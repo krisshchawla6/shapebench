@@ -1,0 +1,17 @@
+{
+  "job_name": "job_001",
+  "created_at": "2025-09-29T12:04:23.303060",
+  "sweep_variable": "alpha",
+  "sweep_values": [
+    -10,
+    -8,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    5
+  ],
+  "status": "created"
+}

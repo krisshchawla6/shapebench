@@ -1,0 +1,16 @@
+{
+  "job_name": "beta_sweep_m5_to_10_deg",
+  "velocity_magnitude": 100,
+  "alpha": 0,
+  "beta": -5,
+  "sweep_schema": {
+    "variable": "beta",
+    "values": [
+      -5,
+      0,
+      5,
+      10
+    ],
+    "unit": "fl.u.deg"
+  }
+}

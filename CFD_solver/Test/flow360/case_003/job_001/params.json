@@ -1,0 +1,15 @@
+{
+  "job_name": "velocity_sweep_3_points",
+  "velocity_magnitude": 200,
+  "alpha": 0,
+  "beta": 0,
+  "sweep_schema": {
+    "variable": "velocity_magnitude",
+    "values": [
+      200,
+      350,
+      500
+    ],
+    "unit": "fl.u.m/fl.u.s"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "job_name": "alpha_sweep_1_3",
+  "velocity_magnitude": 15,
+  "alpha": 1,
+  "beta": 0,
+  "sweep_schema": {
+    "variable": "alpha",
+    "values": [
+      1,
+      2,
+      3
+    ],
+    "unit": "fl.u.deg"
+  }
+}

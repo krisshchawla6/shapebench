@@ -1,0 +1,14 @@
+{
+  "job_name": "velocity_sweep_10_20",
+  "velocity_magnitude": 10,
+  "alpha": 2,
+  "beta": 0,
+  "sweep_schema": {
+    "variable": "velocity_magnitude",
+    "values": [
+      10,
+      20
+    ],
+    "unit": "fl.u.m/fl.u.s"
+  }
+}

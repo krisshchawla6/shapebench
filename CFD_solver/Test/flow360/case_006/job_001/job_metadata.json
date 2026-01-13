@@ -1,0 +1,13 @@
+{
+  "job_name": "job_001",
+  "created_at": "2025-09-29T11:40:33.385475",
+  "sweep_variable": "velocity_magnitude",
+  "sweep_values": [
+    50,
+    75,
+    100,
+    125,
+    150
+  ],
+  "status": "created"
+}

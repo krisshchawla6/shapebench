@@ -1,0 +1,21 @@
+{
+  "job_name": "velocity_sweep_50_150",
+  "volume_mesh_params": {
+    "boundary_layer_growth_rate": 1.2,
+    "boundary_layer_first_layer_thickness": 0.001
+  },
+  "velocity_magnitude": 100,
+  "alpha": 10,
+  "beta": 0,
+  "sweep_schema": {
+    "variable": "velocity_magnitude",
+    "values": [
+      50,
+      75,
+      100,
+      125,
+      150
+    ],
+    "unit": "fl.u.m/fl.u.s"
+  }
+}

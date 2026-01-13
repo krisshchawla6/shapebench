@@ -1,0 +1,11 @@
+{
+  "case_path": "C:\\Users\\kriss\\Desktop\\Flex_Compute\\project\\flow360\\case_006",
+  "case_name": "case_006",
+  "job_count": 2,
+  "job_paths": [
+    "C:\\Users\\kriss\\Desktop\\Flex_Compute\\project\\flow360\\case_006\\job_001",
+    "C:\\Users\\kriss\\Desktop\\Flex_Compute\\project\\flow360\\case_006\\job_002"
+  ],
+  "created_at": "2025-09-29T11:40:33.388040",
+  "total_parameter_sets": 2
+}

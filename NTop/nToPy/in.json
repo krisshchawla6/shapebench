@@ -1,0 +1,12 @@
+{
+    "inputs":[
+        {
+            "name": "test", 
+            "type": "text_list", 
+            "value": [
+                "Hello ", 
+                "World"
+            ]
+        }
+    ]
+}

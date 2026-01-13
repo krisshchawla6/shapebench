@@ -1,0 +1,15 @@
+{
+  "job_name": "beta_sweep_neg5_5",
+  "velocity_magnitude": 15,
+  "alpha": 2,
+  "beta": -5,
+  "sweep_schema": {
+    "variable": "beta",
+    "values": [
+      -5,
+      0,
+      5
+    ],
+    "unit": "fl.u.deg"
+  }
+}

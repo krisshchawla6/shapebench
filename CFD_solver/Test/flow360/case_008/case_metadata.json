@@ -1,0 +1,6 @@
+{
+  "case_name": "case_008",
+  "created_at": "2025-09-29T12:04:23.300214",
+  "description": "Flow360 External Flow Simulation Case",
+  "run_type": "external_aero_flow"
+}

@@ -1,0 +1,17 @@
+{
+  "job_name": "Design_comparison",
+  "volume_mesh_params": {
+    "boundary_layer_growth_rate": 1.2,
+    "boundary_layer_first_layer_thickness": 0.001
+  },
+  "velocity_magnitude": 100,
+  "alpha": 0,
+  "beta": 0,
+  "sweep_schema": {
+    "variable": "alpha",
+    "values": [
+      0
+    ],
+    "unit": "fl.u.deg"
+  }
+}

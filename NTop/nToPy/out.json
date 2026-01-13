@@ -1,0 +1,14 @@
+[
+    {
+        "components": [],
+        "name": "Choice_1",
+        "type": "choice",
+        "value": {
+            "choices": [
+                "Hello ",
+                "World"
+            ],
+            "selected": 0
+        }
+    }
+]

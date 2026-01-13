@@ -1,0 +1,53 @@
+{
+    "description": "$markdown-enabled$\nThis introductory workflow demonstrates how to build a parametric aircraft model by combining modular components.",
+    "inputs": [
+        {
+            "description": "",
+            "name": "Fuselage_width",
+            "type": "real",
+            "units": "mm",
+            "value": 750.0
+        },
+        {
+            "description": "",
+            "name": "Wing Chord Length",
+            "type": "real",
+            "units": "mm",
+            "value": 2500.0
+        },
+        {
+            "description": "",
+            "name": "Wing Span",
+            "type": "real",
+            "units": "mm",
+            "value": 7000.0
+        },
+        {
+            "description": "",
+            "name": "NACA 4-digit code",
+            "type": "text",
+            "value": "2415"
+        },
+        {
+            "description": "",
+            "name": "Stablizer Wing Length",
+            "type": "real",
+            "units": "mm",
+            "value": 1300.0
+        },
+        {
+            "description": "",
+            "name": "Stablizer Wing Span",
+            "type": "real",
+            "units": "mm",
+            "value": 5500.0
+        },
+        {
+            "description": "",
+            "name": "Path",
+            "type": "file_path",
+            "value": "C:/Users/kriss/Desktop/NTop/projects/designs/design_5/mesh_output.stl"
+        }
+    ],
+    "title": "Parametric Aircraft"
+}

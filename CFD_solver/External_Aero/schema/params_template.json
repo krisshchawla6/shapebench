@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Flow360 External Flow Parameters",
+  "description": "Parameter schema for Flow360 external flow simulations with type validation as railguards for AI agents",
+  "type": "object",
+  "required": ["job_name", "volume_mesh_params", "velocity_magnitude", "alpha", "beta", "sweep_schema"],
+  "properties": {
+    "job_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "description": "Name for the Flow360 project/job",
+      "example": "barracuda_sweep"
+    },
+    "volume_mesh_params": {
+      "type": "object",
+      "description": "Volume mesh generation parameters",
+      "required": ["boundary_layer_growth_rate", "boundary_layer_first_layer_thickness"],
+      "properties": {
+        "boundary_layer_growth_rate": {
+          "type": "number",
+          "minimum": 1.01,
+          "maximum": 2.0,
+          "default": 1.2,
+          "description": "Growth rate for boundary layer mesh refinement"
+        },
+        "boundary_layer_first_layer_thickness": {
+          "type": "number",
+          "minimum": 0.0001,
+          "maximum": 0.01,
+          "default": 0.001,
+          "description": "First layer thickness for boundary layer in meters"
+        }
+      }
+    },
+    "velocity_magnitude": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1000.0,
+      "description": "Velocity magnitude in m/s for the simulation",
+      "example": 100
+    },
+    "alpha": {
+      "type": "number",
+      "minimum": -45.0,
+      "maximum": 45.0,
+      "description": "Angle of attack in degrees",
+      "example": 20
+    },
+    "beta": {
+      "type": "number",
+      "minimum": -45.0,
+      "maximum": 45.0,
+      "description": "Sideslip angle in degrees",
+      "example": 5
+    },
+    "sweep_schema": {
+      "type": "object",
+      "required": ["variable", "values", "unit"],
+      "description": "Parameter sweep configuration",
+      "properties": {
+        "variable": {
+          "type": "string",
+          "enum": ["alpha", "beta", "velocity_magnitude"],
+          "description": "Variable to sweep over during parameter study"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 20,
+          "description": "Array of values to sweep the variable over"
+        },
+        "unit": {
+          "type": "string",
+          "enum": ["fl.u.deg", "fl.u.m/fl.u.s", "fl.u.dimensionless"],
+          "description": "Flow360 unit string for the sweep variable"
+        }
+      }
+    }
+  },
+  "example": {
+    "job_name": "barracuda_sweep",
+    "volume_mesh_params": {
+      "boundary_layer_growth_rate": 1.2,
+      "boundary_layer_first_layer_thickness": 0.001
+    },
+    "velocity_magnitude": 100,
+    "alpha": 20,
+    "beta": 5,
+    "sweep_schema": {
+      "variable": "alpha",
+      "values": [0, 5, 10, 15, 20],
+      "unit": "fl.u.deg"
+    }
+  }
+}
