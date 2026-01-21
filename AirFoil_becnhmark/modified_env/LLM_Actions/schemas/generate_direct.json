@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generate Shape (Direct)",
+  "description": "Generate a new airfoil shape with exact parameter values (no bounds or sampling).",
+  "type": "object",
+  "properties": {
+    "n_cp": {
+      "type": "integer",
+      "description": "Number of control points."
+    },
+    "n_sp": {
+      "type": "integer",
+      "description": "Bezier sampling resolution (e.g., 10-100)."
+    },
+    "params": {
+      "type": "array",
+      "description": "List of [x, y, radius, edgy] per control point. Each value MUST be a number (no bounds).",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 4,
+        "maxItems": 4
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "Base name for the file (default: 'shape')."
+    }
+  },
+  "required": ["n_cp", "n_sp", "params"]
+}
