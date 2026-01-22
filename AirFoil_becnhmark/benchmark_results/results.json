@@ -1,0 +1,156 @@
+[
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/baseline_action.csv",
+    "rank": 0,
+    "reward": 0.015555288890281524,
+    "drag_lift": [
+      -4.437649366284284,
+      0.06902891788632677
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/baseline_action.csv",
+    "rank": 0,
+    "reward": 0.015555288890281524,
+    "drag_lift": [
+      -4.437649366284284,
+      0.06902891788632677
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/baseline_action.csv",
+    "rank": 0,
+    "reward": 0.015555288890281524,
+    "drag_lift": [
+      -4.437649366284284,
+      0.06902891788632677
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/baseline_action.csv",
+    "rank": 0,
+    "reward": 0.015555288890281524,
+    "drag_lift": [
+      -4.437649366284284,
+      0.06902891788632677
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/baseline_action.csv",
+    "rank": 0,
+    "reward": 0.015555288890281524,
+    "drag_lift": [
+      -4.437649366284284,
+      0.06902891788632677
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/initial/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_4_0.csv",
+    "rank": 0,
+    "reward": 0.05767201277665708,
+    "drag_lift": [
+      -4.58929906600433,
+      0.2646741143705021
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_4/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_4/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_4/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5.csv",
+    "rank": 0,
+    "reward": 0.25485181087677555,
+    "drag_lift": [
+      -4.670400488507525,
+      1.1902600220159198
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5.csv",
+    "rank": 0,
+    "reward": 0.25485181087677555,
+    "drag_lift": [
+      -4.670400488507525,
+      1.1902600220159198
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5.csv",
+    "rank": 0,
+    "reward": 0.25485181087677555,
+    "drag_lift": [
+      -4.670400488507525,
+      1.1902600220159198
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5.csv",
+    "rank": 0,
+    "reward": 0.25485181087677555,
+    "drag_lift": [
+      -4.670400488507525,
+      1.1902600220159198
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5.csv",
+    "rank": 0,
+    "reward": 0.25485181087677555,
+    "drag_lift": [
+      -4.670400488507525,
+      1.1902600220159198
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results/design_5/save/sol/1_v.png"
+    ]
+  }
+]

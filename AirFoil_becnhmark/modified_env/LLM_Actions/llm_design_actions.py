@@ -3,14 +3,14 @@ import numpy as np
 from scipy.stats import norm
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from shapes_utils import Shape
+# from shapes_utils import Shape # Not needed for action manipulation directly
 
-def save_csv(path, n_cp, n_sp, cp, r, e):
-    with open(path, 'w') as f:
-        f.write(f"{n_cp} {n_sp}\n")
-        [f.write(f"{x}\n") for x in r]
-        [f.write(f"{x}\n") for x in e]
-        [f.write(f"{p[0]} {p[1]}\n") for p in cp]
+def save_action_csv(path, action_array):
+    """Save action array as a flat, comma-separated CSV."""
+    # Ensure it's a flat array
+    action_flat = np.array(action_array).flatten()
+    # Save as a single row
+    np.savetxt(path, [action_flat], delimiter=',', fmt='%.6f')
     return path
 
 def linear_sample(b):
@@ -25,60 +25,115 @@ def gaussian_sampling(vectors, std_scale=0.1):
     return np.random.normal(mean, std)
 
 def generate(n_cp, n_sp, params, out_dir='./output', name='shape'):
-    """Generate with linear sampling support (params can be values or [lo, hi] bounds)."""
+    """
+    Generate action vector with linear sampling.
+    params: List of [val0, val1, val2] per control point.
+    """
     os.makedirs(out_dir, exist_ok=True)
-    cp, r, e = np.zeros((n_cp, 2)), np.zeros(n_cp), np.zeros(n_cp)
-    for i, p in enumerate(params):
-        cp[i], r[i], e[i] = [linear_sample(p[0]), linear_sample(p[1])], linear_sample(p[2]), linear_sample(p[3])
-    return save_csv(f"{out_dir}/{name}_0.csv", n_cp, n_sp, cp, r, e)
+    # params is list of N points, each has 3 values (or bounds)
+    actions = []
+    for p in params:
+        # p is [v0, v1, v2] where each can be value or bounds
+        pt_action = [linear_sample(p[0]), linear_sample(p[1]), linear_sample(p[2])]
+        actions.extend(pt_action)
+    
+    return save_action_csv(f"{out_dir}/{name}_0.csv", actions)
 
 def generate_direct(n_cp, n_sp, params, out_dir='./output', name='shape'):
-    """Pure direct generation - LLM provides exact values, no sampling."""
+    """
+    Pure direct generation - LLM provides exact values.
+    params: List of [val0, val1, val2] per control point.
+    """
     os.makedirs(out_dir, exist_ok=True)
-    cp, r, e = np.zeros((n_cp, 2)), np.zeros(n_cp), np.zeros(n_cp)
-    for i, p in enumerate(params):
-        cp[i], r[i], e[i] = [p[0], p[1]], p[2], p[3]
-    return save_csv(f"{out_dir}/{name}_0.csv", n_cp, n_sp, cp, r, e)
+    actions = []
+    for p in params:
+        # p is [v0, v1, v2]
+        actions.extend(p)
+    return save_action_csv(f"{out_dir}/{name}_0.csv", actions)
 
 def modify(base_csv, pt_idx, values, out_dir='./output', name=None):
-    """Modify with linear sampling support (values can be direct or [lo, hi] bounds)."""
+    """
+    Modify an existing action CSV.
+    base_csv: Path to baseline action CSV.
+    values: List of [val0, val1, val2] for each index in pt_idx.
+    """
     os.makedirs(out_dir, exist_ok=True)
-    s = Shape(); s.read_csv(base_csv)
+    
+    # Load base action
+    # Assuming base_csv is a flat comma-separated file
+    try:
+        base_action = np.loadtxt(base_csv, delimiter=',')
+        if base_action.ndim == 2:
+            base_action = base_action[0] # Handle if it was saved with multiple rows
+    except Exception as e:
+        print(f"Error loading base CSV {base_csv}: {e}")
+        return None
+
+    # Reshape to (N, 3) for easier indexing
+    # We assume the length is divisible by 3
+    n_pts = len(base_action) // 3
+    action_matrix = base_action.reshape((n_pts, 3))
+
     for i, idx in enumerate(pt_idx):
-        v = values[i]
-        # value format: [x, y, radius, edgy]
-        s.control_pts[idx] = [linear_sample(v[0]), linear_sample(v[1])]
-        s.radius[idx] = linear_sample(v[2])
-        s.edgy[idx] = linear_sample(v[3])
-    return save_csv(f"{out_dir}/{name or s.name}_{s.index+1}.csv", s.n_control_pts, s.n_sampling_pts, s.control_pts, s.radius, s.edgy)
+        if idx >= n_pts:
+            continue # Skip invalid indices
+        
+        v = values[i] # [v0, v1, v2] (can be bounds)
+        
+        # Update values
+        action_matrix[idx, 0] = linear_sample(v[0])
+        action_matrix[idx, 1] = linear_sample(v[1])
+        action_matrix[idx, 2] = linear_sample(v[2])
+    
+    # Determine output name
+    if name is None:
+        # Try to infer index from filename or default to next
+        import re
+        match = re.search(r'_(\d+)\.csv$', base_csv)
+        idx_num = int(match.group(1)) + 1 if match else 1
+        base_name = os.path.basename(base_csv).split('_')[0]
+        name = f"{base_name}_{idx_num}"
+    else:
+        # If name is provided, use it directly (append .csv if needed, but save_action_csv assumes full path or we construct it)
+        # The logic below matches original: f"{out_dir}/{name or s.name}_{s.index+1}.csv"
+        # We'll just use the provided name logic
+        pass
+
+    # Reconstruct name logic to match original's intent but adapted
+    final_name = f"{name}.csv" if not name.endswith('.csv') else name
+    
+    return save_action_csv(f"{out_dir}/{final_name}", action_matrix.flatten())
 
 def modify_direct(base_csv, pt_idx, values, out_dir='./output', name=None):
-    """Pure direct modification - LLM provides exact values, no sampling."""
-    os.makedirs(out_dir, exist_ok=True)
-    s = Shape(); s.read_csv(base_csv)
-    for i, idx in enumerate(pt_idx):
-        v = values[i]
-        # value format: [x, y, radius, edgy]
-        s.control_pts[idx] = [v[0], v[1]]
-        s.radius[idx] = v[2]
-        s.edgy[idx] = v[3]
-    return save_csv(f"{out_dir}/{name or s.name}_{s.index+1}.csv", s.n_control_pts, s.n_sampling_pts, s.control_pts, s.radius, s.edgy)
+    """Pure direct modification of action CSV."""
+    # Logic is same as modify but values are exact
+    # We can reuse modify since linear_sample handles scalar values too
+    return modify(base_csv, pt_idx, values, out_dir, name)
 
 def generate_from_vectors(n_cp, n_sp, vectors, out_dir='./output', name='gauss_gen'):
-    """Generate shape by Gaussian sampling from a set of prior vectors."""
+    """
+    Generate action by Gaussian sampling from prior action vectors.
+    vectors: List of action arrays (flat or shaped).
+    """
+    # vectors should be a list of lists/arrays
+    # We assume each vector in 'vectors' is the full action array
     vec = gaussian_sampling(vectors)
-    vec = vec.reshape((n_cp, 4))
-    return generate(n_cp, n_sp, vec.tolist(), out_dir=out_dir, name=name)
+    return save_action_csv(f"{out_dir}/{name}_0.csv", vec)
 
 def run_action(action, **kwargs):
     return globals()[action](**kwargs)
 
 if __name__ == "__main__":
-    # Example 1: Linear sample (LLM provided bounds)
-    b = [[(0.8,1.2), (-0.1,0.1), 0.5, 0.5]]*4
+    # Example 1: Linear sample
+    # 3 values per point: [radius_param, angle_param, edgy_param]
+    b = [[(0.0, 0.1), (-0.1, 0.1), 0.0]]*4
     print(f"Linear Gen: {run_action('generate', n_cp=4, n_sp=10, params=b, name='lin')}")
     
-    # Example 2: Gaussian sampling from priors (set of vectors)
-    priors = [[1.0, 0.0, 0.5, 0.5], [1.1, 0.1, 0.4, 0.6], [0.9, -0.1, 0.6, 0.4]]
-    sampled_vec = run_action('gaussian_sampling', vectors=priors)
-    print(f"Gaussian Sampled Vector: {sampled_vec}")
+    # Example 2: Gaussian sampling
+    # Priors are flat action arrays (size 12 for 4 points)
+    priors = [
+        np.zeros(12),
+        np.ones(12) * 0.1
+    ]
+    sampled_vec = run_action('generate_from_vectors', n_cp=4, n_sp=10, vectors=priors)
+    print(f"Gaussian Sampled file: {sampled_vec}")

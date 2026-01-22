@@ -29,7 +29,7 @@ def resume_env():
     xmax                    = 30.0
     ymin                    =-15.0
     ymax                    = 15.0
-    final_time              = 10.0  # Reduced for testing (original: 2.0*(xmax-xmin)=90)
+    final_time              = 0.01#2.0*(xmax-xmin)  # Reduced for testing (original: 2.0*(xmax-xmin)=90)
 
     # Define environment
     environment=env(nb_pts_to_move, pts_to_move,

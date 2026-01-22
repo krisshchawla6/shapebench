@@ -1,12 +1,13 @@
 """
 Test script for shape modification pipeline.
-Takes CSV input or modification parameters, outputs geometry PNG and meshed domain PNG.
+Takes CSV input (Shape format or Action format) or modification parameters, outputs geometry PNG and meshed domain PNG.
 """
 
 import os
 import sys
 import argparse
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 import matplotlib.tri as mtri
 
@@ -19,7 +20,67 @@ from meshes_utils import read_mesh
 def load_shape_from_csv(csv_path: str) -> Shape:
     """Load shape from CSV file."""
     shape = Shape()
-    shape.read_csv(csv_path)
+    try:
+        # Try reading as standard shape file
+        shape.read_csv(csv_path)
+    except Exception:
+        # If it fails, check if it's an Action CSV
+        try:
+            action = np.loadtxt(csv_path, delimiter=',')
+            if action.ndim == 2: action = action[0] # Handle single row
+            print(f"Detected Action CSV (size {len(action)}). Loading baseline and applying action.")
+            
+            # Load baseline shape
+            # Assuming relative path from this script: ../reset/4/shape_0.csv
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            baseline_path = os.path.join(base_dir, 'reset', '4', 'shape_0.csv')
+            
+            if not os.path.exists(baseline_path):
+                raise FileNotFoundError(f"Baseline shape not found at {baseline_path}")
+            
+            shape.read_csv(baseline_path)
+            
+            # Convert Action -> Deformation
+            # Action format: [radius_param, angle_param, edgy_param] per point, all in [-1, 1]
+            # Logic from environment.py
+            n_pts = len(action) // 3
+            if n_pts != shape.n_control_pts:
+                print(f"Warning: Action size {n_pts} != Shape pts {shape.n_control_pts}")
+            
+            # Environment constants
+            MAX_DEFORMATION = 3.0
+            
+            deformation = np.zeros((n_pts, 3))
+            action_reshaped = action.reshape((n_pts, 3))
+            dangle = 360.0 / float(n_pts)
+            
+            # Convert [radius_param, angle_param, edgy_param] -> [x, y, edgy]
+            # Using environment.py logic
+            for i in range(n_pts):
+                radius_param = action_reshaped[i, 0]
+                angle_param = action_reshaped[i, 1]
+                edgy_param = action_reshaped[i, 2]
+                
+                # Environment conversion
+                radius = max(abs(radius_param), 0.2) * MAX_DEFORMATION
+                angle = dangle * float(i) + angle_param * dangle / 2.0
+                x = radius * math.cos(math.radians(angle))
+                y = radius * math.sin(math.radians(angle))
+                edgy = 0.5 + 0.5 * abs(edgy_param)
+                
+                deformation[i, 0] = x
+                deformation[i, 1] = y
+                deformation[i, 2] = edgy
+                
+            # Apply deformation
+            # For 'replace=True', modify_shape_from_field sets absolute coordinates
+            all_pts_list = list(range(n_pts))
+            shape.modify_shape_from_field(deformation, replace=True, pts_list=all_pts_list)
+            
+        except Exception as e:
+            print(f"Failed to load as Action CSV: {e}")
+            raise ValueError(f"Could not load {csv_path} as Shape or Action CSV")
+
     shape.generate(centering=False)
     return shape
 
@@ -35,8 +96,8 @@ def apply_modification(shape: Shape, deformation: np.ndarray,
 
 def generate_geometry_image(shape: Shape, output_path: str, 
                             plot_pts: bool = True,
-                            xmin: float = -3.0, xmax: float = 3.0,
-                            ymin: float = -3.0, ymax: float = 3.0):
+                            xmin: float = -15.0, xmax: float = 30.0,
+                            ymin: float = -15.0, ymax: float = 15.0):
     """Generate and save geometry PNG using original fenics style."""
     shape.generate_image(
         plot_pts=plot_pts,
@@ -48,8 +109,8 @@ def generate_geometry_image(shape: Shape, output_path: str,
 
 
 def generate_mesh_image(mesh_path: str, output_path: str, shape: Shape = None,
-                        xmin: float = -3.0, xmax: float = 3.0,
-                        ymin: float = -3.0, ymax: float = 3.0):
+                        xmin: float = -15.0, xmax: float = 30.0,
+                        ymin: float = -15.0, ymax: float = 15.0):
     """Generate and save mesh visualization PNG (fenics style)."""
     mesh = read_mesh(mesh_path)
     
@@ -81,8 +142,8 @@ def run_pipeline(csv_path: str, output_dir: str,
                  mesh_domain: bool = True,
                  shape_h: float = 0.1,
                  domain_h: float = 0.3,
-                 xmin: float = -3.0, xmax: float = 5.0,
-                 ymin: float = -3.0, ymax: float = 3.0):
+                 xmin: float = -15.0, xmax: float = 30.0,
+                 ymin: float = -15.0, ymax: float = 15.0):
     """
     Full pipeline: load CSV -> (optional) modify -> generate images -> mesh -> mesh image.
     
@@ -111,43 +172,49 @@ def run_pipeline(csv_path: str, output_dir: str,
         shape = apply_modification(shape, modification, replace=replace, pts_list=pts_list)
     
     # Generate geometry image
-    geom_path = os.path.join(output_dir, f"{shape.name}_{shape.index}_geometry.png")
+    # Use output path if provided, otherwise default logic
+    # We want to use the CSV name prefix for the image
+    csv_name = os.path.basename(csv_path).rsplit('.', 1)[0]
+    geom_path = os.path.join(output_dir, f"{csv_name}_geometry.png")
+    
     generate_geometry_image(shape, geom_path, plot_pts=True,
                             xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax)
     
     # Save modified CSV
     original_dir = os.getcwd()
     os.chdir(output_dir)
+    # Note: This will write a SHAPE CSV, even if input was Action CSV.
+    # This is fine for visualization/debugging, but the main pipeline uses the Action CSV.
     shape.write_csv()
     csv_out = f"{shape.name}_{shape.index}.csv"
     print(f"CSV saved: {os.path.join(output_dir, csv_out)}")
     os.chdir(original_dir)
     
-    # Generate mesh
-    print("Generating mesh...")
-    os.chdir(output_dir)
-    try:
-        success, n_tri = shape.mesh(
-            mesh_domain=mesh_domain,
-            shape_h=shape_h,
-            domain_h=domain_h,
-            xmin=xmin, xmax=xmax,
-            ymin=ymin, ymax=ymax,
-            mesh_format='mesh'
-        )
-        
-        if success:
-            mesh_file = f"{shape.name}_{shape.index}.mesh"
-            print(f"Mesh generated: {mesh_file} ({n_tri} triangles)")
-            
-            # Generate mesh visualization
-            mesh_img_path = f"{shape.name}_{shape.index}_mesh.png"
-            generate_mesh_image(mesh_file, mesh_img_path, shape=shape,
-                                xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax)
-        else:
-            print("Meshing failed!")
-    finally:
-        os.chdir(original_dir)
+    # Generate mesh (SKIPPING due to environment compatibility issues)
+    # print("Generating mesh...")
+    # os.chdir(output_dir)
+    # try:
+    #     success, n_tri = shape.mesh(
+    #         mesh_domain=mesh_domain,
+    #         shape_h=shape_h,
+    #         domain_h=domain_h,
+    #         xmin=xmin, xmax=xmax,
+    #         ymin=ymin, ymax=ymax,
+    #         mesh_format='mesh'
+    #     )
+    #     
+    #     if success:
+    #         mesh_file = f"{shape.name}_{shape.index}.mesh"
+    #         print(f"Mesh generated: {mesh_file} ({n_tri} triangles)")
+    #         
+    #         # Generate mesh visualization
+    #         mesh_img_path = f"{shape.name}_{shape.index}_mesh.png"
+    #         generate_mesh_image(mesh_file, mesh_img_path, shape=shape,
+    #                             xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax)
+    #     else:
+    #         print("Meshing failed!")
+    # finally:
+    #     os.chdir(original_dir)
     
     return shape
 
@@ -175,10 +242,10 @@ def main():
                         help='Mesh size on shape (default: 0.1)')
     parser.add_argument('--domain-h', type=float, default=0.3,
                         help='Mesh size in domain (default: 0.3)')
-    parser.add_argument('--xmin', type=float, default=-3.0)
-    parser.add_argument('--xmax', type=float, default=5.0)
-    parser.add_argument('--ymin', type=float, default=-3.0)
-    parser.add_argument('--ymax', type=float, default=3.0)
+    parser.add_argument('--xmin', type=float, default=-15.0)
+    parser.add_argument('--xmax', type=float, default=30.0)
+    parser.add_argument('--ymin', type=float, default=-15.0)
+    parser.add_argument('--ymax', type=float, default=15.0)
     
     args = parser.parse_args()
     

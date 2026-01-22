@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Generate Shape",
-  "description": "Generate a new airfoil shape from scratch using linear sampling from provided bounds.",
+  "title": "Generate Action",
+  "description": "Generate a new airfoil action vector (deformation parameters) using linear sampling from provided bounds.",
   "type": "object",
   "properties": {
     "n_cp": {
@@ -10,21 +10,22 @@
     },
     "n_sp": {
       "type": "integer",
-      "description": "Bezier sampling resolution (e.g., 10)."
+      "description": "Bezier sampling resolution (unused for action generation, but kept for compatibility)."
     },
     "params": {
       "type": "array",
-      "description": "List of [x, y, radius, edgy] per control point. Each value can be a float or [lo, hi] for linear sampling.",
+      "description": "List of [[r_min, r_max], [a_min, a_max], [e_min, e_max]] BOUNDS per control point. MUST provide [min, max] ranges, NOT single values. All values in [-1.0, 1.0].",
       "items": {
         "type": "array",
+        "description": "Each point has 3 bounds: [[r_min, r_max], [a_min, a_max], [e_min, e_max]]",
         "items": {
-          "anyOf": [
-            { "type": "number" },
-            { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } }
-          ]
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "type": "number" }
         },
-        "minItems": 4,
-        "maxItems": 4
+        "minItems": 3,
+        "maxItems": 3
       }
     },
     "name": {
