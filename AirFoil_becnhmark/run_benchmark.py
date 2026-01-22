@@ -14,6 +14,20 @@ from run_case import run_from_csv
 from LLM_agent import run_llm_action
 
 def run_simulation(csv_path, case_dir):
+    # Clear contents of ./save subdirs before running to prevent accumulation
+    # but keep directory structure intact for the environment
+    for subdir in ['csv', 'png', 'sol', 'xml', 'rejected']:
+        subdir_path = os.path.join('./save', subdir)
+        if os.path.exists(subdir_path):
+            for f in os.listdir(subdir_path):
+                fp = os.path.join(subdir_path, f)
+                if os.path.isfile(fp):
+                    os.remove(fp)
+    # Also clear drag_lift file
+    dl_path = './save/drag_lift'
+    if os.path.exists(dl_path):
+        os.remove(dl_path)
+    
     result = run_from_csv(csv_path, reset_first=True)
     reward = result[2]
     

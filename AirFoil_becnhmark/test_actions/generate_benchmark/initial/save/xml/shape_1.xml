@@ -1,5 +1,5 @@
 <dolfin xmlns:dolfin="https://fenicsproject.org/">
-  <mesh celltype="triangle" dim="3">
+  <mesh celltype="triangle" dim="2">
     <vertices size="3282">
       <vertex index="0" x="3.0" y="0.0" z="0.0"/>
       <vertex index="1" x="2.946494600259972" y="0.49788272800570643" z="0.0"/>

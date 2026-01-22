@@ -141,6 +141,7 @@ if __name__ == "__main__":
                         help='LLM action to use for all iterations')
     parser.add_argument('--iterations', type=int, default=10, help='Number of iterations')
     parser.add_argument('--inspirations', type=int, default=2, help='Number of inspirations')
+    parser.add_argument('--output', type=str, default=None, help='Custom output directory')
     args = parser.parse_args()
     
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -150,7 +151,7 @@ if __name__ == "__main__":
         print(f"Error: {baseline_csv} not found")
         sys.exit(1)
     
-    output_dir = os.path.join(base_dir, f'benchmark_results_{args.action}')
+    output_dir = args.output if args.output else os.path.join(base_dir, f'benchmark_results_{args.action}')
     best_design, cached = run_benchmark(baseline_csv, args.iterations, args.inspirations, args.action, output_dir)
     print(f"\nBest design: {best_design}")
     

@@ -22,6 +22,9 @@ def run_from_csv(csv_path, reset_first=True):
 
     # Reset environment before execution to ensure deformations are applied to the baseline
     if reset_first:
+        # Reset shape index to prevent file accumulation across runs
+        from environment import env as env_singleton
+        env_singleton.shape.index = 0
         env.reset()
         
     result = env.execute(airfoil_shape)
