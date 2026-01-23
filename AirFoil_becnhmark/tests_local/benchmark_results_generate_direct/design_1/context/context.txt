@@ -1,0 +1,67 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [1.0, 0.0, 0.0, 1.0, 0.3, 0.0, 1.0, -0.3, 0.0, 1.0, 0.0, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design completely failed, resulting in a drag coefficient of -1.0 and a lift coefficient of 0.0, leading to a reward of -5.0. The uniform pressure and velocity fields indicate no meaningful flow interaction with the geometry, suggesting a lack of aerodynamic shaping. The absence of any discernible pressure differential means no lift is generated.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire geometry is a critical region. The leading edge needs to be shaped to create a stagnation point and initiate flow separation. The upper surface needs to be curved to accelerate the flow and reduce pressure, generating lift. The trailing edge needs to be sharp to promote clean flow separation and minimize drag.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+This design offers no aerodynamic benefit and is a complete failure. A significant redesign is needed rather than an iterative improvement. The prioritized recommendation is to replace the current geometry with an airfoil shape featuring a curved upper surface and a flatter lower surface to generate lift.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [1.0, 0.0, 0.0, 1.0, 0.3, 0.0, 1.0, -0.3, 0.0, 1.0, 0.0, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design completely failed, resulting in a drag coefficient of -1.0 and a lift coefficient of 0.0, leading to a reward of -5.0. The uniform pressure and velocity fields indicate no meaningful flow interaction with the geometry, suggesting a lack of aerodynamic shaping. The absence of any discernible pressure differential means no lift is generated.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire geometry is a critical region. The leading edge needs to be shaped to create a stagnation point and initiate flow separation. The upper surface needs to be curved to accelerate the flow and reduce pressure, generating lift. The trailing edge needs to be sharp to promote clean flow separation and minimize drag.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+This design offers no aerodynamic benefit and is a complete failure. A significant redesign is needed rather than an iterative improvement. The prioritized recommendation is to replace the current geometry with an airfoil shape featuring a curved upper surface and a flatter lower surface to generate lift.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [1.0, 0.0, 0.0, 1.0, 0.3, 0.0, 1.0, -0.3, 0.0, 1.0, 0.0, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design completely failed, resulting in a drag coefficient of -1.0 and a lift coefficient of 0.0, leading to a reward of -5.0. The uniform pressure and velocity fields indicate no meaningful flow interaction with the geometry, suggesting a lack of aerodynamic shaping. The absence of any discernible pressure differential means no lift is generated.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire geometry is a critical region. The leading edge needs to be shaped to create a stagnation point and initiate flow separation. The upper surface needs to be curved to accelerate the flow and reduce pressure, generating lift. The trailing edge needs to be sharp to promote clean flow separation and minimize drag.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+This design offers no aerodynamic benefit and is a complete failure. A significant redesign is needed rather than an iterative improvement. The prioritized recommendation is to replace the current geometry with an airfoil shape featuring a curved upper surface and a flatter lower surface to generate lift.

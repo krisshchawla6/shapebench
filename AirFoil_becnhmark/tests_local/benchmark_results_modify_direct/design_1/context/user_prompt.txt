@@ -1,0 +1,114 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.2, 0.2, 0.0, 0.2, -0.2, 0.0, -0.2, 0.2, 0.0, -0.2, -0.2, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design completely failed aerodynamically, evidenced by a drag coefficient of -1.0, a lift coefficient of 0.0, and a resulting L/D ratio of -0.0. The uniform pressure and velocity fields indicate that the simulation is not resolving the airfoil geometry. The negative drag coefficient is non-physical and suggests a fundamental issue with the simulation setup or the geometry itself.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Due to the lack of any discernible flow features, it is impossible to identify critical regions for shape optimization. The absence of flow interaction suggests that the airfoil geometry is either degenerate or not being properly represented in the simulation. To proceed, the airfoil geometry must be corrected or redefined and the simulation re-run.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no trade-offs visible in this design due to the lack of any aerodynamic performance. The simulation results are invalid, and the design is unusable in its current state. The immediate recommendation is to verify and correct the airfoil geometry definition or the mesh to ensure the geometry is being properly represented in the simulation before proceeding with any further iterative design improvements.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #1)
+- **Action**: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation demonstrates complete aerodynamic failure, with a drag coefficient of -1.0 and a lift coefficient of 0.0, yielding a negative reward of -5.0. The uniform pressure and velocity fields indicate massive flow separation across the entire surface, stemming from the circular geometry which provides no mechanism for lift generation or drag reduction. There are no positive aspects to this design.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire geometry is a critical region. The circular shape induces immediate flow separation. The leading edge needs to be shaped to smoothly accelerate the flow, requiring a change from a circular arc to an elliptical or similar profile. A trailing edge must be introduced to allow for proper flow reattachment.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+This design presents no trade-offs, as it is a complete failure. Iterating on this circular shape is not recommended; a complete pivot to an airfoil-like geometry is necessary. Prioritized recommendation: Replace the circle with a basic airfoil shape (e.g., NACA 0012) and re-run the simulation.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.2, 0.2, 0.0, 0.2, -0.2, 0.0, -0.2, 0.2, 0.0, -0.2, -0.2, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design completely failed aerodynamically, evidenced by a drag coefficient of -1.0, a lift coefficient of 0.0, and a resulting L/D ratio of -0.0. The uniform pressure and velocity fields indicate that the simulation is not resolving the airfoil geometry. The negative drag coefficient is non-physical and suggests a fundamental issue with the simulation setup or the geometry itself.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Due to the lack of any discernible flow features, it is impossible to identify critical regions for shape optimization. The absence of flow interaction suggests that the airfoil geometry is either degenerate or not being properly represented in the simulation. To proceed, the airfoil geometry must be corrected or redefined and the simulation re-run.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no trade-offs visible in this design due to the lack of any aerodynamic performance. The simulation results are invalid, and the design is unusable in its current state. The immediate recommendation is to verify and correct the airfoil geometry definition or the mesh to ensure the geometry is being properly represented in the simulation before proceeding with any further iterative design improvements.
+
+
+## Visual Reference
+
+If an image is provided, it shows the **parent design's geometry** - the exact shape you are about to modify. Use this visual reference to:
+- Identify which control points affect which regions of the shape
+- Understand how the current geometry produces the observed lift/drag
+- Target specific geometric features for improvement
+
+# Task: Modify Existing Airfoil Design (Exact Values)
+
+You are modifying an existing airfoil to improve its performance.
+
+Current action vector to modify:
+```
+0.200000,0.200000,0.000000,0.200000,-0.200000,0.000000,-0.200000,0.200000,0.000000,-0.200000,-0.200000,0.000000
+```
+Base CSV path: /scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results_modify_direct/design_0.csv
+
+Specify which control points to modify (pt_idx) and provide exact [radius_param, angle_param, edgy_param] values.
+All values must be in the range [-1.0, 1.0].
+
+Modification strategy:
+- Analyze the current design's performance and identify weak points
+- Make targeted improvements based on aerodynamic principles
+- Preserve successful aspects while improving underperforming areas
+- Consider incremental changes to avoid breaking working geometry
+
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "pt_idx": [<idx1>, <idx2>, ...],
+  "values": [
+    [<r>, <a>, <e>],
+    [<r>, <a>, <e>],
+    ...
+  ],
+  "name": "<descriptive_name>"
+}
+
+Replace <idx> with integer indices (0 to n_cp-1).
+Replace other <placeholders> with actual float values in [-1.0, 1.0].
+Number of entries in values must match length of pt_idx.
+

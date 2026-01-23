@@ -1,0 +1,6 @@
+I am proposing a new design that introduces camber and thickness to the airfoil.
+- **Radius Parameters**: The radius parameters will be varied to increase the thickness of the airfoil, with a range of [-0.5, 0.5] to allow both increases and decreases relative to the original.
+- **Angle Parameters**: The angle parameters will be used to introduce camber. We use a wider range of [-1.0, 1.0] to fully explore the impact of angle changes on lift generation.
+- **Edgy Parameters**: The edgy parameters will remain at -1.0, maintaining a smooth shape.
+
+The goal is to create an airfoil shape that generates lift by creating a pressure difference between the upper and lower surfaces. The large range for the angle parameters reflects the initial design's failure and the need for significant shape changes.

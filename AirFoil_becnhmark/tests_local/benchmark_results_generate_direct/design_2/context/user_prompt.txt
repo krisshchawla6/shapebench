@@ -1,0 +1,133 @@
+# Context: Airfoil Design Optimization
+
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.0, 0.0, -1.0, -0.5, 0.3, -1.0, 0.5, -0.3, -1.0, 0.0, -0.1, 1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design failed completely, with a large negative reward of -5 and near-zero lift and a negative drag coefficient. The flow visualizations show minimal disturbance, indicating either a tiny or nonexistent airfoil. This suggests a fundamental problem with the geometric representation and/or its orientation to the flow.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The primary critical region is the entire airfoil geometry itself. The current representation is not creating any meaningful aerodynamic forces. The geometric cause is likely either an extremely small size, incorrect coordinates, or an improper orientation relative to the incoming flow. The immediate parameter change needed is to drastically increase the size and ensure the airfoil is correctly oriented with the leading edge facing the flow.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no relevant design trade-offs to consider at this stage due to the complete failure of the initial design. It is not worth iterating on the current representation. The recommendation is to prioritize correcting the geometric representation of the airfoil to ensure it is properly sized and oriented before proceeding with any shape optimization.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.0, 0.0, -1.0, -0.5, 0.3, -1.0, 0.5, -0.3, -1.0, 0.0, -0.1, 1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design failed completely, with a large negative reward of -5 and near-zero lift and a negative drag coefficient. The flow visualizations show minimal disturbance, indicating either a tiny or nonexistent airfoil. This suggests a fundamental problem with the geometric representation and/or its orientation to the flow.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The primary critical region is the entire airfoil geometry itself. The current representation is not creating any meaningful aerodynamic forces. The geometric cause is likely either an extremely small size, incorrect coordinates, or an improper orientation relative to the incoming flow. The immediate parameter change needed is to drastically increase the size and ensure the airfoil is correctly oriented with the leading edge facing the flow.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no relevant design trade-offs to consider at this stage due to the complete failure of the initial design. It is not worth iterating on the current representation. The recommendation is to prioritize correcting the geometric representation of the airfoil to ensure it is properly sized and oriented before proceeding with any shape optimization.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.0, 0.0, -1.0, -0.5, 0.3, -1.0, 0.5, -0.3, -1.0, 0.0, -0.1, 1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design failed completely, with a large negative reward of -5 and near-zero lift and a negative drag coefficient. The flow visualizations show minimal disturbance, indicating either a tiny or nonexistent airfoil. This suggests a fundamental problem with the geometric representation and/or its orientation to the flow.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The primary critical region is the entire airfoil geometry itself. The current representation is not creating any meaningful aerodynamic forces. The geometric cause is likely either an extremely small size, incorrect coordinates, or an improper orientation relative to the incoming flow. The immediate parameter change needed is to drastically increase the size and ensure the airfoil is correctly oriented with the leading edge facing the flow.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no relevant design trade-offs to consider at this stage due to the complete failure of the initial design. It is not worth iterating on the current representation. The recommendation is to prioritize correcting the geometric representation of the airfoil to ensure it is properly sized and oriented before proceeding with any shape optimization.
+
+
+## Visual Reference
+
+If an image is provided, it shows the **parent design's geometry** - the shape you are building upon or learning from. Use this visual reference to understand:
+- The current shape characteristics (camber, thickness, leading/trailing edge)
+- Areas that may need modification based on flow behavior
+- Geometric features that correlate with the performance metrics
+
+# Strategy: Precise Optimization
+
+Analyze the best-performing designs and propose a refined version:
+- Study the exact parameter values that led to the best rewards
+- Make targeted, precise adjustments to improve upon the best design
+- Be specific - choose exact values based on your analysis
+
+# Analysis Task
+
+Before proposing a new design, analyze the previous results:
+
+1. **Best Design Analysis**: What was the best reward achieved? What exact parameters led to it?
+2. **Parameter Sensitivity**: Which parameters seem to have the highest impact on reward?
+3. **Improvement Hypothesis**: What specific parameter changes should improve performance?
+
+# Response Format
+
+You MUST structure your response as follows:
+
+<ANALYSIS>
+Provide your analysis of the previous designs here. Identify patterns, explain what worked and what didn't.
+</ANALYSIS>
+
+<DESIGN_RATIONALE>
+Explain your specific parameter choices. Why these exact values?
+</DESIGN_RATIONALE>
+
+<DESIGN>
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [<r0>, <a0>, <e0>],
+    [<r1>, <a1>, <e1>],
+    [<r2>, <a2>, <e2>],
+    [<r3>, <a3>, <e3>]
+  ],
+  "name": "<descriptive_name>"
+}
+
+Replace all <placeholders> with actual float values in [-1.0, 1.0].
+Each inner array is [radius_param, angle_param, edgy_param] for that control point.
+
+</DESIGN>
+
+IMPORTANT:
+- Your analysis and rationale are REQUIRED - they ensure systematic improvement
+- Use the exact JSON format shown (no schema definitions, no markdown code blocks)
+- All parameter values must be EXACT floats in range [-1.0, 1.0]
+- The name should reflect your design strategy

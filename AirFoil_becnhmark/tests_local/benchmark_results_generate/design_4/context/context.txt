@@ -1,0 +1,67 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.135596, 0.195606, -0.094104, 0.310004, -0.268969, -0.023367, 0.366485, 0.219174, 0.001577, 0.245581, 0.647781, -0.031868]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design is a complete failure, indicated by a drag coefficient of -1 and a lift coefficient of 0, resulting in a negative reward of -5. The flow visualizations show no discernible airfoil shape or meaningful flow field. The control points are not defining a valid aerodynamic geometry.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire geometry definition is critical. The control points are not defining a valid shape, leading to a trivial, non-physical solution. Increase the scale of the geometry and ensure the control points define a closed airfoil shape with a reasonable chord length and thickness distribution.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no meaningful trade-offs to analyze with the current design. The fundamental problem is the lack of a valid airfoil geometry. The design process should pivot to defining a basic airfoil shape using the control points. The prioritized recommendation is to redefine the control point locations to generate a recognizable airfoil geometry before further optimization.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.135596, 0.195606, -0.094104, 0.310004, -0.268969, -0.023367, 0.366485, 0.219174, 0.001577, 0.245581, 0.647781, -0.031868]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design is a complete failure, indicated by a drag coefficient of -1 and a lift coefficient of 0, resulting in a negative reward of -5. The flow visualizations show no discernible airfoil shape or meaningful flow field. The control points are not defining a valid aerodynamic geometry.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire geometry definition is critical. The control points are not defining a valid shape, leading to a trivial, non-physical solution. Increase the scale of the geometry and ensure the control points define a closed airfoil shape with a reasonable chord length and thickness distribution.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no meaningful trade-offs to analyze with the current design. The fundamental problem is the lack of a valid airfoil geometry. The design process should pivot to defining a basic airfoil shape using the control points. The prioritized recommendation is to redefine the control point locations to generate a recognizable airfoil geometry before further optimization.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.135596, 0.195606, -0.094104, 0.310004, -0.268969, -0.023367, 0.366485, 0.219174, 0.001577, 0.245581, 0.647781, -0.031868]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design is a complete failure, indicated by a drag coefficient of -1 and a lift coefficient of 0, resulting in a negative reward of -5. The flow visualizations show no discernible airfoil shape or meaningful flow field. The control points are not defining a valid aerodynamic geometry.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire geometry definition is critical. The control points are not defining a valid shape, leading to a trivial, non-physical solution. Increase the scale of the geometry and ensure the control points define a closed airfoil shape with a reasonable chord length and thickness distribution.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no meaningful trade-offs to analyze with the current design. The fundamental problem is the lack of a valid airfoil geometry. The design process should pivot to defining a basic airfoil shape using the control points. The prioritized recommendation is to redefine the control point locations to generate a recognizable airfoil geometry before further optimization.

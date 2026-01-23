@@ -1,0 +1,5 @@
+The provided designs all yield a completely failed airfoil shape, indicated by zero lift, large negative drag, and minimal flow disturbance. This suggests a fundamental issue with the airfoil's shape or simulation setup. The lack of lift points to a lack of camber or a symmetric shape that doesn't generate the necessary pressure differential. The negative drag is suspicious and potentially indicates an error in the simulation or geometry implementation, although it might also reflect extreme separation.
+
+To improve the design, we need to introduce substantial camber and increase the thickness of the airfoil. This will involve modifying the radius and angle parameters significantly. The initial designs have edgy_param set to -1.0, which corresponds to a smooth airfoil. While smoothness can be desirable, we need to ensure the basic shape is correct first.
+
+Since the initial designs are so poor, a more aggressive exploration strategy is necessary. We will significantly increase the camber by adjusting the angle parameters and explore different thickness levels by adjusting the radius parameters.

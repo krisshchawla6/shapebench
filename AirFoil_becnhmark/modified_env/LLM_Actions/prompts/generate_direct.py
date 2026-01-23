@@ -1,27 +1,71 @@
 # Generate Direct action prompts (exact values)
+# Restructured following Shinka's best practices
 
+from typing import Optional, Tuple
 from .base import format_response_instructions
 
-GENERATE_DIRECT_SYSTEM = """You are an evolutionary optimizer for aerodynamic shape optimization.
-Your goal is to generate diverse, novel designs by specifying EXACT parameter values.
-Improve the reward based on previous results. Explore the design space creatively."""
+# =============================================================================
+# SYSTEM PROMPTS
+# =============================================================================
 
-GENERATE_DIRECT_USER = """{context}
+GENERATE_DIRECT_SYSTEM = """You are an expert aerodynamicist and optimization specialist with deep knowledge of airfoil design.
+Your task is to analyze previous airfoil designs and propose a design that MAXIMIZES the reward.
 
-# Task: Generate New Airfoil Design (Exact Values)
+Key capabilities:
+- Understanding of aerodynamic principles (lift, drag, flow separation)
+- Shape optimization intuition (leading edge, trailing edge, camber, thickness)
+- Parameter space exploration strategies
+- Trade-off analysis between competing objectives
 
-Create a new airfoil by specifying exact [radius_param, angle_param, edgy_param] for each control point.
-All values must be in the range [-1.0, 1.0].
+You will specify EXACT parameter values. Be bold - major changes may be needed."""
 
-Design considerations:
-- Asymmetric shapes often generate more lift
-- Sharp trailing edges can reduce drag  
-- Smooth leading edges improve flow attachment
-- Larger radius values create more pronounced deformations
-- Analyze patterns from high-performing previous designs
+
+# =============================================================================
+# PROMPT VARIANTS
+# =============================================================================
+
+GENERATE_DIRECT_STRATEGY_NEW_DESIGN = """Maximize reward by proposing a new design.
+
+Explore the full parameter space [-1.0, 1.0]. Try different parameter combinations."""
+
+# List of all strategy variants
+GENERATE_DIRECT_STRATEGIES = [
+    GENERATE_DIRECT_STRATEGY_NEW_DESIGN,
+]
+
+GENERATE_DIRECT_STRATEGY_NAMES = [
+    "new_design",
+]
+
+
+# =============================================================================
+# MAIN USER PROMPT TEMPLATE
+# =============================================================================
+
+GENERATE_DIRECT_USER = """# Context: Airfoil Design Optimization
+
+{context}
+
+## Visual Reference
+
+If an image is provided, it shows the **parent design's geometry**. This is NOT a design to modify, but a visual reference to help you understand how the parameter arrays map to physical shapes. Use this to infer how changes in parameters affect the geometry.
+
+## Task
+
+{strategy}
+
+Propose a COMPLETELY NEW airfoil design with exact parameter values for each control point.
+
+## Output Format
 
 {response_format}
-"""
+
+Critical: All parameter values must be in the range [-1.0, 1.0]."""
+
+
+# =============================================================================
+# EXAMPLE FORMAT
+# =============================================================================
 
 GENERATE_DIRECT_EXAMPLE = """{
   "n_cp": 4,
@@ -35,10 +79,46 @@ GENERATE_DIRECT_EXAMPLE = """{
   "name": "<descriptive_name>"
 }
 
-Replace all <placeholders> with actual float values in [-1.0, 1.0]."""
+Replace all <placeholders> with actual float values in [-1.0, 1.0].
+Each inner array is [radius_param, angle_param, edgy_param] for that control point."""
 
 
-def get_generate_direct_prompt(context_str: str) -> str:
-    """Build the full generate_direct prompt."""
+# =============================================================================
+# HELPER FUNCTIONS
+# =============================================================================
+
+def get_generate_direct_prompt(context_str: str, strategy_idx: Optional[int] = None) -> str:
+    """Build the full generate_direct prompt with optional strategy variant.
+    
+    Args:
+        context_str: Formatted context with design history
+        strategy_idx: Optional strategy index (0-2). If None, uses default (0).
+    
+    Returns:
+        Complete formatted user prompt
+    """
+    # Select strategy (default to precise optimization)
+    if strategy_idx is None:
+        strategy_idx = 0
+    strategy_idx = strategy_idx % len(GENERATE_DIRECT_STRATEGIES)
+    strategy = GENERATE_DIRECT_STRATEGIES[strategy_idx]
+    
     response_fmt = format_response_instructions(GENERATE_DIRECT_EXAMPLE)
-    return GENERATE_DIRECT_USER.format(context=context_str, response_format=response_fmt)
+    
+    return GENERATE_DIRECT_USER.format(
+        context=context_str,
+        strategy=strategy,
+        response_format=response_fmt
+    )
+
+
+def get_generate_direct_system(strategy_idx: Optional[int] = None) -> str:
+    """Get system prompt for generate_direct action."""
+    return GENERATE_DIRECT_SYSTEM
+
+
+def sample_direct_strategy() -> Tuple[int, str]:
+    """Randomly sample a strategy variant for generate_direct."""
+    import random
+    idx = random.randint(0, len(GENERATE_DIRECT_STRATEGIES) - 1)
+    return idx, GENERATE_DIRECT_STRATEGY_NAMES[idx]

@@ -1,9 +1,10 @@
 import os
+import re
 import json
 import subprocess
 import google.generativeai as genai
 from dotenv import load_dotenv
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional, Tuple
 
 # Custom imports
 import sys
@@ -14,7 +15,7 @@ from prompts import (
     GENERATE_SYSTEM, GENERATE_DIRECT_SYSTEM,
     MODIFY_SYSTEM, MODIFY_DIRECT_SYSTEM
 )
-from prompts.generate import get_generate_prompt
+from prompts.generate import get_generate_prompt, get_generate_system, sample_strategy, GENERATE_STRATEGY_NAMES
 from prompts.generate_direct import get_generate_direct_prompt
 from prompts.modify import get_modify_prompt
 from prompts.modify_direct import get_modify_direct_prompt
@@ -30,8 +31,64 @@ else:
     print("Warning: Google API Key not found.")
 
 
-def get_gemini_response(system_prompt: str, user_prompt: str, images: List[Any] = None, temperature: float = 1.0) -> Dict:
-    """Get response from Gemini with system and user prompts."""
+def extract_structured_response(text: str) -> Tuple[Optional[str], Optional[str], Optional[str]]:
+    """Extract analysis, rationale, and design JSON from structured response.
+    
+    Args:
+        text: Raw LLM response text
+        
+    Returns:
+        Tuple of (analysis, rationale, json_str)
+    """
+    analysis = None
+    rationale = None
+    json_str = None
+    
+    # Try to extract structured blocks
+    analysis_match = re.search(r'<ANALYSIS>(.*?)</ANALYSIS>', text, re.DOTALL)
+    if analysis_match:
+        analysis = analysis_match.group(1).strip()
+    
+    rationale_match = re.search(r'<DESIGN_RATIONALE>(.*?)</DESIGN_RATIONALE>', text, re.DOTALL)
+    if rationale_match:
+        rationale = rationale_match.group(1).strip()
+    
+    design_match = re.search(r'<DESIGN>(.*?)</DESIGN>', text, re.DOTALL)
+    if design_match:
+        design_content = design_match.group(1).strip()
+        # Extract JSON from design block
+        start, end = design_content.find('{'), design_content.rfind('}') + 1
+        if start != -1 and end > start:
+            json_str = design_content[start:end]
+    
+    # Fallback: if no structured blocks found, use simple JSON extraction
+    if json_str is None:
+        start, end = text.find('{'), text.rfind('}') + 1
+        if start != -1 and end > start:
+            json_str = text[start:end]
+    
+    return analysis, rationale, json_str
+
+
+def get_gemini_response(
+    system_prompt: str,
+    user_prompt: str,
+    images: List[Any] = None,
+    temperature: float = 1.0,
+    return_full: bool = False
+) -> Dict | Tuple[Dict, Optional[str], Optional[str]]:
+    """Get response from Gemini with system and user prompts.
+    
+    Args:
+        system_prompt: System instruction for the model
+        user_prompt: User prompt/question
+        images: Optional list of images to include
+        temperature: Sampling temperature
+        return_full: If True, return (params, analysis, rationale) tuple
+        
+    Returns:
+        Dict of parsed parameters, or tuple with analysis/rationale if return_full=True
+    """
     try:
         model = genai.GenerativeModel(
             'gemini-2.0-flash',
@@ -42,35 +99,85 @@ def get_gemini_response(system_prompt: str, user_prompt: str, images: List[Any] 
         response = model.generate_content(content, generation_config=generation_config)
         text = response.text
         
-        # Extract JSON from response
-        start, end = text.find('{'), text.rfind('}') + 1
-        if start == -1:
-            print(f"No JSON found in response: {text[:200]}")
+        # Extract structured response
+        analysis, rationale, json_str = extract_structured_response(text)
+        
+        if json_str is None:
+            print(f"No JSON found in response: {text[:500]}")
+            if return_full:
+                return {}, analysis, rationale
             return {}
-        json_str = text[start:end]
-        return json.loads(json_str)
+        
+        params = json.loads(json_str)
+        
+        if return_full:
+            return params, analysis, rationale
+        return params
+        
     except json.JSONDecodeError as e:
         print(f"JSON Parse Error: {e}")
-        print(f"Raw response: {text[:500]}")
+        print(f"Raw response: {text[:500] if 'text' in dir() else 'N/A'}")
+        if return_full:
+            return {}, None, None
         return {}
     except Exception as e:
         print(f"Gemini Error: {e}")
+        if return_full:
+            return {}, None, None
         return {}
 
 
-def run_llm_action(action: str, context: List[Dict], output_dir: str, base_csv: str = None, name: str = "llm_design", temperature: float = 1.0, skip_vis: bool = False):
-    """Orchestrates: LLM Params -> Design Action -> Visualization/Mesh"""
+def run_llm_action(
+    action: str,
+    context: List[Dict],
+    output_dir: str,
+    base_csv: str = None,
+    name: str = "llm_design",
+    temperature: float = 1.0,
+    skip_vis: bool = False,
+    debug_dir: str = None,
+    strategy_idx: int = None,
+    random_strategy: bool = True
+):
+    """Orchestrates: LLM Params -> Design Action -> Visualization/Mesh
+    
+    Args:
+        action: Type of action ('generate', 'generate_direct', 'modify', 'modify_direct')
+        context: List of previous designs with rewards/feedback
+        output_dir: Directory to save outputs
+        base_csv: Base CSV file for modify actions
+        name: Name for the generated design
+        temperature: LLM sampling temperature
+        skip_vis: Whether to skip visualization
+        debug_dir: Directory to save debug information
+        strategy_idx: Specific strategy index (0-4) for generate action
+        random_strategy: If True and strategy_idx is None, randomly sample strategy
+        
+    Returns:
+        Path to generated CSV file, or None on failure
+    """
     os.makedirs(output_dir, exist_ok=True)
     ctx_text = format_context(context)
     images = [img for item in context for img in item.get('images', [])]
     
+    strategy_name = None
+    
     # Build prompts based on action type
     if action == 'generate':
-        system_prompt = GENERATE_SYSTEM
-        user_prompt = get_generate_prompt(ctx_text)
+        # Select strategy
+        if strategy_idx is None and random_strategy:
+            strategy_idx, strategy_name = sample_strategy()
+        elif strategy_idx is not None:
+            strategy_idx = strategy_idx % len(GENERATE_STRATEGY_NAMES)
+            strategy_name = GENERATE_STRATEGY_NAMES[strategy_idx]
+        
+        system_prompt = get_generate_system(strategy_idx)
+        user_prompt = get_generate_prompt(ctx_text, strategy_idx)
+        
     elif action == 'generate_direct':
         system_prompt = GENERATE_DIRECT_SYSTEM
         user_prompt = get_generate_direct_prompt(ctx_text)
+        
     elif action == 'modify':
         system_prompt = MODIFY_SYSTEM
         base_content = ""
@@ -78,6 +185,7 @@ def run_llm_action(action: str, context: List[Dict], output_dir: str, base_csv: 
             with open(base_csv, 'r') as f:
                 base_content = f.read().strip()
         user_prompt = get_modify_prompt(ctx_text, base_csv or "", base_content)
+        
     elif action == 'modify_direct':
         system_prompt = MODIFY_DIRECT_SYSTEM
         base_content = ""
@@ -89,9 +197,39 @@ def run_llm_action(action: str, context: List[Dict], output_dir: str, base_csv: 
         print(f"Unknown action: {action}")
         return None
     
-    # 1. Get Params from LLM
-    params = get_gemini_response(system_prompt, user_prompt, images, temperature=temperature)
+    # Save debug info if debug_dir is provided
+    if debug_dir:
+        os.makedirs(debug_dir, exist_ok=True)
+        with open(os.path.join(debug_dir, 'context.txt'), 'w', encoding='utf-8') as f:
+            f.write(ctx_text)
+        with open(os.path.join(debug_dir, 'system_prompt.txt'), 'w', encoding='utf-8') as f:
+            f.write(system_prompt)
+        with open(os.path.join(debug_dir, 'user_prompt.txt'), 'w', encoding='utf-8') as f:
+            f.write(user_prompt)
+        if strategy_name:
+            with open(os.path.join(debug_dir, 'strategy.txt'), 'w', encoding='utf-8') as f:
+                f.write(f"Strategy: {strategy_name} (idx={strategy_idx})")
+    
+    # 1. Get Params from LLM (with full response for debugging)
+    params, analysis, rationale = get_gemini_response(
+        system_prompt, user_prompt, images, 
+        temperature=temperature, return_full=True
+    )
+    
     print(f"DEBUG: Gemini raw params: {json.dumps(params, indent=2)}")
+    if strategy_name:
+        print(f"DEBUG: Strategy used: {strategy_name}")
+    
+    # Save analysis and rationale for debugging
+    if debug_dir:
+        if analysis:
+            with open(os.path.join(debug_dir, 'llm_analysis.txt'), 'w', encoding='utf-8') as f:
+                f.write(analysis)
+        if rationale:
+            with open(os.path.join(debug_dir, 'llm_rationale.txt'), 'w', encoding='utf-8') as f:
+                f.write(rationale)
+        with open(os.path.join(debug_dir, 'llm_params.json'), 'w', encoding='utf-8') as f:
+            json.dump(params, f, indent=2)
     
     if not params:
         print("Error: LLM returned empty params")

@@ -1,0 +1,67 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.4, -0.3, 1.0, 0.5, 0.2, 1.0, 0.6, -0.1, 1.0, 0.7, 0.4, 1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation results indicate a complete failure, with a negative drag coefficient of -1.0 and a lift coefficient of 0.0, resulting in a very poor L/D ratio. The negative drag is physically unrealistic and suggests a fundamental problem. Without visible flow fields, it is impossible to determine the exact flow characteristics.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without visible flow fields, identifying specific critical regions is impossible. However, the negative drag coefficient suggests a potential issue with the overall airfoil shape. Ensuring a smooth, continuous surface and avoiding sharp corners would be a first step.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+Due to the unrealistic simulation results, design trade-offs cannot be assessed. A major issue exists with either the airfoil geometry or the simulation setup. The prioritized recommendation is to verify the airfoil geometry and simulation parameters to ensure a physically plausible simulation before further iteration.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.4, -0.3, 1.0, 0.5, 0.2, 1.0, 0.6, -0.1, 1.0, 0.7, 0.4, 1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation results indicate a complete failure, with a negative drag coefficient of -1.0 and a lift coefficient of 0.0, resulting in a very poor L/D ratio. The negative drag is physically unrealistic and suggests a fundamental problem. Without visible flow fields, it is impossible to determine the exact flow characteristics.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without visible flow fields, identifying specific critical regions is impossible. However, the negative drag coefficient suggests a potential issue with the overall airfoil shape. Ensuring a smooth, continuous surface and avoiding sharp corners would be a first step.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+Due to the unrealistic simulation results, design trade-offs cannot be assessed. A major issue exists with either the airfoil geometry or the simulation setup. The prioritized recommendation is to verify the airfoil geometry and simulation parameters to ensure a physically plausible simulation before further iteration.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.4, -0.3, 1.0, 0.5, 0.2, 1.0, 0.6, -0.1, 1.0, 0.7, 0.4, 1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation results indicate a complete failure, with a negative drag coefficient of -1.0 and a lift coefficient of 0.0, resulting in a very poor L/D ratio. The negative drag is physically unrealistic and suggests a fundamental problem. Without visible flow fields, it is impossible to determine the exact flow characteristics.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without visible flow fields, identifying specific critical regions is impossible. However, the negative drag coefficient suggests a potential issue with the overall airfoil shape. Ensuring a smooth, continuous surface and avoiding sharp corners would be a first step.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+Due to the unrealistic simulation results, design trade-offs cannot be assessed. A major issue exists with either the airfoil geometry or the simulation setup. The prioritized recommendation is to verify the airfoil geometry and simulation parameters to ensure a physically plausible simulation before further iteration.

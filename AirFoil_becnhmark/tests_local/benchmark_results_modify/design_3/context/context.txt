@@ -1,0 +1,67 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.295377, -0.0416, -0.036971, 0.653902, -0.212249, 0.054439, -0.581732, 0.394376, 0.129699, -0.415204, 0.681243, -0.205722]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation results indicate a complete failure, with a negative drag coefficient of -1.0 and zero lift. The L/D ratio is also extremely poor at -0.0000, indicating a complete lack of aerodynamic performance. The provided visualizations show no discernible flow patterns, suggesting either a problem with the simulation setup or the airfoil geometry being too small to influence the flow.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Given the lack of any meaningful flow features, it's impossible to identify specific critical regions. However, the entire airfoil shape is suspect. The current geometry is likely not producing any lift and is resulting in anomalous drag behavior. The airfoil's leading edge and overall camber are areas that require major redesign.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no visible trade-offs with this design, as it currently provides no aerodynamic benefit. Due to the fundamental issues, I recommend pivoting to a different airfoil design or checking the simulation setup. A standard airfoil profile (e.g., NACA 4412) with a reasonable chord length should be used as a starting point for the next iteration.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.295377, -0.0416, -0.036971, 0.653902, -0.212249, 0.054439, -0.581732, 0.394376, 0.129699, -0.415204, 0.681243, -0.205722]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation results indicate a complete failure, with a negative drag coefficient of -1.0 and zero lift. The L/D ratio is also extremely poor at -0.0000, indicating a complete lack of aerodynamic performance. The provided visualizations show no discernible flow patterns, suggesting either a problem with the simulation setup or the airfoil geometry being too small to influence the flow.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Given the lack of any meaningful flow features, it's impossible to identify specific critical regions. However, the entire airfoil shape is suspect. The current geometry is likely not producing any lift and is resulting in anomalous drag behavior. The airfoil's leading edge and overall camber are areas that require major redesign.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no visible trade-offs with this design, as it currently provides no aerodynamic benefit. Due to the fundamental issues, I recommend pivoting to a different airfoil design or checking the simulation setup. A standard airfoil profile (e.g., NACA 4412) with a reasonable chord length should be used as a starting point for the next iteration.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.295377, -0.0416, -0.036971, 0.653902, -0.212249, 0.054439, -0.581732, 0.394376, 0.129699, -0.415204, 0.681243, -0.205722]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation results indicate a complete failure, with a negative drag coefficient of -1.0 and zero lift. The L/D ratio is also extremely poor at -0.0000, indicating a complete lack of aerodynamic performance. The provided visualizations show no discernible flow patterns, suggesting either a problem with the simulation setup or the airfoil geometry being too small to influence the flow.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Given the lack of any meaningful flow features, it's impossible to identify specific critical regions. However, the entire airfoil shape is suspect. The current geometry is likely not producing any lift and is resulting in anomalous drag behavior. The airfoil's leading edge and overall camber are areas that require major redesign.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no visible trade-offs with this design, as it currently provides no aerodynamic benefit. Due to the fundamental issues, I recommend pivoting to a different airfoil design or checking the simulation setup. A standard airfoil profile (e.g., NACA 4412) with a reasonable chord length should be used as a starting point for the next iteration.

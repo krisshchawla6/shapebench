@@ -1,0 +1,114 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.29712, -0.04908, -0.038337, 0.674928, -0.237269, 0.038311, -0.590509, 0.357986, 0.118197, -0.433801, 0.629101, -0.281093]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #2 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation resulted in complete aerodynamic failure, with a drag coefficient of -1.0, lift coefficient of 0.0, and a near-zero L/D ratio. The uniform pressure and velocity fields indicate the flow is not interacting with the airfoil. No part of the geometry showed any positive contribution.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire airfoil geometry is problematic, as the flow does not interact with it. The likely cause is an error in the simulation setup, such as the mesh, boundary conditions, or airfoil definition. No specific region can be optimized until the simulation is correctly set up.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no design trade-offs to consider because the simulation is not producing meaningful results. Given the complete lack of flow interaction with the airfoil, further iteration on this design is pointless until the simulation setup is debugged. Prioritized recommendation: Thoroughly review and correct the simulation setup, starting with the mesh, boundary conditions, and airfoil definition.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.335607, 0.270827, -0.042446, 0.676124, -0.119698, -0.017226, 0.548917, 0.24759, 0.122076, 0.7959, 0.212533, 0.21124]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed completely, yielding a drag coefficient of -1.0 and a lift coefficient of 0.0, resulting in a highly negative reward of -5.0. The uniform pressure, X-velocity, and Y-velocity fields indicate no interaction between the flow and the airfoil, suggesting a fundamental setup error rather than an aerodynamic design flaw. The incorrect simulation setup prevents the airfoil from influencing the flow field.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+No geometric regions are relevant since the flow field is uniform. The lack of flow interaction means that the leading edge, trailing edge, and camber are not influencing the aerodynamic performance at all. The issue is not related to shape optimization but rather to fixing the simulation setup.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+Since the simulation is fundamentally flawed, there are no design trade-offs to consider. Iterating on the airfoil shape is pointless at this stage. The immediate priority is to debug the simulation setup to ensure the airfoil is correctly represented in the computational domain and that the solver recognizes its presence.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.335607, 0.270827, -0.042446, 0.676124, -0.119698, -0.017226, 0.548917, 0.24759, 0.122076, 0.7959, 0.212533, 0.21124]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed completely, yielding a drag coefficient of -1.0 and a lift coefficient of 0.0, resulting in a highly negative reward of -5.0. The uniform pressure, X-velocity, and Y-velocity fields indicate no interaction between the flow and the airfoil, suggesting a fundamental setup error rather than an aerodynamic design flaw. The incorrect simulation setup prevents the airfoil from influencing the flow field.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+No geometric regions are relevant since the flow field is uniform. The lack of flow interaction means that the leading edge, trailing edge, and camber are not influencing the aerodynamic performance at all. The issue is not related to shape optimization but rather to fixing the simulation setup.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+Since the simulation is fundamentally flawed, there are no design trade-offs to consider. Iterating on the airfoil shape is pointless at this stage. The immediate priority is to debug the simulation setup to ensure the airfoil is correctly represented in the computational domain and that the solver recognizes its presence.
+
+
+## Visual Reference
+
+If an image is provided, it shows the **parent design's geometry** - the exact shape you are about to modify. Use this visual reference to:
+- Identify which control points affect which regions of the shape
+- Understand how the current geometry produces the observed lift/drag
+- Target specific geometric features for improvement
+
+# Task: Modify Existing Airfoil Design (with Sampling Bounds)
+
+You are modifying an existing airfoil to improve its performance.
+
+Current action vector to modify:
+```
+0.297120,-0.049080,-0.038337,0.674928,-0.237269,0.038311,-0.590509,0.357986,0.118197,-0.433801,0.629101,-0.281093
+```
+Base CSV path: /scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_results_modify/design_0.csv
+
+Specify which control points to modify (pt_idx) and provide [min, max] bounds for sampling.
+Values will be uniformly sampled between the bounds you provide.
+
+Modification strategy:
+- Identify which control points most affect lift and drag
+- Make targeted changes to promising points
+- Consider what made previous successful designs work
+- Preserve aspects of the design that are working well
+
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "pt_idx": [<idx1>, <idx2>, ...],
+  "values": [
+    [[<r_min>, <r_max>], [<a_min>, <a_max>], [<e_min>, <e_max>]],
+    [[<r_min>, <r_max>], [<a_min>, <a_max>], [<e_min>, <e_max>]],
+    ...
+  ],
+  "name": "<descriptive_name>"
+}
+
+Replace <idx> with integer indices (0 to n_cp-1).
+Replace other <placeholders> with actual float values in [-1.0, 1.0].
+Number of entries in values must match length of pt_idx.
+

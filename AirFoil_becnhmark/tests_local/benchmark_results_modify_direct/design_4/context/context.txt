@@ -1,0 +1,67 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.5, -0.1, 0.05, 0.5, 0.1, 0.05, -0.55, 0.35, 0.05, -0.55, -0.35, 0.05]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design failed catastrophically, achieving a drag coefficient of -1.0 and zero lift, resulting in a negative L/D ratio. The uniform flow fields of pressure, x-velocity, and y-velocity indicate that the airfoil is unresolved, acting as a negligible obstruction to the flow. No meaningful aerodynamic forces are generated due to the airfoil's size and shape.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire airfoil profile is a critical region requiring redesign. The leading edge needs to be shaped to promote smooth flow attachment instead of acting as a point obstruction. The airfoil's overall size and thickness must be significantly increased to generate meaningful pressure differences and lift.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+This design demonstrates no useful aerodynamic characteristics, so there are no meaningful trade-offs to consider. Iterating on this design is unlikely to yield significant improvements without a fundamental change in size and shape. Prioritized recommendation: Increase the size of the airfoil by at least an order of magnitude and implement a conventional airfoil shape (e.g., NACA 0012).
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.5, -0.1, 0.05, 0.5, 0.1, 0.05, -0.55, 0.35, 0.05, -0.55, -0.35, 0.05]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design failed catastrophically, achieving a drag coefficient of -1.0 and zero lift, resulting in a negative L/D ratio. The uniform flow fields of pressure, x-velocity, and y-velocity indicate that the airfoil is unresolved, acting as a negligible obstruction to the flow. No meaningful aerodynamic forces are generated due to the airfoil's size and shape.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire airfoil profile is a critical region requiring redesign. The leading edge needs to be shaped to promote smooth flow attachment instead of acting as a point obstruction. The airfoil's overall size and thickness must be significantly increased to generate meaningful pressure differences and lift.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+This design demonstrates no useful aerodynamic characteristics, so there are no meaningful trade-offs to consider. Iterating on this design is unlikely to yield significant improvements without a fundamental change in size and shape. Prioritized recommendation: Increase the size of the airfoil by at least an order of magnitude and implement a conventional airfoil shape (e.g., NACA 0012).
+### Inspiration 2 (Database Rank #3)
+- **Action**: [0.2, 0.2, 0.0, 0.2, -0.2, 0.0, -0.2, 0.2, 0.0, -0.2, -0.2, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design completely failed aerodynamically, evidenced by a drag coefficient of -1.0, a lift coefficient of 0.0, and a resulting L/D ratio of -0.0. The uniform pressure and velocity fields indicate that the simulation is not resolving the airfoil geometry. The negative drag coefficient is non-physical and suggests a fundamental issue with the simulation setup or the geometry itself.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Due to the lack of any discernible flow features, it is impossible to identify critical regions for shape optimization. The absence of flow interaction suggests that the airfoil geometry is either degenerate or not being properly represented in the simulation. To proceed, the airfoil geometry must be corrected or redefined and the simulation re-run.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no trade-offs visible in this design due to the lack of any aerodynamic performance. The simulation results are invalid, and the design is unusable in its current state. The immediate recommendation is to verify and correct the airfoil geometry definition or the mesh to ensure the geometry is being properly represented in the simulation before proceeding with any further iterative design improvements.

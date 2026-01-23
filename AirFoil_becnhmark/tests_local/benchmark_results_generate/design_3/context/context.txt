@@ -1,0 +1,67 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.272474, -0.766611, -1.0, -0.401149, -0.447792, -1.0, 0.141077, -0.590755, -1.0, -0.032672, 0.043214, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed to produce meaningful results, indicated by a drag coefficient of -1.0 and a lift coefficient of 0.0, leading to a highly negative reward of -5.0. The flow visualizations show no discernable flow features around the presumed airfoil location, suggesting a problem with the geometry definition, mesh generation, or simulation setup. There is no evidence of lift generation or drag reduction.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without visible flow patterns, pinpointing critical regions is impossible. However, if the airfoil exists, the leading edge would typically be critical for managing pressure gradients and preventing separation. The trailing edge and camber would also influence lift generation. The simulation must be fixed to proceed with meaningful analysis.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no visible design trade-offs to analyze with the current simulation results. The primary issue is the lack of a valid simulation. The recommendation is to debug the simulation setup, ensuring the airfoil geometry is correctly defined and meshed within the flow domain, and rerun the simulation before attempting further analysis.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.272474, -0.766611, -1.0, -0.401149, -0.447792, -1.0, 0.141077, -0.590755, -1.0, -0.032672, 0.043214, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed to produce meaningful results, indicated by a drag coefficient of -1.0 and a lift coefficient of 0.0, leading to a highly negative reward of -5.0. The flow visualizations show no discernable flow features around the presumed airfoil location, suggesting a problem with the geometry definition, mesh generation, or simulation setup. There is no evidence of lift generation or drag reduction.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without visible flow patterns, pinpointing critical regions is impossible. However, if the airfoil exists, the leading edge would typically be critical for managing pressure gradients and preventing separation. The trailing edge and camber would also influence lift generation. The simulation must be fixed to proceed with meaningful analysis.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no visible design trade-offs to analyze with the current simulation results. The primary issue is the lack of a valid simulation. The recommendation is to debug the simulation setup, ensuring the airfoil geometry is correctly defined and meshed within the flow domain, and rerun the simulation before attempting further analysis.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.272474, -0.766611, -1.0, -0.401149, -0.447792, -1.0, 0.141077, -0.590755, -1.0, -0.032672, 0.043214, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed to produce meaningful results, indicated by a drag coefficient of -1.0 and a lift coefficient of 0.0, leading to a highly negative reward of -5.0. The flow visualizations show no discernable flow features around the presumed airfoil location, suggesting a problem with the geometry definition, mesh generation, or simulation setup. There is no evidence of lift generation or drag reduction.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without visible flow patterns, pinpointing critical regions is impossible. However, if the airfoil exists, the leading edge would typically be critical for managing pressure gradients and preventing separation. The trailing edge and camber would also influence lift generation. The simulation must be fixed to proceed with meaningful analysis.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no visible design trade-offs to analyze with the current simulation results. The primary issue is the lack of a valid simulation. The recommendation is to debug the simulation setup, ensuring the airfoil geometry is correctly defined and meshed within the flow domain, and rerun the simulation before attempting further analysis.

@@ -1,0 +1,86 @@
+[
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/baseline_action.csv",
+    "rank": 0,
+    "reward": -5.0,
+    "drag_lift": [
+      -1.0,
+      0.0
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/initial/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/initial/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/initial/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_0.csv",
+    "rank": 0,
+    "reward": -5.0,
+    "drag_lift": [
+      -1.0,
+      0.0
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_0/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_0/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_0/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_1.csv",
+    "rank": 0,
+    "reward": -5.0,
+    "drag_lift": [
+      -1.0,
+      0.0
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_1/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_1/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_1/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_2.csv",
+    "rank": 0,
+    "reward": -5.0,
+    "drag_lift": [
+      -1.0,
+      0.0
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_2/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_2/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_2/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_3.csv",
+    "rank": 0,
+    "reward": -5.0,
+    "drag_lift": [
+      -1.0,
+      0.0
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_3/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_3/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_3/save/sol/1_v.png"
+    ]
+  },
+  {
+    "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_4.csv",
+    "rank": 0,
+    "reward": -5.0,
+    "drag_lift": [
+      -1.0,
+      0.0
+    ],
+    "sol_images": [
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_4/save/sol/1_p.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_4/save/sol/1_u.png",
+      "/scratch/LLM_Evolve/AirFoil_becnhmark/tmp_out/tmp_test/modify_benchmark/design_4/save/sol/1_v.png"
+    ]
+  }
+]

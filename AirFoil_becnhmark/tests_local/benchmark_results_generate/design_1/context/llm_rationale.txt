@@ -1,0 +1,1 @@
+To address the inverted orientation, I will invert the radius and angle parameters. The edgy parameter is kept the same as it is not clear if it is causing the problem. I will start by flipping the existing values by multiplying the radius and angle by -1. Since the provided actions are all identical, this becomes a simple inversion.

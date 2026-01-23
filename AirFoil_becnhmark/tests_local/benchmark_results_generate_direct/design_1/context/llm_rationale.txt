@@ -1,0 +1,5 @@
+To create a functional airfoil shape, I need to introduce curvature and thickness. I will modify the parameters to create a typical airfoil profile.
+- Point 0: Leading edge. radius_param should be set to 0.0. angle_param controls the bluntness of the leading edge. edgy_param should be set to -1 to smooth the edge.
+- Point 1: Upper surface. radius_param should be negative for the upper surface and affect thickness. angle_param will define the curve. edgy_param should be -1 to smooth the edge.
+- Point 2: Lower surface. radius_param should be positive. angle_param will define the curve. edgy_param should be -1 to smooth the edge.
+- Point 3: Trailing edge. radius_param should be set close to 0.0. angle_param should be small and negative. edgy_param should be 1 to make a sharper trailing edge.

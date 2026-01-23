@@ -1,0 +1,5 @@
+The provided designs all have a reward of -5.0, a drag of -1.0, and a lift of 0.0. They are circular in shape, leading to the simulation reporting incorrect (negative) drag. The feedback emphasizes the need for a distinct leading edge, trailing edge, and camber to generate lift and positive drag.
+
+The key is to move away from the circular shape and create something resembling an airfoil.
+
+Hypothesis: By perturbing the radius and angle parameters, particularly for the first few and last few control points, we can introduce camber and a leading/trailing edge. Setting `edgy_param` to -1 (smooth) will also help create a more realistic airfoil shape.

@@ -1,0 +1,135 @@
+# Context: Airfoil Design Optimization
+
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.715608, 0.145984, -1.0, 0.274039, 0.139207, -1.0, 0.368913, -0.038243, -1.0, 0.838272, -0.051032, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design completely failed, resulting in a reward of -5.000000 and zero lift. The drag coefficient is -1.000000, indicating thrust instead of drag, likely due to the inverted orientation. The pressure, x-velocity, and y-velocity fields show no signs of lift generation or flow acceleration around the airfoil.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire airfoil shape is problematic due to its inverted orientation. The leading edge experiences no stagnation pressure. The trailing edge does not promote proper flow convergence. The camber is completely wrong for this orientation.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+This design shows that orientation and camber are crucial. Iterating on this design in its current state is unlikely to yield positive results. The primary recommendation is to rotate the airfoil 180 degrees.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.715608, 0.145984, -1.0, 0.274039, 0.139207, -1.0, 0.368913, -0.038243, -1.0, 0.838272, -0.051032, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design completely failed, resulting in a reward of -5.000000 and zero lift. The drag coefficient is -1.000000, indicating thrust instead of drag, likely due to the inverted orientation. The pressure, x-velocity, and y-velocity fields show no signs of lift generation or flow acceleration around the airfoil.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire airfoil shape is problematic due to its inverted orientation. The leading edge experiences no stagnation pressure. The trailing edge does not promote proper flow convergence. The camber is completely wrong for this orientation.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+This design shows that orientation and camber are crucial. Iterating on this design in its current state is unlikely to yield positive results. The primary recommendation is to rotate the airfoil 180 degrees.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.715608, 0.145984, -1.0, 0.274039, 0.139207, -1.0, 0.368913, -0.038243, -1.0, 0.838272, -0.051032, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design completely failed, resulting in a reward of -5.000000 and zero lift. The drag coefficient is -1.000000, indicating thrust instead of drag, likely due to the inverted orientation. The pressure, x-velocity, and y-velocity fields show no signs of lift generation or flow acceleration around the airfoil.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire airfoil shape is problematic due to its inverted orientation. The leading edge experiences no stagnation pressure. The trailing edge does not promote proper flow convergence. The camber is completely wrong for this orientation.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+This design shows that orientation and camber are crucial. Iterating on this design in its current state is unlikely to yield positive results. The primary recommendation is to rotate the airfoil 180 degrees.
+
+
+## Visual Reference
+
+If an image is provided, it shows the **parent design's geometry** — the shape you are building upon or learning from. Use this visual reference to understand:
+- The current shape characteristics (camber, thickness, leading/trailing edge)
+- Areas that may need modification based on flow behavior
+- Geometric features that correlate with the performance metrics
+
+# Strategy: Systematic Parameter Tuning
+
+Perform systematic exploration of the parameter space:
+- If radius parameters were important, try different radius configurations
+- If angles showed sensitivity, do a focused angle sweep
+- Use wider bounds for uncertain parameters, narrow bounds for confident ones
+- Think about which parameters have the highest impact on reward
+
+# Analysis Task
+
+Before proposing a new design, analyze the previous results:
+
+1. **Best Design Analysis**: What was the best reward achieved? What parameters led to it?
+2. **Pattern Recognition**: What patterns distinguish good designs from bad ones?
+3. **Failure Analysis**: Why might low-performing designs have failed?
+4. **Improvement Hypothesis**: Based on your analysis, what specific changes should improve performance?
+
+# Response Format
+
+You MUST structure your response as follows:
+
+<ANALYSIS>
+Provide your analysis of the previous designs here. Identify patterns, explain what worked and what didn't, and state your hypothesis for improvement.
+</ANALYSIS>
+
+<DESIGN_RATIONALE>
+Explain your specific design choices. Why did you choose these parameter ranges? What aerodynamic effect are you targeting?
+</DESIGN_RATIONALE>
+
+<DESIGN>
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [[<r0_min>, <r0_max>], [<a0_min>, <a0_max>], [<e0_min>, <e0_max>]],
+    [[<r1_min>, <r1_max>], [<a1_min>, <a1_max>], [<e1_min>, <e1_max>]],
+    [[<r2_min>, <r2_max>], [<a2_min>, <a2_max>], [<e2_min>, <e2_max>]],
+    [[<r3_min>, <r3_max>], [<a3_min>, <a3_max>], [<e3_min>, <e3_max>]]
+  ],
+  "name": "<descriptive_strategy_name>"
+}
+
+Replace all <placeholders> with actual float values in [-1.0, 1.0].
+Bounds format: [min, max] where min <= max.
+
+</DESIGN>
+
+IMPORTANT:
+- Your analysis and rationale are REQUIRED - they help ensure systematic improvement
+- Use the exact JSON format shown in <DESIGN> (no schema definitions, no markdown code blocks)
+- All parameter values must be in range [-1.0, 1.0]
+- The name should reflect your design strategy

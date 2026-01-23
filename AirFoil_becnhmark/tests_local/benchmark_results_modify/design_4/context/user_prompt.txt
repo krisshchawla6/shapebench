@@ -1,0 +1,114 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #2 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The design exhibits complete aerodynamic failure, indicated by the negative drag coefficient (-1.0), zero lift coefficient (0.0), and consequently a highly negative reward (-5.0). The symmetrical pressure distribution confirms that the airfoil is not generating lift. The near-zero velocity field suggests a significant issue with the simulation setup or boundary conditions.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Given the lack of any aerodynamic performance, there are no specific regions to optimize on this circular shape. The symmetric pressure and velocity fields indicate the circular geometry is fundamentally unsuitable for lift generation. The entire shape needs to be re-designed to have an asymmetric profile capable of producing lift.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no meaningful design trade-offs to consider with this circular geometry, as it produces neither lift nor drag. This design is a failure, and iterating on it is unlikely to yield any improvement. The prioritized recommendation is to pivot to a different airfoil shape with a clear leading and trailing edge and an asymmetric profile to generate lift.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.215848, -0.176704, -0.067535, 0.743043, -0.198867, 0.123157, -0.631042, 0.226033, 0.133966, -0.415204, 0.681243, -0.205722]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The airfoil design failed catastrophically, as evidenced by the highly negative drag coefficient of -1.0 and a near-zero lift coefficient, resulting in a reward of -5.0. The flow visualizations suggest massive flow separation, likely originating near the leading edge due to an extremely blunt shape, creating a large region of recirculating flow. This separation drastically increases pressure drag and eliminates any effective lift generation.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The leading edge is the most critical region. Its bluntness creates a strong adverse pressure gradient leading to immediate flow separation; therefore, the leading edge radius must be significantly decreased. The overall thickness of the airfoil also appears to be excessive, contributing to the pressure drag; reducing the maximum thickness would likely improve the flow. Finally, the camber may be too aggressive, further exacerbating separation; reducing the camber could help reattach the flow.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There's a clear trade-off between lift and drag in this design; reducing leading-edge bluntness and overall thickness to minimize drag will likely also reduce lift initially. However, addressing the severe flow separation is the priority. The immediate recommendation is to SIGNIFICANTLY decrease the leading-edge radius to promote attached flow and reduce the adverse pressure gradient.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.215848, -0.176704, -0.067535, 0.743043, -0.198867, 0.123157, -0.631042, 0.226033, 0.133966, -0.415204, 0.681243, -0.205722]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The airfoil design failed catastrophically, as evidenced by the highly negative drag coefficient of -1.0 and a near-zero lift coefficient, resulting in a reward of -5.0. The flow visualizations suggest massive flow separation, likely originating near the leading edge due to an extremely blunt shape, creating a large region of recirculating flow. This separation drastically increases pressure drag and eliminates any effective lift generation.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The leading edge is the most critical region. Its bluntness creates a strong adverse pressure gradient leading to immediate flow separation; therefore, the leading edge radius must be significantly decreased. The overall thickness of the airfoil also appears to be excessive, contributing to the pressure drag; reducing the maximum thickness would likely improve the flow. Finally, the camber may be too aggressive, further exacerbating separation; reducing the camber could help reattach the flow.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There's a clear trade-off between lift and drag in this design; reducing leading-edge bluntness and overall thickness to minimize drag will likely also reduce lift initially. However, addressing the severe flow separation is the priority. The immediate recommendation is to SIGNIFICANTLY decrease the leading-edge radius to promote attached flow and reduce the adverse pressure gradient.
+
+
+## Visual Reference
+
+If an image is provided, it shows the **parent design's geometry** - the exact shape you are about to modify. Use this visual reference to:
+- Identify which control points affect which regions of the shape
+- Understand how the current geometry produces the observed lift/drag
+- Target specific geometric features for improvement
+
+# Task: Modify Existing Airfoil Design (with Sampling Bounds)
+
+You are modifying an existing airfoil to improve its performance.
+
+Current action vector to modify:
+```
+1,0,0,1,0,0,1,0,0,1,0,0
+```
+Base CSV path: /scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/baseline_action.csv
+
+Specify which control points to modify (pt_idx) and provide [min, max] bounds for sampling.
+Values will be uniformly sampled between the bounds you provide.
+
+Modification strategy:
+- Identify which control points most affect lift and drag
+- Make targeted changes to promising points
+- Consider what made previous successful designs work
+- Preserve aspects of the design that are working well
+
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "pt_idx": [<idx1>, <idx2>, ...],
+  "values": [
+    [[<r_min>, <r_max>], [<a_min>, <a_max>], [<e_min>, <e_max>]],
+    [[<r_min>, <r_max>], [<a_min>, <a_max>], [<e_min>, <e_max>]],
+    ...
+  ],
+  "name": "<descriptive_name>"
+}
+
+Replace <idx> with integer indices (0 to n_cp-1).
+Replace other <placeholders> with actual float values in [-1.0, 1.0].
+Number of entries in values must match length of pt_idx.
+

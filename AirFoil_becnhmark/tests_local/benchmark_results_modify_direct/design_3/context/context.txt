@@ -1,0 +1,67 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.55, 0.35, 0.05, 0.55, -0.35, 0.05, -0.55, 0.35, 0.05, -0.55, -0.35, 0.05]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The extremely negative drag coefficient (-1.0) and zero lift indicate complete aerodynamic stall, leading to a negative reward. The lack of discernible pressure differential between the upper and lower surfaces in the pressure field visualization suggests no lift generation. The velocity fields (u and v) don't show any clear flow structures due to the image resolution, but the absence of expected velocity gradients confirms massive flow separation.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire airfoil surface is problematic due to the complete stall. The leading edge likely has an excessively large angle of attack, causing immediate flow separation on both the upper and lower surfaces. Reduce the leading edge angle of attack to promote attached flow and establish a favorable pressure gradient along the upper surface.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+The design is so poor that trade-offs are irrelevant at this stage; the primary goal is to achieve positive lift and reduce drag. Iterating on this design is necessary. Prioritized recommendation: SIGNIFICANTLY reduce the leading-edge angle of attack to re-establish attached flow and positive lift.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.55, 0.35, 0.05, 0.55, -0.35, 0.05, -0.55, 0.35, 0.05, -0.55, -0.35, 0.05]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The extremely negative drag coefficient (-1.0) and zero lift indicate complete aerodynamic stall, leading to a negative reward. The lack of discernible pressure differential between the upper and lower surfaces in the pressure field visualization suggests no lift generation. The velocity fields (u and v) don't show any clear flow structures due to the image resolution, but the absence of expected velocity gradients confirms massive flow separation.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire airfoil surface is problematic due to the complete stall. The leading edge likely has an excessively large angle of attack, causing immediate flow separation on both the upper and lower surfaces. Reduce the leading edge angle of attack to promote attached flow and establish a favorable pressure gradient along the upper surface.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+The design is so poor that trade-offs are irrelevant at this stage; the primary goal is to achieve positive lift and reduce drag. Iterating on this design is necessary. Prioritized recommendation: SIGNIFICANTLY reduce the leading-edge angle of attack to re-establish attached flow and positive lift.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.55, 0.35, 0.05, 0.55, -0.35, 0.05, -0.55, 0.35, 0.05, -0.55, -0.35, 0.05]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The extremely negative drag coefficient (-1.0) and zero lift indicate complete aerodynamic stall, leading to a negative reward. The lack of discernible pressure differential between the upper and lower surfaces in the pressure field visualization suggests no lift generation. The velocity fields (u and v) don't show any clear flow structures due to the image resolution, but the absence of expected velocity gradients confirms massive flow separation.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+The entire airfoil surface is problematic due to the complete stall. The leading edge likely has an excessively large angle of attack, causing immediate flow separation on both the upper and lower surfaces. Reduce the leading edge angle of attack to promote attached flow and establish a favorable pressure gradient along the upper surface.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+The design is so poor that trade-offs are irrelevant at this stage; the primary goal is to achieve positive lift and reduce drag. Iterating on this design is necessary. Prioritized recommendation: SIGNIFICANTLY reduce the leading-edge angle of attack to re-establish attached flow and positive lift.

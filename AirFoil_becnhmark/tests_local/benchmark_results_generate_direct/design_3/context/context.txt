@@ -1,0 +1,67 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.5, -0.2, -1.0, 0.6, 0.1, -1.0, 0.7, 0.3, -1.0, 0.8, -0.1, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation results indicate a complete failure, with a negative drag coefficient (-1.00) and zero lift, leading to a highly negative reward (-5.00). This suggests a critical error in the simulation setup or a fundamentally flawed geometry. Without visible flow field data, it's impossible to diagnose specific flow separation or pressure gradient issues, but the negative drag points to an unphysical result.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without flow visualizations, identifying critical regions is impossible. However, given the negative drag, the entire shape needs a re-evaluation. If the shape is intended to be an airfoil, it lacks the fundamental characteristics to produce lift and minimize drag. The leading and trailing edge geometry and overall camber are likely completely incorrect.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+The current design exhibits no positive aerodynamic characteristics, so trade-offs are irrelevant. The unphysical results necessitate a review of the simulation setup, including mesh quality, boundary conditions, and solver settings. The prioritized recommendation is to carefully validate the simulation setup and input geometry before proceeding with further design iterations.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.5, -0.2, -1.0, 0.6, 0.1, -1.0, 0.7, 0.3, -1.0, 0.8, -0.1, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation results indicate a complete failure, with a negative drag coefficient (-1.00) and zero lift, leading to a highly negative reward (-5.00). This suggests a critical error in the simulation setup or a fundamentally flawed geometry. Without visible flow field data, it's impossible to diagnose specific flow separation or pressure gradient issues, but the negative drag points to an unphysical result.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without flow visualizations, identifying critical regions is impossible. However, given the negative drag, the entire shape needs a re-evaluation. If the shape is intended to be an airfoil, it lacks the fundamental characteristics to produce lift and minimize drag. The leading and trailing edge geometry and overall camber are likely completely incorrect.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+The current design exhibits no positive aerodynamic characteristics, so trade-offs are irrelevant. The unphysical results necessitate a review of the simulation setup, including mesh quality, boundary conditions, and solver settings. The prioritized recommendation is to carefully validate the simulation setup and input geometry before proceeding with further design iterations.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.5, -0.2, -1.0, 0.6, 0.1, -1.0, 0.7, 0.3, -1.0, 0.8, -0.1, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation results indicate a complete failure, with a negative drag coefficient (-1.00) and zero lift, leading to a highly negative reward (-5.00). This suggests a critical error in the simulation setup or a fundamentally flawed geometry. Without visible flow field data, it's impossible to diagnose specific flow separation or pressure gradient issues, but the negative drag points to an unphysical result.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without flow visualizations, identifying critical regions is impossible. However, given the negative drag, the entire shape needs a re-evaluation. If the shape is intended to be an airfoil, it lacks the fundamental characteristics to produce lift and minimize drag. The leading and trailing edge geometry and overall camber are likely completely incorrect.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+The current design exhibits no positive aerodynamic characteristics, so trade-offs are irrelevant. The unphysical results necessitate a review of the simulation setup, including mesh quality, boundary conditions, and solver settings. The prioritized recommendation is to carefully validate the simulation setup and input geometry before proceeding with further design iterations.

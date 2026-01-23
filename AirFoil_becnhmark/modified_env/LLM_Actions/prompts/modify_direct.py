@@ -3,10 +3,18 @@
 from .base import format_response_instructions
 
 MODIFY_DIRECT_SYSTEM = """You are an evolutionary optimizer for aerodynamic shape optimization.
-Your goal is to mutate existing designs by modifying specific control points with exact values.
-Make precise, targeted changes to improve the reward based on performance feedback."""
+Your goal is to mutate existing designs by modifying specific control points to MAXIMIZE reward.
+The current designs have LOW rewards. You must make bold changes to SIGNIFICANTLY INCREASE the reward.
+Do not be conservative - explore parameter changes that could lead to major improvements."""
 
 MODIFY_DIRECT_USER = """{context}
+
+## Visual Reference
+
+If an image is provided, it shows the **parent design's geometry** - the exact shape you are about to modify. Use this visual reference to:
+- Identify which control points affect which regions of the shape
+- Understand how the current geometry produces the observed lift/drag
+- Target specific geometric features for improvement
 
 # Task: Modify Existing Airfoil Design (Exact Values)
 
@@ -22,10 +30,11 @@ Specify which control points to modify (pt_idx) and provide exact [radius_param,
 All values must be in the range [-1.0, 1.0].
 
 Modification strategy:
+- The current reward is LOW - you need to make changes that INCREASE it significantly
 - Analyze the current design's performance and identify weak points
-- Make targeted improvements based on aerodynamic principles
-- Preserve successful aspects while improving underperforming areas
-- Consider incremental changes to avoid breaking working geometry
+- Make BOLD changes - incremental tweaks won't achieve meaningful improvement
+- Don't preserve parameters just because reward is positive - positive but low is still bad
+- Target fundamental changes to improve aerodynamic efficiency
 
 {response_format}
 """

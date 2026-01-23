@@ -1,0 +1,67 @@
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.5, 0.3, 0.0, 0.5, -0.3, 0.0, -0.5, 0.3, 0.0, -0.5, -0.3, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed completely, evidenced by a negative drag coefficient of -1.0, zero lift, and a reward of -5.0.  The uniform pressure and velocity fields indicate no flow interaction with the airfoil, meaning the simulation setup is fundamentally flawed. This prevents any meaningful assessment of the airfoil's aerodynamic performance.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Shape optimization is impossible given the lack of flow. The simulation setup needs to be debugged before any region can be deemed critical. It is necessary to check boundary conditions and mesh quality.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no design trade-offs to analyze because the simulation did not converge to a meaningful solution. The priority is to debug the simulation setup, focusing on boundary conditions and mesh generation, before iterating on the airfoil shape. Ensure proper inflow and outflow conditions are defined.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.5, 0.3, 0.0, 0.5, -0.3, 0.0, -0.5, 0.3, 0.0, -0.5, -0.3, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed completely, evidenced by a negative drag coefficient of -1.0, zero lift, and a reward of -5.0.  The uniform pressure and velocity fields indicate no flow interaction with the airfoil, meaning the simulation setup is fundamentally flawed. This prevents any meaningful assessment of the airfoil's aerodynamic performance.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Shape optimization is impossible given the lack of flow. The simulation setup needs to be debugged before any region can be deemed critical. It is necessary to check boundary conditions and mesh quality.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no design trade-offs to analyze because the simulation did not converge to a meaningful solution. The priority is to debug the simulation setup, focusing on boundary conditions and mesh generation, before iterating on the airfoil shape. Ensure proper inflow and outflow conditions are defined.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.5, 0.3, 0.0, 0.5, -0.3, 0.0, -0.5, 0.3, 0.0, -0.5, -0.3, 0.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed completely, evidenced by a negative drag coefficient of -1.0, zero lift, and a reward of -5.0.  The uniform pressure and velocity fields indicate no flow interaction with the airfoil, meaning the simulation setup is fundamentally flawed. This prevents any meaningful assessment of the airfoil's aerodynamic performance.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Shape optimization is impossible given the lack of flow. The simulation setup needs to be debugged before any region can be deemed critical. It is necessary to check boundary conditions and mesh quality.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no design trade-offs to analyze because the simulation did not converge to a meaningful solution. The priority is to debug the simulation setup, focusing on boundary conditions and mesh generation, before iterating on the airfoil shape. Ensure proper inflow and outflow conditions are defined.

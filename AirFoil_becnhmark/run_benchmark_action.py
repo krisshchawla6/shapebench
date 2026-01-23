@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'modified_env/LLM_Act
 
 from run_case import run_from_csv
 from LLM_agent import run_llm_action
+from Analysis_LLM import run_simulation_analysis
 
 def run_simulation(csv_path, case_dir):
     result = run_from_csv(csv_path, reset_first=True)
@@ -23,10 +24,10 @@ def run_simulation(csv_path, case_dir):
             shutil.rmtree(case_save_dir)
         shutil.copytree('./save', case_save_dir)
     
-    results = post_process_results(case_save_dir)
+    results = post_process_results(case_save_dir, reward)
     return reward, results
 
-def post_process_results(save_dir):
+def post_process_results(save_dir, reward=None):
     drag, lift = 0.0, 0.0
     dl_path = os.path.join(save_dir, 'drag_lift')
     if os.path.exists(dl_path):
@@ -45,7 +46,26 @@ def post_process_results(save_dir):
         os.path.join(sol_dir, '1_v.png')
     ]
     
-    return [[drag, lift], sol_images]
+    # Find shape image (geometry visualization)
+    png_dir = os.path.join(save_dir, 'png')
+    shape_image = None
+    if os.path.exists(png_dir):
+        shape_pngs = sorted([f for f in os.listdir(png_dir) if f.startswith('shape_') and f.endswith('.png')])
+        if shape_pngs:
+            shape_image = os.path.join(png_dir, shape_pngs[-1])
+    
+    # Run qualitative analysis
+    metrics = {'drag': drag, 'lift': lift}
+    if reward is not None:
+        metrics['reward'] = reward
+        
+    try:
+        analysis_text = run_simulation_analysis(sol_images, metrics)
+    except Exception as e:
+        print(f"Analysis failed: {e}")
+        analysis_text = ""
+    
+    return [[drag, lift], sol_images, analysis_text, shape_image]
 
 def update_database(database, x, reward, results):
     entry = np.array([[x, 0, reward, results]], dtype=object)
@@ -58,24 +78,58 @@ def update_database(database, x, reward, results):
         database[i, 1] = i
     return database
 
-def generate_design(parent, inspirations, output_dir, iteration_nb, action):
+def generate_design(parent, inspirations, output_dir, iteration_nb, action, debug=False):
     llm_context = []
+    
+    # Build context with full information including feedback
     if parent is not None:
         vec = np.loadtxt(parent[0], delimiter=',')
         if vec.ndim == 2: vec = vec[0]
-        llm_context.append({'vector': vec.tolist(), 'reward': parent[2], 'ranking': parent[1], 'images': []})
+        results = parent[3] if len(parent) > 3 else []
+        drag_lift = results[0] if len(results) > 0 else [0, 0]
+        feedback = results[2] if len(results) > 2 else ""
+        shape_image = results[3] if len(results) > 3 else None
+        
+        # For parent: include shape image for visual context
+        parent_images = []
+        if shape_image and os.path.exists(shape_image):
+            parent_images.append(shape_image)
+        
+        llm_context.append({
+            'vector': vec.tolist(),
+            'reward': parent[2],
+            'ranking': parent[1],
+            'drag': drag_lift[0],
+            'lift': drag_lift[1],
+            'feedback': feedback,
+            'images': parent_images  # Shape image only for parent
+        })
     
     if inspirations is not None:
         for insp in inspirations:
             vec = np.loadtxt(insp[0], delimiter=',')
             if vec.ndim == 2: vec = vec[0]
-            llm_context.append({'vector': vec.tolist(), 'reward': insp[2], 'ranking': insp[1], 'images': []})
+            results = insp[3] if len(insp) > 3 else []
+            drag_lift = results[0] if len(results) > 0 else [0, 0]
+            feedback = results[2] if len(results) > 2 else ""
+            
+            # Inspirations: no images, just feedback text
+            llm_context.append({
+                'vector': vec.tolist(),
+                'reward': insp[2],
+                'ranking': insp[1],
+                'drag': drag_lift[0],
+                'lift': drag_lift[1],
+                'feedback': feedback,
+                'images': []  # No images for inspirations
+            })
     
     base_csv = parent[0] if parent is not None else None
     name = f"design_{iteration_nb}"
     os.makedirs(output_dir, exist_ok=True)
     
-    x = run_llm_action(action, llm_context, output_dir, base_csv=base_csv, name=name, skip_vis=True)
+    debug_dir = os.path.join(output_dir, name, 'context') if debug else None
+    x = run_llm_action(action, llm_context, output_dir, base_csv=base_csv, name=name, skip_vis=True, debug_dir=debug_dir)
     return x
 
 def powerlaw_sample_parent_and_inspiration(database, n_inspiration, alpha=0.1):
@@ -90,9 +144,9 @@ def powerlaw_sample_parent_and_inspiration(database, n_inspiration, alpha=0.1):
     inspirations = [database[i] for i in indices[1:]]
     return parent, inspirations
 
-def run_iteration(database, iteration_nb, output_dir, n_inspirations, action):
+def run_iteration(database, iteration_nb, output_dir, n_inspirations, action, debug=False):
     parent, inspirations = powerlaw_sample_parent_and_inspiration(database, n_inspirations)
-    x = generate_design(parent, inspirations, output_dir, iteration_nb, action)
+    x = generate_design(parent, inspirations, output_dir, iteration_nb, action, debug=debug)
     
     if x:
         case_dir = os.path.join(output_dir, f'design_{iteration_nb}')
@@ -111,7 +165,7 @@ def initialize_database(d0, output_dir):
     reward, results = run_simulation(d0, case_dir)
     return np.array([[d0, 0, reward, results]], dtype=object)
 
-def run_benchmark(d0, n_iterations, n_inspirations, action, output_dir):
+def run_benchmark(d0, n_iterations, n_inspirations, action, output_dir, debug=False):
     os.makedirs(output_dir, exist_ok=True)
     database = initialize_database(d0, output_dir)
     best_x = d0
@@ -121,7 +175,7 @@ def run_benchmark(d0, n_iterations, n_inspirations, action, output_dir):
     
     for i in range(n_iterations):
         print(f"\n--- Iteration {i+1}/{n_iterations} (action: {action}) ---")
-        database, reward, current_best = run_iteration(database, i, output_dir, n_inspirations, action)
+        database, reward, current_best = run_iteration(database, i, output_dir, n_inspirations, action, debug=debug)
         
         best_idx = np.argmax(database[:, 2].astype(float))
         cached.append(database[best_idx].copy())
@@ -141,6 +195,7 @@ if __name__ == "__main__":
                         help='LLM action to use for all iterations')
     parser.add_argument('--iterations', type=int, default=10, help='Number of iterations')
     parser.add_argument('--inspirations', type=int, default=2, help='Number of inspirations')
+    parser.add_argument('--debug', action='store_true', help='Save LLM context and prompts to context/ subfolder')
     args = parser.parse_args()
     
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -151,7 +206,7 @@ if __name__ == "__main__":
         sys.exit(1)
     
     output_dir = os.path.join(base_dir, f'benchmark_results_{args.action}')
-    best_design, cached = run_benchmark(baseline_csv, args.iterations, args.inspirations, args.action, output_dir)
+    best_design, cached = run_benchmark(baseline_csv, args.iterations, args.inspirations, args.action, output_dir, debug=args.debug)
     print(f"\nBest design: {best_design}")
     
     cache_data = []
@@ -162,7 +217,9 @@ if __name__ == "__main__":
             'rank': int(rank),
             'reward': float(reward),
             'drag_lift': results[0],
-            'sol_images': results[1]
+            'sol_images': results[1],
+            'analysis': results[2] if len(results) > 2 else "",
+            'shape_image': results[3] if len(results) > 3 else None
         })
     
     with open(os.path.join(output_dir, 'results.json'), 'w') as f:

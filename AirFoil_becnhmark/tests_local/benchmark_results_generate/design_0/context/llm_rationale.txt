@@ -1,0 +1,8 @@
+To transition from a circle to a basic airfoil shape, I will modify the radius and angle parameters to create a leading edge, camber, and trailing edge. I will adjust the `radius_param` and `angle_param` for the first few control points to form the leading edge and upper surface, and adjust those for the last few control points to form the trailing edge and lower surface. The middle points will be perturbed slightly to create a smoother curve. Since the simulation is producing incorrect drag, getting positive lift will be the main focus for now.
+
+Specifically:
+
+*   **First Control Point:** Adjust radius and angle to create a rounded leading edge.
+*   **Middle Control Points:** Small adjustments to create a smooth curve with slight camber.
+*   **Last Control Point:** Adjust radius and angle to create a sharp trailing edge.
+*   **Edgy Parameters:** Set all to -1 to create a smooth shape.

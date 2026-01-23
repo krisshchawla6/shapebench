@@ -1,0 +1,135 @@
+# Context: Airfoil Design Optimization
+
+## Parameter Space
+
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- **radius_param**: Controls radial distance from center. Range: [-1.0, 1.0]
+- **angle_param**: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- **edgy_param**: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+
+Maximize the reward (higher is better).
+
+## Parent Design (to modify/build upon)
+
+This is the design you are working from. If an image is provided, it shows this shape.
+
+- **Action**: [0.272474, -0.766611, -1.0, -0.401149, -0.447792, -1.0, 0.141077, -0.590755, -1.0, -0.032672, 0.043214, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+- **Database Rank**: #0 (out of all evaluated designs)
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed to produce meaningful results, indicated by a drag coefficient of -1.0 and a lift coefficient of 0.0, leading to a highly negative reward of -5.0. The flow visualizations show no discernable flow features around the presumed airfoil location, suggesting a problem with the geometry definition, mesh generation, or simulation setup. There is no evidence of lift generation or drag reduction.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without visible flow patterns, pinpointing critical regions is impossible. However, if the airfoil exists, the leading edge would typically be critical for managing pressure gradients and preventing separation. The trailing edge and camber would also influence lift generation. The simulation must be fixed to proceed with meaningful analysis.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no visible design trade-offs to analyze with the current simulation results. The primary issue is the lack of a valid simulation. The recommendation is to debug the simulation setup, ensuring the airfoil geometry is correctly defined and meshed within the flow domain, and rerun the simulation before attempting further analysis.
+
+## Inspiration Designs
+
+These are additional designs sampled from the database for reference:
+
+### Inspiration 1 (Database Rank #0)
+- **Action**: [0.272474, -0.766611, -1.0, -0.401149, -0.447792, -1.0, 0.141077, -0.590755, -1.0, -0.032672, 0.043214, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed to produce meaningful results, indicated by a drag coefficient of -1.0 and a lift coefficient of 0.0, leading to a highly negative reward of -5.0. The flow visualizations show no discernable flow features around the presumed airfoil location, suggesting a problem with the geometry definition, mesh generation, or simulation setup. There is no evidence of lift generation or drag reduction.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without visible flow patterns, pinpointing critical regions is impossible. However, if the airfoil exists, the leading edge would typically be critical for managing pressure gradients and preventing separation. The trailing edge and camber would also influence lift generation. The simulation must be fixed to proceed with meaningful analysis.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no visible design trade-offs to analyze with the current simulation results. The primary issue is the lack of a valid simulation. The recommendation is to debug the simulation setup, ensuring the airfoil geometry is correctly defined and meshed within the flow domain, and rerun the simulation before attempting further analysis.
+### Inspiration 2 (Database Rank #0)
+- **Action**: [0.272474, -0.766611, -1.0, -0.401149, -0.447792, -1.0, 0.141077, -0.590755, -1.0, -0.032672, 0.043214, -1.0]
+- **Reward**: -5.0000
+- **Drag**: -1.0000
+- **Lift**: 0.0000
+- **L/D Ratio**: -0.00
+
+- **Feedback**: **PARAGRAPH 1: Performance Assessment - What Worked vs What Failed**
+The simulation failed to produce meaningful results, indicated by a drag coefficient of -1.0 and a lift coefficient of 0.0, leading to a highly negative reward of -5.0. The flow visualizations show no discernable flow features around the presumed airfoil location, suggesting a problem with the geometry definition, mesh generation, or simulation setup. There is no evidence of lift generation or drag reduction.
+
+**PARAGRAPH 2: Critical Regions for Shape Optimization**
+Without visible flow patterns, pinpointing critical regions is impossible. However, if the airfoil exists, the leading edge would typically be critical for managing pressure gradients and preventing separation. The trailing edge and camber would also influence lift generation. The simulation must be fixed to proceed with meaningful analysis.
+
+**PARAGRAPH 3: Design Trade-offs and Recommendation**
+There are no visible design trade-offs to analyze with the current simulation results. The primary issue is the lack of a valid simulation. The recommendation is to debug the simulation setup, ensuring the airfoil geometry is correctly defined and meshed within the flow domain, and rerun the simulation before attempting further analysis.
+
+
+## Visual Reference
+
+If an image is provided, it shows the **parent design's geometry** — the shape you are building upon or learning from. Use this visual reference to understand:
+- The current shape characteristics (camber, thickness, leading/trailing edge)
+- Areas that may need modification based on flow behavior
+- Geometric features that correlate with the performance metrics
+
+# Strategy: Creative Exploration
+
+Design a completely different airfoil shape that explores untested regions:
+- Look at what parameter ranges have NOT been explored yet
+- Consider unconventional combinations that might yield surprising results
+- Don't be constrained by what worked before - think outside the box
+- Prioritize diversity over similarity to existing designs
+
+# Analysis Task
+
+Before proposing a new design, analyze the previous results:
+
+1. **Best Design Analysis**: What was the best reward achieved? What parameters led to it?
+2. **Pattern Recognition**: What patterns distinguish good designs from bad ones?
+3. **Failure Analysis**: Why might low-performing designs have failed?
+4. **Improvement Hypothesis**: Based on your analysis, what specific changes should improve performance?
+
+# Response Format
+
+You MUST structure your response as follows:
+
+<ANALYSIS>
+Provide your analysis of the previous designs here. Identify patterns, explain what worked and what didn't, and state your hypothesis for improvement.
+</ANALYSIS>
+
+<DESIGN_RATIONALE>
+Explain your specific design choices. Why did you choose these parameter ranges? What aerodynamic effect are you targeting?
+</DESIGN_RATIONALE>
+
+<DESIGN>
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [[<r0_min>, <r0_max>], [<a0_min>, <a0_max>], [<e0_min>, <e0_max>]],
+    [[<r1_min>, <r1_max>], [<a1_min>, <a1_max>], [<e1_min>, <e1_max>]],
+    [[<r2_min>, <r2_max>], [<a2_min>, <a2_max>], [<e2_min>, <e2_max>]],
+    [[<r3_min>, <r3_max>], [<a3_min>, <a3_max>], [<e3_min>, <e3_max>]]
+  ],
+  "name": "<descriptive_strategy_name>"
+}
+
+Replace all <placeholders> with actual float values in [-1.0, 1.0].
+Bounds format: [min, max] where min <= max.
+
+</DESIGN>
+
+IMPORTANT:
+- Your analysis and rationale are REQUIRED - they help ensure systematic improvement
+- Use the exact JSON format shown in <DESIGN> (no schema definitions, no markdown code blocks)
+- All parameter values must be in range [-1.0, 1.0]
+- The name should reflect your design strategy

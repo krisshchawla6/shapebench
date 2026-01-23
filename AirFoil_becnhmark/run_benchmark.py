@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'modified_env/LLM_Act
 
 from run_case import run_from_csv
 from LLM_agent import run_llm_action
+from Analysis_LLM import run_simulation_analysis
 
 def run_simulation(csv_path, case_dir):
     # Clear contents of ./save subdirs before running to prevent accumulation
@@ -38,10 +39,10 @@ def run_simulation(csv_path, case_dir):
             shutil.rmtree(case_save_dir)
         shutil.copytree('./save', case_save_dir)
     
-    results = post_process_results(case_save_dir)
+    results = post_process_results(case_save_dir, reward)
     return reward, results
 
-def post_process_results(save_dir):
+def post_process_results(save_dir, reward=None):
     drag, lift = 0.0, 0.0
     dl_path = os.path.join(save_dir, 'drag_lift')
     if os.path.exists(dl_path):
@@ -60,7 +61,27 @@ def post_process_results(save_dir):
         os.path.join(sol_dir, '1_v.png')
     ]
     
-    return [[drag, lift], sol_images]
+    # Find shape image (geometry visualization)
+    png_dir = os.path.join(save_dir, 'png')
+    shape_image = None
+    if os.path.exists(png_dir):
+        # Get the most recent shape PNG
+        shape_pngs = sorted([f for f in os.listdir(png_dir) if f.startswith('shape_') and f.endswith('.png')])
+        if shape_pngs:
+            shape_image = os.path.join(png_dir, shape_pngs[-1])
+    
+    # Run qualitative analysis
+    metrics = {'drag': drag, 'lift': lift}
+    if reward is not None:
+        metrics['reward'] = reward
+        
+    try:
+        analysis_text = run_simulation_analysis(sol_images, metrics)
+    except Exception as e:
+        print(f"Analysis failed: {e}")
+        analysis_text = ""
+    
+    return [[drag, lift], sol_images, analysis_text, shape_image]
 
 def update_database(database, x, reward, results):
     entry = np.array([[x, 0, reward, results]], dtype=object)
@@ -81,13 +102,44 @@ def generate_design(parent, inspirations, output_dir, iteration_nb):
     if parent is not None:
         vec = np.loadtxt(parent[0], delimiter=',')
         if vec.ndim == 2: vec = vec[0]
-        llm_context.append({'vector': vec.tolist(), 'reward': parent[2], 'ranking': parent[1], 'images': []})
+        results = parent[3] if len(parent) > 3 else []
+        drag_lift = results[0] if len(results) > 0 else [0, 0]
+        feedback = results[2] if len(results) > 2 else ""
+        shape_image = results[3] if len(results) > 3 else None
+        
+        # For parent: include shape image for visual context
+        parent_images = []
+        if shape_image and os.path.exists(shape_image):
+            parent_images.append(shape_image)
+        
+        llm_context.append({
+            'vector': vec.tolist(), 
+            'reward': parent[2], 
+            'ranking': parent[1], 
+            'images': parent_images,  # Shape image only for parent
+            'drag': drag_lift[0],
+            'lift': drag_lift[1],
+            'feedback': feedback
+        })
     
     if inspirations is not None:
         for insp in inspirations:
             vec = np.loadtxt(insp[0], delimiter=',')
             if vec.ndim == 2: vec = vec[0]
-            llm_context.append({'vector': vec.tolist(), 'reward': insp[2], 'ranking': insp[1], 'images': []})
+            results = insp[3] if len(insp) > 3 else []
+            drag_lift = results[0] if len(results) > 0 else [0, 0]
+            feedback = results[2] if len(results) > 2 else ""
+            
+            # Inspirations: no images, just feedback text
+            llm_context.append({
+                'vector': vec.tolist(), 
+                'reward': insp[2], 
+                'ranking': insp[1], 
+                'images': [],  # No images for inspirations
+                'drag': drag_lift[0],
+                'lift': drag_lift[1],
+                'feedback': feedback
+            })
     
     base_csv = parent[0] if parent is not None else None
     name = f"design_{iteration_nb}"
@@ -174,7 +226,9 @@ if __name__ == "__main__":
             'rank': int(rank),
             'reward': float(reward),
             'drag_lift': results[0],
-            'sol_images': results[1]
+            'sol_images': results[1],
+            'analysis': results[2] if len(results) > 2 else "",
+            'shape_image': results[3] if len(results) > 3 else None
         })
     
     with open(os.path.join(output_dir, 'results.json'), 'w') as f:
