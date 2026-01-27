@@ -24,9 +24,11 @@ You will specify EXACT parameter values. Be bold - major changes may be needed."
 # PROMPT VARIANTS
 # =============================================================================
 
-GENERATE_DIRECT_STRATEGY_NEW_DESIGN = """Maximize reward by proposing a new design.
+GENERATE_DIRECT_STRATEGY_NEW_DESIGN = """Your goal: MAXIMIZE the reward by exploring the FULL parameter space.
 
-Explore the full parameter space [-1.0, 1.0]. Try different parameter combinations."""
+Previous designs show what HAS been tried. Your task is to explore DIFFERENT regions.
+
+**Critical**: The parameter space is [-1.0, 1.0] for each value. Don't just stay in the same region as previous designs - explore the full range!"""
 
 # List of all strategy variants
 GENERATE_DIRECT_STRATEGIES = [

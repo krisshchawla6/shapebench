@@ -1,0 +1,4172 @@
+==========================================
+Job ID: 110
+Node: compute-dy-hpc-128vcpu-8
+Date: Mon Jan 26 23:05:33 UTC 2026
+Action: generate
+Iterations: 50
+Max Inspirations: 10 (grows from 0)
+Output: /scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_action_generate
+==========================================
+****** Starting episode 0
+***    Starting control 0
+-4.328319250107474 -0.1144416919108398
+good epoch; reward: 0.0264402150807148
+Reward: 0.0264, Drag: -4.3283, Lift: 0.1144
+
+--- Iteration 1/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.0,
+        0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.4,
+        -0.2
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ]
+  ],
+  "name": "Refined_Radius_SmallAngleVariations"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 1
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 12675 nodes for 6338 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 1.141339e+04).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.0264
+
+--- Iteration 2/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ]
+  ],
+  "name": "Slight_Variation_Reference"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 2
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 3218 iterations (PETSc reason DIVERGED_BREAKDOWN, residual norm ||r|| = 6.331852e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.0264
+
+--- Iteration 3/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        0.2,
+        0.5
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.1,
+        0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.5,
+        -0.2
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ]
+  ],
+  "name": "Subtle_Adjustments_around_Reference_But_Focused_Search"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 3
+***    Starting control 0
+-3.6391135484047825 -0.24599271889256455
+good epoch; reward: 0.06759687919064693
+Reward: 0.0676, Drag: -3.6391, Lift: 0.2460
+Reward: 0.0676, Best: 0.0676
+
+--- Iteration 4/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        1.0
+      ],
+      [
+        0.3,
+        0.6
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        1.0
+      ],
+      [
+        -0.6,
+        -0.3
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ]
+  ],
+  "name": "Symmetric_Airfoil_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 4
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13555 nodes for 6778 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 3.250178e+03).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.0676
+
+--- Iteration 5/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        -0.2,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.7,
+        1.0
+      ],
+      [
+        0.2,
+        0.6
+      ],
+      [
+        -0.2,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.7,
+        1.0
+      ],
+      [
+        -0.2,
+        0.2
+      ],
+      [
+        -0.2,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.7,
+        1.0
+      ],
+      [
+        -0.6,
+        -0.2
+      ],
+      [
+        -0.2,
+        0.2
+      ]
+    ]
+  ],
+  "name": "Conservative_Radius_Moderate_Angle"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 5
+***    Starting control 0
+-4.634721644436982 0.5001557946502941
+good epoch; reward: -0.10791495865790063
+Reward: -0.1079, Drag: -4.6347, Lift: -0.5002
+Reward: -0.1079, Best: 0.0676
+
+--- Iteration 6/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.2,
+        0.0
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.3,
+        0.5
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.2,
+        0.0
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.6,
+        -0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ]
+  ],
+  "name": "Refined_Exploration_Radius_Angle_Edgy"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 6
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 12799 nodes for 6400 points.
+-4.533415523474013 -1.0567998092639517
+good epoch; reward: 0.23311337859762582
+Reward: 0.2331, Drag: -4.5334, Lift: 1.0568
+Reward: 0.2331, Best: 0.2331
+
+--- Iteration 7/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.2,
+        -0.05
+      ],
+      [
+        -0.05,
+        0.05
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.98
+      ],
+      [
+        0.25,
+        0.45
+      ],
+      [
+        -0.15,
+        -0.05
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.25,
+        -0.0
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.8
+      ],
+      [
+        -0.55,
+        -0.35
+      ],
+      [
+        -0.2,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Aggressive_Exploration_Improved_Reference"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 7
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13703 nodes for 6852 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 3.653839e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 8/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.2,
+        0.0
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ]
+  ],
+  "name": "Focused_Exploration_Near_Reference"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 8
+***    Starting control 0
+-3.6268329622452473 -0.1479380884830483
+good epoch; reward: 0.04078988197776413
+Reward: 0.0408, Drag: -3.6268, Lift: 0.1479
+Reward: 0.0408, Best: 0.2331
+
+--- Iteration 9/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.2,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Refined_Exploration_Slightly_Sharper"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 9
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13687 nodes for 6844 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 290 iterations (PETSc reason DIVERGED_BREAKDOWN, residual norm ||r|| = 1.604344e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 10/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.2,
+        0.0
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ]
+  ],
+  "name": "Aggressive_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 10
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 7.460563e+05).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 11/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.25,
+        0.45
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.2,
+        0.0
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.85
+      ],
+      [
+        -0.55,
+        -0.35
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ]
+  ],
+  "name": "Conservative_Radius_Angle_Edgy"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 11
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 5389 iterations (PETSc reason DIVERGED_DTOL, residual norm ||r|| = 1.365357e+06).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 12/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Focused_Exploration_Refined_Ranges"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 12
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 1.157074e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 13/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        -0.05,
+        0.05
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.99
+      ],
+      [
+        0.25,
+        0.45
+      ],
+      [
+        -0.15,
+        -0.01
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.95
+      ],
+      [
+        -0.15,
+        0.05
+      ],
+      [
+        -0.08,
+        0.08
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.82
+      ],
+      [
+        -0.55,
+        -0.35
+      ],
+      [
+        -0.2,
+        -0.05
+      ]
+    ]
+  ],
+  "name": "Conservative_Exploration_Around_Good_Designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 13
+***    Starting control 0
+-3.7594541888369775 -0.23506641023489563
+good epoch; reward: 0.06252673883695219
+Reward: 0.0625, Drag: -3.7595, Lift: 0.2351
+Reward: 0.0625, Best: 0.2331
+
+--- Iteration 14/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.2,
+        -0.1
+      ],
+      [
+        -0.05,
+        0.05
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.98
+      ],
+      [
+        0.25,
+        0.45
+      ],
+      [
+        -0.2,
+        -0.05
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.2,
+        0.0
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.2,
+        -0.05
+      ]
+    ]
+  ],
+  "name": "refined_search_around_good_designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 14
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13659 nodes for 6830 points.
+-3.5813305632107637 -0.2761249768445367
+good epoch; reward: 0.07710122591894529
+Reward: 0.0771, Drag: -3.5813, Lift: 0.2761
+Reward: 0.0771, Best: 0.2331
+
+--- Iteration 15/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.2,
+        -0.1
+      ],
+      [
+        0.0,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.95
+      ],
+      [
+        0.3,
+        0.4
+      ],
+      [
+        -0.2,
+        -0.1
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.8
+      ],
+      [
+        -0.45,
+        -0.35
+      ],
+      [
+        -0.2,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Narrowed_Ranges_Around_Top_Designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 15
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13991 nodes for 6996 points.
+-3.9985796629678707 0.1593219652925024
+good epoch; reward: -0.039844639527388745
+Reward: -0.0398, Drag: -3.9986, Lift: -0.1593
+Reward: -0.0398, Best: 0.2331
+
+--- Iteration 16/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        0.0,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        -0.05
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.2,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.8
+      ],
+      [
+        -0.45,
+        -0.35
+      ],
+      [
+        -0.2,
+        -0.05
+      ]
+    ]
+  ],
+  "name": "Refined_Parameter_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 16
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13583 nodes for 6792 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 6410 iterations (PETSc reason DIVERGED_DTOL, residual norm ||r|| = 1.580791e+06).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 17/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Refined_Exploration_Around_Reference"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 17
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 304 iterations (PETSc reason DIVERGED_DTOL, residual norm ||r|| = 1.448723e+06).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 18/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        0.0,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.15,
+        -0.05
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.2,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.75
+      ],
+      [
+        -0.45,
+        -0.35
+      ],
+      [
+        -0.2,
+        -0.05
+      ]
+    ]
+  ],
+  "name": "Refined_Search_Near_TopPerformers"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 18
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 111 iterations (PETSc reason DIVERGED_BREAKDOWN, residual norm ||r|| = 5.722535e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 19/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Conservative_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 19
+***    Starting control 0
+-3.9609085077524773 -0.8557551349357841
+good epoch; reward: 0.21605021506072655
+Reward: 0.2161, Drag: -3.9609, Lift: 0.8558
+Reward: 0.2161, Best: 0.2331
+
+--- Iteration 20/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Explore_Similar_Radius_Smaller_Angle_Range"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 20
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14027 nodes for 7014 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 5239 iterations (PETSc reason DIVERGED_BREAKDOWN, residual norm ||r|| = 4.357981e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 21/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.99
+      ],
+      [
+        0.25,
+        0.45
+      ],
+      [
+        -0.15,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.95
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.2,
+        -0.05
+      ]
+    ]
+  ],
+  "name": "Focused_Exploration_Around_Best"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 21
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 9361 iterations (PETSc reason DIVERGED_DTOL, residual norm ||r|| = 5.650766e+07).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 22/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.25,
+        0.45
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.2,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ]
+  ],
+  "name": "Aggressive_Exploration_Around_Reference"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 22
+***    Starting control 0
+-4.071271995181158 0.1816590594659314
+good epoch; reward: -0.04461973056109904
+Reward: -0.0446, Drag: -4.0713, Lift: -0.1817
+Reward: -0.0446, Best: 0.2331
+
+--- Iteration 23/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        -0.1,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.95
+      ],
+      [
+        0.3,
+        0.45
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Refined_Exploration_Based_on_Top_Designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 23
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14111 nodes for 7056 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 1.264739e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2331
+
+--- Iteration 24/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.2
+      ],
+      [
+        0.0,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Focused_Exploration_Near_Best"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 24
+***    Starting control 0
+-4.434361331098123 -1.3138955661161928
+good epoch; reward: 0.29629871542083386
+Reward: 0.2963, Drag: -4.4344, Lift: 1.3139
+Reward: 0.2963, Best: 0.2963
+
+--- Iteration 25/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.95
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.85,
+        1.0
+      ],
+      [
+        0.25,
+        0.45
+      ],
+      [
+        -0.15,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.95
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.85
+      ],
+      [
+        -0.55,
+        -0.35
+      ],
+      [
+        -0.35,
+        -0.15
+      ]
+    ]
+  ],
+  "name": "Aggressive_Exploration_Refined"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 25
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14051 nodes for 7026 points.
+-4.048219436703388 -0.9557874823437906
+good epoch; reward: 0.23610070977825331
+Reward: 0.2361, Drag: -4.0482, Lift: 0.9558
+Reward: 0.2361, Best: 0.2963
+
+--- Iteration 26/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.5
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Refined_Search_Around_Best"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 26
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13751 nodes for 6876 points.
+-4.047148309179064 -1.0434809423104794
+good epoch; reward: 0.25783115976843024
+Reward: 0.2578, Drag: -4.0471, Lift: 1.0435
+Reward: 0.2578, Best: 0.2963
+
+--- Iteration 27/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.4,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Aggressive_Curvature_Optimization"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 27
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13531 nodes for 6766 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 7.381295e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2963
+
+--- Iteration 28/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        1.0
+      ],
+      [
+        -0.3,
+        0.0
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        0.2,
+        0.5
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.6,
+        -0.4
+      ],
+      [
+        -0.4,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Targeted_Exploration_Refined"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 28
+***    Starting control 0
+-2.847649607660786 -0.6252766266122993
+good epoch; reward: 0.21957639202877055
+Reward: 0.2196, Drag: -2.8476, Lift: 0.6253
+Reward: 0.2196, Best: 0.2963
+
+--- Iteration 29/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.95
+      ],
+      [
+        0.25,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.75
+      ],
+      [
+        -0.5,
+        -0.4
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Focused_Exploration_Near_Top_Designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 29
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13827 nodes for 6914 points.
+-4.679635551560513 -1.0014409059782776
+good epoch; reward: 0.2139997644996795
+Reward: 0.2140, Drag: -4.6796, Lift: 1.0014
+Reward: 0.2140, Best: 0.2963
+
+--- Iteration 30/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.4,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Refined_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 30
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13723 nodes for 6862 points.
+-4.6455984528411 -1.3701362137290378
+good epoch; reward: 0.29493212287667825
+Reward: 0.2949, Drag: -4.6456, Lift: 1.3701
+Reward: 0.2949, Best: 0.2963
+
+--- Iteration 31/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        0.05,
+        0.25
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.95
+      ],
+      [
+        0.25,
+        0.4
+      ],
+      [
+        -0.1,
+        0.05
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.35,
+        -0.15
+      ]
+    ]
+  ],
+  "name": "Aggressive_Exploration_SlightlyRefined"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 31
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13959 nodes for 6980 points.
+-5.557793747502827 -0.9259568225992493
+good epoch; reward: 0.16660510711022536
+Reward: 0.1666, Drag: -5.5578, Lift: 0.9260
+Reward: 0.1666, Best: 0.2963
+
+--- Iteration 32/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.2
+      ],
+      [
+        0.1,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.03,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        0.0,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.4
+      ],
+      [
+        -0.3,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Aggressive_Concave_Refinement"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 32
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13875 nodes for 6938 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 4743 iterations (PETSc reason DIVERGED_BREAKDOWN, residual norm ||r|| = 3.465665e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2963
+
+--- Iteration 33/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.85
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.85,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.75
+      ],
+      [
+        -0.5,
+        -0.35
+      ],
+      [
+        -0.3,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Refined_Search_Near_Best"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 33
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 1.505106e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2963
+
+--- Iteration 34/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.85
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.05,
+        0.05
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        0.0,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Conservative_Exploration_Near_Top_Designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 34
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 2923 iterations (PETSc reason DIVERGED_DTOL, residual norm ||r|| = 4.137345e+06).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2963
+
+--- Iteration 35/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.65,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        0.1,
+        0.3
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.2,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Aggressive_Curvature_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 35
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 861 iterations (PETSc reason DIVERGED_BREAKDOWN, residual norm ||r|| = 8.767754e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.2963
+
+--- Iteration 36/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.65,
+        0.75
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        0.1,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.95
+      ],
+      [
+        0.25,
+        0.35
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.2,
+        -0.1
+      ],
+      [
+        -0.07,
+        -0.05
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.75
+      ],
+      [
+        -0.5,
+        -0.35
+      ],
+      [
+        -0.3,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Refined_Exploration_Q1"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 36
+***    Starting control 0
+-4.105133023431926 -0.7962096924324991
+good epoch; reward: 0.19395466307370984
+Reward: 0.1940, Drag: -4.1051, Lift: 0.7962
+Reward: 0.1940, Best: 0.2963
+
+--- Iteration 37/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.1,
+        0.3
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.5,
+        0.7
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.4,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Focused exploration around top design"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 37
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14519 nodes for 7260 points.
+-4.0757528057507635 -1.0420822033182158
+good epoch; reward: 0.25567846063869953
+Reward: 0.2557, Drag: -4.0758, Lift: 1.0421
+Reward: 0.2557, Best: 0.2963
+
+--- Iteration 38/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.3
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Explore_Similar_To_Top"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 38
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14127 nodes for 7064 points.
+-5.126200407099664 -2.023049417056389
+good epoch; reward: 0.7892978254437787
+Reward: 0.7893, Drag: -5.1262, Lift: 4.0461
+Reward: 0.7893, Best: 0.7893
+
+--- Iteration 39/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        0.0,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.25,
+        0.35
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        -0.22,
+        -0.18
+      ],
+      [
+        -0.05,
+        0.05
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.75
+      ],
+      [
+        -0.45,
+        -0.35
+      ],
+      [
+        -0.3,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Refined_Search_Near_Good_Designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 39
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14443 nodes for 7222 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 168 iterations (PETSc reason DIVERGED_BREAKDOWN, residual norm ||r|| = 1.022466e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.7893
+
+--- Iteration 40/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.2,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.4,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Aggressive exploration around reference design"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 40
+***    Starting control 0
+-4.423958893378599 -0.4589669840398681
+good epoch; reward: 0.1037457614551551
+Reward: 0.1037, Drag: -4.4240, Lift: 0.4590
+Reward: 0.1037, Best: 0.7893
+
+--- Iteration 41/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.4,
+        -0.2
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Aggressive_Exploration_Radius_Angle_Edgy"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 41
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 3.064547e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.7893
+
+--- Iteration 42/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.7
+      ],
+      [
+        -0.3,
+        -0.2
+      ],
+      [
+        0.1,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.2,
+        0.3
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.8
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        -0.15,
+        -0.05
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.7
+      ],
+      [
+        -0.35,
+        -0.25
+      ],
+      [
+        -0.3,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Refined_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 42
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14319 nodes for 7160 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 1.113253e+03).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.7893
+
+--- Iteration 43/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.1,
+        0.3
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.4,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Aggressive_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 43
+***    Starting control 0
+-5.09125664588248 -1.1134720034126229
+good epoch; reward: 0.21870278417669944
+Reward: 0.2187, Drag: -5.0913, Lift: 1.1135
+Reward: 0.2187, Best: 0.7893
+
+--- Iteration 44/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.98
+      ],
+      [
+        0.25,
+        0.35
+      ],
+      [
+        -0.15,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        -0.1,
+        0.05
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.75
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Focused Exploration Around Top Designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 44
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13987 nodes for 6994 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 385 iterations (PETSc reason DIVERGED_BREAKDOWN, residual norm ||r|| = 1.287966e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.7893
+
+--- Iteration 45/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.9,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        -0.15,
+        -0.05
+      ]
+    ],
+    [
+      [
+        0.5,
+        0.7
+      ],
+      [
+        -0.4,
+        -0.2
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Conservative_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 45
+***    Starting control 0
+-4.238186311664332 -0.7731644918805557
+good epoch; reward: 0.18242815087025624
+Reward: 0.1824, Drag: -4.2382, Lift: 0.7732
+Reward: 0.1824, Best: 0.7893
+
+--- Iteration 46/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.95
+      ],
+      [
+        -0.35,
+        -0.15
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.99
+      ],
+      [
+        0.25,
+        0.45
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.95
+      ],
+      [
+        -0.25,
+        -0.05
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Aggressive_Curvature_Exploration"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 46
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14247 nodes for 7124 points.
+-3.429328805386001 -0.30594902927722306
+good epoch; reward: 0.08921542571150036
+Reward: 0.0892, Drag: -3.4293, Lift: 0.3059
+Reward: 0.0892, Best: 0.7893
+
+--- Iteration 47/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.65,
+        0.75
+      ],
+      [
+        -0.35,
+        -0.25
+      ],
+      [
+        0.1,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.9,
+        0.98
+      ],
+      [
+        0.25,
+        0.35
+      ],
+      [
+        -0.1,
+        0.05
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.1
+      ],
+      [
+        -0.15,
+        -0.0
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.7
+      ],
+      [
+        -0.45,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Refined_Search_Near_Top_Designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 47
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 13487 nodes for 6744 points.
+-4.724506391786598 -0.8150974334567794
+good epoch; reward: 0.17252541659670523
+Reward: 0.1725, Drag: -4.7245, Lift: 0.8151
+Reward: 0.1725, Best: 0.7893
+
+--- Iteration 48/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.65,
+        0.75
+      ],
+      [
+        -0.3,
+        -0.2
+      ],
+      [
+        0.1,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        0.9
+      ],
+      [
+        0.3,
+        0.4
+      ],
+      [
+        -0.1,
+        0.0
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.85
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        -0.05,
+        0.05
+      ]
+    ],
+    [
+      [
+        0.65,
+        0.75
+      ],
+      [
+        -0.5,
+        -0.4
+      ],
+      [
+        -0.35,
+        -0.25
+      ]
+    ]
+  ],
+  "name": "Refined_Exploration_Based_on_Reference_Designs"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 48
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14379 nodes for 7190 points.
+-4.980785542854885 -1.7665472903352482
+good epoch; reward: 0.35467242569185164
+Reward: 0.3547, Drag: -4.9808, Lift: 1.7665
+Reward: 0.3547, Best: 0.7893
+
+--- Iteration 49/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.6,
+        0.8
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.8,
+        1.0
+      ],
+      [
+        0.2,
+        0.4
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.7,
+        0.9
+      ],
+      [
+        -0.25,
+        -0.15
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.75
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.4,
+        -0.2
+      ]
+    ]
+  ],
+  "name": "Aggressive_Exploration_RadiusAngleEdgy"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 49
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14151 nodes for 7076 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 42 iterations (PETSc reason DIVERGED_DTOL, residual norm ||r|| = 1.320219e+06).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.7893
+
+--- Iteration 50/50 (action: generate) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      [
+        0.75,
+        0.95
+      ],
+      [
+        -0.35,
+        -0.15
+      ],
+      [
+        0.1,
+        0.3
+      ]
+    ],
+    [
+      [
+        0.85,
+        0.98
+      ],
+      [
+        0.25,
+        0.45
+      ],
+      [
+        -0.1,
+        0.1
+      ]
+    ],
+    [
+      [
+        0.75,
+        0.9
+      ],
+      [
+        -0.3,
+        -0.1
+      ],
+      [
+        0.0,
+        0.2
+      ]
+    ],
+    [
+      [
+        0.6,
+        0.75
+      ],
+      [
+        -0.5,
+        -0.3
+      ],
+      [
+        -0.3,
+        -0.1
+      ]
+    ]
+  ],
+  "name": "Aggressive_Exploration_V1"
+}
+DEBUG: Strategy used: new_design
+****** Starting episode 50
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 427 iterations (PETSc reason DIVERGED_BREAKDOWN, residual norm ||r|| = 5.122363e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Reward: -5.0000, Best: 0.7893
+
+Best design: /scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_action_generate/design_37_0.csv
+Results saved to /scratch/LLM_Evolve/AirFoil_becnhmark/benchmark_action_generate/results.json
+==========================================
+Job completed successfully
+==========================================

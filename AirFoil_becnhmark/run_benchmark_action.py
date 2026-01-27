@@ -174,8 +174,10 @@ def run_benchmark(d0, n_iterations, n_inspirations, action, output_dir, debug=Fa
     cached = [database[0].copy()]
     
     for i in range(n_iterations):
-        print(f"\n--- Iteration {i+1}/{n_iterations} (action: {action}) ---")
-        database, reward, current_best = run_iteration(database, i, output_dir, n_inspirations, action, debug=debug)
+        # Variable inspirations: starts at 0, increases to max n_inspirations
+        current_inspirations = min(i, n_inspirations)
+        print(f"\n--- Iteration {i+1}/{n_iterations} (action: {action}, inspirations: {current_inspirations}) ---")
+        database, reward, current_best = run_iteration(database, i, output_dir, current_inspirations, action, debug=debug)
         
         best_idx = np.argmax(database[:, 2].astype(float))
         cached.append(database[best_idx].copy())
@@ -194,7 +196,7 @@ if __name__ == "__main__":
                         choices=['generate', 'generate_direct', 'modify', 'modify_direct'],
                         help='LLM action to use for all iterations')
     parser.add_argument('--iterations', type=int, default=10, help='Number of iterations')
-    parser.add_argument('--inspirations', type=int, default=2, help='Number of inspirations')
+    parser.add_argument('--inspirations', type=int, default=2, help='Maximum number of inspirations (grows from 0 to this value)')
     parser.add_argument('--debug', action='store_true', help='Save LLM context and prompts to context/ subfolder')
     args = parser.parse_args()
     

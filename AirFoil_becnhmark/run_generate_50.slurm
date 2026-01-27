@@ -31,12 +31,13 @@ echo "Node: $SLURMD_NODENAME"
 echo "Date: $(date)"
 echo "Action: generate"
 echo "Iterations: 50"
+echo "Max Inspirations: 10 (grows from 0)"
 echo "Output: $OUTPUT_DIR"
 echo "=========================================="
 
 # Run the benchmark
 PYTHON_EXEC="$HOME/miniconda3/envs/fenics_env/bin/python"
-PYTHONNOUSERSITE=1 "$PYTHON_EXEC" run_benchmark_action.py --action generate --iterations 50 --inspirations 2 --output "$OUTPUT_DIR"
+PYTHONNOUSERSITE=1 "$PYTHON_EXEC" run_benchmark_action.py --action generate --iterations 50 --inspirations 10 --output "$OUTPUT_DIR"
 
 echo "=========================================="
 echo "Job completed successfully"
