@@ -1,0 +1,14 @@
+{
+  "design_name": "Cambered_MidSweep_WashinRoot_PositiveDihedral",
+  "le_sweep": 59.518900656997744,
+  "root_chord_in": 40.53021525424922,
+  "twist_root": 6.962750999066581,
+  "twist_tip": -6.279563299100611,
+  "dihedral": 7.733697129398603,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 17,
+    "chord_length": 1.0
+  }
+}

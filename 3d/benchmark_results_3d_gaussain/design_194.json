@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_Cambered_DiffWash_Delta",
+  "le_sweep": 74.22973160841921,
+  "root_chord_in": 28.281590179995284,
+  "twist_root": -2.044716602413258,
+  "twist_tip": -10.0,
+  "dihedral": -15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

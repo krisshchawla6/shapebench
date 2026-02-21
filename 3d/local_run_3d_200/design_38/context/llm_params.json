@@ -1,0 +1,11 @@
+{
+  "le_sweep": 75.0,
+  "root_chord_in": 15.0,
+  "twist_root": 5.0,
+  "twist_tip": -8.0,
+  "dihedral": 7.5,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 8,
+  "name": "HighSweepThinWashInChordExplore"
+}

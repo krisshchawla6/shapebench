@@ -1,0 +1,23 @@
+No images were provided for Design 1, so the analysis is based solely on the numerical parameters and rewards of the provided designs.
+
+The highest-reward design by a significant margin is Design 2 (Reward: 338.5009). Its parameters are:
+*   `le_sweep`: 63.12 degrees (moderate sweep)
+*   `root_chord_in`: 33.2 inches (mid-range chord)
+*   `twist_root`: -10.0 degrees (maximum washout at root)
+*   `twist_tip`: -2.83 degrees (moderate washout at tip, strong differential with root)
+*   `dihedral`: -3.44 degrees (slight anhedral)
+*   `NACA`: 2411 (cambered, m=2, p=4, t=11)
+
+Comparing Design 2 with other designs:
+*   Designs 1 and 3, which have similar sweep (around 63 degrees) but different twist distributions and NACA profiles, yield significantly lower rewards. Design 1 has less root washout and more tip washout, resulting in a smaller twist differential.
+*   Designs 4, 5, and 6 explore higher sweep angles (73-76 degrees). While Design 5 and 4 have decent rewards (19.4 and 13.3, respectively), they are far below Design 2. Design 5 also exhibits strong root washout (-9.9) and moderate tip washout (-4.5), suggesting this twist pattern is beneficial even at higher sweeps.
+
+Key aerodynamic issues (inferred from lower rewards):
+*   Inefficient lift distribution: Designs with less washout or an unfavorable twist differential likely lead to higher induced drag from non-optimal load distribution, potentially with premature tip-stall-like behavior.
+*   Suboptimal airfoil: The NACA 2411 profile in Design 2 seems particularly effective for this wing configuration. Other NACA profiles (00xx, 40xx, 44xx) in other designs did not achieve comparable performance.
+
+Key design changes needed to improve designs in the population (focusing on exploiting Design 2's success):
+1.  **Maintain strong root washout**: The maximum negative twist at the root (`twist_root = -10.0`) appears crucial.
+2.  **Optimize twist differential**: The large difference between `twist_root` and `twist_tip` in Design 2 likely creates an efficient lift distribution.
+3.  **Refine sweep angle**: The moderate sweep around 63 degrees seems to be a good balance for vortex lift and induced drag.
+4.  **Explore NACA variations around 2411**: The 2411 profile's camber and thickness are potent. Slight adjustments could yield further gains.

@@ -1,0 +1,13 @@
+Based on the provided numerical data, Design 1 (Rank 0, Reward: 56.6208) stands out significantly. Its parameters include a high leading edge sweep (71.31 deg), a moderate root chord (32.95 inches), and a pronounced negative twist (washout) at both root (-5.70 deg) and tip (-9.13 deg). It also features a slight negative dihedral (-3.99 deg) and a NACA 2411 airfoil (2% camber at 40% chord, 11% thickness).
+
+Comparing this to lower-performing designs reveals several patterns:
+*   **Twist Distribution**: Designs with positive `twist_root` (Designs 5 and 6) perform very poorly (rewards of 0.6848 and -7.1658 respectively), indicating that washout (negative twist) is crucial for effective lift distribution and preventing tip stall on delta wings. The most successful designs consistently employ negative twist.
+*   **Sweep Angle**: While high sweep (Design 1) is associated with the highest reward, Design 3 shows that a lower sweep (57.24 deg) can still yield a decent reward (12.7507) if other parameters are optimized. This suggests a broader optimal range for sweep.
+*   **Dihedral**: All top 3 designs (1, 2, 3) exhibit negative dihedral, with Design 3 having the maximum negative (-15.0 deg). This implies negative dihedral might be beneficial for stability or aerodynamic performance.
+*   **Airfoil**: NACA 2411 was successful for Design 1 and 2. NACA 4015 was used in Design 3. Both indicate the utility of camber (`naca_m=2` or `4`). Thickness (`naca_t`) varies but seems to be in a moderate range (7-15 for the top designs).
+
+Key design changes needed to improve designs in the population:
+1.  **Consistent and Strong Washout**: Emphasize consistently negative twist values for both root and tip, avoiding any positive root twist. Explore more aggressive washouts within the allowed range.
+2.  **Systematic Dihedral Exploration**: Further investigate the impact of pronounced negative dihedral, as seen in Design 3, to understand its contribution to performance.
+3.  **Intermediate Sweep Regimes**: Explore designs with sweep angles between the highest-performing (71 deg) and the moderately successful lower sweep (57 deg) to find new optima.
+4.  **Camber and Thickness Balance**: Continue using cambered airfoils (NACA m=2 or 4) and explore slightly varied thickness values around the successful ranges (e.g., slightly thicker than 11% or 15%) to understand their sensitivity.

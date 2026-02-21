@@ -1,0 +1,14 @@
+The provided designs reveal a clear pattern for high-reward configurations. Design 1 (reward 424.5627) and Design 3 (reward 353.7832) are the top performers. They consistently feature:
+*   **High leading edge sweep:** Around 70-71 degrees.
+*   **Strong washout:** Both `twist_root` and `twist_tip` are significantly negative, often at or near the -10.0 degree boundary. This likely helps distribute lift more evenly and delay tip stall.
+*   **Strong anhedral:** `dihedral` is consistently at or near the -15.0 degree boundary. This configuration might enhance lateral stability or improve vortex interaction at certain flight conditions.
+*   **Cambered airfoils:** `NACA 2407` or `NACA 2408` are associated with the highest rewards. Design 2, using `NACA 0006`, had a lower (though still respectable) reward, suggesting camber is beneficial.
+*   **Root chord:** Generally in the 30-33 inch range.
+
+The lower-ranked designs (e.g., Design 4, 5, 6) often deviate from these extremes in twist and dihedral, or use different NACA profiles, resulting in significantly reduced rewards. The images (if provided, which they are not in this case) would show Cp distribution, but based on the parameter values, the successful designs likely leverage strong vortex lift and have a well-managed spanwise lift distribution due to the aggressive washout and anhedral.
+
+**Key Design Changes Needed for the Population:**
+1.  **Explore the upper boundary of `le_sweep`**: The successful designs cluster around 70-71 degrees. Pushing closer to 80 degrees could reveal further improvements or limitations of very high sweep.
+2.  **Test different camber profiles (`naca_m=4`)**: Only `naca_m=0` and `m=2` have been explored. `m=4` might offer different lift characteristics.
+3.  **Investigate parameter interactions away from current extremes**: While extreme negative twist and dihedral were successful, a slightly less extreme but still significant negative twist/dihedral combination could be explored to understand the sensitivity and find alternative optima.
+4.  **Vary `root_chord_in` more broadly**: Most high-reward designs have similar root chords. Exploring smaller or larger chords in conjunction with other favorable parameters is needed.

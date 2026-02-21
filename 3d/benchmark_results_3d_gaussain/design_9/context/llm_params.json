@@ -1,0 +1,11 @@
+{
+  "le_sweep": 78.5,
+  "root_chord_in": 45.0,
+  "twist_root": -1.0,
+  "twist_tip": -7.5,
+  "dihedral": 8.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 8,
+  "name": "Extreme_Sweep_Symmetric_Large_Wing"
+}

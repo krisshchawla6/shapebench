@@ -1,0 +1,33 @@
+{
+  "design_name": "MidSweep_MaxCamber_TipWashout_PosDihedral",
+  "design_params": {
+    "le_sweep_deg": 57.13371132622653,
+    "root_chord_in": 31.222219673746572,
+    "twist_root_deg": -1.242649815017067,
+    "twist_tip_deg": -8.832888223963518,
+    "dihedral_deg": 6.888185032748046,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 10,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.5161929120303651,
+    "CDi": 0.04210058163291425,
+    "CM": -0.5167192452919351,
+    "L_D": 12.260944908818203
+  },
+  "corrected_results": {
+    "CL": 0.3121291211902571,
+    "CDi": 0.024390402308727507,
+    "CM": -0.279489342826471,
+    "L_D": 12.797210855294885
+  }
+}

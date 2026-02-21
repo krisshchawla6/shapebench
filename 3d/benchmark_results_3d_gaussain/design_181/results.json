@@ -1,0 +1,33 @@
+{
+  "design_name": "ExtremeSweep_PosDihedral_ThickCamber_WashInRoot",
+  "design_params": {
+    "le_sweep_deg": 77.64545138392307,
+    "root_chord_in": 38.83818420456591,
+    "twist_root_deg": 10.0,
+    "twist_tip_deg": -1.9417133768325274,
+    "dihedral_deg": 8.9741609733071,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 16,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.9580533071712961,
+    "CDi": 0.24578106162341784,
+    "CM": -1.0564412706765418,
+    "L_D": 3.8979948285812656
+  },
+  "corrected_results": {
+    "CL": 0.09021341600799009,
+    "CDi": 0.020706368275910467,
+    "CM": -0.05008240731719474,
+    "L_D": 4.356795687486311
+  }
+}

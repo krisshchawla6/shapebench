@@ -1,0 +1,33 @@
+{
+  "design_name": "MidSweep_Camber_PosDihedral",
+  "design_params": {
+    "le_sweep_deg": 53.74206288632657,
+    "root_chord_in": 41.61603456103614,
+    "twist_root_deg": 1.539472437292977,
+    "twist_tip_deg": -6.774691374124893,
+    "dihedral_deg": 7.028923618463905,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.7011483820603062,
+    "CDi": 0.07916575731350022,
+    "CM": -0.6753172576709466,
+    "L_D": 8.856712875034148
+  },
+  "corrected_results": {
+    "CL": 0.13087980299794605,
+    "CDi": 0.006990944139011593,
+    "CM": -0.06872104706223067,
+    "L_D": 18.72133439996995
+  }
+}

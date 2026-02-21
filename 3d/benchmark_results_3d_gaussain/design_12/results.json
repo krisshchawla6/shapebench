@@ -1,0 +1,33 @@
+{
+  "design_name": "Aggressive Washout Anhedral Camber",
+  "design_params": {
+    "le_sweep_deg": 70.30648616580521,
+    "root_chord_in": 41.56059870565335,
+    "twist_root_deg": 2.3704866410290126,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -3.2127418435650625,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.31882079291881593,
+    "CDi": 0.04069387847795606,
+    "CM": -0.2817165418996812,
+    "L_D": 7.83461308785108
+  },
+  "corrected_results": {
+    "CL": -0.0050028839577322265,
+    "CDi": 0.002915741190011718,
+    "CM": 0.08070645375295799,
+    "L_D": -1.7158189399217976
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Sweep_CamberedThin_AggressiveTwist",
+  "design_params": {
+    "le_sweep_deg": 63.97920997604782,
+    "root_chord_in": 36.040645589935465,
+    "twist_root_deg": -7.82966839698196,
+    "twist_tip_deg": -8.872736323038716,
+    "dihedral_deg": -1.8631373062295844,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 10,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.23186970367230184,
+    "CDi": 0.017372954407403666,
+    "CM": -0.2820231237813761,
+    "L_D": 13.346590236459042
+  },
+  "corrected_results": {
+    "CL": 0.045744543799644606,
+    "CDi": -0.0004071565159310605,
+    "CM": -0.0345740823165421,
+    "L_D": -112.35125071015699
+  }
+}

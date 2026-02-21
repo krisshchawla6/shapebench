@@ -1,0 +1,15 @@
+Design 1, with a high leading edge sweep of 69.77 degrees, significant root washout (-6.11 deg) and maximum tip washout (-10.0 deg), and a NACA 2408 airfoil (2% camber at 40% chord, 8% thickness), achieved the highest reward of 353.78. This indicates that a high-sweep delta wing, effectively utilizing vortex lift and managing load distribution through washout, is a promising configuration. The negative dihedral (-11.66 deg) also suggests anhedral might be beneficial or at least not detrimental.
+
+Based on general delta wing aerodynamics and the success of Design 1:
+*   **Aerodynamic Issues (potential for population, not specific to Design 1)**: For delta wings, common challenges include premature vortex breakdown at higher angles of attack, high induced drag if the lift distribution is not optimally controlled, and potential for pitch-up tendencies if tip loading is not properly mitigated. Design 1's high reward suggests it largely mitigated these issues.
+*   **Parameter Influence**:
+    *   **le_sweep**: Clearly a dominant factor; higher sweep angles promote stronger, more stable leading-edge vortices, leading to high lift coefficients.
+    *   **twist_root & twist_tip**: Washout (negative twist) is critical for controlling load distribution, delaying tip stall, and promoting stable vortex formation, which directly impacts CL/CDi. Design 1 uses substantial washout.
+    *   **naca_m & naca_p (camber)**: The NACA 24xx series (2% camber at 40% chord) for Design 1 indicates that moderate camber can enhance lift without excessive drag.
+    *   **naca_t (thickness)**: Design 1 uses 8% thickness, which is relatively thin. Thickness affects skin friction and pressure drag.
+    *   **dihedral**: Design 1 has a moderate anhedral, which might influence lateral stability or effective aspect ratio.
+*   **Key Design Changes Needed to Improve Designs**:
+    1.  **Push leading edge sweep even higher**: Explore the upper limits of the sweep range to maximize vortex lift.
+    2.  **Optimize washout combination**: Investigate different negative twist distributions (root vs. tip) to fine-tune lift distribution further.
+    3.  **Explore higher camber and its position**: Try higher `naca_m` values to potentially increase lift, observing its interaction with high sweep.
+    4.  **Test broader thickness range**: Investigate thicker airfoils to see if structural benefits can be gained without significant aerodynamic penalties, or if thinner profiles yield better CL/CDi.

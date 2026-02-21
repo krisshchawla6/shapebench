@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_WashinRoot_PositiveDihedral_Thick4420",
+  "design_params": {
+    "le_sweep_deg": 52.360113319333784,
+    "root_chord_in": 44.16777880515896,
+    "twist_root_deg": 6.451729885369691,
+    "twist_tip_deg": -4.005670539076161,
+    "dihedral_deg": 7.322528414051258,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 21,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 1.0076856238471266,
+    "CDi": 0.17890673294024606,
+    "CM": -0.9452663722788501,
+    "L_D": 5.6324633918818945
+  },
+  "corrected_results": {
+    "CL": 0.05868147882010785,
+    "CDi": 0.002137881794312906,
+    "CM": -0.00449400282977266,
+    "L_D": 27.448420663953264
+  }
+}

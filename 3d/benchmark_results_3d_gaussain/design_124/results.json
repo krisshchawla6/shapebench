@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Sweep_Washout_Camber6",
+  "design_params": {
+    "le_sweep_deg": 72.92071284342167,
+    "root_chord_in": 31.69205796890367,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -7.810121009777346,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.028842973510672713,
+    "CDi": 0.0047500324925789095,
+    "CM": -0.06134770179267889,
+    "L_D": 6.0721634127208155
+  },
+  "corrected_results": {
+    "CL": 0.014612367089037325,
+    "CDi": -0.00044746216619426775,
+    "CM": -0.006986805987065692,
+    "L_D": -32.65609518077848
+  }
+}

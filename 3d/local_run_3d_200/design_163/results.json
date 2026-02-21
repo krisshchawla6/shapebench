@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_CamberWashout_Thinner",
+  "design_params": {
+    "le_sweep_deg": 65.31001944035712,
+    "root_chord_in": 44.246846760024546,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -1.8022729577184124,
+    "dihedral_deg": -1.7693379192075422,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.15065335939492688,
+    "CDi": 0.022832604787305383,
+    "CM": -0.21699701249861345,
+    "L_D": 6.598167874332415
+  },
+  "corrected_results": {
+    "CL": -0.12004439664387308,
+    "CDi": -0.01284601142598843,
+    "CM": 0.14911066710027224,
+    "L_D": 9.344876994349733
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitative_MaxWashout_MaxAnhedral_ThinCamber",
+  "design_params": {
+    "le_sweep_deg": 65.72532613090692,
+    "root_chord_in": 30.371862937809823,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -13.817189746860873,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.026194181929946957,
+    "CDi": 0.005534956568507697,
+    "CM": -0.06250262600698013,
+    "L_D": 4.732499994486728
+  },
+  "corrected_results": {
+    "CL": 0.027733684622427708,
+    "CDi": 0.0008614081360042651,
+    "CM": -0.027909868935590103,
+    "L_D": 32.195754211323575
+  }
+}

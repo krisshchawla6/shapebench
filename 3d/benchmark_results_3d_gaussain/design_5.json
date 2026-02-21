@@ -1,0 +1,14 @@
+{
+  "design_name": "Initial_Exploration_HighSweep_Washout_Camber",
+  "le_sweep": 67.8950131138585,
+  "root_chord_in": 36.210448890137386,
+  "twist_root": 5.066020402149628,
+  "twist_tip": -3.9990260879120116,
+  "dihedral": 3.241084434806546,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

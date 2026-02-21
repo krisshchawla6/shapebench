@@ -1,0 +1,33 @@
+{
+  "design_name": "HybridBlend_ExtremeWashoutAnhedral_NACA2409",
+  "design_params": {
+    "le_sweep_deg": 69.04766348734948,
+    "root_chord_in": 33.46339264400581,
+    "twist_root_deg": -8.838675913248881,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -13.902792395429923,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.019309909623130346,
+    "CDi": 0.00014620856482924728,
+    "CM": -0.01566152355479878,
+    "L_D": 132.07098808255063
+  },
+  "corrected_results": {
+    "CL": 0.00042750195009025034,
+    "CDi": 0.0001754720763129376,
+    "CM": 0.026013273606032714,
+    "L_D": 2.4362961849715714
+  }
+}

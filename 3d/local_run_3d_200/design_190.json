@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploit_NACA4412_RefinedTwistSweep",
+  "le_sweep": 66.4546347466624,
+  "root_chord_in": 34.31939814510751,
+  "twist_root": -3.8390195377630585,
+  "twist_tip": -0.14344979554981308,
+  "dihedral": -3.3556246526242375,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

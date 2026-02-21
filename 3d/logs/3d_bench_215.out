@@ -1,0 +1,13 @@
+==========================================
+Job ID: 215
+Node: compute-dy-hpc-128vcpu-1
+Date: Fri Feb 20 20:15:12 UTC 2026
+Action: gaussain
+Iterations: 80
+Max Inspirations: 5 (grows 0->1->2...->5)
+Initialize N Sample: 6
+AoA: 10 deg, Mach: 0.3
+Working Directory: /scratch/3D/3d/work_215
+Output: /scratch/3D/3d/benchmark_results_3d_gaussain
+==========================================
+Setting up isolated workspace...

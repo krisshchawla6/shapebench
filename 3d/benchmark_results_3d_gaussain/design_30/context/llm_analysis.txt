@@ -1,0 +1,18 @@
+The provided designs demonstrate a strong correlation between certain parameter sets and high CL/CDi ratios. The top-performing design (Design 1, Reward: 424.5627) features a high leading-edge sweep (~71 deg), a mid-range root chord (~32.9 in), a uniform strong negative twist (-10 deg root and tip), maximum negative dihedral (-15 deg), and a relatively thin NACA 2407 airfoil. Design 3, also high-ranking (Reward: 353.7832), shares high sweep, similar root chord, a strong washout twist (-6.1 deg root, -10 deg tip), and strong negative dihedral (-11.66 deg), with a slightly thicker NACA 2408.
+
+Key observations from the data:
+*   **High Sweep & Moderate Chord:** A sweep around 70-71 degrees with a root chord around 32-33 inches appears optimal. Higher sweeps and larger chords (Designs 5, 6) generally lead to lower rewards if other parameters are not tuned.
+*   **Strong Negative Twist / Washout:** The top designs exhibit significant negative twist. Design 1 shows uniform strong negative twist, while Design 3 has a classic washout configuration. This seems crucial for effective lift distribution and possibly vortex management. Designs with wash-in (Design 6) or complex twist leading to positive root twist (Design 5) perform poorly.
+*   **Strong Negative Dihedral:** The highest reward is associated with maximum negative dihedral (-15 degrees). Milder negative dihedral (Design 2) results in significantly lower rewards. This suggests a potential interaction with vortex lift or stability at the operational angle of attack.
+*   **Thin NACA 24xx Airfoil:** A NACA 2407 or 2408 profile (moderate camber, camber at 40% chord, thin) appears consistently in high-reward designs. Thicker airfoils (2411 in Design 2) or unusual camber distributions (4010 in Design 4) generally reduce performance.
+
+Based on this, the primary aerodynamic issues in lower-performing designs are likely related to:
+1.  **Suboptimal Lift Distribution:** Incorrect twist and dihedral settings can lead to inefficient lift generation and higher induced drag.
+2.  **Increased Drag:** Thicker airfoils contribute to higher profile drag, and some camber choices might also lead to higher form or pressure drag.
+3.  **Ineffective Vortex Management:** Delta wings rely heavily on vortex lift. The combination of sweep, twist, and dihedral likely plays a significant role in establishing stable and strong leading-edge vortices.
+
+**Key design changes needed to improve designs in the population:**
+1.  Systematically explore the range of strong negative twist/washout, from uniform to progressive.
+2.  Confirm the efficacy of maximum negative dihedral by testing similar configurations.
+3.  Maintain airfoil profiles within the thin NACA 24xx series, further refining thickness.
+4.  Consistently explore the high-sweep, moderate-chord region that yielded top results.

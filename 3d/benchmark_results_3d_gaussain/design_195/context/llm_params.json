@@ -1,0 +1,11 @@
+{
+  "le_sweep": 78.5,
+  "root_chord_in": 27.5,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -15.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 6,
+  "name": "Exploit_MaxSweep_NACA0006_V2"
+}

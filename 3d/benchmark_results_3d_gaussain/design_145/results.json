@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_HighSweep_4407_WashoutBlend",
+  "design_params": {
+    "le_sweep_deg": 72.26594739807248,
+    "root_chord_in": 35.12822399225597,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": -0.029403782216861366,
+    "CDi": 0.024205661022846,
+    "CM": -0.05556321836162122,
+    "L_D": -1.2147481611474782
+  },
+  "corrected_results": {
+    "CL": -0.0617718944765926,
+    "CDi": 0.006534839376087527,
+    "CM": 0.05581881597794797,
+    "L_D": -9.452702801331291
+  }
+}

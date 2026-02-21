@@ -1,0 +1,221 @@
+{
+  "action": "generate_direct",
+  "use_context": true,
+  "n_samples": 10,
+  "n_unique": 10,
+  "n_duplicates": 0,
+  "parameter_stats": {
+    "mean": 0.2983333333333334,
+    "std": 0.39853551354371863,
+    "min": -0.8,
+    "max": 1.0
+  },
+  "diversity_stats": {
+    "mean": 0.12754044594909236,
+    "std": 0.05320391780056125,
+    "min": 0.07772815877574014,
+    "max": 0.21984843263788204
+  },
+  "generation_details": [
+    {
+      "sample_idx": 0,
+      "vector": [
+        0.5,
+        0.3,
+        0.1,
+        0.6,
+        -0.2,
+        0.3,
+        0.7,
+        0.4,
+        0.2,
+        0.8,
+        -0.1,
+        0.4
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_0_0.csv",
+      "diversity_score": 1.0,
+      "min_distance": 0.0
+    },
+    {
+      "sample_idx": 1,
+      "vector": [
+        0.5,
+        0.3,
+        0.1,
+        0.7,
+        0.6,
+        -0.2,
+        0.6,
+        -0.4,
+        0.3,
+        0.8,
+        -0.7,
+        -0.1
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_1_0.csv",
+      "diversity_score": 0.21262251370288457,
+      "min_distance": 1.4730919862656235
+    },
+    {
+      "sample_idx": 2,
+      "vector": [
+        0.7,
+        0.5,
+        0.2,
+        0.9,
+        -0.3,
+        0.8,
+        0.6,
+        -0.8,
+        0.5,
+        0.8,
+        0.2,
+        0.9
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_2_0.csv",
+      "diversity_score": 0.21984843263788204,
+      "min_distance": 1.523154621172782
+    },
+    {
+      "sample_idx": 3,
+      "vector": [
+        0.8,
+        0.5,
+        0.2,
+        0.9,
+        -0.3,
+        0.1,
+        0.7,
+        0.4,
+        0.3,
+        1.0,
+        -0.1,
+        0.0
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_3_0.csv",
+      "diversity_score": 0.10103629710818453,
+      "min_distance": 0.7000000000000001
+    },
+    {
+      "sample_idx": 4,
+      "vector": [
+        0.5,
+        0.3,
+        0.1,
+        0.7,
+        -0.2,
+        0.2,
+        0.6,
+        0.4,
+        -0.1,
+        0.8,
+        -0.3,
+        0.0
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_4_0.csv",
+      "diversity_score": 0.08164965809277261,
+      "min_distance": 0.565685424949238
+    },
+    {
+      "sample_idx": 5,
+      "vector": [
+        0.5,
+        0.2,
+        0.1,
+        0.6,
+        0.3,
+        0.0,
+        0.7,
+        -0.2,
+        0.0,
+        0.5,
+        -0.1,
+        0.1
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_5_0.csv",
+      "diversity_score": 0.12747548783981963,
+      "min_distance": 0.8831760866327847
+    },
+    {
+      "sample_idx": 6,
+      "vector": [
+        0.7,
+        0.3,
+        0.1,
+        0.8,
+        -0.2,
+        0.0,
+        0.9,
+        0.5,
+        0.0,
+        0.6,
+        -0.4,
+        0.2
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_6_0.csv",
+      "diversity_score": 0.07772815877574014,
+      "min_distance": 0.5385164807134505
+    },
+    {
+      "sample_idx": 7,
+      "vector": [
+        0.5,
+        0.3,
+        0.1,
+        0.7,
+        0.5,
+        0.2,
+        0.8,
+        -0.2,
+        0.3,
+        0.6,
+        -0.5,
+        0.1
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_7_0.csv",
+      "diversity_score": 0.08779711460710617,
+      "min_distance": 0.608276253029822
+    },
+    {
+      "sample_idx": 8,
+      "vector": [
+        0.8,
+        0.5,
+        0.2,
+        0.9,
+        -0.3,
+        0.1,
+        0.7,
+        -0.7,
+        0.3,
+        0.9,
+        0.8,
+        0.4
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_8_0.csv",
+      "diversity_score": 0.1567907310185565,
+      "min_distance": 1.0862780491200217
+    },
+    {
+      "sample_idx": 9,
+      "vector": [
+        0.5,
+        0.3,
+        0.2,
+        0.6,
+        -0.2,
+        0.1,
+        0.7,
+        0.4,
+        -0.3,
+        0.4,
+        -0.5,
+        0.4
+      ],
+      "csv_path": "/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/test_9_0.csv",
+      "diversity_score": 0.08291561975888499,
+      "min_distance": 0.5744562646538028
+    }
+  ]
+}

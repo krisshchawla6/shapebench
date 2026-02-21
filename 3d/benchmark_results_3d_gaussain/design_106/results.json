@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_HighSweep_MaxWashout_ThinNACA",
+  "design_params": {
+    "le_sweep_deg": 72.2277728522863,
+    "root_chord_in": 34.571193536675956,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.006229605585713177,
+    "CDi": 0.005291025599603815,
+    "CM": -0.04043703824154292,
+    "L_D": 1.1773909364905817
+  },
+  "corrected_results": {
+    "CL": -0.029076224303118244,
+    "CDi": -0.00045731065714469814,
+    "CM": 0.042962780797496096,
+    "L_D": 63.58090249779201
+  }
+}

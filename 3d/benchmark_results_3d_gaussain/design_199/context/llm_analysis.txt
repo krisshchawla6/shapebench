@@ -1,0 +1,13 @@
+The top-ranked design (Design 1) achieved a reward of 626.7341. Its key features are: extremely high leading-edge sweep (77.84 degrees), moderate root chord (27.28 inches), significant and nearly uniform washout (twist_root -9.55, twist_tip -9.13), maximum anhedral (-15.0 degrees), and a very thin symmetric airfoil (NACA 0006).
+
+Comparing Design 1 to other high-ranking designs:
+*   High sweep: Designs 1 and 4 have very high sweep (77.84, 76.64) which correlates with higher rewards. Designs 2 and 3 have lower sweep (71.24, 69.77) and lower rewards, suggesting a strong positive correlation between high sweep and CL/CDi.
+*   Washout: All top designs exhibit substantial negative twist (washout), often near the maximum -10 degrees at either root or tip, or both. This suggests washout is crucial for managing lift distribution and reducing induced drag.
+*   Anhedral: All top designs, particularly Design 1, utilize the maximum negative dihedral (-15.0 degrees), indicating it contributes positively to performance, possibly by interacting favorably with vortex lift or stability.
+*   Airfoil: Design 1 uses a symmetric NACA 0006. Design 2 and 3 use cambered NACA 2407/2408. The success of Design 1 with a symmetric airfoil suggests that for these high-sweep configurations, vortex lift might dominate, making explicit camber less critical or even detrimental compared to optimal twist and sweep. Thinness seems to be consistently beneficial.
+
+Key changes needed to improve designs in the population, based on exploiting Design 1's success:
+1.  Push leading-edge sweep even closer to the maximum limit.
+2.  Maximize washout uniformly across the wing.
+3.  Maintain maximum anhedral.
+4.  Further explore very thin, symmetric airfoils, or slightly vary their thickness.

@@ -1,0 +1,11 @@
+{
+  "le_sweep": 65.0,
+  "root_chord_in": 34.0,
+  "twist_root": -8.0,
+  "twist_tip": -4.0,
+  "dihedral": -2.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 11,
+  "name": "Refined_Design1_Twist_Thin"
+}

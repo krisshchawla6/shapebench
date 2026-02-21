@@ -1,0 +1,11 @@
+{
+  "le_sweep": 80.0,
+  "root_chord_in": 35.0,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -15.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 10,
+  "name": "ExtremeVortex_MaxCamber_4410"
+}

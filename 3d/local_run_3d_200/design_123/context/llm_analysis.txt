@@ -1,0 +1,19 @@
+The representative design (Design 1) achieved the highest reward (4016.0090). Its parameters are: `le_sweep=65.5`, `root_chord_in=34.7`, `twist_root=-7.1`, `twist_tip=-4.6`, `dihedral=-1.7`, `NACA 4412`.
+
+Several observations can be made from this and other designs:
+*   **Sweep**: Moderate sweep (around 65 degrees) appears to correlate with high reward. Higher sweep (e.g., Design 4 at 79.1 degrees) led to very low reward, suggesting a sweet spot for balancing vortex lift generation and induced drag.
+*   **Twist**: All high-reward designs (1, 2, 5, 3) exhibit significant negative twist (washout). Crucially, the `twist_root` is generally more negative than `twist_tip` (e.g., Design 1: `root -7.1`, `tip -4.6`; Design 2: `root -10.0`, `tip -2.8`). This implies that the root section is twisted to a lower angle of attack than the tip, which might delay root stall and promote a specific lift distribution or vortex shedding pattern beneficial for delta wings.
+*   **Camber/Thickness (NACA)**: Designs 1, 3, 6 use `NACA 44xx` (moderate camber, max camber at 40% chord). Design 2 uses `NACA 2411`. Design 4 uses `NACA 4008` (less camber, thinner). The top performers seem to prefer cambered airfoils, particularly `NACA 44xx`, indicating that camber contributes positively to lift, which helps CL/CDi.
+*   **Root Chord**: Values vary, but Design 1 is moderate. Larger chords (Design 3 at 41.6) also show up in relatively high-performing designs (though not as high as Design 1).
+*   **Dihedral**: Varies, with Design 1 having a slight negative, while others range from negative to positive. Its impact seems less dominant than sweep or twist.
+
+**Aerodynamic Issues (Inferred from lower rewards and general delta wing principles):**
+*   **High Induced Drag**: Likely culprit for low CL/CDi. Inefficient lift distribution due to poor twist or excessive sweep can increase induced drag significantly. The extremely high sweep of Design 4 might be suffering from this.
+*   **Suboptimal Vortex Lift**: For delta wings, vortex lift is crucial. The sweep and twist must work together to generate strong, stable vortices across the flight envelope. Too much or too little sweep, or incorrect twist, can diminish this effect.
+*   **Early Stall/Poor Load Distribution**: If twist is not appropriate, parts of the wing might stall prematurely or generate lift inefficiently, leading to higher drag. The observed trend of more negative root twist might be a strategy to manage this.
+
+**Key Design Changes Needed to Improve Designs (based on population trends and exploration):**
+1.  **Explore more aggressive negative twist at the root** in combination with moderate tip twist, pushing the observed trend from Design 1 and 2.
+2.  **Test the extremes of sweep** (e.g., closer to 70-75 degrees) while maintaining optimized twist, to see if higher vortex lift can be achieved without excessive induced drag.
+3.  **Investigate symmetric airfoils (NACA 00xx)** in conjunction with aggressive twist to understand if pure geometric twist can effectively manage lift distribution without aerodynamic camber. This is a novel direction for high-reward.
+4.  **Experiment with larger root chords** to see how scaling affects performance with optimized sweep and twist.

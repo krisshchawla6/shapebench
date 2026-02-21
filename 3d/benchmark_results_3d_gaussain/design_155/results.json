@@ -1,0 +1,33 @@
+{
+  "design_name": "HybridHighSweepWashoutNACA2409",
+  "design_params": {
+    "le_sweep_deg": 71.61846558574835,
+    "root_chord_in": 31.596168688617755,
+    "twist_root_deg": -5.7110284971434595,
+    "twist_tip_deg": -8.960922401719383,
+    "dihedral_deg": -13.156664758478229,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 15,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.1574159069895792,
+    "CDi": 0.008139501623304622,
+    "CM": -0.17149957515064268,
+    "L_D": 19.339747600623813
+  },
+  "corrected_results": {
+    "CL": 0.051873319034895095,
+    "CDi": 0.0006999181286369496,
+    "CM": -0.03711538697064338,
+    "L_D": 74.11340971538401
+  }
+}

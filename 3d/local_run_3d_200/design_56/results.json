@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_HighChord_PositiveDihedral_4411",
+  "design_params": {
+    "le_sweep_deg": 54.74787144959549,
+    "root_chord_in": 37.10913007088573,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -8.49613946895766,
+    "dihedral_deg": 5.814742926467818,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 10,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.24947954780625825,
+    "CDi": 0.015805783909174878,
+    "CM": -0.3090257608310803,
+    "L_D": 15.784066721388072
+  },
+  "corrected_results": {
+    "CL": 0.06388450007688812,
+    "CDi": -0.00044731909085777844,
+    "CM": -0.056499562982237225,
+    "L_D": -142.81639523674988
+  }
+}

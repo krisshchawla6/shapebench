@@ -1,0 +1,14 @@
+{
+  "design_name": "ExploitationMaxWashoutThin2406",
+  "le_sweep": 67.05485163017913,
+  "root_chord_in": 33.310748122136154,
+  "twist_root": -10.0,
+  "twist_tip": -9.749867939010722,
+  "dihedral": -14.442767051869057,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

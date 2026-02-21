@@ -1,0 +1,14 @@
+{
+  "design_name": "SweptCamberWashout",
+  "le_sweep": 68.45647130125465,
+  "root_chord_in": 32.516317547354056,
+  "twist_root": -1.9918337716453474,
+  "twist_tip": -2.534279459136208,
+  "dihedral": 2.2518461497294013,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

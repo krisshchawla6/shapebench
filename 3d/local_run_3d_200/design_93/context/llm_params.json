@@ -1,0 +1,11 @@
+{
+  "le_sweep": 70.0,
+  "root_chord_in": 38.0,
+  "twist_root": -9.0,
+  "twist_tip": -1.0,
+  "dihedral": -7.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 10,
+  "name": "HighSweep_AggressiveWashin_ThinCamber"
+}

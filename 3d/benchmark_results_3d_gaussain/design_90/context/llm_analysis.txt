@@ -1,0 +1,12 @@
+The top-performing design (Design 1, Reward: 424.5627) exhibits a high sweep (71.2 deg), maximal washout (twist_root=-10.0, twist_tip=-10.0), and extreme negative dihedral (-15.0). It utilizes a NACA 2407 airfoil (2% camber). This combination likely capitalizes on strong vortex lift due to the high sweep, with the aggressive washout helping to control the load distribution and potentially reduce induced drag at the tips. The extreme negative dihedral could be contributing to stability or interacting favorably with the high sweep and washout, though it is also present in low-reward designs, suggesting a complex interplay. While this design is highly rewarded, its extreme parameters (maximal washout, maximal negative dihedral) might represent local optima that are not globally optimal or could be limiting the overall lift potential.
+
+Key aerodynamic issues/areas for exploration:
+*   The extreme washout might be limiting total lift coefficient, even if it optimizes the CL/CDi ratio by reducing induced drag.
+*   The consistent use of extreme negative dihedral in top designs suggests it's beneficial in this highly swept, washout-heavy regime, but its effect with different sweeps or twist distributions is largely unexplored.
+*   The parameter space for sweep below 70 degrees is relatively unexplored by top-tier designs, as are higher camber airfoils (NACA 44xx) or different twist distributions.
+
+Key design changes needed to improve designs in the population:
+1.  Explore significantly lower sweep angles to investigate different lift generation mechanisms.
+2.  Test dihedral values closer to zero or positive, rather than consistently negative.
+3.  Investigate twist distributions that are less extreme in washout, or even include positive twist at the root.
+4.  Introduce airfoils with higher camber (e.g., NACA 44xx) to evaluate their potential for increased lift.

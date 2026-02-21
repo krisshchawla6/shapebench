@@ -1,0 +1,14 @@
+{
+  "design_name": "CamberedThinWashoutHybrid",
+  "le_sweep": 72.2454544222613,
+  "root_chord_in": 28.207150210937613,
+  "twist_root": -8.588947721048502,
+  "twist_tip": -3.939178445333175,
+  "dihedral": -15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

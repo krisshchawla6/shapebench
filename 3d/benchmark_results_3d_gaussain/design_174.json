@@ -1,0 +1,14 @@
+{
+  "design_name": "MaxSweep_Cambered_RootWash",
+  "le_sweep": 79.39866772574291,
+  "root_chord_in": 31.322291099692382,
+  "twist_root": -6.779171091331958,
+  "twist_tip": -9.749026158253889,
+  "dihedral": -7.1757880322805,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "MaxSweep_ZeroTwist_PosDihedral_Thick2418",
+  "le_sweep": 75.6159533590511,
+  "root_chord_in": 30.674205628521598,
+  "twist_root": 1.0175322996901675,
+  "twist_tip": 0.17367884348256057,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 17,
+    "chord_length": 1.0
+  }
+}

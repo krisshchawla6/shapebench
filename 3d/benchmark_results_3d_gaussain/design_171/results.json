@@ -1,0 +1,33 @@
+{
+  "design_name": "ModerateSweep_PositiveTwist_PositiveDihedral_HighCamber_MediumThick",
+  "design_params": {
+    "le_sweep_deg": 58.31892065724888,
+    "root_chord_in": 29.600396164288306,
+    "twist_root_deg": 3.3531828025656605,
+    "twist_tip_deg": 2.892102205411543,
+    "dihedral_deg": 11.91278362651443,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.9367960062502083,
+    "CDi": 0.18261314179745405,
+    "CM": -0.9262940863045153,
+    "L_D": 5.129948463891271
+  },
+  "corrected_results": {
+    "CL": 0.3591329109953764,
+    "CDi": 0.07852464089475676,
+    "CM": -0.3380247908043798,
+    "L_D": 4.573505932700883
+  }
+}

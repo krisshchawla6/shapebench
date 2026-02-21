@@ -1,0 +1,33 @@
+{
+  "design_name": "ExtremeSweep_MaxCamber_DeepChord",
+  "design_params": {
+    "le_sweep_deg": 78.3702902367213,
+    "root_chord_in": 41.2848462433429,
+    "twist_root_deg": -9.607594996458893,
+    "twist_tip_deg": -1.8890959670900926,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.06165573017152356,
+    "CDi": 0.006967740680301998,
+    "CM": -0.08766952096115742,
+    "L_D": 8.848740646423032
+  },
+  "corrected_results": {
+    "CL": -0.11300712661238323,
+    "CDi": -0.011602104121140239,
+    "CM": 0.15234046413983476,
+    "L_D": 9.740226896125893
+  }
+}

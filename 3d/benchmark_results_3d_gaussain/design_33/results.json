@@ -1,0 +1,33 @@
+{
+  "design_name": "LowerSweepPositiveDihedralNoCamber",
+  "design_params": {
+    "le_sweep_deg": 55.395374872140344,
+    "root_chord_in": 30.163175283217274,
+    "twist_root_deg": 7.852168316109166,
+    "twist_tip_deg": -7.160589872996124,
+    "dihedral_deg": 5.7640516960445485,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 15,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.7464822867161077,
+    "CDi": 0.1625893524830348,
+    "CM": -0.6150200435522847,
+    "L_D": 4.5912126182678445
+  },
+  "corrected_results": {
+    "CL": 0.3163641840978606,
+    "CDi": 0.07313171109343339,
+    "CM": -0.2785812433568954,
+    "L_D": 4.32595079983391
+  }
+}

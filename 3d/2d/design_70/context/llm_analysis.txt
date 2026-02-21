@@ -1,0 +1,7 @@
+Design 1 (Reward 5.4897) features a highly distinct "pinched" geometry, characterized by a very low radius at CP1 (0.212). This creates a sharp transition on the upper surface, likely generating a strong, localized suction peak. While this produces high lift, the velocity field (1_u.png) reveals a significant wake and potential separation towards the trailing edge, suggesting high pressure drag. The pressure field (1_p.png) shows a concentrated low-pressure zone followed by a steep recovery gradient. The trailing edge (CP3) is relatively sharp (edgy=0.837), but there is room to refine the closure. 
+
+Key changes needed:
+1. Increase the radius of the upper control point (CP1) to create a more conventional, convex upper surface, reducing the severity of the pressure recovery.
+2. Moderate the lower surface radius (CP2) to explore different camber distributions, as the current population is hitting the 1.0 limit.
+3. Increase the sharpness (edgy_param) of the trailing edge to further reduce base drag and improve flow convergence.
+4. Adjust angular offsets to shift the maximum thickness forward, potentially delaying separation.

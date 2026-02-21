@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweepWashoutPositiveDihedralCamber",
+  "le_sweep": 68.0464636864677,
+  "root_chord_in": 49.35599320050089,
+  "twist_root": -9.112342354648927,
+  "twist_tip": -9.66970292889369,
+  "dihedral": 8.861807486728628,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

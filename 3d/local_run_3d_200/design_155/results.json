@@ -1,0 +1,33 @@
+{
+  "design_name": "MidSweep_LargeChord_LowCamber_TipWashout",
+  "design_params": {
+    "le_sweep_deg": 60.49463231881598,
+    "root_chord_in": 44.126989087919235,
+    "twist_root_deg": -7.545555730035571,
+    "twist_tip_deg": -2.0060548213328238,
+    "dihedral_deg": 2.371254243106393,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.28569248276762216,
+    "CDi": 0.021279768444810963,
+    "CM": -0.3006987927525022,
+    "L_D": 13.42554471438752
+  },
+  "corrected_results": {
+    "CL": -0.04346326043208205,
+    "CDi": -0.011820326998381515,
+    "CM": 0.10165537289167641,
+    "L_D": 3.6769930677918814
+  }
+}

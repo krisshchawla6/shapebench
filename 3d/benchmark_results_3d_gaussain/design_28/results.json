@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_GradWash_N2412_MedChord",
+  "design_params": {
+    "le_sweep_deg": 80.0,
+    "root_chord_in": 24.68944385302583,
+    "twist_root_deg": -7.057049813645772,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -7.0982928068788365,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.06992427047732709,
+    "CDi": 0.001998115518610829,
+    "CM": -0.06534614405361316,
+    "L_D": 34.995109054526175
+  },
+  "corrected_results": {
+    "CL": 0.0942580985955073,
+    "CDi": 0.003074106708832909,
+    "CM": -0.08599686743020211,
+    "L_D": 30.66194752598311
+  }
+}

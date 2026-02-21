@@ -1,0 +1,15 @@
+The top-performing design (Design 1, Reward: 4016.0090) features a moderate leading-edge sweep (65.5 deg), a root chord of ~35 inches, and a specific twist distribution with significant negative twist at the root (-7.1 deg) and moderate negative twist at the tip (-4.6 deg), indicating washout. It also uses a NACA 4412 airfoil (4% camber at 40% chord, 12% thickness) and slight negative dihedral. This suggests that a combination of moderate sweep, effective load distribution through twist, and some airfoil camber is highly effective for maximizing CL/CDi.
+
+Lower-reward designs often share similar sweep and root chord ranges but vary significantly in twist and airfoil choice. Several low-performing designs feature maximum negative twist at both root and tip (-10.0 deg), which might lead to excessive washout, reducing overall lift or creating unfavorable load distributions. The NACA airfoils explored include 24xx, 44xx, and 40xx (camber at leading edge). The thickness values generally cluster around 11-16%. Dihedral values vary but don't show a clear pattern with reward, staying mostly in the -10 to +10 range.
+
+**Key Issues/Observations from Population & Representative Design (Design 1 assumed to be efficient):**
+*   **Twist Distribution:** Many low-performing designs utilize extreme negative twist, suggesting that overly aggressive washout might be detrimental to CL/CDi. Design 1's moderate negative twist is a key factor.
+*   **Airfoil Camber:** NACA 44xx (Design 1) performs best, indicating camber is beneficial. However, the influence of `naca_p` (camber position) and `naca_m=0` (symmetric airfoils) is not fully explored.
+*   **Sweep Range:** The highest rewards are in the mid-60s sweep range. The higher sweep range (70-80 degrees) is largely unexplored by high-performing designs.
+*   **Thickness:** The extreme ends of the thickness range (6-10% and 17-24%) are under-represented, with most designs clustering in the 11-16% range.
+
+**3-4 Key Design Changes Needed for Population Improvement:**
+1.  Systematically explore higher leading-edge sweep angles (70-80 deg) to investigate increased reliance on vortex lift.
+2.  Introduce symmetric airfoils (NACA 00xx) to understand if camber is always necessary, especially with high sweep.
+3.  Investigate twist distributions that are less aggressive than full -10.0 degrees, potentially including slightly positive root twist combined with washout.
+4.  Explore the thinner end of the NACA thickness range (6-10%) in combination with new sweep and airfoil types.

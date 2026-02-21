@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweep_MaxChord_WashinRoot_NACA0024",
+  "le_sweep": 51.04333024644322,
+  "root_chord_in": 48.295659954700575,
+  "twist_root": 8.030357194831442,
+  "twist_tip": -10.0,
+  "dihedral": 3.772863812130022,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 24,
+    "chord_length": 1.0
+  }
+}

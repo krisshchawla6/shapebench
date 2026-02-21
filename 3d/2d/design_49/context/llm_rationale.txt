@@ -1,0 +1,5 @@
+*   **Strategy Focus (Exploitation)**: This design builds directly on the parameter clusters of the two best-performing designs (1 and 4), which both prioritize extreme smoothness on the main body and high sharpness at the trailing edge.
+*   **Trailing Edge Optimization**: CP3 is pushed to a higher sharpness (0.9542) and a more extreme angular offset (0.9918) to create a cleaner flow departure, reducing base drag and potentially increasing the pressure differential.
+*   **Internal Thickness Control**: CP1's `radius_param` is kept low (0.2312), consistent with the high-performing designs, to maintain the thin airfoil characteristics that minimize wave and pressure drag at the cost of some structural volume.
+*   **Leading Edge Curvature**: CP0 and CP2 are set to -1.0 in `edgy_param` to ensure the leading edge is as smooth as possible, preventing premature transition or separation bubbles.
+*   **Pressure Recovery Tuning**: CP2's `angle_param` is slightly decreased (-0.0912) to subtly alter the lower surface curvature, aiming to improve the lift-to-drag ratio by increasing the pressure recovery efficiency.

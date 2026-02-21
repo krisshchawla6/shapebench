@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweepCamberAsymTwist",
+  "le_sweep": 75.46870043118395,
+  "root_chord_in": 40.07225208593826,
+  "twist_root": -6.52119817832114,
+  "twist_tip": -8.085494186442967,
+  "dihedral": -2.1970237913416977,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

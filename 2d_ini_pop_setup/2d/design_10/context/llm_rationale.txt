@@ -1,0 +1,5 @@
+*   **Exploitation Strategy**: This design refines the high-reward geometric patterns identified in Designs 1 and 4. I am maintaining the successful leading-edge configuration while specifically targeting the trailing-edge sharpness.
+*   **Trailing Edge Sharpness**: By increasing CP3's edgy_param from ~0.45 to ~0.85, I aim to create a more tapered TE. This should reduce the wake thickness and pressure drag visible in the velocity and pressure fields of Design 1.
+*   **Chord Extension**: Increasing the radius_param of CP3 (from 0.96 to 0.98) slightly extends the effective chord length, potentially increasing the lift-to-drag ratio if the curvature remains smooth.
+*   **Surface Smoothing**: I am keeping the edgy_params for the mid-section control points (CP1, CP2) highly negative (~-0.91). This is a proven pattern in the top 3 designs that maintains laminar-like flow and prevents separation.
+*   **Leading Edge Continuity**: The LE (CP0) radius and angle are kept very close to Design 1 to preserve the excellent stagnation point and suction peak characteristics.

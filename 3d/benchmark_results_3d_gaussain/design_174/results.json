@@ -1,0 +1,33 @@
+{
+  "design_name": "MaxSweep_Cambered_RootWash",
+  "design_params": {
+    "le_sweep_deg": 79.39866772574291,
+    "root_chord_in": 31.322291099692382,
+    "twist_root_deg": -6.779171091331958,
+    "twist_tip_deg": -9.749026158253889,
+    "dihedral_deg": -7.1757880322805,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.09343010328597383,
+    "CDi": 0.004660719695518216,
+    "CM": -0.11203310741266721,
+    "L_D": 20.04628241767402
+  },
+  "corrected_results": {
+    "CL": 0.04066442806875506,
+    "CDi": 0.00029144561013893144,
+    "CM": -0.026554121132102697,
+    "L_D": 139.52664460916196
+  }
+}

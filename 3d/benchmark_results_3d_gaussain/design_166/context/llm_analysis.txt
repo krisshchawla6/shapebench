@@ -1,0 +1,20 @@
+Given the lack of an image, this analysis relies purely on the numerical data from previous designs, with a critical focus on Design 2 (Rank 0, Reward: 626.7341) as the current benchmark.
+
+Design 2's parameters: le_sweep=77.84, root_chord_in=27.28, twist_root=-9.55, twist_tip=-9.13, dihedral=-15.0, NACA 0006.
+
+*   **Aerodynamic Insights from Design 2:**
+    *   **High Sweep:** The extremely high leading-edge sweep (77.84 deg) is a dominant feature, strongly suggesting that maximizing leading-edge vortex lift is crucial for high CL/CDi in this design space.
+    *   **Aggressive Washout:** The significant negative twist at both root and tip (approx. -9.5 deg) indicates an aggressive washout strategy. This likely unloads the outer wing sections, preventing tip stall and optimizing the spanwise lift distribution to reduce induced drag, which is critical for CL/CDi.
+    *   **Max Negative Dihedral:** The consistent use of maximum negative dihedral (-15.0 deg) across the top designs (including Design 2) is a strong correlation. This likely contributes to favorable stability characteristics or an aerodynamic interaction that enhances performance.
+    *   **Thin, Uncambered Airfoil:** The selection of NACA 0006 (zero camber, minimal thickness) for the best design is a key observation. This implies that for vortex-dominated delta wings and the objective of maximizing CL/CDi, minimizing profile drag through a very thin, symmetric airfoil is more beneficial than gaining additional lift from camber, which would increase drag.
+    *   **Root Chord:** A moderate root chord (27.28 inches) seems effective when combined with these other features.
+
+*   **Potential Aerodynamic Issues (general for high sweep delta wings, inferred):**
+    *   High induced drag inherent to generating lift with high sweep, necessitating careful spanwise load management (e.g., through washout).
+    *   Potential for adverse flow phenomena if twist is not optimally distributed.
+
+*   **Key Design Changes Needed to Improve Designs in the Population:**
+    1.  **Extreme Sweep Exploration:** Systematically push leading-edge sweep even closer to the maximum limit (80 deg) to fully explore its impact on vortex generation and CL/CDi.
+    2.  **Refined Washout Strategy:** Continue to explore aggressive washout, potentially varying the differential between root and tip twist more broadly to fine-tune spanwise load.
+    3.  **Minimal Drag Airfoil Confirmation:** Further investigate uncambered, ultra-thin airfoils (NACA 00xx with low `naca_t`) to confirm the hypothesis that profile drag minimization is key.
+    4.  **Dihedral Consistency:** Maintain the maximum negative dihedral due to its strong correlation with high reward, while occasionally exploring slight variations to confirm its sensitivity.

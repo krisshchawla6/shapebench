@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploitative Cambered Max Washout",
+  "le_sweep": 72.52642976029253,
+  "root_chord_in": 30.071214924882632,
+  "twist_root": -10.0,
+  "twist_tip": -5.1999248390716355,
+  "dihedral": -11.486501930887677,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

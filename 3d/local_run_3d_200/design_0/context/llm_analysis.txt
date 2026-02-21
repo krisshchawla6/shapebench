@@ -1,0 +1,12 @@
+As this is the initial iteration, no previous designs or images are available for analysis. Therefore, a critical assessment of a representative design's Cp distribution and aerodynamic performance is not possible at this stage.
+
+However, for a delta wing aiming for high CL/CDi, an ideal design would exhibit:
+*   **Cp distribution:** Strong and stable leading-edge vortices, indicated by significant suction peaks along the leading edge, spreading smoothly over the wing surface. The pressure recovery should be gradual, minimizing sudden adverse pressure gradients that could lead to separation or vortex breakdown. The spanwise loading should be elliptical or close to it to minimize induced drag.
+*   **Aerodynamic performance:** High lift coefficient (CL) achieved efficiently with minimal induced drag (CDi), leading to a high CL/CDi ratio. This implies effective utilization of vortex lift while maintaining attached flow over the majority of the wing surface.
+*   **Potential issues to avoid (in future designs):** Premature vortex breakdown, flow separation over large areas, highly non-uniform spanwise loading leading to excessive induced drag or tip stall, and excessive thickness leading to high profile drag.
+
+**Key design changes needed to improve designs in the population (general initial exploration focus):**
+1.  **Optimize leading-edge sweep:** To balance the strength of leading-edge vortices for lift against the increase in induced drag.
+2.  **Refine twist distribution (root and tip):** To control spanwise load distribution, delay stall, and potentially reduce induced drag.
+3.  **Explore camber and thickness variations:** To fine-tune lift generation and minimize drag while ensuring structural feasibility.
+4.  **Investigate dihedral/anhedral effects:** To understand its influence on lateral stability and potential aerodynamic efficiency.

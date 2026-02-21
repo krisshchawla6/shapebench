@@ -1,0 +1,33 @@
+{
+  "design_name": "ExploitHighCamberWashout",
+  "design_params": {
+    "le_sweep_deg": 61.55201619000659,
+    "root_chord_in": 34.72964716299783,
+    "twist_root_deg": -9.056605028917595,
+    "twist_tip_deg": -4.617829258136666,
+    "dihedral_deg": -11.743258772609625,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.15563854930040072,
+    "CDi": 0.02152511281690132,
+    "CM": -0.22205607251047071,
+    "L_D": 7.230556728055556
+  },
+  "corrected_results": {
+    "CL": 0.035438650775722114,
+    "CDi": 0.0024039376983724593,
+    "CM": -0.037921834336253304,
+    "L_D": 14.74191731329609
+  }
+}

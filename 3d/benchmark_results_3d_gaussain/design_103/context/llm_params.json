@@ -1,0 +1,11 @@
+{
+  "le_sweep": 78.5,
+  "root_chord_in": 12.5,
+  "twist_root": 0.0,
+  "twist_tip": 0.0,
+  "dihedral": 14.5,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 12,
+  "name": "Extreme_HighSweep_PosDihedral_SmallChord_NoTwist_ThickSymmetric"
+}

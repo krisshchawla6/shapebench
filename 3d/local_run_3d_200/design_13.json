@@ -1,0 +1,14 @@
+{
+  "design_name": "CamberedLEWashout_ModerateSweep",
+  "le_sweep": 63.35199008569245,
+  "root_chord_in": 26.41234861427245,
+  "twist_root": -5.455117675619412,
+  "twist_tip": -6.715129793412467,
+  "dihedral": -9.042618899418311,
+  "naca": {
+    "m": 4,
+    "p": 0,
+    "t": 15,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "ExtremeSweep_MinThick_AnhedralWashout",
+  "design_params": {
+    "le_sweep_deg": 73.64401899539405,
+    "root_chord_in": 25.683771005322143,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -2.299878884916236,
+    "dihedral_deg": -14.74461144794141,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.05812939653331498,
+    "CDi": 0.004388134018998992,
+    "CM": -0.06321900580224941,
+    "L_D": 13.246951046079328
+  },
+  "corrected_results": {
+    "CL": 0.08313269146473588,
+    "CDi": 0.003427529097610035,
+    "CM": -0.07642460639251865,
+    "L_D": 24.254408670871115
+  }
+}

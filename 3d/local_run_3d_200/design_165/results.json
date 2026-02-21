@@ -1,0 +1,33 @@
+{
+  "design_name": "Extreme_High_Sweep_Symmetric_Washin",
+  "design_params": {
+    "le_sweep_deg": 80.0,
+    "root_chord_in": 18.953101194947454,
+    "twist_root_deg": 6.468290087911046,
+    "twist_tip_deg": 0.8542095484264782,
+    "dihedral_deg": 15.0,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 23,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.6008186553345379,
+    "CDi": 0.1503354551949413,
+    "CM": -0.5902392541314884,
+    "L_D": 3.9965200128968323
+  },
+  "corrected_results": {
+    "CL": 0.30493514596716303,
+    "CDi": 0.08042174077395796,
+    "CM": -0.3163134185143255,
+    "L_D": 3.791700391368632
+  }
+}

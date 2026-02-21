@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_MaxWashout_NACA0008",
+  "le_sweep": 80.0,
+  "root_chord_in": 27.37102006894158,
+  "twist_root": -10.0,
+  "twist_tip": -6.604519352777016,
+  "dihedral": -9.588403198012529,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

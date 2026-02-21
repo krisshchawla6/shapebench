@@ -1,0 +1,14 @@
+{
+  "design_name": "SweptWashoutCambered",
+  "le_sweep": 65.90817441205814,
+  "root_chord_in": 36.17549623910277,
+  "twist_root": 1.388977243802556,
+  "twist_tip": -8.897756721430504,
+  "dihedral": 4.31394138271655,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

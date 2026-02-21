@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_Camber_Sweep_Delta_V1",
+  "le_sweep": 65.48300256458288,
+  "root_chord_in": 42.407095985975424,
+  "twist_root": -9.377140030260358,
+  "twist_tip": -8.896087786738963,
+  "dihedral": 0.08810900983125602,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

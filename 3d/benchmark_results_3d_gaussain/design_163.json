@@ -1,0 +1,14 @@
+{
+  "design_name": "LowerSweep_HighCamber_LargeChord",
+  "le_sweep": 60.20998087524258,
+  "root_chord_in": 46.05915870802802,
+  "twist_root": -8.147320256743976,
+  "twist_tip": -10.0,
+  "dihedral": -9.939513739519581,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

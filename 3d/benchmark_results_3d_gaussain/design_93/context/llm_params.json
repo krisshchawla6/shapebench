@@ -1,0 +1,11 @@
+{
+  "le_sweep": 71.5,
+  "root_chord_in": 31.5,
+  "twist_root": -10.0,
+  "twist_tip": -8.5,
+  "dihedral": -15.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 7,
+  "name": "Hybrid_SweepTwist_SymmetricAirfoil"
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_SweepTwist_SymmetricAirfoil",
+  "design_params": {
+    "le_sweep_deg": 69.3957551633504,
+    "root_chord_in": 36.080661669047686,
+    "twist_root_deg": -9.041374577924431,
+    "twist_tip_deg": -4.704621266911182,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.06793316979572275,
+    "CDi": 0.003437691939373027,
+    "CM": -0.06835868557439767,
+    "L_D": 19.761273259439452
+  },
+  "corrected_results": {
+    "CL": -0.014184209602961427,
+    "CDi": -0.0010454226000996914,
+    "CM": 0.04802842611485379,
+    "L_D": 13.56791942474634
+  }
+}

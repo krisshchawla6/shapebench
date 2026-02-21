@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_ZeroCamber_Thick_Washout",
+  "design_params": {
+    "le_sweep_deg": 72.9162963912868,
+    "root_chord_in": 31.590001672224417,
+    "twist_root_deg": -8.894553448062268,
+    "twist_tip_deg": -7.960609409062425,
+    "dihedral_deg": 5.877419119090993,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 18,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.05063584454867517,
+    "CDi": 0.0012667119455961246,
+    "CM": -0.050089334368900666,
+    "L_D": 39.97423780893259
+  },
+  "corrected_results": {
+    "CL": 0.007994148621835843,
+    "CDi": 0.00013871016280281385,
+    "CM": 0.009721741737241059,
+    "L_D": 57.63203258005026
+  }
+}

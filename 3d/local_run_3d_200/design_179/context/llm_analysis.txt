@@ -1,0 +1,15 @@
+The representative design (Design 1) achieved the highest reward of 4016.0090, indicating a highly efficient aerodynamic configuration. Its parameters are: `le_sweep=65.5`, `root_chord_in=34.7`, `twist_root=-7.1`, `twist_tip=-4.6`, `dihedral=-1.7`, `NACA 4412`.
+
+Critically assessing Design 1:
+*   **Sweep (65.5 deg):** This moderate-to-high sweep angle is optimal for generating significant vortex lift without incurring excessive induced drag.
+*   **Twist Distribution (washout at both root and tip, but root has more washout):** The negative twist at both root and tip (washout) is crucial for load distribution. The fact that `twist_root` is more negative than `twist_tip` suggests a strategy to manage the strong inboard vortex and prevent premature root stall, ensuring a more consistent lift distribution across the span and reducing induced drag.
+*   **Camber (NACA 4412):** The 4% camber (`naca_m=4`) with its maximum point at 40% chord (`naca_p=4`) is a key enabler of high lift. This aggressive camber, combined with the sweep and twist, appears to be highly effective. The moderate thickness (`naca_t=12`) likely balances structural needs with aerodynamic performance.
+*   **Dihedral (Slight Anhedral):** The small negative dihedral (-1.7 deg) is common in high-performance aircraft for roll control or potentially minor induced drag benefits, though its impact here is likely subtle.
+
+Key observations from the population suggest that cambered airfoils (especially `naca_m=4`) and washout are critical for high rewards. Designs with `naca_m=0` performed poorly. More extreme sweeps (e.g., 75.6 deg in Design 4) yielded lower rewards, suggesting an optimal range around 65-70 degrees.
+
+Based on this, three to four key changes needed to improve designs in the population are:
+1.  **Reinforce high camber with `naca_m=4` and `naca_p=4`:** This configuration has proven most effective for generating lift.
+2.  **Fine-tune the twist distribution, especially root washout:** While Design 1 has effective twist, exploring even stronger root washout (as seen in Designs 2 and 3) could further optimize lift distribution and drag.
+3.  **Explore moderate thickness variations with aggressive camber:** Design 1 used `t=12`. Can a slightly thinner or thicker section improve performance when combined with optimal camber and twist?
+4.  **Confirm optimal sweep within the 65-70 degree range:** Explore values slightly above or below Design 1's sweep, while maintaining other high-performing parameters.

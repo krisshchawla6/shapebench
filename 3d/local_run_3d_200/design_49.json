@@ -1,0 +1,14 @@
+{
+  "design_name": "HighCamberWashoutDelta",
+  "le_sweep": 69.40658046983576,
+  "root_chord_in": 34.556264207531065,
+  "twist_root": -8.321127881737555,
+  "twist_tip": -6.038747444736021,
+  "dihedral": -7.463568644417543,
+  "naca": {
+    "m": 4,
+    "p": 0,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

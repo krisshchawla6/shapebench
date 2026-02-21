@@ -1,0 +1,18 @@
+The provided context includes a reference to `geometry.png` which was not rendered, so a critical assessment of Cp distribution is not possible. However, analyzing the parameters and reward of Design 1 (Reward: 4016.0090) gives insights into a successful design:
+
+*   **Parameters:** `le_sweep=65.5`, `root_chord_in=34.8`, `twist_root=-7.1`, `twist_tip=-4.6`, `dihedral=-1.7`, `NACA 4412`.
+*   **Key Characteristics:** This design features a moderate-high sweep, a mid-range root chord, significant washout (negative twist) at both root and tip, a slight negative dihedral, and a cambered airfoil (NACA 4412, indicating 4% max camber at 40% chord, 12% thickness).
+
+From the existing designs, higher rewards generally correlate with:
+*   `le_sweep` in the mid-60s (Design 1 & 5). Very high sweep (>70, D2, D3) and lower sweep (<60, D4, D6) tend to yield lower rewards.
+*   `root_chord_in` in the mid-30s. Both very low (D2) and very high (D3, D4) chords led to lower rewards.
+*   Significant negative twist (`twist_root` and `twist_tip`). All good designs show washout.
+*   Slightly negative or near-zero `dihedral`. High positive dihedral (D4) performed poorly.
+*   Cambered airfoils (NACA 4412 in D1, NACA 2411 in D5) appear to outperform symmetric (NACA 00xx in D3, D6).
+
+**Key Design Changes Needed (for population, not just modifying Design 1):**
+
+1.  **Explore boundary sweep values:** The extreme low (45-55 deg) and high (75-80 deg) sweep ranges are not well represented, especially with successful parameter combinations.
+2.  **Investigate positive twist (washin):** All successful designs utilize negative twist (washout). The full range of positive twist (-10 to +10 deg) is almost entirely unexplored.
+3.  **Test combination of extreme chord values with other parameters:** The very low (10-20 inches) and very high (45-50 inches) root chords need more testing, especially in novel combinations.
+4.  **Vary NACA airfoil parameters more widely:** Specifically, explore `naca_m=2` more thoroughly, and combinations of `naca_m > 0` with `naca_p=0`. Also, the higher `naca_t` (thickness) range (15-24) is largely unexplored.

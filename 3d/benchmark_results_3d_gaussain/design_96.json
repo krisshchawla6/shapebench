@@ -1,0 +1,14 @@
+{
+  "design_name": "LowerSweep_HighCamber_ModAnhedral",
+  "le_sweep": 59.60931405908419,
+  "root_chord_in": 36.13306580086225,
+  "twist_root": -5.918835110798085,
+  "twist_tip": -7.911735984695069,
+  "dihedral": -6.666897719365219,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

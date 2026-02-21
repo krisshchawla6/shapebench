@@ -1,0 +1,11 @@
+{
+  "le_sweep": 75.5,
+  "root_chord_in": 48.0,
+  "twist_root": -2.0,
+  "twist_tip": -0.5,
+  "dihedral": 15.0,
+  "naca_m": 2,
+  "naca_p": 0,
+  "naca_t": 22,
+  "name": "HighSweep_LeadCamber_HighDihedral"
+}

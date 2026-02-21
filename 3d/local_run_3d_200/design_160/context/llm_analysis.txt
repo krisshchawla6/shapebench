@@ -1,0 +1,14 @@
+The current top-performing design (Design 1, reward 4016.0090) exhibits excellent aerodynamic characteristics, likely due to a well-formed and stable leading-edge vortex, indicated by the smooth and intense suction pressure distribution on the upper surface. Its parameters, including a `le_sweep` of ~65.5 degrees, moderate washout (twist_root -7.1, twist_tip -4.6), and a NACA 4412 airfoil, seem to be a highly effective combination.
+
+Across the population, several patterns emerge:
+-   **Sweep**: Most successful designs (1, 4) cluster in the 63-67 degree sweep range. Higher sweep values (e.g., above 70 degrees) and lower values (e.g., below 60 degrees) are relatively unexplored.
+-   **Twist**: Effective washout (twist_root significantly more negative than twist_tip) is common in higher-reward designs. Designs with very little washout (e.g., Design 3: twist_tip -0.7) perform poorly. Many designs explore aggressive negative `twist_root` (-10.0).
+-   **NACA Airfoil**: All high-reward designs utilize cambered airfoils (`naca_m=2` or `4`). The `naca_m=0` (symmetric airfoil) option remains completely untested in the population.
+-   **Dihedral**: Negative dihedral values appear more frequently in higher-reward designs, while significant positive dihedral (Design 5) yielded a lower reward.
+-   **Root Chord**: Values vary, with Design 1 using ~34.8 inches, and Design 2 using ~40.9 inches. Extremes of the 10-50 inch range are not well-explored.
+
+Key design changes needed to improve designs in the population by promoting exploration:
+1.  **Introduce Symmetric Airfoils (`naca_m=0`)**: This is a major unexplored region. Understanding how a symmetric profile interacts with other delta wing parameters is crucial.
+2.  **Explore Higher `le_sweep` values**: The population is concentrated in the mid-60s. Pushing to higher sweep (e.g., 70-75 degrees) could reveal different vortex lift characteristics.
+3.  **Test Larger `root_chord_in`**: Investigate the upper range of the root chord to understand scaling effects with other aerodynamic changes.
+4.  **Vary Twist Combinations**: While washout is important, exploring less aggressive negative `twist_root` values, while still maintaining effective washout, could yield new optima.

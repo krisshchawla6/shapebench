@@ -1,0 +1,33 @@
+{
+  "design_name": "LowerSweep_PosDihedral_PosRootTwist_HighCamber",
+  "design_params": {
+    "le_sweep_deg": 54.6235192633884,
+    "root_chord_in": 36.17960095738967,
+    "twist_root_deg": 3.5973541702805774,
+    "twist_tip_deg": -4.191683357890107,
+    "dihedral_deg": 9.337306217553222,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.8369105854744135,
+    "CDi": 0.12278817194284712,
+    "CM": -0.8029508960969924,
+    "L_D": 6.8158892850360315
+  },
+  "corrected_results": {
+    "CL": 0.2642563170691476,
+    "CDi": 0.039187002122506795,
+    "CM": -0.21568131579500027,
+    "L_D": 6.743468567537442
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "Cambered_PositiveDihedral_ModerateSweep_Exploration",
+  "design_params": {
+    "le_sweep_deg": 59.020155991165815,
+    "root_chord_in": 46.20003292142851,
+    "twist_root_deg": 0.17777063912515734,
+    "twist_tip_deg": 2.8311254873162577,
+    "dihedral_deg": 12.71107637839339,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 15,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.7908112028937162,
+    "CDi": 0.13217853772420726,
+    "CM": -0.7985112164017719,
+    "L_D": 5.982901736617461
+  },
+  "corrected_results": {
+    "CL": 0.013131814459539771,
+    "CDi": -0.014485515369166264,
+    "CM": 0.057307091608767284,
+    "L_D": -0.9065479635948632
+  }
+}

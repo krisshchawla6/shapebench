@@ -1,0 +1,8 @@
+The representative design (Design 1) achieved the highest reward of 424.5627. Its parameters are: le_sweep=71.2, root_chord_in=32.88, twist_root=-10.0, twist_tip=-10.0, dihedral=-15.0, and NACA 2407.
+Assuming typical delta wing aerodynamics, this design likely benefits from strong, stable leading-edge vortices, which contribute significantly to lift. The aggressively negative twist at both root and tip (full washout) suggests an optimized load distribution, potentially reducing induced drag by unloading the tips or by shaping the spanwise lift distribution to promote favorable vortex interaction. The strong anhedral (-15.0 deg) might further aid in managing the vortex stability or reducing effective spanwise flow, thereby improving CL/CDi. The NACA 2407 airfoil (2% max camber at 40% chord, 7% thickness) provides a moderate amount of camber for lift generation while remaining relatively thin, which minimizes profile drag.
+
+Key design changes needed to improve designs in the population, based on Design 1's success, are:
+1.  **Maintain High and Consistent Washout**: The -10.0 degree twist at both root and tip appears crucial for optimal lift distribution and induced drag reduction.
+2.  **Sustain Strong Anhedral**: The maximum negative dihedral (-15.0 degrees) is a strong indicator of its positive impact on the CL/CDi ratio, possibly by influencing vortex behavior.
+3.  **Optimize Leading Edge Sweep**: The 70-72 degree sweep range seems to be a sweet spot for generating effective vortex lift without excessive induced drag.
+4.  **Refine Airfoil Thickness**: While cambered airfoils (NACA 24xx) are beneficial, exploring slightly thinner profiles (e.g., 06) while maintaining camber could further reduce drag.

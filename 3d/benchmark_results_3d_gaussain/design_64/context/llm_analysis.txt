@@ -1,0 +1,12 @@
+The top-performing designs (Rank 0, 1, 2) consistently feature a high degree of anhedral (dihedral strongly negative, often -15.0), significant tip washout (twist_tip at or near -10.0), and moderate root washout (twist_root negative). The leading-edge sweep generally hovers around 69-72 degrees. Root chords are in the mid-range (27-33 inches). Airfoil choices include both cambered (NACA 2407, 2408) and symmetric (NACA 0006, 0009). The `naca_m=4` camber has not been explored in the top designs, nor have high `naca_t` values.
+
+Issues observed in the population, generally, include:
+*   Clustering of designs around a specific parameter subspace, limiting full exploration.
+*   Lack of diversity in dihedral (almost exclusively negative in good designs) and root twist (almost exclusively negative).
+*   Untested extreme values for sweep, root chord, and NACA parameters (`naca_m=4`, higher `naca_t`).
+
+Key design changes needed to improve exploration and potentially the population:
+1.  **Explore positive dihedral**: All top designs are heavily anhedral. The opposite extreme needs to be tested to understand the full stability landscape.
+2.  **Investigate higher sweep angles**: Most good designs are around 70-72 degrees. Pushing towards the upper limit (e.g., 75-80) could uncover new vortex lift strategies or highlight limitations.
+3.  **Test positive root twist and different tip washout levels**: The current trend is strong negative twist at both root and tip. Exploring positive root twist or less extreme tip washout could reveal alternative load distributions.
+4.  **Introduce new NACA profiles**: The `naca_m=4` option is completely unexplored, and higher `naca_t` values are also rare among top performers.

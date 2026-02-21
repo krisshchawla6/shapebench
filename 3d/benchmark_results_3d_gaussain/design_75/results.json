@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Cambered_Delta",
+  "design_params": {
+    "le_sweep_deg": 72.62402280177311,
+    "root_chord_in": 32.84417998811123,
+    "twist_root_deg": -8.083213730367843,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.0335517986690853,
+    "CDi": 0.000530907752880532,
+    "CM": -0.028143400422154748,
+    "L_D": 63.19704032771081
+  },
+  "corrected_results": {
+    "CL": 6.139665767145039e-05,
+    "CDi": 0.00025004038508791125,
+    "CM": 0.02424858603336469,
+    "L_D": 0.24554696494273934
+  }
+}

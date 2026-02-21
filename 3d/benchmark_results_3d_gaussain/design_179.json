@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid High Sweep Camber Washout",
+  "le_sweep": 71.37106894728808,
+  "root_chord_in": 28.624963048336113,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -5.675359799135776,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

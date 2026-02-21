@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Cambered_GraduatedTwist_Delta",
+  "design_params": {
+    "le_sweep_deg": 70.52386177557543,
+    "root_chord_in": 43.29349878551841,
+    "twist_root_deg": -6.596621992790002,
+    "twist_tip_deg": -8.479443145404035,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.11913223777449417,
+    "CDi": 0.015752395411668865,
+    "CM": -0.16930326677275567,
+    "L_D": 7.5628013810677235
+  },
+  "corrected_results": {
+    "CL": -0.11796321429110986,
+    "CDi": -0.011210469350035735,
+    "CM": 0.15109370664348873,
+    "L_D": 10.522593711987074
+  }
+}

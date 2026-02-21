@@ -1,0 +1,11 @@
+{
+  "le_sweep": 55.0,
+  "root_chord_in": 45.0,
+  "twist_root": -5.0,
+  "twist_tip": -10.0,
+  "dihedral": 12.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 12,
+  "name": "LowSweep_PosDihedral_NACA00_Exp"
+}

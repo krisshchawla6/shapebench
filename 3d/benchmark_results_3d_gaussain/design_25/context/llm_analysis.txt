@@ -1,0 +1,12 @@
+The provided analysis of previous designs indicates a strong correlation between high rewards (CL/CDi) and specific parameter ranges. Design 1, with a reward of 424.56, stands out significantly. Key characteristics of the top performers (Designs 1 and 2) include:
+
+*   **High Leading-Edge Sweep:** Both designs are in the 69-71 degree range, suggesting this is optimal for generating strong vortex lift.
+*   **Strong Washout (Negative Twist):** Design 1 utilizes the maximum negative twist at both root and tip (-10.0 degrees), while Design 2 also has a strong washout at the tip (-10.0 degrees) and a substantial negative root twist (-6.11 degrees). This twist distribution is crucial for managing lift and induced drag.
+*   **Strong Negative Dihedral:** Design 1 uses the maximum negative dihedral (-15.0 degrees), and Design 2 is also significantly negative (-11.66 degrees). This likely contributes to favorable lift distribution and stability characteristics for a delta wing.
+*   **NACA 24xx Airfoils and Moderate Thickness:** The best designs use NACA 2407 or 2408, indicating 2% maximum camber at 40% chord and relatively thin profiles (7-8% thickness). The worst design (Design 3) used NACA 4010, suggesting higher camber (4%) or increased thickness (10%) might be detrimental for this objective.
+
+**Key design changes needed to improve designs in the population (based on numerical data, no image):**
+1.  **Refine Twist Distribution:** Investigate the combined effect of maximum negative root and tip twist versus varying the root twist while keeping the tip twist maximized.
+2.  **Explore Dihedral Sensitivity:** Systematically explore negative dihedral values, potentially moving away from the extreme to find an optimum or confirm monotonicity.
+3.  **Camber vs. No Camber:** Conduct a bold exploration into the effectiveness of a zero-camber airfoil (NACA 00xx) combined with successful geometric parameters, given that all top performers used NACA 24xx.
+4.  **Thickness Optimization:** Further test the lower bounds of airfoil thickness, as thinner profiles might reduce drag without compromising lift generation too much, especially with optimal geometric twist and sweep.

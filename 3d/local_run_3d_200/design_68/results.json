@@ -1,0 +1,33 @@
+{
+  "design_name": "High_Sweep_AggressiveTwist_ThinCamber",
+  "design_params": {
+    "le_sweep_deg": 79.9477357237475,
+    "root_chord_in": 28.335213741750827,
+    "twist_root_deg": -6.3949058806030035,
+    "twist_tip_deg": 3.9805876619284977,
+    "dihedral_deg": 14.820619967528097,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 14,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.1705542283781999,
+    "CDi": 0.03466509038338863,
+    "CM": -0.22780336846480123,
+    "L_D": 4.920057224484514
+  },
+  "corrected_results": {
+    "CL": 0.08956309089816093,
+    "CDi": 0.011752061301855026,
+    "CM": -0.09436766708132108,
+    "L_D": 7.62105375369542
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "HighCamber_AggressiveWashout_Anhedral_ThinNACA",
+  "le_sweep": 71.64666532537844,
+  "root_chord_in": 29.526094083802917,
+  "twist_root": -10.0,
+  "twist_tip": -8.876752428884473,
+  "dihedral": -11.853446847753464,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

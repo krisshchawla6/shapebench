@@ -1,0 +1,33 @@
+{
+  "design_name": "ModerateSweepAggressiveWashoutScaled",
+  "design_params": {
+    "le_sweep_deg": 56.36059990975912,
+    "root_chord_in": 45.84823585005108,
+    "twist_root_deg": -6.572564112939486,
+    "twist_tip_deg": -4.6631329890769315,
+    "dihedral_deg": 7.628686984725483,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.4192089797218191,
+    "CDi": 0.029036262308166094,
+    "CM": -0.45200436794546656,
+    "L_D": 14.43742914541455
+  },
+  "corrected_results": {
+    "CL": -0.01898718647163252,
+    "CDi": -0.01549277385305803,
+    "CM": 0.07480591505619125,
+    "L_D": 1.2255511280108662
+  }
+}

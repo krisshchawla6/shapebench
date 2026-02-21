@@ -1,0 +1,11 @@
+{
+  "le_sweep": 78.5,
+  "root_chord_in": 30.0,
+  "twist_root": -5.0,
+  "twist_tip": -4.0,
+  "dihedral": 10.0,
+  "naca_m": 4,
+  "naca_p": 0,
+  "naca_t": 24,
+  "name": "HighSweep_LEcamber_Thick_PosDihedral"
+}

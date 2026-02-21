@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitative_Refined_NACA2412",
+  "design_params": {
+    "le_sweep_deg": 58.3338806168554,
+    "root_chord_in": 36.83807565757954,
+    "twist_root_deg": -7.699897701291576,
+    "twist_tip_deg": -7.127645249766683,
+    "dihedral_deg": -0.33842089851657775,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.13866945416009122,
+    "CDi": 0.006045906230489755,
+    "CM": -0.125303152678116,
+    "L_D": 22.936090781688844
+  },
+  "corrected_results": {
+    "CL": 0.0022896522048595157,
+    "CDi": 3.863806693923491e-05,
+    "CM": 0.037543886384539954,
+    "L_D": 59.25897401804269
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_CamberedThin_MaxWashout_Compact",
+  "le_sweep": 80.0,
+  "root_chord_in": 26.606519913481772,
+  "twist_root": -8.32622190252995,
+  "twist_tip": -9.694439190011867,
+  "dihedral": -9.202030038008026,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

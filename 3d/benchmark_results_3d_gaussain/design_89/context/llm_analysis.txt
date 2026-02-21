@@ -1,0 +1,19 @@
+*   **Design 1 Parameters**: le_sweep=71.23, root_chord_in=32.88, twist_root=-10.0, twist_tip=-10.0, dihedral=-15.0, NACA 2407. Reward: 424.56.
+*   **Aerodynamic Issues (General from database patterns, no images)**:
+    *   Designs with extremely high sweep (e.g., Design 2 at 80.0 deg) tend to have very low rewards, suggesting increased induced drag or other adverse effects outweigh vortex lift benefits.
+    *   Designs with lower sweep (e.g., Design 4 at 66.72 deg) also show poor performance, indicating a "sweet spot" for sweep around 70-72 degrees.
+    *   Insufficient washout, particularly at the wingtip (e.g., Design 6 with twist_tip=-3.91), correlates with lower rewards, suggesting a need for effective load distribution to mitigate tip stall and reduce induced drag.
+    *   Excessive airfoil camber (e.g., NACA 44xx in Design 4) or higher thickness (e.g., NACA 0010 in Design 2) appears detrimental to CL/CDi, favoring thin, moderately cambered or symmetric airfoils.
+
+*   **How parameters affect performance (inferred from database)**:
+    *   **Sweep (le_sweep)**: Crucial for vortex lift, with an apparent optimum range around 70-72 degrees. Too high or too low reduces CL/CDi.
+    *   **Twist (twist_root, twist_tip)**: Large negative twist (washout), especially at the tip, is strongly correlated with high rewards. This likely improves spanwise load distribution, delaying tip stall and reducing induced drag.
+    *   **Dihedral**: Consistently negative (anhedral), mostly at the maximum allowed -15.0 degrees, appears to be a common trait among successful designs.
+    *   **NACA (m, p, t)**: Thin airfoils (6-8% thickness) are prevalent among high-reward designs. Moderate camber (NACA 24xx) is effective, while symmetric (NACA 00xx) can also work, but high camber (NACA 44xx) is detrimental.
+    *   **Root Chord**: Mid-range (around 28-33 inches) appears optimal, with very large chords (e.g., Design 4 at 40.86 inches) leading to lower rewards.
+
+*   **Key Design Changes Needed (general population improvement)**:
+    1.  Maintain sweep within the identified optimal range of 69-72 degrees.
+    2.  Prioritize aggressive washout, especially at the wingtip (-10.0 degrees) and consider similar washout at the root.
+    3.  Continue to explore strong anhedral (around -15.0 degrees).
+    4.  Focus on thin, moderately cambered airfoils (NACA 2406-2408 range), while avoiding overly thick or excessively cambered profiles.

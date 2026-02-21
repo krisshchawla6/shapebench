@@ -1,0 +1,33 @@
+{
+  "design_name": "HybridCamberAggressiveWashout",
+  "design_params": {
+    "le_sweep_deg": 65.9948951331463,
+    "root_chord_in": 36.61329041772932,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -2.032694238080385,
+    "dihedral_deg": 0.8706145535943177,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.15487359125030395,
+    "CDi": 0.021788305169828884,
+    "CM": -0.21805312641469118,
+    "L_D": 7.108106392082457
+  },
+  "corrected_results": {
+    "CL": -0.009256629656607887,
+    "CDi": -0.002125257866734348,
+    "CM": 0.016885696400065875,
+    "L_D": 4.355532475139847
+  }
+}

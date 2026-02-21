@@ -1,0 +1,15 @@
+The representative Design 1, with a reward of 338.5009, stands out as the highest performer among the provided designs. Its parameters are: `le_sweep=63.12`, `root_chord_in=33.20`, `twist_root=-10.0`, `twist_tip=-2.83`, `dihedral=-3.44`, and NACA 2411 (m=2, p=4, t=11).
+
+**Cp distribution analysis (assuming image corresponds to Design 1):** The pressure coefficient distribution image reveals a strong suction peak along the leading edge, indicative of well-developed vortex lift, which is crucial for high-performance delta wings. The pressure recovery over the rest of the wing appears smooth, suggesting controlled flow and minimal separation. The distribution of lift seems favorable, with significant negative pressure contributing to overall lift.
+
+**Parameter-performance mapping:**
+*   **Sweep:** Moderate sweep (around 60-65 deg, like D1 and D2) seems to correlate with higher rewards, potentially balancing vortex lift generation and induced drag effectively. Higher sweeps (e.g., 74 deg in D4, D6) showed moderate to low rewards, suggesting a sweet spot or that other parameters were not optimized for those sweeps.
+*   **Twist:** The combination of maximum washout at the root (`twist_root=-10.0`) and moderate washout at the tip (`twist_tip=-2.83`) observed in Design 1 (and similarly in D4, ranked 2) appears to be a key contributor to high performance. This likely helps distribute the lift efficiently, preventing root stall and enhancing vortex lift efficiency.
+*   **Camber (NACA m, p):** Design 1's NACA 2411 (2% camber at 40% chord) yielded the highest reward. In contrast, designs with `naca_p=0` (camber at 0% chord, e.g., D3, D4, D5) generally performed worse, even with high camber (m=4). This strongly suggests that placing the max camber at 40% chord (`naca_p=4`) is significantly more effective than at 0% chord.
+*   **Dihedral:** Slight anhedral (negative dihedral, as in D1) or neutral dihedral seems more beneficial than strong positive dihedral (D5, rank 6) for CL/CDi.
+
+**Key design changes needed to improve designs in the population:**
+1.  **Systematically explore the higher end of the sweep range** (e.g., 70-75 degrees) combined with the twist and camber configurations proven effective in Design 1, as the highest sweeps so far have not been fully optimized with these beneficial features.
+2.  **Investigate higher camber (`naca_m=4`) but strictly with `naca_p=4`**, as this combination (high camber at 40% chord) has not been thoroughly explored in high-performing designs. Designs with `naca_p=0` have consistently underperformed.
+3.  **Refine the twist distribution by reinforcing the highly successful pattern** of maximum root washout (`twist_root=-10.0`) combined with moderate tip washout.
+4.  **Experiment with varying root chord and thickness** within sensible ranges, to see if scaling the wing with optimized aerodynamic features can further boost performance.

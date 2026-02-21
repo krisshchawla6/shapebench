@@ -1,0 +1,7 @@
+The top-performing design (Design 1, Reward 424.56) demonstrates that a combination of high leading-edge sweep (approx. 71-77 degrees), significant washout at both root and tip (close to -10.0 degrees), and strong negative dihedral (close to -15.0 degrees) is highly effective for maximizing CL/CDi. This indicates these features likely contribute to favorable lift distribution and reduced induced drag, possibly by controlling tip vortices or optimizing the effective angle of attack across the span. The use of a cambered airfoil (NACA 2407/2408) is also present in high-ranking designs, although Design 4 shows that a symmetric airfoil (NACA 0008) can also perform well if other geometric parameters are optimized. Designs with less extreme washout or dihedral (e.g., Design 6) tend to perform significantly worse, highlighting the sensitivity of these parameters.
+
+Key design changes needed to improve designs in the population based on current high-performers:
+1.  Maintain high leading-edge sweep as a general favorable trend.
+2.  Leverage strong washout (negative twist) and negative dihedral.
+3.  Systematically explore the interaction between these geometric features and different NACA profiles (camber and thickness).
+4.  Actively explore regions of the parameter space that are the opposite of the current high-performers to understand boundaries and sensitivities.

@@ -1,0 +1,11 @@
+{
+  "le_sweep": 60.5,
+  "root_chord_in": 42.0,
+  "twist_root": -6.5,
+  "twist_tip": -9.5,
+  "dihedral": 0.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 12,
+  "name": "ModerateSweepAggressiveWashoutScaled"
+}

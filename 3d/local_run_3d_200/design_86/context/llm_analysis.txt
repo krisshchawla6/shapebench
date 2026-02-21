@@ -1,0 +1,13 @@
+The representative design, Design 1, achieved an exceptionally high reward of 4016.0090, indicating superior aerodynamic performance. Without direct access to the Cp distribution image, we infer that this design likely exhibits:
+*   **Efficient Vortex Generation and Stability**: The moderate leading edge sweep (65.5°) is well-suited for generating stable leading-edge vortices, crucial for high lift on delta wings. The Cp distribution would likely show strong suction peaks along the leading edge.
+*   **Optimized Load Distribution**: The specific washout twist distribution (`twist_root=-7.1`, `twist_tip=-4.6`) suggests an effective tailoring of the spanwise lift distribution, possibly preventing premature tip stall and minimizing induced drag.
+*   **Beneficial Camber**: The NACA 4412 airfoil indicates a cambered profile, which contributes to lift generation at lower angles of attack and likely influences the pressure recovery.
+*   **Minimal Dihedral Penalty**: The small negative dihedral (-1.7°) seems to provide good lateral stability characteristics without significantly penalizing performance.
+
+While Design 1 is excellent, to advance the population and explore robustness, we need to understand how variations around this optimum affect performance and discover other high-performing regions.
+
+**Key design changes needed to improve designs in the population**:
+1.  **Systematic exploration of twist differential**: The difference between `twist_root` and `twist_tip` (washout gradient) is critical for load management and vortex behavior. Varying this differential while keeping within a moderate overall washout range.
+2.  **Refined sweep within the 60-70 degree window**: This range has produced the highest reward. Further exploration to pinpoint the precise optimum or robust regions.
+3.  **Alternative camber/thickness combinations**: Investigate slightly different NACA profiles (e.g., lower camber or different thickness) to assess their impact on drag and lift efficiency, ensuring camber is still present.
+4.  **Moderate variation in root chord and dihedral**: Explore how scaling the wing and minor changes in dihedral affect the aerodynamic performance in combination with optimized sweep and twist.

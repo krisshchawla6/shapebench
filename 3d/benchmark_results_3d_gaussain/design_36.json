@@ -1,0 +1,14 @@
+{
+  "design_name": "HybridBlend_ExtremeWashoutAnhedral_NACA2409",
+  "le_sweep": 69.04766348734948,
+  "root_chord_in": 33.46339264400581,
+  "twist_root": -8.838675913248881,
+  "twist_tip": -10.0,
+  "dihedral": -13.902792395429923,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

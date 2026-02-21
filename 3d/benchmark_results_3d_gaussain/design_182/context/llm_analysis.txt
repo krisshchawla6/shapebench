@@ -1,0 +1,11 @@
+The highest-performing designs (Rank 0, 1, 3) consistently exhibit several key characteristics:
+1.  **High Leading Edge Sweep:** All top designs have `le_sweep` greater than 71 degrees, with the best at 77.84 degrees, indicating a strong correlation between high sweep and high reward (CL/CDi). This suggests the importance of leading-edge vortex lift.
+2.  **Significant Washout (Negative Twist):** All top designs feature substantial negative `twist_root` and `twist_tip` values, often at or near the maximum -10.0 degrees. This strongly implies that tailoring the load distribution to reduce induced drag is crucial. Design 1 (highest reward) had slightly less negative twist at the tip than the root (`-9.13` vs `-9.55`), while Design 2 had both at `-10.0`.
+3.  **Maximum Negative Dihedral:** The three highest-ranked designs all have `dihedral` at the maximum negative value of -15.0 degrees. This suggests a strong benefit for CL/CDi, potentially by influencing vortex formation or stability.
+4.  **Symmetric, Thin Airfoils:** The best design (Rank 0) uses `NACA 0006`. Design 6 (Rank 3) uses `NACA 0008`. In contrast, designs using cambered airfoils (`NACA 24xx`, `NACA 44xx`) or thicker airfoils generally yield lower rewards (e.g., Design 4, 5). This indicates that camber might increase drag disproportionately for this objective, and thin airfoils minimize profile drag.
+
+**Key changes needed to improve designs in the population:**
+1.  **Push `le_sweep` to its absolute maximum:** The trend for higher sweep is clear.
+2.  **Systematically explore twist distributions:** While strong washout is beneficial, the exact balance between `twist_root` and `twist_tip` needs further investigation, especially with very high sweep.
+3.  **Maintain extreme negative `dihedral`:** This parameter has consistently shown high reward at its boundary.
+4.  **Confirm optimal airfoil thickness within `NACA 00xx` series:** Test slightly thicker symmetric airfoils while staying thin, as `NACA 0006` was the best so far.

@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_NACA00_MaxWashoutDihedral_LargeChord",
+  "design_params": {
+    "le_sweep_deg": 72.03546547401253,
+    "root_chord_in": 37.173276009239565,
+    "twist_root_deg": -7.214243464878919,
+    "twist_tip_deg": -7.080192094516293,
+    "dihedral_deg": -9.83622566324002,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.10196213731363159,
+    "CDi": 0.004784200242996187,
+    "CM": -0.09502076229950418,
+    "L_D": 21.312263729533207
+  },
+  "corrected_results": {
+    "CL": -0.03364900972756363,
+    "CDi": -0.0015920990869003144,
+    "CM": 0.07282466351708712,
+    "L_D": 21.134997189826592
+  }
+}

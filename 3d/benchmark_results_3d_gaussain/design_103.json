@@ -1,0 +1,14 @@
+{
+  "design_name": "Extreme_HighSweep_PosDihedral_SmallChord_NoTwist_ThickSymmetric",
+  "le_sweep": 78.73991454354199,
+  "root_chord_in": 10.43370288182378,
+  "twist_root": 3.411779704199791,
+  "twist_tip": -0.741993023169115,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

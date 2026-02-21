@@ -1,0 +1,13 @@
+The representative design (Design 1) with `le_sweep=71.3`, `twist_root=-5.7`, `twist_tip=-9.1`, `dihedral=-3.99`, and `NACA 2411` achieved a reward of 56.6208. Given its high sweep, strong leading-edge vortices would be the primary source of lift. The washout (more negative twist at the tip) is a good strategy to reduce induced drag and prevent tip stall. The NACA 2411 airfoil is cambered (2% max camber at 40% chord) and moderately thick (11%).
+
+While the design is generally sound, several areas could be optimized for significantly higher CL/CDi, as shown by Design 2's vastly superior reward (353.7832).
+*   **Aerodynamic Issues/Opportunities:**
+    *   **Sub-optimal Twist Distribution:** While washout is present, the exact combination of root and tip twist might not be fully optimized for minimum induced drag given the high sweep. Design 2 had a maximal washout (`twist_tip=-10.0`).
+    *   **Airfoil Profile (Camber & Thickness):** The cambered NACA 2411 airfoil adds lift but also profile drag. For high-sweep delta wings where vortex lift dominates, an uncambered or thinner airfoil might yield better efficiency by reducing profile drag. Design 2 used a thinner NACA 2408.
+    *   **Dihedral Impact:** Design 2 demonstrated a significant negative dihedral (`-11.66 deg`) which correlated with high performance, suggesting this parameter might have a non-obvious positive impact beyond just stability in this context.
+
+*   **Key Design Changes Needed to improve designs in the population:**
+    1.  **Maximize Washout:** Experiment with extreme washout to further reduce induced drag.
+    2.  **Explore Uncambered, Thin Airfoils:** Test if removing camber and reducing thickness can improve CL/CDi by reducing profile drag, especially with dominant vortex lift.
+    3.  **Investigate Strong Negative Dihedral:** Explore the full range of negative dihedral to understand its effect on efficiency.
+    4.  **Push Sweep Towards Max:** Continue exploring the high sweep regime to maximize vortex lift.

@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_MaxCamberThin_PosRootNegTipTwist",
+  "design_params": {
+    "le_sweep_deg": 55.88210868784373,
+    "root_chord_in": 30.481953657442524,
+    "twist_root_deg": 1.9538545603403654,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": 0.6392631139667477,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 10,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.4097994598449102,
+    "CDi": 0.05412433960137818,
+    "CM": -0.3291567997240176,
+    "L_D": 7.5714449887620505
+  },
+  "corrected_results": {
+    "CL": 0.20584344899604728,
+    "CDi": 0.02888434085885543,
+    "CM": -0.16002267478475685,
+    "L_D": 7.126472090947484
+  }
+}

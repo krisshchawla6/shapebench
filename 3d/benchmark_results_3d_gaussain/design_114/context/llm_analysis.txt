@@ -1,0 +1,9 @@
+The top-performing designs (Design 1 & 2) consistently exhibit strong washout (`twist_root` and `twist_tip` near -10.0 deg) and significant anhedral (`dihedral` at -15.0 deg). The `le_sweep` for these high-reward designs clusters around 70-72 degrees. `root_chord_in` is typically in the 30-35 inch range. Airfoil choices include both cambered (NACA 2407/2408) and symmetric (NACA 0006/0008) profiles, with `NACA 2407` yielding the highest reward. The `naca_t` (thickness) for successful designs generally ranges from 6 to 8 percent.
+
+Without an image, I must infer typical issues from the parameter space. Given the prevalence of strong washout and anhedral, it's likely these features are critical for managing lift distribution, controlling vortex stability, and delaying undesirable flow separation or vortex breakdown on delta wings. The reward function (CL/CDi) suggests minimizing induced drag and maximizing lift efficiency.
+
+Key design changes needed to improve designs in the population:
+1.  **Explore new camber profiles:** While NACA 24XX performed well, other camber distributions like NACA 44XX (higher camber) are largely unexplored in high-reward designs.
+2.  **Investigate lower sweep angles:** Most successful designs are above 70 degrees. Exploring the lower end of the allowed sweep (e.g., 60-65 degrees) could reveal a different optimum or provide insights into the trade-off between vortex lift and induced drag at lower sweeps.
+3.  **Vary root chord more broadly:** The current high-reward designs cluster around 30-35 inches. Exploring slightly smaller or larger root chords could reveal scaling effects.
+4.  **Test thicker airfoils with new camber:** Combining higher camber with a slightly thicker profile (e.g., 10-15% thickness) could offer a different aerodynamic strategy, potentially leading to a more robust vortex structure or better internal volume without prohibitive drag penalties at specific flight conditions.

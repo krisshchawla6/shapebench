@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation-HighWashout-V2",
+  "design_params": {
+    "le_sweep_deg": 69.7700552246637,
+    "root_chord_in": 32.909995928624454,
+    "twist_root_deg": -6.108173892296854,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -11.660027289847022,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.16365533787024247,
+    "CDi": 0.007383364899890281,
+    "CM": -0.1784244886359169,
+    "L_D": 22.165413749586513
+  },
+  "corrected_results": {
+    "CL": 0.05751514346747274,
+    "CDi": 0.0001601052932981568,
+    "CM": -0.03746765761975272,
+    "L_D": 359.23324134177693
+  }
+}

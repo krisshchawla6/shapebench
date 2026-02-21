@@ -1,0 +1,11 @@
+{
+  "le_sweep": 50.0,
+  "root_chord_in": 45.0,
+  "twist_root": -3.0,
+  "twist_tip": 2.0,
+  "dihedral": 2.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 20,
+  "name": "LowSweep_Symmetric_PositiveTipTwist_Thick"
+}

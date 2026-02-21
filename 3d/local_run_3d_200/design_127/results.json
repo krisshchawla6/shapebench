@@ -1,0 +1,33 @@
+{
+  "design_name": "CamberedWashoutRefinement",
+  "design_params": {
+    "le_sweep_deg": 71.64418618875273,
+    "root_chord_in": 36.76154535758561,
+    "twist_root_deg": -3.4024738185118126,
+    "twist_tip_deg": -1.925748251630528,
+    "dihedral_deg": -4.007593272014951,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 14,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.27130925169300174,
+    "CDi": 0.030966691932083717,
+    "CM": -0.2980890042631002,
+    "L_D": 8.76132498389038
+  },
+  "corrected_results": {
+    "CL": 0.01951727893979148,
+    "CDi": -0.00628798484154177,
+    "CM": 0.012338473763946168,
+    "L_D": -3.1039004437240307
+  }
+}

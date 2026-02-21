@@ -1,0 +1,11 @@
+{
+  "le_sweep": 68.0,
+  "root_chord_in": 38.0,
+  "twist_root": -6.5,
+  "twist_tip": -3.8,
+  "dihedral": 1.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 10,
+  "name": "Hybrid_SweepTwistChord_NACA4410"
+}

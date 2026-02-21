@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweepExtremeWashout2412",
+  "le_sweep": 73.36922139779927,
+  "root_chord_in": 29.21186110202852,
+  "twist_root": -7.61865285278572,
+  "twist_tip": -8.806672000140846,
+  "dihedral": -11.983463040520771,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

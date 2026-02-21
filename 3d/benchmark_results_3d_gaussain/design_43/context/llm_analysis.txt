@@ -1,0 +1,14 @@
+The current top-performing designs (Design 1 & 2) consistently feature a high sweep angle (around 70-71 degrees), strong anhedral (dihedral between -10.0 and -15.0), and significant washout, especially at the tip (twist_tip = -10.0). These designs utilize a cambered NACA 24xx airfoil with moderate thickness (7-8%). Design 1, the best performer, pushed all these parameters to their limits: `le_sweep=71.2`, `twist_root=-10.0`, `twist_tip=-10.0`, `dihedral=-15.0`.
+
+Conversely, designs with much lower rewards (e.g., Design 3, 4, 5, 6) deviated from these patterns:
+*   Less anhedral (Design 3, dihedral -3.99).
+*   Less tip washout (Design 5, twist_tip -3.91).
+*   Symmetric airfoils (NACA 00xx in Designs 4 & 6).
+*   Higher sweep (Design 6, le_sweep 80.0) also yielded poor results, suggesting there's an optimal range for sweep.
+*   Thicker airfoils (NACA 2411 in Design 3, NACA 0013 in Design 6) also performed poorly.
+
+Key design changes needed to improve designs in the population, focusing on bold exploration:
+1.  **Explore significantly lower sweep angles:** The current top designs are clustered around 70-71 degrees. We need to investigate the lower end of the sweep spectrum (e.g., 45-60 degrees) to understand the trade-offs in vortex lift vs. induced drag.
+2.  **Test positive dihedral:** All top performers had negative dihedral (anhedral). Exploring positive dihedral will provide crucial data on its impact on CL/CDi in this design space and diversify the population's stability characteristics.
+3.  **Investigate alternative camber distributions:** The NACA 24xx series (max camber at 40% chord) dominates. Experimenting with NACA 44xx (max camber at 40% chord but different shape for `m=4`) or even NACA 20xx (`m=2`, `p=0`) could reveal new high-performing aerodynamic profiles.
+4.  **Systematically vary wing twist differential:** While strong tip washout seems beneficial, the relationship between root and tip twist needs further exploration, especially with different sweep and dihedral configurations.

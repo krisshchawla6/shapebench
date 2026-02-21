@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_PositiveDihedral_Cambered_Twist",
+  "design_params": {
+    "le_sweep_deg": 80.0,
+    "root_chord_in": 43.39389226315623,
+    "twist_root_deg": 3.5577802063420907,
+    "twist_tip_deg": -5.462088615370926,
+    "dihedral_deg": 4.529554319584059,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.5819594382529588,
+    "CDi": 0.07565466437944623,
+    "CM": -0.672284463026902,
+    "L_D": 7.6923140565945705
+  },
+  "corrected_results": {
+    "CL": -0.018284506537961893,
+    "CDi": -0.015156764535329785,
+    "CM": 0.08341716272513597,
+    "L_D": 1.2063594770072117
+  }
+}

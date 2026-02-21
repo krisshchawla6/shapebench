@@ -1,0 +1,14 @@
+{
+  "design_name": "Extreme_Sweep_Symmetric_Large_Wing",
+  "le_sweep": 77.16308212118228,
+  "root_chord_in": 45.59090806144283,
+  "twist_root": 3.90650189941469,
+  "twist_tip": -10.0,
+  "dihedral": 6.301714287740002,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

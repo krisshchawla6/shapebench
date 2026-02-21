@@ -1,0 +1,33 @@
+{
+  "design_name": "ExtremeSweep_MaxAnhedral_GradWashout_NACA4412",
+  "design_params": {
+    "le_sweep_deg": 78.08619896001998,
+    "root_chord_in": 46.24613380475615,
+    "twist_root_deg": -2.9081103816891445,
+    "twist_tip_deg": -7.785087813492836,
+    "dihedral_deg": -13.522798167623531,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2531494379811657,
+    "CDi": 0.02166718585496365,
+    "CM": -0.2555619227142666,
+    "L_D": 11.683540247252399
+  },
+  "corrected_results": {
+    "CL": -0.13458130273101132,
+    "CDi": -0.010969627504074394,
+    "CM": 0.20076225655498517,
+    "L_D": 12.268538989224972
+  }
+}

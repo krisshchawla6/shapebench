@@ -1,0 +1,16 @@
+The representative design (Design 1) demonstrates the highest reward of 424.5627. Its parameters are: le_sweep=71.23, root_chord_in=32.88, twist_root=-10.0, twist_tip=-10.0, dihedral=-15.0, NACA 2407.
+
+Without the specific Cp distribution image, I must infer its aerodynamic performance from the high CL/CDi reward. The wing appears to be highly optimized for aerodynamic efficiency.
+
+Key observations from the parameters of Design 1 and other high-ranking designs:
+*   **High Sweep (70-72 degrees)**: This range seems critical for establishing strong vortex lift characteristic of delta wings while maintaining good L/D.
+*   **Maximum Negative Twist (Washout, -10.0 deg at both root and tip)**: This is a consistent feature in the highest-reward designs. It effectively unloads the wing tips, delaying tip stall and significantly reducing induced drag by creating a more elliptical-like lift distribution for the highly swept delta wing planform.
+*   **Maximum Negative Dihedral (Anhedral, -15.0 deg)**: This is also prevalent in the top performers, particularly Design 1. While typically associated with stability, in this highly swept context, it seems to enhance performance, possibly by influencing the vortex path or effective angle of attack distribution.
+*   **Cambered Airfoil (NACA 24xx)**: All high-reward designs use a cambered airfoil (NACA 24xx), contrasting sharply with the very low reward of Design 5 (NACA 0009). This indicates that inherent lift generation from camber is crucial for maximizing CL/CDi.
+*   **Moderate Thickness (NACA 2407/2408)**: The top designs use relatively thin airfoils (7-8% thickness), suggesting a balance between structural considerations and minimizing parasitic drag.
+
+Key design changes needed to improve designs (based on exploitation):
+1.  Maintain the significant washout distribution (twist_root and twist_tip near -10.0 deg).
+2.  Continue utilizing strong negative dihedral (near -15.0 deg).
+3.  Ensure the use of a cambered airfoil, specifically NACA 24xx, to contribute to overall lift.
+4.  Fine-tune the high sweep angle (70-72 deg) and root chord within their effective ranges.

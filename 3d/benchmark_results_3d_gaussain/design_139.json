@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Cambered_TwistExploration",
+  "le_sweep": 80.0,
+  "root_chord_in": 26.804539168472598,
+  "twist_root": 1.0786138619246213,
+  "twist_tip": -5.224860229364931,
+  "dihedral": -2.7688468549782796,
+  "naca": {
+    "m": 4,
+    "p": 0,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_PosDihedral_ModCamber",
+  "design_params": {
+    "le_sweep_deg": 72.34284511591578,
+    "root_chord_in": 30.43465212152632,
+    "twist_root_deg": -2.400352176271208,
+    "twist_tip_deg": -3.789176431944699,
+    "dihedral_deg": 7.431166857093522,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.30312606063693776,
+    "CDi": 0.03265350723414282,
+    "CM": -0.3095081107848426,
+    "L_D": 9.28310880859947
+  },
+  "corrected_results": {
+    "CL": 0.1263105601409996,
+    "CDi": 0.012290866462848164,
+    "CM": -0.1029006909012308,
+    "L_D": 10.276782399581098
+  }
+}

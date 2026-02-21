@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_InvertedWashout_HighSweep",
+  "design_params": {
+    "le_sweep_deg": 69.43723135836643,
+    "root_chord_in": 43.003599368713374,
+    "twist_root_deg": -4.285484529651714,
+    "twist_tip_deg": -7.59656310223577,
+    "dihedral_deg": 5.174208427337009,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.3395528525559976,
+    "CDi": 0.025104138609656726,
+    "CM": -0.37214323702698293,
+    "L_D": 13.52577189903592
+  },
+  "corrected_results": {
+    "CL": -0.036590449850386425,
+    "CDi": -0.013644674115618307,
+    "CM": 0.08350072216816169,
+    "L_D": 2.681665354579876
+  }
+}

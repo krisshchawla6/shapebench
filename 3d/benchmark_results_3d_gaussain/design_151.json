@@ -1,0 +1,14 @@
+{
+  "design_name": "CamberedThinHighSweepHybrid",
+  "le_sweep": 72.18356281074118,
+  "root_chord_in": 23.758885624897324,
+  "twist_root": -6.325184818109717,
+  "twist_tip": -8.070134045522112,
+  "dihedral": -10.40105871368656,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

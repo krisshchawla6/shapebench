@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_HighSweep_DeepDiffWashout_NACA2408",
+  "le_sweep": 79.86783428176817,
+  "root_chord_in": 32.204241655686936,
+  "twist_root": -9.049939912690816,
+  "twist_tip": -10.0,
+  "dihedral": -10.418938386786518,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

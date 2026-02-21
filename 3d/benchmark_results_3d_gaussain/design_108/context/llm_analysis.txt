@@ -1,0 +1,11 @@
+The top-ranked design (Design 1, Reward: 424.5627) demonstrates an excellent CL/CDi, indicating a highly efficient aerodynamic configuration. Its parameters feature a high leading-edge sweep (71.2 deg), maximum washout at both root and tip (-10.0 deg), and significant anhedral (-15.0 deg). The airfoil is a NACA 2407, a cambered profile with 2% max camber at 40% chord and 7% thickness.
+
+Assuming typical delta wing behavior, this design likely generates strong leading-edge vortices due to the high sweep, which significantly boosts lift. The extreme washout at both root and tip is crucial for effectively distributing this lift spanwise, preventing premature tip stall, and optimizing induced drag. The strong anhedral contributes to lateral stability and might subtly influence the vortex structure. The NACA 2407 provides a baseline lift component.
+
+Critically, while Design 1 is the best performer, Design 5 (Reward: 218.4856) also achieved a high rank with a very similar geometric configuration but utilized a *symmetric* NACA 0006 airfoil. This suggests that a cambered airfoil might enhance performance, but is not strictly necessary for good CL/CDi, especially if other parameters like sweep and twist are well-optimized.
+
+Key design changes needed to improve designs in the population by exploring diversity:
+1.  **Systematic exploration of symmetric vs. cambered airfoils:** Given Design 5's performance with NACA 0006, further explore symmetric profiles with varying thicknesses to understand their full potential relative to cambered profiles.
+2.  **Differential twist distribution:** While uniform max washout (-10.0/-10.0) worked well, exploring designs with slightly less washout at the root than the tip could lead to different load distributions and potentially further optimize induced drag.
+3.  **Pushing sweep limits:** Investigate slightly higher leading-edge sweep angles (e.g., 73-75 degrees) to determine if even stronger vortex generation is beneficial or if it incurs too much drag.
+4.  **Refining anhedral:** While -15.0 works, explore slightly less extreme anhedral values (e.g., -12 to -14 degrees) within the observed beneficial range.

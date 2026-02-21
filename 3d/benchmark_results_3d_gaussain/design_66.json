@@ -1,0 +1,14 @@
+{
+  "design_name": "ExploitHighSweepMaxWashoutThinnerCamber",
+  "le_sweep": 74.2668544563964,
+  "root_chord_in": 32.16376467260849,
+  "twist_root": -10.0,
+  "twist_tip": -7.688144576109717,
+  "dihedral": -15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

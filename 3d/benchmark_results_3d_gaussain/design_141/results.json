@@ -1,0 +1,33 @@
+{
+  "design_name": "High_Sweep_Anhedral_DiffWashout_NoCamber",
+  "design_params": {
+    "le_sweep_deg": 76.2884347921839,
+    "root_chord_in": 33.15657496495806,
+    "twist_root_deg": -5.635605357016862,
+    "twist_tip_deg": -6.8691039682955966,
+    "dihedral_deg": -13.083659017559423,
+    "naca": {
+      "m": 2,
+      "p": 0,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.11999036976952861,
+    "CDi": 0.007646645282039422,
+    "CM": -0.11306954927191665,
+    "L_D": 15.691896948765775
+  },
+  "corrected_results": {
+    "CL": 0.021641684855947405,
+    "CDi": 0.0015550527237964992,
+    "CM": 0.007431472279520859,
+    "L_D": 13.917010352621027
+  }
+}

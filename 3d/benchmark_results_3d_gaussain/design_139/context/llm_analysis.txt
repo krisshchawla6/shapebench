@@ -1,0 +1,11 @@
+The top-ranked design (Design 1) achieved its high reward (424.5627) with a high leading edge sweep (71.2 deg), a moderate root chord (32.8 in), maximum washout at both root and tip (-10.0 deg), and maximum negative dihedral (-15.0 deg). The airfoil chosen was a NACA 2407, indicating mild camber and low thickness.
+
+The consistent trend among the high-reward designs is the aggressive use of washout (negative twist) at both root and tip, and maximum negative dihedral. High sweep angles (70-76 deg) also appear to be crucial. Airfoil choices vary between symmetric (NACA 00xx) and mildly cambered (NACA 24xx), typically with low thickness (6-8%). The significant drop in reward for Design 5, despite being very similar to Design 1, suggests the design space around the optimum is highly sensitive.
+
+Without image analysis, it's inferred that the aggressive washout helps manage the spanwise lift distribution, delaying separation and reducing induced drag, while the negative dihedral might contribute to effective vortex generation or flow attachment for these high-sweep configurations.
+
+Key changes needed to explore the design space effectively and diversify the population:
+1.  **Explore non-extreme twist distributions:** The current population heavily exploits maximum washout. Investigate designs with less aggressive washout, or even wash-in, to understand different load distributions.
+2.  **Vary dihedral beyond the negative extreme:** The strong preference for maximum negative dihedral needs to be challenged to see if neutral or positive dihedral can offer different aerodynamic benefits or trade-offs.
+3.  **Test higher sweep angles:** Push the `le_sweep` even closer to its maximum to observe the effect on vortex lift and induced drag beyond the currently observed sweet spot.
+4.  **Investigate higher camber and thickness:** While thin, mildly cambered airfoils have performed well, exploring a more pronounced camber (e.g., NACA 44xx) with moderate thickness could reveal new high-lift, high CL/CDi regions.

@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_MaxWashout_NegDihedral",
+  "design_params": {
+    "le_sweep_deg": 74.3927512204083,
+    "root_chord_in": 36.982986787592445,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -5.357108532430347,
+    "dihedral_deg": -11.42490944535231,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.009640966664239076,
+    "CDi": 0.01880226645533615,
+    "CM": -0.08722206485306877,
+    "L_D": 0.5127555599289434
+  },
+  "corrected_results": {
+    "CL": -0.06701448257711523,
+    "CDi": -0.0013133087787031792,
+    "CM": 0.07285328666208964,
+    "L_D": 51.02720979546667
+  }
+}

@@ -1,0 +1,9 @@
+The provided context indicates Design 1 achieved an exceptionally high reward of 4016.0090. This design features a leading-edge sweep of 65.5 degrees, a root chord of 34.8 inches, a significant negative twist at the root (-7.1 deg) and a moderate negative twist at the tip (-4.6 deg), resulting in pronounced washout. It utilizes a cambered NACA 4412 airfoil and has a slightly negative dihedral (-1.7 deg).
+
+While a direct image of the Cp distribution is not provided for analysis, the high CL/CDi value strongly suggests effective leading-edge vortex generation and management, coupled with an efficient lift distribution across the wing. The washout (twist_root < twist_tip) would typically help distribute lift more evenly, reducing tip stall and potentially improving induced drag. The NACA 4412 airfoil (cambered, 4% max camber at 40% chord, 12% thickness) is a key differentiator, as other designs with symmetric airfoils (NACA 00xx) performed significantly worse.
+
+Key changes needed to improve designs in the population, based on Design 1's success, are:
+1.  **Prioritize cambered airfoils**: The NACA 4xxx and 2xxx series show dramatically higher performance than NACA 00xx.
+2.  **Optimize twist distribution for washout**: Maintain a strong negative twist at the root with a less negative twist at the tip to manage load and vortex behavior.
+3.  **Refine sweep angle**: Explore angles around 63-68 degrees, balancing vortex strength and induced drag.
+4.  **Investigate moderate thickness**: Design 1's NACA 4412 has 12% thickness. Testing slightly thinner or thicker cambered sections around this value is prudent.

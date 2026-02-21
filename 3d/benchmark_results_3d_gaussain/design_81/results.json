@@ -1,0 +1,33 @@
+{
+  "design_name": "MidSweep_CamberedThick_WashInRoot_PositiveDihedral",
+  "design_params": {
+    "le_sweep_deg": 53.27091257243054,
+    "root_chord_in": 47.321791251549215,
+    "twist_root_deg": 4.1664842962210304,
+    "twist_tip_deg": -4.539669598916317,
+    "dihedral_deg": 0.18940978500566175,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 19,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.8530829155233078,
+    "CDi": 0.12651058634366658,
+    "CM": -0.804840056220758,
+    "L_D": 6.743174149915836
+  },
+  "corrected_results": {
+    "CL": -0.007610519743178127,
+    "CDi": -0.015560863064306318,
+    "CM": 0.07632203640720085,
+    "L_D": 0.4890808248698764
+  }
+}

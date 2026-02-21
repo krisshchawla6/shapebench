@@ -1,0 +1,33 @@
+{
+  "design_name": "ModerateSweep_PosRootTwist_PosDihedral_NACA4410",
+  "design_params": {
+    "le_sweep_deg": 62.25311081646208,
+    "root_chord_in": 35.081730019189514,
+    "twist_root_deg": 7.670176733109646,
+    "twist_tip_deg": -2.5901106426742917,
+    "dihedral_deg": 7.074246164744528,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.9372223521152939,
+    "CDi": 0.19039576167678582,
+    "CM": -0.9183637916182159,
+    "L_D": 4.922495878381549
+  },
+  "corrected_results": {
+    "CL": 0.2553740425627962,
+    "CDi": 0.05528781585801313,
+    "CM": -0.2098743409559252,
+    "L_D": 4.618993147036819
+  }
+}

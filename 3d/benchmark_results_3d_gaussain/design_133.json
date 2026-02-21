@@ -1,0 +1,14 @@
+{
+  "design_name": "ExtremeSweep_WashinRoot_PositiveDihedral_NACA4415",
+  "le_sweep": 80.0,
+  "root_chord_in": 30.77936862848834,
+  "twist_root": 4.501167218332423,
+  "twist_tip": -3.6437845241507665,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

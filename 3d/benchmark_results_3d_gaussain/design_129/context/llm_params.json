@@ -1,0 +1,11 @@
+{
+  "le_sweep": 79.5,
+  "root_chord_in": 29.0,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -15.0,
+  "naca_m": 2,
+  "naca_p": 0,
+  "naca_t": 7,
+  "name": "HighSweep_LE_Camber_MaxWashout_Anhedral"
+}

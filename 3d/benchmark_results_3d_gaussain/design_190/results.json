@@ -1,0 +1,33 @@
+{
+  "design_name": "MidSweep_WashinRoot_Dihedral_CamberThick",
+  "design_params": {
+    "le_sweep_deg": 54.49910838929313,
+    "root_chord_in": 24.119683506661843,
+    "twist_root_deg": 3.729138397570029,
+    "twist_tip_deg": -2.2911341073557936,
+    "dihedral_deg": 12.069177512038456,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 17,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.8945645864314871,
+    "CDi": 0.14479763104563506,
+    "CM": -0.8616164679518061,
+    "L_D": 6.1780333004864705
+  },
+  "corrected_results": {
+    "CL": 0.46950217635381336,
+    "CDi": 0.09755599175669533,
+    "CM": -0.47531056319440557,
+    "L_D": 4.812643159066559
+  }
+}

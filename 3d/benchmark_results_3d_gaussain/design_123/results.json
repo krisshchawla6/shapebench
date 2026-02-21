@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_MaxWashoutAnhedral_NACA2406",
+  "design_params": {
+    "le_sweep_deg": 71.81277879239006,
+    "root_chord_in": 39.19234872326799,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -12.684917592281213,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.010067372148970678,
+    "CDi": 0.005272205273274558,
+    "CM": -0.044513228735305777,
+    "L_D": 1.909518242774688
+  },
+  "corrected_results": {
+    "CL": -0.08660943913522615,
+    "CDi": -0.0017052066612720136,
+    "CM": 0.11352881104435465,
+    "L_D": 50.79116866140969
+  }
+}

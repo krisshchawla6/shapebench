@@ -1,0 +1,7 @@
+Design 1, with a reward of 353.7832, showcases a delta wing with a le_sweep of ~70 degrees, a moderate root_chord_in of ~33 inches, significant washout (-6.11 root, -10.0 tip), moderate negative dihedral (-11.66), and a cambered NACA 2408 airfoil. While a strong performer, it is not the top design. Without direct visual access to the Cp distribution, we infer from its parameters that its performance likely comes from a good balance of vortex lift (due to sweep), favorable load distribution (due to washout), and some added lift from camber. Potential aerodynamic issues might include non-optimal pressure recovery on the aft section or sub-optimal induced drag from the twist distribution or airfoil thickness.
+
+Key changes needed to improve designs in the population:
+1.  **More aggressive washout:** The top performer (Design 2) had full -10.0/-10.0 twist.
+2.  **Increased negative dihedral:** The top performers consistently used the maximum negative dihedral of -15.0.
+3.  **Explore higher sweep with camber:** Design 5 showed a good reward with very high sweep (76.64) and a symmetric airfoil. Combining this high sweep with camber could be beneficial.
+4.  **Optimize airfoil thickness for drag:** Design 2 used NACA 2407, Design 1 used NACA 2408. Exploring thinner cambered airfoils (e.g., NACA 2406) might reduce drag.

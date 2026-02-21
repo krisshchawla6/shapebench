@@ -1,0 +1,14 @@
+{
+  "design_name": "Refined_Cambered_Washout_Delta_V2",
+  "le_sweep": 62.76005108308949,
+  "root_chord_in": 32.40441493223346,
+  "twist_root": -5.449048221661917,
+  "twist_tip": -6.005869114285355,
+  "dihedral": 4.401141374901556,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

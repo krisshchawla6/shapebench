@@ -1,0 +1,11 @@
+{
+  "le_sweep": 72.0,
+  "root_chord_in": 35.0,
+  "twist_root": -4.0,
+  "twist_tip": -9.0,
+  "dihedral": 3.0,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 10,
+  "name": "HighSweep_AggressiveWashout_NACA2410"
+}

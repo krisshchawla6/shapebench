@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_HighSweep_MaxWashout_Anhedral_2409",
+  "design_params": {
+    "le_sweep_deg": 75.69853731289736,
+    "root_chord_in": 28.210169061459176,
+    "twist_root_deg": -9.447663925657189,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": -0.04112110298922157,
+    "CDi": 0.020880020554633717,
+    "CM": -0.03705383170183359,
+    "L_D": -1.9693995454470916
+  },
+  "corrected_results": {
+    "CL": 0.007518103824859347,
+    "CDi": 0.008261436641171183,
+    "CM": -0.025446425649345298,
+    "L_D": 0.9100237829571424
+  }
+}

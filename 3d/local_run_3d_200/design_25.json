@@ -1,0 +1,14 @@
+{
+  "design_name": "HighWashout_NoCamber_Thick",
+  "le_sweep": 73.45754128046914,
+  "root_chord_in": 37.15954134559702,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -7.4673024227931375,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 16,
+    "chord_length": 1.0
+  }
+}

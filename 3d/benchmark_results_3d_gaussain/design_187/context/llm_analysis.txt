@@ -1,0 +1,14 @@
+The top-performing designs, particularly Design 1 (Reward: 626.7341), consistently exhibit high leading-edge sweep (>70 degrees), significant washout (negative twist at both root and tip, often near the maximum -10 degrees), maximum anhedral (dihedral = -15.0 degrees), and very thin symmetric airfoils (NACA 0006). This combination suggests that generating strong, stable vortex lift while minimizing induced and profile drag is key to achieving high CL/CDi in this regime. The very thin profile helps reduce wave drag and profile drag, crucial for efficiency.
+
+**Key observations and issues from the population:**
+
+*   **Dominance of High Sweep, Anhedral, and Washout**: The top designs are clustered in a specific region of the parameter space, indicating a strong correlation between these features and high reward. This implies that the optimizer is effectively exploiting a high-sweep vortex-lift dominant regime.
+*   **Importance of Airfoil Selection**: Design 1's NACA 0006 (symmetric, very thin) significantly outperforms cambered or slightly thicker airfoils (NACA 2407, 0008) even at similar high sweeps and twist/dihedral settings. This highlights the sensitivity to profile drag and potentially the interaction with vortex flow.
+*   **Underexplored Parameters**: The `root_chord_in` parameter is consistently in the mid-range (27-33 inches) across all high-performing designs. The lower (10-20 inches) and upper (40-50 inches) bounds of this parameter are largely unexplored. Similarly, positive dihedral (+0.1 to +15.0 degrees) is completely absent from the top designs. Lower sweep angles (45-60 degrees) are also less represented, especially in high-reward designs. `naca_t` values are also heavily skewed towards the lower end (6-9).
+
+**Key design changes needed to improve designs in the population:**
+
+1.  **Systematically explore lower sweep angles**: Investigate if the vortex lift characteristics or induced drag trade-offs at sweeps significantly lower than 70 degrees (e.g., 45-60 degrees) can be optimized with appropriate twist and airfoil.
+2.  **Investigate the impact of positive dihedral**: All good designs use anhedral. Testing positive dihedral, especially at its boundary, will uncover a completely new part of the stability and lift distribution landscape.
+3.  **Explore extreme root chord values**: Push `root_chord_in` to its upper or lower limits to understand the scaling effects on CL/CDi, especially when combined with new sweep/dihedral strategies.
+4.  **Test thicker NACA airfoils**: Explore `naca_t` values in the mid-to-high range (e.g., 12-20) to see if increased thickness can offer benefits in structural performance or flow characteristics under different sweep/twist/dihedral combinations, even if potentially incurring higher drag.

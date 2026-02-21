@@ -1,0 +1,14 @@
+{
+  "design_name": "Extreme_Sweep_Aggressive_Washout_Thin_Camber",
+  "le_sweep": 75.47320031523532,
+  "root_chord_in": 37.61137690000743,
+  "twist_root": -1.1949944375801778,
+  "twist_tip": -10.0,
+  "dihedral": -3.590992241210017,
+  "naca": {
+    "m": 4,
+    "p": 0,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

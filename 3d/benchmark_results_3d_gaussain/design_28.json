@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_GradWash_N2412_MedChord",
+  "le_sweep": 80.0,
+  "root_chord_in": 24.68944385302583,
+  "twist_root": -7.057049813645772,
+  "twist_tip": -10.0,
+  "dihedral": -7.0982928068788365,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

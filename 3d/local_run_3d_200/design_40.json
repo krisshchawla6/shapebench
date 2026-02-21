@@ -1,0 +1,14 @@
+{
+  "design_name": "HybridCamberedDelta_MidSweep",
+  "le_sweep": 68.83826435634097,
+  "root_chord_in": 29.276060326986254,
+  "twist_root": -10.0,
+  "twist_tip": -6.516075188265697,
+  "dihedral": 1.6428472267703127,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 18,
+    "chord_length": 1.0
+  }
+}

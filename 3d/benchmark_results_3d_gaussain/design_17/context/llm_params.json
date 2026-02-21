@@ -1,0 +1,11 @@
+{
+  "le_sweep": 73.5,
+  "root_chord_in": 35.5,
+  "twist_root": -6.5,
+  "twist_tip": -10.0,
+  "dihedral": -4.0,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 11,
+  "name": "Exploitation-HighWashout-V2"
+}

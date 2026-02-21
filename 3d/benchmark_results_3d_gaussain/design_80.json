@@ -1,0 +1,14 @@
+{
+  "design_name": "Explorer_LowSweep_PosDihedral_MildTwist",
+  "le_sweep": 66.89408654733516,
+  "root_chord_in": 19.671792677416747,
+  "twist_root": 0.01987335955570813,
+  "twist_tip": 2.7164523656218034,
+  "dihedral": 11.520801532674941,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

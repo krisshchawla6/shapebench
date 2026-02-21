@@ -1,0 +1,14 @@
+The representative Design 1 (le_sweep=77.84, root_chord_in=27.28, twist_root=-9.55, twist_tip=-9.13, dihedral=-15.0, NACA 0006) achieved the highest reward of 626.7341. Its parameters indicate a highly swept, relatively small root chord, with significant washout and maximum anhedral. The NACA 0006 profile suggests a very thin, uncambered airfoil.
+
+Critically assessing this design and the population:
+*   **Aerodynamic Issues/Characteristics:** Design 1's high sweep is indicative of a reliance on leading-edge vortex lift for high lift coefficients, which is typical for delta wings. The anhedral and washout likely contribute to stability and favorable load distribution. The thin, uncambered airfoil minimizes profile drag at lower angles of attack but might limit maximum lift. The Cp distribution (if visualizable) would likely show strong suction peaks along the leading edges due to the vortices.
+*   **Parameter Influence:**
+    *   **High sweep (70-78 deg):** Consistently appears in top-performing designs, suggesting strong vortex lift is beneficial.
+    *   **High negative twist (washout):** Both root and tip washout are prominent, especially at the tip, likely shedding load towards the tip to reduce induced drag or improve stall characteristics.
+    *   **Maximum anhedral (-15.0 deg):** Common in high-reward designs, possibly enhancing vortex stability or managing lateral stability at high sweep.
+    *   **NACA 00XX or 24XX (no/moderate camber, thin):** Both have yielded high rewards. The thickness values are predominantly low (6-8%).
+*   **Key Design Changes Needed to Improve Population:**
+    1.  **Explore positive dihedral:** All current high-reward designs leverage anhedral. The opposite extreme of positive dihedral (tips up) is completely unexplored.
+    2.  **Investigate significantly thicker airfoils:** `naca_t` values are concentrated at the lower end (6-12). Exploring the mid-to-upper range (e.g., 15-24) could reveal different aerodynamic characteristics.
+    3.  **Test moderate sweep angles (45-65 deg):** Most successful designs are high sweep. Exploring the lower-middle range could reveal designs less reliant on strong leading-edge vortices.
+    4.  **Combinatorial exploration of twist and camber with new dihedral/thickness:** While high washout is prevalent, combining it with positive dihedral and thicker airfoils, or trying less aggressive washout, could yield novel results.

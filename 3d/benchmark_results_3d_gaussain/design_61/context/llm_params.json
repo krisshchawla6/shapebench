@@ -1,0 +1,11 @@
+{
+  "le_sweep": 75.0,
+  "root_chord_in": 38.0,
+  "twist_root": -5.0,
+  "twist_tip": -9.0,
+  "dihedral": -7.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 12,
+  "name": "HighSweepCamberAsymTwist"
+}

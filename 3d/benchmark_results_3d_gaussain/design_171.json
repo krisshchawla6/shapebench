@@ -1,0 +1,14 @@
+{
+  "design_name": "ModerateSweep_PositiveTwist_PositiveDihedral_HighCamber_MediumThick",
+  "le_sweep": 58.31892065724888,
+  "root_chord_in": 29.600396164288306,
+  "twist_root": 3.3531828025656605,
+  "twist_tip": 2.892102205411543,
+  "dihedral": 11.91278362651443,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

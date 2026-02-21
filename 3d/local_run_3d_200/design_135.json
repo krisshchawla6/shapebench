@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_ModTwist_NACA4410",
+  "le_sweep": 62.72291996688241,
+  "root_chord_in": 36.92189620706656,
+  "twist_root": -7.7512655382838,
+  "twist_tip": -7.396516445357922,
+  "dihedral": -4.293462878263597,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

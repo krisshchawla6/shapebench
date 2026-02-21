@@ -1,0 +1,33 @@
+{
+  "design_name": "Swept_FlatPlate_HighTwist_Dihedral",
+  "design_params": {
+    "le_sweep_deg": 58.3924288963374,
+    "root_chord_in": 33.789280379553944,
+    "twist_root_deg": 4.679553680461547,
+    "twist_tip_deg": -9.740395334796652,
+    "dihedral_deg": 9.037208899690288,
+    "naca": {
+      "m": 2,
+      "p": 0,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.4991253422188565,
+    "CDi": 0.08332155579132189,
+    "CM": -0.4036955164116605,
+    "L_D": 5.990350725914331
+  },
+  "corrected_results": {
+    "CL": 0.18252794925744195,
+    "CDi": 0.034137604927826345,
+    "CM": -0.12545783104141744,
+    "L_D": 5.346829387806853
+  }
+}

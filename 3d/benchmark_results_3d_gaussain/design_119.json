@@ -1,0 +1,14 @@
+{
+  "design_name": "ExploitMaxWashoutAnhedralNACA2407",
+  "le_sweep": 74.52328733650724,
+  "root_chord_in": 31.789531012291558,
+  "twist_root": -10.0,
+  "twist_tip": -6.738443028854052,
+  "dihedral": -14.077007773418915,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

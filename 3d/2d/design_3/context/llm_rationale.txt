@@ -1,0 +1,5 @@
+- **Strategic Focus**: This design employs a "Fresh Start" strategy, ignoring the absence of a database to establish a high-performance baseline using aerodynamic first principles (Cambered/Laminar-style profile).
+- **Geometric Differentiation**: I am intentionally setting Point 1 and Point 3 with contrasting `radius_param` values to induce positive camber, which is fundamental for maximizing the lift-to-drag ratio.
+- **Sharp Trailing Edge**: By setting `edgy_param` to a high value at the rear-most point (P2), I am simulating a classic sharp trailing edge to minimize wake turbulence.
+- **Leading Edge Radius**: A very low `edgy_param` and moderate `radius_param` at P0 will be used to create a "blunt-nose" leading edge, which is robust against flow separation.
+- **Optimization Path**: By exploring a teardrop shape with shifted angular positions (using `angle_param`), I aim to find the "sweet spot" for the maximum thickness location, which influences the transition from laminar to turbulent flow.

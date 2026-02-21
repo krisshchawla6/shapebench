@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_MaxCamber_OptimizedTwist",
+  "design_params": {
+    "le_sweep_deg": 69.68042675673455,
+    "root_chord_in": 40.23156406119551,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -3.3585767015267063,
+    "dihedral_deg": 0.131171538393986,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.09685738400123046,
+    "CDi": 0.018914219450635924,
+    "CM": -0.16205797702520305,
+    "L_D": 5.1208766110606785
+  },
+  "corrected_results": {
+    "CL": -0.09091377776227186,
+    "CDi": -0.007542387874029726,
+    "CM": 0.10912462497452889,
+    "L_D": 12.053712866625446
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "le_sweep": 64.8,
+  "root_chord_in": 34.0,
+  "twist_root": -10.0,
+  "twist_tip": -3.5,
+  "dihedral": -2.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 10,
+  "name": "Hybrid Washout Camber Delta"
+}

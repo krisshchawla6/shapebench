@@ -1,0 +1,13 @@
+The top-ranked design (Design 1) achieved a significantly high reward (4016.0090) compared to all others, indicating a successful configuration for CL/CDi maximization. Its parameters are: le_sweep=65.5, root_chord_in=34.7, twist_root=-7.1, twist_tip=-4.6, dihedral=-1.7, and a NACA 4412 airfoil.
+
+Observations from Design 1 and other top designs:
+*   **Sweep**: A moderate-high sweep around 63-65 degrees seems optimal so far. Lower sweep designs (e.g., Design 5 at 55.8 deg) yielded significantly lower rewards. This suggests vortex lift is a dominant factor, but excessively high sweep might incur drag penalties not yet explored.
+*   **Twist**: All high-performing designs feature negative twist (washout) at both root and tip, with the root generally having a more negative twist than the tip. This is critical for controlling load distribution, preventing tip stall, and optimizing vortex formation and stability. Design 1 has a moderate washout difference, while Design 2 has a very aggressive washout at both root and tip.
+*   **Dihedral**: Negative dihedral (anhedral) is a consistent feature among the top designs, ranging from -1.7 to -8.6 degrees. This is typical for highly swept wings to achieve desirable lateral stability characteristics.
+*   **NACA Airfoil**: Cambered airfoils (`naca_m > 0`) significantly outperform symmetric ones (e.g., Design 6 with NACA 0011). `naca_m=4` and `naca_p=4` combinations (e.g., NACA 44XX series) appear in the highest-ranked designs, suggesting that both camber magnitude and its position play a crucial role in enhancing lift while managing induced drag. Thickness (`naca_t`) seems to be in a moderate range (11-16%), with Design 1 using 12%.
+
+Key design changes needed to improve designs in the population based on current understanding:
+1.  **Explore higher sweep angles**: Push beyond the current optimal (65.5 deg) to understand the full trade-off between vortex lift and induced drag.
+2.  **Optimize twist distribution**: Experiment with more aggressive root washout and varied tip twist to further refine load distribution and vortex control.
+3.  **Investigate stronger anhedral**: Test the impact of more pronounced negative dihedral on performance, potentially influencing stability and effective dihedral.
+4.  **Refine airfoil selection**: Continue exploring cambered airfoils with different `naca_m`, `naca_p`, and slightly thinner `naca_t` values to find the best lift-to-drag characteristics.

@@ -1,0 +1,33 @@
+{
+  "design_name": "HybridCamberedWashoutDelta",
+  "design_params": {
+    "le_sweep_deg": 74.92629923985645,
+    "root_chord_in": 31.09339916416212,
+    "twist_root_deg": -9.288963210879052,
+    "twist_tip_deg": -5.839276660005143,
+    "dihedral_deg": -14.73537132894678,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.055280146127626224,
+    "CDi": 0.0049517363454279545,
+    "CM": -0.08244614891354085,
+    "L_D": 11.16379028917151
+  },
+  "corrected_results": {
+    "CL": 0.03446008904560719,
+    "CDi": -0.0002884504599527186,
+    "CM": -0.024430276864867276,
+    "L_D": -119.4662301847455
+  }
+}

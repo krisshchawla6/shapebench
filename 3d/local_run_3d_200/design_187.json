@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_Camber_Sweep_TwistOptimized",
+  "le_sweep": 68.16060140430955,
+  "root_chord_in": 44.92266423107014,
+  "twist_root": -8.491490422055781,
+  "twist_tip": -4.116717787482407,
+  "dihedral": -1.4282198159425294,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

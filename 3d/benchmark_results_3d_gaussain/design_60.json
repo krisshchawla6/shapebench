@@ -1,0 +1,14 @@
+{
+  "design_name": "ExploitTopPerformer_HighSweepAnhedralWashout_NACA2409",
+  "le_sweep": 64.77612444871016,
+  "root_chord_in": 29.675047201187116,
+  "twist_root": -10.0,
+  "twist_tip": -9.54530937710779,
+  "dihedral": -15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

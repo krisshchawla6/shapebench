@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_Washin_Thick_LargeChord",
+  "design_params": {
+    "le_sweep_deg": 47.932391886978834,
+    "root_chord_in": 38.27983201743157,
+    "twist_root_deg": 4.959421407481328,
+    "twist_tip_deg": 0.04567333132019247,
+    "dihedral_deg": 7.7839932405927685,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.9970822474111124,
+    "CDi": 0.19730460152742085,
+    "CM": -0.8949944302162791,
+    "L_D": 5.0535174531777995
+  },
+  "corrected_results": {
+    "CL": 0.2304821241772983,
+    "CDi": 0.04726766450311699,
+    "CM": -0.17440062995960742,
+    "L_D": 4.876105612582139
+  }
+}

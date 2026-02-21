@@ -1,0 +1,14 @@
+The top-performing design (Design 1) achieved a reward of 4016.0090 with `le_sweep=65.5`, `root_chord_in=34.7`, significant washout (`twist_root=-7.1`, `twist_tip=-4.6`), slight anhedral (`dihedral=-1.7`), and a cambered NACA 4412 airfoil. This indicates that a moderate sweep combined with specific washout and a moderately cambered airfoil can be highly effective in maximizing CL/CDi. The washout likely helps distribute lift more efficiently and delays tip stall, which is crucial for delta wings. The anhedral might contribute to stability characteristics.
+
+Key observations from the population:
+- Most high-performing designs utilize significant washout (negative twist at root and tip).
+- Cambered airfoils (NACA 24XX or 44XX) are prevalent among the better-performing designs. Design 6 with NACA 0007 had a very low reward, suggesting uncambered thin airfoils might be challenging to optimize for this objective.
+- Sweep angles are generally in the mid-60s to low-70s.
+- Root chords are mostly in the 30-40 inch range.
+- NACA thickness is varied but generally 11-18.
+
+Key design changes needed to improve designs in the population:
+1.  Explore more extreme sweep angles, especially towards the upper boundary (closer to 80 degrees) to investigate enhanced vortex lift.
+2.  Investigate designs with significantly less washout, or even wash-in (positive twist), to understand its effect on load distribution with different sweep and airfoil types.
+3.  Re-explore uncambered airfoils (NACA 00XX) in combination with other aggressive parameters to see if performance can be improved over Design 6.
+4.  Test the interaction of very thin airfoils (NACA X.X06-08) with high sweep and different twist distributions, which has only been partially explored (Design 5 used NACA 2406).

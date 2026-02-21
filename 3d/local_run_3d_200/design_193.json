@@ -1,0 +1,14 @@
+{
+  "design_name": "High_Sweep_Optimized_Washout",
+  "le_sweep": 67.36380402683066,
+  "root_chord_in": 39.85911914149961,
+  "twist_root": -7.006535226266046,
+  "twist_tip": -10.0,
+  "dihedral": -1.858162196989492,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

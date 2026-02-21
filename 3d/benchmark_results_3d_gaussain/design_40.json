@@ -1,0 +1,14 @@
+{
+  "design_name": "ExtremeSweep_MaxAnhedral_GradWashout_NACA4412",
+  "le_sweep": 78.08619896001998,
+  "root_chord_in": 46.24613380475615,
+  "twist_root": -2.9081103816891445,
+  "twist_tip": -7.785087813492836,
+  "dihedral": -13.522798167623531,
+  "naca": {
+    "m": 4,
+    "p": 0,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

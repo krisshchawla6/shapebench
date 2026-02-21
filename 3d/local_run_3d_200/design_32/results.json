@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_PositiveRootTwist_ThickCamber",
+  "design_params": {
+    "le_sweep_deg": 76.14682916051396,
+    "root_chord_in": 49.96691445058028,
+    "twist_root_deg": 3.088569928975988,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": 0.13838919091536472,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 19,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.5438053604491218,
+    "CDi": 0.05059602300102002,
+    "CM": -0.6001954104380397,
+    "L_D": 10.747986268370513
+  },
+  "corrected_results": {
+    "CL": -0.16500045398313165,
+    "CDi": -0.038605408404330584,
+    "CM": 0.23634212640658808,
+    "L_D": 4.274024309107493
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "Extreme_Sweep_Thin_Twisted",
+  "le_sweep": 75.53089626327521,
+  "root_chord_in": 50.0,
+  "twist_root": 1.1125407292742668,
+  "twist_tip": -6.380235239707424,
+  "dihedral": 6.956195378988813,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

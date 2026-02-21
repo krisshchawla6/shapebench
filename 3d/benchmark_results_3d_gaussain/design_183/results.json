@@ -1,0 +1,33 @@
+{
+  "design_name": "SweptCamberWashout",
+  "design_params": {
+    "le_sweep_deg": 70.30137471821726,
+    "root_chord_in": 35.437423467144306,
+    "twist_root_deg": -7.268703433305276,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -13.100544824170091,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.09479027397732503,
+    "CDi": 0.016847986370327816,
+    "CM": -0.15269637225322008,
+    "L_D": 5.626207897714525
+  },
+  "corrected_results": {
+    "CL": -0.015211071963164381,
+    "CDi": 0.0006430503200088416,
+    "CM": 0.02153018057925201,
+    "L_D": -23.654559355409756
+  }
+}

@@ -1,0 +1,18 @@
+The provided designs demonstrate a clear hierarchy in performance, with Design 1 significantly outperforming all others by an order of magnitude (Reward: 4016.0090 vs. 338.5009 for the next best). Analyzing Design 1's parameters:
+*   **Sweep (le_sweep=65.51)**: Moderate sweep, effective for generating vortex lift without excessive induced drag.
+*   **Root Chord (root_chord_in=34.78)**: Moderate size, neither too small nor too large, likely optimizing for Reynolds number effects and structural considerations.
+*   **Twist Distribution (twist_root=-7.13, twist_tip=-4.60)**: A key differentiating factor. Design 1 exhibits washout, with the root having more negative twist than the tip. This differential washout likely optimizes the spanwise lift distribution, delaying root stall and reducing induced drag compared to designs with more extreme or less refined twist.
+*   **Dihedral (dihedral=-1.72)**: A slight negative dihedral, which contributes to stability but is not extreme, unlike lower-performing designs with very strong negative or positive dihedral.
+*   **Airfoil (NACA 4412)**: This cambered airfoil (4% max camber at 40% chord, 12% thickness) is critical. Designs with symmetric airfoils (NACA 00xx, e.g., Designs 5 and 6) perform extremely poorly, highlighting the necessity of camber for high CL/CDi in this context. The NACA p=4 (max camber at 40%) also appears beneficial.
+
+**Aerodynamic Issues/Observations (General for Delta Wings and this Population):**
+*   **Poor Lift Distribution**: Designs with overly aggressive or insufficient twist (e.g., Design 2 with -10.0 root twist, or Designs 5/6 with less effective twist/airfoil) likely suffer from non-optimal spanwise lift, leading to higher induced drag or premature stall.
+*   **Lack of Camber**: Symmetric airfoils (NACA 00xx) severely limit lift generation, leading to very low rewards.
+*   **Extreme Dihedral**: High positive or negative dihedral (e.g., Design 3 and 4) appears detrimental, suggesting that a subtle adjustment is preferred.
+*   **Suboptimal Sweep/Chord**: Very high or very low sweep, or very large root chords, do not yield the best results, indicating a sweet spot in the moderate range.
+
+**Key design changes needed to improve designs in the population:**
+1.  **Refine Twist Distribution**: Explore subtle variations around Design 1's differential washout, perhaps slightly more washout at the tip, or slightly less overall.
+2.  **Maintain Camber (NACA m & p)**: Stick with m=4, p=4, as this combination has proven effective for high lift.
+3.  **Optimize Thickness (NACA t)**: Experiment with NACA thickness values slightly different from 12 while maintaining m=4, p=4.
+4.  **Confirm Moderate Sweep/Chord/Dihedral**: Maintain parameters like le_sweep, root_chord_in, and dihedral close to Design 1's successful values, as these appear to be in a beneficial range.

@@ -1,0 +1,14 @@
+{
+  "design_name": "Vortex_Flow_Explorer_2410",
+  "le_sweep": 65.62815005097384,
+  "root_chord_in": 43.62815052935867,
+  "twist_root": -6.603345341693587,
+  "twist_tip": -1.3278109616228169,
+  "dihedral": 13.424560380318038,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

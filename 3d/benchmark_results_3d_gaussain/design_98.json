@@ -1,0 +1,14 @@
+{
+  "design_name": "BalancedSymmetricMidSweep",
+  "le_sweep": 68.13153582280722,
+  "root_chord_in": 33.88450834656098,
+  "twist_root": -9.749183820070755,
+  "twist_tip": -8.298991079840478,
+  "dihedral": -4.3792285492117875,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

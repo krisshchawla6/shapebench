@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_MaxWashout_NegDihedral_NACA2407",
+  "design_params": {
+    "le_sweep_deg": 72.8007638477631,
+    "root_chord_in": 32.2001428887026,
+    "twist_root_deg": -9.046509803604161,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.03191112180430792,
+    "CDi": 0.004265933568872185,
+    "CM": -0.06016245125375532,
+    "L_D": 7.480454463041366
+  },
+  "corrected_results": {
+    "CL": 0.006151220756965439,
+    "CDi": -0.00037956854947044467,
+    "CM": 0.003962277423220213,
+    "L_D": -16.20582307345358
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_MaxWashout_MaxAnhedral_ThickerSymmetric",
+  "design_params": {
+    "le_sweep_deg": 80.0,
+    "root_chord_in": 35.93305039384295,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -12.100238072401432,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": -0.0068621637620866534,
+    "CDi": 4.565981173919648e-05,
+    "CM": 0.006435535401637549,
+    "L_D": -150.2889193079142
+  },
+  "corrected_results": {
+    "CL": -0.04882087711339626,
+    "CDi": 0.000324849680366571,
+    "CM": 0.08044949173120827,
+    "L_D": -150.2875947370648
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Washout_Camber_Explorer",
+  "le_sweep": 75.7086025221185,
+  "root_chord_in": 41.71212219437215,
+  "twist_root": -0.8766676645299625,
+  "twist_tip": -4.498116349758295,
+  "dihedral": 3.9635024426054755,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

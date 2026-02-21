@@ -1,0 +1,24 @@
+Given the absence of an image, the analysis relies solely on the provided numerical data for previous designs.
+
+**Design 1 (Reward: 4016.0090)** stands out significantly as the best performer, followed by Design 2 (Reward: 338.5009). The other designs have rewards two orders of magnitude lower, indicating their parameter combinations are far less optimal for the objective.
+
+Critically assessing the best design (Design 1):
+*   **Parameters**: `le_sweep=65.5`, `root_chord_in=34.8`, `twist_root=-7.1`, `twist_tip=-4.6`, `dihedral=-1.7`, and NACA 4412.
+*   **Observed Patterns for High Reward**:
+    *   **Sweep**: Moderate-high sweep (63-65 degrees) appears to be a sweet spot, balancing vortex lift benefits with induced drag.
+    *   **Root Chord**: Moderate chord (33-35 inches) is consistently seen in top performers.
+    *   **Twist**: A distinct negative twist gradient (washout) is present: `twist_root` is significantly more negative than `twist_tip`. This implies an efficient spanwise load distribution, likely unloading the tips to prevent early stall and maintain lift inboard.
+    *   **Dihedral**: A slight anhedral (-1.7 to -3.4 degrees) is observed in the top two designs.
+    *   **NACA Airfoil**: Cambered airfoils (`naca_m=4, naca_p=4` in Design 1; `naca_m=2, naca_p=4` in Design 2) are crucial for high performance, unlike the symmetric NACA 00xx designs which performed poorly.
+    *   **Thickness**: Moderate thickness (11-12% chord) is present in the top designs.
+
+**Aerodynamic Issues (Inferred for lower-performing designs):**
+*   Designs with symmetric airfoils (NACA 00xx) likely suffer from insufficient lift at lower angles of attack or less efficient lift generation, leading to lower CL/CDi.
+*   Designs with lower sweep (e.g., Design 3 at 58.3 deg) may not effectively generate strong vortex lift, a key characteristic of delta wings.
+*   Designs with uniform washout (e.g., Design 3, `twist_root=-7.7, twist_tip=-7.1`) might not optimize spanwise load distribution as effectively as those with a stronger twist gradient.
+
+**Key Design Changes Needed to Improve the Population (exploiting D1 & D2):**
+1.  **Prioritize Cambered Airfoils**: Consistently use `naca_m` of 2 or 4 with `naca_p=4`.
+2.  **Refine Sweep within Optimal Range**: Explore the 60-70 degree sweep window, potentially pushing slightly higher than D1 to maximize vortex lift.
+3.  **Optimize Twist Gradient**: Implement a strong washout at the root and a milder washout at the tip to maintain the beneficial load distribution observed.
+4.  **Explore Moderate Thickness Variations**: Investigate if slightly thinner (e.g., 10%) or thicker (e.g., 14%) airfoils within the cambered profile can further improve efficiency.

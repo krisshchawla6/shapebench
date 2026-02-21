@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_SmallChord_ThinAirfoil_Dihedral",
+  "design_params": {
+    "le_sweep_deg": 71.58515849031893,
+    "root_chord_in": 12.239367007236966,
+    "twist_root_deg": -6.995730789820815,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": 11.574210862378019,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.06327803528528782,
+    "CDi": 0.0018323388016221124,
+    "CM": -0.05604135207847741,
+    "L_D": 34.53402571034884
+  },
+  "corrected_results": {
+    "CL": 0.15263701867864743,
+    "CDi": 0.004759229323881443,
+    "CM": -0.1519674268301937,
+    "L_D": 32.071793202468044
+  }
+}

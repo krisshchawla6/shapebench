@@ -1,0 +1,13 @@
+Design 1, with a reward of 4016.0090, stands out significantly from the rest of the population. Its parameters are `le_sweep=65.5`, `root_chord_in=34.78`, `twist_root=-7.13`, `twist_tip=-4.60`, `dihedral=-1.72`, and `NACA 4412`. This design features a moderate-to-high sweep, significant washout (negative twist) at both root and tip, a slight negative dihedral, and a cambered, moderately thick NACA 4412 airfoil. The high reward suggests an excellent balance of lift generation (likely strong leading-edge vortices) and efficient lift distribution, leading to a high CL/CDi ratio.
+
+Critically assessing the patterns in the lower-ranked designs:
+*   Designs with aggressive washout at both root and tip (e.g., Design 2, 4) generally performed worse than Design 1, suggesting that *too much* washout, or a specific distribution, can be detrimental.
+*   Designs with lower sweep (e.g., Design 6 at 58.3 degrees) combined with symmetric airfoils (NACA 0011) performed very poorly, indicating that for lower sweeps, camber might be crucial or vortex lift is insufficient.
+*   Design 5 explored high sweep (75.6 degrees) and aggressive tip washout with a very thin cambered airfoil and extreme negative dihedral, yielding a moderate reward. This suggests high sweep itself isn't necessarily bad, but its interaction with other parameters is critical.
+*   The use of cambered airfoils (NACA m=2 or 4) generally appears more effective than symmetric (NACA m=0) or the `NACA 40xx` (m=4, p=0) for higher rewards, though the best is `NACA 4412`.
+
+Key design changes needed to improve designs in the population and explore:
+1.  Investigate the effect of significantly higher sweep (closer to 80 degrees) with different twist and airfoil combinations.
+2.  Explore novel twist distributions, particularly positive twist (washin) at the root, which has not been tested.
+3.  Test positive dihedral values, especially in combination with high sweep, as the range has been mostly negative or mildly positive.
+4.  Examine the performance of cambered airfoils (NACA m=2 or 4) with different thickness values, including thinner profiles or moderately thicker ones in new sweep regimes.

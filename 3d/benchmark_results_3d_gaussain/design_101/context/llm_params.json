@@ -1,0 +1,11 @@
+{
+  "le_sweep": 78.0,
+  "root_chord_in": 35.0,
+  "twist_root": 5.0,
+  "twist_tip": -5.0,
+  "dihedral": 10.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 10,
+  "name": "HighSweep_PositiveDihedral_Cambered_Twist"
+}

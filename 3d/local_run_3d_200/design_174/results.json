@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Camber_PositiveDihedral",
+  "design_params": {
+    "le_sweep_deg": 68.90419085309674,
+    "root_chord_in": 33.97257308747369,
+    "twist_root_deg": -6.374035642597062,
+    "twist_tip_deg": -7.9104427593561075,
+    "dihedral_deg": 7.578009793777308,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2138640144718614,
+    "CDi": 0.010544164583425927,
+    "CM": -0.23081984606367945,
+    "L_D": 20.282689328278142
+  },
+  "corrected_results": {
+    "CL": 0.07434989468094565,
+    "CDi": 0.00025657592277245474,
+    "CM": -0.048668334895011225,
+    "L_D": 289.7773644446097
+  }
+}

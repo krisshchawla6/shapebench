@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploitation_Refined4410_MaxRootWashout",
+  "le_sweep": 63.5952661815099,
+  "root_chord_in": 38.26983676446251,
+  "twist_root": -10.0,
+  "twist_tip": -8.853044029256779,
+  "dihedral": -4.450995313525198,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

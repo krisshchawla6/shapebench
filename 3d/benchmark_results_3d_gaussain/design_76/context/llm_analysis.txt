@@ -1,0 +1,12 @@
+The representative design (Design 1) with parameters `le_sweep=71.2`, `root_chord_in=32.9`, `twist_root=-10.0`, `twist_tip=-10.0`, `dihedral=-15.0`, and NACA 2407 achieved the highest reward of 424.5627. The Cp distribution shows a characteristic strong leading-edge vortex lift, indicated by the intense suction peaks near the leading edge along the sweep. The pressure distribution across the wing appears generally smooth, suggesting attached flow. The strong negative twist across the entire span and maximum negative dihedral seem to be key contributors to this high CL/CDi.
+
+However, some aspects could be explored for improvement or diversity:
+*   **Extreme Twist:** While effective, the maximum washout at both root and tip might be suboptimal for certain flight regimes or could lead to premature flow separation elsewhere if not perfectly balanced. A more nuanced twist distribution could potentially improve efficiency further.
+*   **Dihedral Extremity:** The maximum negative dihedral (-15.0 deg) contributes to lateral stability and effective sweep, but pushing it to the limit might have diminishing returns or introduce other complexities not captured by this specific reward function.
+*   **Airfoil Choice:** The NACA 2407 is a good general-purpose cambered airfoil. However, exploring a different thickness or different camber percentage/position might yield benefits, especially with the high sweep.
+
+**Key design changes needed to improve designs in the population:**
+1.  **Explore higher sweep angles:** Push closer to the maximum `le_sweep` to investigate stronger vortex lift generation.
+2.  **Vary twist distribution:** Experiment with different `twist_root` and `twist_tip` combinations, maintaining overall washout but not necessarily at the absolute extremes.
+3.  **Investigate thicker airfoils:** Explore `naca_t` values beyond 7-11 while keeping camber, to see if more robust profiles can maintain performance.
+4.  **Moderate dihedral:** Try a less extreme negative `dihedral` to see if the benefits are retained without being at the absolute limit.

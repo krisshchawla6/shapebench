@@ -1,0 +1,11 @@
+{
+  "le_sweep": 67.0,
+  "root_chord_in": 39.0,
+  "twist_root": -9.0,
+  "twist_tip": -6.0,
+  "dihedral": -4.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 14,
+  "name": "Cambered High Washout Exploitation"
+}

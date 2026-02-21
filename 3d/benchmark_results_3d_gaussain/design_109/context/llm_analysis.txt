@@ -1,0 +1,11 @@
+The most successful designs (Rank 0, 1, 2) consistently feature high leading-edge sweep (around 70-72 degrees), significant washout (negative twist at both root and tip, often at the extreme of -10 degrees), and pronounced anhedral (negative dihedral, also often at the extreme of -15 degrees). They typically use thin NACA 24xx or 00xx airfoils. The root chord generally hovers in the low to mid-30s.
+
+Design 1 (Reward: 424.56) exemplifies this pattern with `le_sweep=71.2`, `twist_root=-10.0`, `twist_tip=-10.0`, `dihedral=-15.0`, and `NACA 2407`. Other designs exploring similar parameter spaces, like Design 4, which is very close to Design 1 but with slightly higher sweep and chord, yield significantly lower rewards (58.13). This suggests a sensitive optimum within this highly explored region, or perhaps a fluke result for Design 1.
+
+Design 6, with its lower sweep (`le_sweep=59.6`) and NACA 4406 airfoil, yielded a moderate reward of 148.99, indicating that lower sweep configurations might be viable but have not been fully optimized or explored with other extreme parameters. The current population mostly explores a narrow band of high sweep, washout, and anhedral.
+
+Key changes needed to improve designs in the population by diversifying the search:
+1.  **Explore the lower end of the `le_sweep` range (45-60 deg):** This region is largely unrepresented, especially in combination with other parameters.
+2.  **Investigate positive `twist_root` and `twist_tip` (washin):** All high-reward designs use washout. Washin could drastically alter load distribution and vortex behavior.
+3.  **Test positive `dihedral`:** The population is heavily biased towards anhedral. Positive dihedral represents a significant shift in lateral stability and effective angle of attack across the span.
+4.  **Explore thicker `naca_t` airfoils:** Most designs are thin (6-11%). Testing thicker sections (e.g., 15-24%) could provide structural benefits and different aerodynamic characteristics, especially at lower sweeps.

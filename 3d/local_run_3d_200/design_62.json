@@ -1,0 +1,14 @@
+{
+  "design_name": "HighCamber_Thin_PosTwist_HighDihedral",
+  "le_sweep": 54.030816707233924,
+  "root_chord_in": 41.85959672376002,
+  "twist_root": -0.3644546481750761,
+  "twist_tip": -3.4689885204978843,
+  "dihedral": 9.342907247809082,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

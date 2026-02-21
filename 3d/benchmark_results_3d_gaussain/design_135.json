@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweepPosRootNegTipTwistPosDihedralNACA4408",
+  "le_sweep": 75.33041458201137,
+  "root_chord_in": 32.820821037738156,
+  "twist_root": -0.506819019494249,
+  "twist_tip": -7.972593887824775,
+  "dihedral": 10.825944423921982,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

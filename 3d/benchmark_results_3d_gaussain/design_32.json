@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_MinThickness_AggressiveWashout_Anhedral",
+  "le_sweep": 76.8703511353771,
+  "root_chord_in": 29.74581094663018,
+  "twist_root": -9.203590930127376,
+  "twist_tip": -8.227899200271187,
+  "dihedral": -15.0,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

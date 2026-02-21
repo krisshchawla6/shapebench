@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_AggressiveWashout_NACA0018_LargeChord",
+  "le_sweep": 74.77007813337886,
+  "root_chord_in": 50.0,
+  "twist_root": -9.752769332821922,
+  "twist_tip": -2.706394588390151,
+  "dihedral": 10.50130026584679,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 18,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,54 @@
+# Delta Wing Design Context
+
+## Parameter Space
+Each delta wing is defined by the following design parameters:
+
+| Parameter      | Type       | Range / Options                     |
+|--------------- |----------- |-------------------------------------|
+| le_sweep       | continuous | 45.0 – 80.0 deg                    |
+| root_chord_in  | continuous | 10.0 – 50.0 inches                 |
+| twist_root     | continuous | -10.0 – 10.0 deg                   |
+| twist_tip      | continuous | -10.0 – 10.0 deg (washout < 0)     |
+| dihedral       | continuous | -15.0 – 15.0 deg (tips up > 0)     |
+| naca_m         | discrete   | 0, 2, 4  (max camber %chord)       |
+| naca_p         | discrete   | 0, 4  (camber pos, must be 0 if m=0)|
+| naca_t         | integer    | 6 – 24  (thickness %chord)         |
+
+Hardcoded (delta wing identity): taper = 0, tip chord = 0, symmetric wing.
+
+## Objective
+Maximize the reward (CL/CDi relative to baseline).
+
+## Previous Designs
+Design 1:
+  - Parameters: le_sweep=71.23797572368547, root_chord_in=32.88449414553215, twist_root=-10.0, twist_tip=-10.0, dihedral=-15.0, NACA 2407
+  - Reward: 424.5627
+  - Rank: 0
+
+Design 2:
+  - Parameters: le_sweep=71.31195873699008, root_chord_in=32.95013952119979, twist_root=-5.7044673197480895, twist_tip=-9.129223918924767, dihedral=-3.9940311787905136, NACA 2411
+  - Reward: 56.6208
+  - Rank: 2
+
+Design 3:
+  - Parameters: le_sweep=69.7700552246637, root_chord_in=32.909995928624454, twist_root=-6.108173892296854, twist_tip=-10.0, dihedral=-11.660027289847022, NACA 2408
+  - Reward: 353.7832
+  - Rank: 1
+
+Design 4:
+  - Parameters: le_sweep=71.66452458285335, root_chord_in=35.326162759000376, twist_root=-5.3042589806019205, twist_tip=-8.277900154443028, dihedral=-9.959599910200733, NACA 4010
+  - Reward: 6.5209
+  - Rank: 10
+
+Design 5:
+  - Parameters: le_sweep=73.59331497547852, root_chord_in=48.6349189413763, twist_root=5.31822161163038, twist_tip=-9.55071056429987, dihedral=-15.0, NACA 4406
+  - Reward: -2.5630
+  - Rank: 24
+
+Design 6:
+  - Parameters: le_sweep=66.71994939555528, root_chord_in=40.860924006950704, twist_root=-8.756971685821739, twist_tip=-8.51861018058735, dihedral=-15.0, NACA 4408
+  - Reward: 28.3901
+  - Rank: 5
+
+
+Note: If images are provided, they show the Cp distribution and results table for a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between design parameters and resulting aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

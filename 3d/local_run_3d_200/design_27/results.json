@@ -1,0 +1,33 @@
+{
+  "design_name": "MidSweepHighCamberTipWashout",
+  "design_params": {
+    "le_sweep_deg": 55.88126382159983,
+    "root_chord_in": 44.78984580690256,
+    "twist_root_deg": -2.641618016325337,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": 15.0,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.21807884028492477,
+    "CDi": 0.017551191702886187,
+    "CM": -0.1721462176015389,
+    "L_D": 12.425301026656955
+  },
+  "corrected_results": {
+    "CL": -0.09132407381614156,
+    "CDi": -0.005366636501599693,
+    "CM": 0.1699401259765727,
+    "L_D": 17.017003814012664
+  }
+}

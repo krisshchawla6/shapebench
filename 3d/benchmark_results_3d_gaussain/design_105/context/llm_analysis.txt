@@ -1,0 +1,9 @@
+The current top-performing design (Design 1) achieved a reward of 424.5627. It features a high leading-edge sweep (71.2 deg), a moderate root chord (32.9 in), aggressive uniform washout (-10.0 deg at both root and tip), and an extreme negative dihedral (-15.0 deg). The airfoil is a cambered NACA 2407. This combination suggests that high sweep, significant washout, and negative dihedral are key drivers for high CL/CDi in this design space, likely by enhancing vortex lift and optimizing spanwise load distribution.
+
+However, the uniform and extreme washout, combined with the maximum negative dihedral, could potentially lead to local flow separation at certain conditions or an excessively steep lift curve slope. The cambered airfoil, while providing baseline lift, might not be fully leveraging the vortex-dominated flow, where symmetric airfoils often excel by allowing the vortices to form cleanly without interference from airfoil camber.
+
+**Key design changes needed to improve designs in the population:**
+1.  **Optimize Twist Gradient**: Explore differential twist distributions (e.g., more washout at the tip than the root) to fine-tune spanwise lift, potentially reducing induced drag more effectively than uniform washout.
+2.  **Moderate Dihedral**: Investigate if slightly less extreme negative dihedral values can improve performance by balancing stability, vortex strength, and flow attachment.
+3.  **Evaluate Symmetric Airfoils with High Sweep**: Thoroughly test symmetric airfoils (NACA 00xx) at very high sweeps, as they are often synergistic with vortex-dominated lift generation.
+4.  **Explore Root Chord vs. Sweep Relationship**: Examine if a slightly smaller root chord, combined with very high sweep, can maintain or improve efficiency by reducing wetted area for a given lift requirement.

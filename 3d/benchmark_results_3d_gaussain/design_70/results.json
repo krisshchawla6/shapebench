@@ -1,0 +1,33 @@
+{
+  "design_name": "AggressiveCamberWashoutDelta",
+  "design_params": {
+    "le_sweep_deg": 67.36277443926224,
+    "root_chord_in": 37.331371787980274,
+    "twist_root_deg": -3.5708346958780623,
+    "twist_tip_deg": -9.95243977131471,
+    "dihedral_deg": -12.644002564147232,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.23139836631212712,
+    "CDi": 0.01602855276790463,
+    "CM": -0.20857839520534516,
+    "L_D": 14.43663502643085
+  },
+  "corrected_results": {
+    "CL": 0.040197206625787366,
+    "CDi": 0.004322475579983722,
+    "CM": 0.012882127711715758,
+    "L_D": 9.299579808369616
+  }
+}

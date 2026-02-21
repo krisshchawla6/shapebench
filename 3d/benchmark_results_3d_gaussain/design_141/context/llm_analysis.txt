@@ -1,0 +1,9 @@
+The representative design (Design 1) with `le_sweep=71.2`, `root_chord_in=32.88`, `twist_root=-10.0`, `twist_tip=-10.0`, `dihedral=-15.0`, and NACA 2407, achieved the highest reward of 424.5627.
+
+The Cp distribution image shows a strong, well-defined suction peak along the leading edge, characteristic of robust leading-edge vortex lift. This indicates that the high sweep and geometry are effectively generating and maintaining these vortices. The pressure recovery over the aft portion of the wing appears relatively smooth, suggesting efficient flow without significant premature separation. The aggressive, uniform washout (`twist_root=-10.0`, `twist_tip=-10.0`) likely plays a crucial role in tailoring the spanwise load distribution, reducing induced drag, and potentially delaying flow separation, especially in conjunction with the high sweep. The strong anhedral (`dihedral=-15.0`) is also a consistent feature among the top-performing designs, suggesting it contributes positively to the overall aerodynamic efficiency or stability for these highly swept planforms.
+
+**Key design changes needed to improve designs in the population**:
+1.  **Explore higher sweep angles**: Push beyond 71 degrees to investigate if even stronger vortex lift can be generated, potentially at the cost of induced drag, but with a net gain in CL/CDi.
+2.  **Vary twist distribution**: Experiment with non-uniform aggressive washout (e.g., maximum at root, less extreme at tip) to further optimize spanwise lift distribution.
+3.  **Investigate camber interaction**: Test configurations with zero camber (NACA 00xx) to isolate the contribution of vortex lift and twist, or higher camber (NACA 44xx) to see if more inherent lift aids or hinders the vortex dynamics.
+4.  **Dihedral sensitivity**: Systematically vary the strong anhedral observed in top designs to understand its specific role in vortex stability and overall performance.

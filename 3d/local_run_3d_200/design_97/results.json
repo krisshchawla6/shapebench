@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_PosRootTwist_NACA2410_SmallChord_PosDihedral",
+  "design_params": {
+    "le_sweep_deg": 64.39107942590701,
+    "root_chord_in": 19.36976459300675,
+    "twist_root_deg": -2.192652270635052,
+    "twist_tip_deg": -6.465020716991662,
+    "dihedral_deg": 10.201096111816211,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.3438561664001044,
+    "CDi": 0.030085058785485466,
+    "CM": -0.3350697955550004,
+    "L_D": 11.429466329179911
+  },
+  "corrected_results": {
+    "CL": 0.2681781601793832,
+    "CDi": 0.027538544252509123,
+    "CM": -0.2658944593727453,
+    "L_D": 9.738283829398448
+  }
+}

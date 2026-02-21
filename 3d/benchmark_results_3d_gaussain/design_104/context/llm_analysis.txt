@@ -1,0 +1,10 @@
+The current population's highest reward comes from Design 1 (424.5627), which features a `le_sweep` of ~71.2 degrees, a `root_chord_in` of ~32.9 inches, and notably, the most aggressive washout possible with `twist_root` and `twist_tip` both at -10.0 degrees. This design also employs the maximum negative `dihedral` of -15.0 degrees (tips significantly down). The airfoil is a NACA 2407.
+Other high-reward designs (Design 2 and 4) corroborate the effectiveness of high sweep, significant washout, and negative dihedral, though perhaps not always at the extreme limits. The NACA 24xx series (cambered) has shown strong performance, but a symmetric NACA 0006 also yielded a decent reward when combined with extreme geometric parameters.
+
+The key takeaway is that an aggressive combination of high sweep, strong washout, and negative dihedral seems to drive the highest CL/CDi ratios. This setup likely optimizes the spanwise lift distribution, enhances the beneficial effects of leading-edge vortices, and minimizes induced drag. The `naca_t` values are generally low (6-8) in successful designs, suggesting thinner airfoils are preferred.
+
+Key design changes needed to improve designs in the population by exploitation:
+1.  Maintain high leading-edge sweep values, near or slightly above 71 degrees.
+2.  Continue to maximize washout by setting `twist_root` and `twist_tip` to their lowest possible values (-10.0 deg).
+3.  Continue to maximize negative dihedral by setting `dihedral` to its lowest possible value (-15.0 deg).
+4.  Explore the thinnest available NACA profile (naca_t=6) within the successful cambered series (NACA 24xx) to potentially reduce drag further.

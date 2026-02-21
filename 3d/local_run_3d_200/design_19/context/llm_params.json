@@ -1,0 +1,11 @@
+{
+  "le_sweep": 71.5,
+  "root_chord_in": 33.0,
+  "twist_root": -9.8,
+  "twist_tip": -7.5,
+  "dihedral": 1.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 12,
+  "name": "HighSweepCamberedWashout"
+}

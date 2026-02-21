@@ -1,0 +1,14 @@
+{
+  "design_name": "MidSweep_MaxCamber_TipWashout_PosDihedral",
+  "le_sweep": 57.13371132622653,
+  "root_chord_in": 31.222219673746572,
+  "twist_root": -1.242649815017067,
+  "twist_tip": -8.832888223963518,
+  "dihedral": 6.888185032748046,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

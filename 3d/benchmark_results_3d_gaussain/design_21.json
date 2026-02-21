@@ -1,0 +1,14 @@
+{
+  "design_name": "Swept_FlatPlate_HighTwist_Dihedral",
+  "le_sweep": 58.3924288963374,
+  "root_chord_in": 33.789280379553944,
+  "twist_root": 4.679553680461547,
+  "twist_tip": -9.740395334796652,
+  "dihedral": 9.037208899690288,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

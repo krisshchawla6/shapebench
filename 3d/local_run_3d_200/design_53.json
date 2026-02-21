@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweep_CamberedWashout_Exploration",
+  "le_sweep": 52.109731174588504,
+  "root_chord_in": 46.04243702520692,
+  "twist_root": -9.499727515392106,
+  "twist_tip": -6.362526796162424,
+  "dihedral": -5.549108146348622,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

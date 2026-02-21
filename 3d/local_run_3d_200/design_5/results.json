@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_Washout_Camber_Explorer",
+  "design_params": {
+    "le_sweep_deg": 75.7086025221185,
+    "root_chord_in": 41.71212219437215,
+    "twist_root_deg": -0.8766676645299625,
+    "twist_tip_deg": -4.498116349758295,
+    "dihedral_deg": 3.9635024426054755,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.30878260224653736,
+    "CDi": 0.03600003180270095,
+    "CM": -0.318720081986493,
+    "L_D": 8.577286929601282
+  },
+  "corrected_results": {
+    "CL": -0.04120496345990672,
+    "CDi": -0.011929615970503134,
+    "CM": 0.09727252696476418,
+    "L_D": 3.45400585918181
+  }
+}

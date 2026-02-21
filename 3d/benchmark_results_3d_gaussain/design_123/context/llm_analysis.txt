@@ -1,0 +1,13 @@
+The top-performing design (Design 1, Reward: 424.5627) exhibits several extreme parameter values: maximum negative twist at both root and tip (-10.0 deg), and maximum negative dihedral (-15.0 deg). It employs a relatively high leading-edge sweep (71.24 deg) and a cambered, thin airfoil (NACA 2407). The second-best design (Design 4, Reward: 353.7832) shares similar characteristics, including a cambered airfoil (NACA 2408), significant washout (-6.11 deg root, -10.0 deg tip), and strong anhedral (-11.66 deg). The consistency of these traits across high-reward designs suggests they are crucial for maximizing CL/CDi.
+
+Without specific image data, general aerodynamic issues for delta wings with these characteristics might include:
+-   **Vortex strength vs. drag**: While high sweep creates strong vortex lift, it also increases induced drag. The optimal sweep angle balances these effects.
+-   **Load distribution**: The aggressive washout (negative twist) likely aims to unload the wing tips, preventing premature tip stall and promoting a more elliptical-like spanwise load distribution to reduce induced drag.
+-   **Stability**: Extreme anhedral can impact lateral stability, but in this optimization context, it seems to be beneficial for the CL/CDi ratio, possibly by influencing the effective aspect ratio or vortex interaction.
+-   **Airfoil choice**: The NACA 24xx series provides inherent camber, generating lift at zero angle of attack, which is generally favorable for reducing trim drag and improving overall efficiency at certain flight conditions. The thinness (NACA 07/08) likely contributes to lower profile drag.
+
+Key design changes needed to improve designs in the population, based on these observations and an exploitation strategy:
+1.  **Maintain extreme washout and anhedral:** The current top performers consistently use maximum negative twist and dihedral. Further designs should continue to leverage these extremes.
+2.  **Fine-tune sweep angle:** The optimal sweep appears to be around 70-71 degrees. Small perturbations around this value could yield marginal improvements.
+3.  **Explore thinner cambered airfoils:** The NACA 24xx profile is performing well. Investigate the lower bounds of thickness (NACA 2406) to see if further drag reduction is possible without sacrificing too much lift or structural integrity.
+4.  **Confirm root chord range:** The root chord around 32-33 inches seems to be a good range; slight variations around this value can be explored.

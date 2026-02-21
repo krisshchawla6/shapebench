@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploitative_MaxWashout_MaxAnhedral_ThinCamber",
+  "le_sweep": 65.72532613090692,
+  "root_chord_in": 30.371862937809823,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -13.817189746860873,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

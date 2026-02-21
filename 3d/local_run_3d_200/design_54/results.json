@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_CamberWashout_Sweep65",
+  "design_params": {
+    "le_sweep_deg": 72.22898415316808,
+    "root_chord_in": 31.36295485695726,
+    "twist_root_deg": -6.616714298875612,
+    "twist_tip_deg": -6.769110078975896,
+    "dihedral_deg": 1.3135881003922267,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 14,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.20332106088454624,
+    "CDi": 0.01720019217913326,
+    "CM": -0.2455401090075086,
+    "L_D": 11.820859834997021
+  },
+  "corrected_results": {
+    "CL": 0.07043708469418242,
+    "CDi": 0.0027170477139274417,
+    "CM": -0.06499451289424865,
+    "L_D": 25.924125046875577
+  }
+}

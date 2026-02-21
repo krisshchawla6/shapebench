@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_SweepTwist4410",
+  "le_sweep": 68.65525484285348,
+  "root_chord_in": 36.53053244387282,
+  "twist_root": -9.945015801494883,
+  "twist_tip": -7.8884319477247615,
+  "dihedral": -2.8362561252598617,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

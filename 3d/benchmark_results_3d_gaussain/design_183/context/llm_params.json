@@ -1,0 +1,11 @@
+{
+  "le_sweep": 68.5,
+  "root_chord_in": 38.0,
+  "twist_root": -8.5,
+  "twist_tip": -9.8,
+  "dihedral": -11.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 9,
+  "name": "SweptCamberWashout"
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "Swept_Cambered_Anhedral",
+  "le_sweep": 65.16899505295656,
+  "root_chord_in": 23.396511198684834,
+  "twist_root": -10.0,
+  "twist_tip": -7.919676092508213,
+  "dihedral": -15.0,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

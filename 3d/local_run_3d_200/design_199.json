@@ -1,0 +1,14 @@
+{
+  "design_name": "Enhanced_Vortex_Hybrid",
+  "le_sweep": 73.33730874156751,
+  "root_chord_in": 35.196641043843236,
+  "twist_root": -8.803892943182172,
+  "twist_tip": -8.876015055761911,
+  "dihedral": -5.437678049909361,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

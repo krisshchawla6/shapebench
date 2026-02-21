@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_Cambered_TwistExploration",
+  "design_params": {
+    "le_sweep_deg": 80.0,
+    "root_chord_in": 26.804539168472598,
+    "twist_root_deg": 1.0786138619246213,
+    "twist_tip_deg": -5.224860229364931,
+    "dihedral_deg": -2.7688468549782796,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.25299236758386157,
+    "CDi": 0.0355922122824291,
+    "CM": -0.25010800879026157,
+    "L_D": 7.108082115726113
+  },
+  "corrected_results": {
+    "CL": 0.13956925188103944,
+    "CDi": 0.022020077224103773,
+    "CM": -0.12107153624923565,
+    "L_D": 6.338272589174354
+  }
+}

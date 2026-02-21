@@ -1,0 +1,13 @@
+The top-performing design (Design 1, Reward 424.5627) exhibits a high leading-edge sweep (71.2 deg), maximum washout at both root and tip (-10.0 deg), maximum anhedral (-15.0 deg), and utilizes a NACA 2407 airfoil (cambered, thin). This combination suggests that strong vortex lift generation (high sweep), effective load distribution management to reduce induced drag (aggressive washout), and possibly enhanced lateral stability or beneficial vortex interaction (anhedral) are key drivers of high CL/CDi. The NACA 2407 airfoil provides modest camber for lift augmentation.
+
+Critically assessing the patterns in the top designs (Designs 1, 2, 3, 4):
+*   **High Sweep**: All top designs have sweep above 69 degrees, with Design 4 reaching 76.6 degrees. This consistently points to the importance of vortex lift.
+*   **Aggressive Washout**: All top designs feature significant negative twist (washout), especially at the tip (many at -10.0 deg). This is likely crucial for controlling load distribution, preventing tip stall, and minimizing induced drag.
+*   **Strong Anhedral**: Designs 1, 3, and 4 use the maximum anhedral of -15.0 degrees, and Design 2 is close at -11.7 degrees. This strong anhedral appears to be a consistent trait of successful designs.
+*   **Airfoil Type**: The highest reward designs (1 and 2) use NACA 24xx cambered airfoils, while Design 3 and 4 use NACA 00xx symmetric airfoils. This suggests camber might provide an edge, but high sweep itself can be very effective even with symmetric profiles. Thickness is generally low (6-8%).
+
+Key design changes needed to improve the population:
+1.  **Explore very high sweep with camber**: While Design 4 showed high sweep with a symmetric airfoil, combining very high sweep with a cambered airfoil could yield further gains.
+2.  **Investigate varied washout profiles**: While -10.0/-10.0 (root/tip) is effective, exploring other strong but differentiated washout combinations might refine load distribution even further.
+3.  **Solidify anhedral's role**: The -15.0 deg anhedral appears robustly effective; reinforcing this trait in new designs seems prudent.
+4.  **Test alternative camber distributions**: NACA 24xx has been successful; exploring NACA 44xx could reveal benefits from a different camber profile.

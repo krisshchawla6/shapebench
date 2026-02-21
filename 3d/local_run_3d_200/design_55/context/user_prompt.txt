@@ -1,0 +1,127 @@
+# Delta Wing Design Context
+
+## Parameter Space
+Each delta wing is defined by the following design parameters:
+
+| Parameter      | Type       | Range / Options                     |
+|--------------- |----------- |-------------------------------------|
+| le_sweep       | continuous | 45.0 – 80.0 deg                    |
+| root_chord_in  | continuous | 10.0 – 50.0 inches                 |
+| twist_root     | continuous | -10.0 – 10.0 deg                   |
+| twist_tip      | continuous | -10.0 – 10.0 deg (washout < 0)     |
+| dihedral       | continuous | -15.0 – 15.0 deg (tips up > 0)     |
+| naca_m         | discrete   | 0, 2, 4  (max camber %chord)       |
+| naca_p         | discrete   | 0, 4  (camber pos, must be 0 if m=0)|
+| naca_t         | integer    | 6 – 24  (thickness %chord)         |
+
+Hardcoded (delta wing identity): taper = 0, tip chord = 0, symmetric wing.
+
+## Objective
+Maximize the reward (CL/CDi relative to baseline).
+
+## Previous Designs
+Design 1:
+  - Parameters: le_sweep=65.51609837711328, root_chord_in=34.78643701978183, twist_root=-7.132963532239833, twist_tip=-4.605112484236357, dihedral=-1.7232349482397291, NACA 4412
+  - Reward: 4016.0090
+  - Rank: 0
+
+Design 2:
+  - Parameters: le_sweep=63.122921519208425, root_chord_in=33.20239762524798, twist_root=-10.0, twist_tip=-2.831254150244472, dihedral=-3.4417722793995127, NACA 2411
+  - Reward: 338.5009
+  - Rank: 1
+
+Design 3:
+  - Parameters: le_sweep=58.3338806168554, root_chord_in=36.83807565757954, twist_root=-7.699897701291576, twist_tip=-7.127645249766683, dihedral=-0.33842089851657775, NACA 0011
+  - Reward: 53.8090
+  - Rank: 2
+
+Design 4:
+  - Parameters: le_sweep=72.9162963912868, root_chord_in=31.590001672224417, twist_root=-8.894553448062268, twist_tip=-7.960609409062425, dihedral=5.877419119090993, NACA 0018
+  - Reward: 52.1820
+  - Rank: 3
+
+Design 5:
+  - Parameters: le_sweep=72.22898415316808, root_chord_in=31.36295485695726, twist_root=-6.616714298875612, twist_tip=-6.769110078975896, dihedral=1.3135881003922267, NACA 4414
+  - Reward: 20.4741
+  - Rank: 6
+
+Design 6:
+  - Parameters: le_sweep=74.41042346556199, root_chord_in=23.710527182124228, twist_root=-5.378154639335459, twist_tip=-10.0, dihedral=-4.515377296648114, NACA 4009
+  - Reward: 13.3161
+  - Rank: 10
+
+
+Note: If images are provided, they show the Cp distribution and results table for a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between design parameters and resulting aerodynamics, but generate a NEW design to advance the population, not a modification of this one.
+
+
+# Task: Generate New Delta Wing Design (with Direct Values)
+
+First, analyze the provided information:
+
+1. **Image Analysis**: If images are provided, they show the Cp distribution and corrected aerodynamic coefficients for a representative design sampled from the population (listed as Design 1 above for reference). Analyze this design critically to understand current population patterns, NOT to modify this specific design.
+
+Reference Design 1's parameters and reward to learn parameter-aerodynamic mappings.
+
+Critically assess the design shown:
+- What aerodynamic issues exist? (e.g., poor lift distribution, high induced drag, early vortex breakdown)
+- How does the sweep, twist, camber, and thickness affect performance?
+- Which parameters most influence the reward (CL/CDi)?
+- List 3-4 key design changes needed to improve designs in the population
+
+
+**Strategy Focus**: **Hybrid Strategy**: Examine the design database and identify 2-3 designs with complementary strengths
+    (e.g., one with high lift, another with low drag). Analyze their parameters and aerodynamic features from the images.
+    Your new design should blend parameter characteristics from these designs, creating values that interpolate
+    or combine their successful traits into a novel hybrid configuration.
+
+
+2. **Design Reasoning**: Based on the design database and population state, think step-by-step about what NEW design should be explored to advance the population. **Follow the Strategy Focus guidance above** - this determines HOW you should approach the design. Consider unexplored geometric variations and different aerodynamic strategies. Focus on diversity and bold exploration, not incremental tweaking.
+
+In your reasoning, provide 4-6 bullet points that:
+- **Apply the Strategy Focus approach described above**
+- Draw insights from the population database (what patterns lead to high/low rewards?)
+- Incorporate observations from the image analysis (what aerodynamic phenomena are present?)
+- Identify specific design parameters to explore and WHY
+- Apply your judgment as an evolutionary optimizer (what will advance the search?)
+
+Then, create a new delta wing by specifying precise values for each parameter.
+
+Design considerations:
+- Higher sweep → stronger vortex lift but higher induced drag
+- Twist distribution (root vs tip) controls load distribution and stall behavior
+- Camber (naca_m, naca_p) adds lift but shifts pitching moment
+- Thickness (naca_t) affects wave drag and structural depth
+- Dihedral affects lateral stability
+- Root chord scales the entire wing
+
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "le_sweep": <float 45.0-80.0>,
+  "root_chord_in": <float 10.0-50.0>,
+  "twist_root": <float -10.0 to 10.0>,
+  "twist_tip": <float -10.0 to 10.0>,
+  "dihedral": <float -15.0 to 15.0>,
+  "naca_m": <int: 0, 2, or 4>,
+  "naca_p": <int: 0 or 4 (must be 0 when naca_m=0)>,
+  "naca_t": <int 6-24>,
+  "name": "<descriptive_name>"
+}
+
+Replace all <placeholders> with actual values respecting the stated ranges.
+
+
+**Response Format:**
+Provide your response in the following structure:
+
+## Analysis
+[Critically assess the representative design's Cp distribution and aerodynamic performance. Reference its parameters and reward. Identify issues and list 3-4 key changes needed]
+
+## Reasoning
+[4-6 bullet points with design insights: combine population database patterns, image analysis observations, the Strategy Focus guidance above, and your judgment as an evolutionary optimizer to justify the new design strategy]
+
+## Design Parameters
+[Your JSON with the design parameters as shown in the example above]

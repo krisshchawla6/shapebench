@@ -1,0 +1,8 @@
+The strategy is to **Explore Underexplored Regions** of the parameter space, pushing towards boundaries and untested combinations, rather than making incremental changes to the best design.
+
+*   The current population's high-performing designs primarily cluster around mid-to-high sweep angles (60-65 deg), significant root wash-in, and moderate camber/thickness. We need to explore configurations that diverge from these established patterns.
+*   The `NACA m=4, p=0` configuration (effectively "NACA 40xx") has not been attempted. This represents a distinct camber distribution with max camber at the leading edge, which could interact uniquely with leading-edge vortices at high sweep.
+*   To further push exploration, we will pair this novel NACA profile with a very high sweep angle (close to the upper bound). High sweep is known to generate strong vortex lift, and combining it with a "leading-edge camber" could be synergistic or antagonistic, which is valuable to discover.
+*   We will also explore the extreme upper boundary for `naca_t` (max thickness, 24). This will test the penalty of high thickness and could influence pressure recovery and vortex behavior at high sweep.
+*   For twist, Design 1 has max wash-in at the root. Let's try a less extreme wash-in at the root, paired with a moderate tip washout. This allows the novel camber and sweep to dominate the initial exploration.
+*   Finally, let's explore a positive dihedral (tips up) at a moderately high value, as most designs have been anhedral or neutral. This tests its impact on CL/CDi alongside other extreme parameters.

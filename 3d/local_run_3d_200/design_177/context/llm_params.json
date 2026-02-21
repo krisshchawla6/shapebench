@@ -1,0 +1,11 @@
+{
+  "le_sweep": 70.0,
+  "root_chord_in": 38.0,
+  "twist_root": -9.0,
+  "twist_tip": -3.0,
+  "dihedral": 3.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 10,
+  "name": "Hybrid_InvertedWashout_HighSweep"
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "ExtremeExploration_HighSweep_LargeChord_WashIn_DihedralUp_MaxCamberThick",
+  "le_sweep": 77.76025968985527,
+  "root_chord_in": 41.782657669075505,
+  "twist_root": 1.1122442146804707,
+  "twist_tip": 3.5324726110493114,
+  "dihedral": 4.874442374347467,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 20,
+    "chord_length": 1.0
+  }
+}

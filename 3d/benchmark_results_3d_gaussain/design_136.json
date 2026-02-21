@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_SweepWashoutAnhedral_NACA008",
+  "le_sweep": 75.14123344980075,
+  "root_chord_in": 25.479378326178036,
+  "twist_root": -8.417108014649198,
+  "twist_tip": -5.74411318323466,
+  "dihedral": -9.410625456246649,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "WashinExplorer_CamberedThin",
+  "le_sweep": 68.26001690194941,
+  "root_chord_in": 36.78897807664038,
+  "twist_root": -8.186360042480903,
+  "twist_tip": -7.1464350550064895,
+  "dihedral": 2.9383872689305632,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

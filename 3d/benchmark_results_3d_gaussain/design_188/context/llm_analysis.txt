@@ -1,0 +1,16 @@
+The representative design (Design 1) with the highest reward (626.7341) features a very high leading-edge sweep (77.84 degrees), moderate root chord (27.28 inches), extreme washout at both root and tip (approx. -9.5 to -9.1 degrees), extreme anhedral (-15.0 degrees dihedral), and a very thin symmetric airfoil (NACA 0006).
+
+**Observations from Design 1:**
+*   **Aerodynamic performance**: The high reward suggests excellent CL/CDi. The Cp distribution (if viewed) would likely indicate strong leading-edge vortex lift generation due to the high sweep, evidenced by significant low-pressure regions on the upper surface. The strong washout helps to distribute this lift efficiently along the span and mitigate tip stall, contributing to a high CL. The very thin, symmetric airfoil minimizes profile drag (CDp).
+*   **Parameter Influence**:
+    *   **High Sweep (77.84°)**: Clearly crucial for generating strong vortex lift, a key characteristic of high-performing delta wings.
+    *   **Extreme Washout (twist_root/tip ~ -9°)**: Essential for managing spanwise lift distribution, delaying separation, and ensuring efficient lift generation across the wing, leading to higher CL and lower induced drag.
+    *   **Extreme Anhedral (dihedral -15.0°)**: This is a consistent feature among the top designs and may be interacting favorably with the vortex flow, possibly influencing effective dihedral stability or vortex attachment.
+    *   **NACA 0006**: A very thin symmetric airfoil significantly reduces profile drag, allowing the high lift to translate into a high CL/CDi ratio. Cambered airfoils (NACA 24xx) were present in other good designs but not the absolute best.
+
+**Key design changes needed to improve designs in the population (based on Design 1 and population trends):**
+
+1.  **Explore lower sweep angles**: The top designs are all concentrated at the higher end of the sweep range. Testing mid-to-lower sweep angles (e.g., 50-60 degrees) while maintaining other beneficial characteristics (washout, airfoil choice) is crucial for understanding the design space.
+2.  **Investigate extreme positive dihedral**: All high-reward designs show strong anhedral. Exploring the opposite extreme (maximum positive dihedral) is an underexplored region that could reveal new optimal interactions or confirm the necessity of anhedral.
+3.  **Test thin cambered airfoils systematically**: While NACA 0006 performed best, exploring other thin cambered airfoils (e.g., NACA 2407/2408) in combination with different sweep and dihedral configurations might find new optima where camber contributes more effectively.
+4.  **Vary root chord more significantly**: Current high-reward designs cluster around a medium root chord (27-33 inches). Exploring smaller or larger root chords will test scaling effects across different aerodynamic regimes.

@@ -1,0 +1,16 @@
+The representative design (Design 1) achieves the highest reward (424.5627) by employing a high leading-edge sweep (71.2 deg), an aggressive uniform washout (-10 deg at both root and tip), maximum anhedral (-15 deg), and a moderately thin, cambered airfoil (NACA 2407).
+
+Aerodynamic issues (inferred without image): The extreme uniform washout, while effective in this case, might risk under-utilizing the outer wing sections at certain flight conditions, potentially sacrificing overall lift if not perfectly tuned to the vortex flowfield. The maximum anhedral could lead to excessive roll instability if not compensated. However, the high reward suggests that for this specific delta wing configuration, these extreme settings are advantageous.
+
+Parameter influence on reward (CL/CDi):
+*   **le_sweep**: Clearly a dominant factor, with high sweep (70+ degrees) consistently appearing in top designs, indicating the critical role of strong leading-edge vortices for lift generation.
+*   **Twist distribution**: Aggressive washout, particularly at the tip, is highly prevalent in top designs (1, 2, 3, 4). This strongly suggests it's crucial for optimizing spanwise lift distribution and reducing induced drag for delta wings.
+*   **Camber (naca_m, naca_p)**: Designs using NACA 24xx (cambered) appear at the very top (Design 1, 4), outperforming some NACA 00xx (symmetric) designs, suggesting camber contributes positively to lift efficiency.
+*   **Dihedral**: Strong anhedral (-15 to -11.6 deg) is common among high-reward designs, implying it plays a role in the overall optimal setup, possibly influencing vortex stability or effective dihedral effect for flight control.
+*   **naca_t**: A low thickness percentage (6-8%) is seen across top designs, indicating a benefit from reduced profile drag.
+
+Key design changes needed to improve designs in the population:
+1.  **Refine Washout Distribution**: Explore differential washout (e.g., max root washout with slightly less extreme tip washout) to fine-tune spanwise load distribution, building on the success of aggressive twist.
+2.  **Combine High Sweep and Camber**: Consistently leverage high sweep (70-75+ deg) with cambered airfoils (NACA 24xx) which appear to provide a synergistic benefit for CL/CDi.
+3.  **Optimize Thickness for Cambered Airfoils**: Investigate the lowest practical thickness (e.g., NACA 2406) when combined with camber and high sweep, to minimize profile drag while maintaining lift.
+4.  **Confirm Anhedral Benefit**: Continue to explore the extreme anhedral (-15 deg) observed in top designs, as its consistent presence suggests it's a key element of the high-performance configurations.

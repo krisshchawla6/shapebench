@@ -1,0 +1,33 @@
+{
+  "design_name": "ExploitativeMaxWashoutDihedral",
+  "design_params": {
+    "le_sweep_deg": 72.71759674893299,
+    "root_chord_in": 35.80659841759332,
+    "twist_root_deg": -7.670746742633515,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -14.964362393393149,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.052152661086853416,
+    "CDi": 0.01679754407230944,
+    "CM": -0.11356382053106744,
+    "L_D": 3.1047789404420425
+  },
+  "corrected_results": {
+    "CL": -0.04050618548276702,
+    "CDi": 0.0006813911613516676,
+    "CM": 0.047127732113978235,
+    "L_D": -59.44630306388973
+  }
+}

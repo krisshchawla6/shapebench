@@ -1,0 +1,14 @@
+{
+  "design_name": "Balanced Swept Washout CamberThin",
+  "le_sweep": 68.53926903530017,
+  "root_chord_in": 24.549548982849238,
+  "twist_root": -7.321763090938199,
+  "twist_tip": -6.797535869020838,
+  "dihedral": -13.84801533235127,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

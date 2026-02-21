@@ -1,0 +1,11 @@
+{
+  "le_sweep": 79.9,
+  "root_chord_in": 45.0,
+  "twist_root": -8.0,
+  "twist_tip": -10.0,
+  "dihedral": -15.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 6,
+  "name": "ExtremeSweep_AggressiveWashout_MaxChord_NACA0006"
+}

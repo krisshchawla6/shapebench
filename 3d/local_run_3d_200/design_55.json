@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_Sweep_AggressiveWashout_NACA4415",
+  "le_sweep": 70.39107679806418,
+  "root_chord_in": 33.30962096669412,
+  "twist_root": -10.0,
+  "twist_tip": -7.530533899381692,
+  "dihedral": -5.782387114457114,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 21,
+    "chord_length": 1.0
+  }
+}

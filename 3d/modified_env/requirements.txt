@@ -1,0 +1,13 @@
+# Core dependencies
+numpy
+matplotlib
+scipy
+pillow
+lxml
+
+# Mesh generation (specific versions required for FEniCS compatibility)
+pygmsh==6.0.2
+meshio==3.3.1
+
+# Note: FEniCS (dolfin, mshr) must be installed via conda:
+# conda install -c conda-forge fenics=2019.1.0 mshr

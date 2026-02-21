@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweep_WashIn_HighDihedral_NACA4412",
+  "le_sweep": 50.56450865483188,
+  "root_chord_in": 27.713657462561752,
+  "twist_root": -4.839436535372552,
+  "twist_tip": 5.096490226171013,
+  "dihedral": 9.598953607043779,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

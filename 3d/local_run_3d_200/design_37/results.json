@@ -1,0 +1,33 @@
+{
+  "design_name": "CamberedWashoutExplorer",
+  "design_params": {
+    "le_sweep_deg": 65.51609837711328,
+    "root_chord_in": 34.78643701978183,
+    "twist_root_deg": -7.132963532239833,
+    "twist_tip_deg": -4.605112484236357,
+    "dihedral_deg": -1.7232349482397291,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.25035252808801733,
+    "CDi": 0.021961182429179632,
+    "CM": -0.2935537301142962,
+    "L_D": 11.399774529233731
+  },
+  "corrected_results": {
+    "CL": 0.06293126037982207,
+    "CDi": 1.5648862704384953e-05,
+    "CM": -0.049113650994574064,
+    "L_D": 4021.4590394603024
+  }
+}

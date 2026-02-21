@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_ZeroCam_PosDihedral_LargeChord",
+  "le_sweep": 79.26113035498916,
+  "root_chord_in": 50.0,
+  "twist_root": -7.019378671547768,
+  "twist_tip": -8.506473191488602,
+  "dihedral": 12.611373462327277,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 24,
+    "chord_length": 1.0
+  }
+}

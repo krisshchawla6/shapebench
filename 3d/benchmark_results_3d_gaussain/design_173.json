@@ -1,0 +1,14 @@
+{
+  "design_name": "ExtremeSweep_MaxWashout_MinChord_0006",
+  "le_sweep": 77.25754878807786,
+  "root_chord_in": 18.13796954596618,
+  "twist_root": -1.7603548399915638,
+  "twist_tip": -10.0,
+  "dihedral": -12.718483130027693,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

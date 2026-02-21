@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_Sweep_Washout_Camber6",
+  "le_sweep": 72.92071284342167,
+  "root_chord_in": 31.69205796890367,
+  "twist_root": -10.0,
+  "twist_tip": -7.810121009777346,
+  "dihedral": -15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

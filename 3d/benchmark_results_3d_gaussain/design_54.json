@@ -1,0 +1,14 @@
+{
+  "design_name": "SweptWashoutCambered_AnhedralDelta",
+  "le_sweep": 69.1275586015469,
+  "root_chord_in": 25.77660602781291,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -15.0,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

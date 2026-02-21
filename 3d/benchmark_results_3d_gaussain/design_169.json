@@ -1,0 +1,14 @@
+{
+  "design_name": "Moderate_Sweep_MaxCamber_MaxWashout",
+  "le_sweep": 60.172595405389465,
+  "root_chord_in": 36.45013969064454,
+  "twist_root": -6.234467348640164,
+  "twist_tip": -10.0,
+  "dihedral": -10.64918454022208,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 15,
+    "chord_length": 1.0
+  }
+}

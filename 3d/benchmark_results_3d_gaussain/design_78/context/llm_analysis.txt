@@ -1,0 +1,7 @@
+The highest-ranking design (Design 1, Reward: 424.5627) exhibits several consistent patterns also seen in other top performers (Design 4, 3). This design utilizes a moderately high sweep (71.24 deg), a substantial root chord (32.88 in), extreme negative twist at both root and tip (-10.0 deg for both, indicating strong washout), maximum anhedral (-15.0 deg), and a cambered, relatively thin airfoil (NACA 2407). The strong washout likely flattens the lift distribution and prevents tip stall, significantly reducing induced drag, while the anhedral likely enhances lateral stability and could interact favorably with the vortex flow field. The camber provides additional lift.
+
+**Key design changes needed to improve designs in the population (based on top performers):**
+1.  **Optimize Sweep:** Focus on the 70-72 degree range, as values outside this (e.g., 80 deg in Design 2) have shown lower rewards.
+2.  **Maximize Washout:** Continue to apply significant negative twist, especially at the tip (-10.0 deg appears highly effective). Strong negative root twist also correlates with success.
+3.  **Maximize Anhedral:** Maintain high negative dihedral (close to -15.0 deg), as it's a strong recurring feature in high-reward designs.
+4.  **Refine Airfoil:** Prioritize thin airfoils (NACA 't' parameter 6-8). Cambered profiles (NACA 24xx) appear to offer an advantage over symmetric ones (00xx) for highest rewards, but very thin symmetric airfoils also perform well.

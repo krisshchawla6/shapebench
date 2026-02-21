@@ -1,0 +1,33 @@
+{
+  "design_name": "MaxSweep_MaxCamber_OppositeDihedral",
+  "design_params": {
+    "le_sweep_deg": 80.0,
+    "root_chord_in": 27.25967974806867,
+    "twist_root_deg": -7.255725858486036,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": 4.330365144890216,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.0721832485181402,
+    "CDi": 0.0018785782148896312,
+    "CM": -0.07243847925016021,
+    "L_D": 38.424404129684355
+  },
+  "corrected_results": {
+    "CL": 0.08553234380585005,
+    "CDi": 0.002796187363095513,
+    "CM": -0.0709406227123049,
+    "L_D": 30.588917228765975
+  }
+}

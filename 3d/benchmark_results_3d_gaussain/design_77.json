@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweepTwistedCambered",
+  "le_sweep": 79.97480826974176,
+  "root_chord_in": 46.81042916725394,
+  "twist_root": 3.452542537049668,
+  "twist_tip": -9.895829400293042,
+  "dihedral": 10.115182056686198,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 15,
+    "chord_length": 1.0
+  }
+}

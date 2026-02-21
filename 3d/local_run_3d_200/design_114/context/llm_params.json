@@ -1,0 +1,11 @@
+{
+  "le_sweep": 68.0,
+  "root_chord_in": 37.0,
+  "twist_root": -10.0,
+  "twist_tip": -7.5,
+  "dihedral": -3.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 13,
+  "name": "Hybrid_AggressiveTwistHighSweep"
+}

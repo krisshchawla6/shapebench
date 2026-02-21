@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_Design2_RefinedTwistNACA",
+  "design_params": {
+    "le_sweep_deg": 62.865738964360624,
+    "root_chord_in": 35.29677911044654,
+    "twist_root_deg": -8.885934008948727,
+    "twist_tip_deg": -6.743187238029742,
+    "dihedral_deg": -12.589946190844632,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.12780479056474403,
+    "CDi": 0.0195495148697809,
+    "CM": -0.19463554640090736,
+    "L_D": 6.537491667494069
+  },
+  "corrected_results": {
+    "CL": 0.003490901227093563,
+    "CDi": 0.0012808759236323736,
+    "CM": -0.004778153370891695,
+    "L_D": 2.7254015495848236
+  }
+}

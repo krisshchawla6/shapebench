@@ -1,0 +1,33 @@
+{
+  "design_name": "Extreme_Sweep_Symmetric_Large_Wing",
+  "design_params": {
+    "le_sweep_deg": 77.16308212118228,
+    "root_chord_in": 45.59090806144283,
+    "twist_root_deg": 3.90650189941469,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": 6.301714287740002,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.3451277970934381,
+    "CDi": 0.04833678008272183,
+    "CM": -0.32609462699212644,
+    "L_D": 7.1400659394936685
+  },
+  "corrected_results": {
+    "CL": -0.08601199911594297,
+    "CDi": -0.00890317491466072,
+    "CM": 0.16519938384725122,
+    "L_D": 9.660823238944609
+  }
+}

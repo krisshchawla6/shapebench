@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_Symmetric_PositiveTipTwist_Thick",
+  "design_params": {
+    "le_sweep_deg": 52.89898513493907,
+    "root_chord_in": 45.19489734242752,
+    "twist_root_deg": -6.196535800515929,
+    "twist_tip_deg": 4.989337837615407,
+    "dihedral_deg": 7.662022792517888,
+    "naca": {
+      "m": 2,
+      "p": 0,
+      "t": 22,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.4449995584219607,
+    "CDi": 0.07143686163569853,
+    "CM": -0.41976923291662954,
+    "L_D": 6.229270830671331
+  },
+  "corrected_results": {
+    "CL": -0.09146802543736333,
+    "CDi": -0.012838363903264089,
+    "CM": 0.15582231220909168,
+    "L_D": 7.124585821570929
+  }
+}

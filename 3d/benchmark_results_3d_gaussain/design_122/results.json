@@ -1,0 +1,33 @@
+{
+  "design_name": "ExtremeExploration_HighSweep_LargeChord_WashIn_DihedralUp_MaxCamberThick",
+  "design_params": {
+    "le_sweep_deg": 77.76025968985527,
+    "root_chord_in": 41.782657669075505,
+    "twist_root_deg": 1.1122442146804707,
+    "twist_tip_deg": 3.5324726110493114,
+    "dihedral_deg": 4.874442374347467,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 20,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.4033313717820779,
+    "CDi": 0.08258928613756118,
+    "CM": -0.42434976365043103,
+    "L_D": 4.883579827900278
+  },
+  "corrected_results": {
+    "CL": -0.061340244075034606,
+    "CDi": -0.01984874365320677,
+    "CM": 0.11245794295858764,
+    "L_D": 3.090384215079752
+  }
+}

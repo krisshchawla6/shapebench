@@ -1,0 +1,33 @@
+{
+  "design_name": "CamberedSweepOpt_StrongTwistGradient",
+  "design_params": {
+    "le_sweep_deg": 67.35184807080412,
+    "root_chord_in": 36.85242546589373,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": 0.5187138634647384,
+    "dihedral_deg": -3.355441636742424,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.13867250105783596,
+    "CDi": 0.025226091538971308,
+    "CM": -0.20653070120016176,
+    "L_D": 5.497185358405739
+  },
+  "corrected_results": {
+    "CL": -0.016617380224740665,
+    "CDi": -0.0029898419131003575,
+    "CM": 0.025195832809195542,
+    "L_D": 5.557946108096747
+  }
+}

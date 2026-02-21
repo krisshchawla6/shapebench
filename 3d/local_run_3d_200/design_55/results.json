@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Sweep_AggressiveWashout_NACA4415",
+  "design_params": {
+    "le_sweep_deg": 70.39107679806418,
+    "root_chord_in": 33.30962096669412,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -7.530533899381692,
+    "dihedral_deg": -5.782387114457114,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 21,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.03564582738469982,
+    "CDi": 0.0187416759511147,
+    "CM": -0.1104557429486892,
+    "L_D": 1.9019551654653226
+  },
+  "corrected_results": {
+    "CL": -0.03631131429667269,
+    "CDi": 0.003198679661100941,
+    "CM": 0.027631289633918348,
+    "L_D": -11.351969607414466
+  }
+}

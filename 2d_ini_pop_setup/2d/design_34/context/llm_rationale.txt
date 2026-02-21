@@ -1,0 +1,5 @@
+*   **Hybrid Strategy Implementation**: This design blends the leading-edge robustness of Design 3 (r0=1.0) with the high-performance slender upper profile of Design 2 (r1=0.296), aiming to capture both high lift and low drag.
+*   **Curvature Blending**: I am interpolating the angular offset of CP2 (lower surface) between Design 2 (-0.016) and Design 3 (-0.185), selecting -0.095 to test if an intermediate lower-camber profile improves the pressure gradient.
+*   **Trailing Edge Optimization**: The edgy_param for the trailing edge (CP3) is set to 0.725, a hybrid value between the top two designs, to ensure clean flow separation and minimal wake thickness.
+*   **Smoothness Consistency**: Following the pattern of all high-reward designs, I am keeping the first three control points (CP0, CP1, CP2) extremely smooth (edgy_param < -0.8) to prevent unwanted flow disturbances.
+*   **Exploratory Interpolation**: By combining the high r0 from the Rank 1 design and the low r1 from the Rank 0 design, the search moves into a promising but unexplored region of the "slender-but-blunt-nose" design space.

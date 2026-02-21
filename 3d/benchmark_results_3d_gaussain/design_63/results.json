@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_PosDihedral_LE_Camber_TwistExp",
+  "design_params": {
+    "le_sweep_deg": 55.41612036991014,
+    "root_chord_in": 34.8467165434746,
+    "twist_root_deg": 8.700581877246016,
+    "twist_tip_deg": -7.434592393244898,
+    "dihedral_deg": 4.822700189048113,
+    "naca": {
+      "m": 2,
+      "p": 0,
+      "t": 14,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.7836451028362911,
+    "CDi": 0.17719266198392525,
+    "CM": -0.6457921405909589,
+    "L_D": 4.422559569128109
+  },
+  "corrected_results": {
+    "CL": 0.22522703082175247,
+    "CDi": 0.05634519395027292,
+    "CM": -0.1701293623812472,
+    "L_D": 3.9972713736778527
+  }
+}

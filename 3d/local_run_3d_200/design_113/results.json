@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Vortex_Twist_Delta",
+  "design_params": {
+    "le_sweep_deg": 66.36519833986907,
+    "root_chord_in": 41.396993626010314,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -0.9197027567915974,
+    "dihedral_deg": 2.63886046352777,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 15,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.16626620087065924,
+    "CDi": 0.022783292826852895,
+    "CM": -0.2271192359729387,
+    "L_D": 7.297724790452335
+  },
+  "corrected_results": {
+    "CL": -0.08646847345783336,
+    "CDi": -0.010757740509731956,
+    "CM": 0.10996902185924047,
+    "L_D": 8.037791335421218
+  }
+}

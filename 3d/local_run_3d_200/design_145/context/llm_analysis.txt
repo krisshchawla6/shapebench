@@ -1,0 +1,15 @@
+The highest-rewarding design (Design 1, Reward: 4016.0090) features a moderate-to-high sweep (65.5 deg), a mid-range root chord (34.7 in), significant negative twist at the root (-7.1 deg) with a notable washout towards the tip (-4.6 deg), slight anhedral (-1.7 deg), and a cambered NACA 4412 airfoil. This combination suggests that effective load distribution through twist and moderate sweep are key for high CL/CDi.
+
+The population generally shows a preference for negative twist at both root and tip, leading to washout. Designs with very little differential washout (e.g., Design 5, twist_root=-7.6, twist_tip=-7.1) tend to perform poorly. The NACA airfoils vary, with both cambered (44xx, 24xx) and uncambered (00xx) profiles achieving decent rewards, but the thickness parameter `naca_t` has mostly been explored in the 10-16 range. Dihedral is predominantly negative (anhedral), though Design 6 achieved a moderate reward with positive dihedral (9.5 deg).
+
+Based on the provided data (without images):
+*   **Aerodynamic Issues (in general from the population):** Designs with insufficient washout or non-optimal twist distributions likely suffer from poor spanwise lift distribution, leading to higher induced drag. Very low sweep (Design 5) also correlated with low reward, suggesting reduced benefits from vortex lift.
+*   **Parameter Influence:**
+    *   **Washout (twist_root vs. twist_tip):** Crucial for efficient lift distribution and high CL/CDi. A significant negative twist at the root combined with a less negative (or closer to zero) twist at the tip seems beneficial.
+    *   **Sweep:** Moderate-to-high sweep (63-66 deg) has been most successful, indicating the importance of vortex lift.
+    *   **NACA Camber/Thickness:** Camber (m=2,4) appears beneficial for high lift, but uncambered wings (m=0) with adequate thickness (like D4's 0016) can also perform well.
+*   **Key Design Changes Needed for Improvement/Exploration:**
+    1.  **Explore higher sweep angles:** The current cluster is around 63-66 degrees; higher values (70-80) are largely untouched.
+    2.  **Investigate extreme dihedral/anhedral:** The boundaries of -15 to 15 degrees are largely unexplored, particularly strong positive dihedral or very strong anhedral.
+    3.  **Test very thin or very thick airfoils:** The NACA `naca_t` parameter has a wide range (6-24), but most designs use 10-16. Exploring the 6-9 or 17-24 range is critical.
+    4.  **Vary root chord significantly:** All top designs have mid-to-large root chords (33-41 in). Smaller root chords (10-30 in) are unexplored.

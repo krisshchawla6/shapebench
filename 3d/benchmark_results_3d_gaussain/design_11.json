@@ -1,0 +1,14 @@
+{
+  "design_name": "MidHighSweepCamberWashoutAnhedral",
+  "le_sweep": 68.79615535888593,
+  "root_chord_in": 28.840925435238628,
+  "twist_root": -4.114944269494685,
+  "twist_tip": -6.552283243289576,
+  "dihedral": -4.89804403258301,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

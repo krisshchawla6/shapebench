@@ -1,0 +1,33 @@
+{
+  "design_name": "Extreme_Sweep_MaxThick_PosDihedral_LargeChord",
+  "design_params": {
+    "le_sweep_deg": 79.92171862166721,
+    "root_chord_in": 48.927934818589385,
+    "twist_root_deg": -6.963935405108532,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": 15.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 24,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.13517507270871473,
+    "CDi": 0.014217286396573752,
+    "CM": -0.20651901042784498,
+    "L_D": 9.507796983064983
+  },
+  "corrected_results": {
+    "CL": -0.27249384631683266,
+    "CDi": -0.015503445610830459,
+    "CM": 0.31260581900552703,
+    "L_D": 17.576340973291305
+  }
+}

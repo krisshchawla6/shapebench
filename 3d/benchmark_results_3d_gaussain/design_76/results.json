@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweepGradientWashoutThickCamber",
+  "design_params": {
+    "le_sweep_deg": 80.0,
+    "root_chord_in": 36.64549535065947,
+    "twist_root_deg": -3.126954190072034,
+    "twist_tip_deg": -5.469636803813665,
+    "dihedral_deg": -12.066402461040862,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 17,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2014987459758912,
+    "CDi": 0.020183674518026502,
+    "CM": -0.20243483264490242,
+    "L_D": 9.983253831998136
+  },
+  "corrected_results": {
+    "CL": -0.019238372966440057,
+    "CDi": -0.0017094982420264083,
+    "CM": 0.05600040275530107,
+    "L_D": 11.253812664723911
+  }
+}

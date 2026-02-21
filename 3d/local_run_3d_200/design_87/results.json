@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_NACA4413_RefinedWashout",
+  "design_params": {
+    "le_sweep_deg": 67.41131157838757,
+    "root_chord_in": 36.05999452328434,
+    "twist_root_deg": -6.596883654203959,
+    "twist_tip_deg": -6.121981842274735,
+    "dihedral_deg": -7.695775675748684,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.19908938385915634,
+    "CDi": 0.018970076424200795,
+    "CM": -0.24363110212521563,
+    "L_D": 10.494917332287127
+  },
+  "corrected_results": {
+    "CL": 0.013440700121321583,
+    "CDi": -0.003056543552137023,
+    "CM": 0.0019017776857236605,
+    "L_D": -4.39735272606351
+  }
+}

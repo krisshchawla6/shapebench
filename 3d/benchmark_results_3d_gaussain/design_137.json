@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploration_LowSweep_PosDihedral_HighCamberThick",
+  "le_sweep": 52.96896915647119,
+  "root_chord_in": 48.92656893187496,
+  "twist_root": 1.6524793096914268,
+  "twist_tip": -5.172341887954052,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 16,
+    "chord_length": 1.0
+  }
+}

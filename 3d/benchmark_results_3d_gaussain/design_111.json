@@ -1,0 +1,14 @@
+{
+  "design_name": "Extreme_Geom_High_Camber_Delta",
+  "le_sweep": 79.04040812271417,
+  "root_chord_in": 35.806176319426015,
+  "twist_root": -10.0,
+  "twist_tip": -3.81519594399869,
+  "dihedral": -10.933286805345269,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

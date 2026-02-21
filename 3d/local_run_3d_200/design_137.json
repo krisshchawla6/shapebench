@@ -1,0 +1,14 @@
+{
+  "design_name": "HybridMidSweepCamberedWashout",
+  "le_sweep": 69.63567284604267,
+  "root_chord_in": 42.68672649725677,
+  "twist_root": -9.38523312185488,
+  "twist_tip": -5.493748575183798,
+  "dihedral": 2.0440884173262512,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

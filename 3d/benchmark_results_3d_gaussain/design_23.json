@@ -1,0 +1,14 @@
+{
+  "design_name": "VortexOptimizedUltraThinDelta",
+  "le_sweep": 80.0,
+  "root_chord_in": 24.69425439369202,
+  "twist_root": -9.802686564476721,
+  "twist_tip": -10.0,
+  "dihedral": -11.451497054335476,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

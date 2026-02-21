@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_LargeChord_PosDihedral_MilderWash_NACA4410",
+  "design_params": {
+    "le_sweep_deg": 78.48513813349174,
+    "root_chord_in": 45.27747046466791,
+    "twist_root_deg": 0.5733573008376549,
+    "twist_tip_deg": -8.988320021637836,
+    "dihedral_deg": 12.810247051724296,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.4042599234532489,
+    "CDi": 0.03769186086158693,
+    "CM": -0.46630913894285597,
+    "L_D": 10.72539042149665
+  },
+  "corrected_results": {
+    "CL": -0.08767213510337217,
+    "CDi": -0.022402883838895663,
+    "CM": 0.14167786159848497,
+    "L_D": 3.9134307767626186
+  }
+}

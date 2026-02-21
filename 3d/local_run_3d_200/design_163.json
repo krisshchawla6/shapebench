@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_CamberWashout_Thinner",
+  "le_sweep": 65.31001944035712,
+  "root_chord_in": 44.246846760024546,
+  "twist_root": -10.0,
+  "twist_tip": -1.8022729577184124,
+  "dihedral": -1.7693379192075422,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

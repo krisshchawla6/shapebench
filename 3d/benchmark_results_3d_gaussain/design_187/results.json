@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweepHighChordPosDihedral",
+  "design_params": {
+    "le_sweep_deg": 56.40884152211462,
+    "root_chord_in": 48.335275515879445,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -6.19594101901675,
+    "dihedral_deg": 15.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2667092702157665,
+    "CDi": 0.017503070600514353,
+    "CM": -0.3277568663331801,
+    "L_D": 15.23785604840838
+  },
+  "corrected_results": {
+    "CL": -0.1346039715668614,
+    "CDi": -0.01193449640398937,
+    "CM": 0.17561821617396703,
+    "L_D": 11.278563167681465
+  }
+}

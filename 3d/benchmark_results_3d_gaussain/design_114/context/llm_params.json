@@ -1,0 +1,11 @@
+{
+  "le_sweep": 65.0,
+  "root_chord_in": 25.0,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -15.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 12,
+  "name": "Swept_Cambered_Anhedral"
+}

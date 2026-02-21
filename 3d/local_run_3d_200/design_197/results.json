@@ -1,0 +1,33 @@
+{
+  "design_name": "WashinExplorer_CamberedThin",
+  "design_params": {
+    "le_sweep_deg": 68.26001690194941,
+    "root_chord_in": 36.78897807664038,
+    "twist_root_deg": -8.186360042480903,
+    "twist_tip_deg": -7.1464350550064895,
+    "dihedral_deg": 2.9383872689305632,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.20200026717077163,
+    "CDi": 0.017101698649412137,
+    "CM": -0.25289997990272783,
+    "L_D": 11.811707790659456
+  },
+  "corrected_results": {
+    "CL": 0.006891961409568154,
+    "CDi": -0.002670978739020568,
+    "CM": 0.0075928115730024715,
+    "L_D": -2.580313092306903
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "le_sweep": 62.5,
+  "root_chord_in": 35.0,
+  "twist_root": -6.0,
+  "twist_tip": -9.5,
+  "dihedral": 0.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 12,
+  "name": "Moderate_Sweep_Camber_NeutralDihedral"
+}

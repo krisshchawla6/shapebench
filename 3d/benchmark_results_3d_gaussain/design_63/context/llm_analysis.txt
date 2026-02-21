@@ -1,0 +1,12 @@
+The representative Design 1 (le_sweep=71.24, root_chord_in=32.88, twist_root=-10.0, twist_tip=-10.0, dihedral=-15.0, NACA 2407, Reward: 424.56) showcases a highly swept delta wing with significant washout at both root and tip, strong anhedral, and a moderately cambered and thin airfoil. The high reward suggests this combination effectively maximizes CL/CDi, likely by efficiently utilizing vortex lift at high sweep angles and managing spanwise load distribution through twist and anhedral to minimize induced drag.
+
+Possible aerodynamic issues that might be present in such a design, though not explicitly visible without the image:
+*   High induced drag due to extreme sweep, even with good load distribution.
+*   Potential for leading-edge separation issues if twist and camber aren't perfectly tuned for the operating conditions.
+*   Strong anhedral, while seemingly beneficial for performance in this specific case, could have adverse effects on lateral stability, which is not part of the objective function but is a real-world consideration.
+
+Key changes needed to explore the population more effectively and potentially improve designs:
+1.  **Explore lower sweep angles:** The current top designs are all at high sweep (around 70 degrees). Lower sweep (45-60 degrees) is largely untested, which could lead to designs relying more on conventional lift and less on vortex lift, potentially finding a new optimum.
+2.  **Investigate positive dihedral:** All high-performing designs have strong anhedral (negative dihedral). Testing positive dihedral (tips up) is crucial to understand its impact and find potentially new stable and efficient configurations.
+3.  **Experiment with different twist strategies:** While max washout (-10/-10) is prominent in top designs, the full range of twist_root (-10 to 10) and twist_tip (-10 to 0 for washout) is not fully explored. Varying twist distribution, including positive root twist (washin), could significantly alter lift distribution.
+4.  **Novel NACA airfoil combinations:** Specifically, the combination of `naca_m > 0` with `naca_p = 0` (e.g., NACA 20xx series) is completely unexplored for cambered airfoils. This implies maximum camber at the leading edge, which could have unique aerodynamic effects, potentially providing significant leading-edge suction or controlling flow separation.

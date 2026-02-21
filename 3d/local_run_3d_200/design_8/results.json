@@ -1,0 +1,33 @@
+{
+  "design_name": "Cambered_Swept_Delta_HighDihedral",
+  "design_params": {
+    "le_sweep_deg": 66.3127770379902,
+    "root_chord_in": 49.609433278674764,
+    "twist_root_deg": 1.3114874106582035,
+    "twist_tip_deg": -5.876232226252663,
+    "dihedral_deg": 12.726399882723594,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 14,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.44968099236597997,
+    "CDi": 0.05711776347900539,
+    "CM": -0.42995013848878777,
+    "L_D": 7.872874653631491
+  },
+  "corrected_results": {
+    "CL": -0.13077836988831434,
+    "CDi": -0.02833814025961599,
+    "CM": 0.21398344213341297,
+    "L_D": 4.61492422192163
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "Refined High-Performance Delta with Differential Washout",
+  "le_sweep": 64.8502251432106,
+  "root_chord_in": 28.65273443585785,
+  "twist_root": -10.0,
+  "twist_tip": -3.37846978314387,
+  "dihedral": -9.6827509615966,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

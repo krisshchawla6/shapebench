@@ -1,0 +1,13 @@
+The top-performing design (Design 1, reward 424.56) exhibits a clear pattern: high leading-edge sweep (71.2 deg), aggressive uniform washout (-10 deg at both root and tip), maximum negative dihedral (-15 deg), and a cambered NACA 2407 airfoil. Design 3, also high-performing (reward 353.78), reinforces this pattern with similar sweep (69.7 deg), aggressive tip washout (-10 deg), significant root washout (-6.1 deg), and strong negative dihedral (-11.6 deg), using a NACA 2408 airfoil.
+
+Aerodynamic issues/insights from this pattern for delta wings generally involve:
+*   **Vortex Lift:** High sweep angles are crucial for generating strong leading-edge vortices, which provide significant lift at high angles of attack. The success of designs with sweep around 70-73 degrees indicates effective utilization of this phenomenon.
+*   **Induced Drag Management:** Aggressive washout (negative twist) likely serves to reduce the induced drag by unloading the wingtips, distributing the lift more efficiently, and preventing premature tip stall typical of untwisted, highly swept wings. The uniform washout in Design 1 and differential washout in Design 3 both show high performance.
+*   **Dihedral Impact:** The consistently strong negative dihedral (-11 to -15 deg) among top designs is a distinctive feature. While positive dihedral enhances lateral stability, negative dihedral can reduce the effective sweep of the wing relative to the flow, influencing vortex strength, or it might be interacting with the aggressive washout to optimize load distribution across the span in an unconventional way.
+*   **Camber Benefit:** The use of cambered airfoils (NACA 24xx) is superior to symmetric ones (NACA 00xx, Design 5), indicating that a designed camber provides an additional lift component and likely optimizes the pressure distribution for improved CL/CDi.
+
+**Key design changes needed to improve designs in the population:**
+1.  **Explore higher sweep limits:** Designs have clustered around 70-73 degrees. Pushing closer to the 80-degree limit could reveal if even stronger vortex lift can be harnessed.
+2.  **Diverse Washout Gradients:** While uniform max washout worked for Design 1, Design 3 showed slightly different root/tip twist. Explore various aggressive washout gradients across the span.
+3.  **Dihedral Sensitivity:** Investigate the precise sensitivity around the highly negative dihedral values. Is -15.0 optimal, or is there a plateau/peak slightly less extreme?
+4.  **Cambered Airfoil Thickness:** Maintain a beneficial camber (NACA 24xx), but explore slightly different thickness values to see if it impacts overall performance in conjunction with extreme sweep/twist combinations.

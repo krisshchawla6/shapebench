@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweepHighCamberWashoutTip",
+  "le_sweep": 58.98164682236042,
+  "root_chord_in": 35.99615579362786,
+  "twist_root": 0.18731575119162633,
+  "twist_tip": -10.0,
+  "dihedral": 4.807521909750292,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

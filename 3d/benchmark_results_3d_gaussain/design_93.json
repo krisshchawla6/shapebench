@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_SweepTwist_SymmetricAirfoil",
+  "le_sweep": 69.3957551633504,
+  "root_chord_in": 36.080661669047686,
+  "twist_root": -9.041374577924431,
+  "twist_tip": -4.704621266911182,
+  "dihedral": -15.0,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

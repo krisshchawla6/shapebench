@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweepModerateWashoutDihedralUp",
+  "design_params": {
+    "le_sweep_deg": 67.53924305857795,
+    "root_chord_in": 27.959644823741947,
+    "twist_root_deg": -5.623536870428943,
+    "twist_tip_deg": -6.203823864361395,
+    "dihedral_deg": 7.919770816131717,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.25223384987234493,
+    "CDi": 0.015995497030784844,
+    "CM": -0.2648631229273212,
+    "L_D": 15.769053589700718
+  },
+  "corrected_results": {
+    "CL": 0.17893572116105902,
+    "CDi": 0.009815833870802263,
+    "CM": -0.16810771759900997,
+    "L_D": 18.22929396689497
+  }
+}

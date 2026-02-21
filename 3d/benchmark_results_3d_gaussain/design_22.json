@@ -1,0 +1,14 @@
+{
+  "design_name": "ExtremeSweepHighCamber",
+  "le_sweep": 78.69852171218251,
+  "root_chord_in": 39.81632065890926,
+  "twist_root": -2.4340609069585653,
+  "twist_tip": -10.0,
+  "dihedral": 7.049971499428257,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 18,
+    "chord_length": 1.0
+  }
+}

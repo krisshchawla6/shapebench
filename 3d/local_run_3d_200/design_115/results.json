@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_Cambered_Twist",
+  "design_params": {
+    "le_sweep_deg": 59.05500128532767,
+    "root_chord_in": 38.749549582016186,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -1.544530266496296,
+    "dihedral_deg": -8.390114908153443,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.18659279868565498,
+    "CDi": 0.025836439786576456,
+    "CM": -0.25785551741444307,
+    "L_D": 7.222078592368631
+  },
+  "corrected_results": {
+    "CL": -0.02017233262042295,
+    "CDi": -0.003090756623155329,
+    "CM": 0.028982673957523873,
+    "L_D": 6.526664852643485
+  }
+}

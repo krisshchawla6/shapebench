@@ -1,0 +1,16 @@
+The top-performing design (Design 1) is characterized by an extremely high leading-edge sweep (77.8 degrees), a moderate root chord (27.3 inches), significant washout across the span (twist_root -9.55 deg, twist_tip -9.13 deg), and extreme negative dihedral (-15.0 deg). It utilizes a thin, uncambered NACA 0006 airfoil. This combination yielded the highest reward (CL/CDi: 626.7341), indicating excellent aerodynamic efficiency relative to the baseline.
+
+Aerodynamically, such a highly swept delta wing primarily relies on leading-edge vortex lift for high lift coefficients. The high sweep angle effectively generates strong, stable vortices on the upper surface, leading to enhanced lift. The substantial washout likely contributes to a more uniform spanwise lift distribution, delaying tip stall and potentially reducing induced drag by minimizing flow separation near the tips. The extreme negative dihedral (anhedral) provides strong lateral stability. The NACA 0006 profile, being thin and symmetric, minimizes profile drag and likely promotes clean vortex formation.
+
+Key observations regarding performance drivers from the population:
+- **High sweep (70-78 deg):** Consistently present in top designs (e.g., Design 1, 2, 5).
+- **Significant washout (negative twist):** All top designs feature large negative twist values, indicating its importance for lift distribution and efficiency.
+- **Extreme negative dihedral (-15 deg):** Appears to be a strong correlating factor for high reward.
+- **Low thickness (NACA 0006-0010):** Common across most high-performing designs.
+- **Camber:** NACA 00xx (uncambered) performs best, though NACA 24xx is present in some good designs (Design 2, 4).
+
+To further advance the population, key design changes are needed to explore currently unvisited regions and strategies:
+1.  Investigate significantly lower sweep angles to understand the trade-offs with vortex lift and induced drag.
+2.  Explore the effects of positive dihedral, contrasting with the dominant negative dihedral trend.
+3.  Test the maximum available camber (NACA 44xx) to see its impact on lift and drag, especially in conjunction with other parameter changes.
+4.  Examine less extreme or varied twist distributions, potentially including washin at the root.

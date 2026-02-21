@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_SymThin_AggressiveWashout_LargeChord",
+  "design_params": {
+    "le_sweep_deg": 78.04037494305858,
+    "root_chord_in": 50.0,
+    "twist_root_deg": 1.2315370245711041,
+    "twist_tip_deg": -4.182220518714459,
+    "dihedral_deg": 2.663905223527163,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2597777275899517,
+    "CDi": 0.04007701445754534,
+    "CM": -0.24381103415393846,
+    "L_D": 6.481963068010997
+  },
+  "corrected_results": {
+    "CL": -0.20199375525959495,
+    "CDi": -0.03158766072774862,
+    "CM": 0.29019857070602434,
+    "L_D": 6.394704470222156
+  }
+}

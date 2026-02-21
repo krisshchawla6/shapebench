@@ -1,0 +1,14 @@
+The provided designs demonstrate that high rewards are strongly associated with specific parameter ranges. Design 1, with the highest reward of 424.5627, features a leading-edge sweep of ~71.2 degrees, a root chord of ~32.9 inches, maximum negative twist at both root and tip (-10.0 degrees, indicating significant washout), and maximum negative dihedral (-15.0 degrees, or anhedral). Its airfoil is a NACA 2407, suggesting moderate camber (2%) at 40% chord with 7% thickness.
+
+Key observations from the population:
+*   **Washout & Anhedral:** Designs 1, 2, and 4, which are the top performers, all exhibit substantial negative twist (washout) and negative dihedral (anhedral), often at or near their maximum allowed values. This strongly suggests these features are critical for favorable lift distribution and stability, reducing induced drag.
+*   **Sweep:** The successful sweep range appears to be between ~69.8 and ~76.6 degrees. Design 1 is at ~71.2 degrees, while Design 4 (Rank 2) has a higher sweep of ~76.6 degrees. This indicates a broad optimum or multiple peaks within this range.
+*   **Airfoil:** NACA 24xx series (moderate camber) and NACA 00xx (symmetric) appear in top designs. The NACA 44xx (higher camber) in Design 3 yielded a lower reward. Thickness (`naca_t`) in top designs is consistently low (7 or 8%).
+*   **Root Chord:** Successful designs have root chords around 30.75 to 32.9 inches.
+*   **Sensitivity:** The striking difference in reward between Design 1 (424.56) and Design 5 (58.13), despite very similar parameters (slightly higher sweep and root chord for Design 5), highlights the high sensitivity of the design space. Small deviations from an optimal configuration can lead to significant performance drops.
+
+Key design changes needed to improve designs in the population:
+1.  Systematically explore the parameter space around the high-performing regions identified, especially for sweep and root chord.
+2.  Maintain or further investigate the effects of extreme washout and anhedral, as these appear to be robustly beneficial.
+3.  Experiment with different NACA airfoil types and thicknesses within the successful ranges (24xx or 00xx, low thickness).
+4.  Investigate combinations of sweep and root chord that blend successful aspects from multiple top-performing designs.

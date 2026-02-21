@@ -1,0 +1,11 @@
+{
+  "le_sweep": 67.0,
+  "root_chord_in": 39.0,
+  "twist_root": -9.5,
+  "twist_tip": -6.5,
+  "dihedral": -2.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 14,
+  "name": "Hybrid_Vortex_Twist_Delta"
+}

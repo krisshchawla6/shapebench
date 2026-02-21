@@ -1,0 +1,14 @@
+{
+  "design_name": "High_Sweep_Symmetric_Differential_Washout",
+  "le_sweep": 74.18781552483613,
+  "root_chord_in": 30.37435559452932,
+  "twist_root": -4.927391853417741,
+  "twist_tip": -10.0,
+  "dihedral": -14.404270278104805,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

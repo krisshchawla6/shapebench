@@ -1,0 +1,16 @@
+The top-performing design, Design 1, features a highly swept leading edge (71.2 degrees), aggressive washout at both root and tip (-10 degrees), maximum negative dihedral (-15 degrees), and a NACA 2407 airfoil. Its high reward (424.5627) indicates a very effective configuration for generating lift relative to induced drag.
+
+Critically assessing this design and the overall population:
+*   **Aerodynamic Issues/Observations (based on typical behavior of such designs):** The strong negative twist and high sweep likely contribute to stable leading-edge vortex formation, providing significant non-linear lift. The extreme washout helps shed these vortices cleanly and may mitigate tip stall, ensuring a more distributed lift. The negative dihedral, while typically reducing static roll stability, is often beneficial for highly swept wings as it can improve lateral-directional characteristics at high angles of attack and may aid in vortex behavior. The NACA 2407 airfoil provides modest camber and low thickness, which would add to lift without excessive drag penalties.
+*   **Parameter Influence:**
+    *   **`le_sweep`**: High sweep (69-71 degrees in top designs) is strongly correlated with high rewards, suggesting robust vortex lift.
+    *   **`twist_root` & `twist_tip`**: Aggressive negative twist (washout), especially -10 degrees at both root and tip, is a consistent feature of high-reward designs (Design 1, 2, 3, 5).
+    *   **`dihedral`**: Negative dihedral is strongly favored across the top designs (Design 1, 2, 3, 5, 6 are negative, Design 4 is slightly negative).
+    *   **`naca_m` & `naca_t`**: Cambered airfoils (m=2 or 4) are common in top designs, often with lower thickness (6-8%). Design 3 (NACA 0006) shows symmetric can also work if other parameters are optimized.
+    *   **`root_chord_in`**: Values in the 28-36 inch range seem effective.
+
+**Key design changes needed to improve designs in the population:**
+1.  Explore the absolute upper limits of `le_sweep` combined with aggressive washout to push vortex lift generation.
+2.  Investigate how *maximum* camber (NACA m=4) interacts with aggressive sweep and washout, especially at minimal thickness.
+3.  Test the robustness of the high sweep/washout strategy by exploring *opposite* extremes for `dihedral`, contrasting the current strong preference for negative values.
+4.  Maintain relatively low `naca_t` (thickness) to minimize form drag, especially with the exploration of higher camber.

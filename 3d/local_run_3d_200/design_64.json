@@ -1,0 +1,14 @@
+{
+  "design_name": "CamberedWashout_Exploit_SweepUp",
+  "le_sweep": 66.82683219505718,
+  "root_chord_in": 34.62098028242182,
+  "twist_root": -9.492825332149048,
+  "twist_tip": -0.3817470671138472,
+  "dihedral": -5.10925881206332,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

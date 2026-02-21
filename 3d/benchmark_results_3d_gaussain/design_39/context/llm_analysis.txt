@@ -1,0 +1,18 @@
+The top-performing designs (Design 1, 3, 6, 5 in descending order of reward among high-performers) consistently exhibit several key characteristics:
+*   **High Leading Edge Sweep**: All top designs show `le_sweep` values ranging from approximately 69.7 to 72.9 degrees. The highest sweep (80.0 deg in Design 4) resulted in a much lower reward, suggesting an optimal range exists below the maximum.
+*   **Strong Washout**: Designs 1, 3, 5, and 6 all feature significant negative twist at both root and tip, with `twist_tip` frequently at the maximum negative limit of -10.0 degrees, and `twist_root` also strongly negative (often -10.0 or around -6.0). This strong washout likely aids in load distribution and delaying tip stall, contributing to higher lift-to-induced-drag ratios.
+*   **Negative Dihedral (Anhedral)**: The highest rewards are associated with substantial negative dihedral (`dihedral` values between -10.0 and -15.0 degrees). This might improve lateral stability characteristics or have a subtle aerodynamic benefit in combination with other parameters.
+*   **Cambered, Thin Airfoils**: The best designs utilize NACA 24xx airfoils, indicating that camber (`naca_m=2`, `naca_p=4`) is beneficial. Furthermore, the two best designs (1 and 3) used NACA 2407 and NACA 2408 respectively, suggesting that thinner airfoils (`naca_t` = 7-8) are superior compared to thicker ones (NACA 2410, NACA 2411, NACA 2414) which resulted in significantly lower rewards.
+*   **Root Chord**: The `root_chord_in` for the top designs clusters around 32-35 inches, which appears to be a favorable size in the given range.
+
+The primary issues in lower-performing designs appear to be:
+*   Lack of significant washout (Design 2).
+*   Symmetric airfoils (NACA 00xx in Design 4).
+*   Excessive sweep (80.0 deg in Design 4) without other beneficial characteristics.
+*   Thicker airfoils (Design 5, 2).
+
+Key design changes needed to improve designs in the population:
+1.  **Optimize Sweep within the High Range**: Further explore the optimal sweep angle around 70-72 degrees, rather than pushing to the extreme max.
+2.  **Maintain Strong Washout**: Ensure both `twist_root` and `twist_tip` are strongly negative, often at or near their maximum negative limits.
+3.  **Leverage Anhedral**: Continue to use significant negative dihedral.
+4.  **Prioritize Cambered, Thinner Airfoils**: Focus on NACA 24xx profiles and explore the minimum allowable thickness (`naca_t=6`) to confirm its benefits.

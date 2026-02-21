@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_Washout_NoCamber",
+  "design_params": {
+    "le_sweep_deg": 70.20287300151519,
+    "root_chord_in": 43.43327874150739,
+    "twist_root_deg": -7.0151245438429015,
+    "twist_tip_deg": -8.941030248104614,
+    "dihedral_deg": -3.2265535758053385,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.11291911599250413,
+    "CDi": 0.0042559743213599404,
+    "CM": -0.10406459109262384,
+    "L_D": 26.531907259351676
+  },
+  "corrected_results": {
+    "CL": -0.11817017395947035,
+    "CDi": -0.0042189450380960315,
+    "CM": 0.17667421934800168,
+    "L_D": 28.009412991262714
+  }
+}

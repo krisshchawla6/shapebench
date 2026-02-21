@@ -1,0 +1,11 @@
+{
+  "le_sweep": 65.75,
+  "root_chord_in": 35.5,
+  "twist_root": -9.5,
+  "twist_tip": -4.0,
+  "dihedral": -2.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 12,
+  "name": "Exploitation_VortexOptimizer_01"
+}

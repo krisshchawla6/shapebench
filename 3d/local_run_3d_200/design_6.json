@@ -1,0 +1,14 @@
+{
+  "design_name": "Cambered_MidSweep_Washout_Thin",
+  "le_sweep": 58.36429832789167,
+  "root_chord_in": 34.89555611386732,
+  "twist_root": -2.9775148964150517,
+  "twist_tip": -9.604132480144393,
+  "dihedral": -0.2901291153366936,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 15,
+    "chord_length": 1.0
+  }
+}

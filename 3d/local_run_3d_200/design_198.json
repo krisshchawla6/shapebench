@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_NACA0006_NeutralTwist",
+  "le_sweep": 69.19801074377087,
+  "root_chord_in": 26.521686019244402,
+  "twist_root": -3.630956685588436,
+  "twist_tip": -2.226641032310044,
+  "dihedral": 4.8632909765790995,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

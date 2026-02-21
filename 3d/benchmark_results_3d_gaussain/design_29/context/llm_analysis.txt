@@ -1,0 +1,7 @@
+The representative design (Design 1) achieved the highest reward of 424.5627. This design features a high leading-edge sweep (71.24 deg), maximum negative twist at both the root and tip (-10.0 deg, indicating significant washout), and maximum anhedral (-15.0 deg). The airfoil is a NACA 2407, meaning 2% maximum camber located at 40% chord, with 7% thickness. The high reward suggests this combination effectively generates strong vortex lift while managing induced drag, possibly through an optimized lift distribution due to the aggressive washout. The extreme anhedral might contribute to this by influencing vortex stability or effective dihedral. The thin, moderately cambered airfoil likely contributes positively to lift without significant drag penalties.
+
+**Key design changes needed to improve designs in the population (based on exploitation of Design 1):**
+1.  **Sustain high sweep angles:** Designs around 70-75 degrees appear to be highly effective for vortex generation.
+2.  **Explore full washout:** The maximum negative twist at both root and tip seems to be a critical factor in achieving high CL/CDi, suggesting an optimized spanwise lift distribution.
+3.  **Investigate strong anhedral:** The correlation between maximum anhedral and the top reward design is significant and warrants further exploration.
+4.  **Maintain moderate camber and thin airfoils:** NACA 24xx profiles with low thickness (e.g., 07, 08, 09) appear to be a good balance for generating lift and minimizing profile drag.

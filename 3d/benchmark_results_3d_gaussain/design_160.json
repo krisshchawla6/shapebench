@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_CamberedWashout_Hybrid",
+  "le_sweep": 75.07907093946089,
+  "root_chord_in": 35.13263832723609,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -13.283919063546053,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

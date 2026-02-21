@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_MaxCamber_AggressiveWashout",
+  "design_params": {
+    "le_sweep_deg": 76.5176230413981,
+    "root_chord_in": 34.14433613305561,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -5.170985736327254,
+    "dihedral_deg": -0.7677380681925827,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 14,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": -0.018958418309694986,
+    "CDi": 0.016423828118075717,
+    "CM": -0.05820618597352843,
+    "L_D": -1.154323959883004
+  },
+  "corrected_results": {
+    "CL": -0.04691131965330838,
+    "CDi": 0.00038611882999131186,
+    "CM": 0.0459717328359344,
+    "L_D": -121.49451414831009
+  }
+}

@@ -1,0 +1,7 @@
+Design 1 is the current population leader (Reward: 3.2293). Its geometry features a high-radius, very smooth leading edge (r0=1.0, e0=-1.0) and a trailing edge located at a high positive angular offset (a3=0.88, r3=1.0) with moderate sharpness (e3=0.41). The mid-section (CP1, CP2) uses conservative radii (0.4-0.8), suggesting a relatively thin profile with most of the curvature concentrated at the extremities. The flow likely maintains attachment due to the smooth leading edge, but the high reward relative to Design 2 (Reward: 0.98) suggests that Design 1's specific trailing edge angle and mid-body "thinness" are critical. However, the wake in Design 1 (inferred) might still be optimized; the moderate sharpness at the TE (0.41) could be increased to fix the separation point.
+
+Key changes needed:
+1.  **Shift Thickness Distribution**: Move the upper mid-point (CP1) to a much higher radius and extreme angle to test "aft-loading" vs. "forward-loading."
+2.  **Boundary Radius Testing**: Explore the lower limit of the radius parameter for internal control points (CP2) to create a more concave lower surface (underexplored).
+3.  **TE Sharpness**: Increase the sharpness parameter (e3) toward the boundary (0.8-0.9) to evaluate its effect on pressure recovery.
+4.  **Angle Divergence**: Push the angular offsets (a1, a2) to their limits to test the geometric limits of the airfoil chord.

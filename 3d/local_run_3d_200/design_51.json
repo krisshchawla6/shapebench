@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweep_PosRootTwist_HighCamber_PosDihedral",
+  "le_sweep": 54.10712792655031,
+  "root_chord_in": 38.51919708206943,
+  "twist_root": 6.4486457018582835,
+  "twist_tip": -4.184091980214062,
+  "dihedral": 6.101905762912809,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 16,
+    "chord_length": 1.0
+  }
+}

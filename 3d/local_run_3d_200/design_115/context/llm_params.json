@@ -1,0 +1,11 @@
+{
+  "le_sweep": 66.0,
+  "root_chord_in": 36.0,
+  "twist_root": -8.5,
+  "twist_tip": -5.5,
+  "dihedral": -2.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 13,
+  "name": "Exploitation_Cambered_Twist"
+}

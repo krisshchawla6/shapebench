@@ -1,0 +1,14 @@
+{
+  "design_name": "Aggressive_Washout_4410",
+  "le_sweep": 69.6806131947336,
+  "root_chord_in": 30.978262713137127,
+  "twist_root": -7.139619549326072,
+  "twist_tip": -8.683046970762557,
+  "dihedral": 2.2910822802889204,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

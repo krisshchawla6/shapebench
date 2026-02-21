@@ -1,0 +1,14 @@
+{
+  "design_name": "Extreme_Sweep_MaxThick_PosDihedral_LargeChord",
+  "le_sweep": 79.92171862166721,
+  "root_chord_in": 48.927934818589385,
+  "twist_root": -6.963935405108532,
+  "twist_tip": -10.0,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 24,
+    "chord_length": 1.0
+  }
+}

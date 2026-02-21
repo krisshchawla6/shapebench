@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_HighChord_SymmAirfoil_Dihedral",
+  "design_params": {
+    "le_sweep_deg": 55.32388316185731,
+    "root_chord_in": 50.0,
+    "twist_root_deg": -2.6156696359843683,
+    "twist_tip_deg": -8.777301977494558,
+    "dihedral_deg": 7.312759203388702,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 15,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2611891868732776,
+    "CDi": 0.023087895792379822,
+    "CM": -0.21162147916568078,
+    "L_D": 11.312819029592262
+  },
+  "corrected_results": {
+    "CL": -0.1780011859873487,
+    "CDi": -0.014459155795051335,
+    "CM": 0.2690976729307272,
+    "L_D": 12.310620931843742
+  }
+}

@@ -1,0 +1,5 @@
+*   **Exploitation Strategy**: I am focusing on the high-reward region established by Design 1, refining its slender topology rather than returning to the thicker, less efficient shapes seen in lower-ranked designs.
+*   **Leading Edge Refinement**: I will decrease $e_0$ (more negative) to increase the smoothness of the nose, which helps in maintaining a favorable pressure gradient and delaying the transition to turbulence.
+*   **Mid-section Smoothing**: I will push $e_1$ and $e_2$ closer to -1.0 to ensure maximum curvature continuity, minimizing the risk of local velocity spikes that lead to separation.
+*   **Trailing Edge Optimization**: I will increase $e_3$ and slightly increase $a_3$. A sharper trailing edge ($e_3 > 0.5$) combined with a precise angular closure ($a_3 \approx 0.93$) is intended to produce a cleaner flow departure and reduce base drag.
+*   **Slenderness Maintenance**: Keeping $r_1$ and $r_2$ in the 0.40-0.45 range preserves the high-aspect-ratio benefit seen in Design 1 while subtly adjusting the camber for better lift-to-drag performance.

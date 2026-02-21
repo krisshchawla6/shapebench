@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploitation_Refinement_NACA4410",
+  "le_sweep": 64.6896857276623,
+  "root_chord_in": 38.8901547141683,
+  "twist_root": -3.8429656560892616,
+  "twist_tip": -4.3107216912072825,
+  "dihedral": 3.66514930512733,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "CamberedHighSweepAnhedral",
+  "design_params": {
+    "le_sweep_deg": 68.16643770992424,
+    "root_chord_in": 31.632926426879273,
+    "twist_root_deg": -9.280420908921771,
+    "twist_tip_deg": -7.636785321784036,
+    "dihedral_deg": 3.886170730291803,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.15633262380872762,
+    "CDi": 0.016989907124450605,
+    "CM": -0.21628618755438123,
+    "L_D": 9.201499611716264
+  },
+  "corrected_results": {
+    "CL": 0.06347196551171272,
+    "CDi": 0.0040996735772432695,
+    "CM": -0.07011580323482358,
+    "L_D": 15.482199818062826
+  }
+}

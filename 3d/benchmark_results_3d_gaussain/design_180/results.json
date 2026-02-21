@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_HighSweep_CamberedThin_MaxWashout",
+  "design_params": {
+    "le_sweep_deg": 75.54112072919267,
+    "root_chord_in": 27.921946896397404,
+    "twist_root_deg": -8.127779715501802,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -15.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.04644465294489045,
+    "CDi": 0.003793134996692982,
+    "CM": -0.06946679300123075,
+    "L_D": 12.244397572293865
+  },
+  "corrected_results": {
+    "CL": 0.06046059145965581,
+    "CDi": 0.001287751695043822,
+    "CM": -0.05675716615509936,
+    "L_D": 46.950504272175195
+  }
+}

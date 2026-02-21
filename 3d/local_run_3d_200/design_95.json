@@ -1,0 +1,14 @@
+{
+  "design_name": "ExtremeSweepForwardCamberWashout",
+  "le_sweep": 79.15900495809834,
+  "root_chord_in": 37.09342814041734,
+  "twist_root": -9.823131499398277,
+  "twist_tip": -8.009965621606653,
+  "dihedral": 4.22597451773885,
+  "naca": {
+    "m": 4,
+    "p": 0,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

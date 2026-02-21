@@ -1,0 +1,33 @@
+{
+  "design_name": "HigherSweepBalancedWashoutAnhedral4410",
+  "design_params": {
+    "le_sweep_deg": 73.55343584735279,
+    "root_chord_in": 42.421151734629575,
+    "twist_root_deg": 1.5777632796167076,
+    "twist_tip_deg": -9.68847127391775,
+    "dihedral_deg": -5.267365654737818,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.277872340672344,
+    "CDi": 0.032662211577742906,
+    "CM": -0.2543172119794811,
+    "L_D": 8.507456392257751
+  },
+  "corrected_results": {
+    "CL": -0.0652742641711902,
+    "CDi": -0.006312005020681346,
+    "CM": 0.1303560347561916,
+    "L_D": 10.341288379416435
+  }
+}

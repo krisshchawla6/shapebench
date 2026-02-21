@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweepExtremeDihedralThinCamber",
+  "design_params": {
+    "le_sweep_deg": 52.51042641119081,
+    "root_chord_in": 12.970096943202446,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -5.379156261948962,
+    "dihedral_deg": 6.109827858418022,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.20418675325407717,
+    "CDi": 0.00766198958974295,
+    "CM": -0.2306263232721653,
+    "L_D": 26.64931227881339
+  },
+  "corrected_results": {
+    "CL": 0.19324418772916707,
+    "CDi": 0.006405481585591167,
+    "CM": -0.20615739991699972,
+    "L_D": 30.168565024659642
+  }
+}

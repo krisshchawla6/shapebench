@@ -1,0 +1,11 @@
+{
+  "le_sweep": 72.0,
+  "root_chord_in": 42.0,
+  "twist_root": -10.0,
+  "twist_tip": -4.0,
+  "dihedral": -2.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 13,
+  "name": "HighSweep_MaxCamber_OptimizedTwist"
+}

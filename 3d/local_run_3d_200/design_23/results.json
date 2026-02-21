@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_WashIn_HighDihedral_NACA4412",
+  "design_params": {
+    "le_sweep_deg": 50.56450865483188,
+    "root_chord_in": 27.713657462561752,
+    "twist_root_deg": -4.839436535372552,
+    "twist_tip_deg": 5.096490226171013,
+    "dihedral_deg": 9.598953607043779,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.6450824608878349,
+    "CDi": 0.09227771492130137,
+    "CM": -0.634870606376412,
+    "L_D": 6.9906635793700636
+  },
+  "corrected_results": {
+    "CL": 0.4077674622351276,
+    "CDi": 0.05868905177907212,
+    "CM": -0.3882598703186563,
+    "L_D": 6.947930659539691
+  }
+}

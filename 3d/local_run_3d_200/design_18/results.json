@@ -1,0 +1,33 @@
+{
+  "design_name": "Extreme_Sweep_Aggressive_Washout_Thin_Camber",
+  "design_params": {
+    "le_sweep_deg": 75.47320031523532,
+    "root_chord_in": 37.61137690000743,
+    "twist_root_deg": -1.1949944375801778,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -3.590992241210017,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.22926548952080275,
+    "CDi": 0.019782956395243356,
+    "CM": -0.21493538809762247,
+    "L_D": 11.589040835975744
+  },
+  "corrected_results": {
+    "CL": 0.013255003794696452,
+    "CDi": 0.003012540941694083,
+    "CM": 0.038039943278255064,
+    "L_D": 4.399941461788926
+  }
+}

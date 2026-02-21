@@ -1,0 +1,14 @@
+(No images were provided for direct Cp distribution analysis; relying on provided design parameters and rewards.)
+
+The top-performing designs (Design 1, 2, 4) consistently exhibit:
+*   **High Sweep:** All are around 70-71 degrees. This suggests that strong leading-edge vortices are critical for achieving high CL/CDi in this design space.
+*   **Aggressive Washout:** `twist_root` is significantly negative, and `twist_tip` is often at the maximum allowed -10.0 degrees. This likely helps distribute lift more effectively, reducing induced drag and potentially preventing tip stall.
+*   **Strong Anhedral:** `dihedral` is consistently at or near the maximum negative value of -15.0 degrees. This effect seems strongly correlated with high performance, possibly by influencing vortex stability or effective dihedral effect.
+*   **Relatively Thin Airfoils:** `naca_t` values are low (6-8). Both cambered (`24xx`) and symmetric (`00xx`) airfoils perform well at low thickness, with `2407`/`2408` yielding the highest rewards. Thicker airfoils, especially symmetric ones (e.g., `0009` in Design 3), result in significantly lower rewards.
+*   **Medium Root Chord:** `root_chord_in` tends to be in the 27-33 inch range.
+
+**Key observations and areas for improvement/exploration:**
+1.  **Limited Sweep Exploration:** The current population's high-performers are clustered at high sweep. Lower sweep ranges (e.g., 45-65 degrees) are under-explored in high-reward contexts.
+2.  **Dihedral Influence:** While strong anhedral is prevalent in top designs, the precise mechanism or optimal value isn't fully clear. Exploring moderate anhedral or even positive dihedral with otherwise optimal parameters could be insightful.
+3.  **Camber Profile Extremes:** The `24xx` NACA series is common. Testing a more aggressive camber (e.g., `44xx`) could provide higher lift at potentially lower angles of attack, which might be beneficial, especially with different sweep values.
+4.  **Coupling of Parameters:** The interaction between sweep, twist, and dihedral is complex. While high sweep, max washout, and max anhedral seem to work well together, exploring different combinations (e.g., lower sweep with max washout and *different* anhedral) is needed.

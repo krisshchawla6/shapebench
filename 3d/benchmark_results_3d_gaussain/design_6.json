@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_SymThin_AggressiveWashout_LargeChord",
+  "le_sweep": 78.04037494305858,
+  "root_chord_in": 50.0,
+  "twist_root": 1.2315370245711041,
+  "twist_tip": -4.182220518714459,
+  "dihedral": 2.663905223527163,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

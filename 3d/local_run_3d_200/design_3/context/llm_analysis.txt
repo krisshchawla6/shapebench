@@ -1,0 +1,6 @@
+No previous designs or representative images were provided. Therefore, there is no existing design to analyze for aerodynamic issues or performance patterns. This response generates the very first design in the population, aiming for a diverse and reasonable starting point for the evolutionary process.
+
+Key changes needed:
+1.  **Establish a baseline:** Generate a design with a combination of parameters that are neither at the extreme limits nor perfectly average, to provide a good initial data point.
+2.  **Explore key features:** Incorporate features like high sweep for vortex lift, some washout for stability, and moderate camber/thickness.
+3.  **Provide diversity:** Select parameters that are distinct enough to allow subsequent generations to explore different regions of the design space effectively.

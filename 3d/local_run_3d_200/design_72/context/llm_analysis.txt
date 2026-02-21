@@ -1,0 +1,13 @@
+The representative design (Design 1) with `le_sweep=72.9`, `root_chord_in=31.59`, `twist_root=-8.89`, `twist_tip=-7.96`, `dihedral=5.88`, and `NACA 0018` yielded a reward of 52.1820. The Cp distribution shows a strong leading-edge suction peak, indicative of vortex lift, characteristic of highly swept delta wings. However, the symmetric NACA 0018 airfoil likely contributes to its relatively lower efficiency. The strong and uniform washout across the wing, combined with positive dihedral, suggests that the lift distribution may not be optimally efficient, leading to higher induced drag for the lift generated.
+
+Key issues:
+*   **Lack of Camber:** The symmetric airfoil (NACA 0018) forces the wing to operate at a higher angle of attack to achieve lift, significantly increasing induced drag compared to cambered airfoils.
+*   **High Sweep:** While high sweep generates strong vortex lift, sweep angles above ~70 degrees can lead to diminishing returns or increased drag components for the given operating conditions. The best performers are in the 63-66 degree range.
+*   **Washout Distribution:** The strong, almost uniform washout from root to tip may be overly aggressive, reducing the effective angle of attack across the entire wing and potentially limiting overall lift efficiency for a given wing area.
+*   **Positive Dihedral:** The positive dihedral observed in this design, unlike the slightly negative dihedral of top performers, might negatively impact the effective span and induced drag.
+
+Key design changes needed to improve designs in the population:
+1.  **Introduce Airfoil Camber:** Prioritize the use of cambered airfoils (NACA 24xx or 44xx) to generate lift more efficiently, reducing induced drag.
+2.  **Optimize Sweep Angle:** Target sweep angles closer to the 60-70 degree range, as this has shown better performance in the population.
+3.  **Refine Twist Distribution:** Experiment with a more nuanced twist distribution, potentially less aggressive overall washout, or a significant gradient from root to tip to tailor the spanwise load.
+4.  **Adjust Dihedral:** Explore neutral to slightly negative dihedral settings, which appear correlated with higher rewards.

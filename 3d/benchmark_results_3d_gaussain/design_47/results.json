@@ -1,0 +1,33 @@
+{
+  "design_name": "ModerateSweep_SymmetricAirfoil_Washout",
+  "design_params": {
+    "le_sweep_deg": 63.131414497131395,
+    "root_chord_in": 35.15918488824624,
+    "twist_root_deg": -3.1955083798295925,
+    "twist_tip_deg": -6.227642144059059,
+    "dihedral_deg": -3.2549018158206238,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.30111656634974054,
+    "CDi": 0.029291875251229255,
+    "CM": -0.2680053584457301,
+    "L_D": 10.279866473796483
+  },
+  "corrected_results": {
+    "CL": 0.08078097629419842,
+    "CDi": 0.008472053343423562,
+    "CM": -0.03228070221101201,
+    "L_D": 9.534993822590213
+  }
+}

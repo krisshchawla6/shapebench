@@ -1,0 +1,7 @@
+The representative design (Design 1) demonstrates exceptional performance with a reward of 353.7832, significantly outperforming other designs. Its aerodynamic success is likely attributed to a combination of a high leading-edge sweep (69.77 deg), which effectively generates stable leading-edge vortices for enhanced lift, and a pronounced wash-in configuration (negative twist at root -6.11 deg, and maximum negative twist at tip -10.0 deg) that likely controls the spanwise load distribution and vortex behavior. The strong anhedral (-11.66 deg) also appears to contribute positively, potentially influencing lateral stability or vortex dynamics favorably. The thin NACA 2408 airfoil (moderate camber, aft camber position) likely minimizes profile drag while providing sufficient curvature for lift. Compared to Design 2 (reward 56.6208), Design 1 features a more extreme negative tip twist, stronger anhedral, and a thinner airfoil, suggesting these parameters are critical.
+
+**Key design changes needed to improve or diversify:**
+1.  Investigate sweep angles slightly perturbed around the successful 70-degree range.
+2.  Explore nuanced variations in negative twist distribution, especially slightly less extreme tip wash-in to understand its sensitivity.
+3.  Test intermediate anhedral values, balancing the strong anhedral of Design 1 with the more moderate anhedral of Design 2.
+4.  Experiment with slightly different airfoil thicknesses within the successful NACA 24xx series.

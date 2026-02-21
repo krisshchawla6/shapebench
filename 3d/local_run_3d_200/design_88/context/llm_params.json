@@ -1,0 +1,11 @@
+{
+  "le_sweep": 78.0,
+  "root_chord_in": 48.0,
+  "twist_root": -5.0,
+  "twist_tip": -9.5,
+  "dihedral": 12.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 22,
+  "name": "HighSweep_ZeroCam_PosDihedral_LargeChord"
+}

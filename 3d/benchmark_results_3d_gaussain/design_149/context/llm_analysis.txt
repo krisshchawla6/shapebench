@@ -1,0 +1,7 @@
+The top-ranked design (Design 1, reward 424.5627) demonstrates strong performance with a high leading-edge sweep (71.2 deg), maximum negative twist at both root and tip (-10.0 deg), and maximum negative dihedral (-15.0 deg). It uses a NACA 2407 airfoil, indicating moderate camber and a thin profile. The other high-reward designs also show similar trends: high sweep, significant washout, and negative dihedral. NACA 24XX and 00XX airfoils with `naca_t` between 6 and 8 appear to be favored, while NACA 44XX has yielded lower rewards. The consistency of extreme values for twist and dihedral across the best designs suggests these parameters are critical for achieving high CL/CDi, likely by optimizing vortex lift and load distribution.
+
+Key changes needed to improve designs in the population:
+1.  **Explore higher leading-edge sweep:** The current top sweep is 76.6 deg (Design 3), but Design 1 is at 71.2 deg. Pushing closer to the 80.0 deg limit could yield more vortex lift.
+2.  **Investigate extreme twist/dihedral combinations:** The current population suggests max negative values are highly beneficial. We should continue to test these boundaries with other parameter combinations.
+3.  **Refine airfoil selection:** While NACA 24XX and 00XX are good, explore thinner profiles (e.g., `naca_t=6`) in conjunction with aggressive geometric parameters to reduce parasitic drag.
+4.  **Vary root chord:** Current successful designs are in the 30-34 inch range. Exploring slightly larger or smaller root chords can impact overall wing scale and aspect ratio effects.

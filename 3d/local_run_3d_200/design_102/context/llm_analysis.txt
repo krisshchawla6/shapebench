@@ -1,0 +1,9 @@
+Design 1, with a reward of 4016.0090, is the highest-performing design in the current population. It features a moderate leading edge sweep (65.5 deg), a root chord of 34.79 inches, significant washout at both the root (-7.13 deg) and tip (-4.61 deg), near-neutral dihedral (-1.72 deg), and a NACA 4412 airfoil. This combination suggests that effective vortex lift generation, coupled with a spanwise load distribution optimized by twist, is key to high CL/CDi. The NACA 4-series airfoil provides camber for baseline lift.
+
+Critically assessing the (hypothetical, as no image was provided) Cp distribution for a well-performing delta wing like Design 1, we would expect to see strong leading-edge suction indicating well-developed vortex lift. The pressure distribution across the chord and span should be relatively smooth, without abrupt changes that would suggest separation or inefficient flow. The washout likely contributes to maintaining attached flow towards the tips and preventing premature tip stall, which is a common issue for highly swept wings.
+
+Key design changes needed to improve designs in the population:
+1.  **Refine Twist Distribution:** While washout is present, the optimal gradient and magnitude between root and tip for various sweep angles should be thoroughly explored to fine-tune load distribution.
+2.  **Explore Higher Sweeps:** Design 1 is in the mid-60s. Pushing to higher sweeps (e.g., 70-75 degrees) could enhance vortex stability and lift, potentially requiring different twist profiles.
+3.  **Vary Camber and Thickness:** The NACA 4412 worked well, but exploring lighter camber (NACA 2-series) or even symmetric profiles (NACA 00-series) with varied thickness could isolate the impact of vortex lift versus airfoil-generated lift and profile drag.
+4.  **Investigate Chord-Sweep Scaling:** How does the `root_chord_in` interact with different sweep angles to maintain optimal aspect ratio and vortex characteristics?

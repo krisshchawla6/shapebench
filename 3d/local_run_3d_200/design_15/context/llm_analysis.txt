@@ -1,0 +1,13 @@
+The representative design (Design 1) with `le_sweep=63.8`, `root_chord_in=31.8`, `twist_root=-8.7`, `twist_tip=-7.0`, `dihedral=1.0`, and `NACA 4413` achieved the highest reward of 20.2761. Without the Cp distribution image, a precise aerodynamic assessment is limited, but its high reward suggests effective vortex lift generation and a well-managed lift distribution. Key contributing factors likely include:
+*   **High Sweep (63.8 deg):** This is ideal for generating strong leading-edge vortices, a primary source of lift for delta wings, especially at higher angles of attack.
+*   **Significant Washout (negative twist at root and tip):** The negative twist distribution (`-8.7` at root, `-7.0` at tip) effectively unloads the wing tips, which is crucial for delaying tip stall and improving the spanwise lift distribution, thus reducing induced drag.
+*   **Positive Camber (NACA 44xx):** The cambered airfoil provides additional lift, especially at lower angles of attack, and contributes to a more favorable pressure distribution over the wing, enhancing the CL/CDi ratio.
+*   **Near-Zero Dihedral:** This provides good lateral stability without significantly impacting lift or drag characteristics negatively, unlike the designs with strong negative dihedral.
+
+From the population data, designs with very low sweep (e.g., Design 4: 50.4 deg) or symmetric airfoils (e.g., Design 6: NACA 0015) consistently performed poorly, indicating these characteristics are detrimental. Similarly, positive root twist (Design 5) led to a drastically low reward.
+
+**Key Design Changes Needed to Improve Designs in the Population:**
+1.  **Optimize Twist Gradient:** Systematically explore the balance between root and tip washout (difference between `twist_root` and `twist_tip`) to fine-tune spanwise load distribution and minimize induced drag further.
+2.  **Explore Higher Sweep with Varied Chord:** Investigate if pushing `le_sweep` even higher (e.g., 70-75 degrees) can be combined with different `root_chord_in` values to maintain or improve performance, especially by potentially increasing surface area to support vortex lift at extreme sweeps.
+3.  **Refine Camber and Thickness:** While `NACA 44xx` performs well, explore `NACA 24xx` or alternative `NACA 40xx` thickness combinations to see if a slightly different camber profile or thickness can yield further gains without excessive drag.
+4.  **Maintain Neutral Dihedral:** Focus on designs with dihedral values close to zero, as both significantly positive and negative dihedral appear to correlate with lower performance.
