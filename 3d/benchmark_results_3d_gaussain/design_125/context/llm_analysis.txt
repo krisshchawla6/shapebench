@@ -1,7 +1,0 @@
-The top-performing design (Design 1) achieved a reward of 424.5627 with a high leading-edge sweep (71.24 deg), moderate root chord (32.88 in), maximum washout at both root and tip (-10.0 deg), maximum anhedral (-15.0 deg), and a NACA 2407 airfoil. This combination suggests that strong leading-edge vortices, effectively managed lift distribution through aggressive washout, and beneficial lateral stability characteristics (from anhedral) are crucial for maximizing CL/CDi in this design space. The use of a moderately cambered airfoil (NACA 24xx) appears to outperform both symmetric (NACA 00xx) and highly cambered (NACA 44xx) profiles, indicating that some positive camber is beneficial but excessive camber may lead to higher drag penalties or less stable vortex flow. Designs with lower sweep (e.g., Design 5 at 59.61 deg) consistently show significantly lower rewards. Induced drag is likely well-managed in the top designs due to the washout, which prevents excessive load concentration at the wingtips.
-
-Key design changes needed to improve designs in the population:
-1.  Maintain high leading-edge sweep, as it's strongly correlated with high performance.
-2.  Continue to explore aggressive washout configurations, particularly maximizing negative twist at both root and tip.
-3.  Prioritize maximum anhedral, which has been a consistent feature of high-reward designs.
-4.  Focus on moderate camber airfoils (NACA 24xx series), refining thickness within this family.

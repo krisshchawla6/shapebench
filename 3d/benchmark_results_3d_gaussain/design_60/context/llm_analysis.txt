@@ -1,9 +1,0 @@
-The top performing design (Design 1, Reward: 424.5627) exhibits a highly swept delta wing (le_sweep ~71.2 degrees) with a moderate root chord (~32.8 inches). Aerodynamically, this sweep strongly promotes leading-edge vortex lift, which is a key mechanism for generating high lift coefficients at relevant angles of attack for delta wings. The design features aggressive washout at both the root and tip (-10.0 degrees for both `twist_root` and `twist_tip`), which helps to distribute lift more evenly and delay tip stall, reducing induced drag. A significant anhedral angle (-15.0 degrees `dihedral`) is also present, likely contributing to lateral stability or enhancing the effective sweep in some contexts. The NACA 2407 airfoil (2% max camber at 40% chord, 7% thickness) provides some positive camber, adding to the overall lift generation.
-
-Compared to other designs, those with similar high sweep, strong anhedral, and significant washout (e.g., Design 2) also show good rewards, though Design 2 had slightly less aggressive root twist and slightly less anhedral, resulting in a lower reward. Designs with less optimal parameter combinations, such as the symmetric airfoil in Design 5 (NACA 0006) or the higher sweep (Design 6, ~75.6 degrees) with similar twist/dihedral, resulted in significantly lower rewards, suggesting that the precise balance of these parameters is crucial.
-
-Key design changes needed to improve designs in the population by exploiting current knowledge:
-1.  **Maintain high leading-edge sweep** within the 70-73 degree range, as this appears to be a sweet spot for vortex lift.
-2.  **Continue with aggressive negative twist (washout)**, especially at the tip, to optimize lift distribution and reduce induced drag.
-3.  **Utilize strong anhedral** to further enhance stability and potentially vortex behavior.
-4.  **Favor cambered airfoils** over symmetric ones, as demonstrated by the success of NACA 24xx profiles.

@@ -1,7 +1,0 @@
-Design 1 is the current performance leader (Reward 5.3926). Its parameter set reveals a specific geometric strategy: high radial expansion at the leading edge (CP0) and lower surface (CP2), contrasted with a significant "pinch" on the upper surface (CP1, radius 0.2332). This creates a highly cambered, potentially thin profile. The flow fields (u, v, p) suggest high-velocity flow over the upper surface with a well-maintained pressure differential. However, the extremely low radius at CP1 might lead to a sharp curvature transition, which can trigger early transition or separation at higher angles of attack. The trailing edge (CP3) is nearly at maximum sharpness (edgy 0.9327), which effectively enforces the Kutta condition but might be sensitive to flow oscillations. 
-
-Key changes needed:
-1.  **Moderate Upper Surface Curvature**: Increase the radius of CP1 (interpolating between Design 1's 0.23 and Design 3's 0.41) to create a more robust suction-side profile that delays flow separation.
-2.  **Harmonize Leading Edge Smoothness**: Maintain the extremely low "edgy" parameters for the first three points to ensure laminar-like flow and minimize skin friction drag.
-3.  **Refine Trailing Edge Convergence**: Slightly reduce the radius and angle of CP3 compared to Design 1 to explore a more tapered, less aggressive rear termination.
-4.  **Balance Pressure Recovery**: Adjust CP2's angle to be slightly more negative (closer to Design 3), facilitating a smoother pressure recovery on the lower surface.

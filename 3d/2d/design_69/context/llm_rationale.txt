@@ -1,5 +1,0 @@
-*   **Strategy Focus: Exploitation**: This design focuses on fine-tuning the best-performing parameters from Design 1. By making incremental adjustments to the radii and angles of the control points, we aim to find the peak of the local reward landscape.
-*   **Leading Edge Tuning**: Design 1 has CP1 at `r=0.2126` and `a=0.6644`. I will slightly increase the radius to `0.2185` and shift the angle to `0.6750` to create a more aerodynamic "nose" that manages the suction peak more effectively.
-*   **Camber Management**: The relationship between CP0 and CP2 defines the thickness. I will nudge CP2's angle closer to the horizontal (`-0.06`) to slightly stretch the upper surface, potentially reducing the adverse pressure gradient seen in the velocity plots.
-*   **Trailing Edge Precision**: I will set the trailing edge `edgy_param` (CP3) to `0.8550`. This is slightly sharper than Design 1 but less extreme than Design 2, seeking an optimal balance for wake management.
-*   **Maintain Smoothness**: CPs 0, 1, and 2 will keep very low `edgy_param` values to ensure the solver interprets the shape as a continuous, high-quality curve, avoiding local turbulence spikes.

@@ -42,15 +42,19 @@ point_analysis    = gendw.point_analysis
 NACA4DigitAirfoil = gendw.NACA4DigitAirfoil
 
 
-# ── helpers ──────────────────────────────────────────────────────────────────
+# ── dataset-fixed constants (must match VortexNet training setup) ─────────────
+_ROOT_CHORD_IN = 25.734
+_TWIST_ROOT    = 0.0
+_TWIST_TIP     = 0.0
+_DIHEDRAL      = 0.0
+_CHORD_LENGTH  = 1.0
 
-def _geom_kwargs(params):
-    """Extract geometry keyword args that vehicle_setup / point_analysis accept."""
+def _geom_kwargs():
     return dict(
-        root_chord_in = params.get('root_chord_in', 25.734),
-        twist_root    = params.get('twist_root', 0.0),
-        twist_tip     = params.get('twist_tip', 0.0),
-        dihedral      = params.get('dihedral', 0.0),
+        root_chord_in=_ROOT_CHORD_IN,
+        twist_root=_TWIST_ROOT,
+        twist_tip=_TWIST_TIP,
+        dihedral=_DIHEDRAL,
     )
 
 
@@ -60,8 +64,8 @@ def run_design(params, aoa, mach, output_dir):
     le_sweep     = params['le_sweep']
     naca         = params['naca']
     NACA_4DIGITS = {'m': naca['m'], 'p': naca['p'], 't': naca['t'],
-                    'chord_length': naca.get('chord_length', 1.0)}
-    gkw = _geom_kwargs(params)
+                    'chord_length': _CHORD_LENGTH}
+    gkw = _geom_kwargs()
 
     orig_dir = os.getcwd()
     os.chdir(output_dir)
@@ -86,10 +90,10 @@ def save_results_json(params, aoa, mach, results, geometry, output_dir):
         'design_name': params.get('design_name', 'unnamed'),
         'design_params': {
             'le_sweep_deg':   params['le_sweep'],
-            'root_chord_in':  params.get('root_chord_in', 25.734),
-            'twist_root_deg': params.get('twist_root', 0.0),
-            'twist_tip_deg':  params.get('twist_tip', 0.0),
-            'dihedral_deg':   params.get('dihedral', 0.0),
+            'root_chord_in':  _ROOT_CHORD_IN,
+            'twist_root_deg': _TWIST_ROOT,
+            'twist_tip_deg':  _TWIST_TIP,
+            'dihedral_deg':   _DIHEDRAL,
             'naca':           params['naca'],
         },
         'sim_conditions': {
@@ -201,10 +205,10 @@ def save_geometry_png(params, aoa, mach, results, geometry, output_dir):
         ('Geometry',    '',                              '#aaa',   True),
         ('  LE Sweep',  f"{le} deg",                     TC,       False),
         ('  Airfoil',   f"NACA {naca['m']}{naca['p']}{naca['t']:02d}", TC, False),
-        ('  Root chord',f"{params.get('root_chord_in', 25.734)} in", TC, False),
-        ('  Twist root',f"{params.get('twist_root', 0.0)} deg",  TC, False),
-        ('  Twist tip', f"{params.get('twist_tip', 0.0)} deg",   TC, False),
-        ('  Dihedral',  f"{params.get('dihedral', 0.0)} deg",    TC, False),
+        ('  Root chord',f"{_ROOT_CHORD_IN} in",   TC, False),
+        ('  Twist root',f"{_TWIST_ROOT} deg",    TC, False),
+        ('  Twist tip', f"{_TWIST_TIP} deg",     TC, False),
+        ('  Dihedral',  f"{_DIHEDRAL} deg",       TC, False),
         ('  Semi-span', f"{wing.spans.projected/2:.4f} m",       TC, False),
         ('  Ref. area', f"{wing.areas.reference:.4f} m2",        TC, False),
         ('  AR',        f"{wing.aspect_ratio:.3f}",              TC, False),

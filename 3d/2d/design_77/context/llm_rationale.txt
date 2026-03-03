@@ -1,6 +1,0 @@
-*   **Exploitation Strategy**: The design space around Designs 1, 2, and 4 is highly productive. I am focusing on interpolating the successful parameters of Design 1 and Design 4 while pushing the trailing edge sharpness.
-*   **Geometry Refinement**: Design 4 achieved high rewards with a slightly higher `r1` (0.279) than Design 1 (0.212). I will target the middle ground (~0.25) to find an optimal curvature that maintains high lift while reducing upper-surface flow deceleration gradients.
-*   **Angular Optimization**: I am adjusting `a1` to 0.7125, slightly further aft than Design 1, to delay the pressure recovery on the upper surface and potentially extend the laminar region.
-*   **Leading Edge Consistency**: Maintaining `r0` and `a0` near Design 1's values, as they successfully established a clean stagnation point and smooth transition to the suction side.
-*   **Trailing Edge Sharpness**: Increasing `edgy_param` at Point 3 to 0.9450 to explore if a more extreme "knife-edge" closure improves the pressure recovery at the very end of the airfoil.
-*   **Smoothness Enforcement**: Setting `e0` and `e2` to near-minimum values (-0.99) to ensure no parasitic drag from surface discontinuities on the critical leading and lower surfaces.

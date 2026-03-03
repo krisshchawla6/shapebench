@@ -1,5 +1,0 @@
-*   **Hybrid Strategy Application**: I am combining the successful "stretched" longitudinal frame of Design 1 (r0=1, r3=1) with a refined interior point distribution interpolated from the top two designs (D1 and D2).
-*   **Aft-Section Refinement**: Designs 1 and 2 both used positive edginess at the trailing edge (e3 ≈ 0.4); I will reduce this to ~0.22 to investigate if a smoother TE reduces the wake thickness observed in the velocity magnitude plots.
-*   **Camber Optimization**: By averaging the angle and radius of P1 and P2 from the two highest-ranked designs, I aim to stabilize the pressure recovery on the upper surface and minimize the pressure drag on the lower surface.
-*   **Leading Edge Consistency**: P0 is kept at max radius (1.0) and min edginess (-1.0) to maintain the smooth, large-radius leading edge that characterizes the high-performing cluster.
-*   **Search Advancement**: This design moves towards a more "streamlined-hybrid" by testing if the high-lift characteristics of the top population can be maintained with a more tapered, less edgy trailing edge configuration.

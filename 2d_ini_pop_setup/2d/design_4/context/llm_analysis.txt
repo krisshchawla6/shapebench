@@ -1,5 +1,0 @@
-As this is the initial design iteration with no previous population or images available, the analysis focuses on fundamental aerodynamic requirements and the prevention of common geometric flaws observed in random initializations.
-- **Geometric Flaws to Avoid**: Avoid "hourglass" shapes where middle control points collapse inward. Avoid extreme "edgy_param" values on the leading edge, which cause flow separation.
-- **Flow Problem Predictions**: A blunt leading edge with high edginess usually results in immediate stall. A thick trailing edge (low edginess) creates a large low-pressure wake, significantly increasing pressure drag.
-- **Parameter Mappings**: The `radius_param` will be used to define the thickness and camber; `angle_param` will be used to shift the maximum thickness point; and `edgy_param` will define the curvature gradients at the stagnation and exit points.
-- **Key Changes for Population Initialization**: 1. Enforce a smooth, low-edginess leading edge. 2. Implement a high-edginess trailing edge for Kutta condition compliance. 3. Establish vertical asymmetry (camber) for lift generation.

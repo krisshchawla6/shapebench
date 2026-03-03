@@ -1,6 +1,0 @@
-- **Strategy Focus (Hybridization)**: Since no designs exist in the database, I am hybridizing the geometric archetypes of a **Clark-Y high-lift profile** (flat bottom, curved top) and a **NACA 6-series laminar flow profile** (max thickness further aft). 
-- **LE Strategy (CP0)**: Setting a moderate `radius_param` and very low `edgy_param` to create a robust, rounded nose that can handle varying angles of attack without immediate separation.
-- **Upper Surface Strategy (CP1)**: Using a high `radius_param` and a positive `angle_param` to push the maximum camber slightly aft, mimicking laminar flow characteristics to reduce skin friction drag.
-- **Lower Surface Strategy (CP2)**: Utilizing a slightly negative `radius_param` to create a flat or slightly concave pressure surface, maximizing the pressure differential between the upper and lower surfaces.
-- **TE Strategy (CP3)**: Applying a high `radius_param` to extend the chord and a maximum `edgy_param` to ensure a razor-sharp trailing edge, which is critical for minimizing the drag-inducing wake.
-- **Evolutionary Jump**: This design bypasses random search by enforcing a "lifting-body" topology immediately, providing a high-performance baseline for the next generation.

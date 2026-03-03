@@ -1,6 +1,0 @@
-*   **Apply Hybrid Strategy**: This design blends the superior radial distribution of Design 1 and Design 2 with the thinner, lower-drag thickness profile suggested by Design 4's CP1 parameters.
-*   **Thickness Optimization**: By setting CP1's radius to 0.1750 (a midpoint between Design 1's 0.21 and Design 4's 0.12), I am exploring a hybrid thickness that aims to maintain high lift while reducing the drag penalty observed in thicker profiles.
-*   **Leading Edge Refinement**: Increasing CP0's radius to 0.9650 (from Design 1's 0.917) intends to slightly blunt the nose, spreading the suction peak more evenly across the upper surface to delay flow separation.
-*   **Trailing Edge Sharpening**: Based on the success of Design 2 (e=0.93) and Design 1 (e=0.83), I am setting the trailing edge edginess (CP3) to 0.8950 to ensure a clean flow departure and minimize the recirculation zone seen in the wake of the v-velocity plot.
-*   **Angular Consistency**: I have interpolated the angle parameters (a0-a3) across the top three designs to maintain the overall camber distribution that has proven effective for this reward function.
-*   **Judgment**: This evolutionary step moves away from the local optimum of Design 1 by integrating traits from other high-ranking designs, specifically targeting a more refined thickness-to-camber ratio.

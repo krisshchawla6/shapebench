@@ -1,7 +1,0 @@
-Design 1, the current leader (Reward: 5.4897), presents a slender, cambered profile characterized by a very smooth leading edge (CP0 $e \approx -0.98$) and a sharply defined trailing edge (CP3 $e \approx 0.83$). The flow field (1_u, 1_v) shows a well-behaved stagnation point, but the pressure recovery near the trailing edge (1_p) suggests the onset of a thin wake, likely due to the extreme angle offset of the trailing edge (CP3 $a = 0.989$). The geometric mapping reveals that a very low radius for CP1 ($r \approx 0.21$) creates a "necking" effect that maintains thinness but might limit the maximum lift coefficient. 
-
-Key flaws and needed changes:
-1. **Curvature Discontinuity**: The transition from the smooth upper surface to the sharp trailing edge is slightly abrupt; smoothing the transition by adjusting the edgy_param of the intermediate control points could reduce wake turbulence.
-2. **Thickness Distribution**: The very low radius of CP1 creates a profile that is perhaps too thin for optimal pressure distribution at higher angles of attack. Increasing this radius slightly would improve structural and aerodynamic robustness.
-3. **Trailing Edge Alignment**: The high angular offset ($a \approx 0.99$) of CP3 creates a significant "hook" effect; slightly moderating this while keeping the sharpness high might optimize the Kutta condition and reduce drag.
-4. **Leading Edge Bluntness**: Design 1 has a slightly asymmetric entry; centering the leading edge more effectively could improve performance across a wider range of flow conditions.

@@ -1,5 +1,0 @@
-*   **Hybrid Strategy Application**: This design blends the "stretched" chord length logic of Design 1 (using high r0 and r3, and high a3) with a much thinner cross-section inspired by the need to eliminate the "bean" bulge that caused the high drag wake in the previous results.
-*   **Geometric Refinement**: I am reducing P1 and P2 radius parameters from the ~0.60 range in Design 1 down to the ~0.35-0.45 range. This "constriction" should streamline the flow and delay separation.
-*   **Sharpness Control**: Design 1 used a moderately sharp P3 (e=0.53); I will refine this to 0.25 to maintain a defined trailing edge without creating the computational instability seen in Design 2's sharp edges.
-*   **Leading Edge Optimization**: P0 is kept at a high radius (0.88) and low angular offset to ensure a robust, rounded leading edge that can handle varied angles of attack, as seen in successful subsonic profiles.
-*   **Evolutionary Exploration**: By moving the mid-points (P1, P2) inward while keeping the endpoints (P0, P3) far apart, I am exploring a "laminar-style" thickness distribution that has not yet been represented in the current population.

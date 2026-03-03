@@ -1,5 +1,0 @@
-- **Apply Strategy Focus**: This design is a hybrid of Design 1 and Design 2. It takes the successful camber profile of Design 1 and merges it with the slightly more robust leading-edge and trailing-edge characteristics of Design 2.
-- **Population Patterns**: Designs 1, 2, and 3 all utilize highly smooth (edgy ~ -1.0) leading and lower surfaces (CP0, CP2). I will maintain this trend as it is clearly linked to high rewards.
-- **Image Analysis Insights**: The pressure gradient on the upper surface of Design 1 is steep; by slightly reducing the angle_param of CP1 compared to Design 1 (but keeping it higher than Design 2), I aim to elongate the low-pressure zone.
-- **Geometric Exploration**: I am specifically interpolating the "edgy_param" for CP3. Design 1 is at 1.0 (very sharp) and Design 2 is at 0.4199. A value around 0.725 should provide a sharp exit without the extreme geometric discontinuity.
-- **Evolutionary Judgment**: By moving CP0 radius closer to 1.0 (like Design 2) while keeping the angle closer to Design 1, I am testing if the reward is driven by the bluntness of the nose or its specific angular orientation.

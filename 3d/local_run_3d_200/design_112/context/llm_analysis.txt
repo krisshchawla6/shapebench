@@ -1,9 +1,0 @@
-Design 1, with a reward of 4016.0090, is the best performing design by a significant margin. Its parameters include a moderate leading edge sweep (65.5 deg), a root chord of ~34.8 inches, a moderate washout distribution (twist_root = -7.1 deg, twist_tip = -4.6 deg), a slightly negative dihedral (-1.7 deg), and a cambered NACA 4412 airfoil. The success of Design 1 suggests that a balanced approach to these parameters is key.
-
-The other designs, particularly Designs 2 (338.5) and 3 (320.9), while significantly lower in reward, show that certain parameter combinations (e.g., more aggressive `twist_root` at -10.0 deg) can yield reasonable, though not optimal, results. Designs with extremely high sweep (Design 5, 72.9 deg) or very negative dihedral (Design 4, -11.1 deg) consistently show much lower rewards, indicating that these extremes might be detrimental for the CL/CDi objective. The `naca_m=4, naca_p=0` combination in Design 3 (effectively max camber at the leading edge) also appears less effective compared to `naca_p=4`.
-
-Key design changes needed to improve designs in the population:
-1.  **Refine Twist Distribution**: Explore `twist_root` values slightly more negative than Design 1, but less extreme than -10.0, while maintaining a healthy washout (twist_root < twist_tip).
-2.  **Optimize Camber Profile**: Confirm the importance of `naca_p=4` for effective camber, and explore variations in `naca_m` (camber percentage) and `naca_t` (thickness) around the successful NACA 4412.
-3.  **Adjust Sweep within Optimal Range**: Explore the upper end of the moderate sweep range (e.g., 68-70 deg) to potentially increase vortex lift without incurring excessive induced drag or stability issues.
-4.  **Explore Dihedral-Chord Interaction**: Investigate a slightly more negative dihedral than Design 1, paired with a slightly larger root chord, to see if an optimal balance can be found for lift and stability.

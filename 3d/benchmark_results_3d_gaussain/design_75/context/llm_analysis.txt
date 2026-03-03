@@ -1,7 +1,0 @@
-The representative design (Design 1) uses a NACA 0006 symmetric airfoil with `le_sweep=71.2`, `root_chord_in=27.8`, `twist_root=-10.0`, `twist_tip=-7.5`, and `dihedral=-15.0`, achieving a reward of 218.4856. While its sweep, strong washout, and anhedral settings align with high-performing designs, its use of a symmetric, very thin airfoil (`NACA 0006`) and a smaller root chord likely limit its overall lift generation and CL/CDi ratio compared to the top performers. The top designs (Rank 0 and 1) both feature cambered `NACA 24xx` airfoils and larger root chords.
-
-Key design changes needed to improve designs in the population:
-1.  Introduce cambered airfoils (e.g., `NACA 24xx` type) to enhance lift and efficiency.
-2.  Increase `root_chord_in` towards the observed sweet spot of 32-33 inches to provide more lifting surface.
-3.  Maintain a high `le_sweep` (around 70-72 degrees) to capitalize on vortex lift.
-4.  Consistently apply strong negative twist (`washout`) at the tip and significant `anhedral`.

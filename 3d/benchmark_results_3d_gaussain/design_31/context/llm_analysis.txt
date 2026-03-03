@@ -1,9 +1,0 @@
-The representative design (Design 1) achieved an exceptionally high reward of 424.5627. This design features a high leading-edge sweep (71.24 deg), a mid-range root chord (32.88 in), aggressive washout at both root and tip (-10.0 deg for both), maximum negative dihedral (-15.0 deg), and a relatively thin, cambered NACA 2407 airfoil.
-
-The high reward suggests an excellent balance of lift and induced drag. The combination of high sweep and aggressive washout likely promotes strong vortex lift while effectively distributing the load spanwise, preventing premature tip stall and minimizing induced drag. The extreme negative dihedral is a key distinguishing feature of this top performer. While conventionally associated with reduced lateral stability, in this specific delta wing context, it appears to contribute significantly to the CL/CDi ratio, possibly by further optimizing the effective angle of attack distribution or enhancing vortex interaction in a favorable way. The thin NACA 2407 airfoil contributes to efficiency.
-
-Key design changes needed to improve designs, following an exploitation strategy:
-1.  Maintain high leading-edge sweep (around 70-72 degrees).
-2.  Continue maximizing washout, especially at the wingtip, and explore maximum washout at the root.
-3.  Strongly consider exploiting the maximum negative dihedral observed in the top design.
-4.  Stick with the NACA 24xx profile series, potentially exploring slightly varied thickness.

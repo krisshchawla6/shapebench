@@ -1,9 +1,0 @@
-Design 1 (le_sweep=65.5, root_chord_in=34.8, twist_root=-7.1, twist_tip=-4.6, dihedral=-1.7, NACA 4412, Reward: 4016.0090) demonstrates exceptional performance. The Cp distribution from the image clearly shows intense low-pressure regions along the leading edges of the wing's upper surface, indicative of strong and well-formed leading-edge vortices. These vortices are crucial for generating high lift efficiently on delta wings. The pressure recovery towards the trailing edge appears smooth, suggesting good flow attachment and minimal separation.
-
-The combination of a moderate-to-high sweep (65.5 degrees) with a significant washout distribution (twist_root much more negative than twist_tip) is likely key to its success. The deeper washout at the root, progressively reducing towards the tip, helps to distribute lift more evenly, delay tip stall, and effectively manage induced drag. The NACA 4412 airfoil provides beneficial camber and a suitable thickness for structural integrity without excessive drag. The small anhedral (-1.7 degrees) contributes to stable roll characteristics.
-
-Key design changes needed to further improve designs, based on exploiting this highly successful design:
-1.  **Refine Sweep Angle**: Explore slightly higher sweep angles to potentially enhance vortex lift, ensuring the trade-off with induced drag remains favorable.
-2.  **Optimize Washout Differential**: Push the differential washout even further (more negative `twist_root`, less negative `twist_tip`) to potentially achieve a more ideal elliptical or near-elliptical lift distribution for minimal induced drag.
-3.  **Adjust Airfoil Thickness**: Experiment with slightly thinner airfoils while maintaining effective camber to reduce profile drag, assuming structural integrity is maintained.
-4.  **Modulate Root Chord**: Explore variations in root chord to scale the wing and assess the impact on overall lift and drag characteristics.

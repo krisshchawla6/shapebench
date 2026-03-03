@@ -1,9 +1,0 @@
-The representative design, Design 1, achieved the highest reward of 626.7341. Its parameters include a very high leading-edge sweep (77.84 degrees), a moderate root chord (27.28 inches), significant washout twist at both root and tip (approx -9.5 and -9.1 degrees respectively), maximum negative dihedral (-15.0 degrees), and a thin, symmetric NACA 0006 airfoil.
-
-The Cp distribution shown in the image for Design 1 indicates a strong and well-developed leading-edge vortex, characterized by low pressure (blue/purple) along the leading edge extending across the upper surface. This strong vortex lift is crucial for high CL in delta wings. The pressure distribution appears relatively smooth and well-behaved, suggesting efficient lift generation without obvious signs of premature vortex breakdown or highly localized pressure spikes. The lower surface shows a typical high-pressure distribution for lift.
-
-**Key design changes needed to improve designs in the population:**
-1.  **Push leading-edge sweep closer to the maximum limit**: Design 1 suggests that very high sweep is beneficial for maximizing vortex lift and CL/CDi.
-2.  **Maintain or slightly refine strong washout twist**: The aggressive washout at both root and tip in Design 1 is a consistent feature of top performers, contributing to stable lift distribution.
-3.  **Confirm optimal strong negative dihedral**: The -15.0 degree dihedral is present in all top designs, indicating a strong correlation with high reward.
-4.  **Continue with thin, potentially symmetric airfoils**: The NACA 0006 airfoil worked best for Design 1, suggesting that minimizing profile drag while relying on vortex lift is a good strategy.

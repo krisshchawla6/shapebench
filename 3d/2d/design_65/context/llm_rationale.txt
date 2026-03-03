@@ -1,6 +1,0 @@
-*   Following the **Hybrid Strategy**, this design blends the high-lift characteristics of Design 1 with the drag-reduction refinements found in Design 2.
-*   I have interpolated the leading edge parameters ($r_0, a_0$) to create a profile that is sharper than Design 1 but more robust than Design 2, targeting an optimal stagnation point transition.
-*   Analysis of the population database reveals a "sweet spot" for the upper surface thickness parameter $r_1$ between 0.20 and 0.23; I have selected 0.2088 to test the lower bound of this high-performance zone.
-*   The trailing edge angle $a_2$ is shifted further toward the chord line (-0.0685) to continue the positive trend observed when moving from Design 1 to Design 2, which should theoretically improve the pressure recovery profile.
-*   The "edginess" of the trailing edge ($e_3$) is set to 0.8425, balancing the need for a clean flow exit with the smoother pressure gradients associated with Design 2's superior performance.
-*   $r_3$ is slightly increased to 0.9585 to extend the effective chord length and refine the taper ratio, exploring the direction of improvement seen in the transition from Design 1 to Design 2.

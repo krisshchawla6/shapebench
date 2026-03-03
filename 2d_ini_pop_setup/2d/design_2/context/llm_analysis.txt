@@ -1,5 +1,0 @@
-As no previous designs or images are provided, this analysis addresses the theoretical "Design 1" as a null-state or a default circular primitive. In a default state, the geometry lacks the necessary asymmetry to produce lift and the sharpness required to satisfy the Kutta condition. Key flaws in a baseline/primitive design include: 1) A blunt trailing edge causing massive pressure drag and a wide wake; 2) A lack of camber, resulting in zero lift at 0° angle of attack; 3) Uniform curvature that fails to manage the pressure gradient, leading to early boundary layer separation. To advance the population from this void, the following changes are required:
-- Implement a high sharpness value (`edgy_param`) at the posterior control point to create a defined trailing edge.
-- Introduce radial asymmetry between the upper and lower control points to establish camber.
-- Optimize the longitudinal position of the maximum thickness point using the `angle_param` to promote laminar flow.
-- Ensure a rounded, smooth leading edge to provide tolerance for varying angles of attack.

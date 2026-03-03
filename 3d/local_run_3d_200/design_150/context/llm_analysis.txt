@@ -1,9 +1,0 @@
-The top-performing design (Design 1, Reward: 4016.0090) exhibits a moderate leading-edge sweep of 65.5 degrees, a mid-range root chord, and a NACA 4412 airfoil (cambered, 12% thickness). A key characteristic is its twist distribution: a root twist of -7.13 degrees and a tip twist of -4.61 degrees. This means the tip section experiences less washout than the root section, effectively increasing its angle of attack relative to the root. This 'positive' differential twist (in terms of effective AoA towards the tip) is likely crucial for achieving an efficient spanwise lift distribution, delaying tip stall, and optimizing vortex lift, leading to a high CL/CDi. The dihedral is also slightly negative (anhedral) at -1.72 degrees, suggesting that a near-neutral or slightly anhedral configuration might be beneficial for this delta wing.
-
-In contrast, designs with very high sweep (Design 2, 72.9 deg) and symmetric airfoils (NACA 0018) performed poorly. Designs with very thin airfoils (Design 6, NACA 4407) also yielded low rewards, indicating that a certain level of thickness and camber is important. Extreme dihedral or anhedral values (Designs 3, 5) also correlated with lower performance.
-
-Key design changes needed to improve designs in the population, based on Design 1's success:
-*   **Optimize differential twist**: Further refine the distribution where the tip experiences less washout (higher effective AoA) than the root, within the negative twist range.
-*   **Maintain moderate sweep**: Stay within the 63-68 degree sweep range, avoiding extremes.
-*   **Refine airfoil thickness**: Explore slightly thinner cambered airfoils than NACA 4412 to reduce profile drag, but not so thin as to compromise lift or structural integrity.
-*   **Modest dihedral/anhedral**: Stick to values close to zero, with a slight anhedral potentially being beneficial.

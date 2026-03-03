@@ -1,7 +1,0 @@
-The highest-rewarding design (Design 2, Reward: 4016.0090) exhibits a le_sweep around 65.5 degrees, a mid-range root_chord_in of about 34.8 inches, significant negative twist at the root (-7.1 degrees) and less so at the tip (-4.6 degrees), a slight anhedral (dihedral -1.7 degrees), and uses a NACA 4412 airfoil. This combination appears to successfully balance vortex lift generation with efficient spanwise load distribution and reduced induced drag. Lower-performing designs tend to deviate significantly in sweep (e.g., Design 6 with 72.9 degrees sweep and low reward), or have less optimal twist distributions, or different airfoil choices. The prevalence of cambered airfoils (NACA 44xx) in higher-ranked designs suggests that camber is a beneficial feature. The variations in dihedral without a clear trend among high-reward designs indicate it might be sensitive or have a narrower optimal range.
-
-Key design changes needed to improve designs in the population:
-1.  Maintain leading edge sweep in the mid-60s range, as this appears to be optimal for high CL/CDi.
-2.  Prioritize cambered airfoils (NACA m=4, p=4) to enhance lift generation.
-3.  Implement a specific twist distribution with more aggressive negative twist at the root and milder negative twist at the tip to optimize load.
-4.  Refine dihedral to a slight anhedral or near-zero value, as extreme values appear detrimental.

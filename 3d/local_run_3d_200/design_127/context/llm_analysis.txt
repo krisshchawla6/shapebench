@@ -1,8 +1,0 @@
-Design 1, with a reward of 4016.0090, stands out as the best performing design by a significant margin. Its parameters indicate a moderate sweep (65.5 degrees), a root chord of 34.8 inches, and a NACA 4412 airfoil (4% camber at 40% chord, 12% thickness). The twist distribution shows washout, with the root at -7.1 degrees and the tip at -4.6 degrees, suggesting a distribution aimed at reducing induced drag. It also features a slight anhedral (-1.7 degrees).
-Without images, a direct analysis of Cp distribution is not possible. However, the high CL/CDi suggests an efficient lift generation with low induced drag. The combination of moderate sweep, effective washout, and a cambered airfoil (NACA 4412) appears to be highly effective. The washout likely helps in achieving a more elliptical lift distribution, delaying tip stall and reducing induced drag. The camber contributes to higher lift coefficient for a given angle of attack.
-
-Key changes needed to improve designs in the population, based on Design 1's success:
-1.  **Maintain effective sweep**: The 65.5-65.6 degree sweep range seen in high-reward designs appears optimal for this configuration.
-2.  **Optimize washout**: The washout in Design 1 is effective; further exploration of negative twist values, particularly maintaining `twist_root` more negative than `twist_tip`, is warranted.
-3.  **Leverage camber**: The NACA 44xx series, specifically 4412, has shown excellent performance. Camber is likely critical for high lift efficiency.
-4.  **Refine overall scale and thickness**: Explore slightly varied root chord and airfoil thickness around Design 1's values to fine-tune performance.

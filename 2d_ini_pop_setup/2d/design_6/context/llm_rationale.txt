@@ -1,5 +1,0 @@
-*   **Exploitation Strategy**: I am taking the "extended" nature of Design 1's CP0 (high radius) but refining its quality by reducing its sharpness, transforming it into a robust leading edge.
-*   **Thickness Normalization**: I am increasing the radius parameters for CP1 and CP2 to approximately 0.6-0.7 to create a streamlined body, which is essential for developing a suction peak on the upper surface.
-*   **Flow Attachment**: By setting edgy_param to low negative values (-0.75 to -0.85) for the upper and lower surfaces, I am enforcing curvature continuity to prevent premature boundary layer separation.
-*   **Angular Distribution**: I am spreading the angle_params of the four points to roughly 0, 0.4, -0.4, and 1.0. This mapping creates a classic teardrop topology, distributing the control points effectively around the origin.
-*   **Trailing Edge Definition**: The final control point (CP3) is placed at a high angle and given a positive edgy_param (0.55) to simulate a sharp trailing edge, which is critical for satisfying the Kutta condition and improving the reward.

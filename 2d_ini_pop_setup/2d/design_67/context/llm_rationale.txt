@@ -1,5 +1,0 @@
-*   **Strategy Focus (Exploitation)**: This design focuses on interpolating and refining the characteristics of Design 2 (Rank 0) and Design 1 (Rank 1). These designs have established a successful "cluster" in the parameter space characterized by low $r_1$ (upper curve height) and high $e_3$ (sharp trailing edge).
-*   **Refining Thickness**: Design 2's $r_1$ was 0.212, and Design 4 (Rank 2) was even lower at 0.123. I will target $r_1 \approx 0.19$ to find the optimal thickness that balances high lift with low drag.
-*   **Optimizing the Leading Edge**: Population data shows that $r_0$ values around 0.90-0.92 (Design 2) perform better than 1.0 (Design 1). I will set $r_0 = 0.905$ to continue this refinement.
-*   **Trailing Edge Sharpness**: High rewards are strictly correlated with $e_3 > 0.8$. I will increase $e_3$ to 0.95 and $r_3$ to 0.96 to ensure a very clean, sharp exit for the flow, reducing wake-related drag.
-*   **Lower Surface Smoothing**: By setting $e_2$ to nearly -1.0 and slightly adjusting $a_2$ toward the LE, I aim to minimize the pressure gradient on the lower surface to prevent any premature transition or separation.

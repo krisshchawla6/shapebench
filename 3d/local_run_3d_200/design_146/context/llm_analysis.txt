@@ -1,9 +1,0 @@
-The provided designs reveal interesting patterns, even without visual Cp distributions. Design 1, with the highest reward (4016.0090), features a moderate leading-edge sweep (65.5 deg), a relatively high root chord (34.8 in), significant washout (twist_root=-7.13, twist_tip=-4.60), and a NACA 4412 airfoil. This suggests that a combination of camber and washout is crucial for high CL/CDi, likely by distributing lift efficiently and controlling vortex behavior.
-
-Designs with lower rewards often show similar washout patterns but vary in sweep, thickness, or camber. For instance, Design 6, with the lowest reward (53.8090), used a symmetric NACA 0011 airfoil and the lowest sweep (58.33 deg), indicating that camber and higher sweep are generally beneficial. Design 2 (NACA 4016 with `naca_m=4, naca_p=0`) appears to have an invalid NACA configuration, which might explain its relatively low reward despite other parameters being within reasonable ranges.
-
-Key design changes needed to improve designs in the population:
-1.  **Explore higher sweep angles:** The highest reward designs are in the mid-range of sweep (63-68 deg). The range goes up to 80 deg, which is largely unexplored and could offer stronger vortex lift.
-2.  **Investigate thinner airfoils:** The current designs cluster around 11-16% thickness. Pushing towards the lower bound (6-10%) could reduce drag, especially if combined with high sweep.
-3.  **Test more extreme washout/washin distributions:** While strong washout seems beneficial, different combinations of `twist_root` and `twist_tip` (e.g., even stronger washout, or specific washin profiles) at different sweep angles could optimize load distribution.
-4.  **Explore boundary dihedral values:** Most designs have moderate negative or near-zero dihedral. Exploring more extreme anhedral (negative) or dihedral (positive) could uncover new stability-performance trade-offs.

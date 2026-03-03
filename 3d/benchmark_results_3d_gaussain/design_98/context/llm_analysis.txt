@@ -1,9 +1,0 @@
-The top-ranked Design 1 (le_sweep=71.24, root_chord_in=32.88, twist_root=-10.0, twist_tip=-10.0, dihedral=-15.0, NACA 2407) achieved the highest reward of 424.56. Its Cp distribution image indicates robust leading-edge vortex formation, characterized by strong suction peaks along the leading edge. This high sweep combined with aggressive negative twist (washout) and significant anhedral appears to be highly effective for maximizing CL/CDi in this design space.
-
-However, the extreme parameters (max sweep, max washout, max anhedral) suggest the design is pushing the limits of the operating envelope. While beneficial for CL/CDi, these extremes could lead to other issues not captured by the current objective, such as reduced stability or early vortex breakdown at higher angles of attack. The consistent use of `naca_m=2` or `4` with `naca_p=4` (cambered airfoils) is also common among top designs, with the notable exception of Design 3 (NACA 0006), which also performed well.
-
-Key changes needed to advance the population:
-1.  **Explore less aggressive negative twist and dihedral:** Test if slightly moderated values can maintain high performance while potentially offering a more balanced design or uncovering new optima.
-2.  **Investigate symmetric airfoils (NACA 00xx) further:** Design 3's good performance with NACA 0006 suggests these profiles warrant more exploration across different thicknesses and geometric configurations.
-3.  **Vary sweep angle more comprehensively:** While high sweep is dominant, exploring slightly lower sweep angles (mid-60s) might reveal designs with a better balance of vortex lift and reduced induced drag.
-4.  **Test different root chord values:** The top designs cluster around 30-33 inches. Exploring slightly larger root chords could increase wing area and potentially lift, if drag increase is managed.

@@ -1,5 +1,0 @@
-* **Apply Hybrid Strategy**: This design merges the aggressive radius parameters of Design 2 (Rank 0) with the slightly more forward-weighted camber characteristics of Design 1 (Rank 1).
-* **Camber Optimization**: By setting the angle of CP1 to $0.61$, I am interpolating between Design 1 ($0.69$) and Design 2 ($0.53$), aiming to capture the lift-generating benefits of D1 while maintaining the flow attachment of D2.
-* **Lower Surface Refinement**: Design 2's success is largely attributed to its high CP2 radius ($0.99$) and negative angle ($-0.18$). I will adopt a similar profile ($r=0.985, a=-0.175$) to ensure a clean pressure recovery on the lower surface.
-* **Leading Edge Robustness**: I am keeping CP0 at maximum radius ($1.0$) with a very smooth `edgy` parameter ($-0.98$) to ensure a blunt, low-drag leading edge that handles various angles of attack well, as seen in the top 3 designs.
-* **Trailing Edge Focus**: The trailing edge (CP3) is kept at maximum radius and high angle ($0.835$) to maintain high lift, with a sharpness ($0.86$) that bridges the gap between Design 2 ($0.80$) and Design 1 ($1.0$).

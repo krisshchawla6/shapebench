@@ -1,5 +1,0 @@
-*   The current population is clustering around extremely thin designs (r1 < 0.3). I will move the search toward a "fuller" airfoil by increasing CP1's radius to ~0.45, exploring if a more traditional thickness-to-chord ratio improves the lift-to-drag balance.
-*   Design 1 and 2 show that a very smooth leading edge (e0 ≈ -1.0) and upper surface (e2 ≈ -1.0) are essential for maintaining attached flow; I will maintain these extreme negative values.
-*   The trailing edge sharpness in Design 1 (e3=0.837) is high but not at the limit. I will push e3 closer to 1.0 to minimize the trailing edge bluntness and the resulting drag from base pressure.
-*   I will adjust the angular parameter for CP2 (a2) to be more negative, shifting the control point further "up" and "forward" on the top surface to explore a different pressure peak location.
-*   This strategy follows the "evolutionary optimizer" mandate by deliberately moving away from the "pinched" local optimum of the current top designs while retaining the successful "sharp tail/smooth body" topological logic.

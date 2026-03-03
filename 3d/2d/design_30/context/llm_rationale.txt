@@ -1,5 +1,0 @@
-*   **Exploitation Strategy**: This design builds directly on the high-reward patterns of Design 1 and Design 2, specifically maintaining the high-camber, thin-profile topology while refining the control point transitions.
-*   **Leading Edge Refinement**: By slightly increasing `r1` from 0.377 to 0.395 and adjusting `a1` to 0.712, we aim to soften the leading edge transition and move the suction peak slightly aft, which generally improves the lift-to-drag ratio by delaying boundary layer transition or separation.
-*   **Camber Optimization**: Keeping `a3` high (0.834) and `a0` negative (-0.115) preserves the high-lift camber line seen in the best designs, while the small adjustment to `r0` and `r3` ensures the chord length is maximized.
-*   **Surface Smoothness**: Maintaining `edgy_param` near -1.0 for CP0, CP1, and CP2 ensures that the airfoil surfaces remain smooth and aerodynamic, minimizing parasitic drag from sharp corners.
-*   **Sharp Trailing Edge**: We retain the `e3 = 1.0` value from the top-ranked design, as a sharp trailing edge is critical for maintaining the Kutta condition and achieving the high reward values seen in the current population.

@@ -1,5 +1,0 @@
-*   **Apply Hybrid Strategy**: This design blends the aggressive, high-lift camber profile of Design 1 with the more balanced angular spacing and entry characteristics of Design 6 (Reward 4.3143).
-*   **Camber Modulation**: I am interpolating the radius of the "waist" point (r1) between D1 (0.21) and D6 (0.34), setting it to 0.2854. This maintains high lift while reducing the risk of flow separation seen in the D1 velocity wake.
-*   **Leading Edge Refinement**: By blending the a0 and a2 parameters from D1 and D6, the new design seeks a more optimal stagnation point transition, reducing the initial pressure spike at the leading edge.
-*   **Sharpness Optimization**: The edgy_param for the trailing edge (e3) is increased to 0.9125, moving closer to Design 6's sharp-TE approach while maintaining Design 1's radius-based chord length (r3=0.9723).
-*   **Surface Continuity**: All parameters for e0 and e2 are set to -1.0 to maximize surface smoothness, as the population data shows a strong correlation between smoothness in these regions and higher rewards.

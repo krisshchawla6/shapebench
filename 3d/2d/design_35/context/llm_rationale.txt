@@ -1,6 +1,0 @@
-*   **Strategy Focus (Bold Exploration):** Instead of incremental changes to Design 1, this design explores a "high-camber, aft-loaded" strategy, significantly shifting the internal control points to test a different aerodynamic regime.
-*   **Population Insight:** All top designs (Rank 0-2) utilize a very high edgy_param for CP3 and a very low edgy_param for CP0; this design treats these as "locked" aerodynamic constraints while varying the radial/angular positions.
-*   **Thickness Distribution:** By increasing the CP1 angle (from 0.64 to 0.78), I am moving the upper surface peak backward, which aims to delay the onset of the adverse pressure gradient seen in Design 1’s pressure plot.
-*   **Camber Enhancement:** Moving CP2 to a more negative angle (-0.28 vs -0.10) and slightly decreasing its radius will create a more concave lower surface, potentially increasing lift through the "spoon" effect seen in high-performance subsonic airfoils.
-*   **Leading Edge Refinement:** Adjusting CP0's angle slightly downwards (-0.04) aims to align the stagnation point more effectively with the incoming flow, reducing the intensity of the initial suction spike.
-*   **Optimizer Judgment:** Moving into the "aft-loaded" design space is a classic evolutionary jump to find a new local optimum that avoids the stagnation of the "front-loaded" thin airfoil population.

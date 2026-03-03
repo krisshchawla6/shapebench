@@ -1,9 +1,0 @@
-The representative design (Design 1) achieves a very high reward of 4016.0090. Its parameters include a moderate leading edge sweep (65.5 deg), a significant negative twist at the root (-7.1 deg) and a less extreme negative twist at the tip (-4.6 deg), indicating washout concentrated more towards the root. It uses a NACA 4412 airfoil, which is cambered (4% max camber at 40% chord) and 12% thick. The dihedral is slightly negative (-1.7 deg).
-
-Based on the parameters and high reward, it's highly probable that Design 1 benefits from strong vortex lift due to the sweep, combined with an optimized load distribution from the twist and camber. The washout helps prevent tip stall, and the camber directly contributes to lift, especially at lower angles of attack. The negative dihedral could contribute to roll stability characteristics, but its impact on CL/CDi for high-performance deltas can be complex.
-
-**Key design changes needed to improve designs in the population (general exploration, not fixing Design 1):**
-1.  **Explore different twist distributions:** Current top designs tend to have more washout at the root. Investigate if more aggressive tip washout, or even twist_tip < twist_root (absolute value), can further optimize spanwise lift and reduce induced drag.
-2.  **Vary sweep more extensively:** While 65-68 degrees has worked well, push towards higher sweep angles to maximize vortex lift potential, or lower angles for potentially reduced induced drag, combined with other features.
-3.  **Investigate different NACA profiles (camber/thickness):** While camber (m=2,4) is clearly beneficial, explore the impact of reduced camber or different thickness ratios on overall efficiency.
-4.  **Explore positive dihedral:** Most top designs have negative or near-zero dihedral. Investigate if a moderate positive dihedral can offer benefits in stability or interaction with vortex flow without excessive drag penalty.

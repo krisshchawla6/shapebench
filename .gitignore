@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Results / run outputs (large data, regeneratable)
+environments/*/results/
+logs/
+work_227/
+nohup.out
+
+# Large data dirs (archive of old experiments, CAD, CFD solver binaries)
+archive/
+NTop/
+CFD_solver/
+
+# Binary / model weights
+*.pkl
+*.h5
+*.pt
+*.pth
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+*.swp
+*.swo
+*~

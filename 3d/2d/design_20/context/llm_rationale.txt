@@ -1,5 +1,0 @@
-*   **Strategy Focus (Exploration):** This design explicitly targets the "corners" of the parameter space, moving away from the smooth, positive-radius cluster that dominates the current top designs.
-*   **Inverting the Norm:** While high-ranking designs (1 and 2) use `edgy_param` values near -1.0 (maximal smoothness), this design uses values > 0.5 for all points to explore "faceted" aerodynamic properties.
-*   **Radial Boundary Testing:** I am pushing `radius_param` into the negative domain for CP1 and CP3 (e.g., -0.7123 and -0.9912), a region entirely untouched by the current top 6 designs.
-*   **Angular Diversification:** By setting `a0` and `a2` to extreme opposite values compared to the current population, I am testing the coordinate system's mapping at its furthest limits.
-*   **Evolutionary Advancement:** This jump into an underexplored region is designed to prevent premature convergence on a local optimum of conventional shapes and to test if sharp-edged or concave geometries offer untapped aerodynamic advantages.

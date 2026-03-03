@@ -1,7 +1,0 @@
-The top performing design (Design 1, Reward: 424.5627) features a high sweep angle (71.2 degrees), a moderate root chord (32.8 inches), maximum washout at both root and tip (twist_root=-10.0, twist_tip=-10.0), and maximum anhedral (dihedral=-15.0). It uses a NACA 2407 airfoil (2% camber at 40% chord, 7% thickness). Designs 2 and 3, also high-ranking, share similar characteristics: high sweep, significant washout, and strong anhedral. This suggests that high sweep combined with aggressive negative twist and anhedral is a promising direction for maximizing CL/CDi in this population. The NACA 24xx series seems to perform well for these configurations.
-
-However, the designs so far are clustered around these parameters. Key design changes needed to improve designs in the population by exploring novelty include:
-1.  **Exploring higher sweep angles (closer to 80 degrees)**: The current successful designs are around 70-71 degrees. Pushing higher could further enhance vortex lift.
-2.  **Investigating more aggressive camber (NACA m=4)**: While NACA 24xx is common, NACA 44xx has not been thoroughly explored in high-reward designs.
-3.  **Varying dihedral significantly**: The successful designs all use strong anhedral (-15 degrees). Exploring dihedral values closer to zero or even positive could reveal different stability and performance trade-offs.
-4.  **Exploring alternative twist distributions**: While maximum washout is effective, investigating wash-in at the root combined with washout at the tip could offer different load management characteristics.

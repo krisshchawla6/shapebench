@@ -1,5 +1,0 @@
-*   **Strategy Focus (Exploitation):** I am focusing on the specific parameter relationships found in Design 1 and Design 3. These designs utilize a "collapsed" internal control point (low $r1$) to define the upper surface curvature, which appears to be a high-performing local optimum.
-*   **Refining Camber:** By slightly increasing $r1$ (from 0.233 to 0.265), I aim to increase the upper surface curvature, potentially boosting lift without inducing premature separation.
-*   **Leading Edge Optimization:** I am slightly increasing the angular offset $a0$ and decreasing $e0$ (making it smoother) to facilitate a more gradual pressure gradient at the nose.
-*   **Streamlining the Underbelly:** Adjusting $a2$ to a slightly less negative value compared to Design 1 to streamline the flow toward the trailing edge and reduce pressure drag.
-*   **Maximizing TE Sharpness:** Design 1 has $e3=0.9327$. I will push this closer to 1.0 (0.9650) and $a3$ closer to 1.0 (0.9920) to ensure the sharpest possible trailing edge, minimizing wake thickness.

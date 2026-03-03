@@ -55,15 +55,22 @@ from SUAVE.Core import Units
 PRETRAINED_WEIGHTS = VNET_DIR / 'pretrained_model' / 'model_weights_20241116_045918.pth'
 PRETRAINED_HP      = VNET_DIR / 'pretrained_model' / 'tuning_results_20241116_045918.json'
 
+# dataset-fixed constants (must match VortexNet training setup)
+_ROOT_CHORD_IN = 25.734
+_TWIST_ROOT    = 0.0
+_TWIST_TIP     = 0.0
+_DIHEDRAL      = 0.0
+_CHORD_LENGTH  = 1.0
+
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
-def _geom_kwargs(params):
+def _geom_kwargs():
     return dict(
-        root_chord_in = params.get('root_chord_in', 25.734),
-        twist_root    = params.get('twist_root', 0.0),
-        twist_tip     = params.get('twist_tip', 0.0),
-        dihedral      = params.get('dihedral', 0.0),
+        root_chord_in=_ROOT_CHORD_IN,
+        twist_root=_TWIST_ROOT,
+        twist_tip=_TWIST_TIP,
+        dihedral=_DIHEDRAL,
     )
 
 
@@ -245,8 +252,8 @@ def run_full_pipeline(params, aoa, mach, re, output_dir):
     le_sweep     = params['le_sweep']
     naca         = params['naca']
     NACA_4DIGITS = {'m': naca['m'], 'p': naca['p'], 't': naca['t'],
-                    'chord_length': naca.get('chord_length', 1.0)}
-    gkw = _geom_kwargs(params)
+                    'chord_length': _CHORD_LENGTH}
+    gkw = _geom_kwargs()
 
     orig_dir = os.getcwd()
     os.chdir(output_dir)
@@ -283,10 +290,10 @@ def save_results_json(params, aoa, mach, re, vlm_res, corr_res, output_dir):
         'design_name': params.get('design_name', 'unnamed'),
         'design_params': {
             'le_sweep_deg':   params['le_sweep'],
-            'root_chord_in':  params.get('root_chord_in', 25.734),
-            'twist_root_deg': params.get('twist_root', 0.0),
-            'twist_tip_deg':  params.get('twist_tip', 0.0),
-            'dihedral_deg':   params.get('dihedral', 0.0),
+            'root_chord_in':  _ROOT_CHORD_IN,
+            'twist_root_deg': _TWIST_ROOT,
+            'twist_tip_deg':  _TWIST_TIP,
+            'dihedral_deg':   _DIHEDRAL,
             'naca':           params['naca'],
         },
         'sim_conditions': {
@@ -374,9 +381,9 @@ def save_geometry_png(params, aoa, mach, vlm_res, corr_res, predicted_dcp, geome
         ('Design', params.get('design_name', '-'), '', '#7ec8e3', True),
         ('Airfoil', f"NACA {naca['m']}{naca['p']}{naca['t']:02d}", '', TC, True),
         ('LE Sweep', f"{le} deg", '', TC, True),
-        ('Root chord', f"{params.get('root_chord_in', 25.734)} in", '', TC, True),
-        ('Twist', f"root {params.get('twist_root', 0.0)}, tip {params.get('twist_tip', 0.0)} deg", '', TC, True),
-        ('Dihedral', f"{params.get('dihedral', 0.0)} deg", '', TC, True),
+        ('Root chord', f"{_ROOT_CHORD_IN} in", '', TC, True),
+        ('Twist', f"root {_TWIST_ROOT}, tip {_TWIST_TIP} deg", '', TC, True),
+        ('Dihedral', f"{_DIHEDRAL} deg", '', TC, True),
         None,
         ('', 'VLM', 'Corrected', '#aaa', True),
         ('CL',  f"{vlm_cl:.4f}",  f"{cor_cl:.4f}",  '#7ff97f', False),

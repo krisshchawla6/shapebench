@@ -1,9 +1,0 @@
-The representative design (Design 1) demonstrates exceptional aerodynamic efficiency, achieving a reward of 4016.0090, which is significantly higher than any other design in the population. Its parameter configuration, including a moderate leading-edge sweep (65.5 deg), a root chord of 34.8 inches, moderate washout (twist_root -7.1 deg, twist_tip -4.6 deg), slight anhedral (-1.7 deg), and a NACA 4412 airfoil, appears to be highly optimized.
-
-Given its high reward, this design likely exhibits a well-distributed lift profile, effectively harnessing vortex lift without incurring excessive induced or profile drag. The moderate washout helps to ensure that the wing tips do not stall prematurely and contributes to a more elliptical-like lift distribution, minimizing induced drag. The NACA 4412 airfoil (4% camber, max camber at 40% chord, 12% thickness) provides a good balance of lift generation and low drag for the design conditions.
-
-Key design changes needed to improve designs in the population, based on Design 1's success and the relative underperformance of other designs:
-1.  **Refine moderate sweep angles:** Focus on the 60-70 degree range, as higher sweep (e.g., Design 6 at 74 deg) led to very low rewards.
-2.  **Optimize twist distribution:** Investigate nuanced washout, particularly ensuring `twist_root` is not always at the maximum negative limit (-10.0 deg), as seen in Design 1's -7.1 deg.
-3.  **Explore NACA profiles with moderate camber and thickness:** Designs with NACA `m=2` or `m=4` and thickness around 11-13% have shown promising results.
-4.  **Maintain slight anhedral or near-zero dihedral:** Significant positive dihedral (e.g., Design 5 at +9.5 deg) correlated with much lower rewards.
