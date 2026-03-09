@@ -1,0 +1,14 @@
+{
+  "design_name": "SweptSymmetricAggressiveWashout",
+  "le_sweep": 55.64548597298706,
+  "root_chord_in": 33.92504456480066,
+  "twist_root": 10.0,
+  "twist_tip": -10.0,
+  "dihedral": -5.377435147272619,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

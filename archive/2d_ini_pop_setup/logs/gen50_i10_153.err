@@ -1,0 +1,99 @@
+/home/ubuntu/miniconda3/envs/fenics_env/lib/python3.10/site-packages/ufl/__init__.py:250: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/home/ubuntu/miniconda3/envs/fenics_env/lib/python3.10/site-packages/google/api_core/_python_version_support.py:275: FutureWarning: You are using a Python version (3.10.19) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.
+  warnings.warn(message, FutureWarning)
+/scratch/LLM_Evolve_1_28/AirFoil_becnhmark_change/modified_env/LLM_Actions/LLM_agent.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+mv: cannot stat '1.png': No such file or directory
+mv: cannot stat '1_u.png': No such file or directory
+mv: cannot stat '1_v.png': No such file or directory
+mv: cannot stat '1_p.png': No such file or directory
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+mv: cannot stat '1.png': No such file or directory
+mv: cannot stat '1_u.png': No such file or directory
+mv: cannot stat '1_v.png': No such file or directory
+mv: cannot stat '1_p.png': No such file or directory
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+mv: cannot stat '1.png': No such file or directory
+mv: cannot stat '1_u.png': No such file or directory
+mv: cannot stat '1_v.png': No such file or directory
+mv: cannot stat '1_p.png': No such file or directory
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+WARNING:root:Dolfin's XML is a legacy format. Consider using XDMF instead.
+mv: cannot stat '1.png': No such file or directory
+mv: cannot stat '1_u.png': No such file or directory
+mv: cannot stat '1_v.png': No such file or directory
+mv: cannot stat '1_p.png': No such file or directory
+Traceback (most recent call last):
+  File "/scratch/LLM_Evolve_1_28/AirFoil_becnhmark_change/run_benchmark_action.py", line 279, in <module>
+    best_design, cached = run_benchmark(baseline_csv, args.iterations, args.inspirations, args.action, output_dir, debug=args.debug)
+  File "/scratch/LLM_Evolve_1_28/AirFoil_becnhmark_change/run_benchmark_action.py", line 241, in run_benchmark
+    database, reward, current_best = run_iteration(database, i, output_dir, current_inspirations, action, debug=debug)
+  File "/scratch/LLM_Evolve_1_28/AirFoil_becnhmark_change/run_benchmark_action.py", line 196, in run_iteration
+    x = generate_design(parent, inspirations, output_dir, iteration_nb, action, debug=debug)
+  File "/scratch/LLM_Evolve_1_28/AirFoil_becnhmark_change/run_benchmark_action.py", line 110, in generate_design
+    vec = np.loadtxt(parent[0], delimiter=',')
+  File "/home/ubuntu/miniconda3/envs/fenics_env/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1373, in loadtxt
+    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,
+  File "/home/ubuntu/miniconda3/envs/fenics_env/lib/python3.10/site-packages/numpy/lib/npyio.py", line 992, in _read
+    fh = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "/home/ubuntu/miniconda3/envs/fenics_env/lib/python3.10/site-packages/numpy/lib/_datasource.py", line 193, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/home/ubuntu/miniconda3/envs/fenics_env/lib/python3.10/site-packages/numpy/lib/_datasource.py", line 533, in open
+    raise FileNotFoundError(f"{path} not found.")
+FileNotFoundError: /scratch/LLM_Evolve_1_28/AirFoil_becnhmark_change/benchmark_results_generate/design_0_0.csv not found.

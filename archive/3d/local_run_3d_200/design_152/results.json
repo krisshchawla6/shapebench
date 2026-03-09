@@ -1,0 +1,33 @@
+{
+  "design_name": "SweptCamberWashoutThin",
+  "design_params": {
+    "le_sweep_deg": 65.58940326508774,
+    "root_chord_in": 36.917431422973884,
+    "twist_root_deg": -7.393434546375355,
+    "twist_tip_deg": -6.620766894967039,
+    "dihedral_deg": -7.575910983180109,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.18839605865259823,
+    "CDi": 0.018842655372577493,
+    "CM": -0.23947343272658586,
+    "L_D": 9.99838159364624
+  },
+  "corrected_results": {
+    "CL": 0.008528691464908618,
+    "CDi": -0.002517591915256358,
+    "CM": 0.005215082689715532,
+    "L_D": -3.387638565736405
+  }
+}

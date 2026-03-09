@@ -1,0 +1,7 @@
+- **Exploitation Strategy**: The population shows a clear local optimum around the configuration of Design 1 and 2. Radical departures (like Designs 4, 5, 6) yield poor rewards (<0.4). Therefore, the strategy is to "hill-climb" by extrapolating the vector difference between the good designs (Design 2 -> Design 1) to find a better peak.
+- **Trend Analysis**: 
+    - **CP0 (Leading Edge)**: Design 1 (0.52) outperformed Design 2 (0.50). I will increase the radius slightly to **0.535** to test if slightly more nose radius improves stall characteristics or suction, while keeping the angle stable.
+    - **CP1 (Mid Section)**: Design 1 (0.16) outperformed Design 2 (0.17). Lower radius here seems to reduce form drag. I will decrease this slightly to **0.155**.
+    - **CP2 (Trailing Edge)**: Design 1 (0.78) outperformed Design 2 (0.81). A shorter effective length or different tail curvature seems preferred. I will adjust to **0.77**.
+- **Smoothness**: Design 1 uses smooth parameters for the front/mid sections. I will decrease the `edgy` parameters for CP0 and CP1 closer to -1.0 (e.g., -0.98, -0.65) to minimize surface curvature discontinuities that could trigger premature transition to turbulent flow.
+- **Trailing Edge Sharpness**: The sharp trailing edge (edgy=1.0) is crucial for enforcing the Kutta condition and preventing separation at the tail. This will be maintained.

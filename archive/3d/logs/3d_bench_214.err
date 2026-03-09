@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/scratch/3D/3d/run_benchmark_action_3d.py", line 32, in <module>
+    from LLM_agent_3d import run_llm_action_3d
+  File "/scratch/3D/3d/modified_env3d/LLM_Actions/LLM_agent_3d.py", line 7, in <module>
+    import google.generativeai as genai
+ModuleNotFoundError: No module named 'google'

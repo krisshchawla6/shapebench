@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_HighSweep_MaxCamber",
+  "le_sweep": 49.528074818169735,
+  "root_chord_in": 38.2691250978123,
+  "twist_root": 10.0,
+  "twist_tip": -6.484827611763875,
+  "dihedral": 8.678773373006297,
+  "naca": {
+    "m": 4,
+    "p": 0,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

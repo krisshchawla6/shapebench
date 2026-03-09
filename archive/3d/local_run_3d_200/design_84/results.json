@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_AggressiveCamber_Twisted",
+  "design_params": {
+    "le_sweep_deg": 67.50116269168879,
+    "root_chord_in": 27.535434328627133,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -0.7201137006355642,
+    "dihedral_deg": -6.819040733141676,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.12154434235099837,
+    "CDi": 0.011817813991845129,
+    "CM": -0.15295748086100142,
+    "L_D": 10.284841378859909
+  },
+  "corrected_results": {
+    "CL": 0.09574928511093433,
+    "CDi": 0.005841887897599958,
+    "CM": -0.09861566564064389,
+    "L_D": 16.39012709406343
+  }
+}

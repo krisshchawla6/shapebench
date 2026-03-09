@@ -1,0 +1,14 @@
+{
+  "design_name": "OptimizedHybridTwist_NACA12",
+  "le_sweep": 48.28764893015286,
+  "root_chord_in": 29.927991594305425,
+  "twist_root": 4.1553308516975465,
+  "twist_tip": -10.0,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

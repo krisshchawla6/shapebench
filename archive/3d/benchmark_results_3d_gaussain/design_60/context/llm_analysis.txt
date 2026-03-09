@@ -1,0 +1,13 @@
+The provided designs consistently show high rewards (CL/CDi) for delta wings with relatively low leading edge sweep (46-51 degrees), positive root twist (4-10 degrees), strong negative tip twist (washout, -3 to -10 degrees), and generally positive dihedral (10-15 degrees). All successful designs leverage a NACA 24xx airfoil, indicating moderate camber (2%) at 40% chord, with thickness ranging from 7% to 14%.
+
+Key observations:
+*   **Low Sweep Dominance**: All top designs are clustered at the lower end of the `le_sweep` range (45-51 degrees). This suggests that moderate sweep might be effective for the given objective, but higher sweep angles (up to 80 degrees) are completely unexplored.
+*   **Camber Preference**: The consistent use of NACA 24xx profiles indicates that a specific amount of camber (m=2, p=4) is found beneficial. Symmetric airfoils (m=0, p=0) and higher camber (m=4) are entirely unexplored.
+*   **Washout**: Strong tip washout (`twist_tip` between -8 to -10 degrees) seems to be a consistent feature of high-performing designs, likely helping to distribute lift and prevent tip stall.
+*   **Dihedral**: High positive dihedral is favored (often at the boundary of 15 degrees), which suggests that dihedral might be coupling positively with stability or induced drag characteristics for these designs.
+
+Key design changes needed to improve diversity and exploration:
+1.  **Explore higher sweep angles**: Test designs significantly beyond the 51-degree sweep seen in current top performers.
+2.  **Investigate different NACA profiles**: Crucially, test symmetric airfoils (NACA 00xx) and potentially higher camber (NACA 4xXX) to understand their impact.
+3.  **Vary dihedral more broadly**: Explore neutral or negative dihedral to understand its role.
+4.  **Test thicker airfoils**: The current designs are mostly in the 7-14% thickness range; higher thicknesses (up to 24%) are untried.

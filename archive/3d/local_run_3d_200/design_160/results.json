@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_Symmetric_LargeChord",
+  "design_params": {
+    "le_sweep_deg": 72.44249002979743,
+    "root_chord_in": 45.896359445722254,
+    "twist_root_deg": -3.77229587179536,
+    "twist_tip_deg": -0.0013215615233457267,
+    "dihedral_deg": -9.330554926967883,
+    "naca": {
+      "m": 2,
+      "p": 0,
+      "t": 16,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.21823592254180138,
+    "CDi": 0.030451341199190816,
+    "CM": -0.20719754133775703,
+    "L_D": 7.166709706290393
+  },
+  "corrected_results": {
+    "CL": -0.1553814951433793,
+    "CDi": -0.02123221563120345,
+    "CM": 0.22580111983533271,
+    "L_D": 7.318195041078349
+  }
+}

@@ -1,0 +1,9 @@
+- **Exploration Strategy:** To satisfy the goal of exploring underexplored regions and pushing boundaries, I will target the **positive limit of the `edgy_param`** (sharpness). The current best designs rely on smoothness (`e` near -1.0).
+- **Hypothesis:** Exploring "Double Wedge" or "Diamond" airfoil profiles—characterized by sharp corners rather than smooth curves—can identify efficient low-drag shapes (common in supersonic regimes but valid for diversity in subsonic optimization) or break out of local smooth-shape optima.
+- **Design Constraints:** Based on the failure of Designs 3 and 4, I must strictly avoid large positive `radius_param` values. I will keep radii small or negative to ensure the shape remains streamlined and does not balloon into a bluff body, despite the increased sharpness.
+- **Geometric Plan:**
+    - **CP0 (Leading Edge):** Shift from smooth to **Sharp** (`e > 0.8`) with a tight radius to form a piercing nose.
+    - **CP1 (Upper Surface):** Use a moderate positive radius but high sharpness to form a distinct ridge (roof-top shape).
+    - **CP2 (Trailing Edge):** Maintain high sharpness (standard for TE).
+    - **CP3 (Lower Surface):** Use negative radius and high sharpness to create a faceted lower surface.
+- **Diversity:** This "Polygonal/Diamond" genotype is completely distinct from the organic shapes currently in the population.

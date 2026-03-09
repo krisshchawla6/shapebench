@@ -1,0 +1,8 @@
+*   **Strategy Focus:** Following the visual intuition, we must completely reject the geometric topology of Design 6 (negative radii) and adopt the successful topology of Design 1, but with targeted refinements to the curvature and thickness distribution.
+*   **Smoothness:** I will force the `edgy` parameters for the leading edge and main surfaces (CP0, CP1, CP3) to **-1.0** (or very close) to minimize skin friction drag and ensure surface continuity, improving upon Design 1's -0.95/-0.97.
+*   **Trailing Edge Sharpness:** I will maintain the trailing edge (CP2) `edgy` parameter at **1.0** and maximize the radius `r` to **1.0**. This ensures a clean Kutta condition release, preventing flow wrapping and separation at the tail.
+*   **Camber & Thickness:** Design 1 has a good reward (4.14). I will attempt to increase the Lift-to-Drag ratio by slightly **thinning the profile** and **shifting the camber forward**.
+    *   *Thickness:* Reduce CP1 radius slightly from 0.312 to **0.305** to reduce pressure drag.
+    *   *Camber Peak:* Shift CP1 angle from 0.54 to **0.50** to move the suction peak slightly forward, potentially softening the pressure recovery gradient.
+    *   *Lower Surface:* Flatten the lower surface slightly (CP3 `a` from -0.23 to -0.21) to reduce blockage.
+*   **Evolutionary Logic:** This design represents a "fine-tuning" step from a robust local optimum (Design 1) rather than a wild exploration (like Design 6), as the penalty for bad geometry (negative radii) is severe.

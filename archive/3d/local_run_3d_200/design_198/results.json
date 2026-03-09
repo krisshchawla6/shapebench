@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_NACA0006_NeutralTwist",
+  "design_params": {
+    "le_sweep_deg": 69.19801074377087,
+    "root_chord_in": 26.521686019244402,
+    "twist_root_deg": -3.630956685588436,
+    "twist_tip_deg": -2.226641032310044,
+    "dihedral_deg": 4.8632909765790995,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2587430705567228,
+    "CDi": 0.03167321272000223,
+    "CM": -0.24072253731176266,
+    "L_D": 8.16914510201618
+  },
+  "corrected_results": {
+    "CL": 0.17329021531069846,
+    "CDi": 0.020821116850999338,
+    "CM": -0.1488152632392639,
+    "L_D": 8.32281075750176
+  }
+}

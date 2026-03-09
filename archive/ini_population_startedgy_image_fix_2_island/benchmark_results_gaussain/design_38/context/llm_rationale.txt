@@ -1,0 +1,8 @@
+*   **Strategy Focus (Exploration)**: The population analysis reveals a strong correlation between **Negative CP0 Radius** and higher rank (Top 3 designs have `r0 < 0`, Bottom 3 have `r0 > 0`). However, the "good" designs use *small* negative values (`-0.07`, `-0.5`). To explore the boundary, this design will test a **Large Negative Radius** at CP0 (`-0.92`).
+*   **Topology Variation**:
+    *   Design 1 (Rank 3) follows a `[-, +, -, -]` radius sign pattern.
+    *   Design 2 (Rank 5) follows a `[-, -, +, +]` pattern.
+    *   **New Design Strategy**: Explore the hybrid `[-, -, +, -]` pattern. This combines the "double negative" forebody of Design 2 (for a potentially different camber line) with the "negative lower rear" of Design 1, but flips the trailing edge to **Positive** (`r2 > 0`).
+*   **Geometric Stability**:
+    *   CP2 is set to a **Large Positive Radius** (`0.85`) to contrast with the "pinched negative" CP2 of Design 1 (`-0.71`). This aims to create a stable, perhaps thicker, trailing edge section that avoids the self-intersection risks of the failed Design 4 (`-1.0`).
+*   **Camber Exploration**: Angular parameters are pushed to `+/- 0.4` and `+/- 0.5` to explore higher camber configurations than the mostly neutral previous designs.

@@ -1,0 +1,33 @@
+{
+  "design_name": "Extreme_Sweep_Thin_Twisted",
+  "design_params": {
+    "le_sweep_deg": 75.53089626327521,
+    "root_chord_in": 50.0,
+    "twist_root_deg": 1.1125407292742668,
+    "twist_tip_deg": -6.380235239707424,
+    "dihedral_deg": 6.956195378988813,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.4318558018480395,
+    "CDi": 0.05082148067139864,
+    "CM": -0.46925778054414635,
+    "L_D": 8.497505309621562
+  },
+  "corrected_results": {
+    "CL": -0.1125472373957348,
+    "CDi": -0.03307703340728234,
+    "CM": 0.19721221556741655,
+    "L_D": 3.402579548471722
+  }
+}

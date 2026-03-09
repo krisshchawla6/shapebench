@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Camber_PositiveDihedral_Explore",
+  "le_sweep": 75.96554956411683,
+  "root_chord_in": 36.35481243902611,
+  "twist_root": -1.7581137384117373,
+  "twist_tip": -1.6614920051176316,
+  "dihedral": 6.657364932830453,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 20,
+    "chord_length": 1.0
+  }
+}

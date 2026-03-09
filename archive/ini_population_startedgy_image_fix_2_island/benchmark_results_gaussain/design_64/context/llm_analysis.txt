@@ -1,0 +1,7 @@
+*   **Geometry (from Design 1 images)**: The visualized design features a classic thin airfoil profile with a relatively flat bottom and a curved top surface. The leading edge (LE) appears clean with a small radius, transitioning smoothly into the upper surface. The trailing edge (TE) tapers to a sharp point. There are no visible pinch points, but the profile is quite slender, which may limit lift capacity compared to a thicker, higher-camber variant.
+*   **Flow Fields**: The pressure distribution (`1_p.png`) shows a classic high-pressure stagnation zone at the nose and a low-pressure suction zone over the forward 30% of the upper surface. The recovery region seems smooth. The velocity fields (`1_u.png`, `1_v.png`) show a narrow, stable wake, indicating attached flow. There is no evidence of massive flow separation, which aligns with the high reward.
+*   **Mapping**: The high reward of Design 1 correlates with `r0` being small (~0.026) and `e2` being 1.0 (sharp TE). The failure cases (Designs 4 & 5) clearly demonstrate that excessive `r` values (0.5+) create blob-like non-aerodynamic shapes that ruin the flow. The "Edgy" parameter `e` works best when -1 (smooth) for curvature and 1 (sharp) for the trailing edge.
+*   **Key Changes Needed**:
+    1.  Shift the maximum thickness point further aft to extend the region of favorable pressure gradient (laminar flow strategy).
+    2.  Slightly increase the aft camber to boost lift without inducing separation.
+    3.  Maintain the strict "small radius" constraint at the leading edge to prevent drag spikes.

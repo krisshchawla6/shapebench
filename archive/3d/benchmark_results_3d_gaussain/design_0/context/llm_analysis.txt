@@ -1,0 +1,15 @@
+Given no specific image or previous designs, I will analyze a hypothetical "baseline" delta wing to identify common issues and inform design changes. Imagine a delta wing with moderate sweep (e.g., 60 deg), no twist (0 deg at root and tip), a symmetric airfoil (NACA 0012), and neutral dihedral.
+
+**Hypothetical Aerodynamic Issues for a Baseline Delta Wing:**
+
+1.  **Poor Spanwise Lift Distribution:** Without twist, the lift distribution along the span would likely be sub-optimal, potentially leading to high induced drag. The Cp distribution might show high suction near the root leading edge and less effective lift generation further outboard, or even premature tip stall at higher angles of attack due to lack of washout. This means the wing isn't efficiently using its full span.
+2.  **Lack of Camber Benefits:** A symmetric airfoil (NACA 0012) generates no lift at zero angle of attack and does not take advantage of camber to optimize CL/CDi at a specific design lift coefficient, often resulting in higher drag for a given lift.
+3.  **Suboptimal Vortex Management:** While delta wings inherently generate leading-edge vortices, a simple, untwisted planform with a moderate sweep might not fully optimize these vortices for enhanced lift and stability, or could suffer from early vortex breakdown.
+4.  **High Induced Drag:** As a direct consequence of the issues above, particularly the non-elliptical lift distribution, the induced drag component (CDi) would likely be higher than necessary for the generated lift, leading to a lower CL/CDi ratio.
+
+**Key Design Changes Needed to Improve Designs (General Principles):**
+
+1.  **Introduce Washout (Negative Twist at Tip):** To improve spanwise lift distribution, delay tip stall, and reduce induced drag by shifting load inboard.
+2.  **Incorporate Camber:** To generate lift at zero angle of attack, improve efficiency at the design lift coefficient, and potentially shift the center of pressure.
+3.  **Optimize Leading Edge Sweep:** To fine-tune the strength and stability of leading-edge vortices, which are critical for delta wing performance.
+4.  **Consider Airfoil Thickness:** Adjusting thickness to balance structural requirements with profile drag, aiming for thinner airfoils where feasible for lower drag.

@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_HighCamber_ModWashout",
+  "design_params": {
+    "le_sweep_deg": 68.2413413186692,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 10,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.14400370244239338,
+    "CDi": 0.013867399850889134,
+    "CM": -0.19980495664652922,
+    "L_D": 10.384333327863212
+  },
+  "corrected_results": {
+    "CL": 0.07263240905616099,
+    "CDi": 0.007738859081003423,
+    "CM": -0.10118555951111474,
+    "L_D": 9.38541564020099
+  }
+}

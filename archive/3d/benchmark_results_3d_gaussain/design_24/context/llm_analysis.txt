@@ -1,0 +1,15 @@
+The representative Design 1 (le_sweep=51.6, root_chord_in=29.1, twist_root=7.5, twist_tip=-3.8, dihedral=15.0, NACA 2407, Reward: 35.5280) shows a strong performance. The Cp distribution likely indicates significant leading-edge vortex formation, characteristic of delta wings, contributing to high lift. The wash-in at the root (positive twist_root) combined with washout at the tip (negative twist_tip) is a common strategy to achieve a favorable lift distribution and delay tip stall. The NACA 24xx airfoil with its inherent camber contributes to lift. The high positive dihedral (15.0) could contribute to stability but also influence vortex interaction or effective span.
+
+**Aerodynamic Issues/Observations:**
+*   **Vortex Strength/Stability:** The image suggests well-formed leading-edge vortices, crucial for delta wing lift. Further optimization might involve fine-tuning sweep and twist to ensure robust vortices across the operating envelope.
+*   **Lift Distribution:** The twist distribution of wash-in at root and washout at tip aims to achieve an elliptical-like loading, reducing induced drag.
+*   **Airfoil Impact:** The use of cambered airfoils (NACA 24xx) across all top designs suggests that airfoil-generated lift is synergistic with vortex lift.
+*   **Sweep Impact:** The best designs cluster around 50-60 degrees sweep. Higher sweeps (64-66 deg, Designs 4, 5, 6) lead to significantly lower rewards, possibly due to increased induced drag or less effective vortex generation/stability at the tested conditions for those planforms.
+*   **Thickness Impact:** Thicker airfoils (NACA 2411, 2414) in lower-reward designs suggest that minimizing profile drag by using thinner sections (NACA 2407, 2408) is beneficial.
+
+**Key design changes needed for population improvement (Exploration Strategy):**
+
+1.  **Explore symmetric airfoils (NACA 00xx):** All current designs use cambered airfoils. Testing NACA 00xx (m=0, p=0) will determine if camber is essential for high CL/CDi or if vortex lift can sufficiently compensate. This is an entirely unexplored region for the `naca_m` and `naca_p` parameters.
+2.  **Investigate anhedral (negative dihedral):** All current designs have positive dihedral. Anhedral is an entirely unexplored parameter space that could alter lateral stability characteristics and potentially influence vortex interaction in novel ways, potentially leading to improved CL/CDi under certain conditions.
+3.  **Explore the extreme low end of leading-edge sweep (45-50 deg):** While the best designs are in the mid-range, pushing to the absolute lower boundary of 45.0 degrees could reveal performance characteristics when the wing planform is less slender, potentially reducing induced drag or changing vortex behavior.
+4.  **Test combination of symmetric airfoil with moderate twist:** How does a symmetric airfoil perform with a less aggressive twist distribution than seen in high-reward designs? This combination is untested.

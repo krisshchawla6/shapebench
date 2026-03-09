@@ -1,0 +1,5 @@
+- **Strategy Focus**: Instead of tweaking the "hump" of Design 1, I will generate a significantly more streamlined profile based on aerodynamic first principles (high L/D requires thin profiles with gradual pressure recovery). I will disregard the high-radius values seen in the suboptimal designs.
+- **Upper Surface (Point 1)**: To reduce the pressure drag and delay separation seen in Design 1, I will lower the radius parameter significantly (closer to Design 2's successful range but distinct) and moderate the angle. This will flatten the suction peak.
+- **Trailing Edge (Point 2)**: I will extend the effective chord length by increasing the radius parameter (moving the TE further back) and applying a moderate negative angle to induce aft-loading (camber) without the steep drop-off seen in Design 1.
+- **Leading Edge (Point 0)**: I will choose a moderate nose radius to ensure good flow attachment at varying angles of attack, avoiding the excessive bluntness of Design 1.
+- **Lower Surface (Point 3)**: I will use negative radius/angle parameters to "tuck" the lower surface, reducing thickness and enhancing the camber effect efficiently.

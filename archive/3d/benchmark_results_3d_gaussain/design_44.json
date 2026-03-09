@@ -1,0 +1,14 @@
+{
+  "design_name": "MaxTwistThinLowSweepHighDihedral",
+  "le_sweep": 48.28727944437981,
+  "root_chord_in": 28.199845923119675,
+  "twist_root": 9.891840086265557,
+  "twist_tip": -6.678304844552325,
+  "dihedral": 14.640298964371745,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

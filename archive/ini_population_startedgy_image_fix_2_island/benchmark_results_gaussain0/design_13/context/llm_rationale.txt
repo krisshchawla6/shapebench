@@ -1,0 +1,5 @@
+- **Exploitation Strategy**: This design focuses on refining the high-reward configuration found in Design 1 (Reward: 1.4688) and Design 2 (Reward: 1.3845), which both utilize a high negative `r0` and a high positive `r2`.
+- **Smoothing Curvature**: By reducing the `edgy_param` `e2` from 0.3576 to 0.1250, I aim to maintain the specific aft-loading shape of the successful designs while removing the geometric "kink" observed in the flow field analysis, thereby reducing drag.
+- **Optimizing Camber**: I have increased `r2` to 0.9320 (interpolating between the 0.91 of Design 1 and the 0.99 of Design 2) to explore whether a slightly more pronounced, but smoother, upper surface further improves the lift-to-drag ratio.
+- **Nose Refinement**: The `radius_param` `r0` is slightly moderated to -0.8955 to ensure the leading edge remains thin for performance but transitions more gracefully into the upper and lower surfaces.
+- **Consistency**: The angular parameters (`a1`, `a2`) are kept very close to Design 1's values, as the population data suggests this specific point distribution is the current global optimum for this environment.

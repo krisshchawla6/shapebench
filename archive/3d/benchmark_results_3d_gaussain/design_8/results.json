@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_Mod_Camber_Washout",
+  "design_params": {
+    "le_sweep_deg": 65.94635793428294,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 14,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.08845110913770805,
+    "CDi": 0.0031780416138396427,
+    "CM": -0.1125723342653972,
+    "L_D": 27.83195435595423
+  },
+  "corrected_results": {
+    "CL": 0.04391784301159717,
+    "CDi": 0.0015719496340454633,
+    "CM": -0.05624032368675512,
+    "L_D": 27.938454299310585
+  }
+}

@@ -1,0 +1,7 @@
+- **Strategy Focus**: The population lacks designs with significant thickness and aft-camber. I will generate a "Supercritical-style" explorer design that pushes the thickness parameters (`r1`, `r3`) and shifts the upper surface peak (`a1`) rearward.
+- **Geometric Exploration**:
+  - **Increase Thickness**: Current successful designs have `r1` $\approx$ 0.19. I will double this to `r1` = 0.385 to test a high-lift/high-volume configuration.
+  - **Aft-Loading**: I will shift the upper control point angle `a1` from ~0.50 to 0.68. Assuming `a` maps to chordwise position/angle, this moves the suction peak further back, promoting laminar flow.
+  - **Lower Surface Support**: To balance the thicker top, I will increase the lower chin radius `r3` (from 0.07 to 0.22) and adjust its angle `a3` to -0.35 to prevent the bottom surface from pinching the flow or intersecting the top.
+- **Constraint Handling**: I strictly enforced positive radii (fixing the failure mode seen in Design 6) and kept `e` parameters smooth for the body (avoiding the separation seen in "edgy" mid-body designs).
+- **Nose Adjustment**: A slightly sharper nose (`r0` reduced from 0.19 to 0.165) with a slight positive angle (`a0` = 0.05) is chosen to align with the increased camber line.

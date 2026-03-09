@@ -1,0 +1,16 @@
+- **Geometry**: 
+    - The design appears as an extremely thin, high-camber profile, resembling a curved membrane or a "skeletal" blade rather than a traditional teardrop airfoil.
+    - It possesses a very high chord-to-thickness ratio with a sharp, pointed leading edge and a similarly tapered trailing edge.
+    - The curvature is quite aggressive throughout the chord, creating a deep arching shape that is highly asymmetric.
+    - There is a noticeable lack of volumetric "meat" in the middle of the airfoil, which might lead to structural instability or immediate stall at varying angles of attack.
+
+- **Flow Field / Simulation Results**: 
+    - The pressure plot shows a concentrated stagnation point (red) at the very tip of the leading edge, followed by a sharp transition into the suction zone.
+    - The velocity fields (`u` and `v`) indicate that the flow is being deflected significantly downward, confirming high lift production despite the thinness.
+    - The suction surface (top) exhibits a broad, high-velocity region (red in `u` plot), though the thinness of the boundary layer suggests the flow is precarious.
+    - The wake is surprisingly narrow and coherent, indicating that for this specific simulation condition, the flow remains largely attached to the cambered surface.
+
+- **Critique and Mapping**:
+    - The extreme thinness is a direct result of the radial parameters in Design 1 (`r2=-0.88`, `r3=-0.46`) being pulled significantly toward the center, contrasting with the outer-limit `r0=1.0`.
+    - The sharp leading edge is likely a product of the high `edgy_param` values (e.g., `e2=1.0`) combined with the thin geometry.
+    - Key design changes needed: 1) Increase internal volume by balancing radial parameters away from the center; 2) Smooth the leading-edge radius to reduce the initial pressure spike; 3) Explore extreme angular offsets to see if a more robust camber can be achieved with higher thickness.

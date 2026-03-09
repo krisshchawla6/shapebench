@@ -1,0 +1,15 @@
+The representative design (Design 1) shows good performance with a reward of 24.3845. Its parameters are `le_sweep=64.7`, `root_chord_in=31.7`, `twist_root=1.1`, `twist_tip=-1.8` (slight washout), `dihedral=6.2`, and `NACA 2411`.
+
+Based on general aerodynamic principles and the provided database:
+*   **Aerodynamic Issues (potential for improvement):** While good, the CL/CDi ratio might be further improved by optimizing the spanwise load distribution. The moderate washout in Design 1 is effective, but stronger or differently distributed washout could reduce induced drag further, especially at the tips. The Cp distribution (if visualized) would likely show strong leading-edge vortices, but their optimal strength and interaction with the twist distribution are key.
+*   **Influence of Parameters:**
+    *   **Sweep:** Moderate sweep (64-68 degrees) seems to be a sweet spot for high rewards, effectively balancing vortex lift and induced drag. The extreme sweep of Design 6 (78 degrees) led to very poor performance, indicating a limit.
+    *   **Twist:** Washout at the tip (`twist_tip` negative) appears beneficial (Design 1, 4, 5). Positive tip twist (Design 2, 3) generally results in lower rewards. The interplay between `twist_root` and `twist_tip` is critical for load distribution. Design 4, with near-zero root twist and strong tip washout, achieved a good reward.
+    *   **Camber (NACA m, p):** NACA 24xx (2% camber at 40% chord) is prevalent in the high-reward designs. Design 6 used NACA 4408 (4% camber) and failed, suggesting that higher camber needs careful integration with other parameters.
+    *   **Thickness (NACA t):** Thicknesses between 10-14% are common among the better designs.
+    *   **Dihedral:** Positive dihedral (6-10 degrees) is common in the top designs, suggesting stability benefits without significant drag penalty. Designs with negative dihedral (5, 6) generally performed worse.
+*   **Key design changes needed to improve designs:**
+    1.  Explore slightly higher sweep within the proven moderate range (e.g., 66-68 degrees) to potentially enhance vortex lift, ensuring it's paired with suitable twist.
+    2.  Investigate stronger washout at the tip, potentially combined with moderate positive root twist, to optimize spanwise load distribution and reduce induced drag.
+    3.  Confirm the efficacy of NACA 24xx, potentially experimenting with slight variations in thickness.
+    4.  Maintain positive dihedral, exploring values within the successful range or slightly higher.

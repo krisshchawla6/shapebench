@@ -1,0 +1,14 @@
+{
+  "design_name": "InitialBalancedDelta",
+  "le_sweep": 71.09661510633673,
+  "root_chord_in": 34.313963501181966,
+  "twist_root": 3.9735475837181062,
+  "twist_tip": -0.11374581207296419,
+  "dihedral": -8.605332823800374,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

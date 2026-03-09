@@ -1,0 +1,5 @@
+*   **Strategy Focus Alignment**: This design shifts away from the "standard" proportions of Design 1 by pushing for a much sharper trailing edge and a more aggressive camber line, exploring the "high-camber, high-sharpness" region of the design space.
+*   **Aft-Loading Exploration**: By increasing the angular offset of CP3 (a3 = 0.9521) and the sharpness (e3 = 0.9104), I am attempting to create a "Kutta-condition" optimized trailing edge that enforces a cleaner flow exit.
+*   **Upper Surface Control**: Setting CP1 at a mid-range radius (r=0.6231) and a high positive angle (a=0.5842) seeks to create a more pronounced suction side "hump," testing if higher volume near the leading edge improves the lift-to-drag ratio.
+*   **Lower Surface Management**: CP2 is placed with a high radius (0.8124) and a negative angle (-0.2843) to ensure a relatively flat or slightly concave lower surface, which typically aids in maintaining a high-pressure region underneath.
+*   **Geometric Stability**: To avoid the failures seen in Design 2, I am keeping all radius parameters above 0.5, ensuring the shape remains "inflated" and aerodynamically viable.

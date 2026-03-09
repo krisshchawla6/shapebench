@@ -1,0 +1,14 @@
+{
+  "design_name": "SweptWashoutCruiser",
+  "le_sweep": 70.36691754766377,
+  "root_chord_in": 39.078263854245684,
+  "twist_root": -4.564016990595079,
+  "twist_tip": -5.608949714767216,
+  "dihedral": 7.146928940419049,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

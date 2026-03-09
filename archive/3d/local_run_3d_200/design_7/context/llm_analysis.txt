@@ -1,0 +1,15 @@
+The representative design (Design 1) achieved the highest reward (5.0456) with a moderate leading-edge sweep (58.36 deg), moderate root chord (34.89 inches), significant tip washout (-9.60 deg), and a near-zero dihedral (-0.29 deg). It utilized an uncambered NACA 0015 airfoil. This suggests that a combination of moderate sweep and effective twist distribution for load management, particularly strong washout at the tip, is beneficial for CL/CDi in this regime for uncambered profiles.
+
+Design 2, which performed poorly (-0.2209), had a slightly higher sweep (61.20 deg), a positive root twist (2.88 deg), less aggressive tip washout (-2.91 deg), and a significant negative dihedral (-8.29 deg). This indicates that positive root twist and large negative dihedral, especially when combined with a thinner, uncambered airfoil (NACA 0011), can be detrimental to performance.
+
+Key issues observed:
+- **Limited exploration of Camber:** Both prior designs used uncambered airfoils (NACA 00xx). This is a critical unexplored region for enhancing lift and potentially efficiency.
+- **Twist Distribution Sensitivity:** Aggressive washout (Design 1) seems beneficial, while positive root twist (Design 2) appears problematic. More nuanced exploration of twist combinations is needed.
+- **Dihedral Impact:** Moderate negative dihedral in Design 2 correlated with poor performance, while near-zero was good. The full range, especially positive dihedral, is unexplored.
+- **Sweep Range:** The existing designs are clustered in the 58-61 deg range. The higher and lower ends of the 45-80 deg sweep spectrum remain to be systematically explored.
+
+To improve designs and advance the population, 3-4 key changes are needed:
+1.  **Introduce Camber:** Systematically explore cambered airfoils (NACA 24xx or 44xx) to understand their impact on CL/CDi.
+2.  **Explore Higher Sweep:** Investigate the upper end of the sweep range (e.g., 70-80 degrees) to explore configurations optimized for strong vortex lift.
+3.  **Investigate Positive Dihedral:** Test designs with positive dihedral to understand its effect on stability and performance, as this region is currently unexplored.
+4.  **Vary Twist and Thickness with Camber:** Understand how twist distribution and airfoil thickness interact with cambered airfoils and different sweep angles.

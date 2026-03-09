@@ -1,0 +1,14 @@
+{
+  "design_name": "HybridSweepWashoutDelta",
+  "le_sweep": 66.75430717813715,
+  "root_chord_in": 35.11075054975023,
+  "twist_root": -0.07024247145099638,
+  "twist_tip": -0.7178291110980801,
+  "dihedral": 2.676828327270547,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

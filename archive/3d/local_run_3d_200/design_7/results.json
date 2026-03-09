@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_Camber_PositiveDihedral_Explore",
+  "design_params": {
+    "le_sweep_deg": 75.96554956411683,
+    "root_chord_in": 36.35481243902611,
+    "twist_root_deg": -1.7581137384117373,
+    "twist_tip_deg": -1.6614920051176316,
+    "dihedral_deg": 6.657364932830453,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 20,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.233527637641358,
+    "CDi": 0.03396119992862415,
+    "CM": -0.2191978478033122,
+    "L_D": 6.876307024844831
+  },
+  "corrected_results": {
+    "CL": -0.015441634819987013,
+    "CDi": -0.0022523372913998813,
+    "CM": 0.05655639380348566,
+    "L_D": 6.855827001998297
+  }
+}

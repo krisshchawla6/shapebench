@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploitation_VortexOptimizer_01",
+  "le_sweep": 66.9075632553246,
+  "root_chord_in": 37.85422506977908,
+  "twist_root": -8.451518902096833,
+  "twist_tip": -3.4169001922897513,
+  "dihedral": -6.901654731039216,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 15,
+    "chord_length": 1.0
+  }
+}

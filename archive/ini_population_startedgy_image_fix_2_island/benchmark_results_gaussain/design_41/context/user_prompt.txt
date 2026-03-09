@@ -1,0 +1,116 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [-0.074152, -0.01161, -0.581318, 0.157608, 0.135343, -0.423312, -0.712278, -0.060753, 1.0, -0.178143, -0.07163, -0.675701]
+  - Reward: 1.5437
+  - Rank: 4
+
+Design 2:
+  - Action: [-0.571827, 0.453209, 0.849251, -0.362707, -0.483331, -0.875441, 0.499294, -0.428208, -0.753778, 0.702237, 0.25473, 0.92089]
+  - Reward: 1.4633
+  - Rank: 6
+
+Design 3:
+  - Action: [-0.077558, 0.038119, 0.910005, 0.141833, 0.11402, 0.831596, -0.746375, -0.02815, 0.974437, -0.15607, -0.069983, 0.847566]
+  - Reward: 1.3011
+  - Rank: 9
+
+Design 4:
+  - Action: [-0.962334, -0.362225, -0.862524, -0.760901, 0.421609, -0.690234, 0.864953, -0.050752, 0.934879, -0.905768, 0.291683, -0.258887]
+  - Reward: 0.5523
+  - Rank: 22
+
+Design 5:
+  - Action: [0.156639, -0.14639, -0.376894, 0.424083, 0.377079, -0.602934, -1.0, 0.035922, 0.961858, -0.046774, 0.308483, -0.502715]
+  - Reward: 0.2745
+  - Rank: 29
+
+Design 6:
+  - Action: [0.317096, -0.05045, -0.902909, 0.45744, 0.18405, -0.904781, -0.27893, 0.019527, 0.883469, 0.057667, -0.21471, -0.972429]
+  - Reward: -0.0177
+  - Rank: 35
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.
+
+
+# Task: Generate New Airfoil Design (with Direct Values)
+
+First, analyze the provided information:
+
+1. **Image Analysis**: If images are provided, they show a representative design sampled from the population (listed as Design 1 above for reference). You MUST first describe what you actually see in the images before analyzing action vectors:
+
+- In 3-4 bullet points, describe the **geometry** you observe: What does the shape look like? Is it smooth or jagged? Symmetric or asymmetric? Thick or thin? Are there any obvious geometric flaws visible (discontinuities, pinch points, blunt edges, odd proportions)?
+- In 3-4 bullet points, describe the **flow field / simulation results** you observe: What do the pressure, velocity, or other field plots show? Where are high/low regions? Is there visible flow separation, recirculation, wake asymmetry, or pressure spikes?
+
+Only AFTER describing what you see in the images, reference Design 1's action vector and reward to learn parameter-geometry mappings.
+
+Critically and relentlessly assess the design shown:
+- Which visible geometric features are problematic and why?
+- Which action parameters likely caused the geometric flaws you see?
+- List 3-4 key design/geometric changes needed to improve designs in the population
+
+
+**Strategy Focus**: **Novel Design Strategy**: Ignore specific parameter values from the database. Instead, use the database only to understand 
+    general trends (what geometric features correlate with high/low rewards) and use the image analysis to learn parameter-geometry mappings. 
+    Generate a completely fresh design with parameter values chosen based on aerodynamic first principles and your judgment 
+    as an evolutionary optimizer, not by mimicking existing designs.
+
+
+2. **Design Reasoning**: Based on the design database and population state, think step-by-step about what NEW design should be explored to advance the population. **Follow the Strategy Focus guidance above** - this determines HOW you should approach the design. Consider unexplored geometric variations and different aerodynamic strategies. Focus on diversity and bold exploration, not incremental tweaking of existing designs based on aerodynamic principles.
+
+In your reasoning, provide 4-6 bullet points that:
+- **Apply the Strategy Focus approach described above**
+- Draw insights from the population database (what patterns lead to high/low rewards?)
+- Incorporate observations from the image analysis (what aerodynamic phenomena are present?)
+- Identify specific geometric parameters to explore and WHY
+- Apply your judgment as an evolutionary optimizer (what will advance the search?)
+
+Then, create a new airfoil by specifying precise values for each parameter. Use 4+ decimals. n_cp=4 n_sp=20.
+
+Design considerations: The reasoning above should be applied to the design parameters to evolve the population.
+
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [<r0>, <a0>, <e0>],
+    [<r1>, <a1>, <e1>],
+    [<r2>, <a2>, <e2>],
+    [<r3>, <a3>, <e3>]
+  ],
+  "name": "<descriptive_name>"
+}
+
+Replace all <placeholders> with actual float values in [-1.0, 1.0].
+Each inner array is [radius_param, angle_param, edgy_param] for that control point.
+
+
+**Response Format:**
+Provide your response in the following structure:
+
+## Analysis
+[If images provided: first describe the geometry (3-4 bullets on what you see) and the flow fields (3-4 bullets on what you see). Then reference Design 1's action vector and reward. Identify which visible flaws map to which parameters, and list 3-4 key changes needed]
+
+## Reasoning
+[4-6 bullet points with design insights: combine population database patterns, image analysis observations, the Strategy Focus guidance above, and your judgment as an evolutionary optimizer to justify the new design strategy. Explicitly explain how your design follows the Strategy Focus.]
+
+## Design Parameters
+[Your JSON with the design parameters as shown in the example above]

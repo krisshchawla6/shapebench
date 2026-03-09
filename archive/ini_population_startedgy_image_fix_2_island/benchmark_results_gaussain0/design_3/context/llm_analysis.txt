@@ -1,0 +1,1 @@
+No previous designs or images are available to analyze. This is the initial step in the evolutionary optimization process. Without a baseline, the priority is to establish a diverse starting point that probes the boundaries of the defined parameter space to understand the sensitivity of the reward function to extreme geometric variations.

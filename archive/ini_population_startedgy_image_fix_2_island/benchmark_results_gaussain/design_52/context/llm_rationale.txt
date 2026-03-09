@@ -1,0 +1,9 @@
+To advance the population, I will adopt an **Exploration Strategy** focused on "High-Camber, High-Thickness" boundaries, which are underexplored in the current database.
+
+*   **Strategy Focus**: Instead of refining the "safe" central region (small angles, moderate radii), I will push the parameters toward the boundaries to test if a thicker, more highly cambered foil can sustain higher lift.
+*   **Geometric Targets**:
+    *   **Nose (CP0)**: Increase `radius_param` significantly (>0.7) and apply a strong negative `angle_param` (< -0.6) to create a "drooped" leading edge, potentially improving high-angle-of-attack performance or shifting the suction peak.
+    *   **Upper Surface (CP1)**: Increase `radius_param` to thicken the airfoil, but test a slightly less "smooth" parameter (`edgy` around -0.4 instead of -0.8) to see if changing the curvature acceleration helps pressure recovery.
+    *   **Trailing Edge (CP2)**: Maximize `radius_param` towards 1.0 to extend the chord length/effective area, keeping `edgy` pinned at 1.0 for a sharp release.
+    *   **Lower Surface (CP3)**: Use a strong negative `radius_param` to carve out the underside (camber), combined with a negative angle offset.
+*   **Hypothesis**: By combining a drooped nose (negative angle CP0) with a highly extended sharp tail (max radius CP2), we might uncover a high-lift geometry distinct from the current "flat" designs.

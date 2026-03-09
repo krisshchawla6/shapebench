@@ -1,0 +1,14 @@
+{
+  "design_name": "ExtremeSweepSymmetricAirfoilExtremeTwistNegativeDihedral",
+  "le_sweep": 73.99361356443741,
+  "root_chord_in": 26.665033141511795,
+  "twist_root": 10.0,
+  "twist_tip": -10.0,
+  "dihedral": -10.540874205075049,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

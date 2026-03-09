@@ -1,0 +1,8 @@
+*   **Strategy Focus**: I will apply a hybrid strategy by blending the robust, high-performing "chassis" of Design 2 (the current best, Reward 1.2162) with a parameter modification intended to increase lift potential, inspired by the variation seen in the database.
+*   **Population Insights**: Designs 1 and 2 are the only successful candidates, characterized by small/negative radii at CP0 (LE) and CP3, and a sharp CP2 (TE). Failed designs (3-6) all share large positive radii at CP0, leading to blunt, drag-heavy shapes.
+*   **Hybridization Plan**: I will take Design 2 as the base because it improved on Design 1 by slightly increasing the CP1 radius (thickness/upper shape) and adjusting the LE angle. I will extrapolate this trend further.
+*   **Specific Changes**:
+    *   **CP0 (Leading Edge)**: Maintain the successful small radius and negative angle from Design 2 to ensure low drag entry. `r ~ -0.025`, `a ~ -0.085`.
+    *   **CP1 (Upper Surface)**: Design 2 increased this radius to 0.12. I will push this further to `r ~ 0.165` to increase thickness/camber slightly, aiming for higher lift capacity while keeping the angle similar to maintain the peak location.
+    *   **CP2 (Trailing Edge)**: Retain the highly negative radius and positive 'edgy' value (sharpness) from Design 2 to enforce the Kutta condition and minimize wake.
+    *   **CP3 (Lower Surface)**: Keep values close to Design 2 to maintain the established lower surface pressure recovery.

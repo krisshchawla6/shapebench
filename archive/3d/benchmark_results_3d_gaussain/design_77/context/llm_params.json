@@ -1,0 +1,11 @@
+{
+  "le_sweep": 45.0,
+  "root_chord_in": 38.5,
+  "twist_root": 9.8,
+  "twist_tip": -9.5,
+  "dihedral": 10.5,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 11,
+  "name": "Exploit_LowSweep_HighTwist_2411"
+}

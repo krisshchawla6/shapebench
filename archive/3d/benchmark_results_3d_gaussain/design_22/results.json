@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_D1_D3_Swept_ModDihedral_NACA09",
+  "design_params": {
+    "le_sweep_deg": 64.64154042996682,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.0921506773311405,
+    "CDi": 0.003268196172683279,
+    "CM": -0.11657005938941688,
+    "L_D": 28.196189109260924
+  },
+  "corrected_results": {
+    "CL": 0.04953419212389176,
+    "CDi": 0.0016553991160842075,
+    "CM": -0.06212081533069896,
+    "L_D": 29.9228093349858
+  }
+}

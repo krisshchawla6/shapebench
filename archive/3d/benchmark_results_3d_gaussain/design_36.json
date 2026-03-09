@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_SymmAirfoil_NegDihedral_InvertedTwist",
+  "le_sweep": 80.0,
+  "root_chord_in": 29.21672230983563,
+  "twist_root": -5.248134095196791,
+  "twist_tip": 2.3532939491595006,
+  "dihedral": -4.920772064625816,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 16,
+    "chord_length": 1.0
+  }
+}

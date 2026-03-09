@@ -1,0 +1,11 @@
+{
+  "le_sweep": 65.0,
+  "root_chord_in": 28.0,
+  "twist_root": -10.0,
+  "twist_tip": -6.5,
+  "dihedral": -5.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 12,
+  "name": "CamberedMidSweepCompactAnhedral"
+}

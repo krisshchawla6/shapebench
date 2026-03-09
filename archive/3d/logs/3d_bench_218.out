@@ -1,0 +1,274 @@
+==========================================
+Job ID: 218
+Node: compute-dy-hpc-128vcpu-1
+Date: Sun Feb 22 05:53:47 UTC 2026
+Action: gaussain
+Iterations: 80
+Max Inspirations: 5 (grows 0->1->2...->5)
+Initialize N Sample: 6
+AoA: 0 deg, Mach: 0.3
+Working Directory: /scratch/3D/3d/work_218
+Output: /scratch/3D/3d/benchmark_results_3d_gaussain
+==========================================
+Setting up isolated workspace...
+============================================================
+3D Delta Wing Benchmark
+  action:      gaussain
+  iterations:  80
+  inspirations:5
+  init_sample: 6
+  aoa:         0.0 deg
+  mach:        0.3
+  re:          3000000
+  output:      /scratch/3D/3d/benchmark_results_3d_gaussain
+============================================================
+
+--- Iteration 1/80 [INIT 1/6] (action: gaussain, no context) ---
+Reward: 19.0639, Best: 19.0639
+
+--- Iteration 2/80 [INIT 2/6] (action: gaussain, no context) ---
+Reward: 20.9596, Best: 20.9596
+
+--- Iteration 3/80 [INIT 3/6] (action: gaussain, no context) ---
+Reward: 19.1059, Best: 20.9596
+
+--- Iteration 4/80 [INIT 4/6] (action: gaussain, no context) ---
+Reward: -5.4500, Best: 20.9596
+
+--- Iteration 5/80 [INIT 5/6] (action: gaussain, no context) ---
+Reward: 24.3845, Best: 24.3845
+
+--- Iteration 6/80 [INIT 6/6] (action: gaussain, no context) ---
+Reward: 22.9962, Best: 24.3845
+
+--- Iteration 7/80 (action: gaussain, inspirations: 0) ---
+Reward: -5.4500, Best: 24.3845
+
+--- Iteration 8/80 (action: gaussain, inspirations: 1) ---
+Reward: -0.9773, Best: 24.3845
+
+--- Iteration 9/80 (action: gaussain, inspirations: 2) ---
+Reward: 22.4885, Best: 24.3845
+
+--- Iteration 10/80 (action: gaussain, inspirations: 3) ---
+Reward: -5.4500, Best: 24.3845
+
+--- Iteration 11/80 (action: gaussain, inspirations: 4) ---
+Reward: -5.4500, Best: 24.3845
+
+--- Iteration 12/80 (action: gaussain, inspirations: 5) ---
+Reward: 21.0863, Best: 24.3845
+
+--- Iteration 13/80 (action: gaussain, inspirations: 5) ---
+Reward: 17.7393, Best: 24.3845
+
+--- Iteration 14/80 (action: gaussain, inspirations: 5) ---
+Reward: 2.8712, Best: 24.3845
+
+--- Iteration 15/80 (action: gaussain, inspirations: 5) ---
+Reward: 21.9046, Best: 24.3845
+
+--- Iteration 16/80 (action: gaussain, inspirations: 5) ---
+Reward: 21.2672, Best: 24.3845
+
+--- Iteration 17/80 (action: gaussain, inspirations: 5) ---
+Reward: 21.9539, Best: 24.3845
+
+--- Iteration 18/80 (action: gaussain, inspirations: 5) ---
+Reward: 28.1365, Best: 28.1365
+
+--- Iteration 19/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 28.1365
+
+--- Iteration 20/80 (action: gaussain, inspirations: 5) ---
+Reward: 32.4419, Best: 32.4419
+
+--- Iteration 21/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 32.4419
+
+--- Iteration 22/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 32.4419
+
+--- Iteration 23/80 (action: gaussain, inspirations: 5) ---
+Reward: 24.4728, Best: 32.4419
+
+--- Iteration 24/80 (action: gaussain, inspirations: 5) ---
+Reward: 35.5280, Best: 35.5280
+
+--- Iteration 25/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 35.5280
+
+--- Iteration 26/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 35.5280
+
+--- Iteration 27/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 35.5280
+
+--- Iteration 28/80 (action: gaussain, inspirations: 5) ---
+Reward: 30.5473, Best: 35.5280
+
+--- Iteration 29/80 (action: gaussain, inspirations: 5) ---
+Reward: 33.7065, Best: 35.5280
+
+--- Iteration 30/80 (action: gaussain, inspirations: 5) ---
+Reward: 34.6874, Best: 35.5280
+
+--- Iteration 31/80 (action: gaussain, inspirations: 5) ---
+Reward: 8.4881, Best: 35.5280
+
+--- Iteration 32/80 (action: gaussain, inspirations: 5) ---
+Reward: 34.2156, Best: 35.5280
+
+--- Iteration 33/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 35.5280
+
+--- Iteration 34/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 35.5280
+
+--- Iteration 35/80 (action: gaussain, inspirations: 5) ---
+Reward: 12.0985, Best: 35.5280
+
+--- Iteration 36/80 (action: gaussain, inspirations: 5) ---
+Reward: 3.9354, Best: 35.5280
+
+--- Iteration 37/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 35.5280
+
+--- Iteration 38/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 35.5280
+
+--- Iteration 39/80 (action: gaussain, inspirations: 5) ---
+Reward: 32.4147, Best: 35.5280
+
+--- Iteration 40/80 (action: gaussain, inspirations: 5) ---
+Reward: 31.0204, Best: 35.5280
+
+--- Iteration 41/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 35.5280
+
+--- Iteration 42/80 (action: gaussain, inspirations: 5) ---
+Reward: 3.3923, Best: 35.5280
+
+--- Iteration 43/80 (action: gaussain, inspirations: 5) ---
+Reward: 36.0529, Best: 36.0529
+
+--- Iteration 44/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 36.0529
+
+--- Iteration 45/80 (action: gaussain, inspirations: 5) ---
+Reward: 38.5407, Best: 38.5407
+
+--- Iteration 46/80 (action: gaussain, inspirations: 5) ---
+Reward: 38.9239, Best: 38.9239
+
+--- Iteration 47/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 38.9239
+
+--- Iteration 48/80 (action: gaussain, inspirations: 5) ---
+Reward: 39.2949, Best: 39.2949
+
+--- Iteration 49/80 (action: gaussain, inspirations: 5) ---
+Reward: 0.6775, Best: 39.2949
+
+--- Iteration 50/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.2949
+
+--- Iteration 51/80 (action: gaussain, inspirations: 5) ---
+Reward: 9.2740, Best: 39.2949
+
+--- Iteration 52/80 (action: gaussain, inspirations: 5) ---
+Reward: 39.9927, Best: 39.9927
+
+--- Iteration 53/80 (action: gaussain, inspirations: 5) ---
+Reward: 2.6290, Best: 39.9927
+
+--- Iteration 54/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 55/80 (action: gaussain, inspirations: 5) ---
+Reward: 39.8773, Best: 39.9927
+
+--- Iteration 56/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 57/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 58/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 59/80 (action: gaussain, inspirations: 5) ---
+Reward: 23.5159, Best: 39.9927
+
+--- Iteration 60/80 (action: gaussain, inspirations: 5) ---
+Reward: 10.0809, Best: 39.9927
+
+--- Iteration 61/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 62/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 63/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 64/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 65/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 66/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 39.9927
+
+--- Iteration 67/80 (action: gaussain, inspirations: 5) ---
+Reward: 16.2759, Best: 39.9927
+
+--- Iteration 68/80 (action: gaussain, inspirations: 5) ---
+Reward: 40.7930, Best: 40.7930
+
+--- Iteration 69/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 40.7930
+
+--- Iteration 70/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 40.7930
+
+--- Iteration 71/80 (action: gaussain, inspirations: 5) ---
+Reward: 39.4911, Best: 40.7930
+
+--- Iteration 72/80 (action: gaussain, inspirations: 5) ---
+Reward: 17.4071, Best: 40.7930
+
+--- Iteration 73/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 40.7930
+
+--- Iteration 74/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 40.7930
+
+--- Iteration 75/80 (action: gaussain, inspirations: 5) ---
+Reward: 39.2479, Best: 40.7930
+
+--- Iteration 76/80 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.5128
+
+--- Iteration 77/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.5128
+
+--- Iteration 78/80 (action: gaussain, inspirations: 5) ---
+Reward: 41.7399, Best: 41.7399
+
+--- Iteration 79/80 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.7399
+
+--- Iteration 80/80 (action: gaussain, inspirations: 5) ---
+Reward: 14.4983, Best: 41.7399
+
+Best design: /scratch/3D/3d/benchmark_results_3d_gaussain/design_77.json
+Results saved to /scratch/3D/3d/benchmark_results_3d_gaussain/results.json
+==========================================
+Job completed successfully
+Results saved to: /scratch/3D/3d/benchmark_results_3d_gaussain
+End time: Sun Feb 22 06:16:17 UTC 2026
+==========================================
+Cleaning up workspace...
+Workspace cleaned.

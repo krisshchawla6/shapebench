@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweep_MaxCamberThin_PosRootNegTipTwist",
+  "le_sweep": 55.88210868784373,
+  "root_chord_in": 30.481953657442524,
+  "twist_root": 1.9538545603403654,
+  "twist_tip": -10.0,
+  "dihedral": 0.6392631139667477,
+  "naca": {
+    "m": 4,
+    "p": 0,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

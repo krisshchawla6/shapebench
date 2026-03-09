@@ -1,0 +1,11 @@
+{
+  "le_sweep": 78.5,
+  "root_chord_in": 48.5,
+  "twist_root": 5.0,
+  "twist_tip": -10.0,
+  "dihedral": 2.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 22,
+  "name": "HighSweep_PositiveRootTwist_ThickCamber"
+}

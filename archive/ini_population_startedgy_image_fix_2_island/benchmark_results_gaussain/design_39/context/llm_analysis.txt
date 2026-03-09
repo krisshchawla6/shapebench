@@ -1,0 +1,16 @@
+**Geometry Observations (Design 1):**
+*   **Overall Shape:** The airfoil exhibits a classic cambered profile with a rounded leading edge and a distinct, sharp trailing edge. The thickness distribution appears moderate, not excessively thin or thick.
+*   **Smoothness:** The surface curvature is generally continuous, indicating successful use of "smooth" parameters (negative `edgy` values) for the leading edge and mid-body control points.
+*   **Asymmetry:** The design is clearly asymmetric, with the upper surface having higher curvature than the lower surface, generating lift.
+*   **Potential Flaws:** While the shape is competent, there may be slight irregularities in the curvature continuity near the transition to the trailing edge, potentially causing a premature pressure recovery or slight separation bubble.
+
+**Flow Field Observations (Design 1):**
+*   **Pressure Distribution:** The pressure plot (`1_p.png`) likely shows a distinct suction peak (low pressure) near the leading edge on the upper surface. The gradient towards the trailing edge seems consistent but could be optimized for a more extended run of laminar flow.
+*   **Velocity:** High velocity regions correspond to the suction peak. The wake region appears relatively narrow, suggesting drag is reasonable but not minimized to the theoretical limit.
+*   **Separation:** There are no massive regions of recirculation, but the flow near the very end of the trailing edge might show signs of thickening boundary layer, hinting at pressure drag that can be reduced.
+
+**Parameter Mapping:**
+*   **Leading Edge (CP0):** The parameters `[-0.002, -0.135, -0.956]` create the smooth, rounded nose. The negative angle positions the stagnation point effectively.
+*   **Upper Surface (CP1):** `[0.140, 0.242, -0.592]` controls the camber and thickness. The positive radius and angle create the upper curve.
+*   **Trailing Edge (CP2):** `[-0.733, -0.043, 0.908]` is the critical sharp point. The high `edgy` value (0.908) is essential for the Kutta condition. The negative radius likely pulls this point to the correct chord length.
+*   **Lower Surface (CP3):** `[-0.089, -0.105, -0.905]` maintains the lower curve. The small radius keeps the bottom relatively flat/concave compared to the top.

@@ -1,0 +1,33 @@
+{
+  "design_name": "HybridOptimizedDelta_T12",
+  "design_params": {
+    "le_sweep_deg": 47.564947463794866,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.24999762705593073,
+    "CDi": 0.01360945976985038,
+    "CM": -0.3025302537733891,
+    "L_D": 18.36940123146998
+  },
+  "corrected_results": {
+    "CL": 0.19908902092913502,
+    "CDi": 0.009163653546277826,
+    "CM": -0.23475489776759859,
+    "L_D": 21.72594368869421
+  }
+}

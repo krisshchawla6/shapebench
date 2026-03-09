@@ -1,0 +1,17 @@
+The provided designs indicate a clear pattern for achieving high CL/CDi ratios. Design 1, with the highest reward of 40.7930, features the minimum allowed leading-edge sweep (45.0 degrees), coupled with extreme positive root twist (10.0 degrees) and extreme negative tip twist (washout, -10.0 degrees). It also uses a moderate positive dihedral (7.33 degrees) and a cambered NACA 2409 airfoil.
+
+From the parameters of the top designs, we can infer the following:
+*   **Aerodynamic Issues (Inferred from lower rewards):** Designs with higher sweep (e.g., Design 6 at 51.62 degrees) tend to have lower rewards, suggesting that the benefits of stronger vortex lift from higher sweep are outweighed by increased induced drag or other penalties in this flight regime. Designs with less aggressive twist distributions (e.g., Design 5 and 6) also show reduced performance, indicating that an optimized spanwise load distribution is crucial.
+*   **Influence of Parameters:**
+    *   **Sweep:** Low sweep (45-48 degrees) is strongly correlated with high rewards, suggesting it minimizes induced drag and optimizes CL/CDi.
+    *   **Twist:** The combination of high positive `twist_root` and high negative `twist_tip` (washout) is critical, likely leading to a near-elliptical lift distribution, delaying tip stall, and reducing induced drag. This appears to be a primary driver of high performance.
+    *   **Camber (NACA m, p):** All top designs use a cambered airfoil (NACA 24xx), providing additional lift without significant drag penalties. The specific `naca_m=2, naca_p=4` (2% camber at 40% chord) is dominant.
+    *   **Thickness (NACA t):** A moderate thickness (9-14%) seems effective, balancing structural requirements with minimizing form drag. NACA 2409 and 2410 are common, but 2414 also performed well.
+    *   **Dihedral:** Positive dihedral is consistently present. Values between 7 and 12 degrees appear in higher-ranked designs, though the maximum 15 degrees in Designs 5 and 6 did not guarantee top performance, suggesting an optimal range rather than simply maximizing it.
+    *   **Root Chord:** Mid-to-high `root_chord_in` values (25-34 inches) are common, indicating an appropriate scale.
+
+*   **Key Design Changes Needed to Improve Designs:**
+    1.  Refine the `le_sweep` in the lower range (45-47 degrees) to ensure minimal induced drag while still benefiting from delta wing characteristics.
+    2.  Explore slight variations around the aggressive `twist_root` (near 10.0 deg) and `twist_tip` (near -10.0 deg) to fine-tune load distribution.
+    3.  Investigate the optimal `dihedral` in the upper-mid positive range (9-12 degrees) to balance stability and induced drag.
+    4.  Experiment with `naca_t` (thickness) in the 9-12% range, maintaining the successful `naca_m=2, naca_p=4` camber profile.

@@ -1,0 +1,21 @@
+The representative design (Design 1) stands out with an exceptionally high reward of 4016.0090, dwarfing all other designs whose rewards are in the hundreds or tens. This indicates a highly effective combination of parameters.
+
+Design 1's parameters are:
+*   **le_sweep**: 65.516 deg (moderate, not extreme)
+*   **root_chord_in**: 34.786 inches (moderate size)
+*   **twist_root**: -7.133 deg (significant negative twist)
+*   **twist_tip**: -4.605 deg (less negative twist than root)
+*   **dihedral**: -1.723 deg (mild negative dihedral)
+*   **NACA**: 4412 (4% max camber at 40% chord, 12% thickness)
+
+**Key Observations for Improvement:**
+1.  **Dominance of Design 1:** The outstanding performance of Design 1 means its parameter combination is highly successful. The exploitation strategy dictates focusing on variations around this design.
+2.  **Twist Distribution:** Design 1 employs a negative twist at both root and tip, with the root being more negatively twisted (-7.133) than the tip (-4.605). This is important to mimic, as other designs with extreme root twist (-10.0) performed worse.
+3.  **Moderate Parameters:** Design 1's sweep, root chord, and dihedral are all in the moderate range, avoiding the extremes. Extreme values (e.g., very high sweep of D6, extreme dihedral of D5/D6) consistently led to lower rewards.
+4.  **NACA Airfoil (4412):** The NACA 4412 airfoil (cambered, 12% thickness) appears to be highly effective. Designs with different NACA profiles or significantly different thicknesses (e.g., D3's 4016, D6's 4407) yielded much lower rewards.
+
+**Key Design Changes Needed to Improve Designs (based on exploiting Design 1):**
+*   Maintain sweep and root chord in the moderate ranges observed in Design 1.
+*   Adopt the specific twist distribution pattern (both negative, root more negative than tip) from Design 1, avoiding extreme -10.0 twist at the root.
+*   Keep dihedral values close to zero or mildly negative.
+*   Utilize a cambered NACA profile similar to 4412, exploring slight variations in thickness.

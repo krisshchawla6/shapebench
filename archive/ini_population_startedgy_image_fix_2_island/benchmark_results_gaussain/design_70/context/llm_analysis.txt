@@ -1,0 +1,15 @@
+**Geometry (from Design 1 images):**
+*   **Profile**: The airfoil features a classic cambered shape with a moderately rounded leading edge and a sharp trailing edge. The maximum thickness appears located slightly aft of the 30-40% chord mark.
+*   **Smoothness**: The curvature is continuous on both upper and lower surfaces (consistent with `e` parameters near -1.0), with no visible kinks or sharp corners except at the trailing edge.
+*   **Camber**: There is noticeable positive camber; the upper surface is significantly convex, while the lower surface is flatter or slightly concave near the trailing edge (under-cambered).
+*   **Trailing Edge**: The trailing edge tapers to a fine point (consistent with `e2` near 1.0), typical for subsonic airfoils to reduce wake turbulence.
+
+**Flow Field (from Design 1 images):**
+*   **Pressure (`1_p.png`)**: Likely shows a strong low-pressure suction peak on the upper surface near the leading edge/mid-chord, contributing to lift. The gradient towards the trailing edge appears smooth, suggesting good pressure recovery.
+*   **Velocity (`1_u.png`, `1_v.png`)**: The flow likely stays attached (streamlines following the surface). Any significant separation (dark blue/reversed regions in `u`) would have penalized the reward heavily, so the high reward implies attached flow. The wake is likely thin.
+*   **Aerodynamics**: The design functions efficiently as a lifting surface. The key to improvement lies in optimizing the lift-to-drag ratio, potentially by extending the run of laminar flow (moving thickness aft) or managing the pressure recovery more aggressively.
+
+**Flaws & Opportunities:**
+*   **Observation**: Previous "bad" designs (Designs 4, 5, 6) utilized larger leading edge radii (`r0` > 0.4) and forward-located thickness (`a1` ~ 0.2), which likely caused early flow separation or excessive form drag.
+*   **Trend**: The best designs (1 & 2) have smaller `r0` (~0.3) and aft-located upper surface peaks (`a1` > 0.45).
+*   **Missing Geometry**: The population lacks exploration of **thinner leading edges** (`r0` < 0.3) combined with **very aft loading** (supercritical-style profiles), which could reduce drag and improve the L/D ratio.

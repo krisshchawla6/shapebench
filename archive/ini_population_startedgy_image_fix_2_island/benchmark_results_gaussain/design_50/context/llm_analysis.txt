@@ -1,0 +1,15 @@
+**Geometry (from Design 1 images):**
+*   **Asymmetric Profile:** The airfoil exhibits a clear asymmetry with a rounded leading edge and a sharp trailing edge.
+*   **Surface Irregularities:** The upper surface appears to have a slight "hump" or discontinuity in curvature near the forward quarter, likely due to the interaction between Control Point 0 (CP0) and Control Point 1 (CP1).
+*   **Thickness Distribution:** The airfoil is moderately thick but tapers somewhat abruptly towards the trailing edge. The lower surface is relatively flat.
+*   **Sharp Trailing Edge:** The trailing edge (CP2) is defined by a sharp corner (`edgy=1.0`), which is geometrically consistent with standard airfoils.
+
+**Flow Field (from Design 1 images):**
+*   **Pressure Distribution:** There is a distinct stagnation point at the leading edge (high pressure, red). The upper surface shows a low-pressure suction peak (blue) which generates lift.
+*   **Flow Attachment:** The streamlines (inferred from velocity plots) appear mostly attached, but the wake region suggests some energy loss. The pressure recovery towards the trailing edge is not perfectly smooth, hinting at potential form drag.
+*   **Velocity Gradients:** The U-velocity component shows a standard acceleration over the top surface. The V-velocity shows the expected downwash behind the airfoil.
+
+**Design 1 Parameters & Flaws:**
+*   **CP2 Radius (-0.712):** This large negative value defines the trailing edge position. While functional, it contrasts with the best design (Design 2) which uses a large positive radius.
+*   **CP0/CP1 Interaction:** The small radius values for CP0 (-0.07) and CP1 (0.15) might be causing the lack of smoothness on the forward upper surface.
+*   **Key Changes Needed:** Increase the radius of curvature control points (CP0, CP1) to smooth the surface; explore the positive radius space for the trailing edge (CP2) to potentially increase chord length or streamline the tail; maintain sharpness only at the trailing edge.

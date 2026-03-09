@@ -1,0 +1,14 @@
+{
+  "design_name": "Extreme_High_Sweep_Symmetric_Washin",
+  "le_sweep": 80.0,
+  "root_chord_in": 18.953101194947454,
+  "twist_root": 6.468290087911046,
+  "twist_tip": 0.8542095484264782,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 23,
+    "chord_length": 1.0
+  }
+}

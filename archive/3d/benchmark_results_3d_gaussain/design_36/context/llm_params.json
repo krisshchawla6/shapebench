@@ -1,0 +1,11 @@
+{
+  "le_sweep": 75.0,
+  "root_chord_in": 38.0,
+  "twist_root": -2.5,
+  "twist_tip": -0.5,
+  "dihedral": -7.5,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 12,
+  "name": "HighSweep_SymmAirfoil_NegDihedral_InvertedTwist"
+}

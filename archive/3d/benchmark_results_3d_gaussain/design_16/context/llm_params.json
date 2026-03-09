@@ -1,0 +1,11 @@
+{
+  "le_sweep": 66.5,
+  "root_chord_in": 33.0,
+  "twist_root": 1.5,
+  "twist_tip": -3.0,
+  "dihedral": 7.5,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 12,
+  "name": "Hybrid_Sweep_Twist_Explorer"
+}

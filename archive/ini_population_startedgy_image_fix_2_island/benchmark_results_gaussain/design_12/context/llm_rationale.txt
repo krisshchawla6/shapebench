@@ -1,0 +1,9 @@
+*   **Exploration Strategy:** The current population is dominated by Design 1, a degenerate "thin plate" geometry. To advance the population and avoid local optima associated with unrealistic shapes, I will explore the **smooth, volumetric** region of the design space. This is a "Blue Ocean" strategy to find robust airfoils rather than exploiting the thin-surface math.
+*   **Geometric Goals:**
+    *   **Smoothness:** I will invert the `edgy_param` strategy, moving from high positive (sharp) to high negative (smooth/round) values.
+    *   **Restoring Volume:** I will increase the radius parameters, particularly avoiding the extreme negative values seen in `r2` of Design 1. `r0` and `r1` (upper surface) will be set to moderate positive values to build a suction side hump.
+    *   **Controlled Camber:** Instead of the extreme `-0.75` radius on the bottom, I will use a moderate negative value (~-0.25) to maintain camber without collapsing the airfoil into a line.
+*   **Parameter Selection:**
+    *   **Radii:** Use values in the `0.05` to `0.2` range for upper points to add thickness, and `~-0.25` for the lower rear point to maintain lift without the "thin arc" collapse.
+    *   **Angles:** I will use larger angular offsets (magnitude `0.2` to `0.4`) than Design 1 to explore different chord-wise distributions of curvature.
+    *   **Edgy:** All set to `<-0.8` to enforce a standard, smooth aerodynamic profile.

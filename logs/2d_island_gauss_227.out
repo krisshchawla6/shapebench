@@ -1,0 +1,35 @@
+==========================================
+Job ID: 227
+Node: compute-dy-hpc-128vcpu-1
+Date: Fri Feb 27 15:23:47 UTC 2026
+Framework: 2d_islands
+Environment: fenics_2d
+Action: gaussain
+Iterations: 500
+Islands: 5 (migration every 10 iters, rate 0.1)
+Max Inspirations: 5
+Initialize N Sample: 10
+Time limit: 72 hours
+Working Directory: /scratch/ShapeEvolve/work_227
+Output: /scratch/ShapeEvolve/environments/fenics_2d/results/run_2d_islands
+==========================================
+Setting up isolated workspace...
+============================================================
+  Framework:   2d_islands
+  Environment: fenics_2d
+  Output:      /scratch/ShapeEvolve/environments/fenics_2d/results/run_2d_islands
+============================================================
+
+--- Iteration 1/500 [INITIAL SAMPLE 1/10] (action: gaussain, island: 0, no context) ---
+****** Starting episode 0
+***    Starting control 0
+Iteration exceeded 45-minute time limit
+good epoch; reward: -5.0
+Warning: Image not found: /scratch/ShapeEvolve/environments/fenics_2d/results/run_2d_islands/design_0/save/sol/1_p.png
+Warning: Image not found: /scratch/ShapeEvolve/environments/fenics_2d/results/run_2d_islands/design_0/save/sol/1_u.png
+Warning: Image not found: /scratch/ShapeEvolve/environments/fenics_2d/results/run_2d_islands/design_0/save/sol/1_v.png
+Reward: -5.0000, Best: -5.0000, Islands: {0: 1, 1: 0, 2: 0, 3: 0, 4: 0}
+
+--- Iteration 2/500 [INITIAL SAMPLE 2/10] (action: gaussain, island: 1, no context) ---
+****** Starting episode 1
+***    Starting control 0

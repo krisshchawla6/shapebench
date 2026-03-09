@@ -1,0 +1,8 @@
+- **Strategy Focus**: Applying the Visual Intuition Strategy, I am moving away from the "razor-thin" characteristics of the current best design towards a slightly more robust, "muscular" profile that generates lift through volume and curvature rather than just thin camber.
+- **Population Insights**: The database shows a "sweet spot" for the upper surface parameter (`r1`) around 0.17-0.20. Designs with `r1 > 0.30` (Design 3, 4) failed or performed poorly, likely due to separation. I will target `r1 ≈ 0.22`, pushing the boundary of the successful cluster without entering the failure zone.
+- **Geometric Adjustments**:
+    - **Nose (`CP0`)**: Current `a0 = -0.12`. I will adjust this to `~ -0.09` to lift the nose slightly, reducing the "droop" and potentially lowering drag at cruise.
+    - **Thickness (`CP1`)**: Increasing `r1` from 0.20 to `0.22` provides more suction volume. To balance this, I will shift the peak slightly aft (increase `a1`) to delay the adverse pressure gradient.
+    - **Camber (`CP3`)**: Design 1 has `r3 = -0.24`. I will use `r3 ≈ -0.25`, slightly increasing the under-camber to compensate for the nose lift and ensure high $C_L$.
+    - **Tail (`CP2`)**: Design 1 `r2 = -0.84` is very aggressive. I will essentially keep this high-performance feature but fine-tune it to `-0.85` to ensure the "pinch" remains efficient for the Kutta condition.
+- **Evolutionary Goal**: This design tests if a "Cleaner Nose + Enhanced Camber" topology outperforms the "Drooped Nose + Moderate Camber" baseline of Design 1.

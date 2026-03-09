@@ -1,0 +1,11 @@
+{
+  "le_sweep": 78.0,
+  "root_chord_in": 35.0,
+  "twist_root": -6.0,
+  "twist_tip": -9.5,
+  "dihedral": -7.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 8,
+  "name": "Extreme_Sweep_Aggressive_Washout_Thin_Camber"
+}

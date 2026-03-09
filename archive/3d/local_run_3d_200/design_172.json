@@ -1,0 +1,14 @@
+{
+  "design_name": "RefinedCamberWashout",
+  "le_sweep": 65.60987175283601,
+  "root_chord_in": 42.23676701485093,
+  "twist_root": -10.0,
+  "twist_tip": -5.313134576510303,
+  "dihedral": 2.2646516574908864,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 16,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,17 @@
+The representative design (Design 1) shows an exceptionally high reward (338.5009), indicating a very efficient configuration for CL/CDi. Its parameters are: `le_sweep=63.12`, `root_chord_in=33.20`, `twist_root=-10.0`, `twist_tip=-2.83`, `dihedral=-3.44`, and NACA 2411.
+
+Critically assessing its implied aerodynamic performance (without direct image, based on reward and parameters):
+*   **Sweep (63.12 deg)**: This moderate sweep angle is well within the effective range for generating stable leading-edge vortices, crucial for high lift on delta wings.
+*   **Twist (-10.0 root, -2.83 tip)**: This configuration is peculiar. `twist_root` being at its minimum (-10.0 degrees) means the root chord is highly negatively twisted relative to the body, while the tip (`-2.83` degrees) is less negatively twisted. This results in an effective *wash-in* relative to the root (`twist_tip > twist_root`), which might shift load inboard or prevent tip stall, but the high performance indicates this complex twist distribution works well to optimize vortex strength and spanwise load distribution. The phrasing "washout < 0" implies that `twist_tip` should be sufficiently negative relative to `twist_root` to produce washout. Here `twist_tip - twist_root = -2.83 - (-10.0) = 7.17`, which is positive (wash-in). This suggests the interpretation of "washout < 0" might refer to the absolute value of twist at the tip being negative (as all previous designs adhere to this), rather than `twist_tip < twist_root`. However, given the success, the optimizer is leveraging an unusual twist setup.
+*   **Camber (NACA 2411)**: The 2% camber at 40% chord adds to lift and likely helps manage pressure distribution.
+*   **Dihedral (-3.44 deg)**: Slight anhedral is common on delta wings to improve lateral stability at high angles of attack.
+*   **Aerodynamic Issues/Opportunities**: While Design 1 is excellent, the population as a whole shows diverse performance.
+    *   The consistently negative `twist_root` across most successful designs suggests this is a powerful feature, but it might be over-exploited. Exploring positive `twist_root` with strong washout at the tip is a key unexplored area.
+    *   Higher sweep angles (70-80 deg) have been attempted (Designs 2, 5, 6) but with much lower rewards, suggesting the *combination* of parameters (twist, camber, thickness) for these high-sweep wings hasn't been optimized.
+    *   Thickness (naca_t) has mostly been in the lower-to-mid range (7-15%). The higher end (16-24%) is under-explored.
+
+**Key Design Changes Needed:**
+1.  **Explore high sweep (75-80 deg) with optimized twist/camber combinations**, as previous high-sweep attempts yielded low rewards.
+2.  **Investigate positive or mildly negative root twist** combined with conventional washout (`twist_tip` significantly more negative than `twist_root`), moving away from the extreme negative root twist currently dominating.
+3.  **Test higher thickness airfoils (18-24% NACA t)** to understand their impact, especially in conjunction with other extreme parameters.
+4.  **Explore larger root chords** to see scaling effects on overall lift and drag, especially with high sweep.

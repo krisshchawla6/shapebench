@@ -1,0 +1,33 @@
+{
+  "design_name": "Initial_Balanced_Delta_Vortex",
+  "design_params": {
+    "le_sweep_deg": 63.99936670113784,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 10,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.0,
+    "CDi": 0.0,
+    "CM": 0.0,
+    "L_D": null
+  },
+  "corrected_results": {
+    "CL": 0.006804469184383547,
+    "CDi": 0.0,
+    "CM": -0.0066824099191138105,
+    "L_D": null
+  }
+}

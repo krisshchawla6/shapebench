@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_LowSweep_HighWashout",
+  "le_sweep": 64.22789734913509,
+  "root_chord_in": 34.6221846553972,
+  "twist_root": 3.1690208580257737,
+  "twist_tip": -7.370731293031534,
+  "dihedral": 4.7552633393122665,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 15,
+    "chord_length": 1.0
+  }
+}

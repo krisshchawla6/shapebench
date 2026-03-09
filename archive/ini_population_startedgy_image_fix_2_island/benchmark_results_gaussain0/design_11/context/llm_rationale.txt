@@ -1,0 +1,5 @@
+- **Visual Intuition Strategy**: By visually inspecting the pressure field of Design 1, the most glaring issue is the "suction peak" at the leading edge caused by the sharpness. I will prioritize rounding this geometry.
+- **Structural Integrity**: The current design is aerodynamically "lucky" but physically thin. Increasing the thickness slightly near the 30% chord mark will likely stabilize the boundary layer.
+- **Evolutionary Step**: Design 1 (Rank 0) is a great baseline for "thin-foil" performance. I will evolve it by softening its sharpest points while maintaining the high-aspect-ratio teardrop shape that clearly out-performed the bulky Design 6.
+- **Parameter Exploration**: I will move the leading edge control point (CP0) to a more negative `edgy_param` to ensure smoothness and increase the `radius_param` of the upper surface (CP1) to broaden the low-pressure zone across the chord rather than having it spike at the nose.
+- **Trailing Edge Refinement**: I will set the trailing edge to be moderately "edgy" to ensure a clean Kutta condition without the geometric "pinching" seen in less successful designs.

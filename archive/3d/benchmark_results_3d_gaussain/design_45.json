@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_Sweep_Twist_NACA2410",
+  "le_sweep": 48.45677607900414,
+  "root_chord_in": 27.899035269783283,
+  "twist_root": 5.174455066813213,
+  "twist_tip": -5.799263472381492,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

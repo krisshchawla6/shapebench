@@ -1,0 +1,18 @@
+- **Geometry Observations:**
+    - Design 1 displays a coherent, asymmetric airfoil shape with a smooth, rounded leading edge and a sharp trailing edge.
+    - The thickness distribution is relatively thin (estimated 10-12% chord), with the maximum thickness located around 30-40% of the chord length.
+    - The upper surface is smoothly convex, while the lower surface is nearly flat or slightly convex, indicating moderate camber.
+    - No geometric pathologies (loops, kinks) are visible, confirming that the parameter set `[r0~0.05, r1~0.14, r2~-0.91, r3~-0.18]` produces valid topology.
+
+- **Flow Observations:**
+    - The flow field likely exhibits a clean stagnation point at the leading edge and a suction peak on the upper surface.
+    - Streamlines appear attached along the entire chord length, suggesting low pressure drag and no massive flow separation.
+    - The wake is thin and stable, characteristic of the high reward (4.85) achieved.
+
+- **Mapping & Improvements:**
+    - **Flaws:** While Design 1 is efficient, it appears conservative (low thickness, moderate camber). It may be leaving maximum lift capability on the table.
+    - **Parameter Mapping:** High rewards strongly correlate with `r2` (Trailing Edge) being near `-0.9` and `e2` being `1.0` (sharp). Positive `r2` values (Designs 4 & 6) lead to broken geometries and failure. `r1` controls upper surface height/lift potential.
+    - **Key Changes:** 
+        1. Significantly increase `r1` (Upper Surface) to test a high-lift, thicker profile.
+        2. Increase `r0` (Leading Edge) slightly to support the flow turning around a thicker nose.
+        3. Adjust `a2` (Trailing Edge Angle) to add rear camber (aft-loading) without inducing separation.

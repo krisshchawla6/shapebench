@@ -1,0 +1,5 @@
+*   **Exploitation Strategy**: The optimization landscape shows a clear gradient of improvement from Design 2 -> Design 1. I will exploit this by extrapolating the parameter changes that led to the reward increase.
+*   **Trend Analysis (Thickness)**: Design 1 performed better than Design 2 with a lower radius parameter at CP1 (0.14 vs 0.20). I will further decrease this to **0.125** to reduce form drag, assuming the airfoil can maintain lift with increased camber.
+*   **Trend Analysis (Camber)**: Design 1 had a higher angle parameter at CP1 (0.255) compared to Design 2 (0.223). I will increase this further to **0.2725** to maximize lift generation on the suction side.
+*   **Trailing Edge Refinement**: The best designs have a CP2 radius parameter around -0.86. I will push this slightly more negative to **-0.885** to create an even finer/longer trailing edge taper, reducing wake turbulence.
+*   **Smoothness**: I have set the 'edgy' parameter for CP1 to -1.0 (from -0.94) to ensure the upper surface is perfectly smooth, minimizing skin friction and delaying transition.

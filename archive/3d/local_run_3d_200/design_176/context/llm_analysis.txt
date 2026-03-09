@@ -1,0 +1,13 @@
+The representative design (Design 1) has a low reward (338.5009) compared to the best design (Design 2 with 4016.0090). Its parameters are: le_sweep=63.12, root_chord_in=33.20, twist_root=-10.0, twist_tip=-2.83, dihedral=-3.44, NACA 2411.
+
+The significant issues observed or inferred from its low reward:
+*   **Inefficient Lift Distribution**: The aggressive negative twist at the root (-10.0 deg) combined with milder negative twist at the tip (-2.83 deg) suggests an unusual wash-out distribution heavily concentrated near the root. While negative twist can help reduce induced drag, this specific distribution might not be optimal for efficient lift generation across the delta wing, potentially leading to premature flow separation or suboptimal vortex strength.
+*   **Suboptimal Airfoil Choice**: NACA 2411 (2% camber at 40% chord, 11% thickness) provides moderate camber. Compared to Design 2's NACA 4412, which has higher camber (4%), Design 1 might not be generating sufficient lift for its drag, especially if vortex lift is a primary contributor to performance.
+*   **Moderate Sweep**: A sweep of 63.12 degrees is moderate. While it generates vortex lift, it might not be fully optimized for the desired flight regime if higher sweep offers significantly stronger, more stable vortices or if lower sweep would provide better aspect ratio benefits.
+*   **Minor Dihedral**: A slightly negative dihedral (-3.44 deg) primarily affects lateral stability, but in combination with other factors, it could subtly influence the vortex interaction with the wing surface.
+
+Key design changes needed to improve designs in the population:
+1.  **Optimize Twist Distribution**: Explore more conventional washout distributions where the tip twist is more negative than the root, or where a more balanced negative twist is applied.
+2.  **Increase Camber**: Investigate higher camber profiles (e.g., NACA m=4) which appear to correlate with higher rewards (Design 2).
+3.  **Explore Sweep Range**: Test higher sweep angles (e.g., 65-70 degrees) to potentially enhance vortex lift, or lower sweep angles to reduce induced drag at higher aspect ratio.
+4.  **Refine Airfoil Thickness**: Experiment with thinner airfoils (NACA t < 12) to potentially reduce profile drag, especially if camber is increased.

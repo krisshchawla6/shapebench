@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploitation_MaxTwistGradient_4410",
+  "le_sweep": 64.35835061262406,
+  "root_chord_in": 34.348910652756004,
+  "twist_root": -8.30218179876036,
+  "twist_tip": -1.0192169730330711,
+  "dihedral": -6.030718840726676,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "High_Sweep_Anhedral_HighCamber_Exploration",
+  "le_sweep": 61.29279580439192,
+  "root_chord_in": 36.64008026624008,
+  "twist_root": 5.839484081997129,
+  "twist_tip": -7.860244052367337,
+  "dihedral": -4.334766571704101,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 20,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweepThinWashInChordExplore",
+  "design_params": {
+    "le_sweep_deg": 73.75270080776728,
+    "root_chord_in": 16.28563471141456,
+    "twist_root_deg": 3.051192666880425,
+    "twist_tip_deg": -7.252725967927136,
+    "dihedral_deg": 6.551411950889537,
+    "naca": {
+      "m": 2,
+      "p": 0,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.3336623036431444,
+    "CDi": 0.051669118597827565,
+    "CM": -0.29957823002798073,
+    "L_D": 6.457673610425654
+  },
+  "corrected_results": {
+    "CL": 0.25231765202071604,
+    "CDi": 0.042438786855497235,
+    "CM": -0.23835822989407704,
+    "L_D": 5.945449215592564
+  }
+}

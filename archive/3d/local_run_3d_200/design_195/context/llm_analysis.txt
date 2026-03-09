@@ -1,0 +1,9 @@
+The current best design (Design 2, Rank 0, Reward: 4016.0090) features a moderate-high leading-edge sweep (65.5 deg), a moderate root chord (34.78 in), a significant but not extreme root washout (-7.13 deg), a moderate tip washout (-4.60 deg), slight negative dihedral (-1.72 deg), and a NACA 4412 airfoil (4% camber, 12% thickness). This suggests that a balance of vortex lift generation, controlled spanwise load distribution, and appropriate airfoil camber/thickness is crucial for high performance.
+
+Looking at Design 1 (Reward: 338.5009, NACA 2411, `twist_root=-10.0`, `twist_tip=-2.83`), while its sweep is similar to the top performer, its extremely aggressive root washout combined with a milder tip washout might lead to sub-optimal lift distribution, potentially concentrating lift too much towards the root and causing premature separation or higher induced drag. The NACA 2411 airfoil also provides less camber than the top performer's NACA 4412. Designs with no camber (NACA 00xx) and very low sweep (Design 4) or very high dihedral (Design 3) consistently show significantly lower rewards, indicating that camber and moderate-to-high sweep are beneficial.
+
+Key design changes needed to improve designs in the population:
+1.  **Optimize Twist Distribution**: Explore configurations where tip washout is equal to or slightly stronger than root washout to better control tip loading.
+2.  **Explore Higher Sweeps**: Push the leading-edge sweep beyond 65-66 degrees to investigate the benefits of stronger vortex lift, while being mindful of induced drag penalties.
+3.  **Refine Camber and Thickness**: Investigate cambered airfoils with potentially thinner sections than the current best (NACA 4412) to reduce profile drag, while retaining sufficient camber for lift.
+4.  **Investigate Stronger Anhedral**: Further explore negative dihedral to assess its impact on stability and performance for higher sweep configurations.

@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_Camber_AggressiveWashout",
+  "le_sweep": 66.60134749011792,
+  "root_chord_in": 39.72479406562435,
+  "twist_root": -10.0,
+  "twist_tip": -10.0,
+  "dihedral": -4.604885069806135,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

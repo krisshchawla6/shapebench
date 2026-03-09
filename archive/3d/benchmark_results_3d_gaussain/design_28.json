@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploitation_Refined_Camber_MinT",
+  "le_sweep": 53.685457830431076,
+  "root_chord_in": 30.897871142368555,
+  "twist_root": 10.0,
+  "twist_tip": -10.0,
+  "dihedral": 12.500078401855168,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

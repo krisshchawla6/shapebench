@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_AggressiveWashin_ThinCamber",
+  "le_sweep": 62.28735689246111,
+  "root_chord_in": 29.788922493649594,
+  "twist_root": -10.0,
+  "twist_tip": -2.9000491415490566,
+  "dihedral": -7.961182799857719,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

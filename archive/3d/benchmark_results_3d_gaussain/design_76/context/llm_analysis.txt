@@ -1,0 +1,9 @@
+The provided image and Design 1 (parameters: le_sweep=45.0, root_chord_in=29.25, twist_root=10.0, twist_tip=-10.0, dihedral=7.33, NACA 2409, Reward: 40.7930) represent a class of delta wings with relatively low leading-edge sweep. The Cp distribution visible in the image indicates the presence of strong leading-edge vortices, characterized by the concentrated low-pressure regions along the leading edge on the upper surface. This vortex lift is crucial for delta wing performance at these sweep angles. The high positive twist at the root and strong negative twist (washout) at the tip, coupled with the cambered NACA 24xx airfoil, suggest an attempt to optimize load distribution across the span, likely delaying vortex breakdown and tip stall, thereby enhancing CL and CL/CDi. The dihedral is positive.
+
+The top-performing designs (Rank 0-4) consistently exhibit low sweep angles (45-48 degrees), significant washout (large positive `twist_root` and large negative `twist_tip`), positive dihedral, and use the NACA 24XX airfoil series. While these designs achieve good rewards, they represent a narrow region of the vast design space.
+
+Key design changes needed to improve exploration:
+1.  **Explore higher sweep angles**: The current designs cluster at the lowest end of the sweep range (45-48 deg). The range extends to 80 deg.
+2.  **Investigate different twist distributions**: The current strong washout might not be optimal for all sweep angles or airfoil types.
+3.  **Test symmetric airfoils**: All top designs use cambered NACA 24XX. NACA 00XX has not been explored in high-performing designs.
+4.  **Vary dihedral direction**: All current designs use positive dihedral. Negative dihedral could influence stability and vortex interaction in novel ways.

@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Twist_LowSweep_NACA2409",
+  "design_params": {
+    "le_sweep_deg": 46.19363829585253,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.13328937614490086,
+    "CDi": 0.0033865612857722103,
+    "CM": -0.1577043303300968,
+    "L_D": 39.3583239449653
+  },
+  "corrected_results": {
+    "CL": 0.09342962914774898,
+    "CDi": 0.0020559862502217505,
+    "CM": -0.11164699959419577,
+    "L_D": 45.44273053269302
+  }
+}

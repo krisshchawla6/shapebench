@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_HighCamber_AggressiveWashout",
+  "le_sweep": 69.09033929535768,
+  "root_chord_in": 22.228963911788757,
+  "twist_root": 9.76913241094607,
+  "twist_tip": -9.018399531296836,
+  "dihedral": 8.829620482063406,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

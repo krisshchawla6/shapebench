@@ -1,0 +1,8 @@
+*   **Visual Intuition Strategy:** The primary visual flaw in Design 1 is the "bulbous" nose relative to the rest of the body. By reducing `r0`, we create a more conventional aerodynamic leading edge.
+*   **Population Insights:** High rewards (Design 1, 2, 5) consistently use a sharp trailing edge (P2 edgy ~1.0) and negative angles for the tail. Low rewards (Design 4) feature excessive thickness/radius on the upper surface (`r1 > 0.5`), causing massive separation.
+*   **Geometric Strategy:**
+    *   **P0 (Nose):** Decrease radius to `~0.28` to sharpen the entry. Keep angle near 0.
+    *   **P1 (Upper):** Set radius `~0.32` and angle `~0.30` to create a smooth suction side without the "hump" seen in failing Design 4.
+    *   **P2 (Tail):** Maximize chord length with high radius `~0.95` and ensure a sharp edge (`edgy=1.0`). Slight negative angle `~-0.05` to reduce pitching moment while maintaining camber.
+    *   **P3 (Lower):** Use a slightly negative radius `~-0.05` to slim down the profile, reducing pressure drag on the lower side.
+*   **Evolutionary Goal:** This design moves away from the "blunt nose" local optimum of Design 1 to explore a "laminar flow" style profile with a finer leading edge and smoother thickness distribution.

@@ -1,0 +1,9 @@
+*   **Strategy Focus (Exploration):** The population is clustered around designs with a sharp, thin pinch at CP2 (`r ~ -0.7`, `e ~ 1.0`) and neutral angles (`a ~ 0`). To explore the boundary regions, I will generate a design that is **fully smooth**, **highly cambered**, and **thicker** in the aft section.
+*   **Parameter Shifts:**
+    *   **Edgy (`e`):** Set all to `~ -0.95`. Design 2 (Rank 1) was sharp; Design 1 (Rank 0) was mixed. A fully smooth design helps explore the laminar flow potential of the optimizer which is currently underexplored.
+    *   **Angle (`a`):** Existing designs have `a` in `[-0.1, 0.1]`. I will push these to `+/- 0.25` to distort the control polygon and force a different camber line. CP0 and CP2 will be shifted negatively, while CP1 and CP3 are shifted positively to create an undulating or highly cambered shape.
+    *   **Radius (`r`):**
+        *   **CP0 (Nose):** Increase to positive (`0.05`) to create a blunter nose, preventing leading-edge separation caused by the increased camber.
+        *   **CP1 (Thickness):** Increase to `0.35` (vs D1's `0.15`) to test a thicker wing section (high lift capacity).
+        *   **CP2 (Aft):** Set to `-0.45` (vs D1's `-0.71`). This explores the "moderate tail" region, avoiding the extreme thinness of the current best designs.
+*   **Goal:** This design ("Smooth Camber Explorer") aims to find a high-lift, robust optima that doesn't rely on the "sharp pinch" trick, effectively broadening the genetic diversity of the population.

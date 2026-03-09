@@ -1,0 +1,5 @@
+*   **Strategy Focus (Exploitation)**: We will anchor the new design on the parameter structure of Design 1 (the current best), preserving the CP0 (Leading Edge) and CP2 (Trailing Edge) roles while refining the surface definitions.
+*   **Geometric Correction**: The primary change is to significantly increase the radius of CP3 (Lower Surface). A value closer to 0.2-0.3 (up from 0.05) will provide necessary structural thickness and smooth the pressure gradient.
+*   **Aerodynamic Camber**: We will widen the angular difference between CP1 (Upper) and CP3 (Lower). Increasing CP1's angle (moving it up/back) and making CP3's angle more negative will create a more effective camber line for lift.
+*   **Smoothing**: We will push the 'edgy' parameters for the leading edge (CP0) and surface points (CP1, CP3) closer to -1.0 to ensure a smooth boundary layer and reduce skin friction drag.
+*   **Optimization**: The trailing edge (CP2) will be kept maximally sharp (edgy = 1.0) to enforce the Kutta condition cleanly.

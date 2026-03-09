@@ -1,0 +1,31 @@
+==========================================
+Job ID: 225
+Node: compute-dy-hpc-128vcpu-1
+Date: Fri Feb 27 01:52:58 UTC 2026
+Framework: 2d_islands
+Environment: fenics_2d
+Action: gaussain
+Iterations: 500
+Islands: 5 (migration every 10 iters, rate 0.1)
+Max Inspirations: 5
+Initialize N Sample: 10
+Time limit: 72 hours
+Working Directory: /scratch/ShapeEvolve/work_225
+Output: /scratch/ShapeEvolve/environments/fenics_2d/results/run_2d_islands
+==========================================
+Setting up isolated workspace...
+============================================================
+  Framework:   2d_islands
+  Environment: fenics_2d
+  Output:      /scratch/ShapeEvolve/environments/fenics_2d/results/run_2d_islands
+============================================================
+
+--- Iteration 1/500 [INITIAL SAMPLE 1/10] (action: gaussain, island: 0, no context) ---
+Error : I could not find the reset folder
+==========================================
+Job completed successfully
+Results saved to: /scratch/ShapeEvolve/environments/fenics_2d/results/run_2d_islands
+End time: Fri Feb 27 01:54:21 UTC 2026
+==========================================
+Cleaning up workspace...
+Workspace cleaned.

@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid Vortex Control",
+  "design_params": {
+    "le_sweep_deg": 57.6356502078306,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.10931982786993293,
+    "CDi": 0.003396912712504946,
+    "CM": -0.1343749782032019,
+    "L_D": 32.18211273651435
+  },
+  "corrected_results": {
+    "CL": 0.06497510667478518,
+    "CDi": 0.0018050014148428266,
+    "CM": -0.08004419248989819,
+    "L_D": 35.997260800176704
+  }
+}

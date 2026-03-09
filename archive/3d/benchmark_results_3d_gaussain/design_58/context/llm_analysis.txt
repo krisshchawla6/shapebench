@@ -1,0 +1,17 @@
+The provided context details Design 1 as a reference. Since no image was rendered, I will analyze based purely on its numerical parameters and reward, inferring potential aerodynamic characteristics.
+
+**Reference Design 1 Parameters:**
+`le_sweep=46.19`, `root_chord_in=25.03`, `twist_root=8.26`, `twist_tip=-10.0`, `dihedral=9.79`, `NACA 2409`. Reward: `39.9927`.
+
+**Inferred Aerodynamic Assessment (without image):**
+Design 1 has the highest reward, indicating a highly efficient configuration for the given flight conditions.
+*   **Sweep (46.19 deg):** This is on the lower end of the allowed range, suggesting a design that might rely more on attached flow principles or moderately developed leading-edge vortices rather than strong vortex lift typical of very high sweeps. Lower sweep generally implies a higher effective aspect ratio for a given wing area, which can be beneficial for CL/CDi if managed well.
+*   **Twist Distribution (twist_root=8.26, twist_tip=-10.0):** This is a very aggressive washout configuration. A large positive twist at the root combined with maximum negative twist at the tip is a strong attempt to shed load towards the tips, aiming to improve spanwise lift distribution and potentially delay tip stall, thereby reducing induced drag. This strong differential could be key to its high reward.
+*   **Airfoil (NACA 2409):** A cambered airfoil (2% max camber at 40% chord) provides lift at zero angle of attack, contributing to overall lift. 9% thickness is moderately thin.
+*   **Dihedral (9.79 deg):** A moderate positive dihedral, contributing to lateral stability.
+
+**Key Design Changes Needed (general to improve population):**
+1.  **Explore higher sweep angles:** The top designs mostly cluster in the 45-55 degree sweep range. Significantly higher sweeps (e.g., 60-75 degrees) could unlock new vortex lift-dominated regimes that haven't been fully optimized.
+2.  **Investigate different twist distribution strategies for high sweep:** The extreme washout works well for lower sweeps. For higher sweeps, a less aggressive or even different twist profile might be more efficient for managing the stronger leading-edge vortices and their interaction with the main flow.
+3.  **Vary thickness and camber more broadly:** While NACA 24xx is common, exploring thinner airfoils (e.g., NACA 2406) or completely symmetric airfoils (NACA 00xx) with different root chords could reveal new optimal balances between profile drag and lift generation, especially when combined with novel sweep/twist configurations.
+4.  **Experiment with larger root chords, especially with higher sweeps:** To maintain adequate wing area and aspect ratio effectiveness as sweep increases, a larger root chord might be necessary.

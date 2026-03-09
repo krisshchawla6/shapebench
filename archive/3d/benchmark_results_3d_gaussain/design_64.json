@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_SymmetricAirfoil_MaxWashout_NegDihedral",
+  "le_sweep": 57.19736441789041,
+  "root_chord_in": 36.585282497924084,
+  "twist_root": 5.310328260647749,
+  "twist_tip": -10.0,
+  "dihedral": -1.7090622354277558,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

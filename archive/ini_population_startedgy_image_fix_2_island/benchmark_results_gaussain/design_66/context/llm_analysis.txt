@@ -1,0 +1,13 @@
+**Geometry (from Design 1 images):**
+*   **Shape**: The airfoil features a conventional subsonic profile with a moderately blunt leading edge and a smooth, convex upper surface. The thickness distribution appears relatively balanced, tapering to a sharp trailing edge.
+*   **Curvature**: The lower surface shows a slight "under-camber" (concavity) in the aft section, creating a high-lift geometry. The leading edge transition is smooth.
+*   **Flaws**: While aerodynamically competent (Rank 3), the leading edge (controlled by `r0`) appears slightly thicker/blunter than the top-ranked Design 2. The maximum thickness point seems located around 35-40% chord, whereas higher-performing laminar flow designs often push this further aft.
+
+**Flow Field (from Design 1 images):**
+*   **Pressure (`1_p.png`)**: A distinct high-pressure stagnation region is visible at the very tip of the leading edge. There is a strong low-pressure suction peak (blue) on the upper surface immediately following the nose, which suggests good lift generation but potentially early pressure recovery onset.
+*   **Velocity (`1_u.png`, `1_v.png`)**: Flow acceleration over the upper surface is smooth. The wake region appears narrow and coherent, indicating no massive flow separation or stall conditions.
+*   **Observation**: The suction peak is concentrated forward. Distributing this load further back (aft-loading) could improve the lift-to-drag ratio.
+
+**Design 1 Parameters & Flaws:**
+*   **Action**: `r0=0.36` (thick nose), `a1=0.38` (forward max thickness).
+*   **Comparison**: Design 2 (Rank 0) used a thinner nose (`r0=0.30`) and pushed the thickness much further back (`a1=0.61`), resulting in significantly higher reward. Design 1's "flaw" is likely its forward-biased thickness distribution and slightly excessive nose radius.

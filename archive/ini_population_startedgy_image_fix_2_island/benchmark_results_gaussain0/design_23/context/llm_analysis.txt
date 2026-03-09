@@ -1,0 +1,17 @@
+**Geometry Observations:**
+* The airfoil is extremely thin with a high degree of camber, appearing almost like a curved plate or a biological wing section.
+* There is a prominent, sharp "peak" or kink on the upper surface located at approximately 30-40% chord, likely caused by a high `edgy_param` at that control point.
+* The leading edge is relatively sharp, and the overall thickness-to-chord ratio is very low, which is typical for high-lift, low-speed configurations or specific thin-airfoil optimizations.
+* The trailing edge is slightly reflexed or tapers very aggressively, creating a hooked appearance.
+
+**Flow Field / Simulation Observations:**
+* **Pressure (p):** A very intense low-pressure (blue) suction peak is visible on the upper surface right at the leading edge and the geometric "kink," suggesting high lift generation but also a high risk of flow separation.
+* **Velocity U:** The flow appears mostly attached, but there is a clear deceleration zone immediately following the upper surface peak, indicating a strong adverse pressure gradient.
+* **Velocity V:** There is significant downward deflection of the flow behind the airfoil, confirming the high lift suggested by the pressure distribution.
+* **Wake:** The velocity plots show a relatively narrow wake, but the asymmetry in the flow field indicates the airfoil is operating at a high effective angle of attack or has massive effective camber.
+
+**Parameter Mapping & Improvements:**
+* **Flaw 1:** The sharp transition on the upper surface (caused by Design 1's `e2 = 0.9988`) creates a localized pressure spike that could lead to early stall.
+* **Flaw 2:** The extreme thinness (driven by the negative `r0` and `r3` values) might be making the design aerodynamically "brittle" to changes in flow direction.
+* **Flaw 3:** The high reward is clearly linked to the high `r2` (1.0) and `e2`, but the flow field suggests that smoothing this peak slightly could improve the pressure recovery.
+* **Required Changes:** Increase thickness in the forward section (CP1), slightly reduce the sharpness of the peak (CP2), and harmonize the transition between the leading edge (CP0) and the mid-section.

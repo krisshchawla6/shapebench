@@ -1,0 +1,15 @@
+*   **Geometry Observation (Design 1)**:
+    *   The airfoil features a conventional cambered shape with a rounded leading edge and a sharp trailing edge.
+    *   The upper surface curvature (camber) is pronounced and peaks at approximately 20-30% chord, typical of low-speed high-lift airfoils.
+    *   The thickness distribution appears moderate, but the lower surface is somewhat flat to slightly convex, lacking significant undercamber.
+    *   Visually, the shape is smooth with no obvious kinks or discontinuities, indicating the control point spacing and "edgy" parameters (mostly negative) are working well to maintain continuity.
+
+*   **Flow Field Observation (Design 1)**:
+    *   **Pressure**: There is a clear high-pressure stagnation region at the leading edge and a suction peak (low pressure) on the forward upper surface. The pressure recovery towards the trailing edge looks smooth.
+    *   **Velocity**: The flow stays attached over the majority of the upper surface, evidenced by the high-velocity region (red) hugging the contour.
+    *   **Wake**: The wake is thin and stable, suggesting minimal separation and low pressure drag, which aligns with the high reward (1.2632).
+
+*   **Parameter Mapping**:
+    *   **Flaws**: The design is "safe" but generic. It sits in a local optimum of conventional shapes (`a1`~0.2, `r1`~0.15). The lower surface (`CP3`) is relatively passive (`r`~-0.17).
+    *   **Missing Features**: The current best designs lack significant aft-loading (laminar flow profiles) or aggressive undercamber, which could potentially increase L/D by modifying the pressure distribution.
+    *   **Key Changes**: To explore, we need to break the clustering around `a1`=0.2 (thickness peak location) and `r1`=0.15 (thickness magnitude).

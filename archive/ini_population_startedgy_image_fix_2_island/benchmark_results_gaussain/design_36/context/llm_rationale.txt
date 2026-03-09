@@ -1,0 +1,7 @@
+*   **Exploration Strategy**: I will apply an "Antipodal Exploration" strategy. Since the top-performing designs cluster around specific signs (e.g., negative `r2`, positive `r1`), I will intentionally invert these signs to sample the opposite corners of the hyperparameter space.
+*   **Parameter Selection**:
+    *   **CP2 Radius (`r2`)**: The current population is dominated by `r2 < -0.6`. I will explore **`r2 > 0.4`** to force the trailing edge structure outward, preventing the self-intersection loop observed in Design 1.
+    *   **CP1 Radius (`r1`)**: Previous high-rank designs have `r1 > 0.1`. I will test a **negative `r1` (~-0.3)** to see if a thinner mid-section combined with a thicker aft section (from positive `r2`) yields interesting camber properties.
+    *   **CP0 & CP3**: I will push these into unexplored high-magnitude regions (e.g., `r3` positive, `r0` large negative) to test extreme leading/trailing edge curvatures.
+    *   **Angles (`a`)**: Existing designs use small angles (< 0.2). I will introduce larger angular offsets (> 0.4) to shift the control points significantly along the chord, potentially discovering new camber lines.
+*   **Diversity Goal**: This configuration creates a geometry that is topologically distinct from the "looped" designs, fulfilling the requirement for bold exploration rather than incremental improvement.

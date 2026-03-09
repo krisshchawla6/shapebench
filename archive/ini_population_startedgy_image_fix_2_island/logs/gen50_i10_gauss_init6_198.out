@@ -1,0 +1,414 @@
+==========================================
+Job ID: 198
+Node: compute-dy-hpc-128vcpu-1
+Date: Fri Feb  6 15:09:04 UTC 2026
+Action: gaussain
+Iterations: 80
+Max Inspirations: 10 (grows 0→1→2...→10, then stays at 10)
+Initialize N Sample: 6 (first 6 designs generated without context)
+Working Directory: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/work_198
+Output: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/experiment_generate_gaussain
+==========================================
+Setting up isolated workspace...
+Starting benchmark run with debug mode...
+Starting from scratch (no baseline)
+
+--- Iteration 1/80 [INITIAL SAMPLE 1/6] (action: gaussain, no context) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.7245,
+      0.021,
+      -0.8842
+    ],
+    [
+      0.3412,
+      0.4821,
+      -0.551
+    ],
+    [
+      0.9678,
+      -0.0154,
+      0.9412
+    ],
+    [
+      0.1854,
+      -0.321,
+      -0.4215
+    ]
+  ],
+  "name": "Initial_Alpha_Supercritical"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 0
+***    Starting control 0
+-0.7712864056598511 -0.8345929536304478
+good epoch; reward: 1.0820791699504113
+Reward: 1.0821, Drag: -0.7713, Lift: 0.8346
+DEBUG post_process: save_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save
+DEBUG post_process: shape_image=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/png/shape_1.png
+DEBUG post_process: sol_images[0]=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_p.png
+Reward: 1.0821, Best: 1.0821
+
+--- Iteration 2/80 [INITIAL SAMPLE 2/6] (action: gaussain, no context) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.425,
+      0.0,
+      -0.85
+    ],
+    [
+      0.88,
+      0.25,
+      -0.65
+    ],
+    [
+      0.995,
+      0.0,
+      0.98
+    ],
+    [
+      0.32,
+      -0.25,
+      -0.75
+    ]
+  ],
+  "name": "Exploitative_Laminar_Refinement_V1"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 1
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 16351 nodes for 8176 points.
+-3.2692449535227857 0.9044281300814361
+good epoch; reward: -0.27664740419859535
+Reward: -0.2766, Drag: -3.2692, Lift: -0.9044
+DEBUG post_process: save_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_1/save
+DEBUG post_process: shape_image=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_1/save/png/shape_1.png
+DEBUG post_process: sol_images[0]=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_1/save/sol/1_p.png
+Reward: -0.2766, Best: 1.0821
+
+--- Iteration 3/80 [INITIAL SAMPLE 3/6] (action: gaussain, no context) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9214,
+      -0.8542,
+      -0.9876
+    ],
+    [
+      0.8831,
+      0.9522,
+      0.3341
+    ],
+    [
+      -0.9125,
+      -0.7768,
+      0.8892
+    ],
+    [
+      -0.9981,
+      0.1234,
+      0.9995
+    ]
+  ],
+  "name": "Boundary_Explorer_Alpha"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 2
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 15991 nodes for 7996 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = -nan).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+DEBUG post_process: save_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_2/save
+DEBUG post_process: shape_image=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_2/save/png/shape_1.png
+DEBUG post_process: sol_images[0]=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_2/save/sol/1_p.png
+Reward: -5.0000, Best: 1.0821
+
+--- Iteration 4/80 [INITIAL SAMPLE 4/6] (action: gaussain, no context) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      -0.1542,
+      0.0521,
+      -0.9234
+    ],
+    [
+      0.9876,
+      0.9122,
+      -0.8543
+    ],
+    [
+      -0.9211,
+      -0.8843,
+      -0.7652
+    ],
+    [
+      0.8943,
+      0.9542,
+      0.9855
+    ]
+  ],
+  "name": "Boundary_Explorer_Camber_Max"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 3
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 1.283369e+116).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+DEBUG post_process: save_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_3/save
+DEBUG post_process: shape_image=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_3/save/png/shape_1.png
+DEBUG post_process: sol_images[0]=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_3/save/sol/1_p.png
+Reward: -5.0000, Best: 1.0821
+
+--- Iteration 5/80 [INITIAL SAMPLE 5/6] (action: gaussain, no context) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.7241,
+      0.0523,
+      -0.8812
+    ],
+    [
+      0.8562,
+      -0.3214,
+      -0.6543
+    ],
+    [
+      0.9125,
+      0.0102,
+      0.9876
+    ],
+    [
+      0.3421,
+      0.2871,
+      -0.7234
+    ]
+  ],
+  "name": "Cambered_Aero_Baseline_V1"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 4
+***    Starting control 0
+-3.877156366230545 -0.7225299480256018
+good epoch; reward: 0.18635563794092241
+Reward: 0.1864, Drag: -3.8772, Lift: 0.7225
+Warning: Could not extract structured analysis, returning raw response
+DEBUG post_process: save_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_4/save
+DEBUG post_process: shape_image=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_4/save/png/shape_1.png
+DEBUG post_process: sol_images[0]=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_4/save/sol/1_p.png
+Reward: 0.1864, Best: 1.0821
+
+--- Iteration 6/80 [INITIAL SAMPLE 6/6] (action: gaussain, no context) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.6542,
+      0.0,
+      -0.885
+    ],
+    [
+      0.4821,
+      0.4512,
+      -0.35
+    ],
+    [
+      0.985,
+      0.991,
+      0.95
+    ],
+    [
+      -0.1542,
+      -0.4215,
+      -0.22
+    ]
+  ],
+  "name": "Laminar_Baseline_Alpha"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 5
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 15471 nodes for 7736 points.
+-3.38069040081697 0.7986033080696536
+good epoch; reward: -0.23622491662551087
+Reward: -0.2362, Drag: -3.3807, Lift: -0.7986
+DEBUG post_process: save_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_5/save
+DEBUG post_process: shape_image=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_5/save/png/shape_1.png
+DEBUG post_process: sol_images[0]=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_5/save/sol/1_p.png
+Reward: -0.2362, Best: 1.0821
+
+--- Iteration 7/80 (action: gaussain, inspirations: 0) ---
+DEBUG: Parent CSV: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0_0.csv
+DEBUG: Shape image path: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/png/shape_1.png
+DEBUG: Sol images: ['/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_p.png', '/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_u.png', '/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_v.png']
+DEBUG: Added shape image: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/png/shape_1.png
+DEBUG: Added sol image: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_p.png
+DEBUG: Added sol image: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_u.png
+DEBUG: Added sol image: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_v.png
+DEBUG image copy: idx=0, img_path=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/work_198
+DEBUG image copy: Copying to /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_6/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/work_198
+DEBUG image copy: Copying to /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_6/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/work_198
+DEBUG image copy: Copying to /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_6/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/work_198
+DEBUG image copy: Copying to /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_6/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9852,
+      -0.951,
+      -0.9821
+    ],
+    [
+      0.854,
+      0.9425,
+      0.9215
+    ],
+    [
+      -0.85,
+      0.12,
+      -0.905
+    ],
+    [
+      0.725,
+      -0.754,
+      0.45
+    ]
+  ],
+  "name": "boundary_crescent_concave"
+}
+DEBUG: Strategy used: diversify
+DEBUG run_iteration: output_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain
+DEBUG run_iteration: case_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_6
+DEBUG run_iteration: case_dir absolute=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_6
+****** Starting episode 6
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 18779 nodes for 9390 points.
+-35.09891790173821 -12.585445140126671
+good epoch; reward: 0.717141489966185
+Reward: 0.7171, Drag: -35.0989, Lift: 25.1709
+DEBUG post_process: save_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_6/save
+DEBUG post_process: shape_image=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_6/save/png/shape_1.png
+DEBUG post_process: sol_images[0]=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_6/save/sol/1_p.png
+Reward: 0.7171, Best: 1.0821
+
+--- Iteration 8/80 (action: gaussain, inspirations: 1) ---
+DEBUG: Parent CSV: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0_0.csv
+DEBUG: Shape image path: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/png/shape_1.png
+DEBUG: Sol images: ['/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_p.png', '/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_u.png', '/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_v.png']
+DEBUG: Added shape image: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/png/shape_1.png
+DEBUG: Added sol image: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_p.png
+DEBUG: Added sol image: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_u.png
+DEBUG: Added sol image: /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_v.png
+DEBUG image copy: idx=0, img_path=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/work_198
+DEBUG image copy: Copying to /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_7/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/work_198
+DEBUG image copy: Copying to /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_7/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/work_198
+DEBUG image copy: Copying to /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_7/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_0/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/work_198
+DEBUG image copy: Copying to /scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_7/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9654,
+      -0.0124,
+      -0.9821
+    ],
+    [
+      0.3852,
+      0.2145,
+      -0.4567
+    ],
+    [
+      0.9982,
+      0.0021,
+      0.9954
+    ],
+    [
+      0.1231,
+      -0.1542,
+      -0.7845
+    ]
+  ],
+  "name": "streamlined_laminar_wing"
+}
+DEBUG: Strategy used: visual_intuition
+DEBUG run_iteration: output_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain
+DEBUG run_iteration: case_dir=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_7
+DEBUG run_iteration: case_dir absolute=/scratch/Testing_paramters/preventing_hill_climbing/ini_population_startedgy_image_fix/benchmark_results_gaussain/design_7
+****** Starting episode 7
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 14949 nodes for 7475 points.

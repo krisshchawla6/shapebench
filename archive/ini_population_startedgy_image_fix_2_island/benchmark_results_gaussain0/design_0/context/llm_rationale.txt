@@ -1,0 +1,6 @@
+* **Apply Exploration Strategy**: I am pushing the `radius_param` and `edgy_param` toward boundary regions (-0.9 to 0.9) to define the maximum extent of the design space's thickness and curvature transitions.
+* **Camber Generation**: By alternating positive and negative `radius_param` values for points corresponding to the upper and lower surfaces, I will explore high-camber configurations which typically yield higher lift in early evolutionary stages.
+* **Sharpness Contrast**: I will set the trailing edge control point to a high `edgy_param` (0.9+) and the leading edge to a low `edgy_param` (-0.8+) to test the solver's ability to handle the Kutta condition vs. stagnation point flow.
+* **Angular Diversity**: I will utilize the `angle_param` to shift the "bulk" of the airfoil toward the front (leading-edge heavy), which often provides better stability in subsonic flows, while keeping the trailing edge at a distinct angular offset to prevent pinch points.
+* **Establishing Mappings**: This design serves as a "boundary probe" to determine how the `radius_param` maps to actual chord thickness when combined with `edgy_param` smoothing.
+* **Search Advancement**: By starting with a bold, asymmetric shape rather than a symmetric circle/ellipse, I accelerate the discovery of lift-generating geometries.

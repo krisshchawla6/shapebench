@@ -1,0 +1,8 @@
+*   **Strategy Focus - Visual & Aerodynamic Refinement**: The goal is to evolve the "safe" shape of Design 1 towards the higher-performing characteristics of Design 2, while pushing the envelope further. I am visualizing a "Streamlined High-Camber" variant.
+*   **Population Trend Extrapolation**: Design 2 (Best) differs from Design 1 (Good) primarily by being thinner (lower `r0`, `r1`) and more cambered (more negative `a0`, `a2`). I will extrapolate this trend, making the new design slightly thinner and more cambered than Design 2 to test the limits of this aerodynamic strategy.
+*   **Geometric Specifics**:
+    *   **Leading Edge (CP0)**: Reduce radius (~0.45) and increase droop (angle ~ -0.08) to align better with the oncoming flow at angle of attack.
+    *   **Upper Surface (CP1)**: Lower the radius (~0.10) to reduce the magnitude of the suction peak and delay separation.
+    *   **Trailing Edge (CP2)**: Increase the length slightly (`r` ~ 0.82) and droop it further (angle ~ -0.07) to maximize aft-loading and downwash.
+    *   **Lower Surface (CP3)**: Keep the belly smooth and tucked in (negative `r` and `a`) to maintain thickness distribution without adding drag.
+*   **Diversity**: This design explores the "thin, highly cambered" region of the design space, distinct from the thicker variants (Design 5) or the distorted shapes (Design 4), aiming to find a highly efficient glider-like profile.

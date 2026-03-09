@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Camber_Sweep_TwistOptimized",
+  "design_params": {
+    "le_sweep_deg": 68.16060140430955,
+    "root_chord_in": 44.92266423107014,
+    "twist_root_deg": -8.491490422055781,
+    "twist_tip_deg": -4.116717787482407,
+    "dihedral_deg": -1.4282198159425294,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.16432466886305674,
+    "CDi": 0.019166973707126337,
+    "CM": -0.21813695368153949,
+    "L_D": 8.573323643782135
+  },
+  "corrected_results": {
+    "CL": -0.13821296720785287,
+    "CDi": -0.0159499158519415,
+    "CM": 0.1749104859930541,
+    "L_D": 8.665435510183519
+  }
+}

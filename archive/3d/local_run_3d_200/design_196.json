@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweepCamberedWashin",
+  "le_sweep": 71.15032637910649,
+  "root_chord_in": 39.52148474501473,
+  "twist_root": -5.894135219014093,
+  "twist_tip": -5.109181940877598,
+  "dihedral": -2.7015231055045374,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

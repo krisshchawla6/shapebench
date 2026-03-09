@@ -1,0 +1,3 @@
+As no images or previous designs are provided for this initial step, I am establishing the baseline for the population. In the absence of visual data, I will proceed by testing the geometric limits of the parameter space as dictated by the **Exploration Strategy**. 
+
+Without a reference "Design 1," there are no specific flaws to map to parameters. However, the objective is to avoid common pitfalls in 4-point parametric airfoils, such as self-intersection (caused by extreme angle offsets) and "star-shaped" non-aerodynamic forms. The goal is to create a robust, high-variance starting point.

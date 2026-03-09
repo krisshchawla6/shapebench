@@ -1,0 +1,11 @@
+{
+  "le_sweep": 70.0,
+  "root_chord_in": 42.0,
+  "twist_root": 0.0,
+  "twist_tip": -5.0,
+  "dihedral": -7.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 15,
+  "name": "HighSweep_Symm_Anhedral"
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweep_ThinCamberedWashout",
+  "le_sweep": 55.64399418785922,
+  "root_chord_in": 28.087402165416705,
+  "twist_root": 3.1489196159192825,
+  "twist_tip": -3.1465505885866847,
+  "dihedral": 10.892312970263438,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

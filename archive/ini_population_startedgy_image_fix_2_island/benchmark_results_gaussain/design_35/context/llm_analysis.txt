@@ -1,0 +1,7 @@
+*   **Geometry:** Design 1 presents a cambered airfoil with a robust, rounded leading edge and a long, tapered trailing edge. The upper surface appears to have a slight "dip" or lack of volume in the mid-chord region (due to low `r1`=0.10 relative to `r0`=0.42), creating a shape that thins out quickly after the nose. The lower surface is relatively flat or slightly concave.
+*   **Flow Fields:** The high reward (1.5999) suggests fully attached flow with efficient lift generation. The pressure plot likely shows a strong suction peak at the nose, but the rapid thinning on the upper surface might be causing a steep pressure recovery gradient mid-chord. The wake is likely thin and symmetric, indicating low profile drag.
+*   **Parameter Mappings:** The "dip" on top maps to the low `r1` value. The good stall resistance maps to the high `r0` (LE radius). The effective lift generation maps to the large `r2` (TE extension) and sharp `e2`.
+*   **Key Changes Needed:**
+    1.  **Fill the mid-chord:** Increase `r1` to smooth the upper surface and prevent the "saddle" effect, promoting better pressure distribution.
+    2.  **Shift max thickness aft:** Increase `a1` to move the upper control point backward, encouraging laminar flow.
+    3.  **Increase Aft-Loading:** Make `a2` more negative to add camber specifically at the trailing edge, boosting lift without increasing LE angle of attack.

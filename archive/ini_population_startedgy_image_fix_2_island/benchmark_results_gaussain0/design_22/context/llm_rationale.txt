@@ -1,0 +1,6 @@
+- **Exploitation Strategy**: This design builds directly upon the success of Design 1, the clear outlier in the population. I am refining the specific parameters that led to its 4.46 reward while keeping the fundamental topology intact.
+- **Camber Enhancement**: By slightly increasing the radius and angle of CP1 (the upper surface control point), I aim to increase the effective camber and lift potential without inducing flow separation.
+- **Trailing Edge Optimization**: Design 1 proved that a maximum edgy parameter at CP2 (the trailing edge) is vital. I am setting this even closer to the limit (0.9995) to minimize trailing edge drag and maximize the pressure differential.
+- **Nose Blunting and Smoothing**: I will slightly decrease the edgy parameter of CP0 (making it more negative) and shift its radius to ensure a perfectly smooth transition at the leading edge, reducing the risk of a premature suction peak.
+- **Lower Surface Refinement**: CP3 is adjusted to be slightly more "filled out" (more negative radius) and smoother, which helps maintain higher pressure on the lower surface to further boost the lift-to-drag ratio.
+- **Evolutionary Step**: Rather than exploring new territory, this design attempts to "climb the hill" of the high-reward region discovered by Design 1, using precision adjustments to its successful geometric proportions.

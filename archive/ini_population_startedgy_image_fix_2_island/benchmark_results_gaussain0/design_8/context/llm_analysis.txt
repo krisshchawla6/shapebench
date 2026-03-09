@@ -1,0 +1,15 @@
+- **Geometry Observation**: 
+    - The airfoil exhibits a moderately thin profile with a distinct, sharp "kink" or protrusion on the lower surface near the leading edge, likely caused by a high `edgy_param`.
+    - The upper surface is relatively smooth but shows an abrupt change in curvature towards the trailing edge, suggesting the control points are not optimally distributed.
+    - The trailing edge is tapered but appears slightly blunt or "hooked" downwards, which creates a high-camber effect at the cost of potential drag.
+    - There is a visible discontinuity in the slope of the surface at the leading edge (Design 1's `e0=1.0`), which is generally undesirable for maintaining laminar flow.
+
+- **Flow Field Observation**:
+    - **Pressure Plot**: There is a significant pressure spike at the stagnation point on the nose, followed by a rapid expansion. However, the "kink" on the lower surface creates a secondary localized pressure disturbance.
+    - **Velocity U**: Flow accelerates well over the top surface, but the wake is relatively thick, indicating that the pressure recovery at the rear is not as efficient as it could be.
+    - **Velocity V**: The vertical velocity plots show a strong downward deflection of the air, confirming lift generation, but the flow near the trailing edge looks slightly turbulent or detached compared to a perfectly streamlined body.
+
+- **Refined Mapping & Flaws**:
+    - The high reward of Design 1 (1.1645) is driven by its effective camber and suction surface length (R2=0.95), but the `e0=1.0` value is clearly a geometric flaw causing a sharp corner.
+    - The lower surface radius (`r3=-0.23`) creates a concave section that helps with lift but might be contributing to the wake thickness.
+    - **Key Changes**: 1) Reduce `e0` to smooth the leading edge. 2) Slightly increase the chord length/suction peak by pushing `r2` higher. 3) Smooth the transition on the lower surface to reduce drag.

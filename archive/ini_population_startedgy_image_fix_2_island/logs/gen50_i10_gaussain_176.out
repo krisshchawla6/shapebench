@@ -1,0 +1,76 @@
+==========================================
+Job ID: 176
+Node: compute-dy-hpc-128vcpu-10
+Date: Fri Jan 30 08:16:39 UTC 2026
+Action: gaussain
+Iterations: 80
+Max Inspirations: 10 (grows 0→1→2...→10, then stays at 10)
+Working Directory: /scratch/Testing_paramters/AirFoil_becnhmark_change_gemini/work_176
+Output: /scratch/Testing_paramters/AirFoil_becnhmark_change_gemini/experiment_generate_gaussain
+==========================================
+Setting up isolated workspace...
+Starting benchmark run with debug mode...
+Starting from scratch (no baseline)
+
+--- Iteration 1/80 (action: gaussain, inspirations: -1) ---
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 40,
+  "params": [
+    [
+      0.1523,
+      0.0,
+      -0.85
+    ],
+    [
+      0.4567,
+      0.1245,
+      -0.6
+    ],
+    [
+      0.7891,
+      0.2854,
+      -0.3
+    ],
+    [
+      0.3421,
+      0.4512,
+      -0.1
+    ],
+    [
+      -0.8543,
+      0.0123,
+      0.95
+    ],
+    [
+      -0.2134,
+      -0.4231,
+      -0.2
+    ],
+    [
+      0.3876,
+      -0.2543,
+      -0.5
+    ],
+    [
+      0.221,
+      -0.1123,
+      -0.8
+    ]
+  ],
+  "name": "Supercritical_Baseline_V1"
+}
+DEBUG: Strategy used: no_strategy
+DEBUG run_iteration: output_dir=/scratch/Testing_paramters/AirFoil_becnhmark_change_gemini/benchmark_results_gaussain
+DEBUG run_iteration: case_dir=/scratch/Testing_paramters/AirFoil_becnhmark_change_gemini/benchmark_results_gaussain/design_0
+DEBUG run_iteration: case_dir absolute=/scratch/Testing_paramters/AirFoil_becnhmark_change_gemini/benchmark_results_gaussain/design_0
+****** Starting episode 0
+***    Starting control 0
+Lengths of pts_list and deformation are different
+==========================================
+Job completed successfully
+Results saved to: /scratch/Testing_paramters/AirFoil_becnhmark_change_gemini/experiment_generate_gaussain
+End time: Fri Jan 30 08:17:17 UTC 2026
+==========================================
+Cleaning up workspace...
+Workspace cleaned.

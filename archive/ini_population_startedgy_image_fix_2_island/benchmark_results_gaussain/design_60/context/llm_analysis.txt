@@ -1,0 +1,14 @@
+- **Geometry (Observed/Inferred from Design 1):**
+  - The baseline design features a classic asymmetric cambered airfoil profile.
+  - The Leading Edge (controlled by CP0/CP3 interaction) appears moderately blunt but effectively smooth (`e` ~ -0.9).
+  - The Upper Surface (CP0, CP1) shows a thickness distribution that peaks relatively forward (angle ~0.09 for CP0, ~0.46 for CP1), typical of generic low-speed airfoils.
+  - The Trailing Edge (CP2) is sharp (`e` ~ 0.99) and extended (`r` ~ 0.96), providing a clean release point.
+- **Flow Field (Observed/Inferred):**
+  - Pressure distribution likely shows a suction peak quite forward on the upper surface due to the CP0 placement.
+  - The pressure recovery region from CP1 to the tail might be slightly aggressive, potentially causing boundary layer thickening near the trailing edge.
+  - The lower surface (CP3) with negative radius (`r` ~ -0.13) creates under-camber, which increases lift but may incur a drag penalty or separation risk at lower angles of attack.
+- **Flaws & Key Changes:**
+  - **Flaw:** Max thickness is somewhat forward, limiting the extent of favorable pressure gradients (laminar flow potential).
+  - **Flaw:** The lower surface might be overly scooped (`r`=-0.13), increasing form drag.
+  - **Change 1:** Shift the upper surface control points (CP0, CP1) aft (increase `angle_param`) to delay the suction peak and extend laminar flow.
+  - **Change 2:** Flatten the lower surface slightly (increase CP3 `radius_param` towards 0) to reduce drag.

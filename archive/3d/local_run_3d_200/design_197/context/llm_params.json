@@ -1,0 +1,11 @@
+{
+  "le_sweep": 67.5,
+  "root_chord_in": 37.0,
+  "twist_root": -8.5,
+  "twist_tip": -5.5,
+  "dihedral": 1.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 10,
+  "name": "WashinExplorer_CamberedThin"
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Symmetric_Exploration",
+  "le_sweep": 73.18851938789652,
+  "root_chord_in": 30.780586574868433,
+  "twist_root": 8.921668493798766,
+  "twist_tip": -6.412331589012311,
+  "dihedral": 9.877849409940058,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

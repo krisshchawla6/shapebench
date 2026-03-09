@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_ThinNACA2409_NeutralDihedral",
+  "design_params": {
+    "le_sweep_deg": 72.12876835483732,
+    "root_chord_in": 23.727910159653995,
+    "twist_root_deg": -5.095496765642104,
+    "twist_tip_deg": -3.462334572950207,
+    "dihedral_deg": -3.600111901411215,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.20244812955831043,
+    "CDi": 0.01988529956446811,
+    "CM": -0.19215361845099077,
+    "L_D": 10.180793550631405
+  },
+  "corrected_results": {
+    "CL": 0.15774751525286737,
+    "CDi": 0.015070351697701512,
+    "CM": -0.14471832434582743,
+    "L_D": 10.467407690089049
+  }
+}

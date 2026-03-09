@@ -1,0 +1,6 @@
+*   **Exploration Strategy**: The population is heavily clustered around a specific geometry (Design 1, 2, 3 are nearly identical). To advance the evolutionary search, I must select parameter values outside this convergence zone.
+*   **Aft-Loading Hypothesis**: Current designs peak in thickness/camber early (`a1` ~ 0.2). I will test a "Laminar Flow" style geometry by shifting the upper control point significantly aft (`a1` > 0.5). This delays the pressure recovery and can reduce skin friction drag if flow remains attached.
+*   **Control Point 1 (Upper) Variation**: I will increase `a1` to ~0.65 (vs 0.21 in Design 1) and slightly increase `r1` to ~0.22 (vs 0.14) to maintain structural volume as the peak moves back.
+*   **Control Point 0 (LE) Refinement**: I will use a slightly lower radius `r0` ~0.4 (vs 0.51) to create a slightly finer entry, reducing the pressure spike at the nose, which is beneficial for the proposed aft-loaded profile.
+*   **Control Point 3 (Lower) Adjustment**: I will introduce slight undercamber by keeping `r3` negative but adjusting `a3` to flatten the belly curve, complementing the aft-loaded upper surface.
+*   **Constraint Handling**: I will maintain `e2`=1.0 (Sharp TE) and negative `e` values elsewhere to ensure the resulting shape is physically viable and smooth, avoiding the jagged failures seen in Design 5.

@@ -1,0 +1,14 @@
+{
+  "design_name": "SweptCamberedThinAnhedral",
+  "le_sweep": 71.96489133162581,
+  "root_chord_in": 42.2334703443839,
+  "twist_root": -3.8774616916961384,
+  "twist_tip": -4.3214712300179485,
+  "dihedral": -3.258759897913437,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

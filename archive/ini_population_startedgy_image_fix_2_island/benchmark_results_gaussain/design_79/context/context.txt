@@ -1,0 +1,46 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.025938, -0.115352, -1.0, 0.14179, 0.254952, -0.94193, -0.866785, -0.221339, 1.0, -0.245577, -0.193771, -0.953088]
+  - Reward: 4.4288
+  - Rank: 9
+
+Design 2:
+  - Action: [0.049271, -0.129381, -1.0, 0.136871, 0.38924, -0.977106, -0.909249, -0.266737, 1.0, -0.175325, -0.1777, -0.979004]
+  - Reward: 4.8513
+  - Rank: 3
+
+Design 3:
+  - Action: [0.069413, -0.118973, -1.0, 0.135862, 0.415572, -0.957202, -0.870202, -0.216316, 0.952545, -0.137558, -0.187013, -0.983267]
+  - Reward: 4.7156
+  - Rank: 5
+
+Design 4:
+  - Action: [0.555331, 0.059228, -0.951229, 0.387751, 0.467149, -0.5584, 0.831403, -0.309601, 1.0, -0.007554, -0.370309, -0.881726]
+  - Reward: 1.5838
+  - Rank: 27
+
+Design 5:
+  - Action: [-0.056362, -0.154658, -0.944157, 0.256145, 0.235154, -0.994907, -0.924336, -0.218654, 1.0, -0.226373, -0.23183, -1.0]
+  - Reward: -5.0000
+  - Rank: 76
+
+Design 6:
+  - Action: [0.518104, -0.015771, -0.825478, 0.274305, 0.415052, -0.507659, -0.720489, -0.00849, 0.763414, 0.033, -0.466057, -0.181394]
+  - Reward: 0.3679
+  - Rank: 58
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

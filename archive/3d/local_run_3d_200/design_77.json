@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweepHighChordPositiveTwistThin",
+  "le_sweep": 46.37145556995385,
+  "root_chord_in": 49.43629829124609,
+  "twist_root": -4.6661919399772405,
+  "twist_tip": -1.890683496399432,
+  "dihedral": 12.292611005242792,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

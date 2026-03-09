@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid Vortex Control",
+  "le_sweep": 57.6356502078306,
+  "root_chord_in": 34.47830532147572,
+  "twist_root": 6.962749405855492,
+  "twist_tip": -4.962273370424987,
+  "dihedral": 6.206001785240533,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

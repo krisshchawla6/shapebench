@@ -1,0 +1,9 @@
+*   **Strategy Focus: Drooped Nose & Rear Loading:** Instead of mimicking the standard camber of Design 1, this design creates a "Drooped Laminar" profile. This is a novel topological change intended to manage the leading edge stagnation point and delay pressure recovery.
+*   **Database Insights:** The database confirms that high `edgy` values (near 1.0) are critical for the trailing edge (CP2) but detrimental elsewhere. We will strictly enforce `e2=1.0` and `e0,e1,e3` near `-1.0`.
+*   **Geometric Parameterization (Droop):**
+    *   **CP0 (LE):** We apply a negative angle offset (`a0 = -0.12`) to physically droop the nose. We slightly increase the radius (`r0 = 0.22`) compared to Design 1 to prevent a sharp voltage spike at the droop 'knuckle'.
+*   **Geometric Parameterization (Rear Loading):**
+    *   **CP1 (Upper):** We push the angle parameter significantly positive (`a1 = 0.58`) to move the upper surface crest rearward. This delays the transition point.
+    *   **CP3 (Lower):** We adjust the lower surface angle (`a3 = -0.32`) to accommodate the drooped nose and maintain reasonable thickness.
+*   **Trailing Edge Tuning:**
+    *   **CP2 (TE):** We reduce the camber angle slightly (`a2 = -0.16` vs D1's `-0.24`) to lower the pitching moment and drag, relying on the new drooped nose geometry for lift generation.

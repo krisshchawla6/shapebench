@@ -1,0 +1,16 @@
+- **Geometry Description**: 
+    - The airfoil in Design 1 exhibits a highly cambered, thin profile with a distinct "teardrop" evolution that is stretched horizontally.
+    - The upper surface has a relatively sharp peak in curvature near the mid-chord, while the lower surface is nearly flat or slightly concave toward the trailing edge.
+    - The trailing edge appears extremely sharp and well-defined, while the leading edge is somewhat blunt but transitions quickly into the high-camber upper surface.
+    - There are no major geometric discontinuities or loops, but the thickness-to-chord ratio is quite low, making it a very "slender" design.
+
+- **Flow Field Analysis**:
+    - **Pressure (P)**: There is a strong, wide region of low pressure (suction) across the entire upper surface and a concentrated high-pressure zone at the leading edge stagnation point, creating significant lift.
+    - **Velocity (U)**: The flow accelerates significantly over the upper surface, reaching peak velocity early and maintaining it until the mid-chord; the wake is thin, indicating low pressure drag.
+    - **Velocity (V)**: There is a clear downward deflection of the flow behind the trailing edge, which is the physical manifestation of lift production (downwash).
+    - **Flaws**: The abrupt change in curvature on the upper surface (mapped to the transition between Point 0 and Point 1) creates a rapid pressure recovery region that could be prone to separation at higher angles of attack.
+
+- **Mapping & Key Changes**:
+    - Design 1's success (Reward 4.46) is tied to the extreme sharpness of Point 2 (`e2=0.9988`) and the maximum radial extension of the upper surface (`r2=1.0`).
+    - The "dip" in the lower surface is likely caused by the negative radius of Point 0 (`r0=-0.7722`) combined with a neutral angle.
+    - **Key Changes Needed**: 1) Explore "thick-front" geometries by reversing the `r0` polarity. 2) Test "reflexed" trailing edges (S-shape) by manipulating the angular offsets of the rear points. 3) Increase the leading-edge radius to see if a more robust nose improves the pressure distribution.

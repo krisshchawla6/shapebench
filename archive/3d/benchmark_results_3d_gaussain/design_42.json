@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploit_Optimal_Twist_Sweep_V1",
+  "le_sweep": 51.117779890436815,
+  "root_chord_in": 30.596908217868336,
+  "twist_root": 10.0,
+  "twist_tip": -8.53369723398051,
+  "dihedral": 14.836054049326494,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

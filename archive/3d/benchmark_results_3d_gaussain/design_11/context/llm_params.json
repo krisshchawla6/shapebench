@@ -1,0 +1,11 @@
+{
+  "le_sweep": 65.5,
+  "root_chord_in": 35.0,
+  "twist_root": 0.5,
+  "twist_tip": -3.0,
+  "dihedral": 7.0,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 12,
+  "name": "Hybrid_OptimalSweep_ModerateWashout_NACA2412"
+}

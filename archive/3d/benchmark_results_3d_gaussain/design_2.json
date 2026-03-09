@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Washout_Camber_Thin",
+  "le_sweep": 76.92444522546587,
+  "root_chord_in": 32.47273455062267,
+  "twist_root": -0.5641621981901181,
+  "twist_tip": -2.387859110911116,
+  "dihedral": 2.454588451408959,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

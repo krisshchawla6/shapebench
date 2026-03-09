@@ -1,0 +1,11 @@
+{
+  "le_sweep": 50.5,
+  "root_chord_in": 31.0,
+  "twist_root": 10.0,
+  "twist_tip": -8.5,
+  "dihedral": 14.0,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 6,
+  "name": "AggressiveTwistThinCamber"
+}

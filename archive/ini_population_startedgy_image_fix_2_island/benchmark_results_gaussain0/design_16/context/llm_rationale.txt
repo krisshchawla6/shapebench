@@ -1,0 +1,5 @@
+- **Exploitation Strategy:** Design 1 is the clear leader. I am refining the parameters of Design 1 to maximize the lift-to-drag characteristics by slightly enhancing the suction side geometry.
+- **Population Insights:** Comparing Design 1 (1.51) and Design 2 (1.46) shows that increasing `r1`, `a1`, and `r2` while decreasing `e0` (making it smoother) directly correlates with higher rewards.
+- **Geometric Refinement:** I am pushing `r2` to its maximum (1.0) and slightly increasing `r1` to 0.38 to increase the camber.
+- **Smoothness Optimization:** I am decreasing `e0` and `e3` to ensure the transition areas and the trailing edge are as smooth as possible, reducing potential parasitic drag.
+- **Angle Offset:** Adjusting `a1` to a higher value (0.73) moves the camber peak slightly, which can help maintain attached flow at higher lift coefficients.

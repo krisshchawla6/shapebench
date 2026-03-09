@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_AggressiveWashout_NACA2410",
+  "design_params": {
+    "le_sweep_deg": 70.22042055941981,
+    "root_chord_in": 41.80758345795114,
+    "twist_root_deg": -1.6336056578038156,
+    "twist_tip_deg": -4.692845733028851,
+    "dihedral_deg": 6.459122933769108,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 10,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2567825957739639,
+    "CDi": 0.031735707766597884,
+    "CM": -0.22973419369377304,
+    "L_D": 8.091283095448398
+  },
+  "corrected_results": {
+    "CL": -0.04846015322333276,
+    "CDi": -0.0054894501225495095,
+    "CM": 0.1161180102913621,
+    "L_D": 8.827870213132755
+  }
+}

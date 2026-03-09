@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploitation_TwistedDelta_ThinAirfoil",
+  "le_sweep": 52.31544337929029,
+  "root_chord_in": 31.178094775528773,
+  "twist_root": 8.788570614444101,
+  "twist_tip": -7.149528321012475,
+  "dihedral": 13.508182767256404,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

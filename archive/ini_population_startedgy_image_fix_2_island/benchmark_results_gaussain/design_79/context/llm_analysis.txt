@@ -1,0 +1,6 @@
+*   **Geometry:** The reference Design 1 (`shape_1.png`) shows an airfoil with a relatively thin profile and a smooth leading edge. The upper surface (controlled by CP1) has a moderate curvature, peaking around 30-40% chord. The trailing edge (controlled by CP2) is sharp (`edgy_param = 1.0`), which is geometrically correct for minimizing drag.
+*   **Flow Field:** The flow field images likely indicate a standard pressure distribution with a suction peak on the upper surface near the leading edge. Given the reward of 4.4, the flow is likely attached, but the design might lack the necessary thickness or camber optimization to maximize the lift-to-drag ratio further.
+*   **Parameter Mapping:**
+    *   High-performing designs (Designs 2 & 3) favor a thin leading edge (CP0 `radius` ~ 0.05) and a moderate upper surface thickness (CP1 `radius` ~ 0.14).
+    *   The trailing edge (CP2) consistently requires `edgy = 1.0` and a negative radius parameter (~ -0.9) to function correctly as a sharp point.
+    *   Poor performers (Design 4, 6) often have excessive radius parameters (> 0.5) or incorrect angle distributions, leading to bluff bodies or separation.

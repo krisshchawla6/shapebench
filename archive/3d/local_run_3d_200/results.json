@@ -1,0 +1,2802 @@
+[
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_0.json",
+    "rank": 0,
+    "reward": -0.22090690328645834,
+    "aero": {
+      "CL": 0.1747592466324046,
+      "CDi": 0.03342056517261854,
+      "CM": -0.13589237807509338,
+      "L_D": 5.229093096713542,
+      "reward": -0.22090690328645834
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_0/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_0.json",
+    "rank": 0,
+    "reward": -0.22090690328645834,
+    "aero": {
+      "CL": 0.1747592466324046,
+      "CDi": 0.03342056517261854,
+      "CM": -0.13589237807509338,
+      "L_D": 5.229093096713542,
+      "reward": -0.22090690328645834
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_0/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_2.json",
+    "rank": 0,
+    "reward": 0.06696038143442351,
+    "aero": {
+      "CL": 0.08677644804056964,
+      "CDi": 0.015729032300574097,
+      "CM": -0.04925934512333613,
+      "L_D": 5.516960381434424,
+      "reward": 0.06696038143442351
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_2/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_2.json",
+    "rank": 0,
+    "reward": 0.06696038143442351,
+    "aero": {
+      "CL": 0.08677644804056964,
+      "CDi": 0.015729032300574097,
+      "CM": -0.04925934512333613,
+      "L_D": 5.516960381434424,
+      "reward": 0.06696038143442351
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_2/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_2.json",
+    "rank": 0,
+    "reward": 0.06696038143442351,
+    "aero": {
+      "CL": 0.08677644804056964,
+      "CDi": 0.015729032300574097,
+      "CM": -0.04925934512333613,
+      "L_D": 5.516960381434424,
+      "reward": 0.06696038143442351
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_2/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_2.json",
+    "rank": 0,
+    "reward": 0.06696038143442351,
+    "aero": {
+      "CL": 0.08677644804056964,
+      "CDi": 0.015729032300574097,
+      "CM": -0.04925934512333613,
+      "L_D": 5.516960381434424,
+      "reward": 0.06696038143442351
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_2/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_6.json",
+    "rank": 0,
+    "reward": 5.045566693495679,
+    "aero": {
+      "CL": 0.05429791072999453,
+      "CDi": 0.005173413910431733,
+      "CM": -0.0109733441356858,
+      "L_D": 10.495566693495679,
+      "reward": 5.045566693495679
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_6/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_6.json",
+    "rank": 0,
+    "reward": 5.045566693495679,
+    "aero": {
+      "CL": 0.05429791072999453,
+      "CDi": 0.005173413910431733,
+      "CM": -0.0109733441356858,
+      "L_D": 10.495566693495679,
+      "reward": 5.045566693495679
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_6/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_6.json",
+    "rank": 0,
+    "reward": 5.045566693495679,
+    "aero": {
+      "CL": 0.05429791072999453,
+      "CDi": 0.005173413910431733,
+      "CM": -0.0109733441356858,
+      "L_D": 10.495566693495679,
+      "reward": 5.045566693495679
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_6/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_9.json",
+    "rank": 0,
+    "reward": 20.276130520968355,
+    "aero": {
+      "CL": 0.09510737790014641,
+      "CDi": 0.0036969173355716335,
+      "CM": -0.0984740297803273,
+      "L_D": 25.726130520968354,
+      "reward": 20.276130520968355
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_9/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_22.json",
+    "rank": 0,
+    "reward": 338.50094583793486,
+    "aero": {
+      "CL": 0.044328155411024944,
+      "CDi": 0.00012887929499083797,
+      "CM": -0.032805055252351015,
+      "L_D": 343.95094583793485,
+      "reward": 338.50094583793486
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_22/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/local_run_3d_200/design_37.json",
+    "rank": 0,
+    "reward": 4016.0090394603026,
+    "aero": {
+      "CL": 0.06293126037982207,
+      "CDi": 1.5648862704384953e-05,
+      "CM": -0.049113650994574064,
+      "L_D": 4021.4590394603024,
+      "reward": 4016.0090394603026
+    },
+    "geometry_png": "/scratch/3D/3d/local_run_3d_200/design_37/geometry.png",
+    "analysis": ""
+  }
+]

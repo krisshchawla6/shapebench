@@ -1,0 +1,33 @@
+{
+  "design_name": "HigherSweepCamberedThinner",
+  "design_params": {
+    "le_sweep_deg": 69.25416235949226,
+    "root_chord_in": 36.41787814967671,
+    "twist_root_deg": -4.268550031700247,
+    "twist_tip_deg": -10.0,
+    "dihedral_deg": -3.3382483650925385,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.31668036490533585,
+    "CDi": 0.01988870360680117,
+    "CM": -0.3463006552492125,
+    "L_D": 15.922624780684217
+  },
+  "corrected_results": {
+    "CL": 0.09027147842674746,
+    "CDi": -0.0010346534832359393,
+    "CM": -0.05901477863638464,
+    "L_D": -87.24803027233632
+  }
+}

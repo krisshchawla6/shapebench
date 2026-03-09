@@ -1,0 +1,6 @@
+- This design follows an **Exploitation Strategy** by refining the high-reward configuration found in Design 3 (Reward: 1.1645).
+- Analysis of the population shows that a sharp trailing edge (edgy_param near 1.0 at CP0) is critical for performance, likely by satisfying the Kutta condition more effectively.
+- Design 3 outperformed Design 1 by having a slightly shorter chord length (r=-0.76 vs -0.91 for the trailing edge point), suggesting that extreme length may be introducing unnecessary skin friction or structural inefficiencies that the reward function penalizes.
+- I will increase the leading edge radius (CP2) to 0.9750 to create a more robust stagnation area, which often improves performance across varying angles of attack.
+- The upper surface control point (CP1) will be adjusted to [0.31, 0.59] to create a smoother transition from the leading edge to the trailing edge, reducing the localized pressure gradient seen in the images.
+- The lower surface point (CP3) is kept relatively close to the successful Design 3 values to maintain the thin-but-not-concave lower profile that seems to work well.

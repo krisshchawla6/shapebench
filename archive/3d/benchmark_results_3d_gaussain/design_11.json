@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_OptimalSweep_ModerateWashout_NACA2412",
+  "le_sweep": 68.65653014291017,
+  "root_chord_in": 35.589482698254486,
+  "twist_root": 3.4320479693721047,
+  "twist_tip": 1.0377066351688757,
+  "dihedral": 10.348479561526393,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

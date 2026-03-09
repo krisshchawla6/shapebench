@@ -1,0 +1,33 @@
+{
+  "design_name": "CamberedMidSweepCompactAnhedral",
+  "design_params": {
+    "le_sweep_deg": 64.14693711472452,
+    "root_chord_in": 35.22329351786144,
+    "twist_root_deg": -8.090995202489172,
+    "twist_tip_deg": -3.8188604604041867,
+    "dihedral_deg": -2.679792610464744,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.20259079483087963,
+    "CDi": 0.012761893461494301,
+    "CM": -0.22216966775718985,
+    "L_D": 15.874665890460905
+  },
+  "corrected_results": {
+    "CL": 0.03510750291291896,
+    "CDi": -0.0015958029298157313,
+    "CM": -0.011301995094622716,
+    "L_D": -21.99989877006483
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "Anhedral_Symmetric_LowSweep_Delta",
+  "le_sweep": 45.0,
+  "root_chord_in": 43.02501122841069,
+  "twist_root": -1.9023223595225134,
+  "twist_tip": -10.0,
+  "dihedral": -14.403700222435598,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

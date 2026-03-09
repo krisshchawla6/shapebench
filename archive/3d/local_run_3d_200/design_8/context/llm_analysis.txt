@@ -1,0 +1,7 @@
+Design 1, with `le_sweep=58.36`, `root_chord_in=34.90`, a significant tip washout of `twist_tip=-9.60`, and a symmetric NACA 0015 airfoil, achieved the highest reward of 5.0456. Designs 2 and 3, which featured higher sweeps (70-76 degrees) and less aggressive washout, performed significantly worse (rewards of 1.4058 and 0.0670). This suggests that for symmetric delta wings, a moderate sweep combined with substantial tip washout appears to be a successful strategy for maximizing CL/CDi. A critical observation from the population is that **all previous designs used symmetric NACA 00xx airfoils**, meaning the influence of camber (`naca_m`, `naca_p`) has been completely unexplored.
+
+Key design changes needed to improve designs in the population through exploration:
+1.  **Introduce Camber:** The most glaring unexplored region is the use of cambered airfoils. This could significantly enhance lift.
+2.  **Explore Dihedral Extremes:** Dihedral has been near zero or slightly positive; its effect at larger magnitudes needs to be investigated.
+3.  **New Twist Combinations:** With the introduction of camber, the optimal twist distribution will likely shift from previous symmetric airfoil designs.
+4.  **Test Varying Thickness with Camber:** The impact of different thicknesses when combined with a cambered profile is unknown.

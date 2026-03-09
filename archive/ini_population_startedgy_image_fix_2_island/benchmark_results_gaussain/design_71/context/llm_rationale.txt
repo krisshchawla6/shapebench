@@ -1,0 +1,6 @@
+- **Strategy Focus**: The goal is to explore a "High Efficiency Laminar" region of the design space, moving away from the "High Lift / High Drag" configuration of Design 1. We will prioritize flow attachment and wake minimization over pure lift generation.
+- **Leading Edge (CP0)**: Adopt a slightly finer nose (`r` reduced to ~0.17) to reduce form drag, maintaining smoothness (`e` near -1.0).
+- **Upper Surface (CP1)**: Design 2 performed better with lower angle/radius than Design 1. I will push this trend further. Set `r` to ~0.28 and `a` to ~0.48. This creates a milder suction peak and a gentler pressure recovery, aiming for laminar flow maintenance.
+- **Trailing Edge (CP2)**: Set `r=1.0` (maximum extension) to ensure a sharp, clean release point (`e=1.0`). Use a moderate angle (`a=-0.12`) to produce lift without inducing a strong pitching moment or separation bubble at the TE.
+- **Lower Surface (CP3)**: Flatten the bottom (`a` changed from -0.24 to -0.10) and reduce thickness (`r` to ~0.11). This approximates a semi-symmetrical or supercritical-style underside, which often performs well in L/D optimization.
+- **Evolutionary Logic**: By reducing the "extremes" of Design 1 (high camber, deep undercut), we create a distinct, more streamlined individual that tests whether the fitness landscape favors efficiency (L/D) over raw lift coefficient.

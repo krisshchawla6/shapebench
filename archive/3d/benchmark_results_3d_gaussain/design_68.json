@@ -1,0 +1,14 @@
+{
+  "design_name": "SymmetricMinSweepMaxWashout",
+  "le_sweep": 45.0,
+  "root_chord_in": 34.90942338962191,
+  "twist_root": 9.330440315170966,
+  "twist_tip": -9.72936943602255,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 16,
+    "chord_length": 1.0
+  }
+}

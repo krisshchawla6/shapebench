@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_AggressiveWashout_ThinCamber",
+  "le_sweep": 78.02135589337156,
+  "root_chord_in": 34.86456206740021,
+  "twist_root": 9.780299406971341,
+  "twist_tip": -8.325293906736707,
+  "dihedral": -3.7457646558911284,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

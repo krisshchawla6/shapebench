@@ -1,0 +1,14 @@
+{
+  "design_name": "ThinCamberedHighSweepMaxWashoutPositiveDihedral",
+  "le_sweep": 73.22163719093503,
+  "root_chord_in": 21.577557658805844,
+  "twist_root": -9.760263798995569,
+  "twist_tip": -9.631510025517906,
+  "dihedral": 12.836410479074782,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_CamberedWashout",
+  "design_params": {
+    "le_sweep_deg": 67.75555833922311,
+    "root_chord_in": 41.68572363630085,
+    "twist_root_deg": -9.874813944822591,
+    "twist_tip_deg": -8.021003432806493,
+    "dihedral_deg": -11.11859549258442,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 14,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.04416012543670297,
+    "CDi": 0.020465625629448068,
+    "CM": -0.12204933688594176,
+    "L_D": 2.1577706069811415
+  },
+  "corrected_results": {
+    "CL": -0.13982632771293502,
+    "CDi": -0.0021179005559241668,
+    "CM": 0.15211403286299732,
+    "L_D": 66.02119600082942
+  }
+}

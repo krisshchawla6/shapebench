@@ -1,0 +1,7 @@
+*   **Novel Design Strategy**: Instead of incrementally tweaking Design 1, I will generate a "Laminar-Biased High-Lift" concept. This design departs from the database by aiming for a further aft maximum thickness point and a blunter nose, a combination not fully exploited in the top ranks.
+*   **Population Insights**: High-ranking designs consistently use a very sharp TE (`e`=1.0) and a negative `radius_param` for CP3 (lower LE). Low-ranking designs (like Design 5) fail when breaking the fundamental topology (e.g., negative `r` at TE). I will maintain the successful topology but alter the proportions significantly.
+*   **Geometric Exploration**:
+    *   **CP0 (Upper Surface)**: I will increase `radius_param` to ~0.55 and set `angle_param` near 0.0 to flatten the rooftop of the pressure distribution, promoting laminar flow.
+    *   **CP1 (Leading Edge)**: I will increase `radius_param` to ~0.18 (vs 0.11 in Design 1) and reduce the `angle_param` slightly to align the nose better with the flow, reducing the entry shock/peak.
+    *   **CP2 (Trailing Edge)**: Retain `edgy_param`=1.0 for a clean release. I will extend the effective chord slightly by increasing `radius_param` to 0.85.
+    *   **CP3 (Lower Surface)**: I will modify `radius_param` to -0.05 and `angle_param` to -0.15 to create a subtle concavity (undercamber) that increases lift without significant drag penalties.

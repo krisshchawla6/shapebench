@@ -1,0 +1,6 @@
+*   **Strategy - "Thin & Smooth":** The population data indicates a strong negative correlation between thickness and performance (D6 and D4 failed with high thickness). However, the best design (D1) succeeded despite being jagged. The engineering hypothesis is that D1's success is due to its *thinness*, not its *jaggedness*.
+*   **Hypothesis:** A design that matches D1's low frontal area (thinness) but improves geometric continuity (smoothness) should offer superior robustness and potentially better aerodynamic efficiency by reducing corner-induced separation bubbles.
+*   **Parameter Choices:**
+    *   **Radii (r):** Kept low (near 0.0 or negative) to prevent the "bloating" seen in failed designs. CP2 is kept deeply negative (~-0.7) to define the chord length/TE position properly.
+    *   **Edginess (e):** Switched from D1's high positive values (>0.8) to moderate negative values (-0.4 to -0.6) for CP0, CP1, and CP3 to force a smooth spline. CP2 is kept at 1.0 (sharp) for the trailing edge.
+    *   **Angles (a):** introduced slight camber (positive CP1 angle, negative CP3/CP0 angles) to improve lift generation compared to a symmetrical wedge.

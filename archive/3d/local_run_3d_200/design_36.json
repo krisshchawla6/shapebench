@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_MaxCamber_OptimizedTwist",
+  "le_sweep": 69.68042675673455,
+  "root_chord_in": 40.23156406119551,
+  "twist_root": -10.0,
+  "twist_tip": -3.3585767015267063,
+  "dihedral": 0.131171538393986,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

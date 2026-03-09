@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploitation_RefinedDelta_1",
+  "le_sweep": 59.94386013924944,
+  "root_chord_in": 33.67241491233228,
+  "twist_root": 5.493011729634007,
+  "twist_tip": -5.756246536080344,
+  "dihedral": 5.881208762067304,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

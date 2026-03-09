@@ -1,0 +1,15 @@
+*   **Geometry Observations (Design 1)**:
+    *   The airfoil features a classic subsonic profile with a smooth, continuous upper surface curvature and a relatively flat lower surface.
+    *   The leading edge (LE) is well-defined and rounded, avoiding the extreme bluntness seen in lower-ranked designs (like Design 4-6).
+    *   The trailing edge (TE) tapers effectively to a sharp point, consistent with the high "edgy" parameter (`0.908`) at the third control point.
+    *   The maximum thickness appears located around 25-30% chord, typical for this class of parametrization.
+
+*   **Flow Field Observations (Design 1)**:
+    *   The pressure distribution likely exhibits a standard suction peak near the leading edge followed by a smooth adverse pressure gradient.
+    *   The high reward suggests the flow remains attached over the majority of the chord, avoiding significant separation bubbles or stall cells.
+    *   Wake turbulence appears minimal, indicating an efficient lift-to-drag ratio.
+
+*   **Parameter Mapping & Flaws**:
+    *   **Success Factors**: The combination of `r0` near 0 (neutral LE size), `r2` strongly negative (thin TE), and `e2` sharp creates a structurally sound and aerodynamically efficient shape.
+    *   **Potential Limitation**: The current population seems clustered around forward-loaded or neutral designs (`a1` ~ 0.2). The design space for aft-loaded profiles (laminar flow shapes) or higher camber (under-cambered lower surfaces) is underexplored.
+    *   **Flaw in bad designs**: Designs 4, 5, and 6 failed due to excessive `r0` (> 0.5), likely creating a "bluff body" leading edge that causes massive drag.

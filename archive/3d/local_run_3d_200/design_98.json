@@ -1,0 +1,14 @@
+{
+  "design_name": "ModerateSweep_Washout_PositiveDihedral_NACA2010",
+  "le_sweep": 65.83781318007549,
+  "root_chord_in": 33.58711580046074,
+  "twist_root": -8.913413683128027,
+  "twist_tip": 0.4798124146713274,
+  "dihedral": 5.919553222977587,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

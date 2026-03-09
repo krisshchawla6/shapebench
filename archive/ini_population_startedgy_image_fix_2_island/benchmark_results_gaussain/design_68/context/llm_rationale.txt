@@ -1,0 +1,7 @@
+- **Strategy Focus:** I will depart from the local optimum of "thin airfoils" populated by Designs 1, 2, and 3. Instead of refining Design 1, I will generate a **High-Lift / High-Camber** archetype to explore the fitness landscape's potential for higher lift-to-drag ratios at higher thicknesses.
+- **Population Insights:** The database shows that `r2 > 0` is catastrophic (Rank 18). Successful designs strictly adhere to `r2 ~ -0.9` and `e2 = 1.0`. I will lock these structural constraints while aggressively modifying the shape-defining parameters (`r1`, `r0`).
+- **Geometric Hypothesis:** 
+    - **Thicker Nose (`r0`):** Increasing `r0` from ~0.04 to ~0.08 will create a blunter LE, which helps delay stall on high-camber profiles.
+    - **Higher Suction Side (`r1`):** Increasing `r1` from ~0.14 to ~0.28 represents a major shift towards a thicker, higher-lift section.
+    - **Aft Loading (`a2`):** Making `a2` more negative (`-0.35`) should deflect the trailing edge downwards, increasing circulation and lift.
+- **Evolutionary Judgment:** This design pushes the boundaries of the "valid" region identified by Design 1 towards the "thick" region. If successful, it opens a new family of high-performance solutions; if it fails due to drag, it bounds the search space effectively.

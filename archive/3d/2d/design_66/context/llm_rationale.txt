@@ -1,0 +1,6 @@
+*   **Bold Exploration Strategy**: Following the directive to avoid incremental tweaking, this design significantly increases the radius of CP1 (from 0.21 to 0.65) to move away from the current thin-profile local optimum and explore a higher-volume "teardrop" family.
+*   **Pressure Gradient Distribution**: By shifting CP1 to a more central angular position (a=0.52), I aim to distribute the suction peak over a larger chord-wise area, potentially improving the Lift-to-Drag ratio.
+*   **Lower Surface Reconfiguration**: CP2 is moved to a more aggressive negative angle (-0.45) to investigate how a more pronounced lower-surface curvature interacts with the thicker upper-surface profile.
+*   **Trailing Edge Optimization**: I am increasing the `edgy_param` of CP3 to 0.98 to test the hypothesis that a more mathematically sharp closure will further reduce the wake observed in Design 1.
+*   **Maintaining LE Integrity**: While being bold with the body, CP0 remains extremely smooth (e=-0.99) to ensure that the leading-edge stagnation point transition doesn't cause premature separation.
+*   **Advancing the Search**: This jump in the parameter space is designed to determine if the reward function favors thinness or if there is a higher peak associated with optimized thickness and camber.

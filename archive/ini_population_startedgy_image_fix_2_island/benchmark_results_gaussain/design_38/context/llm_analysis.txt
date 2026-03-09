@@ -1,0 +1,14 @@
+*   **Geometry Observations (Design 1)**:
+    *   The shape likely features a **pinched trailing edge** due to the high sharpness (`1.0`) and large negative radius (`-0.71`) at CP2, contrasting with the smoother, smaller radii at other points.
+    *   The transition from CP1 (`r=0.15`) to CP2 (`r=-0.71`) involves a sign change and large magnitude difference, likely creating a **pronounced curvature or "kink"** on the upper rear surface.
+    *   The leading edge (CP0/CP3) uses small negative radii (`-0.07`, `-0.17`), suggesting a relatively **thin or sharp nose** rather than a blunt, rounded one.
+*   **Flow Field Observations**:
+    *   Given the high reward (1.54) but sharp features, the flow likely stays attached over the forward section but may exhibit **rapid pressure recovery** or small separation bubbles near the aggressive rear kink.
+    *   The wake is likely focused but potentially turbulent immediately downstream of the sharp CP2 pinch.
+*   **Flaw-Parameter Mapping**:
+    *   **Thin Nose**: Caused by small magnitude radii at CP0/CP3 (`~-0.1`). A thicker nose usually performs better for robustness and stall characteristics.
+    *   **Surface Irregularity**: The alternating signs and large jumps between CP1 and CP2 (`+0.15` to `-0.71`) create geometric instability.
+*   **Key Changes Needed**:
+    *   **Increase Leading Edge Radius**: Use larger magnitudes for CP0 to create a blunter, more aerodynamic nose.
+    *   **Stabilize Thickness**: Use radii with more consistent magnitudes to avoid pinching.
+    *   **Explore Alternative Topologies**: Test a different sequence of radius signs to find smoother global shapes.

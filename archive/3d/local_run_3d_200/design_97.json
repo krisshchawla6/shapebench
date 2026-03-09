@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_PosRootTwist_NACA2410_SmallChord_PosDihedral",
+  "le_sweep": 64.39107942590701,
+  "root_chord_in": 19.36976459300675,
+  "twist_root": -2.192652270635052,
+  "twist_tip": -6.465020716991662,
+  "dihedral": 10.201096111816211,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

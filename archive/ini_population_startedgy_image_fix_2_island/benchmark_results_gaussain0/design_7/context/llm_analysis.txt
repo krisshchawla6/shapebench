@@ -1,0 +1,19 @@
+- **Geometry of Design 1**:
+    - The shape is a slender, cambered profile resembling a thin airfoil or a curved plate.
+    - It features a rounded, blunt nose (leading edge) and a very sharp, tapered tail (trailing edge).
+    - The upper surface has significantly more curvature than the lower surface, which appears nearly flat or slightly concave near the rear.
+    - There is a noticeable "pinch" or rapid thinning in the posterior third of the design, which might lead to structural weakness or early flow separation if not managed.
+
+- **Flow Field / Simulation Results**:
+    - **Pressure ($p$)**: High-pressure stagnation point at the leading edge; a large low-pressure (suction) zone covers the entire upper surface, indicating significant lift generation.
+    - **Velocity ($u$)**: Flow acceleration is visible over the upper surface crest, reaching maximum velocity early and maintaining it until the mid-chord.
+    - **Velocity ($v$)**: Positive vertical velocity at the front and negative vertical velocity at the rear show the flow being deflected downwards, confirming the creation of lift.
+    - **Wake/Separation**: The velocity plots show a thin wake trailing off the sharp edge, suggesting the flow remains mostly attached, though the extreme thinness at the trailing edge might be causing a small recirculation bubble.
+
+- **Parameter Mapping and Improvements**:
+    - **Design 1's Success**: The high reward (1.1645) is driven by the sharp trailing edge (`e0` = 1.0) and the rounded leading edge (`e2` = -0.83), combined with the high radial distance for the leading edge (`r2` = 0.95).
+    - **Problematic Features**: The "pinched" mid-section is likely caused by the relatively low radius value for the lower surface control point (`r3` = -0.23), creating a very narrow profile.
+    - **Needed Changes**: 
+        1. Increase the thickness of the lower surface to prevent the "pinched" geometry and potentially improve the lift-to-drag ratio by smoothing the pressure recovery.
+        2. Refine the angular positions (`a` parameters) to shift the maximum thickness slightly forward, approximating a more efficient NACA-style distribution.
+        3. Maintain the high edginess at the trailing edge to ensure clean flow departure.

@@ -1,0 +1,16 @@
+- **Geometry**:
+    - The airfoil is characterized by a very high thickness-to-chord ratio, appearing more like an elongated ellipse than a high-performance wing section.
+    - The leading edge is broadly rounded, which is good for stall characteristics but contributes to high frontal area.
+    - The trailing edge is notably blunt and rounded, failing to taper to a sharp point, which is a major geometric flaw for subsonic aerodynamics.
+    - The curvature is exceptionally smooth throughout, indicating that the `edgy_param` is likely negative for most control points.
+
+- **Flow Field / Simulation Results**:
+    - The pressure field (1_p) shows a large stagnation region at the leading edge and a failure to recover pressure at the rear due to the blunt trailing edge.
+    - The X-velocity (1_u) plot reveals a massive wake deficit trailing behind the airfoil, indicating significant pressure drag (form drag).
+    - Velocity on the upper surface is high, but the thick profile creates a large displacement effect, which often leads to early separation if the angle of attack were higher.
+    - The Y-velocity (1_v) shows clear flow deflection, but the symmetry of the wake suggests the design is operating at a low lift-to-drag efficiency.
+
+- **Critique & Mapping**:
+    - The blunt trailing edge (caused by low `edgy_param` on the rear-most point, CP2) is the primary source of drag visible in the velocity wake.
+    - The excessive thickness (linked to high `radius_param` values for the top and bottom points) increases the profile drag unnecessarily.
+    - Key changes needed: 1) Sharpen the trailing edge by increasing the `edgy_param` for the aft control point. 2) Reduce overall thickness by decreasing the `radius_param` for the upper and lower points. 3) Maintain the smoothness of the leading edge to prevent flow separation at the nose.

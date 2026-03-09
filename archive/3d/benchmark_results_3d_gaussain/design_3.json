@@ -1,0 +1,14 @@
+{
+  "design_name": "Initial_Balanced_Delta_Vortex",
+  "le_sweep": 63.99936670113784,
+  "root_chord_in": 25.21857320299323,
+  "twist_root": -3.547654090287665,
+  "twist_tip": -7.6376910380968255,
+  "dihedral": 1.710426914348635,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

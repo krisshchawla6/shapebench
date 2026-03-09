@@ -1,0 +1,9 @@
+*   **Strategy**: Instead of minor tweaks, I will generate a **High-Lift, Low-Drag Laminar-Style** profile. The goal is to push the thickness distribution slightly forward while thinning the profile to reduce form drag, and increasing aft-camber to maintain lift.
+*   **Leading Edge (P0)**: I will select a **sharper leading edge** than Design 1 to reduce drag.
+    *   *Action*: Set `r0` to a negative value (approx -0.05 to -0.1) effectively reducing the nose radius compared to Design 1's 0.02.
+*   **Upper Surface (P1)**: I will increase the "suction" potential by slightly increasing the radius (thickness/height) but keeping the crest well-positioned.
+    *   *Action*: Set `r1` slightly higher than Design 1 (approx 0.25 vs 0.20) for more lift capacity, with `a1` similar (approx 0.2) to maintain a stable pressure center.
+*   **Trailing Edge (P2)**: I will push for a **more extended chord** to maximize the effective lifting surface area.
+    *   *Action*: Set `r2` closer to the limit (approx -0.95 vs -0.84) to elongate the tail. Keep `e2` strictly at 1.0 for sharpness.
+*   **Lower Surface (P3)**: I will create a more pronounced **under-camber** (concavity) to increase the pressure differential.
+    *   *Action*: Set `r3` closer to 0 or slightly negative (approx -0.1) to "tuck" the belly closer to the mean line, and adjust `a3` to ensure smooth curvature into the trailing edge.

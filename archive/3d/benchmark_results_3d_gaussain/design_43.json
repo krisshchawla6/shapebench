@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_MaxTwist_LargeChord",
+  "le_sweep": 69.71325656512676,
+  "root_chord_in": 35.16334101730838,
+  "twist_root": 10.0,
+  "twist_tip": -8.720668374526861,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

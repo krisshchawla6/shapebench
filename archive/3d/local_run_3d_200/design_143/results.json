@@ -1,0 +1,33 @@
+{
+  "design_name": "Refined_Cambered_Washout_Delta_V2",
+  "design_params": {
+    "le_sweep_deg": 62.76005108308949,
+    "root_chord_in": 32.40441493223346,
+    "twist_root_deg": -5.449048221661917,
+    "twist_tip_deg": -6.005869114285355,
+    "dihedral_deg": 4.401141374901556,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.3810700424611875,
+    "CDi": 0.02764944530849938,
+    "CM": -0.4119552360175774,
+    "L_D": 13.782194840055158
+  },
+  "corrected_results": {
+    "CL": 0.21733743709335487,
+    "CDi": 0.009116772178615484,
+    "CM": -0.1954077123863701,
+    "L_D": 23.83929671985735
+  }
+}

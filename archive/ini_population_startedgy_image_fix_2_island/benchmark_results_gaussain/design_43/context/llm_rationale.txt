@@ -1,0 +1,8 @@
+*   **Visual Intuition Strategy**: The primary visual flaw inferred is surface irregularity. The new design prioritizes **geometric continuity**. By clamping the "edgy" parameters for the leading edge and main surfaces to nearly -1.0, we ensure a smooth pressure gradient, which is critical for minimizing skin friction and form drag.
+*   **Population Insight**: Design 1 performs well (Rank 5) largely due to the sharp trailing edge ($e_2=1.0$). I will retain this feature ($e_2 \approx 1.0$) while fixing the "noise" in the other parameters. Design 6 failed with jagged/irregular values; stability comes from smoothness.
+*   **Aerodynamic Strategy**: I will attempt a **High-Camber Laminar Profile**.
+    *   **CP0 (LE)**: Increased radius ($r > 0$) for a robust stagnation point.
+    *   **CP1 (Upper)**: Increased radius and positive angle to boost lift (camber), but with maximum smoothness.
+    *   **CP2 (TE)**: Kept sharp to enforce the Kutta condition cleanly.
+    *   **CP3 (Lower)**: Slightly scooped (negative radius/angle) to increase relative camber, but kept smooth.
+*   **Evolutionary Move**: This design moves away from the "random noise" of the current population and tests a highly structured, smooth, engineered geometry that resembles a supercritical airfoil.

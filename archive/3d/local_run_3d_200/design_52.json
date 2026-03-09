@@ -1,0 +1,14 @@
+{
+  "design_name": "CamberedHighSweepAnhedral",
+  "le_sweep": 68.16643770992424,
+  "root_chord_in": 31.632926426879273,
+  "twist_root": -9.280420908921771,
+  "twist_tip": -7.636785321784036,
+  "dihedral": 3.886170730291803,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

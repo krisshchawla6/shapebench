@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid_Sweep_Twist_NACA2410",
+  "design_params": {
+    "le_sweep_deg": 48.45677607900414,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 10,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.12877450020454115,
+    "CDi": 0.003397980180596366,
+    "CM": -0.15345671923078738,
+    "L_D": 37.897366482561544
+  },
+  "corrected_results": {
+    "CL": 0.0875074370590109,
+    "CDi": 0.001972047442048513,
+    "CM": -0.1049582115805579,
+    "L_D": 44.37390054273258
+  }
+}

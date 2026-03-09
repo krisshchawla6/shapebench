@@ -1,0 +1,12 @@
+*   **Geometry Observations**:
+    *   Design 1 shows a cambered airfoil with a noticeably thin profile.
+    *   The leading edge appears moderately rounded but transitions quickly into the upper surface.
+    *   The trailing edge is sharp, as indicated by the high `edgy_param` (1.0) at CP2.
+    *   There is a slight geometric irregularity or "wavy" quality on the lower surface, likely due to the interaction between the negative radii at CP2 and CP3.
+*   **Flow Field Observations**:
+    *   **Pressure (`1_p.png`)**: Shows a clear suction peak on the upper leading edge, indicating effective lift generation. The pressure recovery seems reasonable, though the gradients are steep.
+    *   **Velocity (`1_u.png` & `1_v.png`)**: The wake is visible and somewhat turbulent but relatively narrow, suggesting attached flow over most of the chord.
+    *   **Performance**: The high reward (Rank 0) suggests this thin, cambered configuration is near-optimal for the current objective, likely maximizing L/D by minimizing form drag.
+*   **Parameter Mapping**:
+    *   The high reward comes from a combination of moderate leading edge thickness (`r0 ~ -0.07`), moderate camber (`a1 ~ 0.15`), and a sharp, thin trailing edge (`r2 ~ -0.7`, `e2=1.0`).
+    *   Geometric flaws in lower-ranked designs (like Design 4) often stem from excessive camber (`a1 > 0.3`) or insufficient thinning at the trailing edge, leading to separation.

@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_LowSweep_HighTwist_Dihedral",
+  "le_sweep": 45.0,
+  "root_chord_in": 37.45155288378136,
+  "twist_root": 9.020628418289053,
+  "twist_tip": -8.537294570828237,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

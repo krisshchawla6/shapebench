@@ -1,0 +1,11 @@
+Design 1, with a reward of 4016.0090, significantly outperforms all other listed designs. Its parameters include a moderate-high leading edge sweep (65.5 deg), a mid-range root chord (34.8 inches), and a specific washout distribution with a more negative twist at the root (-7.1 deg) than at the tip (-4.6 deg). It also employs a NACA 4412 airfoil (cambered, max camber at 40% chord, 12% thickness) and a slight anhedral (-1.7 deg).
+
+While no image is provided, we can infer from Design 1's success that this combination likely results in a highly favorable spanwise lift distribution, minimizing induced drag for a given lift. The specific washout pattern likely unloads the wingtips, delaying tip stall and improving overall lift efficiency. The use of a cambered airfoil (NACA 4412) directly contributes to lift generation.
+
+Compared to lower-ranked designs, which often feature extreme washout at the root (e.g., -10.0 deg) and varied tip twists, Design 1 suggests that a *balanced*, less extreme twist distribution is key. Designs with `naca_p=0` (like Design 3) or different `naca_m` values also perform significantly worse, highlighting the importance of both camber and its placement. The parameter `le_sweep` is consistently in the 63-68 range for the better-performing designs, indicating this range might be optimal for vortex lift without excessive drag penalties.
+
+Key design changes needed to improve designs in the population:
+1.  **Refine Twist Distribution:** Move away from extreme root washout and explore varied, less aggressive washout gradients between root and tip.
+2.  **Optimize Airfoil Camber:** Investigate specific combinations of `naca_m` and `naca_p` (e.g., `m=4, p=4` or similar) that provide high lift without excessive drag.
+3.  **Explore Sweep Extremes:** While 63-68 deg sweep is good, investigate slightly higher sweep angles to push vortex lift potential, ensuring accompanying changes mitigate drag.
+4.  **Vary Dihedral:** Explore both moderate anhedral and dihedral to understand their impact on stability and performance beyond the slight anhedral of Design 1.

@@ -1,0 +1,7 @@
+*   **Strategy Focus:** The goal is to explore **underexplored regions** and **boundary values**. The current population clusters around thin, highly cambered foils with smooth body points.
+*   **Exploration Hypothesis - "Thick Semi-Symmetric Profile":** I will test a significantly thicker airfoil. Increasing the radius of CP1 (Upper) and CP3 (Lower) effectively increases the thickness-to-chord ratio. While this increases form drag, it can delay stall and improve lift characteristics if shaped correctly.
+*   **Geometric Variation:**
+    *   **CP1 (Upper):** Increase `radius_param` to **0.46** (well outside the 0.16-0.33 cluster) to create a robust upper curve. Shift `angle_param` to **0.42** (lower than the typical 0.58) to flatten the crest slightly and potentially move the max thickness point.
+    *   **CP3 (Lower):** Increase `radius_param` to **0.25** (double the typical ~0.13) to add volume to the underside, reducing camber but increasing structural depth.
+    *   **Corner Sharpness (Edgy):** Instead of the default -1.0 (smooth), I will set CP1 and CP3 `edgy_param` to **-0.65**. This is a novel value in this population, testing if a slightly "tighter" spline curvature (less perfectly round) benefits the pressure gradients.
+    *   **CP2 (Trailing Edge):** Set `angle_param` to **-0.05** (closer to 0 than the typical -0.2). This raises the tail slightly, creating a reflexed effect which can reduce pitching moment, crucial for stability.

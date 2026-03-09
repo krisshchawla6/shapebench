@@ -1,0 +1,33 @@
+{
+  "design_name": "Cambered High Washout Exploitation",
+  "design_params": {
+    "le_sweep_deg": 65.64905834621585,
+    "root_chord_in": 40.868933388523985,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -9.061029038627403,
+    "dihedral_deg": -8.675823851742372,
+    "naca": {
+      "m": 4,
+      "p": 0,
+      "t": 16,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.00798140862752401,
+    "CDi": 4.994956570622624e-05,
+    "CM": -0.00887499854864734,
+    "L_D": 159.78934981068562
+  },
+  "corrected_results": {
+    "CL": -0.1276233311971841,
+    "CDi": -0.0003910480786775402,
+    "CM": 0.1691123154347447,
+    "L_D": 326.3622509763635
+  }
+}

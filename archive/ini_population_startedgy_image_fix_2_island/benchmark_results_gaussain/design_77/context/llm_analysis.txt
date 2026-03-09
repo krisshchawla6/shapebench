@@ -1,0 +1,10 @@
+**Geometry Observations (from Design 1 images):**
+- **Overall Shape:** The airfoil features a high-camber profile with a relatively sharp leading edge transition and a defined sharp trailing edge. The upper surface appears to have a pronounced hump near the mid-chord, while the lower surface is relatively flat or slightly concave.
+- **Leading Edge:** The nose region (controlled by CP0) seems somewhat blunt but functional, transitioning quickly into the upper suction surface.
+- **Trailing Edge:** The trailing edge (CP2) is sharp and well-defined, preventing blunt-body drag penalties, which correlates with the high reward.
+- **Flaws:** The transition from the leading edge to the upper peak thickness (controlled by CP1) looks slightly abrupt in the curvature plots, potentially causing the strong suction peak seen in the pressure plot.
+
+**Flow Field Observations:**
+- **Pressure (`1_p.png`):** There is a distinct low-pressure zone (suction peak) on the upper surface immediately following the leading edge. The recovery towards the trailing edge seems reasonable but could be smoother to prevent separation.
+- **Velocity (`1_u.png`):** High acceleration over the upper surface confirms the lift generation. The wake region appears relatively narrow, indicating acceptable drag levels, but there is room to improve the lift-to-drag ratio by refining the pressure recovery.
+- **Mapping:** The high reward of Design 1 (Rank 1) suggests the current topology (High `a1`, Low `r3`, Sharp `e2`) is correct. The lower ranked designs (Design 2, 3) generally have thicker profiles (higher `r1`, `r3`) or peaks shifted too far back/forward.

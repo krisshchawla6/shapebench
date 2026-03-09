@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_SymmetricAirfoil",
+  "le_sweep": 65.75539451566311,
+  "root_chord_in": 22.75008685336966,
+  "twist_root": 3.7767217419608006,
+  "twist_tip": -3.296900580849669,
+  "dihedral": 12.471842121764329,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

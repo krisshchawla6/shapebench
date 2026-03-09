@@ -1,0 +1,16 @@
+{
+  "framework": "blended_net_3d_islands",
+  "environment": "BlendedNet",
+  "iterations": 1000,
+  "inspirations": 5,
+  "initialize_n_sample": 6,
+  "action": "gaussain",
+  "num_islands": 3,
+  "migration_interval": 10,
+  "migration_rate": 0.3,
+  "pw_alpha": 3.0,
+  "mach": 0.3,
+  "re": 1e7,
+  "alpha": 4.0,
+  "debug": true
+}

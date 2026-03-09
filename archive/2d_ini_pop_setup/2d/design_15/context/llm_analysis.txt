@@ -1,0 +1,7 @@
+Design 1 (Reward: 3.1815) represents the current performance peak, characterized by high smoothness (edgy_param values of -0.76 to -0.95) for the first three control points. This indicates that a smooth leading edge and continuous curvature are vital for maintaining attached flow. However, Design 1 has a moderate edginess (0.39) at the final control point (CP3) and a high radius (1.0), which likely results in a relatively blunt trailing edge. This bluntness increases pressure drag (base drag) in the wake. The flow field images suggest the suction peak is concentrated near the leading edge, which can lead to early boundary layer transition and higher skin friction. 
+
+Key changes needed:
+1.  **Sharpen the Trailing Edge**: Increase the edginess of the final control point to near 1.0 to minimize the wake deficit and pressure drag.
+2.  **Rearward Thickness Shift**: Adjust the angle and radius parameters of CP1 and CP2 to shift the maximum thickness further aft, promoting a more laminar flow and a favorable pressure gradient over a larger portion of the chord.
+3.  **Refine Curvature Distribution**: Reduce the radius of the lower surface (CP2) to create a more slender, "supercritical" style profile that reduces the overall frontal area and shock strength (if applicable at high speeds).
+4.  **Camber Optimization**: Use asymmetric angle offsets to create a more pronounced camber line, improving the lift-to-drag ratio without requiring extreme thickness.

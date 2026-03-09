@@ -1,0 +1,33 @@
+{
+  "design_name": "VortexCamberWashoutHybrid",
+  "design_params": {
+    "le_sweep_deg": 68.50673816287778,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.08124492927767916,
+    "CDi": 0.0030917762335907206,
+    "CM": -0.10481341819348815,
+    "L_D": 26.277752055595272
+  },
+  "corrected_results": {
+    "CL": 0.03920408477267045,
+    "CDi": 0.001484462384657854,
+    "CM": -0.050386846513793715,
+    "L_D": 26.409618174128674
+  }
+}

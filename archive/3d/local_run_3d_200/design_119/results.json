@@ -1,0 +1,33 @@
+{
+  "design_name": "SymmetricAirfoil_InvertedWashout_PositiveDihedral",
+  "design_params": {
+    "le_sweep_deg": 62.81458153908209,
+    "root_chord_in": 39.95702030040245,
+    "twist_root_deg": -3.321422752165353,
+    "twist_tip_deg": -6.110324801062059,
+    "dihedral_deg": -0.7587811076200079,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.28378487211724035,
+    "CDi": 0.02741982530663874,
+    "CM": -0.2521314700938691,
+    "L_D": 10.34962363704527
+  },
+  "corrected_results": {
+    "CL": 0.011854066115399168,
+    "CDi": 0.0016988488950482295,
+    "CM": 0.05241284003436202,
+    "L_D": 6.977704815272953
+  }
+}

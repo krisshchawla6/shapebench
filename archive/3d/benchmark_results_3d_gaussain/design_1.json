@@ -1,0 +1,14 @@
+{
+  "design_name": "VortexCamberWashoutHybrid",
+  "le_sweep": 68.50673816287778,
+  "root_chord_in": 36.98102604982463,
+  "twist_root": 4.673213519806199,
+  "twist_tip": -6.518224687318368,
+  "dihedral": -1.1656931949988039,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

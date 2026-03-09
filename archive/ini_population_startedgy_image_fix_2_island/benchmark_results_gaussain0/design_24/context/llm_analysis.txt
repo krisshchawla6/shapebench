@@ -1,0 +1,13 @@
+The geometry of Design 1 exhibits the following characteristics:
+*   An elongated, thin profile with a distinct camber, where the upper surface is more curved than the lower surface.
+*   A relatively blunt leading edge that transitions smoothly into a tapering tail.
+*   A slight "pinched" or concave inflection on the lower surface towards the rear, likely caused by the interaction between the third and fourth control points.
+*   Generally smooth curvature on the suction side, though the trailing edge appears very sharp and elongated.
+
+The flow field and simulation results for Design 1 show:
+*   A well-defined stagnation point at the leading edge, with a high-pressure zone (red) transitioning into a broad low-pressure region (blue) across the upper surface.
+*   High velocity ($u$) magnitudes over the upper surface, indicating significant lift generation.
+*   A narrow, stable wake trailing behind the airfoil, suggesting relatively low drag for the amount of lift produced.
+*   Slight pressure recovery fluctuations near the trailing edge where the geometry pinches, which could be a source of parasitic drag.
+
+Design 1's action vector `[-0.772208, 0.034443, -0.826525, 0.245416, 0.914808, -0.910534, 1.0, -0.143621, 0.998891, -0.355204, -0.609027, -0.867132]` maps to these features. The `radius_param` of 1.0 at $P_2$ combined with a high `edgy_param` (0.998) creates that extremely sharp, extended trailing edge. The negative `radius_param` at $P_3$ (-0.355) creates the thinness in the aft section. To improve this, we should: 1) Smooth the lower surface transition to eliminate the slight "waist" effect, 2) maintain the high-lift camber of the upper surface, and 3) slightly broaden the leading edge for better angle-of-attack robustness.

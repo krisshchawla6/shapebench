@@ -1,0 +1,116 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.191425, 0.00517, -0.974481, 0.189386, 0.501187, -0.936277, 0.969696, -0.239854, 0.989082, 0.07581, -0.217943, -0.974363]
+  - Reward: 5.1927
+  - Rank: 1
+
+Design 2:
+  - Action: [0.216601, 0.004134, -0.971449, 0.312062, 0.539855, -0.949852, 0.998624, -0.199639, 1.0, 0.138221, -0.234817, -0.952676]
+  - Reward: 4.1446
+  - Rank: 14
+
+Design 3:
+  - Action: [0.210733, 0.031605, -1.0, 0.326266, 0.588434, -1.0, 0.97754, -0.20411, 1.0, 0.13001, -0.237044, -1.0]
+  - Reward: 3.9574
+  - Rank: 15
+
+Design 4:
+  - Action: [0.157897, 0.004788, -0.892331, 0.165264, 0.539382, -0.95485, 1.0, -0.12312, 1.0, 0.127963, -0.115311, -1.0]
+  - Reward: 2.4418
+  - Rank: 18
+
+Design 5:
+  - Action: [0.750886, -0.02095, -1.0, 0.514952, 0.227295, -0.870633, -0.316972, 0.05848, 0.918344, 0.25506, -0.124084, -0.864977]
+  - Reward: -0.0888
+  - Rank: 69
+
+Design 6:
+  - Action: [0.317096, -0.05045, -0.902909, 0.45744, 0.18405, -0.904781, -0.27893, 0.019527, 0.883469, 0.057667, -0.21471, -0.972429]
+  - Reward: -0.0177
+  - Rank: 68
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.
+
+
+# Task: Generate New Airfoil Design (with Direct Values)
+
+First, analyze the provided information:
+
+1. **Image Analysis**: If images are provided, they show a representative design sampled from the population (listed as Design 1 above for reference). You MUST first describe what you actually see in the images before analyzing action vectors:
+
+- In 3-4 bullet points, describe the **geometry** you observe: What does the shape look like? Is it smooth or jagged? Symmetric or asymmetric? Thick or thin? Are there any obvious geometric flaws visible (discontinuities, pinch points, blunt edges, odd proportions)?
+- In 3-4 bullet points, describe the **flow field / simulation results** you observe: What do the pressure, velocity, or other field plots show? Where are high/low regions? Is there visible flow separation, recirculation, wake asymmetry, or pressure spikes?
+
+Only AFTER describing what you see in the images, reference Design 1's action vector and reward to learn parameter-geometry mappings.
+
+Critically and relentlessly assess the design shown:
+- Which visible geometric features are problematic and why?
+- Which action parameters likely caused the geometric flaws you see?
+- List 3-4 key design/geometric changes needed to improve designs in the population
+
+
+**Strategy Focus**: **Hybrid Strategy**: Examine the design database and identify 2-3 designs with complementary strengths 
+    (e.g., one with good lift, another with low drag). Analyze their parameter vectors and geometric features from the images. 
+    Your new design should blend parameter characteristics from these designs, creating values that interpolate 
+    or combine their successful traits into a novel hybrid configuration.
+
+
+2. **Design Reasoning**: Based on the design database and population state, think step-by-step about what NEW design should be explored to advance the population. **Follow the Strategy Focus guidance above** - this determines HOW you should approach the design. Consider unexplored geometric variations and different aerodynamic strategies. Focus on diversity and bold exploration, not incremental tweaking of existing designs based on aerodynamic principles.
+
+In your reasoning, provide 4-6 bullet points that:
+- **Apply the Strategy Focus approach described above**
+- Draw insights from the population database (what patterns lead to high/low rewards?)
+- Incorporate observations from the image analysis (what aerodynamic phenomena are present?)
+- Identify specific geometric parameters to explore and WHY
+- Apply your judgment as an evolutionary optimizer (what will advance the search?)
+
+Then, create a new airfoil by specifying precise values for each parameter. Use 4+ decimals. n_cp=4 n_sp=20.
+
+Design considerations: The reasoning above should be applied to the design parameters to evolve the population.
+
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [<r0>, <a0>, <e0>],
+    [<r1>, <a1>, <e1>],
+    [<r2>, <a2>, <e2>],
+    [<r3>, <a3>, <e3>]
+  ],
+  "name": "<descriptive_name>"
+}
+
+Replace all <placeholders> with actual float values in [-1.0, 1.0].
+Each inner array is [radius_param, angle_param, edgy_param] for that control point.
+
+
+**Response Format:**
+Provide your response in the following structure:
+
+## Analysis
+[If images provided: first describe the geometry (3-4 bullets on what you see) and the flow fields (3-4 bullets on what you see). Then reference Design 1's action vector and reward. Identify which visible flaws map to which parameters, and list 3-4 key changes needed]
+
+## Reasoning
+[4-6 bullet points with design insights: combine population database patterns, image analysis observations, the Strategy Focus guidance above, and your judgment as an evolutionary optimizer to justify the new design strategy. Explicitly explain how your design follows the Strategy Focus.]
+
+## Design Parameters
+[Your JSON with the design parameters as shown in the example above]

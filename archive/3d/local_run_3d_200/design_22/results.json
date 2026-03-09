@@ -1,0 +1,33 @@
+{
+  "design_name": "ModerateSweep_CamberedThin_DiffWashout",
+  "design_params": {
+    "le_sweep_deg": 63.122921519208425,
+    "root_chord_in": 33.20239762524798,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -2.831254150244472,
+    "dihedral_deg": -3.4417722793995127,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.14394255783355306,
+    "CDi": 0.01020766797199541,
+    "CM": -0.17462660298866747,
+    "L_D": 14.101414566819512
+  },
+  "corrected_results": {
+    "CL": 0.044328155411024944,
+    "CDi": 0.00012887929499083797,
+    "CM": -0.032805055252351015,
+    "L_D": 343.95094583793485
+  }
+}

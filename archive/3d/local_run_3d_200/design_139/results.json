@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweepAggressiveWashoutCamberedThick",
+  "design_params": {
+    "le_sweep_deg": 72.72773240655862,
+    "root_chord_in": 44.37179020958433,
+    "twist_root_deg": -4.213648199500504,
+    "twist_tip_deg": -8.571368480229005,
+    "dihedral_deg": 2.098374247197225,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 20,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.16866347730002465,
+    "CDi": 0.011523593282252657,
+    "CM": -0.15780250507387697,
+    "L_D": 14.636361521000675
+  },
+  "corrected_results": {
+    "CL": -0.15184724780225642,
+    "CDi": -0.010566716906701488,
+    "CM": 0.21213013509572737,
+    "L_D": 14.370333675349416
+  }
+}

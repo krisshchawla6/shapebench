@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  table { border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid #333; padding: 8px 14px; text-align: center; }
+  th { background-color: #2c3e50; color: white; font-weight: bold; }
+  tr:nth-child(even) { background-color: #f2f2f2; }
+  td:first-child { text-align: left; font-weight: bold; }
+  .positive { color: #27ae60; }
+  .negative { color: #c0392b; }
+  h2 { font-family: Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h2>Strategy Performance — Island Model (80 designs, 6 seeds, 74 evolved)</h2>
+<table>
+  <tr>
+    <th>Strategy</th>
+    <th>Count</th>
+    <th>Improved</th>
+    <th>Avg Δ</th>
+    <th>Med Δ</th>
+    <th>Best Δ</th>
+    <th>Avg Reward</th>
+    <th>Best Reward</th>
+    <th>Best Design</th>
+    <th>Fail Rate</th>
+  </tr>
+  <tr>
+    <td>Hybrid</td>
+    <td>5</td>
+    <td>60.0%</td>
+    <td class="positive">+0.444</td>
+    <td class="positive">+0.036</td>
+    <td class="positive">+2.765</td>
+    <td>2.301</td>
+    <td>4.840</td>
+    <td>design_77</td>
+    <td>0.0%</td>
+  </tr>
+  <tr>
+    <td>Exploit</td>
+    <td>13</td>
+    <td>38.5%</td>
+    <td class="negative">−0.576</td>
+    <td class="negative">−0.070</td>
+    <td class="positive">+1.536</td>
+    <td>1.819</td>
+    <td>4.716</td>
+    <td>design_74</td>
+    <td>7.7%</td>
+  </tr>
+  <tr>
+    <td>Novel</td>
+    <td>19</td>
+    <td>26.3%</td>
+    <td class="negative">−0.772</td>
+    <td class="negative">−0.583</td>
+    <td class="positive">+3.258</td>
+    <td>1.945</td>
+    <td>4.858</td>
+    <td>design_45</td>
+    <td>0.0%</td>
+  </tr>
+  <tr>
+    <td>Visual Intuition</td>
+    <td>17</td>
+    <td>52.9%</td>
+    <td class="negative">−1.235</td>
+    <td class="positive">+0.058</td>
+    <td class="positive">+2.882</td>
+    <td>1.180</td>
+    <td>5.236</td>
+    <td>design_60</td>
+    <td>11.8%</td>
+  </tr>
+  <tr>
+    <td>Diversify</td>
+    <td>20</td>
+    <td>5.0%</td>
+    <td class="negative">−1.369</td>
+    <td class="negative">−0.977</td>
+    <td class="positive">+0.085</td>
+    <td>0.808</td>
+    <td>4.531</td>
+    <td>design_70</td>
+    <td>10.0%</td>
+  </tr>
+</table>
+</body>
+</html>

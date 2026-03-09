@@ -1,0 +1,14 @@
+{
+  "design_name": "ModerateSweep_CamberedThin_DiffWashout",
+  "le_sweep": 63.122921519208425,
+  "root_chord_in": 33.20239762524798,
+  "twist_root": -10.0,
+  "twist_tip": -2.831254150244472,
+  "dihedral": -3.4417722793995127,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweepSmoothTwistThinAirfoil",
+  "design_params": {
+    "le_sweep_deg": 65.56457219651824,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.08973985805555133,
+    "CDi": 0.003256938217549418,
+    "CM": -0.11402735862735555,
+    "L_D": 27.553441932672982
+  },
+  "corrected_results": {
+    "CL": 0.048140466536243376,
+    "CDi": 0.0016619703248841637,
+    "CM": -0.06055006432133589,
+    "L_D": 28.965900182121892
+  }
+}

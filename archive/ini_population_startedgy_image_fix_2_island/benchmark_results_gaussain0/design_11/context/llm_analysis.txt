@@ -1,0 +1,18 @@
+- **Geometry Observation**: 
+    - The airfoil in Design 1 exhibits an extremely sharp, almost needle-like leading edge.
+    - The overall profile is very thin, with the maximum thickness located relatively far forward.
+    - The trailing edge appears to close cleanly, but the lower surface shows a slight flattening or subtle concavity toward the rear half.
+    - There is a noticeable "kink" in curvature at the leading edge where the upper and lower surfaces meet, suggesting a lack of a proper leading-edge radius.
+
+- **Flow Field / Simulation Results**:
+    - **Pressure Plot**: Shows a massive, concentrated low-pressure (blue) spike exactly at the sharp leading edge. This indicates a stagnation point transition that is too abrupt, which usually leads to early flow separation at higher angles of attack.
+    - **Velocity (U)**: The flow remains mostly attached over the upper surface, but the wake thickness suggests some energy loss.
+    - **Velocity (V)**: Shows strong upwash at the nose and downwash at the tail, confirming lift generation, but the intensity at the nose is localized due to the sharpness.
+
+- **Mapping & Key Changes**:
+    - Design 1's action vector shows `e0 = 1.0` (edgy) and `r0 = -0.76`. This high "edgy" parameter is clearly responsible for the sharp, problematic leading edge spike.
+    - The reward is high (1.1645), meaning the thin profile is aerodynamic, but the "spike" in pressure is a failure point for efficiency.
+    - **Key Changes Needed**: 
+        1. Significantly reduce the `edgy_param` at the leading edge to create a rounded nose radius.
+        2. Increase the `radius_param` of the upper control point to slightly thicken the airfoil for better pressure distribution.
+        3. Adjust the lower surface parameters to eliminate the slight concavity and ensure a smoother pressure recovery.

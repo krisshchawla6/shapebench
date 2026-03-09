@@ -1,0 +1,11 @@
+{
+  "le_sweep": 68.0,
+  "root_chord_in": 38.0,
+  "twist_root": -9.0,
+  "twist_tip": -7.0,
+  "dihedral": -6.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 14,
+  "name": "Hybrid_SweepTwistThicker_Anhedral"
+}

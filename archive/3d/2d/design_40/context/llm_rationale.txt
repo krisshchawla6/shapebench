@@ -1,0 +1,5 @@
+*   **Refining the "Pinch":** Design 1's success with a low CP1 radius (0.23) suggests that a thin profile is favored. I will test a slightly more robust radius (0.38) to see if a smoother curvature transition improves the lift-to-drag ratio by delaying separation.
+*   **Trailing Edge Optimization:** Design 1 uses a very high angle_param (0.98) for the trailing edge. I will slightly reduce this to 0.92 to explore if a more horizontal exit flow improves pressure recovery.
+*   **Leading Edge Blunting:** I will maintain a high radius for CP0 (0.985) but set the edgy_param to -0.95 to ensure a perfectly smooth stagnation point, reducing drag.
+*   **Camber Control:** By adjusting the angle_param of CP1 (0.55) and CP2 (-0.12), I am aiming for a supercritical-style upper surface which can maintain lift with lower wave drag or separation.
+*   **Evolutionary Exploration:** This design bridges the gap between the hyper-thin Design 1 and the overly-thick lower-ranking designs, exploring the "sweet spot" of thickness distribution.

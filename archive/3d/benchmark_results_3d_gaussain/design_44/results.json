@@ -1,0 +1,33 @@
+{
+  "design_name": "MaxTwistThinLowSweepHighDihedral",
+  "design_params": {
+    "le_sweep_deg": 48.28727944437981,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.12921244127714468,
+    "CDi": 0.003417316751569632,
+    "CM": -0.1538874758272045,
+    "L_D": 37.81108122850924
+  },
+  "corrected_results": {
+    "CL": 0.08853260441809854,
+    "CDi": 0.0020125322868276532,
+    "CM": -0.10618793140305138,
+    "L_D": 43.99065048424745
+  }
+}

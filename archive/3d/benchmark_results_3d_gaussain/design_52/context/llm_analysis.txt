@@ -1,0 +1,7 @@
+The provided reference design (Design 1) with `le_sweep=46.19`, `root_chord_in=25.03`, `twist_root=8.26`, `twist_tip=-10.0`, `dihedral=9.79`, and NACA 2409 achieved a reward of 39.99. The Cp distribution shows strong leading-edge vortices, characteristic of low-to-moderate sweep delta wings, leading to good lift generation. The pressure recovery over the wing surface appears generally smooth, indicating efficient lift. The combination of positive root twist and extreme negative tip twist (washout) likely contributes to a favorable spanwise load distribution, delaying tip stall and reducing induced drag. The positive dihedral further aids stability.
+
+Key issues or areas for exploration based on the top-ranked designs:
+1.  **Limited Sweep Range**: All top designs are clustered in the low to mid-sweep range (46-51 degrees). The higher sweep range (above 55 degrees) is largely unexplored by top performers.
+2.  **Consistent Twist Profile**: A strong positive root twist and aggressive negative tip twist (washout, often at -10.0 degrees) is prevalent. Alternative twist distributions, especially for different sweep angles, are unexplored.
+3.  **Conservative Camber**: Only NACA 24xx airfoils (m=2, p=4) have shown high rewards. Higher camber (m=4) or symmetric (m=0) airfoils are untested in high-performing designs.
+4.  **Uniform Dihedral**: High positive dihedral values (near +15.0 degrees) are common. The impact of neutral or negative dihedral (anhedral) on CL/CDi across different sweep ranges is not well understood.

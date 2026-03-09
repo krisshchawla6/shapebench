@@ -1,0 +1,9 @@
+*   **Exploration Strategy:** I will explore the "boundary" regions of the radius parameters and the "underexplored" combination of control point signs. Design 2 (Best) used large positive radii for CP0 and CP2, while Design 1 used negative. I will test a **mixed-sign large-magnitude** strategy to push the geometry limits.
+*   **Geometric Smoothing:** I will assign large absolute values to the radius parameters (`> 0.5`) for CP1 (upper) and CP3 (lower). This usually results in smoother, more sweeping curves, reducing the "bumpiness" seen in Design 1.
+*   **Trailing Edge Variation:** While Design 2 used `r ~ 0.86` and Design 1 used `r ~ -0.71` for the sharp trailing edge (CP2), the region around `0.0` to `0.4` is underexplored. I will test a moderate positive radius (`0.35`) combined with high sharpness to see if a shorter or differently proportioned tail section yields better L/D.
+*   **Camber Maximization:** To maximize lift (and potentially reward), I will aggressively separate the angles of CP1 (upper, positive angle) and CP3 (lower, negative angle) to create a highly cambered "under-cut" profile, similar to high-lift low-speed airfoils.
+*   **Parameter Specifics:**
+    *   **CP0 (LE):** Keep smooth (`edgy ~ -1`) but use a distinct negative radius to contrast with Design 2.
+    *   **CP1 (Top):** Maximize thickness/lift contribution with high radius and angle.
+    *   **CP2 (TE):** Sharp (`edgy = 1.0`) is non-negotiable for performance, but radius will be intermediate.
+    *   **CP3 (Bot):** push for a concave lower surface (negative angle).

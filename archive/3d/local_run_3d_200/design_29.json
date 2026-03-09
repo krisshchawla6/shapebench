@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_MaxRootWashout_ThinCamber",
+  "le_sweep": 74.26108835525791,
+  "root_chord_in": 23.684047411897364,
+  "twist_root": -10.0,
+  "twist_tip": -4.146058145697705,
+  "dihedral": -8.906398600386797,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

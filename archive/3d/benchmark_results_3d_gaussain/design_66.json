@@ -1,0 +1,14 @@
+{
+  "design_name": "HybridOptimizedDelta_T12",
+  "le_sweep": 47.564947463794866,
+  "root_chord_in": 33.44628588034178,
+  "twist_root": 10.0,
+  "twist_tip": -10.0,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "Initial_Moderate_Camber_Washout_Delta",
+  "design_params": {
+    "le_sweep_deg": 65.88026181248233,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 10,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.08875611968013782,
+    "CDi": 0.0032128923091792375,
+    "CM": -0.112938073274189,
+    "L_D": 27.62499055027816
+  },
+  "corrected_results": {
+    "CL": 0.045841857097517064,
+    "CDi": 0.0016115304441043294,
+    "CM": -0.0581433105981507,
+    "L_D": 28.446162630824798
+  }
+}

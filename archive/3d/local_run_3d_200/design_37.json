@@ -1,0 +1,14 @@
+{
+  "design_name": "CamberedWashoutExplorer",
+  "le_sweep": 65.51609837711328,
+  "root_chord_in": 34.78643701978183,
+  "twist_root": -7.132963532239833,
+  "twist_tip": -4.605112484236357,
+  "dihedral": -1.7232349482397291,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "RefinedMinSweepHighWashout",
+  "design_params": {
+    "le_sweep_deg": 45.0,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.13543559515926848,
+    "CDi": 0.0033403217572541776,
+    "CM": -0.1596641443837422,
+    "L_D": 40.54567344153088
+  },
+  "corrected_results": {
+    "CL": 0.09563547763649222,
+    "CDi": 0.0020364080703990325,
+    "CM": -0.11394405025356744,
+    "L_D": 46.96282588280674
+  }
+}

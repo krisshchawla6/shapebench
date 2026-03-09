@@ -1,0 +1,1122 @@
+[
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_0.json",
+    "rank": 0,
+    "reward": 19.063877005712996,
+    "aero": {
+      "CL": 0.028986568369938154,
+      "CDi": 0.0011824554868731206,
+      "CM": -0.03696257327996399,
+      "L_D": 24.513877005712995,
+      "reward": 19.063877005712996
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_0/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_1.json",
+    "rank": 0,
+    "reward": 20.959618174128675,
+    "aero": {
+      "CL": 0.03920408477267045,
+      "CDi": 0.001484462384657854,
+      "CM": -0.050386846513793715,
+      "L_D": 26.409618174128674,
+      "reward": 20.959618174128675
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_1/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_1.json",
+    "rank": 0,
+    "reward": 20.959618174128675,
+    "aero": {
+      "CL": 0.03920408477267045,
+      "CDi": 0.001484462384657854,
+      "CM": -0.050386846513793715,
+      "L_D": 26.409618174128674,
+      "reward": 20.959618174128675
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_1/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_1.json",
+    "rank": 0,
+    "reward": 20.959618174128675,
+    "aero": {
+      "CL": 0.03920408477267045,
+      "CDi": 0.001484462384657854,
+      "CM": -0.050386846513793715,
+      "L_D": 26.409618174128674,
+      "reward": 20.959618174128675
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_1/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4.json",
+    "rank": 0,
+    "reward": 24.384514632440634,
+    "aero": {
+      "CL": 0.04810459768499624,
+      "CDi": 0.0016123807703139097,
+      "CM": -0.06057626719578655,
+      "L_D": 29.834514632440634,
+      "reward": 24.384514632440634
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_4/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_17.json",
+    "rank": 0,
+    "reward": 28.136509938018758,
+    "aero": {
+      "CL": 0.059884001242491575,
+      "CDi": 0.0017829777893863565,
+      "CM": -0.07437398720094106,
+      "L_D": 33.58650993801876,
+      "reward": 28.136509938018758
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_17/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_17.json",
+    "rank": 0,
+    "reward": 28.136509938018758,
+    "aero": {
+      "CL": 0.059884001242491575,
+      "CDi": 0.0017829777893863565,
+      "CM": -0.07437398720094106,
+      "L_D": 33.58650993801876,
+      "reward": 28.136509938018758
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_17/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_19.json",
+    "rank": 0,
+    "reward": 32.44192850535141,
+    "aero": {
+      "CL": 0.0702677481453851,
+      "CDi": 0.0018544252276698268,
+      "CM": -0.0860158189271967,
+      "L_D": 37.891928505351416,
+      "reward": 32.44192850535141
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_19/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_19.json",
+    "rank": 0,
+    "reward": 32.44192850535141,
+    "aero": {
+      "CL": 0.0702677481453851,
+      "CDi": 0.0018544252276698268,
+      "CM": -0.0860158189271967,
+      "L_D": 37.891928505351416,
+      "reward": 32.44192850535141
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_19/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_19.json",
+    "rank": 0,
+    "reward": 32.44192850535141,
+    "aero": {
+      "CL": 0.0702677481453851,
+      "CDi": 0.0018544252276698268,
+      "CM": -0.0860158189271967,
+      "L_D": 37.891928505351416,
+      "reward": 32.44192850535141
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_19/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_19.json",
+    "rank": 0,
+    "reward": 32.44192850535141,
+    "aero": {
+      "CL": 0.0702677481453851,
+      "CDi": 0.0018544252276698268,
+      "CM": -0.0860158189271967,
+      "L_D": 37.891928505351416,
+      "reward": 32.44192850535141
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_19/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23.json",
+    "rank": 0,
+    "reward": 35.527975122218066,
+    "aero": {
+      "CL": 0.08036789828733672,
+      "CDi": 0.0019612462072036746,
+      "CM": -0.09726918282635107,
+      "L_D": 40.97797512221807,
+      "reward": 35.527975122218066
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_23/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_42.json",
+    "rank": 0,
+    "reward": 36.05294562872295,
+    "aero": {
+      "CL": 0.08128123561262635,
+      "CDi": 0.0019584449821887827,
+      "CM": -0.09829397589373792,
+      "L_D": 41.502945628722955,
+      "reward": 36.05294562872295
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_42/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_42.json",
+    "rank": 0,
+    "reward": 36.05294562872295,
+    "aero": {
+      "CL": 0.08128123561262635,
+      "CDi": 0.0019584449821887827,
+      "CM": -0.09829397589373792,
+      "L_D": 41.502945628722955,
+      "reward": 36.05294562872295
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_42/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_44.json",
+    "rank": 0,
+    "reward": 38.54065048424745,
+    "aero": {
+      "CL": 0.08853260441809854,
+      "CDi": 0.0020125322868276532,
+      "CM": -0.10618793140305138,
+      "L_D": 43.99065048424745,
+      "reward": 38.54065048424745
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_44/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_45.json",
+    "rank": 0,
+    "reward": 38.923900542732575,
+    "aero": {
+      "CL": 0.0875074370590109,
+      "CDi": 0.001972047442048513,
+      "CM": -0.1049582115805579,
+      "L_D": 44.37390054273258,
+      "reward": 38.923900542732575
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_45/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_45.json",
+    "rank": 0,
+    "reward": 38.923900542732575,
+    "aero": {
+      "CL": 0.0875074370590109,
+      "CDi": 0.001972047442048513,
+      "CM": -0.1049582115805579,
+      "L_D": 44.37390054273258,
+      "reward": 38.923900542732575
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_45/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_47.json",
+    "rank": 0,
+    "reward": 39.294921707072696,
+    "aero": {
+      "CL": 0.08765129147266762,
+      "CDi": 0.0019589103775057635,
+      "CM": -0.10507103705721052,
+      "L_D": 44.7449217070727,
+      "reward": 39.294921707072696
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_47/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_47.json",
+    "rank": 0,
+    "reward": 39.294921707072696,
+    "aero": {
+      "CL": 0.08765129147266762,
+      "CDi": 0.0019589103775057635,
+      "CM": -0.10507103705721052,
+      "L_D": 44.7449217070727,
+      "reward": 39.294921707072696
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_47/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_47.json",
+    "rank": 0,
+    "reward": 39.294921707072696,
+    "aero": {
+      "CL": 0.08765129147266762,
+      "CDi": 0.0019589103775057635,
+      "CM": -0.10507103705721052,
+      "L_D": 44.7449217070727,
+      "reward": 39.294921707072696
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_47/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_47.json",
+    "rank": 0,
+    "reward": 39.294921707072696,
+    "aero": {
+      "CL": 0.08765129147266762,
+      "CDi": 0.0019589103775057635,
+      "CM": -0.10507103705721052,
+      "L_D": 44.7449217070727,
+      "reward": 39.294921707072696
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_47/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51.json",
+    "rank": 0,
+    "reward": 39.99273053269302,
+    "aero": {
+      "CL": 0.09342962914774898,
+      "CDi": 0.0020559862502217505,
+      "CM": -0.11164699959419577,
+      "L_D": 45.44273053269302,
+      "reward": 39.99273053269302
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_51/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67.json",
+    "rank": 0,
+    "reward": 40.79297457721058,
+    "aero": {
+      "CL": 0.09651656826084015,
+      "CDi": 0.0020871617611814565,
+      "CM": -0.11506885930306152,
+      "L_D": 46.24297457721058,
+      "reward": 40.79297457721058
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67.json",
+    "rank": 0,
+    "reward": 40.79297457721058,
+    "aero": {
+      "CL": 0.09651656826084015,
+      "CDi": 0.0020871617611814565,
+      "CM": -0.11506885930306152,
+      "L_D": 46.24297457721058,
+      "reward": 40.79297457721058
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67.json",
+    "rank": 0,
+    "reward": 40.79297457721058,
+    "aero": {
+      "CL": 0.09651656826084015,
+      "CDi": 0.0020871617611814565,
+      "CM": -0.11506885930306152,
+      "L_D": 46.24297457721058,
+      "reward": 40.79297457721058
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67.json",
+    "rank": 0,
+    "reward": 40.79297457721058,
+    "aero": {
+      "CL": 0.09651656826084015,
+      "CDi": 0.0020871617611814565,
+      "CM": -0.11506885930306152,
+      "L_D": 46.24297457721058,
+      "reward": 40.79297457721058
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67.json",
+    "rank": 0,
+    "reward": 40.79297457721058,
+    "aero": {
+      "CL": 0.09651656826084015,
+      "CDi": 0.0020871617611814565,
+      "CM": -0.11506885930306152,
+      "L_D": 46.24297457721058,
+      "reward": 40.79297457721058
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67.json",
+    "rank": 0,
+    "reward": 40.79297457721058,
+    "aero": {
+      "CL": 0.09651656826084015,
+      "CDi": 0.0020871617611814565,
+      "CM": -0.11506885930306152,
+      "L_D": 46.24297457721058,
+      "reward": 40.79297457721058
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67.json",
+    "rank": 0,
+    "reward": 40.79297457721058,
+    "aero": {
+      "CL": 0.09651656826084015,
+      "CDi": 0.0020871617611814565,
+      "CM": -0.11506885930306152,
+      "L_D": 46.24297457721058,
+      "reward": 40.79297457721058
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67.json",
+    "rank": 0,
+    "reward": 40.79297457721058,
+    "aero": {
+      "CL": 0.09651656826084015,
+      "CDi": 0.0020871617611814565,
+      "CM": -0.11506885930306152,
+      "L_D": 46.24297457721058,
+      "reward": 40.79297457721058
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_67/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_75.json",
+    "rank": 0,
+    "reward": 41.51282588280674,
+    "aero": {
+      "CL": 0.09563547763649222,
+      "CDi": 0.0020364080703990325,
+      "CM": -0.11394405025356744,
+      "L_D": 46.96282588280674,
+      "reward": 41.51282588280674
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_75/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_75.json",
+    "rank": 0,
+    "reward": 41.51282588280674,
+    "aero": {
+      "CL": 0.09563547763649222,
+      "CDi": 0.0020364080703990325,
+      "CM": -0.11394405025356744,
+      "L_D": 46.96282588280674,
+      "reward": 41.51282588280674
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_75/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_77.json",
+    "rank": 0,
+    "reward": 41.739880690965165,
+    "aero": {
+      "CL": 0.09404004268588294,
+      "CDi": 0.0019928010265956777,
+      "CM": -0.11220486125576,
+      "L_D": 47.18988069096517,
+      "reward": 41.739880690965165
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_77/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_77.json",
+    "rank": 0,
+    "reward": 41.739880690965165,
+    "aero": {
+      "CL": 0.09404004268588294,
+      "CDi": 0.0019928010265956777,
+      "CM": -0.11220486125576,
+      "L_D": 47.18988069096517,
+      "reward": 41.739880690965165
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_77/geometry.png",
+    "analysis": ""
+  },
+  {
+    "json_path": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_77.json",
+    "rank": 0,
+    "reward": 41.739880690965165,
+    "aero": {
+      "CL": 0.09404004268588294,
+      "CDi": 0.0019928010265956777,
+      "CM": -0.11220486125576,
+      "L_D": 47.18988069096517,
+      "reward": 41.739880690965165
+    },
+    "geometry_png": "/scratch/3D/3d/benchmark_results_3d_gaussain/design_77/geometry.png",
+    "analysis": ""
+  }
+]

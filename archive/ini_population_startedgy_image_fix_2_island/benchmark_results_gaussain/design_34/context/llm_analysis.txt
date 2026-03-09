@@ -1,0 +1,11 @@
+- **Geometry**: Based on the Design 1 images, the airfoil exhibits a conventional asymmetric cambered shape. The leading edge is smooth and rounded, blending into a convex upper surface that peaks around the forward quarter-chord. The trailing edge is sharp and thin. The lower surface is nearly flat or slightly convex. There are no visible geometric discontinuities or self-intersections.
+- **Flow Field**: The flow appears attached with a clean wake. The pressure distribution likely shows a strong suction peak on the upper leading edge followed by a pressure recovery. The u-velocity field shows acceleration over the upper surface. The lack of visible separation zones suggests the curvature is well-managed for the simulation conditions.
+- **Parameter Mapping**:
+    - `r0` (radius param ~0) results in a functional but perhaps slightly sharp leading edge.
+    - `r1` (upper surface ~0.14) controls the max thickness/suction magnitude.
+    - `r2` (trailing edge ~-0.73) creates a very thin tail; this negative value is critical for closing the shape.
+    - `e2` (~0.9) successfully enforces the Kutta condition (sharp trailing edge).
+- **Key Changes Needed**:
+    - Increase **leading edge radius** (`r0` > 0) slightly to improve stall characteristics and widen the drag bucket.
+    - Increase **camber/aft-loading** (`a2` more negative, `r3` lower) to generate more lift, as the current design looks conservative.
+    - Modify **upper surface curvature** (`r1` higher, `a1` shifted) to support the increased lift without inducing separation.

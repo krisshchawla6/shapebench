@@ -1,0 +1,3025 @@
+/home/ubuntu/miniconda3/envs/vortexnet/lib/python3.10/site-packages/google/api_core/_python_version_support.py:275: FutureWarning: You are using a Python version (3.10.19) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.
+  warnings.warn(message, FutureWarning)
+/scratch/ShapeEvolve/frameworks/delta_wing_3d/agent.py:7: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+============================================================
+  Framework:   delta_wing_3d
+  Environment: vlm_3d
+  Output:      environments/vlm_3d/results/run_delta_wing_3d_1000
+============================================================
+
+--- Iteration 1/1000 [INIT 1/10] (action: gaussain, no context) ---
+/home/ubuntu/miniconda3/envs/vortexnet/lib/python3.10/site-packages/SUAVE/Plugins/pint/__init__.py:17: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+Reward: 20.9080, Best: 20.9080
+
+--- Iteration 2/1000 [INIT 2/10] (action: gaussain, no context) ---
+Reward: -5.4500, Best: 20.9080
+
+--- Iteration 3/1000 [INIT 3/10] (action: gaussain, no context) ---
+Reward: -5.4500, Best: 20.9080
+
+--- Iteration 4/1000 [INIT 4/10] (action: gaussain, no context) ---
+Reward: 21.6532, Best: 21.6532
+
+--- Iteration 5/1000 [INIT 5/10] (action: gaussain, no context) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 6/1000 [INIT 6/10] (action: gaussain, no context) ---
+Reward: 1.2671, Best: 21.6532
+
+--- Iteration 7/1000 [INIT 7/10] (action: gaussain, no context) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 8/1000 [INIT 8/10] (action: gaussain, no context) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 9/1000 [INIT 9/10] (action: gaussain, no context) ---
+Reward: 20.3546, Best: 21.6532
+
+--- Iteration 10/1000 [INIT 10/10] (action: gaussain, no context) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 11/1000 (action: gaussain, inspirations: 0) ---
+Reward: -0.0710, Best: 21.6532
+
+--- Iteration 12/1000 (action: gaussain, inspirations: 1) ---
+Reward: -0.4376, Best: 21.6532
+
+--- Iteration 13/1000 (action: gaussain, inspirations: 2) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 14/1000 (action: gaussain, inspirations: 3) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 15/1000 (action: gaussain, inspirations: 4) ---
+Reward: 16.4917, Best: 21.6532
+
+--- Iteration 16/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.6020, Best: 21.6532
+
+--- Iteration 17/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 18/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.0171, Best: 21.6532
+
+--- Iteration 19/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.8043, Best: 21.6532
+
+--- Iteration 20/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.2687, Best: 21.6532
+
+--- Iteration 21/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.1819, Best: 21.6532
+
+--- Iteration 22/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 23/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.0478, Best: 21.6532
+
+--- Iteration 24/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 25/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 26/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 27/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 21.6532
+
+--- Iteration 28/1000 (action: gaussain, inspirations: 5) ---
+Reward: 1.9759, Best: 21.6532
+
+--- Iteration 29/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.2956, Best: 21.6532
+
+--- Iteration 30/1000 (action: gaussain, inspirations: 5) ---
+Reward: 34.9325, Best: 34.9325
+
+--- Iteration 31/1000 (action: gaussain, inspirations: 5) ---
+Reward: -1.2539, Best: 34.9325
+
+--- Iteration 32/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 34.9325
+
+--- Iteration 33/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 34.9325
+
+--- Iteration 34/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.1952, Best: 34.9325
+
+--- Iteration 35/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 34.9325
+
+--- Iteration 36/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.4567, Best: 34.9325
+
+--- Iteration 37/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6510, Best: 41.6510
+
+--- Iteration 38/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 39/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.0472, Best: 41.6510
+
+--- Iteration 40/1000 (action: gaussain, inspirations: 5) ---
+Reward: 15.8746, Best: 41.6510
+
+--- Iteration 41/1000 (action: gaussain, inspirations: 5) ---
+Reward: 38.9130, Best: 41.6510
+
+--- Iteration 42/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.9479, Best: 41.6510
+
+--- Iteration 43/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 44/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.9986, Best: 41.6510
+
+--- Iteration 45/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 46/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 47/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 48/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 49/1000 (action: gaussain, inspirations: 5) ---
+Reward: 36.7775, Best: 41.6510
+
+--- Iteration 50/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 51/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 52/1000 (action: gaussain, inspirations: 5) ---
+Reward: 16.2946, Best: 41.6510
+
+--- Iteration 53/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.9289, Best: 41.6510
+
+--- Iteration 54/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 55/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 56/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 57/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 58/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 59/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.5167, Best: 41.6510
+
+--- Iteration 60/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 61/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 62/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 63/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.8497, Best: 41.6510
+
+--- Iteration 64/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6510
+
+--- Iteration 65/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.2801, Best: 41.6510
+
+--- Iteration 66/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6786, Best: 41.6786
+
+--- Iteration 67/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6786
+
+--- Iteration 68/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6786
+
+--- Iteration 69/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.6786
+
+--- Iteration 70/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.7399, Best: 41.7399
+
+--- Iteration 71/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.7399
+
+--- Iteration 72/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.8094, Best: 41.7399
+
+--- Iteration 73/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.7399
+
+--- Iteration 74/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5633, Best: 41.7399
+
+--- Iteration 75/1000 (action: gaussain, inspirations: 5) ---
+Reward: 33.0431, Best: 41.7399
+
+--- Iteration 76/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.7399
+
+--- Iteration 77/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.7399
+
+--- Iteration 78/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.7399
+
+--- Iteration 79/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 80/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.0494, Best: 41.8807
+
+--- Iteration 81/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.0520, Best: 41.8807
+
+--- Iteration 82/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 83/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.8101, Best: 41.8807
+
+--- Iteration 84/1000 (action: gaussain, inspirations: 5) ---
+Reward: 11.4826, Best: 41.8807
+
+--- Iteration 85/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 86/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 87/1000 (action: gaussain, inspirations: 5) ---
+Reward: 26.5896, Best: 41.8807
+
+--- Iteration 88/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 89/1000 (action: gaussain, inspirations: 5) ---
+Reward: 31.6864, Best: 41.8807
+
+--- Iteration 90/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 91/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.5808, Best: 41.8807
+
+--- Iteration 92/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 93/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 94/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 95/1000 (action: gaussain, inspirations: 5) ---
+Reward: 9.0452, Best: 41.8807
+
+--- Iteration 96/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 97/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 98/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.2994, Best: 41.8807
+
+--- Iteration 99/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 100/1000 (action: gaussain, inspirations: 5) ---
+Reward: 16.6758, Best: 41.8807
+
+--- Iteration 101/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 102/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 103/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.7380, Best: 41.8807
+
+--- Iteration 104/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.5320, Best: 41.8807
+
+--- Iteration 105/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 106/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 107/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.2660, Best: 41.8807
+
+--- Iteration 108/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.3298, Best: 41.8807
+
+--- Iteration 109/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.4880, Best: 41.8807
+
+--- Iteration 110/1000 (action: gaussain, inspirations: 5) ---
+Reward: 14.0484, Best: 41.8807
+
+--- Iteration 111/1000 (action: gaussain, inspirations: 5) ---
+Reward: 15.2505, Best: 41.8807
+
+--- Iteration 112/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.8807
+
+--- Iteration 113/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.2583, Best: 41.8807
+
+--- Iteration 114/1000 (action: gaussain, inspirations: 5) ---
+Reward: 8.2531, Best: 41.8807
+
+--- Iteration 115/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.8807
+
+--- Iteration 116/1000 (action: gaussain, inspirations: 5) ---
+Reward: 15.7568, Best: 41.8807
+
+--- Iteration 117/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.2770, Best: 41.8807
+
+--- Iteration 118/1000 (action: gaussain, inspirations: 5) ---
+Reward: 22.1978, Best: 41.8807
+
+--- Iteration 119/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 120/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.2994, Best: 41.8807
+
+--- Iteration 121/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 122/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 123/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 124/1000 (action: gaussain, inspirations: 5) ---
+Reward: 8.2627, Best: 41.8807
+
+--- Iteration 125/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 126/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 127/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 128/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.2394, Best: 41.8807
+
+--- Iteration 129/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 130/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.9279, Best: 41.8807
+
+--- Iteration 131/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 132/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.4580, Best: 41.8807
+
+--- Iteration 133/1000 (action: gaussain, inspirations: 5) ---
+Reward: 38.6936, Best: 41.8807
+
+--- Iteration 134/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.9697, Best: 41.8807
+
+--- Iteration 135/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 136/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 137/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 138/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.5054, Best: 41.8807
+
+--- Iteration 139/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 140/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 141/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 142/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 143/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 144/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 145/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 146/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 147/1000 (action: gaussain, inspirations: 5) ---
+Reward: 28.3955, Best: 41.8807
+
+--- Iteration 148/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.8736, Best: 41.8807
+
+--- Iteration 149/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 150/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 151/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 152/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 153/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 154/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 155/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6786, Best: 41.8807
+
+--- Iteration 156/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 157/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.4658, Best: 41.8807
+
+--- Iteration 158/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.2023, Best: 41.8807
+
+--- Iteration 159/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.3358, Best: 41.8807
+
+--- Iteration 160/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6786, Best: 41.8807
+
+--- Iteration 161/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 162/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 163/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 164/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 165/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 166/1000 (action: gaussain, inspirations: 5) ---
+Reward: 27.5538, Best: 41.8807
+
+--- Iteration 167/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.7802, Best: 41.8807
+
+--- Iteration 168/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 169/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 170/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 171/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 172/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 173/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.3022, Best: 41.8807
+
+--- Iteration 174/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 175/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 176/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.3287, Best: 41.8807
+
+--- Iteration 177/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6306, Best: 41.8807
+
+--- Iteration 178/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.2153, Best: 41.8807
+
+--- Iteration 179/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.9006, Best: 41.8807
+
+--- Iteration 180/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 181/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 182/1000 (action: gaussain, inspirations: 5) ---
+Reward: 24.7484, Best: 41.8807
+
+--- Iteration 183/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.3498, Best: 41.8807
+
+--- Iteration 184/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 185/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 186/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.9949, Best: 41.8807
+
+--- Iteration 187/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 188/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.9010, Best: 41.8807
+
+--- Iteration 189/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 190/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 191/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.3462, Best: 41.8807
+
+--- Iteration 192/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.4866, Best: 41.8807
+
+--- Iteration 193/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 194/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 195/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 196/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 197/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 198/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6786, Best: 41.8807
+
+--- Iteration 199/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.8793, Best: 41.8807
+
+--- Iteration 200/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 201/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 202/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 203/1000 (action: gaussain, inspirations: 5) ---
+Reward: 0.5486, Best: 41.8807
+
+--- Iteration 204/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 205/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 206/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 207/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.1550, Best: 41.8807
+
+--- Iteration 208/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 209/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 210/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.3398, Best: 41.8807
+
+--- Iteration 211/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 212/1000 (action: gaussain, inspirations: 5) ---
+Reward: 14.9657, Best: 41.8807
+
+--- Iteration 213/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 214/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 215/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.0915, Best: 41.8807
+
+--- Iteration 216/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 217/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 218/1000 (action: gaussain, inspirations: 5) ---
+Reward: 10.5489, Best: 41.8807
+
+--- Iteration 219/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.3298, Best: 41.8807
+
+--- Iteration 220/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.4920, Best: 41.8807
+
+--- Iteration 221/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 222/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 223/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 224/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 225/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 226/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 227/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.7332, Best: 41.8807
+
+--- Iteration 228/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 229/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.7264, Best: 41.8807
+
+--- Iteration 230/1000 (action: gaussain, inspirations: 5) ---
+Reward: 9.0118, Best: 41.8807
+
+--- Iteration 231/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 232/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 233/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 234/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 235/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.0103, Best: 41.8807
+
+--- Iteration 236/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 237/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.3580, Best: 41.8807
+
+--- Iteration 238/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 239/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.2976, Best: 41.8807
+
+--- Iteration 240/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 241/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 242/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 243/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.3925, Best: 41.8807
+
+--- Iteration 244/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 245/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.2889, Best: 41.8807
+
+--- Iteration 246/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 247/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 248/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 249/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 250/1000 (action: gaussain, inspirations: 5) ---
+Reward: 22.5705, Best: 41.8807
+
+--- Iteration 251/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 252/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 253/1000 (action: gaussain, inspirations: 5) ---
+Reward: 32.4588, Best: 41.8807
+
+--- Iteration 254/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 255/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 256/1000 (action: gaussain, inspirations: 5) ---
+Gemini Error: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 1.
+Error: LLM returned empty params
+Reward: -10.0000, Best: 41.8807
+
+--- Iteration 257/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.3056, Best: 41.8807
+
+--- Iteration 258/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 259/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.0520, Best: 41.8807
+
+--- Iteration 260/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.9004, Best: 41.8807
+
+--- Iteration 261/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.7379, Best: 41.8807
+
+--- Iteration 262/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 263/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 264/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 265/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 266/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.0520, Best: 41.8807
+
+--- Iteration 267/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 268/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 269/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 270/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 271/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 272/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 273/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.7693, Best: 41.8807
+
+--- Iteration 274/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 275/1000 (action: gaussain, inspirations: 5) ---
+Reward: 26.1498, Best: 41.8807
+
+--- Iteration 276/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 277/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 278/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 279/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.0465, Best: 41.8807
+
+--- Iteration 280/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 281/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.0871, Best: 41.8807
+
+--- Iteration 282/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.3298, Best: 41.8807
+
+--- Iteration 283/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.5939, Best: 41.8807
+
+--- Iteration 284/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 285/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 286/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 287/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 288/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 289/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 290/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 291/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 292/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 293/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.2408, Best: 41.8807
+
+--- Iteration 294/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.1745, Best: 41.8807
+
+--- Iteration 295/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 296/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.1730, Best: 41.8807
+
+--- Iteration 297/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.3503, Best: 41.8807
+
+--- Iteration 298/1000 (action: gaussain, inspirations: 5) ---
+Reward: 9.3623, Best: 41.8807
+
+--- Iteration 299/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 300/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 301/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 302/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 303/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 304/1000 (action: gaussain, inspirations: 5) ---
+Reward: 24.5631, Best: 41.8807
+
+--- Iteration 305/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 306/1000 (action: gaussain, inspirations: 5) ---
+Reward: 15.8487, Best: 41.8807
+
+--- Iteration 307/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 308/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 309/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5633, Best: 41.8807
+
+--- Iteration 310/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.7113, Best: 41.8807
+
+--- Iteration 311/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 312/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 313/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 314/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 315/1000 (action: gaussain, inspirations: 5) ---
+Reward: 25.7939, Best: 41.8807
+
+--- Iteration 316/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.2666, Best: 41.8807
+
+--- Iteration 317/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.1508, Best: 41.8807
+
+--- Iteration 318/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 319/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.1593, Best: 41.8807
+
+--- Iteration 320/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.2990, Best: 41.8807
+
+--- Iteration 321/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.4979, Best: 41.8807
+
+--- Iteration 322/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 323/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 324/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 325/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 326/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 327/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 328/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 329/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5459, Best: 41.8807
+
+--- Iteration 330/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 331/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.8807
+
+--- Iteration 332/1000 (action: gaussain, inspirations: 5) ---
+Reward: 26.3973, Best: 41.8807
+
+--- Iteration 333/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 334/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 335/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.1255, Best: 41.8807
+
+--- Iteration 336/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 337/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.3596, Best: 41.8807
+
+--- Iteration 338/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 339/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 340/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 341/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 342/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.9554, Best: 41.8807
+
+--- Iteration 343/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.0300, Best: 41.8807
+
+--- Iteration 344/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 345/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.6692, Best: 41.8807
+
+--- Iteration 346/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 347/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 348/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 349/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.5108, Best: 41.8807
+
+--- Iteration 350/1000 (action: gaussain, inspirations: 5) ---
+Reward: 1.0828, Best: 41.8807
+
+--- Iteration 351/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.8702, Best: 41.8807
+
+--- Iteration 352/1000 (action: gaussain, inspirations: 5) ---
+Reward: 16.2515, Best: 41.8807
+
+--- Iteration 353/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 354/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 355/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 356/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 357/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.2747, Best: 41.8807
+
+--- Iteration 358/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.0520, Best: 41.8807
+
+--- Iteration 359/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.8239, Best: 41.8807
+
+--- Iteration 360/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 361/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 362/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.9683, Best: 41.8807
+
+--- Iteration 363/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 364/1000 (action: gaussain, inspirations: 5) ---
+Reward: 12.6633, Best: 41.8807
+
+--- Iteration 365/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 366/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.3075, Best: 41.8807
+
+--- Iteration 367/1000 (action: gaussain, inspirations: 5) ---
+Reward: 1.9558, Best: 41.8807
+
+--- Iteration 368/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.4303, Best: 41.8807
+
+--- Iteration 369/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.2356, Best: 41.8807
+
+--- Iteration 370/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 371/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 372/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 373/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.2369, Best: 41.8807
+
+--- Iteration 374/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 375/1000 (action: gaussain, inspirations: 5) ---
+Reward: 32.2647, Best: 41.8807
+
+--- Iteration 376/1000 (action: gaussain, inspirations: 5) ---
+Reward: 0.1626, Best: 41.8807
+
+--- Iteration 377/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 378/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 379/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 380/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 381/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 382/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 383/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.2358, Best: 41.8807
+
+--- Iteration 384/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5633, Best: 41.8807
+
+--- Iteration 385/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.4071, Best: 41.8807
+
+--- Iteration 386/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.3450, Best: 41.8807
+
+--- Iteration 387/1000 (action: gaussain, inspirations: 5) ---
+Reward: -0.5536, Best: 41.8807
+
+--- Iteration 388/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 389/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 390/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.1821, Best: 41.8807
+
+--- Iteration 391/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.0635, Best: 41.8807
+
+--- Iteration 392/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 393/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 394/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 395/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.8807
+
+--- Iteration 396/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 397/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.6051, Best: 41.8807
+
+--- Iteration 398/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 399/1000 (action: gaussain, inspirations: 5) ---
+Reward: 38.2748, Best: 41.8807
+
+--- Iteration 400/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 401/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 402/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 403/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 404/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 405/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 406/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 407/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 408/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 409/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.6497, Best: 41.8807
+
+--- Iteration 410/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 411/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 412/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.0649, Best: 41.8807
+
+--- Iteration 413/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 414/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.7399, Best: 41.8807
+
+--- Iteration 415/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.4097, Best: 41.8807
+
+--- Iteration 416/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.2459, Best: 41.8807
+
+--- Iteration 417/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 418/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 419/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 420/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.1204, Best: 41.8807
+
+--- Iteration 421/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 422/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 423/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 424/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 425/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.1945, Best: 41.8807
+
+--- Iteration 426/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.0289, Best: 41.8807
+
+--- Iteration 427/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 428/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 429/1000 (action: gaussain, inspirations: 5) ---
+Reward: 1.4631, Best: 41.8807
+
+--- Iteration 430/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 431/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.2436, Best: 41.8807
+
+--- Iteration 432/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 433/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 434/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 435/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.9481, Best: 41.8807
+
+--- Iteration 436/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.1200, Best: 41.8807
+
+--- Iteration 437/1000 (action: gaussain, inspirations: 5) ---
+Reward: 38.8051, Best: 41.8807
+
+--- Iteration 438/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 439/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 440/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.3470, Best: 41.8807
+
+--- Iteration 441/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 442/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 443/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.1018, Best: 41.8807
+
+--- Iteration 444/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 445/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.1621, Best: 41.8807
+
+--- Iteration 446/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 447/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 448/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 449/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 450/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6786, Best: 41.8807
+
+--- Iteration 451/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 452/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.8127, Best: 41.8807
+
+--- Iteration 453/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.0797, Best: 41.8807
+
+--- Iteration 454/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.6226, Best: 41.8807
+
+--- Iteration 455/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 456/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 457/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.3528, Best: 41.8807
+
+--- Iteration 458/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 459/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6786, Best: 41.8807
+
+--- Iteration 460/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 461/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 462/1000 (action: gaussain, inspirations: 5) ---
+Reward: 9.2788, Best: 41.8807
+
+--- Iteration 463/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.1050, Best: 41.8807
+
+--- Iteration 464/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.1901, Best: 41.8807
+
+--- Iteration 465/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 466/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.9660, Best: 41.8807
+
+--- Iteration 467/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 468/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 469/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.2650, Best: 41.8807
+
+--- Iteration 470/1000 (action: gaussain, inspirations: 5) ---
+Reward: 16.8431, Best: 41.8807
+
+--- Iteration 471/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 472/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 473/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 474/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.0020, Best: 41.8807
+
+--- Iteration 475/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 476/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 477/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 478/1000 (action: gaussain, inspirations: 5) ---
+Reward: 16.6741, Best: 41.8807
+
+--- Iteration 479/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.4275, Best: 41.8807
+
+--- Iteration 480/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.9841, Best: 41.8807
+
+--- Iteration 481/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.8114, Best: 41.8807
+
+--- Iteration 482/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 483/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.3599, Best: 41.8807
+
+--- Iteration 484/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.3063, Best: 41.8807
+
+--- Iteration 485/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.2778, Best: 41.8807
+
+--- Iteration 486/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5633, Best: 41.8807
+
+--- Iteration 487/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 488/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.2736, Best: 41.8807
+
+--- Iteration 489/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 490/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.1829, Best: 41.8807
+
+--- Iteration 491/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 492/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 493/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5633, Best: 41.8807
+
+--- Iteration 494/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 495/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.1412, Best: 41.8807
+
+--- Iteration 496/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 497/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 498/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.0584, Best: 41.8807
+
+--- Iteration 499/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.1562, Best: 41.8807
+
+--- Iteration 500/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 501/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.6716, Best: 41.8807
+
+--- Iteration 502/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 503/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 504/1000 (action: gaussain, inspirations: 5) ---
+Gemini Error: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 1.
+Error: LLM returned empty params
+Reward: -10.0000, Best: 41.8807
+
+--- Iteration 505/1000 (action: gaussain, inspirations: 5) ---
+Reward: 8.8665, Best: 41.8807
+
+--- Iteration 506/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.9761, Best: 41.8807
+
+--- Iteration 507/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 508/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 509/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.1249, Best: 41.8807
+
+--- Iteration 510/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 511/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 512/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 513/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.2588, Best: 41.8807
+
+--- Iteration 514/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 515/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 516/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 517/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.1227, Best: 41.8807
+
+--- Iteration 518/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.4492, Best: 41.8807
+
+--- Iteration 519/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.0909, Best: 41.8807
+
+--- Iteration 520/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 521/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 522/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 523/1000 (action: gaussain, inspirations: 5) ---
+Reward: 36.5222, Best: 41.8807
+
+--- Iteration 524/1000 (action: gaussain, inspirations: 5) ---
+Reward: 32.3668, Best: 41.8807
+
+--- Iteration 525/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.4088, Best: 41.8807
+
+--- Iteration 526/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 527/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.0094, Best: 41.8807
+
+--- Iteration 528/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 529/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 530/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.5917, Best: 41.8807
+
+--- Iteration 531/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 532/1000 (action: gaussain, inspirations: 5) ---
+Reward: 28.6743, Best: 41.8807
+
+--- Iteration 533/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 534/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.9697, Best: 41.8807
+
+--- Iteration 535/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 536/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.1998, Best: 41.8807
+
+--- Iteration 537/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 538/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 539/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 540/1000 (action: gaussain, inspirations: 5) ---
+Reward: 22.9152, Best: 41.8807
+
+--- Iteration 541/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 542/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.2232, Best: 41.8807
+
+--- Iteration 543/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 544/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 545/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 546/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.6961, Best: 41.8807
+
+--- Iteration 547/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 548/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 549/1000 (action: gaussain, inspirations: 5) ---
+Reward: 26.4428, Best: 41.8807
+
+--- Iteration 550/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 551/1000 (action: gaussain, inspirations: 5) ---
+Reward: 30.1111, Best: 41.8807
+
+--- Iteration 552/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 553/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 554/1000 (action: gaussain, inspirations: 5) ---
+Reward: 14.3709, Best: 41.8807
+
+--- Iteration 555/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.0070, Best: 41.8807
+
+--- Iteration 556/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 557/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 558/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 559/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 560/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.1705, Best: 41.8807
+
+--- Iteration 561/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 562/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 563/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 564/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.1351, Best: 41.8807
+
+--- Iteration 565/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 566/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.7636, Best: 41.8807
+
+--- Iteration 567/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 568/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 569/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.4355, Best: 41.8807
+
+--- Iteration 570/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 571/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 572/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.3141, Best: 41.8807
+
+--- Iteration 573/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 574/1000 (action: gaussain, inspirations: 5) ---
+Reward: 33.0843, Best: 41.8807
+
+--- Iteration 575/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.4597, Best: 41.8807
+
+--- Iteration 576/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 577/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.0537, Best: 41.8807
+
+--- Iteration 578/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 579/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 580/1000 (action: gaussain, inspirations: 5) ---
+Reward: 10.3063, Best: 41.8807
+
+--- Iteration 581/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 582/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.6803, Best: 41.8807
+
+--- Iteration 583/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 584/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.5084, Best: 41.8807
+
+--- Iteration 585/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 586/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.8129, Best: 41.8807
+
+--- Iteration 587/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.8807
+
+--- Iteration 588/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.3960, Best: 41.8807
+
+--- Iteration 589/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 590/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5633, Best: 41.8807
+
+--- Iteration 591/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 592/1000 (action: gaussain, inspirations: 5) ---
+Reward: 26.8097, Best: 41.8807
+
+--- Iteration 593/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 594/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.5044, Best: 41.8807
+
+--- Iteration 595/1000 (action: gaussain, inspirations: 5) ---
+Reward: 0.6577, Best: 41.8807
+
+--- Iteration 596/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5633, Best: 41.8807
+
+--- Iteration 597/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 598/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 599/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.1718, Best: 41.8807
+
+--- Iteration 600/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 601/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.5772, Best: 41.8807
+
+--- Iteration 602/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 603/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.7399, Best: 41.8807
+
+--- Iteration 604/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.9761, Best: 41.8807
+
+--- Iteration 605/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 606/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.0289, Best: 41.8807
+
+--- Iteration 607/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.5141, Best: 41.8807
+
+--- Iteration 608/1000 (action: gaussain, inspirations: 5) ---
+Reward: 15.2500, Best: 41.8807
+
+--- Iteration 609/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 610/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.2456, Best: 41.8807
+
+--- Iteration 611/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 612/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.1640, Best: 41.8807
+
+--- Iteration 613/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 614/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 615/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 616/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.9911, Best: 41.8807
+
+--- Iteration 617/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 618/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 619/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.1860, Best: 41.8807
+
+--- Iteration 620/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 621/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 622/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 623/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.4213, Best: 41.8807
+
+--- Iteration 624/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 625/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.7900, Best: 41.8807
+
+--- Iteration 626/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 627/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 628/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 629/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 630/1000 (action: gaussain, inspirations: 5) ---
+Reward: 26.9052, Best: 41.8807
+
+--- Iteration 631/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 632/1000 (action: gaussain, inspirations: 5) ---
+Reward: -1.1160, Best: 41.8807
+
+--- Iteration 633/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 634/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.8807
+
+--- Iteration 635/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.2888, Best: 41.8807
+
+--- Iteration 636/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 637/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 638/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.5975, Best: 41.8807
+
+--- Iteration 639/1000 (action: gaussain, inspirations: 5) ---
+Reward: 13.7197, Best: 41.8807
+
+--- Iteration 640/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.3644, Best: 41.8807
+
+--- Iteration 641/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 642/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.9279, Best: 41.8807
+
+--- Iteration 643/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 644/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 645/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 646/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 647/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 648/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 649/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 650/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.5366, Best: 41.8807
+
+--- Iteration 651/1000 (action: gaussain, inspirations: 5) ---
+Reward: 24.7965, Best: 41.8807
+
+--- Iteration 652/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 653/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.7313, Best: 41.8807
+
+--- Iteration 654/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 655/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 656/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.1720, Best: 41.8807
+
+--- Iteration 657/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 658/1000 (action: gaussain, inspirations: 5) ---
+Reward: 27.5439, Best: 41.8807
+
+--- Iteration 659/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 660/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 661/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 662/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.7399, Best: 41.8807
+
+--- Iteration 663/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 664/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.2390, Best: 41.8807
+
+--- Iteration 665/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 666/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.2261, Best: 41.8807
+
+--- Iteration 667/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.5141, Best: 41.8807
+
+--- Iteration 668/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 669/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 670/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 671/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 672/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 673/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 674/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.4071, Best: 41.8807
+
+--- Iteration 675/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 676/1000 (action: gaussain, inspirations: 5) ---
+Reward: -1.0097, Best: 41.8807
+
+--- Iteration 677/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 678/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 679/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 680/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 681/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 682/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.9060, Best: 41.8807
+
+--- Iteration 683/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 684/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 685/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 686/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 687/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 688/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 689/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 690/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 691/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 692/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 693/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 694/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.5044, Best: 41.8807
+
+--- Iteration 695/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 696/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 697/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 698/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 699/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 700/1000 (action: gaussain, inspirations: 5) ---
+Reward: 26.2402, Best: 41.8807
+
+--- Iteration 701/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.5065, Best: 41.8807
+
+--- Iteration 702/1000 (action: gaussain, inspirations: 5) ---
+Reward: 9.4530, Best: 41.8807
+
+--- Iteration 703/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 704/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.7201, Best: 41.8807
+
+--- Iteration 705/1000 (action: gaussain, inspirations: 5) ---
+Reward: -1.2984, Best: 41.8807
+
+--- Iteration 706/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.3976, Best: 41.8807
+
+--- Iteration 707/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 708/1000 (action: gaussain, inspirations: 5) ---
+Reward: 16.9962, Best: 41.8807
+
+--- Iteration 709/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 710/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 711/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.5567, Best: 41.8807
+
+--- Iteration 712/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 713/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.2994, Best: 41.8807
+
+--- Iteration 714/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.8802, Best: 41.8807
+
+--- Iteration 715/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.5821, Best: 41.8807
+
+--- Iteration 716/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 717/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6786, Best: 41.8807
+
+--- Iteration 718/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.9908, Best: 41.8807
+
+--- Iteration 719/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.0858, Best: 41.8807
+
+--- Iteration 720/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.3848, Best: 41.8807
+
+--- Iteration 721/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 722/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 723/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 724/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 725/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 726/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 727/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 728/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 729/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 730/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 731/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 732/1000 (action: gaussain, inspirations: 5) ---
+Reward: -0.4372, Best: 41.8807
+
+--- Iteration 733/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.0465, Best: 41.8807
+
+--- Iteration 734/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 735/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6786, Best: 41.8807
+
+--- Iteration 736/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.4763, Best: 41.8807
+
+--- Iteration 737/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.3025, Best: 41.8807
+
+--- Iteration 738/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 739/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 740/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 741/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.9435, Best: 41.8807
+
+--- Iteration 742/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 743/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.0520, Best: 41.8807
+
+--- Iteration 744/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 745/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 746/1000 (action: gaussain, inspirations: 5) ---
+Reward: 24.4054, Best: 41.8807
+
+--- Iteration 747/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 748/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.8807
+
+--- Iteration 749/1000 (action: gaussain, inspirations: 5) ---
+Reward: 25.8067, Best: 41.8807
+
+--- Iteration 750/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 751/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.6746, Best: 41.8807
+
+--- Iteration 752/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 753/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 754/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 755/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 756/1000 (action: gaussain, inspirations: 5) ---
+Gemini Error: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 1.
+Error: LLM returned empty params
+Reward: -10.0000, Best: 41.8807
+
+--- Iteration 757/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.9783, Best: 41.8807
+
+--- Iteration 758/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 759/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 760/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 761/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 762/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.6877, Best: 41.8807
+
+--- Iteration 763/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 764/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 765/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.1233, Best: 41.8807
+
+--- Iteration 766/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 767/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 768/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.0085, Best: 41.8807
+
+--- Iteration 769/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 770/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 771/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 772/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 773/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.8878, Best: 41.8807
+
+--- Iteration 774/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 775/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.4732, Best: 41.8807
+
+--- Iteration 776/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.0202, Best: 41.8807
+
+--- Iteration 777/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 778/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 779/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 780/1000 (action: gaussain, inspirations: 5) ---
+Reward: 16.8431, Best: 41.8807
+
+--- Iteration 781/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 782/1000 (action: gaussain, inspirations: 5) ---
+Reward: 22.4691, Best: 41.8807
+
+--- Iteration 783/1000 (action: gaussain, inspirations: 5) ---
+Reward: 2.9528, Best: 41.8807
+
+--- Iteration 784/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 785/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 786/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 787/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 788/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 789/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 790/1000 (action: gaussain, inspirations: 5) ---
+Reward: 8.0893, Best: 41.8807
+
+--- Iteration 791/1000 (action: gaussain, inspirations: 5) ---
+Reward: 37.9102, Best: 41.8807
+
+--- Iteration 792/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.3862, Best: 41.8807
+
+--- Iteration 793/1000 (action: gaussain, inspirations: 5) ---
+Reward: 24.6398, Best: 41.8807
+
+--- Iteration 794/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 795/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 796/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 797/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 798/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 799/1000 (action: gaussain, inspirations: 5) ---
+Reward: 22.0552, Best: 41.8807
+
+--- Iteration 800/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.0771, Best: 41.8807
+
+--- Iteration 801/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 802/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 803/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.1342, Best: 41.8807
+
+--- Iteration 804/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 805/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 806/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 807/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 808/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 809/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 810/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 811/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 812/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 813/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 814/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 815/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 816/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 817/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 818/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 819/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 820/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 821/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 822/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 823/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 824/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 825/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 826/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 827/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 828/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 829/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 830/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 831/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 832/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.0320, Best: 41.8807
+
+--- Iteration 833/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 834/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 835/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 836/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 837/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 838/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.8482, Best: 41.8807
+
+--- Iteration 839/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 840/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.0375, Best: 41.8807
+
+--- Iteration 841/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 842/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 843/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 844/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 845/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 846/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 847/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 848/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.4854, Best: 41.8807
+
+--- Iteration 849/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.1989, Best: 41.8807
+
+--- Iteration 850/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 851/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 852/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 853/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.8807
+
+--- Iteration 854/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 855/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 856/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 857/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 858/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 859/1000 (action: gaussain, inspirations: 5) ---
+Reward: 24.8985, Best: 41.8807
+
+--- Iteration 860/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.4071, Best: 41.8807
+
+--- Iteration 861/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 862/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 863/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 864/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 865/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.9748, Best: 41.8807
+
+--- Iteration 866/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 867/1000 (action: gaussain, inspirations: 5) ---
+Reward: 7.8192, Best: 41.8807
+
+--- Iteration 868/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 869/1000 (action: gaussain, inspirations: 5) ---
+Reward: 24.6487, Best: 41.8807
+
+--- Iteration 870/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 871/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 872/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 873/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 874/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 875/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 876/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 877/1000 (action: gaussain, inspirations: 5) ---
+Reward: 21.1908, Best: 41.8807
+
+--- Iteration 878/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 879/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 880/1000 (action: gaussain, inspirations: 5) ---
+Reward: 39.1801, Best: 41.8807
+
+--- Iteration 881/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 882/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 883/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.6445, Best: 41.8807
+
+--- Iteration 884/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.1034, Best: 41.8807
+
+--- Iteration 885/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 886/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.2519, Best: 41.8807
+
+--- Iteration 887/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 888/1000 (action: gaussain, inspirations: 5) ---
+Reward: 20.1432, Best: 41.8807
+
+--- Iteration 889/1000 (action: gaussain, inspirations: 5) ---
+Reward: 15.4988, Best: 41.8807
+
+--- Iteration 890/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 891/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.3119, Best: 41.8807
+
+--- Iteration 892/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 893/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 894/1000 (action: gaussain, inspirations: 5) ---
+Reward: 35.5300, Best: 41.8807
+
+--- Iteration 895/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5128, Best: 41.8807
+
+--- Iteration 896/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.3911, Best: 41.8807
+
+--- Iteration 897/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 898/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 899/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.3148, Best: 41.8807
+
+--- Iteration 900/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 901/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 902/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.0464, Best: 41.8807
+
+--- Iteration 903/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.4433, Best: 41.8807
+
+--- Iteration 904/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 905/1000 (action: gaussain, inspirations: 5) ---
+Reward: 8.9777, Best: 41.8807
+
+--- Iteration 906/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 907/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 908/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.2444, Best: 41.8807
+
+--- Iteration 909/1000 (action: gaussain, inspirations: 5) ---
+Reward: 40.4537, Best: 41.8807
+
+--- Iteration 910/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 911/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 912/1000 (action: gaussain, inspirations: 5) ---
+Reward: 16.5106, Best: 41.8807
+
+--- Iteration 913/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8502, Best: 41.8807
+
+--- Iteration 914/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 915/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 916/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 917/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.2994, Best: 41.8807
+
+--- Iteration 918/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.0594, Best: 41.8807
+
+--- Iteration 919/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 920/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 921/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 922/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 923/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.7928, Best: 41.8807
+
+--- Iteration 924/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 925/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 926/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 927/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8112, Best: 41.8807
+
+--- Iteration 928/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 929/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 930/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 931/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 932/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.7399, Best: 41.8807
+
+--- Iteration 933/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 934/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 935/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 936/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 937/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 938/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 939/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 940/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 941/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.6120, Best: 41.8807
+
+--- Iteration 942/1000 (action: gaussain, inspirations: 5) ---
+Reward: 24.5086, Best: 41.8807
+
+--- Iteration 943/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 944/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 945/1000 (action: gaussain, inspirations: 5) ---
+Reward: 1.4203, Best: 41.8807
+
+--- Iteration 946/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 947/1000 (action: gaussain, inspirations: 5) ---
+Reward: 30.9644, Best: 41.8807
+
+--- Iteration 948/1000 (action: gaussain, inspirations: 5) ---
+Reward: 6.4129, Best: 41.8807
+
+--- Iteration 949/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 950/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.3298, Best: 41.8807
+
+--- Iteration 951/1000 (action: gaussain, inspirations: 5) ---
+Reward: 0.7400, Best: 41.8807
+
+--- Iteration 952/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 953/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 954/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 955/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 956/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.1295, Best: 41.8807
+
+--- Iteration 957/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 958/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.9747, Best: 41.8807
+
+--- Iteration 959/1000 (action: gaussain, inspirations: 5) ---
+Reward: 18.0600, Best: 41.8807
+
+--- Iteration 960/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.5629, Best: 41.8807
+
+--- Iteration 961/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 962/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 963/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.5677, Best: 41.8807
+
+--- Iteration 964/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 965/1000 (action: gaussain, inspirations: 5) ---
+Reward: 17.6918, Best: 41.8807
+
+--- Iteration 966/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 967/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 968/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.8807, Best: 41.8807
+
+--- Iteration 969/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 970/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 971/1000 (action: gaussain, inspirations: 5) ---
+Reward: 16.0637, Best: 41.8807
+
+--- Iteration 972/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 973/1000 (action: gaussain, inspirations: 5) ---
+Reward: 38.8544, Best: 41.8807
+
+--- Iteration 974/1000 (action: gaussain, inspirations: 5) ---
+Reward: 23.6591, Best: 41.8807
+
+--- Iteration 975/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 976/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 977/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 978/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 979/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 980/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 981/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 982/1000 (action: gaussain, inspirations: 5) ---
+Reward: 4.4133, Best: 41.8807
+
+--- Iteration 983/1000 (action: gaussain, inspirations: 5) ---
+Reward: 41.2229, Best: 41.8807
+
+--- Iteration 984/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 985/1000 (action: gaussain, inspirations: 5) ---
+Reward: 15.8045, Best: 41.8807
+
+--- Iteration 986/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 987/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 988/1000 (action: gaussain, inspirations: 5) ---
+Reward: 24.5645, Best: 41.8807
+
+--- Iteration 989/1000 (action: gaussain, inspirations: 5) ---
+Reward: 1.3067, Best: 41.8807
+
+--- Iteration 990/1000 (action: gaussain, inspirations: 5) ---
+Reward: 3.2477, Best: 41.8807
+
+--- Iteration 991/1000 (action: gaussain, inspirations: 5) ---
+Reward: 15.7748, Best: 41.8807
+
+--- Iteration 992/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 993/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 994/1000 (action: gaussain, inspirations: 5) ---
+Reward: 0.9622, Best: 41.8807
+
+--- Iteration 995/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 996/1000 (action: gaussain, inspirations: 5) ---
+Reward: 5.1637, Best: 41.8807
+
+--- Iteration 997/1000 (action: gaussain, inspirations: 5) ---
+Reward: 19.1306, Best: 41.8807
+
+--- Iteration 998/1000 (action: gaussain, inspirations: 5) ---
+Reward: -5.4500, Best: 41.8807
+
+--- Iteration 999/1000 (action: gaussain, inspirations: 5) ---
+Reward: 15.1833, Best: 41.8807
+
+--- Iteration 1000/1000 (action: gaussain, inspirations: 5) ---
+Reward: 38.9422, Best: 41.8807
+Results saved to environments/vlm_3d/results/run_delta_wing_3d_1000/results.json

@@ -1,0 +1,7 @@
+*   **Visual Intuition & Strategy**: Since the baseline (Design 1) is already aerodynamically sound (attached flow, clean wake), the goal is optimization rather than repair. I will pursue a "Laminar Aft-Loading" strategy. By moving the upper surface control point (`CP1`) backwards (increasing `a1`), we delay the pressure recovery, which can reduce drag.
+*   **Database Insights**: The population shows that `r0` must be kept small (0.02-0.03) and `r2` (TE) performs best around -0.85 to -0.90. The `e` parameters should remain polarized (-1 for curves, 1 for TE) to ensure geometric validity.
+*   **Design Specifics**: 
+    *   **CP1 (Upper)**: Increase `a1` from ~0.25 to 0.34 to push the suction peak back. Increase `r1` slightly to 0.165 to support this shape and prevent the airfoil from becoming too thin in the middle.
+    *   **CP2 (TE)**: Set `a2` to -0.245 (more negative than Design 1's -0.22) to drop the tail slightly, increasing camber for better lift.
+    *   **CP0 (LE)**: Lock in a small radius (`r0=0.0245`) to ensure a sharp, efficient entry into the air.
+    *   This combination attempts to combine the low drag of a laminar profile with the improved lift of a cambered trailing edge.

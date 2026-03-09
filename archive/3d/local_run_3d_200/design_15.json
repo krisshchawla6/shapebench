@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweepLargeChordWashout",
+  "le_sweep": 74.14203207382111,
+  "root_chord_in": 39.94735715278076,
+  "twist_root": -9.23635149827541,
+  "twist_tip": -5.420177921674085,
+  "dihedral": -1.2957899945245344,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,7 @@
+*   **Strategy Focus - Aft-Loaded Laminar Concept:** Instead of tweaking the current "droopy nose" baseline, I will generate a completely fresh design based on **Supercritical / Aft-Loaded** airfoil principles. This approach aims to reduce the strength of the suction peak at the nose and spread the lift generation further back along the chord.
+*   **Database Insights:** The population shows a clear correlation between high `r2` (extended tail) and high reward. Poor designs consistently lack LE volume (`r0`) or chord length (`r2`). I will respect these structural necessities while diverging on the curvature distribution.
+*   **Geometric Exploration:**
+    *   **Leading Edge (P0):** I will keep the LE thick (`r0` ~ 0.48) for stall performance but change the angle `a0` from negative (down) to slightly positive. This re-orients the stagnation point.
+    *   **Upper Surface (P1):** This is the main novelty. I will triple the radius parameter compared to Design 1 (`r1` ~ 0.32) and push it aft (`a1` > 0.4). This creates a "rooftop" pressure distribution that maintains lift over a longer portion of the surface.
+    *   **Trailing Edge (P2):** I will maximize the lever arm (`r2` > 0.9) and apply aggressive negative angle (`a2` ~ -0.25) to create the "aft-loading" hook, which is efficient for high-lift conditions.
+    *   **Lower Surface (P3):** Kept neutral to slightly forward to support the leading edge volume.

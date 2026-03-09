@@ -1,0 +1,6 @@
+- **Strategy Focus (Exploration)**: Since the design database is empty, the priority is to establish a baseline that is distinct from a "neutral" zero-vector shape. I will push parameters away from the center (0.0) to explore the effects of extreme values on shape generation.
+- **Camber & Thickness**: I will apply positive `radius_param` values to the first two control points and negative values to the latter ones. The hypothesis is that this will create an asymmetric (cambered) airfoil with distinct thickness variation, rather than a symmetric teardrop.
+- **Sharpness Control**: Airfoils typically require a smooth leading edge and a sharp trailing edge.
+  - I will set the `edgy_param` close to -1.0 (smooth) for the first control point (likely leading edge).
+  - I will set the `edgy_param` close to 1.0 (sharp) for the third control point (likely trailing edge) to cleanly define the stagnation point and wake.
+- **Parameter Diversity**: To avoid self-intersection or degenerate geometries often caused by uniform parameters, I will stagger the `angle_param` values, shifting control points slightly relative to their default positions.

@@ -1,0 +1,9 @@
+*   **Strategy Focus - Visual Smoothing:** The primary visual flaw in the baseline (Design 1) is the disparity between the nose radius (`r0` ~0.52) and the mid-body radius (`r1` ~0.15). To fix this "visual pinch," I will increase `r1` to approximately 0.35. This should create a more continuous, structurally sound, and aerodynamically robust airfoil body.
+*   **Curvature Management:** The angle parameter `a1` at 0.26 is aggressive. Reducing this to ~0.12 will lower the "hump" on the upper surface, promoting a longer run of laminar flow and reducing wave drag (if compressible) or pressure drag.
+*   **Maintaining Successful Traits:** The "High Reward" designs (1 & 2) share a large radius parameter at index 2 (`r2` ~0.8) and a sharp edge (`e2` ~1.0). I will preserve this "Extended Sharp Trailing Edge" feature as it clearly correlates with performance in this landscape.
+*   **Exploration:** While keeping the TE fixed, I will explore a slightly bolder nose (`r0` ~0.6) to see if a blunter leading edge improves performance (e.g., stall delay) when coupled with the thicker mid-body.
+*   **Parameter Selection:**
+    *   **CP0 (Nose):** Increase `r` to 0.60 for robustness; keep `e` smooth.
+    *   **CP1 (Upper/Mid):** Increase `r` to 0.32 (filling the dip); reduce `a` to 0.12 (smoothing the hump).
+    *   **CP2 (Tail):** Keep `r` high (0.88) and `e` sharp (1.0).
+    *   **CP3 (Lower/Mid):** Slight adjustment to `r` (-0.08) to balance the thickness increase on top.

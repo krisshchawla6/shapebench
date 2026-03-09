@@ -1,0 +1,14 @@
+{
+  "design_name": "Cambered_Swept_Delta_HighDihedral",
+  "le_sweep": 66.3127770379902,
+  "root_chord_in": 49.609433278674764,
+  "twist_root": 1.3114874106582035,
+  "twist_tip": -5.876232226252663,
+  "dihedral": 12.726399882723594,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

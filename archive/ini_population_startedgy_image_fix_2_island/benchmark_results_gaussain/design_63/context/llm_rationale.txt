@@ -1,0 +1,7 @@
+- **Strategy Focus:** Following the Visual Intuition Strategy, the goal is to clean up the wake and optimize the lift-to-drag ratio by refining the leading edge entry and the pressure recovery on the upper surface.
+- **Database Insights:** Comparing Design 1 (Reward 1.84, `r1`=0.26, `a1`=0.47) with Design 2 (Reward 1.67, `r1`=0.22, `a1`=0.35) suggests that increasing the upper surface thickness (`r1`) and moving the peak location (`a1`) tends to improve performance. I will extrapolate this trend carefully.
+- **Geometric Modifications:**
+    - **Leading Edge (`r0`):** I will reduce `r0` from 0.24 to ~0.21. A slightly sharper LE should reduce form drag without sacrificing stall characteristics too much.
+    - **Upper Surface (`r1`, `a1`):** I will increase `r1` to ~0.30 and `a1` to ~0.55. This aims to maintain a robust suction peak but potentially shift the pressure recovery further aft, creating a more laminar-flow-like profile.
+    - **Trailing Edge (`r2`, `a2`):** I will extend `r2` to ~0.97 (closer to 1.0) to maximize effective chord length. I will slightly reduce the droop (`a2` from -0.13 to -0.11) to create a cleaner exit flow and reduce the wake thickness observed in the images.
+    - **Lower Surface (`r3`):** I will flatten the belly slightly (`r3` closer to -0.12) to reduce pressure drag on the lower surface.

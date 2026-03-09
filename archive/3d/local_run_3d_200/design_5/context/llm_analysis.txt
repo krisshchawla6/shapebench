@@ -1,0 +1,3 @@
+As this is the first design iteration, no previous designs or images are available for analysis. Therefore, there is no Cp distribution or aerodynamic performance data to critically assess. The primary goal for this initial design is to broadly explore the parameter space as per the "Exploration Strategy."
+
+Key changes needed to improve designs cannot be identified without initial data. This first design will serve as a foundational point for future comparisons and analysis.

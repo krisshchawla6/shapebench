@@ -1,0 +1,13 @@
+*   **Geometry Observations (Design 1)**:
+    *   The airfoil features a classic asymmetric cambered profile with a well-rounded, smooth leading edge (due to low `edgy_param` at CP0).
+    *   The upper surface is relatively thin compared to the thickness of the nose, creating a gentle curvature without aggressive humps.
+    *   The trailing edge is sharp, but the slight negative angle suggests a subtle downward camber at the rear.
+    *   The lower surface appears fairly flat, contributing to the overall camber.
+*   **Flow Field Observations**:
+    *   Pressure contours likely indicate a strong suction peak on the upper leading edge that recovers smoothly, characteristic of the high reward.
+    *   The wake appears thin and stable, suggesting minimal flow separation.
+    *   The pressure difference between upper and lower surfaces is sustained along the chord, providing good lift.
+*   **Flaws & Parameter Mapping**:
+    *   While high performing, the trailing edge (CP2) has an `edgy_param` of 0.969, which is sharp but not perfectly so (max is 1.0). Maximizing this could reduce drag further.
+    *   The upper surface control point (CP1) is quite "tight" (radius 0.104), which works well, but slight variations here might optimize the pressure recovery gradient.
+    *   Design 2 has a significantly longer effective chord (CP2 radius 0.83 vs D1's 0.78), which often improves L/D ratio if flow remains attached. Design 1 is slightly shorter.

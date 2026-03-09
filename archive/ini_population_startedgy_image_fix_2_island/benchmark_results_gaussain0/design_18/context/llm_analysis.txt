@@ -1,0 +1,9 @@
+The images for Design 1 (the current best performer) reveal several key characteristics:
+- **Geometry**: The airfoil exhibits a non-traditional "flattened teardrop" shape with a significant protrusion on the lower surface near the leading edge. The upper surface is relatively smooth and flat, while the trailing edge shows a slight upward reflex (camber reversal). There is a noticeable geometric "hump" on the bottom caused by the negative radius of the first control point.
+- **Flow Field**: The pressure field shows a strong stagnation point at the nose with a large low-pressure (suction) region across the entire upper surface, indicating effective lift generation. The velocity field (U) shows high-speed flow over the top, but the "hump" on the lower surface creates a region of flow acceleration followed by a potential pressure recovery challenge. The V-velocity field shows clean flow turning, though the wake appears slightly asymmetric.
+- **Mapping & Flaws**: The negative `radius_param` for CP0 (-0.788) is responsible for the bottom-heavy leading edge. While this design is the current leader, the lower hump likely increases pressure drag. The trailing edge (CP2 radius 1.0) is pushed to the extreme, creating the elongated tail.
+
+**Key Changes Needed**:
+1. Smooth out the lower surface discontinuity by exploring positive or near-zero radius values for CP0.
+2. Experiment with more extreme angular offsets (`angle_param`) to see if shifting the control points' sweep improves the L/D ratio.
+3. Test high `edgy_param` values at the trailing edge to create a sharper, more defined termination, potentially reducing wake turbulence.

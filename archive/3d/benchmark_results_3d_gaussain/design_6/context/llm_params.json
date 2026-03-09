@@ -1,0 +1,11 @@
+{
+  "le_sweep": 48.0,
+  "root_chord_in": 45.0,
+  "twist_root": 2.0,
+  "twist_tip": -8.0,
+  "dihedral": -10.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 8,
+  "name": "LowSweep_LargeChord_NoCamber_AggressiveWashout_NegativeDihedral_Thin"
+}

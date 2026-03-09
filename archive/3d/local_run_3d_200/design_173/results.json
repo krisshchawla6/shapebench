@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_D1_Refinement_SlightlyThinner",
+  "design_params": {
+    "le_sweep_deg": 66.4128619357443,
+    "root_chord_in": 36.439158720449214,
+    "twist_root_deg": -9.401497725096378,
+    "twist_tip_deg": -2.4886816034026946,
+    "dihedral_deg": -1.1016609162021915,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 12,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.14931399666761594,
+    "CDi": 0.010903759217931717,
+    "CM": -0.17552319192540577,
+    "L_D": 13.693809050924605
+  },
+  "corrected_results": {
+    "CL": -0.004312857336827234,
+    "CDi": -0.0039001774987900586,
+    "CM": 0.02859868015619707,
+    "L_D": 1.1058105273837409
+  }
+}

@@ -1,0 +1,8 @@
+Since this is the very first design and there's no existing population data or reference images, I cannot apply the "Hybrid Strategy" of blending complementary designs. My strategy must be to generate a robust, moderately performing initial design to establish a baseline and explore a central region of the parameter space. This design will serve as the first data point for the evolutionary optimizer.
+
+*   **Baseline Exploration:** Aim for a middle-ground design rather than extreme values to ensure a reasonable starting performance and provide a diverse point from which future designs can deviate.
+*   **Moderate Sweep:** Select a mid-to-high sweep angle (e.g., 65 degrees) to benefit from vortex lift, which is characteristic of delta wings, while avoiding the highest induced drag associated with very high sweeps.
+*   **Washout for Stability:** Incorporate a slight negative twist at the tip (`twist_tip`) while keeping the root twist neutral (`twist_root`=0). This washout is a common practice to encourage the root to stall before the tip, improving stability and control at high angles of attack.
+*   **Mild Camber:** Choose a NACA 4-digit airfoil with a modest camber (`naca_m=2, naca_p=4`). This provides inherent lift, which is likely to improve the initial CL/CDi compared to a completely symmetric airfoil (naca_m=0) without introducing excessive pitching moments.
+*   **Moderate Thickness and Dihedral:** Select a moderate thickness (`naca_t`) for reasonable structural properties and avoid excessive profile drag. A small positive dihedral will contribute to lateral stability without being overly aggressive.
+*   **Mid-Range Root Chord:** A root chord in the middle of the range provides a reasonable wing size for initial evaluation.

@@ -1,0 +1,7 @@
+*   **Strategy Focus (Novelty)**: Instead of refining the "short tail" cluster (`r2 ~ -0.7`) found in Designs 1 and 2, this design will explore a **"Long Laminar"** strategy. I will test if a longer chord length (implied by higher `r2`) can yield better performance *if* the trailing edge sharpness is correctly maintained.
+*   **Addressing Previous Failures**: Design 4 attempted a longer tail (`r2 = -0.14`) but failed (Rank 13). Crucially, Design 4 had a *smooth* trailing edge (`e2 = -0.92`). I hypothesize the failure was due to the lack of a sharp release point (Kutta condition), not the length.
+*   **Geometric Strategy**:
+    *   **Trailing Edge (CP2)**: Set `r2 = 0.1` (significantly longer than the -0.7 baseline) to extend the chord and reduce thickness ratio, potentially lowering wave drag or pressure drag.
+    *   **Sharpness Constraint**: Enforce `e2 = 1.0` (maximum sharpness) to ensure a clean wake, fixing the error from Design 4.
+    *   **Thickness Distribution**: Increase `r1` (Top) to `0.28` and move it aft (`a1 = 0.25`) to support the longer chord and encourage laminar flow over a larger portion of the wing.
+    *   **Leading Edge**: Keep `r0` small and negative (`-0.15`) with `e0` close to -1.0 for a smooth, small-radius entry to minimize stagnation pressure losses.

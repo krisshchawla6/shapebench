@@ -1,0 +1,14 @@
+{
+  "design_name": "HigherSweepCamberedThinner",
+  "le_sweep": 69.25416235949226,
+  "root_chord_in": 36.41787814967671,
+  "twist_root": -4.268550031700247,
+  "twist_tip": -10.0,
+  "dihedral": -3.3382483650925385,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "le_sweep": 53.5,
+  "root_chord_in": 34.5,
+  "twist_root": 8.8,
+  "twist_tip": -9.8,
+  "dihedral": 14.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 11,
+  "name": "Hybrid_HighSweep_MaxCamber"
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweepAggressiveCamberWashout",
+  "design_params": {
+    "le_sweep_deg": 71.71040522193299,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 14,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.1211280257545616,
+    "CDi": 0.013301563756308662,
+    "CM": -0.1762270075290336,
+    "L_D": 9.10629967827001
+  },
+  "corrected_results": {
+    "CL": 0.056846907065644006,
+    "CDi": 0.006831610558997214,
+    "CM": -0.08176560630385143,
+    "L_D": 8.321157445190837
+  }
+}

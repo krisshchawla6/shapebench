@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_Symmetric_Thin_LargeChord",
+  "design_params": {
+    "le_sweep_deg": 52.47561220070215,
+    "root_chord_in": 45.08410520663433,
+    "twist_root_deg": -8.398380212076564,
+    "twist_tip_deg": -0.9703875756458027,
+    "dihedral_deg": -0.31818345419705185,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.23501307411254124,
+    "CDi": 0.02099303298340173,
+    "CM": -0.22226654921723338,
+    "L_D": 11.194812788526354
+  },
+  "corrected_results": {
+    "CL": -0.06857288733163006,
+    "CDi": -0.006158227598632684,
+    "CM": 0.13851748406178394,
+    "L_D": 11.135166122612185
+  }
+}

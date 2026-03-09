@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_Refinement_NACA4410",
+  "design_params": {
+    "le_sweep_deg": 64.6896857276623,
+    "root_chord_in": 38.8901547141683,
+    "twist_root_deg": -3.8429656560892616,
+    "twist_tip_deg": -4.3107216912072825,
+    "dihedral_deg": 3.66514930512733,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.4156425971474886,
+    "CDi": 0.03749526079264802,
+    "CM": -0.4395915869560169,
+    "L_D": 11.085203526014327
+  },
+  "corrected_results": {
+    "CL": 0.0920248257172298,
+    "CDi": -0.002521334394293447,
+    "CM": -0.043526741794690314,
+    "L_D": -36.49846126142974
+  }
+}

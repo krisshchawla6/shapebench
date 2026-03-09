@@ -1,0 +1,5 @@
+*   **Hybrid Strategy**: I will apply a hybrid crossover strategy, interpolating parameters between the top-performing Design 1 (Rank 8) and the slightly more aggressive Design 2 (Rank 10).
+*   **Mid-Chord Thickness (CP1)**: Design 1 has a conservative CP1 radius (0.14), while Design 2 is aggressive (0.30). I will target an intermediate value (~0.22) to increase lift potential without incurring the full drag penalty of Design 2.
+*   **Trailing Edge Camber (CP2)**: Design 1 has a neutral trailing edge angle (-0.04), whereas Design 2 is deflected (-0.29). I will blend these to ~ -0.16 to increase aft loading while maintaining the critical sharpness (edgy > 0.9) observed in all successful designs.
+*   **Leading Edge Refinement (CP0)**: High positive radius values at CP0 correlate with failure (Design 5, 6). I will maintain a near-zero radius (interpolating 0.03 and -0.002 to ~0.015) to ensure a streamlined leading edge.
+*   **Diversity**: This specific combination explores the "middle ground" of the solution space between two local optima, testing if a compromise yields a higher global peak.

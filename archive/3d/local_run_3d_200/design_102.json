@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_MoreWashout_LightCamberThin",
+  "le_sweep": 70.8999448985994,
+  "root_chord_in": 36.411628917324826,
+  "twist_root": -10.0,
+  "twist_tip": -5.6378738984285794,
+  "dihedral": 1.2432679968743647,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

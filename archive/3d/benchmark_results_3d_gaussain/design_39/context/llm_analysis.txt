@@ -1,0 +1,12 @@
+The representative Design 1 (le_sweep=64.75, root_chord_in=31.76, twist_root=1.13, twist_tip=-1.89, dihedral=6.22, NACA 2411, Reward: 24.3845) exhibits a significantly lower reward compared to the top designs in the population (rewards often exceeding 34-35).
+*   **Aerodynamic Issues**: Design 1's mid-to-high sweep angle (64.75 degrees) might lead to a less efficient lift distribution at the operating conditions compared to lower sweep delta wings, potentially increasing induced drag. Its very mild twist distribution (low positive root twist, mild negative tip twist) likely results in a suboptimal spanwise lift distribution, which can be inefficient for CL/CDi. The moderate thickness (NACA 2411) could contribute to higher profile drag.
+*   **Parameter Influence**:
+    *   **Sweep**: Lower sweep angles (51-54 degrees) appear to yield higher rewards.
+    *   **Twist**: Designs with high positive root twist (near 10 deg) and strong negative tip twist (near -10 deg, strong washout) consistently perform better.
+    *   **Dihedral**: Higher positive dihedral (near 15 deg) is correlated with higher rewards.
+    *   **NACA**: Thin airfoils (naca_t=6 or 7) with moderate camber (NACA 24XX) are found in top designs.
+*   **Key design changes needed to improve designs in the population**:
+    1.  Reduce the sweep angle to the 50-55 degree range.
+    2.  Significantly increase the magnitude of both `twist_root` (positive) and `twist_tip` (negative) to maximize washout.
+    3.  Increase dihedral towards its maximum positive limit (15.0 degrees).
+    4.  Utilize a thinner airfoil section, specifically NACA 2406 or 2407.

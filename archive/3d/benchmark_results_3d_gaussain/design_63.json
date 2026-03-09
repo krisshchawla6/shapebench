@@ -1,0 +1,14 @@
+{
+  "design_name": "Symmetric_HighSweep_StrongWashout",
+  "le_sweep": 56.197613050797436,
+  "root_chord_in": 36.74146066526288,
+  "twist_root": 7.241091754152443,
+  "twist_tip": -7.2533493475364,
+  "dihedral": 9.664870911391644,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

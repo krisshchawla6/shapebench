@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_RefinedDelta_1",
+  "design_params": {
+    "le_sweep_deg": 59.94386013924944,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.10396834759849267,
+    "CDi": 0.0033749351095758735,
+    "CM": -0.12891964398067376,
+    "L_D": 30.806028626594344
+  },
+  "corrected_results": {
+    "CL": 0.059884001242491575,
+    "CDi": 0.0017829777893863565,
+    "CM": -0.07437398720094106,
+    "L_D": 33.58650993801876
+  }
+}

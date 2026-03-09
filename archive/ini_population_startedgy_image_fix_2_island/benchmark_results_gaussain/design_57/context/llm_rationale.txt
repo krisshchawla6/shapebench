@@ -1,0 +1,7 @@
+*   **Strategy Focus**: Instead of tweaking Design 1's values slightly, I will implement a **"Streamlined High-Lift"** strategy. The goal is to combine the robustness of Design 1's trailing edge with a much more efficient, lower-drag leading edge and optimized camber distribution.
+*   **Database Insights**: High-ranking designs (Rank 5, 9, 12) consistently feature a sharp TE (`e2` near 1.0) and large TE extension (Magnitude of `r2` > 0.7). Failed designs (Rank 46, 56) often have mismatched radii (e.g., `r1` too large vs `r2` too small) or potential self-intersections.
+*   **Geometric Exploration**:
+    *   **Thinner LE**: I will reduce `r0` from 0.46 to ~0.28. This explores the space between the thick Design 1 and the very thin (and riskier) Design 2/6. This should reduce drag while maintaining structural integrity.
+    *   **Aft Loading**: I will increase `a1` (upper surface angle) slightly to `0.42` (vs 0.35) and maintain `r1` around `0.30`. This attempts to move the suction peak back, delaying pressure recovery.
+    *   **Robust TE**: I will fix `e2` at 1.0 and keep `r2` high (~0.9) to ensure a clean Kutta condition, critical for lift generation.
+    *   **Underbelly**: I will keep `r3` slightly negative (`-0.12`) to prevent the bottom surface from bulging, ensuring a clear camber line.

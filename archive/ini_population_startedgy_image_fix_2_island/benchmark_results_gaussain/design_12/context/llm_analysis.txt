@@ -1,0 +1,12 @@
+**Geometry Observations (Design 1):**
+*   **Thin, Degenerate Geometry:** The airfoil (Design 1) appears as an extremely thin, highly cambered arc, effectively resembling a bent plate rather than a volumetric airfoil. There is almost zero thickness between the upper and lower surfaces.
+*   **Sharp Features:** Both the leading and trailing edges are razor-sharp, and the overall curvature has "kinks" rather than smooth transitions. This is consistent with the high `edgy_param` values (>0.8) used.
+*   **High Camber:** The shape is deeply concave on the bottom and convex on the top, driven by the aggressive inward pull of the lower control points.
+
+**Flow Field Observations:**
+*   **Pressure Distribution:** There is a strong pressure differential (high pressure below, low pressure above), indicating high lift generation. This "thin sail" configuration is aerodynamically efficient in ideal potential flow or specific Reynolds number regimes but structurally unrealistic.
+*   **Flow Adhesion:** Despite the sharpness, the flow appears attached in the provided snapshots, likely due to the specific angle of attack and solver physics, but this shape would be prone to separation at varying conditions.
+
+**Parameter Mapping:**
+*   **Cause of Thinness:** The parameter `r2` (Control Point 2, likely lower surface) is deeply negative (`-0.746`), pulling the bottom surface up into the top surface.
+*   **Cause of Sharpness:** The `edgy_param` values are consistently high positive (`0.91`, `0.83`, `0.97`, `0.85`), forcing sharp corners at control points.

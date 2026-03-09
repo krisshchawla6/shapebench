@@ -1,0 +1,14 @@
+Design 1 (le_sweep=51.6, root_chord_in=29.2, twist_root=7.5, twist_tip=-3.8, dihedral=15.0, NACA 2407, Reward: 35.5280) serves as our reference. The Cp distribution image shows a strong leading-edge vortex, indicated by the prominent low-pressure region (blue/purple) along the leading edge, which is the primary lift mechanism for delta wings. The vortex appears relatively stable, although there might be slight broadening or weakening towards the outboard trailing edge, suggesting potential for improved vortex management or load distribution. The pressure recovery over the aft section appears reasonable.
+
+Aerodynamic Issues & Observations:
+*   The current design effectively utilizes leading-edge vortex lift. The challenge lies in optimizing this vortex for maximum lift-to-induced-drag ratio and ensuring its stability across the entire wing.
+*   The twist distribution (positive at root, negative at tip) is beneficial for spanwise load control, preventing premature tip stall and potentially reducing induced drag.
+*   High positive dihedral is present in the top-performing designs, suggesting it plays a role in enhancing performance or stability for this objective.
+*   Moderate sweep angles (50-55 degrees) consistently yield higher rewards than higher sweep angles (60+ degrees).
+*   NACA 24xx profiles (cambered, p=4) with lower thickness (t=6-8) are common among the best designs, indicating the benefit of camber for lift and thin profiles for reduced drag.
+
+Key design changes needed to improve designs in the population:
+1.  **Optimize Twist Distribution:** Explore maximum root twist combined with even more aggressive tip washout to further refine spanwise load distribution and potentially enhance vortex lift characteristics while minimizing induced drag.
+2.  **Refine Sweep Angle:** Systematically test sweep angles at the lower end of the high-performing range (e.g., slightly below 50 degrees) to investigate the trade-off between vortex strength and wetted area/induced drag.
+3.  **Confirm Camber & Thickness Preference:** Consistently apply NACA 24xx profiles and evaluate the absolute thinnest profile (t=6) to confirm its benefit for CL/CDi.
+4.  **Sustain High Dihedral:** Continue exploring designs with high positive dihedral, as this parameter shows a strong correlation with higher rewards.

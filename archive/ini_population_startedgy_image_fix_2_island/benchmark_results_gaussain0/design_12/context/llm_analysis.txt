@@ -1,0 +1,16 @@
+- **Geometry**:
+    - The airfoil exhibits a high-camber, thin-profile design with a significant concave "undercamber" on the lower surface.
+    - The leading edge appears surprisingly sharp for an aerodynamic shape, leading into a steep upper surface curve.
+    - The thickness distribution is uneven, with a "pinched" appearance toward the aft section.
+    - There is a visible geometric discontinuity or "flat" spot on the upper surface where the control points transition.
+
+- **Flow Field / Simulation Results**:
+    - The pressure plot shows an intense, concentrated low-pressure suction peak at the leading edge, which often correlates with high drag or early separation at higher angles of attack.
+    - Velocity (u) plots show rapid acceleration over the top surface leading edge, followed by a noticeable deceleration.
+    - The vertical velocity (v) field indicates strong downward deflection, confirming the design is generating significant lift.
+    - A visible wake region is forming behind the trailing edge, suggesting some pressure drag is present despite the lift generation.
+
+- **Design 1 Assessment**:
+    - Mapping: The high `e0` (1.0) directly correlates to the sharp leading edge seen in the image, while the negative `r0` and `r3` create the undercambered loop.
+    - Problematic features: The sharp leading edge causes a localized pressure spike; the thin profile may lead to flow instability.
+    - Key changes: 1. Drastically reduce `e0` to round the leading edge. 2. Smooth the upper surface transition by balancing `r1` and `a1`. 3. Maximize `e3` to ensure a sharp, clean trailing edge.

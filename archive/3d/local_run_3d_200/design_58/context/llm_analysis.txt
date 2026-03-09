@@ -1,0 +1,14 @@
+The top-performing design (Design 1) achieved a significantly high reward (4016.0090) compared to all other listed designs. Its parameters were: `le_sweep=65.5`, `root_chord_in=34.8`, `twist_root=-7.1`, `twist_tip=-4.6`, `dihedral=-1.7`, and `NACA 4412`. Key observations:
+*   **Moderate-High Sweep:** The 65.5-degree sweep appears to be a sweet spot, balancing vortex lift benefits with induced drag penalties. Much higher sweeps (73-74 degrees in Designs 5 and 6) resulted in very low rewards.
+*   **Significant Washout:** Design 1 features substantial washout, with the root more twisted down (-7.1 deg) than the tip (-4.6 deg). This distribution is effective for managing lift distribution, preventing tip stall, and optimizing induced drag. Designs with constant maximum washout (e.g., `twist_root=-10.0` and `twist_tip` also very negative) did not perform well.
+*   **Cambered Airfoil:** The `NACA 4412` airfoil (4% max camber at 40% chord, 12% thickness) is a strong indicator that camber is crucial for achieving high CL/CDi. Designs using symmetric airfoils (`NACA 00xx` in Designs 3 and 5) consistently performed poorly.
+*   **Moderate Thickness:** A 12% thickness (`naca_t=12`) for Design 1 seems appropriate. Very thin (e.g., `naca_t=7, 9`) or very thick (`naca_t=18`) airfoils were associated with lower rewards.
+*   **Slight Anhedral:** Design 1's slight anhedral (`dihedral=-1.7`) is typical for highly swept wings to improve lateral stability characteristics.
+
+Critically assessing the population, designs with very high sweep angles (70+ degrees) and symmetric airfoils are consistently failing. Designs with max root washout but insufficient tip washout differential also struggle (e.g., Design 2, 4, 6). The combination of a moderate-to-high sweep, effective washout distribution (more at root than tip), and a cambered airfoil (`NACA 44xx` or `24xx`) appears to be the most promising.
+
+Key changes needed to improve designs:
+1.  Prioritize cambered airfoils (naca_m=2 or 4, naca_p=4) over symmetric ones for lift generation.
+2.  Refine twist distribution, ensuring significant washout at the root and a smaller, but still negative, washout at the tip.
+3.  Explore sweep angles in the range of 60-68 degrees, as very high sweeps have proven detrimental.
+4.  Maintain moderate thickness (10-14%) to balance drag and structural integrity.

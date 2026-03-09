@@ -1,0 +1,11 @@
+{
+  "le_sweep": 67.5,
+  "root_chord_in": 36.0,
+  "twist_root": -9.5,
+  "twist_tip": -5.5,
+  "dihedral": -2.5,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 11,
+  "name": "Hybrid_AggressiveWashout_HighSweep_NACA4411"
+}

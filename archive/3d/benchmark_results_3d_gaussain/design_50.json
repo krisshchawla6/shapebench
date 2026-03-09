@@ -1,0 +1,14 @@
+{
+  "design_name": "HigherSweep_CamberedThin",
+  "le_sweep": 58.44035040594648,
+  "root_chord_in": 37.42081236328366,
+  "twist_root": 7.4177660862348755,
+  "twist_tip": -5.394236659483839,
+  "dihedral": 5.902587459741038,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

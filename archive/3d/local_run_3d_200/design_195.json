@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Anhedral_ThinCamber",
+  "le_sweep": 74.52638368564547,
+  "root_chord_in": 42.44139947871908,
+  "twist_root": -4.328640547131661,
+  "twist_tip": -6.152953923681217,
+  "dihedral": 0.4235387142629703,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

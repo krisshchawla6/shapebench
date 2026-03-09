@@ -1,0 +1,9 @@
+*   **Exploitation Strategy in Cold Start**: While the instruction is to "exploit" high-performing designs, the lack of history requires "exploiting" a priori aerodynamic knowledge to create a stable initial seed. We cannot refine existing values, so we must define sensible ones.
+*   **Smoothness Priority**: To maximize the probability of attached flow and high L/D (Lift-to-Drag) ratios, the `edgy_param` will be kept near -1.0 (smooth) for most control points. This avoids premature separation caused by geometric kinks.
+*   **Camber and Thickness**: The `radius_param` values will be distributed to generate a generic cambered airfoil shape. Positive values on the "upper" points (inferred) and smaller/negative values on the "lower" or "trailing" points attempt to create suction and pressure sides.
+*   **Trailing Edge Definition**: One control point (CP2 in this hypothesis) is assigned a higher `edgy_param` and lower `radius_param` to approximate a sharp trailing edge, which is critical for enforcing the Kutta condition and reducing pressure drag.
+*   **Parameter Selection**:
+    *   CP0 (Leading Edge region): Positive radius for curvature, smooth.
+    *   CP1 (Suction Side): Higher positive radius for thickness/lift, smooth.
+    *   CP2 (Trailing Edge): Negative radius (pinching), sharp (`edgy` > 0).
+    *   CP3 (Pressure Side): Neutral/Slight radius, smooth.

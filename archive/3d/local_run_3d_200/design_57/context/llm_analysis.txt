@@ -1,0 +1,17 @@
+Design 1 stands out dramatically with a reward of 4016.0090, far exceeding all other designs. Its parameters include a moderate-to-high leading edge sweep (65.5 deg), a mid-range root chord (34.7 inches), significant washout (twist_root -7.1 deg, twist_tip -4.6 deg), slightly negative dihedral (-1.7 deg), and a NACA 4412 airfoil (4% max camber at 40% chord, 12% thickness).
+
+**Key Strengths of Design 1 (deduced from high reward):**
+*   **Effective Vortex Lift:** The 65.5-degree sweep likely generates strong leading-edge vortices, contributing substantial lift without excessive drag.
+*   **Optimized Spanwise Load Distribution:** The specific washout (more at root, less at tip) suggests an effective distribution of lift across the wing, delaying tip stall and minimizing induced drag by ensuring a near-elliptical or otherwise efficient lift profile.
+*   **Beneficial Camber:** The NACA 4412 airfoil provides positive camber, which likely shifts the zero-lift angle of attack, increasing lift at cruise conditions and potentially improving CL/CDi.
+
+**Aerodynamic Issues to address (general for population, not necessarily specific to Design 1 which is already excellent):**
+*   Designs with NACA 00xx series airfoils (e.g., Design 3, 4, 5) consistently yielded very low rewards, indicating that camber is crucial for performance.
+*   Extremes in sweep (e.g., 72.9 deg in Design 4) without other compensating factors also performed poorly, suggesting an optimal range around Design 1's value.
+*   Aggressive root twist (e.g., -10.0 in Design 2) without matching tip twist seems to lead to lower performance than Design 1's more balanced washout.
+
+**3-4 key design changes needed to improve designs in the population:**
+1.  **Prioritize cambered airfoils (NACA m > 0):** Avoid NACA 00xx.
+2.  **Refine washout distribution:** Explore washout profiles similar to Design 1, balancing root and tip twist.
+3.  **Explore moderate-to-high sweep range:** Focus on values around 60-70 degrees.
+4.  **Investigate airfoil thickness variations:** While camber is good, a slightly thinner airfoil might reduce profile drag if lift can be maintained.

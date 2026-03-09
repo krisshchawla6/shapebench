@@ -1,0 +1,9 @@
+- **Strategy Focus (Hybrid Strategy)**: Since the database is empty, I will apply the "Hybrid Strategy" by conceptually blending two archetypal airfoil philosophies:
+    1.  **High-Lift Concept (Parent A)**: Characterized by high camber (large difference between top/bottom radii) and a blunt leading edge to maintain attachment at high angles of attack.
+    2.  **Laminar Flow Concept (Parent B)**: Characterized by thinner profiles, symmetry, and max thickness pushed further back to maintain laminar boundary layers.
+- **Hybrid Implementation**:
+    -   **Trailing Edge (CP0)**: I will combine the extended chord of Parent B with the sharpness required for both. Parameters: High positive radius ($0.92$) for length, max sharpness ($0.95$).
+    -   **Upper Surface (CP1)**: Blending the thickness of Parent A with the shape of Parent B. I choose a moderate positive radius ($0.45$) to ensure sufficient lift without inducing massive form drag.
+    -   **Leading Edge (CP2)**: A compromise between the blunt nose of A and sharp nose of B. A neutral radius ($0.05$) with moderate smoothing ($-0.6$) allows for a workable range of attack angles.
+    -   **Lower Surface (CP3)**: To induce camber (Parent A trait) while maintaining some thickness (Parent B trait), I will use a slightly negative radius ($-0.15$) to flatten the bottom, deviating from pure symmetry.
+- **Optimization Insight**: By starting with this "Hybrid Baseline," the evolutionary process begins in a fertile region of the design space (likely valid airfoils) rather than wasting iterations on non-aerodynamic blobs. This sets up future generations to specialize towards either lift or efficiency based on the reward signal.

@@ -1,0 +1,6 @@
+- **Exploration Strategy**: This design targets the most extreme boundaries of the parameter space (approaching -1.0 and 1.0) which are currently underexplored compared to the thin, centralized profile of Design 1.
+- To counter the "thin blade" archetype, I am using extreme positive and negative radial values in alternating sequence (`r=0.98` and `r=-0.95`) to force the geometric optimizer to create more volumetric complexity or distinct lobes.
+- I am pushing the `angle_param` to its positive and negative limits (`0.95` vs `-0.95`) to test the maximum "twist" or chordwise extension the generator can produce, seeking a new geometric "island" in the search space.
+- The `edgy_param` is being toggled between maximum smoothness (-0.98) and maximum sharpness (0.98) at the control points to determine how sharp transitions at the boundaries affect lift-to-drag ratios in thicker profiles.
+- By moving control points to the furthest corners of the parameter hypercube, I aim to break away from the current local optimum of high-lift thin foils and discover if a high-performance thick-bodied airfoil exists in the boundary regions.
+- This "box" exploration approach is designed to advance the evolutionary search by providing high-contrast data points for the next generation.

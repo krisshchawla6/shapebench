@@ -1,0 +1,5 @@
+- **Exploitation Strategy**: I am focusing on the high-reward basin established by Design 1. By refining the parameters of the most successful design, I aim to eliminate geometric noise while preserving the lift-generating proportions.
+- **Leading Edge Smoothing**: I will significantly reduce `e0` from 1.0 to a near-zero or negative value. This will transform the sharp corner observed in the image into a smooth, rounded nose, reducing pressure drag.
+- **Optimizing Suction Peak**: Design 1 had `r2=0.95`. I will push this slightly further (`r2=0.98`) to extend the low-pressure zone on the upper surface, which should increase lift if the flow remains attached.
+- **Angular Distribution**: I will slightly adjust `a1` and `a2` to ensure the control points provide a more gradual transition from the leading edge to the maximum thickness point, preventing the abrupt curvature changes seen in the current flow plots.
+- **Lower Surface Refinement**: By adjusting `r3` and `e3`, I will aim for a more subtle "camber" that provides lift without the "hooked" geometry that increases the wake profile.

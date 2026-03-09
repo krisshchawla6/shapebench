@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploit_Mod_Camber_Washout",
+  "le_sweep": 65.94635793428294,
+  "root_chord_in": 29.780002078617333,
+  "twist_root": -0.033999859557579004,
+  "twist_tip": -5.323954086631146,
+  "dihedral": 8.697102810860867,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

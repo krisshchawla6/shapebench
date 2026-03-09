@@ -1,0 +1,14 @@
+{
+  "design_name": "Initial_Moderate_Camber_Washout_Delta",
+  "le_sweep": 65.88026181248233,
+  "root_chord_in": 27.523395461703583,
+  "twist_root": 1.7891307635812772,
+  "twist_tip": 1.8812067828154468,
+  "dihedral": 4.573120919467325,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

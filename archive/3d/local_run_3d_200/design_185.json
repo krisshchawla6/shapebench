@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweepSymmetricMinimalTwist",
+  "le_sweep": 45.0,
+  "root_chord_in": 12.867704885562905,
+  "twist_root": 2.997963715869161,
+  "twist_tip": -0.7382686353563916,
+  "dihedral": 4.064996998585636,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

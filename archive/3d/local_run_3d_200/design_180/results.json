@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_Design1_Refined_Washout_Camber",
+  "design_params": {
+    "le_sweep_deg": 62.15592813608804,
+    "root_chord_in": 28.39975591501576,
+    "twist_root_deg": -4.743237794527745,
+    "twist_tip_deg": -8.724421900311004,
+    "dihedral_deg": -10.399688026380836,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.28697406135332953,
+    "CDi": 0.020526259694474833,
+    "CM": -0.31578225530889364,
+    "L_D": 13.980825811659
+  },
+  "corrected_results": {
+    "CL": 0.224848957481951,
+    "CDi": 0.01166158308110931,
+    "CM": -0.22474000778600756,
+    "L_D": 19.281169281912128
+  }
+}

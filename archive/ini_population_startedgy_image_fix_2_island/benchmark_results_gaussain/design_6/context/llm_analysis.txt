@@ -1,0 +1,15 @@
+*   **Geometry Observations (Design 1)**:
+    *   **Leading Edge**: The combination of `radius_param=0.94` and `edgy_param=1.0` (from the action vector) likely creates a massive, bluff, diamond-like or polygonal leading edge rather than a smooth curve.
+    *   **Thickness Distribution**: With a high leading edge radius tapering to lower values downstream, the shape resembles a wedge or a blunt bullet more than an airfoil.
+    *   **Surface Continuity**: The `edgy_param=1.0` creates sharp discontinuities (corners) at the control points, preventing smooth airflow adhesion.
+    *   **Tail**: The negative radius at the final point suggests a pinched or potentially inverted trailing edge region.
+
+*   **Flow Field Observations**:
+    *   **Separation**: Due to the sharp/bluff leading edge, the flow likely separates immediately, creating a massive wake.
+    *   **Pressure**: Expect a high stagnation pressure spike at the sharp nose, but no useful suction peak (low pressure) on the upper surface due to immediate separation.
+    *   **Performance**: The Rank 4 and Reward -0.2204 confirm this is a non-viable design, essentially a drag-inducing obstacle.
+
+*   **Key Flaws & Mappings**:
+    *   **Sharp LE**: `e0 = 1.0` is the primary failure mode. Subsonic airfoils require smooth leading edges (`e ~ -1.0`) to allow flow to turn around the nose.
+    *   **Bluff Body**: `r0 = 0.94` is too large for the leading edge, increasing form drag.
+    *   **Lack of Structure**: The design lacks a defined camber line or thickness distribution conducive to lift.

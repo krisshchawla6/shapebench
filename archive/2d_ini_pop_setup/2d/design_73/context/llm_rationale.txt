@@ -1,0 +1,5 @@
+*   **Apply Exploitation Strategy**: The top 4 designs cluster tightly in parameter space (CP0 r~0.9, CP1 r~0.2, CP2 r=1.0). This design will refine these successful coordinates, focusing on pushing the limits of smoothness and sharpness.
+*   **Refine Trailing Edge Sharpness**: Moving from Design 1's edgy value of 0.837 to 1.0 for CP3 to ensure a cleaner flow exit, as seen in the trend toward higher rewards in Designs 3 and 4 where sharpness was higher.
+*   **Optimize Thickness Distribution**: CP1's radius in the top designs ranges from 0.21 to 0.28. I will select a middle-ground value (0.23) to balance thickness for structural integrity while maintaining the aerodynamic benefits of the slender profile seen in Design 1.
+*   **Maximize Surface Smoothness**: I will set `edgy_param` for CP0 and CP2 to near-minimum values (-1.0) to ensure the highest possible surface continuity, reducing the risk of localized turbulence or flow separation.
+*   **Stabilize Camber**: By keeping CP2's radius at 1.0 and adjusting its angle slightly, I aim to maintain the high-lift camber profile that has proven successful in the 5.4+ reward range.

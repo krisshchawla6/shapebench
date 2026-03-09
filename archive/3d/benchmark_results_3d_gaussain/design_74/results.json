@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_MinSweep_MaxTwist_NACA2408",
+  "design_params": {
+    "le_sweep_deg": 47.204603767992836,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.13130639563666097,
+    "CDi": 0.0033973267027704525,
+    "CM": -0.15585137133606042,
+    "L_D": 38.649917162686535
+  },
+  "corrected_results": {
+    "CL": 0.0908765778708834,
+    "CDi": 0.00203312755659517,
+    "CM": -0.10887896526680937,
+    "L_D": 44.69792245749313
+  }
+}

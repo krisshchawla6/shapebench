@@ -1,0 +1,15 @@
+The top-performing designs (Rank 0-3) exhibit a consistent pattern: low leading-edge sweep (46-48 degrees), moderate root chord (25-30 inches), significant positive root twist (4-10 degrees) combined with maximum tip washout (-10 degrees), high positive dihedral (10-15 degrees), and cambered NACA 24xx airfoils with moderate thickness (8-11%). Design 1, the top performer, exemplifies this with a relatively low sweep of 46.19 degrees and the described twist/dihedral/NACA characteristics. This combination likely results in an efficient lift distribution across the delta wing, potentially delaying stall and reducing induced drag for the given operating conditions. The strong washout at the tip ensures the outer wing sections contribute less lift, preventing premature tip stall and potentially distributing the load more favorably. The high positive dihedral might be contributing to stability or is a correlate of other beneficial geometric features.
+
+In contrast, Design 5, a very low-reward outlier (Rank 40), features an extreme sweep (80 degrees) with detrimental twist characteristics (negative root twist and positive tip twist/wash-in) and a symmetric airfoil. This clearly indicates that high sweep combined with a reverse twist profile leads to extremely poor aerodynamic performance, likely due to massive flow separation or highly inefficient lift generation.
+
+Critically assessing the patterns:
+*   **Aerodynamic issues implied by low-reward designs:** Extreme sweep without appropriate twist is highly detrimental. Positive twist at the tip (wash-in) is highly penalized.
+*   **Parameter influence:**
+    *   Low sweep and positive dihedral are strongly correlated with high performance in the current dataset.
+    *   The specific twist distribution (positive root, max negative tip) is crucial.
+    *   Cambered airfoils (NACA 24xx) are consistently preferred over symmetric (NACA 00xx).
+*   **Key design changes needed to improve designs in the population:**
+    1.  Explore moderate sweep values (e.g., 55-70 degrees) to understand the transition from low-sweep to high-sweep behavior, while retaining beneficial twist profiles.
+    2.  Investigate higher camber values (NACA `m=4`) to see if increased lift can improve performance at different sweep angles.
+    3.  Test thinner airfoils (`naca_t=6-8`) in conjunction with higher camber or moderate sweep to reduce drag while maintaining lift.
+    4.  Explore neutral or slightly negative dihedral for moderate sweep designs, as the benefits of high positive dihedral might be specific to low-sweep designs.

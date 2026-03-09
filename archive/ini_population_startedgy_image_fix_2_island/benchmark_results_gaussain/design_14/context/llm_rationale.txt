@@ -1,0 +1,8 @@
+**Novel Design Strategy - Streamlined Elongation**:
+- **Problem Identification**: The population database shows a correlation between low rewards and negative/small values for the trailing edge radius parameter (`r2`). Design 1, 2, 3, and 4 all have `r2 < 0`, resulting in stubby shapes with poor L/D ratios.
+- **Hypothesis**: To break out of this local optimum of "blob" shapes, the optimizer must explore **positive extension** of the chord. I will drastically increase `r2` to extend the trailing edge away from the center, transforming the shape from a circle/blob into an elongated airfoil.
+- **Geometric Construction**:
+    - **Lengthening**: Set `r2` (TE) to a high positive value (0.8) to maximize chord length. Set `r0` (LE) to a moderate positive value (0.5) to define the nose.
+    - **Thickness Control**: Keep `r1` (top) and `r3` (bottom) smaller (0.15 and -0.05) to reduce frontal area and prevent the "thick blob" issue.
+    - **Camber**: Introduce asymmetry by setting `r1 > r3` and shifting the angles (`a1` positive, `a3` negative) to encourage lift generation.
+    - **Sharpness**: Enforce strict smoothness at the nose (`e0 = -1.0`) and maximum sharpness at the tail (`e2 = 1.0`) to ensure Kutta condition compliance.

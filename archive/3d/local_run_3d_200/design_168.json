@@ -1,0 +1,14 @@
+{
+  "design_name": "High_Sweep_MaxTipWashout_PosDihedral_2410",
+  "le_sweep": 70.11380200390776,
+  "root_chord_in": 40.88038056007102,
+  "twist_root": -5.905836936759408,
+  "twist_tip": -10.0,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

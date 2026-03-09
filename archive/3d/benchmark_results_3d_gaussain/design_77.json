@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploit_LowSweep_HighTwist_2411",
+  "le_sweep": 45.0,
+  "root_chord_in": 39.07543257969525,
+  "twist_root": 10.0,
+  "twist_tip": -7.315954273325202,
+  "dihedral": 4.245795027560988,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 17,
+    "chord_length": 1.0
+  }
+}

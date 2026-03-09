@@ -1,0 +1,16 @@
+No image was provided for the representative design's Cp distribution. My analysis is based purely on the provided numerical data for previous designs.
+
+The top-performing design (Design 1, Reward: 32.4419) exhibits a combination of:
+*   Moderate leading edge sweep (~55.6 deg)
+*   Mid-range root chord (~28.1 inches)
+*   Positive `twist_root` (~3.15 deg) and negative `twist_tip` (~-3.15 deg), indicating a balanced washout distribution.
+*   High positive dihedral (~10.9 deg)
+*   NACA 2408 airfoil (2% max camber at 40% chord, 8% thickness).
+
+Designs 2 and 4, while lower in reward, also show similar trends: moderate sweep, positive `twist_root`, negative `twist_tip`, and positive dihedral. The NACA 24xx series seems to be a consistent performer. The highest reward design (Design 1) had the lowest sweep among the top 3 and the highest dihedral.
+
+Key design patterns for higher reward appear to be:
+1.  **Lower-to-moderate leading edge sweep**: Sub-60 degree sweep seems to perform better for CL/CDi.
+2.  **Effective washout**: A positive `twist_root` combined with a negative `twist_tip` helps distribute lift effectively, delaying tip stall and potentially reducing induced drag.
+3.  **Positive dihedral**: A moderate to high positive dihedral correlates with higher performance in the top designs.
+4.  **Cambered, relatively thin airfoils**: NACA 24xx series (specifically 2408) is prominent.

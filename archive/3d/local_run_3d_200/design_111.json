@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploit_Delta_Vortex_Twist",
+  "le_sweep": 66.69799780895369,
+  "root_chord_in": 37.60170119786739,
+  "twist_root": -10.0,
+  "twist_tip": -5.27861814569873,
+  "dihedral": 0.5765854499295315,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

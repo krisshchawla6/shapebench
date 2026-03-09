@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Symmetric_NegDihedral_VortexExplorer",
+  "le_sweep": 66.22661097679165,
+  "root_chord_in": 50.0,
+  "twist_root": 7.965357184250536,
+  "twist_tip": -8.284916630497674,
+  "dihedral": -9.263237514424532,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 23,
+    "chord_length": 1.0
+  }
+}

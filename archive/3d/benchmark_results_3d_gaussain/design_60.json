@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Symmetric_Thick_NeutralDihedral",
+  "le_sweep": 67.06384996787203,
+  "root_chord_in": 36.40210652238945,
+  "twist_root": 2.5469326705310324,
+  "twist_tip": -9.741820660082064,
+  "dihedral": -5.28458233217995,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 22,
+    "chord_length": 1.0
+  }
+}

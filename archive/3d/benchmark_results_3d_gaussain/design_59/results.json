@@ -1,0 +1,33 @@
+{
+  "design_name": "High_Sweep_Anhedral_HighCamber_Exploration",
+  "design_params": {
+    "le_sweep_deg": 61.29279580439192,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 20,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.1836882163285608,
+    "CDi": 0.0134030023664345,
+    "CM": -0.2385300281545139,
+    "L_D": 13.705005140383781
+  },
+  "corrected_results": {
+    "CL": 0.1151769866462118,
+    "CDi": 0.007415996102861907,
+    "CM": -0.1459651815968116,
+    "L_D": 15.530885541021773
+  }
+}

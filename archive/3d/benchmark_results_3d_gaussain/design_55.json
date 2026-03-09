@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Uncambered_FlatTwist",
+  "le_sweep": 67.37087401215214,
+  "root_chord_in": 36.0815430767288,
+  "twist_root": 2.838741017980548,
+  "twist_tip": 0.9593917288398505,
+  "dihedral": -1.4644502764204808,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

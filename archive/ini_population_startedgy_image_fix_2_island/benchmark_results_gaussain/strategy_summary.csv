@@ -1,0 +1,6 @@
+Strategy,Count,Improved,Avg Δ,Med Δ,Best Δ,Avg Reward,Best Reward,Best Design,Fail Rate
+Hybrid,5,60.0%,+0.444,+0.036,+2.765,2.301,4.840,design_77,0.0%
+Exploit,13,38.5%,-0.576,-0.070,+1.536,1.819,4.716,design_74,7.7%
+Novel,19,26.3%,-0.772,-0.583,+3.258,1.945,4.858,design_45,0.0%
+Visual Intuition,17,52.9%,-1.235,+0.058,+2.882,1.180,5.236,design_60,11.8%
+Diversify,20,5.0%,-1.369,-0.977,+0.085,0.808,4.531,design_70,10.0%

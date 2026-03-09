@@ -1,0 +1,5 @@
+*   **Strategy Focus (Novel Design Strategy)**: This design moves away from the "bulky" nature of Design 1 (where many radii are 1.0) toward a more streamlined, slender geometry inspired by laminar flow and supercritical airfoil principles.
+*   **Population Insight**: The database shows a strong negative correlation between reward and edginess on the primary body; therefore, edginess for the first three CPs will be kept near -0.95 to ensure maximum smoothness.
+*   **Aerodynamic First Principles**: To minimize drag, the design aims for a very sharp trailing edge (high edginess at CP3) and a specific curvature that delays the pressure recovery until as far aft as possible.
+*   **Parameter Exploration**: I will explore a reduced radius for the lower control point (CP2) to test if a thinner profile outperforms the thicker designs currently topping the leaderboard.
+*   **Geometry Mapping**: Based on the mapping observed, CP0 will act as the leading edge, CP1 as the upper peak, CP2 as the lower peak, and CP3 as the trailing edge. I will maximize the angular separation to ensure the chord length is maximized within the parameter space.

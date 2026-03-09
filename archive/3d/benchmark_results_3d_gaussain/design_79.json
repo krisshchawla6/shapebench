@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploit_LowSweep_LargeChord_ThinNACA",
+  "le_sweep": 45.0,
+  "root_chord_in": 41.193087031060045,
+  "twist_root": 10.0,
+  "twist_tip": -9.322989937868957,
+  "dihedral": 13.102343650635767,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_NoCamber_HighDihedral",
+  "design_params": {
+    "le_sweep_deg": 50.26007280104094,
+    "root_chord_in": 43.14201908921501,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -8.282378234888895,
+    "dihedral_deg": 6.969945721800123,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 21,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.030970623503268357,
+    "CDi": 0.000401327811017176,
+    "CM": -0.030974445037743513,
+    "L_D": 77.17038952464443
+  },
+  "corrected_results": {
+    "CL": -0.15304584747440375,
+    "CDi": -0.0013508776218913907,
+    "CM": 0.20085785936547162,
+    "L_D": 113.29364332804714
+  }
+}

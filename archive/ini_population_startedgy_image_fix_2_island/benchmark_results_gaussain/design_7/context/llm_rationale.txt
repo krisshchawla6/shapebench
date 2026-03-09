@@ -1,0 +1,7 @@
+*   **Novel Design Strategy:** The current population is stuck in a "thick body" local optima. Design 2 tried to be even thicker (`r1=0.86`) and failed miserably (-0.22). Design 1 is better but still inefficient. To advance, we must jump to a different region of the design space: **Thin, Laminar Profiles**.
+*   **Aerodynamic First Principles:** High lift-to-drag requires minimizing frontal area (form drag) while maintaining smooth curvature changes. I will set the leading edge radius near zero (relative to baseline) to form a proper nose radius, and use a moderate positive value for the upper surface to generate lift without separation.
+*   **Geometric Construction:**
+    *   **Nose (CP0):** Set `r` close to 0.0 (baseline) or slightly negative to tighten the nose radius. Keep `e` smooth.
+    *   **Suction Side (CP1):** Set `r` to a moderate value (~0.15) to maintain structure but reduce the massive blockage seen in Design 1. Shift `a` positive to move max thickness aft.
+    *   **Trailing Edge (CP2):** Maximize sharpness. High `e` (~0.95) and very low `r` (<-0.5) to ensure the flow leaves the body cleanly (Kutta condition).
+    *   **Pressure Side (CP3):** Keep `r` slightly negative or zero to create a semi-flat bottom, aiding in camber generation.

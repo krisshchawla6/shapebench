@@ -1,0 +1,14 @@
+{
+  "design_name": "HybridCamberedMaxDihedral",
+  "le_sweep": 54.11158717245796,
+  "root_chord_in": 33.610220841323326,
+  "twist_root": 10.0,
+  "twist_tip": -6.88907771764677,
+  "dihedral": 14.453776038742985,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,8 @@
+*   **Exploration Strategy**: The population is clustered around thin, cambered designs with negative trailing edge angles (downward curvature). To advance, we must explore **structurally distinct** regions of the parameter space.
+*   **Underexplored Region 1: Thickness**: Most successful designs have low thickness parameters (`r1 ~ 0.15`). We will test a significantly **thicker** profile (`r1 ~ 0.22`) to see if the solver can find a high-lift, high-volume shape that maintains attached flow.
+*   **Underexplored Region 2: Reflex (Trailing Edge Angle)**: Top designs have negative angles at CP2 (`-0.06`), curving the tail down. We will explore a **positive angle** (`a2 ~ 0.15`), creating a "reflexed" trailing edge. This often improves stability (pitching moment) and can delay separation on thick airfoils, though potentially at the cost of max lift.
+*   **Design Synthesis**:
+    *   **CP0**: Keep LE radius slightly negative but close to zero (`-0.05`) to maintain a clean entry, avoiding the bluntness penalty seen in Design 5.
+    *   **CP1**: Increase radius (`0.22`) for thickness, but reduce angle (`0.10`) compared to Design 1 (`0.15`) to prevent flow separation over the thicker hump.
+    *   **CP2**: Set high negative radius (`-0.72`) for a sharp tail, but set **positive angle** (`0.15`) to force the reflex geometry.
+    *   **Edgy**: Use sharp (`~1.0`) for the trailing edge to ensure clean release, but intermediate/smooth values elsewhere.

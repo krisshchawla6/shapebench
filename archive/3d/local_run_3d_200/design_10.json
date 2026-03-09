@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_FrontCamber_AggressiveWashout",
+  "le_sweep": 74.41042346556199,
+  "root_chord_in": 23.710527182124228,
+  "twist_root": -5.378154639335459,
+  "twist_tip": -10.0,
+  "dihedral": -4.515377296648114,
+  "naca": {
+    "m": 4,
+    "p": 0,
+    "t": 9,
+    "chord_length": 1.0
+  }
+}

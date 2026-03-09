@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_Sweep_Twist_Explorer",
+  "le_sweep": 66.21216994977723,
+  "root_chord_in": 34.10055229237843,
+  "twist_root": 1.6125805116584249,
+  "twist_tip": -4.647171216276607,
+  "dihedral": 0.3569395917628162,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

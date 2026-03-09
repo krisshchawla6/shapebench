@@ -1,0 +1,13 @@
+The most successful design, Design 1, achieved an exceptionally high reward of 4016.0090, far outperforming all other designs. Its key characteristics include a moderate leading edge sweep (65.5 deg), a moderate root chord (34.8 inches), and a specific twist distribution. Analyzing the twist, Design 1 had `twist_root = -7.1 deg` and `twist_tip = -4.6 deg`. This results in `twist_tip - twist_root = 2.5 deg`. If a positive value means the tip chord line is effectively at a higher angle of attack relative to the root chord line, then this indicates a wash-in configuration. This is a crucial observation, as other moderate-performing designs (D2, D3, D4) also exhibit wash-in (positive `twist_tip - twist_root`). Designs 5 and 6, which showed slight washout (negative `twist_tip - twist_root`), had only moderate rewards. Design 1 also featured a slight anhedral (-1.7 deg) and a cambered NACA 4412 airfoil.
+
+Key observations for improvement:
+- The "wash-in" twist distribution (where `twist_tip` is less negative/more positive than `twist_root`) appears highly correlated with high performance, particularly in Design 1. This warrants further focused exploration.
+- Moderate sweep angles (63-69 degrees) appear to be effective, with Design 1 being in the middle of this range.
+- Cambered airfoils (NACA `m=2` or `m=4`, with `p=4`) generally lead to better performance than symmetric ones (`m=0`).
+- The dihedral/anhedral seems less critical but slight anhedral (like D1) or near-zero values are common in higher-ranked designs.
+
+3-4 key design changes needed to improve designs in the population:
+1.  Systematically explore the "wash-in" twist regime, aiming for a moderate differential twist (e.g., 2-4 degrees of wash-in) by setting `twist_tip` to be less negative than `twist_root`.
+2.  Maintain cambered airfoils, but explore the impact of thickness (NACA `naca_t`) within the context of the optimal twist.
+3.  Vary leading edge sweep and root chord slightly around the Design 1 sweet spot to search for local optima.
+4.  Explore the impact of small positive dihedral in combination with the effective wash-in twist to assess lateral stability and potential for drag reduction.

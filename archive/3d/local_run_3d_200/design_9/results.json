@@ -1,0 +1,33 @@
+{
+  "design_name": "CamberedWashoutHighSweep",
+  "design_params": {
+    "le_sweep_deg": 63.80186605866261,
+    "root_chord_in": 31.86915580644419,
+    "twist_root_deg": -8.774863851265202,
+    "twist_tip_deg": -7.025005013078848,
+    "dihedral_deg": 1.0643642541642369,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.21732953406392638,
+    "CDi": 0.017770379561007757,
+    "CM": -0.2713433214460534,
+    "L_D": 12.229875750138543
+  },
+  "corrected_results": {
+    "CL": 0.09510737790014641,
+    "CDi": 0.0036969173355716335,
+    "CM": -0.0984740297803273,
+    "L_D": 25.726130520968354
+  }
+}

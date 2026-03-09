@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_MaxRootWashout_ThinCamber",
+  "design_params": {
+    "le_sweep_deg": 74.26108835525791,
+    "root_chord_in": 23.684047411897364,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -4.146058145697705,
+    "dihedral_deg": -8.906398600386797,
+    "naca": {
+      "m": 2,
+      "p": 0,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.04939949507171621,
+    "CDi": 0.0027927578575700223,
+    "CM": -0.05317391873501911,
+    "L_D": 17.68842756553864
+  },
+  "corrected_results": {
+    "CL": 0.0951364158550917,
+    "CDi": 0.0030365117457690056,
+    "CM": -0.09014855262284086,
+    "L_D": 31.330824255052608
+  }
+}

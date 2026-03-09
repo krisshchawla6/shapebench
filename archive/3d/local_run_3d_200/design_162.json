@@ -1,0 +1,14 @@
+{
+  "design_name": "ExploitHighCamberWashout",
+  "le_sweep": 61.55201619000659,
+  "root_chord_in": 34.72964716299783,
+  "twist_root": -9.056605028917595,
+  "twist_tip": -4.617829258136666,
+  "dihedral": -11.743258772609625,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

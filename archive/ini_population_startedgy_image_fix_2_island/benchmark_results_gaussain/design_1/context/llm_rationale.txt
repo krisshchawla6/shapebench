@@ -1,0 +1,5 @@
+*   **Strategy Focus (Heuristic Exploitation):** Since there is no database to exploit, I will exploit general aerodynamic principles to create a strong baseline. Random initialization often leads to self-intersecting (invalid) shapes. I will explicitly construct a "classic" airfoil topology to ensure the first generation yields a valid reward signal.
+*   **Leading Edge (CP 0):** Needs to be round and smooth to prevent leading-edge separation. I will set $r_0$ slightly positive for thickness and $e_0$ close to -1.0 (very smooth).
+*   **Trailing Edge (CP 2):** Needs to be sharp to define the stagnation point and reduce drag. I will set $r_2$ negative (pulling the radius in for a taper) and $e_2$ high positive (sharp).
+*   **Camber and Thickness (CP 1 & 3):** To generate lift, the top surface (CP 1) needs more curvature/volume than the bottom (CP 3). I will set $r_1 > r_3$. Both should remain relatively smooth ($e < 0$).
+*   **Constraint Management:** Angular offsets ($a$) will be kept small to prevent control points from crossing over each other, which guarantees a valid closed loop polygon.

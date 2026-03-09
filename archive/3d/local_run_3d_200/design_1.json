@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Cambered_AggressiveWashout_Anhedral",
+  "le_sweep": 74.79134187226744,
+  "root_chord_in": 42.586411137084866,
+  "twist_root": 8.202293460022688,
+  "twist_tip": -10.0,
+  "dihedral": -13.265256235719914,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 17,
+    "chord_length": 1.0
+  }
+}

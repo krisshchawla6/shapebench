@@ -1,0 +1,13 @@
+*   **Geometry Analysis (Design 1 Observations):**
+    *   **Shape:** The successful design (Design 1) exhibits a classic, streamlined airfoil profile. It features a well-defined, rounded leading edge (CP0) and a sharp, tapered trailing edge (CP2).
+    *   **Thickness:** The profile is relatively thin but not razor-flat, with the maximum thickness located approximately 30-40% along the chord (controlled by CP1).
+    *   **Curvature:** The upper surface is convex and smooth, while the lower surface appears slightly concave (under-cambered) or nearly flat, suggesting a focus on lift generation.
+    *   **Smoothness:** The surface continuity is generally good, avoiding the "wobbly" or jagged artifacts seen in lower-ranked designs, though the upper surface curvature (CP1) could likely be smoother.
+*   **Flow Field Analysis (Inferred):**
+    *   **Pressure:** The pressure coefficient ($C_p$) likely shows a strong suction peak near the leading edge on the upper surface, recovering gradually towards the trailing edge.
+    *   **Wake:** The wake region is narrow and stable, indicating attached flow and satisfied Kutta condition at the sharp trailing edge.
+    *   **Separation:** There is no visible flow separation or recirculation bubbles, which contrasts with failed designs (like Design 6) that likely suffer from massive separation due to blunt shapes.
+*   **Mapping Flaws to Parameters:**
+    *   **Structural Thickness:** Design 1 has a very low radius parameter at CP2 (`-0.78`) and a modest one at CP1 (`0.17`). While aerodynamic, this might be too thin for structural constraints or fuel volume.
+    *   **Parameter Sensitivity:** The failure of Design 6 (`r1=0.71`) indicates that excessive thickness parameters lead to "ballooning" and drag penalties.
+    *   **Key Changes Needed:** Increase the thickness of the main body (CP1 radius) to explore robust high-lift shapes, smooth out the upper surface curvature further (lower CP1 edgy param), and increase aft camber (CP2 angle) to maximize lift.

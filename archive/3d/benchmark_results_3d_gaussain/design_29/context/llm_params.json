@@ -1,0 +1,11 @@
+{
+  "le_sweep": 51.0,
+  "root_chord_in": 30.0,
+  "twist_root": 9.8,
+  "twist_tip": -9.5,
+  "dihedral": 14.5,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 6,
+  "name": "Exploitation_TwistedDelta_ThinAirfoil"
+}

@@ -1,0 +1,7 @@
+- **Strategy Focus**: I will pursue a **"Thick Laminar Flow"** exploration strategy. The current population is clustered around thin, conventional airfoils. I will generate a design with significantly increased thickness and aft-camber to test the solver's ability to handle high-volume shapes.
+- **Geometric Constraints**: To avoid the failures seen in Designs 4-6, I will strictly enforce a very low `r2` value (near -0.9) to ensure the trailing edge remains sharp and closed, which is critical for the Kutta condition and reward generation.
+- **Parameter Shifts**:
+    - **Thickness (`r1`)**: I will push `r1` from ~0.15 to ~0.45. This is a boundary-pushing move to create a much thicker cross-section.
+    - **Peak Location (`a1`)**: I will shift the upper crest aft by increasing `a1` to 0.40 (vs 0.13 in Design 1), mimicking laminar flow airfoil characteristics.
+    - **Nose Shape (`r0`)**: I will invert the leading edge strategy from sharp (`r0` < 0) to blunt (`r0` > 0.15) to improve high-alpha performance and accommodate the increased thickness.
+    - **Camber (`r3`, `a3`)**: I will modify the lower surface to be flatter and load the aft section (`a3` > 0) to balance the moment caused by the aft-loaded upper surface.

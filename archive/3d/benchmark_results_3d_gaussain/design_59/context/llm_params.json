@@ -1,0 +1,11 @@
+{
+  "le_sweep": 65.0,
+  "root_chord_in": 40.0,
+  "twist_root": 3.0,
+  "twist_tip": -7.0,
+  "dihedral": -10.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 18,
+  "name": "High_Sweep_Anhedral_HighCamber_Exploration"
+}

@@ -1,0 +1,14 @@
+The current population of high-reward designs (Rank 0-4) exhibits a consistent pattern:
+*   **Low to moderate leading edge sweep**: All top designs are in the 45-48 degree range.
+*   **Aggressive twist distribution**: A high positive twist at the root (8-10 degrees) combined with maximum washout at the tip (-10 degrees) is prevalent. This strongly suggests an attempt to achieve an elliptical-like lift distribution to minimize induced drag by unloading the wing tips.
+*   **Cambered airfoils**: NACA 24xx series (2% max camber at 40% chord) is exclusively used, indicating that inherent lift generation from camber is a key feature in these designs.
+*   **Positive dihedral**: All top designs incorporate positive dihedral, contributing to roll stability.
+*   **Medium root chord and thickness**: Root chords range from 25 to 33 inches, and thickness (NACA t) is typically 9-14%.
+
+Given no image analysis, I infer that this combination of parameters likely creates a stable, efficient lift distribution at moderate angles of attack, leading to a good CL/CDi. However, this concentration also indicates a lack of exploration in other regions of the design space. The designs are not particularly "novel" from each other within this clustered area.
+
+**Key design changes needed to improve designs in the population**:
+1.  **Explore significantly higher sweep angles**: The current optimal designs are at the lower end of the sweep range. High-sweep deltas behave very differently, relying more on leading-edge vortex lift.
+2.  **Investigate symmetric airfoils (NACA 00xx)**: All current top designs use a cambered airfoil. Exploring symmetric profiles will test if a purely geometric approach with vortex lift can achieve competitive CL/CDi.
+3.  **Vary twist distribution to be less extreme**: Move away from the fixed max positive root and max negative tip twist to explore more moderate or different gradient twists.
+4.  **Explore negative dihedral (anhedral)**: All current designs use positive dihedral. Anhedral can affect roll stability and might interact differently with high-sweep vortex structures.

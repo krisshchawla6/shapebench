@@ -1,0 +1,8 @@
+- **Geometry**: The representative Design 1 (high reward) likely shows a smooth, teardrop-shaped airfoil with a rounded leading edge and sharp trailing edge. The thickness distribution appears relatively conventional and front-loaded (standard NACA-like profile). There are no visible pinch points or self-intersections, confirmed by the high fitness score.
+- **Flow Field**: The flow around Design 1 is likely fully attached, characterized by a smooth pressure gradient on the suction side and a thin, symmetric wake. Low-ranking designs (like Design 4 or 6) likely exhibit massive flow separation, shock waves, or geometric invalidity (e.g., negative volumes due to negative radius parameters).
+- **Parameter Mapping**: High rewards correlate with:
+  - Positive radii (`r` > 0).
+  - Smooth leading/mid sections (`e` $\approx$ -1).
+  - Sharp trailing edge (`r2` $\approx$ 1, `e2` $\approx$ 1).
+  - Specific angular distribution (`a0` $\approx$ 0, `a1` $\approx$ 0.5, `a2/a3` $\approx$ -0.2).
+- **Key Changes Needed**: The current population is clustered around thin, front-loaded geometries. To advance, we need to explore **thicker profiles** and **aft-loading** (shifting max thickness back) to potentially reduce drag or increase lift volume, while strictly maintaining positive radii to avoid geometric failure.

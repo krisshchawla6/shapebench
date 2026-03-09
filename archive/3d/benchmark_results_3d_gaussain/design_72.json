@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_Symm_Anhedral",
+  "le_sweep": 67.41358618984977,
+  "root_chord_in": 42.580660959944,
+  "twist_root": -4.842965617577051,
+  "twist_tip": -3.701844839853306,
+  "dihedral": -2.9935184596262205,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

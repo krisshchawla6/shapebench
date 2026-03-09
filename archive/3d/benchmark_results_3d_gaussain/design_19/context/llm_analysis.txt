@@ -1,0 +1,12 @@
+The representative Design 1 (parameters: le_sweep=59.94, root_chord_in=33.67, twist_root=5.49, twist_tip=-5.76, dihedral=5.88, NACA 2408; Reward: 28.1365) achieved the highest reward. Lacking the Cp distribution image, I infer aerodynamic characteristics from its parameters and the overall population trends.
+
+The success of Design 1 suggests:
+*   A moderately low leading edge sweep (~60 degrees) appears to strike a good balance, potentially benefiting from vortex lift without incurring excessive induced drag penalties seen at very high sweeps. Most other designs are at higher sweeps (65-70 deg).
+*   A strong positive twist at the root and significant washout at the tip (`twist_root=5.49`, `twist_tip=-5.76`) is a key feature. This twist distribution likely optimizes the spanwise lift distribution, reduces tip loading, and delays tip stall, thereby minimizing induced drag.
+*   The use of a NACA 2408 airfoil (2% camber at 40% chord, 8% thickness) suggests that moderate camber and relatively thin airfoils are beneficial for this objective.
+
+**Key design changes needed to improve designs in the population:**
+1.  **Explore lower sweep angles:** Design 1's success at ~60 degrees suggests that pushing sweep even lower, perhaps into the mid-50s, might further reduce induced drag while still benefiting from sufficient vortex lift for a delta wing.
+2.  **Optimize twist distribution for aggressive washout:** The strong washout in Design 1 is crucial. Further exploration of high root twist combined with high tip washout could lead to even better load distribution.
+3.  **Investigate thinner airfoils:** Design 1 uses NACA 2408. Exploring the minimum allowed thickness (NACA 2406) could further reduce profile drag, assuming it doesn't significantly penalize lift generation or flow separation.
+4.  **Test smaller root chords:** While chord affects overall lift, a slightly smaller root chord might reduce total wetted area and thus viscous drag, potentially improving the CL/CDi ratio if lift can be maintained efficiently.

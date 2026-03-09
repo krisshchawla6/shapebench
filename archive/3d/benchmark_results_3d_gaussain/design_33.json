@@ -1,0 +1,14 @@
+{
+  "design_name": "Moderately High Sweep, Aggressive Washout",
+  "le_sweep": 52.86190788318982,
+  "root_chord_in": 29.173912714225644,
+  "twist_root": 8.996671385625127,
+  "twist_tip": -7.95592959676203,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 14,
+    "chord_length": 1.0
+  }
+}

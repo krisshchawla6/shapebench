@@ -1,0 +1,33 @@
+{
+  "design_name": "Initial_Exploratory_Delta",
+  "design_params": {
+    "le_sweep_deg": 61.20811714830997,
+    "root_chord_in": 31.471826144224305,
+    "twist_root_deg": 2.8838992338332554,
+    "twist_tip_deg": -2.9134757591412055,
+    "dihedral_deg": -8.291147743837199,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.4385654065854836,
+    "CDi": 0.08045605579153277,
+    "CM": -0.38367875994609096,
+    "L_D": 5.450993120043531
+  },
+  "corrected_results": {
+    "CL": 0.1747592466324046,
+    "CDi": 0.03342056517261854,
+    "CM": -0.13589237807509338,
+    "L_D": 5.229093096713542
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_SymmetricAirfoil_Anhedral_MinThickness",
+  "le_sweep": 63.91607708074936,
+  "root_chord_in": 33.556677219332926,
+  "twist_root": 8.583125223186935,
+  "twist_tip": -0.9703470685482785,
+  "dihedral": -10.285836051868264,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

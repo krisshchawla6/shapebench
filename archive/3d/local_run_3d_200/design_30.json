@@ -1,0 +1,14 @@
+{
+  "design_name": "CamberedMidSweepCompactAnhedral",
+  "le_sweep": 64.14693711472452,
+  "root_chord_in": 35.22329351786144,
+  "twist_root": -8.090995202489172,
+  "twist_tip": -3.8188604604041867,
+  "dihedral": -2.679792610464744,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 13,
+    "chord_length": 1.0
+  }
+}

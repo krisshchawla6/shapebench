@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_ZeroCamber_Thick_Washout",
+  "le_sweep": 72.9162963912868,
+  "root_chord_in": 31.590001672224417,
+  "twist_root": -8.894553448062268,
+  "twist_tip": -7.960609409062425,
+  "dihedral": 5.877419119090993,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 18,
+    "chord_length": 1.0
+  }
+}

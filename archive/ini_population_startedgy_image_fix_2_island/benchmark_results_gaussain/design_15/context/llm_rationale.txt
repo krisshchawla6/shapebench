@@ -1,0 +1,7 @@
+- **Visual Intuition Strategy**: The images/data indicate that "fat" airfoils perform poorly in this flow regime. Design 2 (Rank 9) is the best performer and is significantly slimmer (`r1`=0.42, `r3`=0.06) than Design 1. My strategy is to aggressively streamline the shape, pushing `r3` even lower to flatten the bottom surface and reducing `r1` to lower the pressure drag.
+- **Control Point logic**:
+    - **CP0 (Nose)**: Set `r0` ~ 0.63. This is a compromise between Design 2 (0.65) and Design 4 (0.36, too small), ensuring a robust but not blunt leading edge.
+    - **CP1 (Upper)**: Set `r1` ~ 0.39. This is slightly thinner than Design 2 (0.42), aiming to reduce the form drag further. The angle `a1` is kept moderate (0.16) to place the suction peak appropriately.
+    - **CP2 (Tail)**: Keep `e2` at 1.0 for a sharp trailing edge (critical for Kutta condition). Set `r2` to -0.44, pushing the tail geometry slightly further than Design 2 to potentially increase chord length effective ratio.
+    - **CP3 (Lower)**: Set `r3` ~ 0.035. This is very low, aiming for a nearly flat bottom surface which often improves lift-to-drag ratios in standard regimes.
+    - **Smoothness**: Use `edgy` params around -0.5 to -0.6 for surface points (CP1, CP3). Design 2 showed this works better than the -0.9 used in the failing Design 1.

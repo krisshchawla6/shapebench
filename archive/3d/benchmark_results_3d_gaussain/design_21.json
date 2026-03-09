@@ -1,0 +1,14 @@
+{
+  "design_name": "SymmetricAnhedralTwistDelta",
+  "le_sweep": 63.82033367923428,
+  "root_chord_in": 26.055934176736905,
+  "twist_root": 7.290898507951393,
+  "twist_tip": -9.09250913901728,
+  "dihedral": 5.3822629405851945,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

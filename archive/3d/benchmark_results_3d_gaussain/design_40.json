@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweep_Symmetric_NegDihedral",
+  "le_sweep": 50.98770200160958,
+  "root_chord_in": 34.995615812816425,
+  "twist_root": 3.485149834467988,
+  "twist_tip": 1.8031401617389147,
+  "dihedral": -8.694616453861977,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

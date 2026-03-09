@@ -1,0 +1,14 @@
+- **Geometry Observations**:
+  - The shape of Design 1 (inferred from parameters and context) appears to be an irregular airfoil. The negative radius at the third control point (CP2, `r=-0.4044`) likely creates a significant pinch or concavity, "tucking" the tail of the airfoil inward excessively.
+  - The "edgy" parameter at CP2 is high (`0.84`), creating a sharp corner. While a sharp trailing edge is desirable, the combination with a large negative radius likely results in a reflexed or stubby rear section that disrupts streamline convergence.
+  - The leading edge (CP0) and mid-sections (CP1, CP3) are relatively smooth (`e < -0.6`), which is good, but their radii are somewhat inconsistent, potentially leading to a bumpy surface curvature rather than a smooth camber line.
+- **Flow Field Observations**:
+  - **Pressure**: The pressure distribution likely shows a strong spike at the sharp/pinched CP2 location, leading to immediate pressure recovery issues or separation bubbles. The "tucked" tail prevents smooth pressure recovery.
+  - **Velocity**: There is likely a large wake or separation zone starting immediately after the sharp CP2 point due to the abrupt geometry change (the pinch). This increases drag significantly.
+- **Key Flaws & Parameters**:
+  - **Flaw**: Pinching/Concavity at the trailing edge area. **Parameter**: CP2 `radius_param` (-0.4044) is too negative.
+  - **Flaw**: Potential surface waviness. **Parameter**: Inconsistent radii between CP1 (0.29) and CP3 (0.09).
+- **Changes Needed**:
+  - Relax the negative radius at CP2 (bring it closer to 0 or slightly positive) to extend the chord and reduce the pinch.
+  - Maintain the sharpness at CP2 (high `edgy_param`) to define a clear trailing edge.
+  - Smooth the transition between control points by balancing the radii of the upper (CP1) and lower (CP3) surfaces to create a more consistent thickness distribution.

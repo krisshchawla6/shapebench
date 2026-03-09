@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweep_Washin_NACA4020",
+  "le_sweep": 55.43914837311364,
+  "root_chord_in": 39.00195750306526,
+  "twist_root": 4.035757987315774,
+  "twist_tip": 5.581742038682755,
+  "dihedral": 10.572016503829394,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 18,
+    "chord_length": 1.0
+  }
+}

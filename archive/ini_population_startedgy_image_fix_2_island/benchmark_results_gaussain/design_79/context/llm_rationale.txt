@@ -1,0 +1,7 @@
+*   **Exploration Strategy:** The current high-performing cluster is focused on relatively thin, moderately cambered airfoils. To follow the "Exploration" strategy and avoid hill-climbing around Design 2, I will generate a design in a distinct, underexplored region: **Thick, High-Camber, Aft-Loaded**.
+*   **Geometric Intent:** I will significantly increase the thickness (CP1 radius) and the leading edge radius (CP0) to test if a "high-lift" profile can outperform the thinner "low-drag" profiles. I will also push the maximum thickness further back (aft-loading) by increasing the CP1 angle.
+*   **Parameter Shifts:**
+    *   **CP0 (Leading Edge):** Increase `radius` to ~0.09 (vs 0.05) for a blunter nose, potentially improving stall characteristics.
+    *   **CP1 (Upper Surface):** Increase `radius` to ~0.25 (vs 0.14) and shift `angle` to ~0.55 (vs 0.38) to move the suction peak aft and increase volume.
+    *   **CP2 (Trailing Edge):** Maintain sharpness (`edgy=1.0`) but increase the downward angle (~ -0.4) to increase rear camber.
+    *   **CP3 (Lower Surface):** Adjust angle to match the camber line, creating a "scooped" lower surface to maintain thickness distribution despite the high camber.

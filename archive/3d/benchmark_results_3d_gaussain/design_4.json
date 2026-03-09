@@ -1,0 +1,14 @@
+{
+  "design_name": "Initial_Vortex_Performance_Baseline",
+  "le_sweep": 64.74985667538006,
+  "root_chord_in": 31.76053089116772,
+  "twist_root": 1.1336748898463076,
+  "twist_tip": -1.8917290296167013,
+  "dihedral": 6.22010488895,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 11,
+    "chord_length": 1.0
+  }
+}

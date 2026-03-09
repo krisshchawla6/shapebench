@@ -1,0 +1,10 @@
+*   **Apply the Strategy Focus**: The existing top designs consistently use NACA 24xx. This suggests an unexplored region is symmetric airfoils (NACA 00xx). This is a bold departure from the successful designs, aiming for a novel exploration based on aerodynamic principles (relying more on vortex lift and planform design, less on airfoil camber).
+*   **Draw insights from the population database**: The database shows that a strong washout (`twist_tip` very negative) is a consistent feature of high-reward designs. We will maintain this beneficial characteristic. Also, positive `twist_root` is generally present.
+*   **Incorporate observations from the image analysis**: (Acknowledging no image was provided). General aerodynamic principles suggest that a delta wing's lift is significantly influenced by leading-edge vortices. By adopting a symmetric airfoil, we emphasize the role of the wing's planform and twist in generating and controlling these vortices, rather than relying on inherent airfoil camber.
+*   **Identify specific design parameters to explore and WHY**:
+    *   `naca_m=0, naca_p=0`: This is the primary novel exploration – a symmetric airfoil to see if good performance can be achieved without camber.
+    *   `le_sweep`: Slightly higher than the observed optimum (e.g., 58.0 degrees) to test the limits of vortex lift generation with a symmetric airfoil.
+    *   `twist_tip`: A strong negative value (e.g., -9.0 degrees) to maintain the proven benefits of washout for load distribution.
+    *   `twist_root`: A moderate positive value (e.g., 6.0 degrees) to work with the strong tip washout.
+    *   `naca_t`: A moderate value (e.g., 10) to provide a reasonable balance between drag and structural integrity.
+*   **Apply your judgment as an evolutionary optimizer**: This design represents a significant step away from the current local optimum (NACA 24xx, moderate sweep) into a completely different region of the design space. It aims to diversify the population and explore if alternative aerodynamic strategies (symmetric airfoil + high sweep + strong twist) can yield competitive or even superior `CL/CDi` values.

@@ -1,0 +1,5 @@
+*   **Thinning the Profile**: Building on the success of Design 1's low CP1 radius (0.212), I will push this further (r=0.15) to explore the limit of thin-airfoil performance, which typically maximizes the lift-to-drag ratio in subsonic flow.
+*   **Trailing Edge Refinement**: Design 1 and 3 used high `edgy_param` for the final control point. I will maximize this (e=0.98) to ensure a mathematically sharp Kutta condition at the trailing edge, minimizing wake thickness.
+*   **Camber Optimization**: By shifting the `angle_param` of the lower-surface control point (CP2) to a more negative value (-0.25), I aim to increase the under-surface concavity, potentially increasing lift without a proportional drag penalty.
+*   **Stagnation Point Adjustment**: I will slightly increase the `radius_param` and refine the `angle_param` of CP0 to create a more robust leading-edge radius, ensuring the stagnation point remains stable across varying flow conditions.
+*   **Strategy Focus**: This design shifts from the "moderate thickness" of the current top designs to an "ultra-thin, high-camber" strategy to break the 5.5 reward threshold.

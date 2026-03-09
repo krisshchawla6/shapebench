@@ -1,0 +1,9 @@
+The most successful design in the current population, Design 2 (Reward: 4016.0090), stands out significantly. It features a moderate leading-edge sweep (65.5 deg), a moderate root chord (34.78 in), a specific combination of negative root twist (-7.13 deg) and moderate negative tip twist (-4.60 deg), a slight negative dihedral (-1.72 deg), and a NACA 4412 airfoil. This suggests that a specific balance of these parameters, particularly a well-managed washout and significant camber, is crucial for high CL/CDi.
+
+In contrast, other designs show much lower rewards. Designs with higher sweep (e.g., Design 4 at 75.65 deg) or extreme negative dihedral (Design 4 at -15.0 deg) performed poorly, indicating potential trade-offs where increased vortex lift might be offset by higher induced drag or stability issues. Many designs employ maximum negative root twist (-10.0 deg), but Design 2's slightly less aggressive twist profile suggests that an optimal, rather than extreme, twist is beneficial. All current designs use cambered airfoils (NACA 24xx or 44xx), implying camber is a strong contributor to lift.
+
+**Key Design Changes Needed to Improve Designs in the Population:**
+1.  **Explore the lower bounds of `le_sweep` (45-55 deg):** The current population is heavily biased towards sweeps above 63 degrees.
+2.  **Investigate zero-camber airfoils (`naca_m=0`, `naca_p=0`):** This is a completely unexplored region that could offer insights into pure vortex lift performance.
+3.  **Test positive `twist_root` values:** All current designs use negative `twist_root`, making positive values an unexplored design space for potential aerodynamic benefits or drawbacks.
+4.  **Explore moderate positive `dihedral`:** The current population mainly focuses on negative or near-zero dihedrals.

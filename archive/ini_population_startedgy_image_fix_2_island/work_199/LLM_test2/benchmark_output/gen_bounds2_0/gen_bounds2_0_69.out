@@ -1,0 +1,9 @@
+Starting job for gen_bounds2_0
+Thu Jan 22 01:07:38 UTC 2026
+****** Starting episode 0
+***    Starting control 0
+-2.131706055385203 -1.2343793076362122
+good epoch; reward: 0.5790569973368855
+Reward: 0.5791, Drag: -2.1317, Lift: 1.2344
+Job finished
+Thu Jan 22 01:08:48 UTC 2026

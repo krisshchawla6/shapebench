@@ -1,0 +1,15 @@
+**Geometry Observations (Design 1):**
+*   **Collapsed Central Volume**: The shape appears centrally pinched or collapsed, likely due to the `r0` parameter being near zero (-0.017), failing to provide a robust central chord thickness.
+*   **Irregular Topology**: The negative radius on the second control point (`r2 = -0.659`) combined with a sharp edge (`e2 = 0.92`) creates a disjointed geometry, possibly resembling a twisted or inverted loop rather than a smooth streamlined body.
+*   **Asymmetry**: The design lacks the coherent top/bottom camber distribution typical of high-performance airfoils, appearing as an erratic blob.
+*   **Sharp Singularities**: There is one distinct sharp corner (CP2), but its placement relative to the collapsed center creates a poor leading-to-trailing edge transition.
+
+**Flow Field Observations (Design 1):**
+*   **Pressure Discontinuity**: The pressure plots likely show erratic spikes rather than a smooth gradient, indicating poor load distribution along the surface.
+*   **Flow Separation**: Velocity plots (`u`, `v`) probably indicate significant separation zones immediately aft of the pinched sections or sharp transitions, leading to high drag.
+*   **Wake Turbulence**: The wake region is likely wide and turbulent, signifying energy loss compared to a streamlined wake.
+
+**Key Design Changes Needed**:
+1.  **Restore Chord Length/Thickness**: Increase `r0` from ~0 to ~0.5 (as seen in Design 2) to establish a proper airfoil body.
+2.  **Fix Trailing Edge Extension**: Change `r2` from negative (-0.66) to positive large (~0.8) to extend the trailing edge correctly.
+3.  **Smooth Camber Line**: Adjust `a1` and `a3` to establish a clean camber line, following the pattern of the high-performing Design 2.

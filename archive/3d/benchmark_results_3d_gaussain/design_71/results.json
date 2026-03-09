@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_LowSweep_AggressiveTwist_NACA2412",
+  "design_params": {
+    "le_sweep_deg": 45.0,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 13,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2607920101331178,
+    "CDi": 0.013337398054164866,
+    "CM": -0.3122883779256307,
+    "L_D": 19.5534398144232
+  },
+  "corrected_results": {
+    "CL": 0.21331957986520833,
+    "CDi": 0.009332757622378849,
+    "CM": -0.2489648682130778,
+    "L_D": 22.857079171722322
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweepCamberWashinThin",
+  "design_params": {
+    "le_sweep_deg": 70.92652515751263,
+    "root_chord_in": 41.20210143561306,
+    "twist_root_deg": -4.554988490967746,
+    "twist_tip_deg": -8.536183591611916,
+    "dihedral_deg": 6.318410590690977,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.3158197887220775,
+    "CDi": 0.022032279628028676,
+    "CM": -0.3530743500193266,
+    "L_D": 14.334412691472147
+  },
+  "corrected_results": {
+    "CL": 0.00028486957893593656,
+    "CDi": -0.009050796069316773,
+    "CM": 0.0414212343044609,
+    "L_D": -0.031474532931050875
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_LeadCamber_HighDihedral",
+  "le_sweep": 79.97913429021358,
+  "root_chord_in": 44.71076330725413,
+  "twist_root": 1.9871646271870675,
+  "twist_tip": 2.4774507151863268,
+  "dihedral": 11.299871850092007,
+  "naca": {
+    "m": 2,
+    "p": 0,
+    "t": 22,
+    "chord_length": 1.0
+  }
+}

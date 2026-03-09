@@ -1,0 +1,14 @@
+{
+  "design_name": "Exploit_RefinedWashout_HighDihedral",
+  "le_sweep": 51.62951976169786,
+  "root_chord_in": 29.191708155627886,
+  "twist_root": 7.526066002772714,
+  "twist_tip": -3.8225003113466336,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}

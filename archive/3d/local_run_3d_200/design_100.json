@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_ModCamber_Thinner",
+  "le_sweep": 64.0854493483155,
+  "root_chord_in": 28.385603067656145,
+  "twist_root": -3.964901411851332,
+  "twist_tip": -5.127580943475193,
+  "dihedral": -4.539240173456442,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

@@ -1,0 +1,13 @@
+- **Geometry (Design 1)**:
+    - The airfoil features a significantly thick, rounded leading edge that transitions into a pronounced hump on the upper surface, suggesting a high thickness-to-chord ratio.
+    - The lower surface appears relatively flat but includes a slight inflection or "S-curve" near the rear, which can induce unnecessary drag.
+    - The trailing edge is sharp but positioned with a steep convergence angle, potentially leading to a blunt termination relative to the flow streamlines.
+    - Overall, the shape resembles a low-speed, high-lift foil but lacks the streamlined tapering required for maximizing lift-to-drag efficiency (Reward).
+- **Flow Field (Design 1)**:
+    - The pressure plot (`1_p.png`) shows a strong suction peak (blue) on the upper surface, but it is concentrated very far forward, followed by a potentially rapid pressure recovery that risks separation.
+    - The velocity fields (`1_u.png`, `1_v.png`) indicate a thick wake, suggesting significant pressure drag.
+    - There appears to be flow deceleration or separation starting early on the aft upper surface due to the high curvature (hump).
+- **Mapping to Parameters**:
+    - The "hump" is likely caused by the high **Radius (0.388)** and **Angle (0.467)** on Control Point 1.
+    - The inflection on the lower surface corresponds to the interaction between Point 3 (`r=-0.007`) and the trailing edge Point 2.
+    - Design 2 (Rank 0) used a much smaller Point 1 Radius (0.10) and Angle (0.26), resulting in a thinner, more efficient shape.

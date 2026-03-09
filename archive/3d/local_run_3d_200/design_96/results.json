@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_VortexOptimizer_01",
+  "design_params": {
+    "le_sweep_deg": 66.9075632553246,
+    "root_chord_in": 37.85422506977908,
+    "twist_root_deg": -8.451518902096833,
+    "twist_tip_deg": -3.4169001922897513,
+    "dihedral_deg": -6.901654731039216,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 15,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.15534518359019753,
+    "CDi": 0.020363415473946666,
+    "CM": -0.2125600430181193,
+    "L_D": 7.628640872595713
+  },
+  "corrected_results": {
+    "CL": -0.03643648418227055,
+    "CDi": -0.005645504385648825,
+    "CM": 0.050614266029410826,
+    "L_D": 6.454070653969209
+  }
+}

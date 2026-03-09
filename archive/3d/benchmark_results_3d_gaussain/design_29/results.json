@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploitation_TwistedDelta_ThinAirfoil",
+  "design_params": {
+    "le_sweep_deg": 52.31544337929029,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 6,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.12108619044763294,
+    "CDi": 0.003454467869863403,
+    "CM": -0.14610060953038517,
+    "L_D": 35.05205288026632
+  },
+  "corrected_results": {
+    "CL": 0.07891184540418666,
+    "CDi": 0.001966043700038547,
+    "CM": -0.09579839452389845,
+    "L_D": 40.13738117959407
+  }
+}

@@ -1,0 +1,16 @@
+The top-ranked design (Design 1, Reward: 35.5280) features a moderate leading-edge sweep (51.63 deg), a mid-range root chord (29.19 inches), a high positive twist at the root (7.53 deg), a moderate negative twist (washout) at the tip (-3.82 deg), and maximum positive dihedral (15.0 deg). It uses a NACA 2407 airfoil, indicating 2% max camber at 40% chord and 7% thickness.
+
+Across the top-performing designs (Rank 0-2), there is a clear pattern:
+*   **Sweep**: All are in the low-mid 50s (51.6 - 53.1 deg), suggesting this range optimizes the balance between vortex lift and induced drag.
+*   **Twist**: High positive root twist (7.5 - 9.8 deg) and significant washout at the tip (-3.8 to -10.0 deg) are consistently observed. This combination effectively redistributes lift spanwise, likely minimizing induced drag.
+*   **Dihedral**: High positive dihedral (13.5 - 15.0 deg) is prevalent, indicating a potential benefit for stability or favorable aerodynamic interactions.
+*   **Airfoil**: NACA 24xx series with moderate thickness (06-08) is consistently chosen, providing efficient camber for lift.
+
+**Aerodynamic Issues/Observations from Top Designs:**
+The high rewards suggest these designs are already performing well in terms of CL/CDi. The challenge is to refine further. The high root twist combined with washout aims to create a more elliptical-like lift distribution, reducing induced drag. The specific values of twist and sweep are critical to avoid premature separation or excessive drag.
+
+**Key Design Changes Needed to Improve Designs (Exploitation):**
+1.  **Refine Twist Magnitude**: Explore a slightly different combination of high positive root twist and strong negative tip twist (washout) to further optimize spanwise lift distribution.
+2.  **Fine-tune Sweep within Optimal Range**: Continue to explore the narrow band of 51-53 degrees for leading-edge sweep, as this range has consistently yielded high rewards.
+3.  **Adjust Root Chord for Scale**: Investigate if a slightly larger root chord, coupled with optimized aerodynamic parameters, can improve overall lift generation while maintaining efficiency.
+4.  **Maintain Proven Airfoil Type and Thickness**: Stick to the NACA 24xx camber profile, while exploring minor variations in thickness (e.g., 07) that have performed well.

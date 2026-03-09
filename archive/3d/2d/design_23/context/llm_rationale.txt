@@ -1,0 +1,5 @@
+*   **Strategy Focus**: Following the **Exploration Strategy**, this design pushes multiple parameters to their boundaries (-1.0 or 1.0), specifically targeting the "inner" control points (CP1, CP2) which have remained in the mid-range in previous top designs.
+*   **CP1 Boundary Push**: By setting `r1` to 0.95 and `a1` to 0.95, I am testing a design with maximum thickness shifted significantly toward the upper trailing edge, a region underexplored in the current database.
+*   **CP2 Concavity**: Setting `r2` to a very low value (0.12) explores a nearly "waisted" or concave lower surface, which can sometimes improve lift-to-drag ratios by controlling pressure distribution on the pressure side.
+*   **Sharpness Transition**: I am pushing `e3` to 0.85 (near the upper boundary) to see if a definitively sharp trailing edge outperforms the moderate sharpness seen in Design 1.
+*   **Leading Edge Depth**: Lowering `a0` to -0.25 deviates from the near-zero or slightly positive angles used in high-reward designs, testing if a deeper leading edge "hook" improves low-speed performance.

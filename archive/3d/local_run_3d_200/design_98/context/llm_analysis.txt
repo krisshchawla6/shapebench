@@ -1,0 +1,16 @@
+No image was provided for Design 1, therefore a critical assessment of Cp distribution and aerodynamic performance based on visual data cannot be performed. The analysis relies solely on the provided numerical data for previous designs.
+
+Analyzing Design 1 (Reward: 4016.0090), the highest-ranking design:
+*   **Parameters:** `le_sweep=65.52`, `root_chord_in=34.79`, `twist_root=-7.13`, `twist_tip=-4.61`, `dihedral=-1.72`, NACA 4412.
+*   **Key Features:** Moderate sweep, moderate root chord, significant negative twist at the root and less negative at the tip (indicating a washout of about 2.5 degrees), slight anhedral, and a cambered airfoil with max camber at 40% chord (NACA 44xx series).
+*   **Issues (in comparison to other designs):** While Design 1 is the best, comparing it to lower-performing designs reveals some patterns:
+    *   Very high sweep (e.g., Design 5: 79.16 deg) consistently leads to very low rewards.
+    *   Designs with uniform, extreme negative twist (e.g., Design 3: `twist_root=-10.0`, `twist_tip=-9.06`) also show significantly lower rewards than Design 1, suggesting that a distinct washout (difference between root and tip twist) is beneficial.
+    *   Symmetric airfoils (NACA 00xx in Design 2) perform poorly compared to cambered ones.
+    *   Strong anhedral (e.g., Design 6: -11.12 deg dihedral) correlates with lower rewards.
+
+**Key Design Changes Needed to improve designs in the population (based on numerical analysis):**
+1.  **Optimize Twist Gradient (Washout):** Focus on a clear washout where `twist_tip` is less negative than `twist_root`, avoiding uniform high negative twist.
+2.  **Maintain Moderate Sweep:** Stay within the 60-70 degree sweep range, as higher sweeps drastically reduce performance.
+3.  **Explore Dihedral Variations:** While slight anhedral worked for Design 1, exploring mild positive dihedral might uncover new performance regimes or stability trade-offs.
+4.  **Refine Camber Profile:** Investigate different camber distributions (e.g., NACA 20xx where camber is at the leading edge) or different thicknesses while maintaining cambered profiles.

@@ -1,0 +1,13 @@
+The representative design (Design 1) achieved the highest reward of 4016.0090 with a `le_sweep` of 65.5 degrees, a `root_chord_in` of 34.8 inches, significant washout (`twist_root` -7.1, `twist_tip` -4.6), a slightly negative `dihedral` of -1.7, and a `NACA 4412` airfoil. This combination of parameters clearly indicates that a moderately high sweep, substantial negative twist (washout), and a cambered airfoil (`NACA 44xx`) are crucial for high performance in this environment.
+
+*   **Aerodynamic Issues/Insights (inferred from population):**
+    *   The significant reward drop from Design 1 to Design 2 (from ~4000 to ~300) highlights the sensitivity of performance to parameter choices, even for seemingly similar configurations.
+    *   Designs using symmetric airfoils (`NACA 00xx`, e.g., Design 3, 5) consistently perform poorly, indicating that passive lift from camber is highly beneficial for CL/CDi.
+    *   Very high sweep angles (e.g., 72.9 in Design 5, 72.2 in Design 6) appear to hinder performance, even with cambered airfoils, suggesting diminishing returns or increased induced drag/flow separation if not carefully managed by other parameters.
+    *   Aggressive washout, with `twist_root` being significantly more negative than `twist_tip`, seems to be a common trait among the better performers (Design 1: -7.1 vs -4.6; Design 2: -10.0 vs -2.8). This likely helps to manage spanwise load distribution and delay tip stall, crucial for delta wings.
+
+*   **Key Design Changes Needed to Improve the Population:**
+    1.  **Systematic Exploration of Sweep/Camber Interaction:** Investigate if higher sweep angles can be made effective by combining them with very aggressive camber and washout, as designs with high sweep previously performed poorly.
+    2.  **Optimizing Washout Profile:** Explore the full range of `twist_root` and `twist_tip` to find the most effective load distribution, especially at the extremes of sweep and camber.
+    3.  **Thinner Airfoils for High Sweep:** Test thinner NACA airfoils (`naca_t` on the lower end) in conjunction with higher sweep to reduce profile/wave drag, as thicker airfoils previously led to poor results with higher sweep.
+    4.  **Dihedral Exploration:** Test small positive dihedral values. Most good designs had negative or near-zero dihedral; exploring positive values, even if modest, could reveal new optima for stability or lift distribution.

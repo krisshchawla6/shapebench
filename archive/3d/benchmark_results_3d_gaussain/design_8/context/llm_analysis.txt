@@ -1,0 +1,9 @@
+The provided reference design (Design 1) with `le_sweep=64.75`, `root_chord_in=31.76`, `twist_root=1.13`, `twist_tip=-1.89`, `dihedral=6.22`, and NACA 2411 achieved the highest reward of 24.3845. This configuration features a moderate sweep angle, a slightly positive root twist, and a mild washout at the tip, coupled with positive dihedral and a moderately cambered airfoil. The Cp distribution (if available, generally) for such a design would likely show good vortex lift development along the leading edge, a relatively smooth pressure recovery, and a well-distributed load across the wing, avoiding premature tip stall due to the washout.
+
+Design 2, with a similar sweep but a positive tip twist (washin) and slightly less positive dihedral, yielded a slightly lower reward (22.9962), suggesting that tip washout (negative twist) is beneficial for this delta wing configuration. Design 3, which had a very high sweep angle (78.02), aggressive root twist, strong washout, negative dihedral, and a highly cambered/thin airfoil, performed very poorly (reward -0.9773). This indicates that excessively high sweep or aggressive twist/dihedral combinations can be detrimental, and that moderate camber and thickness might be preferred.
+
+Key changes needed to improve designs in the population based on this analysis:
+1.  **Maintain moderate sweep:** The 60-70 degree range seems to be the sweet spot for current top performers.
+2.  **Ensure tip washout:** Negative twist at the tip appears to significantly improve performance by controlling load distribution and delaying tip stall.
+3.  **Utilize positive dihedral:** Tips-up dihedral correlates with higher rewards.
+4.  **Moderate camber and thickness:** NACA 24xx airfoils with around 10-12% thickness seem effective.

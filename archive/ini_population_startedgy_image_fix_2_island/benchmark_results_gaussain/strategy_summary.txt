@@ -1,0 +1,28 @@
+Strategy Performance Summary — Island Model (80 designs, 6 initial seeds, 74 evolved)
+
+Strategy          | Count | Improved | Avg Δ   | Med Δ   | Best Δ  | Avg Reward | Best Reward | Best Design | Fail Rate
+---               | ---   | ---      | ---     | ---     | ---     | ---        | ---         | ---         | ---
+Hybrid            |     5 |   60.0%  | +0.444  | +0.036  | +2.765  |     2.301  |      4.840  | design_77   |    0.0%
+Exploit           |    13 |   38.5%  | -0.576  | -0.070  | +1.536  |     1.819  |      4.716  | design_74   |    7.7%
+Novel             |    19 |   26.3%  | -0.772  | -0.583  | +3.258  |     1.945  |      4.858  | design_45   |    0.0%
+Visual Intuition  |    17 |   52.9%  | -1.235  | +0.058  | +2.882  |     1.180  |      5.236  | design_60   |   11.8%
+Diversify         |    20 |    5.0%  | -1.369  | -0.977  | +0.085  |     0.808  |      4.531  | design_70   |   10.0%
+
+Columns:
+  Count       — Number of designs produced by this strategy (excluding initial seeds)
+  Improved    — % of designs that scored higher than their parent
+  Avg Δ       — Average reward change (child − parent)
+  Med Δ       — Median reward change (child − parent)
+  Best Δ      — Largest single-step improvement over parent
+  Avg Reward  — Mean reward across all designs from this strategy
+  Best Reward — Highest reward achieved by this strategy
+  Best Design — Design ID that achieved the best reward
+  Fail Rate   — % of designs that received penalty (reward ≤ −5.0)
+
+Initial Population (seeds):
+  design_0: reward = −0.220, strategy = Hybrid,           island = 0
+  design_1: reward =  0.332, strategy = Exploit,          island = 1
+  design_2: reward = −0.018, strategy = Exploit,          island = 2
+  design_3: reward = −0.003, strategy = Visual Intuition, island = 0
+  design_4: reward =  0.305, strategy = Diversify,        island = 1
+  design_5: reward = −0.227, strategy = Diversify,        island = 2

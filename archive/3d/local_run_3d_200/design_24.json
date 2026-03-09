@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_Sweep_CamberedThin_AggressiveTwist",
+  "le_sweep": 63.97920997604782,
+  "root_chord_in": 36.040645589935465,
+  "twist_root": -7.82966839698196,
+  "twist_tip": -8.872736323038716,
+  "dihedral": -1.8631373062295844,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

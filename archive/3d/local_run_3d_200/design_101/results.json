@@ -1,0 +1,33 @@
+{
+  "design_name": "HybridVortexWashout",
+  "design_params": {
+    "le_sweep_deg": 66.6636294589949,
+    "root_chord_in": 37.14833113518495,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -4.829258514323849,
+    "dihedral_deg": -10.347406774694644,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 16,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.08656263225739233,
+    "CDi": 0.006810876031861968,
+    "CM": -0.11934041061799061,
+    "L_D": 12.709471124190715
+  },
+  "corrected_results": {
+    "CL": -0.04874004778894131,
+    "CDi": -0.004298665269304472,
+    "CM": 0.06889673191242518,
+    "L_D": 11.338414306640697
+  }
+}

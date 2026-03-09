@@ -1,0 +1,33 @@
+{
+  "design_name": "Hybrid Washout Camber Delta",
+  "design_params": {
+    "le_sweep_deg": 60.93107839549697,
+    "root_chord_in": 31.396935351832067,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": 3.5363189745617643,
+    "dihedral_deg": -1.9189536545927897,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 11,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.2535593106667575,
+    "CDi": 0.03789622567052462,
+    "CM": -0.3229497403199518,
+    "L_D": 6.690885600883835
+  },
+  "corrected_results": {
+    "CL": 0.12284020000428218,
+    "CDi": 0.012784430936723244,
+    "CM": -0.13178733352619917,
+    "L_D": 9.608577856322414
+  }
+}

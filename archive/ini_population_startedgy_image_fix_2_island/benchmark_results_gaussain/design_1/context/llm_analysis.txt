@@ -1,0 +1,3 @@
+*   **No Images/Data Provided:** As this is the first iteration ("No previous designs available"), there are no images or flow fields to analyze.
+*   **Cold Start State:** No existing population exists to assess flaws or successful features.
+*   **Baseline Requirement:** Cannot map flaws to parameters yet. The immediate goal is to generate a geometrically valid, lift-generating shape (a "seed" design) to initiate the evolutionary process effectively.

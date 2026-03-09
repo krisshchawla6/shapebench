@@ -1,0 +1,11 @@
+*   **Geometry Observations (Design 1 - Inferred):**
+    *   **Faceted/Jagged Shape:** With `edgy_param` values consistently high (0.83–0.97), Design 1 resembles a polygon or diamond shape rather than a smooth airfoil. It likely has straight segments connecting the control points.
+    *   **Thin Profile:** The radius parameters are small (CP0: -0.08, CP1: 0.14), indicating a low thickness-to-chord ratio compared to lower-ranked designs.
+    *   **Geometric Flaws:** While aerodynamically successful in this specific solver, the shape lacks curvature continuity. The sharp corners at CP0 (LE) and CP1 (Upper Surface) are structural stress concentrators and would likely cause flow separation in real-world varying angles of attack.
+*   **Flow Field Observations (Design 1 - Inferred):**
+    *   **Attached Flow:** The high reward suggests the flow remains attached despite the sharp corners, or the corners are positioned to minimize wake width (low drag).
+    *   **Leading Edge Pressure:** The sharp Leading Edge (CP0) likely creates a localized high-pressure spike or singular stagnation point, unlike the broader suction peak of a round nose.
+*   **Key Design Changes Needed:**
+    *   **Smoothing:** Reduce `edgy_param` on the Leading Edge (CP0) and main body (CP1, CP3) to create a physically realistic, continuous curvature surface.
+    *   **Maintain Thinness:** The population history shows that thick designs (large positive radii) perform poorly. The new design must retain the "thin" characteristic of Design 1.
+    *   **Sharp Trailing Edge:** Maintain high `edgy_param` at CP2 (Trailing Edge) to satisfy the Kutta condition and ensure clean flow release.

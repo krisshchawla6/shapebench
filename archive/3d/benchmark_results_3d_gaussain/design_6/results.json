@@ -1,0 +1,33 @@
+{
+  "design_name": "LowSweep_LargeChord_NoCamber_AggressiveWashout_NegativeDihedral_Thin",
+  "design_params": {
+    "le_sweep_deg": 47.068370993971584,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.0,
+    "CDi": 0.0,
+    "CM": 0.0,
+    "L_D": null
+  },
+  "corrected_results": {
+    "CL": 0.015013687268611096,
+    "CDi": 0.0,
+    "CM": -0.016081846933129317,
+    "L_D": null
+  }
+}

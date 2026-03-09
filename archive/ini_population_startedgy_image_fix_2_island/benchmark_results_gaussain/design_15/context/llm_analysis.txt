@@ -1,0 +1,7 @@
+- **Geometry Description**: Based on the parameters of Design 1 (the representative design), the shape is notably "bulbous." The leading edge is broad (`r0`=0.75), and the airfoil maintains significant thickness through the middle due to high upper (`r1`=0.51) and lower (`r3`=0.25) radius parameters. The lower surface appears convex rather than flat.
+- **Flow Field Inference**: This excessive thickness likely creates a large frontal area and adverse pressure gradients towards the rear, leading to flow separation and a wide, turbulent wake. The high drag from this "blunt" profile explains the poor reward (-0.0888) compared to slimmer designs.
+- **Parameter Mapping**: The geometric flaw of "excessive bulk" maps directly to the high `radius_param` values at CP0, CP1, and CP3. The lower surface bulge is specifically caused by `r3` being 0.25, whereas the better Design 2 has `r3` near 0.06.
+- **Key Changes**:
+    1.  **Slimming**: Drastically reduce `radius_param` for the lower surface (CP3) and moderately for the upper surface (CP1).
+    2.  **Surface Quality**: Shift from maximal smoothness (`-1.0`) to intermediate smoothness (`~-0.5`) on surface points to prevent "ballooning" of the splines and allow flatter sections.
+    3.  **Tail Definition**: Ensure the trailing edge (CP2) remains sharp (`e` ~ 1.0) and properly positioned.

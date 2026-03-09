@@ -1,0 +1,11 @@
+{
+  "le_sweep": 66.8,
+  "root_chord_in": 35.5,
+  "twist_root": -9.5,
+  "twist_tip": -3.5,
+  "dihedral": -2.0,
+  "naca_m": 4,
+  "naca_p": 4,
+  "naca_t": 10,
+  "name": "Exploitation_Refinement_Delta"
+}

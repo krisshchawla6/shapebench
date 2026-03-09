@@ -1,0 +1,7 @@
+*   **Strategic Focus:** To advance the population, I will attempt to shift the aerodynamic loading slightly aft. By moving the upper surface control point (`CP1`) rearward (increasing `a1`), we can potentially extend the region of favorable pressure gradient (laminar flow) and improve the Lift-to-Drag ratio.
+*   **Geometric Adjustments:**
+    *   **Leading Edge (`CP0`):** I will slightly reduce `r0` (from ~0.51 to ~0.46) to reduce the leading edge radius slightly, reducing form drag, while maintaining `e0` close to -1.0 for maximum smoothness.
+    *   **Upper Surface (`CP1`):** I will increase `a1` (from 0.21 to ~0.35) to move the maximum thickness/camber point aft. To compensate for the potential loss of lift from a flatter front section, I will increase `r1` (from 0.14 to ~0.24) to add volume and camber.
+    *   **Trailing Edge (`CP2`):** High rewards correlate with high `r2` (extended chord). I will push this further from 0.81 to ~0.89 to increase the effective fineness ratio of the airfoil. `e2` will remain pinned at 1.0 for a sharp edge.
+    *   **Lower Surface (`CP3`):** I will slightly flatten the lower surface by making `r3` less negative (closer to zero) to reduce drag on the pressure side.
+*   **Exploration:** This design explores the trade-off between a front-loaded high-lift design (Design 1) and a more streamlined, aft-loaded shape, aiming for higher efficiency.

@@ -1,0 +1,7 @@
+*   **Exploitation Strategy**: The population contains high-performing individuals (Rank 2 and 3) with very similar parameter structures. The goal is to refine this specific basin of attraction rather than explore random areas which yield poor results (like Design 6).
+*   **Parameter Consistency**: The successful pattern is strictly: `r0` small positive, `r1` medium positive, `r2` large negative, `r3` small negative. `e2` must be 1.0 (sharp).
+*   **Design Hybridization**: I will create a hybrid heavily weighted towards Design 1 (Rank 2) but incorporating a slight increase in thickness from Design 2 (Rank 3) to potentially improve stall characteristics or structural volume without increasing drag significantly.
+    *   **CP1 (Upper)**: Increase radius slightly from D1 (0.137) towards D2 (0.225) -> Target `0.155`. Keep angle high (near D1's 0.389) as this correlates with better rank.
+    *   **CP0 (LE)**: Interpolate slightly between D1 and D2 to smooth the LE search space.
+    *   **CP2 (TE)**: Maintain the aggressive "inward" pull (approx -0.91) to ensure the sharp trailing edge geometry remains closed and thin.
+*   **Constraint Handling**: Ensure `edgy` params for non-TE points remain close to -1.0 to enforce smoothness, preventing flow separation spikes.

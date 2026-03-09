@@ -1,0 +1,13 @@
+The representative design (Design 1) achieved an exceptional reward of 4016.0090. Its parameters include a moderate-high leading edge sweep of 65.5 degrees, a mid-range root chord of 34.8 inches, significant negative twist at the root (-7.1 deg) with less negative twist at the tip (-4.6 deg, indicating effective washout), slight anhedral (-1.7 deg), and a NACA 4412 airfoil (cambered, max camber at 40% chord, 12% thickness).
+
+**Key observations and issues from the population:**
+*   **NACA airfoil choice is critical:** Designs using symmetric NACA 00xx airfoils (D3, D5) or poorly configured cambered airfoils (NACA 4016 for D4, NACA 2008 for D6, where naca_p=0 for a cambered profile is unusual) consistently show very low rewards. This strongly indicates that a cambered profile with `naca_p=4` (max camber at 40% chord) is essential for high CL/CDi in this design space.
+*   **Washout is crucial:** The top designs (D1, D2) exhibit negative twist at both root and tip, with the root twist being more negative than the tip twist (washout). This helps distribute lift more effectively and delays tip stall. Design 6, with positive twist at the root (wash-in), resulted in an extremely low reward, highlighting the negative impact of such a configuration.
+*   **Sweep angle:** The highest rewards are achieved in the mid-high sweep range (63-65 degrees). Very high sweep (70+ degrees, D4, D5, D6) has generally led to lower rewards in the current population, though these high-sweep designs often suffered from poor airfoil or twist choices. This suggests the potential for high sweep is not fully explored with optimal supporting parameters.
+*   **Root chord and thickness:** Mid-range root chords seem to perform well. Thickness values around 11-12% are seen in the top designs, but the full range (6-24) is largely unexplored.
+
+**3-4 key design changes needed to improve designs in the population:**
+1.  **Explore high sweep with optimized camber and twist:** Previous high-sweep designs were flawed; a robust combination could uncover new optimal regions.
+2.  **Systematically explore lower sweep angles:** The 45-55 degree range is virtually untouched by high-reward designs. This would represent a fundamental shift in aerodynamic strategy, moving away from heavy reliance on vortex lift.
+3.  **Investigate different root chord and thickness combinations:** The impact of wing scale and profile thickness beyond the tested values (10-50 inches, 6-24%) needs further exploration, especially in combination with varied sweep and twist.
+4.  **Confirm the robustness of `NACA x4xx`:** Continue using `naca_p=4` when `naca_m` is non-zero, as this appears to be a critical component for high reward.

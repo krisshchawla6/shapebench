@@ -1,0 +1,11 @@
+{
+  "le_sweep": 69.5,
+  "root_chord_in": 35.0,
+  "twist_root": 3.0,
+  "twist_tip": -4.0,
+  "dihedral": 3.0,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 14,
+  "name": "VortexCamberWashoutHybrid"
+}

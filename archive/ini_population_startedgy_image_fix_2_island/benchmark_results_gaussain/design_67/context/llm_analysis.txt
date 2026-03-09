@@ -1,0 +1,13 @@
+*   **Geometry Analysis**:
+    *   The reference design (Design 1) depicts an asymmetric airfoil with a moderately round leading edge and a long, tapering trailing edge.
+    *   The upper surface has a pronounced curvature (camber), peaking around the mid-chord, while the lower surface is relatively flatter but still concave, indicating an under-cambered or highly loaded profile.
+    *   The trailing edge is sharp (caused by the edgy parameter of 1.0 on CP2), which is aerodynamically favorable for defining the stagnation point and reducing wake turbulence compared to a blunt edge.
+    *   Visually, the transition from the leading edge to the upper surface peak appears smooth, contributing to the high reward.
+*   **Flow Analysis**:
+    *   Given the high reward (4.14), the flow field likely exhibits strong suction (low pressure) on the upper surface with a smooth pressure recovery towards the trailing edge.
+    *   The sharp trailing edge effectively enforces the Kutta condition, minimizing separation bubbles at the rear.
+    *   The absence of sharp corners on the leading/mid sections (edgy parameters near -1.0) prevents premature flow separation or drag-inducing pressure spikes.
+*   **Parameter Correlation**:
+    *   **High Reward (Design 1)** is associated with **positive radii** on all control points (`0.21`, `0.31`, `0.99`, `0.13`), whereas poor designs (like Design 4) use negative radii (`-0.93`), likely causing geometric inversions or crossovers.
+    *   The **Trailing Edge (CP2)** maximizes the radius (`0.99`) and sharpness (`1.0`), extending the chord length and reducing drag.
+    *   **Camber**: The angular spread between CP1 (upper, `0.54`) and CP3 (lower, `-0.23`) creates the necessary thickness and camber for lift.

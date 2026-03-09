@@ -1,0 +1,14 @@
+{
+  "design_name": "AggressiveWashoutHighCamberDelta",
+  "le_sweep": 59.7348939233856,
+  "root_chord_in": 32.50732033554228,
+  "twist_root": 10.0,
+  "twist_tip": -8.112021244623236,
+  "dihedral": 15.0,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

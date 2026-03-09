@@ -1,0 +1,5 @@
+- **Visual Intuition Strategy**: Without prior images, I must rely on a mental model of an ideal airfoil. A "teardrop" or "wing" shape is the target. This requires specific manipulation of the control points to emulate camber and thickness distribution.
+- **Leading Edge (P0)**: Needs to be thick and smooth to prevent flow separation at high angles of attack. I will assign a high positive `radius_param` and a very low (negative) `edgy_param`.
+- **Upper Surface (P1)**: Should provide the primary lift surface. A moderate positive `radius_param` will give thickness, and a slight positive `angle_param` may shift the curvature to create camber. `edgy_param` remains low for smoothness.
+- **Trailing Edge (P2)**: Critical for reducing drag. I will use a negative `radius_param` (to pinch the shape inward/thin it) and a maximum positive `edgy_param` (1.0) to create a sharp, clean release point for the flow.
+- **Lower Surface (P3)**: Should be flatter than the top to generate a pressure differential (lift). I will use a small positive `radius_param` and a slight negative `angle_param` to differentiate it from the top surface.

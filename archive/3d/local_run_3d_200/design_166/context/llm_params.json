@@ -1,0 +1,11 @@
+{
+  "le_sweep": 60.0,
+  "root_chord_in": 40.0,
+  "twist_root": -4.0,
+  "twist_tip": -8.0,
+  "dihedral": 5.0,
+  "naca_m": 2,
+  "naca_p": 4,
+  "naca_t": 9,
+  "name": "LowerSweep_StrongTipWashout_PositiveDihedral_NACA2409"
+}

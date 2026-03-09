@@ -1,0 +1,10 @@
+*   **Geometry Observations**: The representative design (Design 1) exhibits a classic cambered airfoil profile. The upper surface (CP0 region) has a smooth, moderate curvature, while the lower surface (CP3 region) is flatter. The Leading Edge (LE) appears moderately sharp (CP1), and the Trailing Edge (TE) is distinctly sharp (CP2), preventing blunt-body separation.
+*   **Flow Field Analysis**: Given the high reward of Design 1, the flow field likely shows smooth acceleration over the upper surface with a delayed transition or separation point. The pressure recovery towards the trailing edge is likely gradual. The sharp TE (CP2 edgy=1.0) successfully enforces the Kutta condition, resulting in a clean wake.
+*   **Visible Flaws & Mappings**: 
+    *   The LE (CP1) might be slightly too sharp (`r`=0.11), potentially causing a suction spike at higher angles of attack. 
+    *   The lower surface (CP3) could potentially contribute more to lift if slightly undercambered (concave) rather than flat.
+    *   The thickness distribution (CP0) seems centered; shifting it slightly could affect the pressure gradient favorable for laminar flow.
+*   **Key Changes Needed**:
+    1.  **Blunt the LE**: Increase CP1 `radius_param` slightly to improve robustness and soften the suction peak.
+    2.  **Increase Aft Loading**: Shift CP0 `radius_param` (upper surface peak) slightly aft.
+    3.  **Optimize Camber**: Adjust CP3 `angle_param` to explore slight undercambering on the pressure side.

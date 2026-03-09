@@ -1,0 +1,5 @@
+* **Exploitation of High-Reward Topology**: The population analysis shows a strong correlation between high rewards and a low radius_param for Point 1 (around 0.21). I will exploit this by setting Point 1 to 0.1985 to further enhance the camber-driven lift.
+* **Trailing Edge Refinement**: Design 1 utilized an edgy_param of 0.837. To improve pressure recovery and reduce drag, I am increasing this to 0.9520, moving closer to a true sharp-edge Kutta condition.
+* **Leading Edge Optimization**: I am increasing the radius_param of Point 0 to 0.9412 (up from 0.9172 in Design 1) to create a slightly blunter nose, which typically improves performance across a wider range of angles of attack.
+* **Camber Distribution**: By shifting the angle_param of Point 2 to -0.0815, I am slightly moving the maximum thickness forward, which can help in stabilizing the boundary layer on the upper surface.
+* **Smoothness Maintenance**: Points 0 and 2 will maintain near-maximum smoothness (edgy_param < -0.99) to ensure laminar flow is preserved as long as possible before the pressure recovery region.

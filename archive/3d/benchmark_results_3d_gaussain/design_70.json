@@ -1,0 +1,14 @@
+{
+  "design_name": "ExploitativeMaxWashoutHighDihedralNACA2408",
+  "le_sweep": 47.23704802954042,
+  "root_chord_in": 33.583688845023666,
+  "twist_root": 8.303700849197263,
+  "twist_tip": -10.0,
+  "dihedral": 11.815410826484134,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

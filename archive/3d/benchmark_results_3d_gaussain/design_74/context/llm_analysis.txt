@@ -1,0 +1,7 @@
+The provided designs indicate a clear trend: lower leading-edge sweep angles (around 45-48 degrees) combined with aggressive washout (high positive twist at root, high negative twist at tip) tend to yield the highest rewards (CL/CDi). Design 2, with the lowest sweep (45.0 deg) and maximal twist distribution (10.0 deg root, -10.0 deg tip), achieved the highest reward of 40.7930. This suggests that controlling induced drag through a well-distributed lift profile is paramount for this objective. The NACA 24xx airfoil series (m=2, p=4) with thicknesses ranging from 9 to 14 percent chord are prevalent in the top performers, with thinner airfoils generally performing better. Dihedral around 7-11 degrees also seems optimal, with Design 2 showing success at the lower end of this range.
+
+Key design changes needed to improve designs in the population, based on exploitation:
+1.  **Reduce leading-edge sweep**: Focus on angles near the minimum allowed (45 degrees).
+2.  **Maximize twist distribution**: Utilize the full range for washout, pushing `twist_root` to 10.0 and `twist_tip` to -10.0.
+3.  **Optimize airfoil thickness**: Continue with NACA 24xx but explore thinner sections (e.g., naca_t < 9).
+4.  **Refine dihedral**: Explore the lower end of the effective positive dihedral range, around 7 degrees.

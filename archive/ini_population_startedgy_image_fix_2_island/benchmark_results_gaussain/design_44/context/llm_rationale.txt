@@ -1,0 +1,7 @@
+*   **Exploration Strategy**: The current population is dominated by standard "Round LE, Sharp TE" shapes (Design 1) or chaotic shapes (Design 2). I will focus on the **"Sharp Leading Edge"** region of the parameter space, which is currently underexplored ($e_0$ is typically negative in the database).
+*   **Geometric Hypothesis**: I will combine a sharp leading edge ($e_0 \to 1.0$) with a thickened main body ($r_1, r_3 > 0$). This resembles a "diamond" or "double-wedge" profile often used in supersonic contexts or low-drag laminar flow designs. This tests if the solver rewards reduced frontal stagnation area despite the potential for separation at low angles.
+*   **Parameter Choices**:
+    *   **CP0 (LE)**: Set $e_0 \approx 0.95$ (Sharp) and $r_0 \approx 0.05$ (Small positive radius) to create a piercing nose, distinct from the negative radii in D1/D2.
+    *   **CP1 (Upper)**: Increase radius to $r_1 \approx 0.55$ (High thickness) and shift angle forward ($a_1 < 0$) to move the max thickness point forward, stabilizing the boundary layer behind the sharp nose.
+    *   **CP2 (TE)**: Maintain the proven "High Reward" configuration: $r_2 \approx -0.9$, $e_2 = 1.0$. This anchors the design with a functional trailing edge.
+    *   **CP3 (Lower)**: Switch to a positive radius ($r_3 \approx 0.3$) to create a biconvex-like thickness, deviating from the thinned lower surfaces of D1/D3.

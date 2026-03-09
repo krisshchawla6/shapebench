@@ -1,0 +1,5 @@
+- **Exploration Strategy**: This design targets the absolute boundaries of the parameter space, specifically the `angle_param` and `radius_param` combinations that have been largely ignored in the existing population.
+- **Boundary Testing**: While previous high-reward designs (Design 1 & 2) stayed within moderate angle ranges, this design pushes `angle_param` to ±1.0 to test the limits of asymmetric control point distribution.
+- **Inversion of Typical Params**: We are exploring an "inverted" radius strategy, assigning high positive radius values where previous designs used negative values, and vice versa, to see if a mirrored or radical geometric arrangement yields a performance breakthrough.
+- **Edgy Param Extremes**: By using the extreme limits of the `edgy_param` (-1.0 for maximum smoothness and 1.0 for maximum sharpness) at the corners of the space, we aim to discover if radical sharpness at non-trailing-edge points can stabilize the wake or improve lift.
+- **Diversity Focus**: This design deliberately avoids the "safe" central region of the parameter space to identify high-performance outliers that a standard hill-climbing approach would miss.

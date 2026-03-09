@@ -1,0 +1,14 @@
+{
+  "design_name": "LowSweep_LargeChord_NoCamber_AggressiveWashout_NegativeDihedral_Thin",
+  "le_sweep": 47.068370993971584,
+  "root_chord_in": 44.93719718577548,
+  "twist_root": 5.726832957590551,
+  "twist_tip": -3.6377895658708184,
+  "dihedral": -12.832621201314106,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

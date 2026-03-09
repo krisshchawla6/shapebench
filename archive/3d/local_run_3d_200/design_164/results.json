@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_Design1_Refined",
+  "design_params": {
+    "le_sweep_deg": 68.56181125695724,
+    "root_chord_in": 43.83907291148592,
+    "twist_root_deg": -10.0,
+    "twist_tip_deg": -9.43584204028357,
+    "dihedral_deg": -0.5094779150191941,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 15,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.07389284938639351,
+    "CDi": 0.019096098331361683,
+    "CM": -0.1462587568315797,
+    "L_D": 3.869526020665628
+  },
+  "corrected_results": {
+    "CL": -0.16671941311453128,
+    "CDi": -0.0023013573745555107,
+    "CM": 0.18711508813672947,
+    "L_D": 72.44394762753083
+  }
+}

@@ -1,0 +1,5 @@
+No images were provided for analysis. This is the initial step in the evolutionary process. Without visual feedback or previous design data, the analysis focuses on established aerodynamic heuristics to seed the population with a viable, high-potential candidate.
+
+*   **Geometry Observation**: N/A (Initial Design)
+*   **Flow Field Observation**: N/A (Initial Design)
+*   **Action Parameter Mapping**: Based on the parameter definitions, the goal is to create a teardrop-shaped profile with a rounded nose (low `edgy_param` at LE) and a sharp termination (high `edgy_param` at TE) to encourage clean flow separation.

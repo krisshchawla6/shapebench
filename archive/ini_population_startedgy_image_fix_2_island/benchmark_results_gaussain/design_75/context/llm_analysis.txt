@@ -1,0 +1,8 @@
+*   **Geometry from Images (Design 6/Rank 63):** The images corresponding to Design 6 (Rank 63) likely depict a **broken or highly distorted geometry**. The parameter set shows negative radii (`r0 = -0.54`, `r3 = -0.66`), which mathematically implies the control points are pulled through the center to the opposite side or form a collapsed, self-intersecting polygon. The shape likely lacks a coherent volume, resembling a twisted knot rather than an airfoil.
+*   **Flow Field (Design 6/Rank 63):** Consequently, the flow field visualizations would show **numerical chaos**. There is likely no attached flow; instead, massive separation, wake turbulence, or solver artifacts dominate. The pressure field would be incoherent, resulting in the abysmal reward of 0.1063.
+*   **Design 1 (Rank 13) Reference:** In contrast, Design 1 (Reward 4.14) establishes a functional baseline.
+    *   **CP0 (Nose):** `r=0.21`, `a=0.00`, `e=-0.97`. Creates a rounded, smooth leading edge.
+    *   **CP1 (Upper):** `r=0.31`, `a=0.54`, `e=-0.95`. Defines the upper camber and thickness.
+    *   **CP2 (Tail):** `r=0.99`, `a=-0.20`, `e=1.0`. A sharp (`e=1.0`), extended (`r~1.0`) trailing edge is crucial for performance.
+    *   **CP3 (Lower):** `r=0.14`, `a=-0.23`. Defines the lower surface.
+*   **Flaws to Fix:** Design 1 is decent but can be refined. The smoothness parameters (`e`) are close to -1.0 but not perfect. The camber peak (`a_CP1` = 0.54) might be slightly too far back or the thickness (`r_CP1`) unoptimized for the specific flow regime.

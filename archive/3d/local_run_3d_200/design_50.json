@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweepCamberThickTipWashout",
+  "le_sweep": 72.21989197681707,
+  "root_chord_in": 39.52467470625067,
+  "twist_root": -1.1392905058881198,
+  "twist_tip": -9.77148996463505,
+  "dihedral": 5.1059044888935565,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 19,
+    "chord_length": 1.0
+  }
+}

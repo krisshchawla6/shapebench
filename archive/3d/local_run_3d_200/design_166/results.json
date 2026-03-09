@@ -1,0 +1,33 @@
+{
+  "design_name": "LowerSweep_StrongTipWashout_PositiveDihedral_NACA2409",
+  "design_params": {
+    "le_sweep_deg": 57.79411048868741,
+    "root_chord_in": 40.083645041150405,
+    "twist_root_deg": -6.862352534502452,
+    "twist_tip_deg": -2.8302619887957885,
+    "dihedral_deg": 8.566375963782257,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.32648275713752695,
+    "CDi": 0.023041806653441268,
+    "CM": -0.3362397318847419,
+    "L_D": 14.169147499932134
+  },
+  "corrected_results": {
+    "CL": 0.04455318165762695,
+    "CDi": -0.003750321112071169,
+    "CM": 0.003680831046910762,
+    "L_D": -11.87983117344899
+  }
+}

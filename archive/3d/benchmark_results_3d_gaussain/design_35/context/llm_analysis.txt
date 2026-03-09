@@ -1,0 +1,16 @@
+The top-performing designs (Rank 0, 1, 2, 3) exhibit a consistent pattern:
+- **Moderate sweep angles** (51.6° to 53.6°).
+- **Moderate root chords** (29.19 to 31.17 inches).
+- **Significant positive twist at the root** (7.5° to 10.0°).
+- **Negative twist (washout) at the tip**, ranging from a moderate -3.82° (Design 2, Rank 0) to an extreme -10.0° (Design 1 & 6). The highest performing design (Design 2) had a less extreme washout.
+- **High positive dihedral** (12.5° to 15.0°).
+- **NACA 240X airfoils** (2% max camber at 40% chord).
+- **Thin to moderate thickness** (NACA 2406, 2407, 2408, 2409).
+
+Since no image of Cp distribution was provided, I infer general aerodynamic characteristics from the successful parameter sets. The consistent use of washout and positive twist at the root suggests an attempt to achieve a more elliptical-like lift distribution to minimize induced drag, while positive dihedral likely contributes to stability or advantageous vortex interactions. The NACA 240X series indicates that a small amount of camber is beneficial for CL/CDi.
+
+Key changes needed to improve exploration, based on the current clustering of high-reward designs:
+1.  **Explore higher sweep angles**: The current population hasn't found high rewards beyond ~53 degrees.
+2.  **Investigate different camber configurations**: Only NACA 240X has been successful.
+3.  **Vary root chord beyond the 29-31 inch cluster**: Explore larger wings.
+4.  **Test less extreme washout (twist_tip)**, while maintaining positive root twist.

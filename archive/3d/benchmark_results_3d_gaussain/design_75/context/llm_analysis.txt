@@ -1,0 +1,11 @@
+The current top designs exhibit a clear pattern: the absolute highest reward (Design 1: 40.7930) is achieved with the minimum possible leading-edge sweep (45.0 degrees). Other high-ranking designs also cluster at the lower end of the sweep range (up to 48.2 degrees). This suggests that for the CL/CDi metric, minimizing induced drag through a broader planform (lower sweep) is highly effective, potentially outweighing the benefits of stronger vortex lift from higher sweep.
+
+A consistent feature across all high-reward designs is a highly optimized twist distribution: a high positive `twist_root` (ranging from 8.26 to 10.0 degrees) combined with aggressive negative `twist_tip` (washout, mostly at the maximum -10.0 degrees). This configuration effectively distributes lift towards the root, preventing tip stall and reducing induced drag.
+
+The NACA airfoil profile `naca_m=2`, `naca_p=4` (NACA 24xx series) is used in all top designs, indicating this camber profile is well-suited. Dihedral values are consistently positive, generally ranging from 7 to 15 degrees, with the highest performer having a moderate 7.33 degrees. Thickness (`naca_t`) shows some variability (9-14 for high performers), suggesting a range of acceptable values.
+
+Key design changes needed to improve designs in the population:
+1.  **Confirm Minimal Sweep Efficacy**: Explore designs with leading-edge sweep extremely close to the observed optimum of 45.0 degrees.
+2.  **Maximize Twist Optimization**: Apply maximum positive `twist_root` and maximum negative `twist_tip` to further optimize lift distribution and minimize induced drag.
+3.  **Refine Dihedral**: Maintain a moderate positive dihedral, avoiding the extremes while ensuring good lateral stability.
+4.  **Fine-tune Thickness with Proven Camber**: Stick with the robust NACA 24xx profile and explore `naca_t` at the lower end of the observed beneficial range to minimize profile drag.

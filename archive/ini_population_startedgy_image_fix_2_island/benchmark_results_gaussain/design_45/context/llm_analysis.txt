@@ -1,0 +1,14 @@
+**Geometry Observations (from Design 1 images):**
+*   **Profile Shape:** The airfoil exhibits a classic asymmetric cambered shape. The thickness distribution appears relatively standard, with the maximum thickness located around 30-40% chord. The leading edge (LE) is rounded but not overly blunt.
+*   **Trailing Edge (TE):** The TE is sharp, as intended by the high `edgy` parameter (0.97) and large radius (0.79). There is a slight downward curve at the TE, indicating aft camber.
+*   **Surface Quality:** The curvature appears smooth on both upper and lower surfaces, suggesting the splining (controlled by `n_sp` and `edgy` params) is working well. There are no visible kinks or slope discontinuities.
+*   **Potential Issues:** The "belly" or lower surface seems somewhat flat or slightly convex in the mid-section. A more concave lower surface (under-camber) could potentially increase lift, though at the cost of drag.
+
+**Flow Field Observations:**
+*   **Pressure (1_p.png):** The stagnation point is well-situated at the LE. The suction peak (low pressure, blue) on the upper surface is distinct but appears to recover pressure relatively early, suggesting potential for extending the laminar run.
+*   **Velocity (1_u.png):** Flow acceleration over the upper surface is visible. There is no large wake region immediately visible, indicating attached flow at this angle of attack.
+*   **Vertical Velocity (1_v.png):** There is clear downwash behind the airfoil, confirming lift generation. The upwash ahead of the LE is also visible.
+
+**Parameter Mapping:**
+*   **Flaw Identification:** Design 1 (Rank 2) has `r1=0.10` (LE radius param) and `a0=-0.08` (Upper crest angle). The best design (Design 2) has `r1=0.22` and `a0=-0.02`. The smaller `r1` in Design 1 might be creating a slightly too-sharp LE peak that causes a premature transition or suction spike.
+*   **Design 1 vs Design 2:** Design 2 is thicker (`r0=0.46` vs `0.42`) and has a blunter nose (`r1=0.22` vs `0.10`). This suggests that a slightly more robust leading edge and thickness profile yields better performance (likely L/D).

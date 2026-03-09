@@ -1,0 +1,12 @@
+*   **Geometry Observations (Design 1):**
+    *   The airfoil features a classic asymmetric cambered profile with a relatively rounded leading edge and a sharp trailing edge.
+    *   The upper surface (suction side) has a pronounced curvature peak at roughly 30-40% chord, contributing to lift.
+    *   The lower surface is flatter but shows a slight "kink" or discontinuity in curvature near the transition from the leading edge to the lower belly (approx 10-15% chord).
+    *   The trailing edge is sharp, which is aerodynamically favorable for enforcing the Kutta condition, but the lower surface near the rear seems to have a slight concavity (under-camber).
+*   **Flow Field Observations:**
+    *   **Pressure:** There is a strong low-pressure region (suction) over the anterior upper surface, driving lift. The pressure recovery towards the trailing edge appears mostly smooth, though the gradients suggest the boundary layer might be thickening significantly near the rear.
+    *   **Velocity:** The flow remains attached over the majority of the airfoil, but the wake region suggests some energy loss. The "kink" on the lower leading edge might be causing a small localized separation bubble or drag penalty.
+*   **Parameter Mapping:**
+    *   Design 1 (Reward 4.14) is significantly superior to the others (next best ~1.68).
+    *   The "kink" likely arises from the interaction between Control Point 0 (Nose: `r`~0.22, `a`~0) and Control Point 3 (Lower: `r`~0.14, `a`~-0.23). The radius drop-off from 0.22 to 0.14 over a short angular span creates the discontinuity.
+    *   The high reward comes from the combination of `r1`~0.31 (Upper thickness) and `r2`~1.0 (Max chord length) with `e2`=1.0 (Sharp TE).

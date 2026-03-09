@@ -1,0 +1,11 @@
+{
+  "le_sweep": 68.0,
+  "root_chord_in": 38.0,
+  "twist_root": 3.0,
+  "twist_tip": 0.0,
+  "dihedral": 0.0,
+  "naca_m": 0,
+  "naca_p": 0,
+  "naca_t": 6,
+  "name": "HighSweep_Uncambered_FlatTwist"
+}

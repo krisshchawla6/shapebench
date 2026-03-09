@@ -1,0 +1,14 @@
+{
+  "design_name": "Hybrid_D1_D3_Swept_ModDihedral_NACA09",
+  "le_sweep": 64.64154042996682,
+  "root_chord_in": 30.623234261843937,
+  "twist_root": 0.8253674078863713,
+  "twist_tip": -5.785419210660977,
+  "dihedral": 1.6816772290741158,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 8,
+    "chord_length": 1.0
+  }
+}

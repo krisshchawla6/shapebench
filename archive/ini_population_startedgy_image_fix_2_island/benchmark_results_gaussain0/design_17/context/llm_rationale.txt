@@ -1,0 +1,6 @@
+- **Hybrid Strategy**: This design blends the successful upper-surface curvature of Design 1 ($r_1, a_1$) with the more aggressive leading-edge positioning of Design 3 ($a_0 = 0.2491$) and an interpolated lower-surface configuration.
+- From the database, we see that high rewards (Designs 1, 2, and 3) all utilize negative $r_0$ and $r_3$ values combined with strongly positive $r_2$ values, suggesting a long, thin profile is optimal for this reward function.
+- I am adjusting $a_0$ to be near zero (blending Design 1's -0.26 and Design 3's +0.25) to test if a more neutral leading edge alignment improves the flow transition over the upper surface.
+- The upper control point (CP1) is kept very close to Design 1's values, as the pressure distribution in the image suggests this curvature is highly effective for maintaining suction.
+- For the trailing edge (CP2), I am slightly increasing the `edgy_param` to $0.25$ to ensure a clean Kutta condition, which should sharpen the trailing edge and potentially reduce drag.
+- The lower surface (CP3) is being adjusted to a middle ground between the flat profile of Design 1 and the more curved profile of Design 3 to find an optimal balance for the pressure recovery zone.

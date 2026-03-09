@@ -1,0 +1,33 @@
+{
+  "design_name": "HighSweep_ZeroCamber_AggressiveTipWashout",
+  "design_params": {
+    "le_sweep_deg": 74.23348001519236,
+    "root_chord_in": 28.85955125929463,
+    "twist_root_deg": -6.604607129403265,
+    "twist_tip_deg": -7.820783637390148,
+    "dihedral_deg": 2.3299493395798914,
+    "naca": {
+      "m": 0,
+      "p": 0,
+      "t": 7,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.119223008946264,
+    "CDi": 0.005896865853370329,
+    "CM": -0.11577825738926197,
+    "L_D": 20.21802969761006
+  },
+  "corrected_results": {
+    "CL": 0.08470264438578393,
+    "CDi": 0.004430350208377827,
+    "CM": -0.06584396190940542,
+    "L_D": 19.11872434499886
+  }
+}

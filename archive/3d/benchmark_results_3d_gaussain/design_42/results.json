@@ -1,0 +1,33 @@
+{
+  "design_name": "Exploit_Optimal_Twist_Sweep_V1",
+  "design_params": {
+    "le_sweep_deg": 51.117779890436815,
+    "root_chord_in": 25.734,
+    "twist_root_deg": 0.0,
+    "twist_tip_deg": 0.0,
+    "dihedral_deg": 0.0,
+    "naca": {
+      "m": 2,
+      "p": 4,
+      "t": 8,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 0.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.12347525977102247,
+    "CDi": 0.0034321458798073487,
+    "CM": -0.14840100156462013,
+    "L_D": 35.9761106010894
+  },
+  "corrected_results": {
+    "CL": 0.08128123561262635,
+    "CDi": 0.0019584449821887827,
+    "CM": -0.09829397589373792,
+    "L_D": 41.502945628722955
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweepSmoothTwistThinAirfoil",
+  "le_sweep": 65.56457219651824,
+  "root_chord_in": 41.645485977146805,
+  "twist_root": -1.3438133607685616,
+  "twist_tip": -0.486032427684278,
+  "dihedral": 9.020667392215515,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 6,
+    "chord_length": 1.0
+  }
+}

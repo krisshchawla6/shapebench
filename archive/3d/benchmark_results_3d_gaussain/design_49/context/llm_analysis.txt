@@ -1,0 +1,13 @@
+The top-performing designs (Design 2, 1, 3) consistently achieve high rewards (CL/CDi > 38) with similar parameter ranges. While no image was provided for this specific turn, by analyzing the parameters of Design 1 (reward 38.92), we can infer what leads to good performance:
+
+*   **Low Sweep Angle:** Designs with `le_sweep` around 48 degrees significantly outperform those with higher sweep (e.g., Design 6 at ~60 degrees, reward 28.13). This suggests that for this specific flight condition or optimization objective, lower sweep is more effective, likely due to better lift-to-induced-drag characteristics despite potentially weaker vortex lift compared to very high sweep.
+*   **Significant Washout:** `twist_tip` is consistently negative and often at its limit (-10.0 degrees for the best design, Design 2). This washout helps to offload the wingtips, reduce induced drag, and potentially mitigate tip stall, leading to a more efficient lift distribution.
+*   **High Dihedral:** All top designs feature very high dihedral (close to or at the maximum of 15.0 degrees). This might contribute to improved lateral stability and potentially interact favorably with the low sweep for overall aerodynamic efficiency.
+*   **Positive Root Twist:** `twist_root` is always positive, ranging from ~4 to ~10 degrees, indicating a general preference for a positive angle of attack at the root.
+*   **NACA 24xx Airfoils:** A `naca_m=2` and `naca_p=4` (NACA 24xx) cambered airfoil seems to be effective, with thickness (`naca_t`) varying from 8% to 11%.
+
+**Key Design Changes Needed to Improve Designs in the Population (based on observed patterns):**
+1.  **Refine Twist Distribution:** Investigate the precise balance between positive `twist_root` and strong negative `twist_tip` to further optimize spanwise lift.
+2.  **Explore Root Chord Scaling:** Slightly vary `root_chord_in` around the successful 28-30 inch range to find a sweet spot for overall wing size and aspect ratio effects.
+3.  **Validate Low Sweep Dominance:** Continue to explore slightly varied low sweep angles (e.g., 48-50 degrees) to confirm this region's performance dominance and fine-tune it.
+4.  **Fine-tune Airfoil Thickness:** Test `naca_t` values within the observed effective range (8-11%) while maintaining the successful 24xx camber profile.

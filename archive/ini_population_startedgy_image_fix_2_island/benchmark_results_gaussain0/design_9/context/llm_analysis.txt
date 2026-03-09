@@ -1,0 +1,18 @@
+- **Geometry**: 
+    - The design exhibits a teardrop-like shape with a notably blunt, rounded leading edge and a tapering, sharp trailing edge.
+    - There is significant positive camber, with the upper surface much more convex than the lower surface, which is relatively flat.
+    - The maximum thickness is concentrated in the first third of the chord length, transitioning into a thin trailing section.
+    - There is a slight geometric "pinch" or high-curvature transition near the trailing edge on the lower side.
+- **Flow Field**: 
+    - The pressure field (1_p) shows a distinct high-pressure stagnation point at the blunt nose and a broad low-pressure suction zone across the upper surface.
+    - Velocity plots (1_u, 1_v) indicate smooth acceleration over the upper leading edge, with flow remaining largely attached.
+    - A visible wake extends from the trailing edge, though it appears narrow and stable, suggesting reasonable efficiency for this shape.
+    - There are minor pressure spikes near the leading edge, likely caused by the bluntness and high curvature at the nose.
+
+**Mapping & Key Changes**:
+- **Design 1 Analysis**: The sharp trailing edge is controlled by the `e0=1.0` parameter, while the smooth, high-lift upper surface corresponds to the high radius (`r2=0.95`) and smooth edge (`e2=-0.83`) of the second/third control points. 
+- **Visible Flaws**: The blunt leading edge (nose) likely induces unnecessary pressure drag. The transition to the trailing edge is quite abrupt.
+- **Key Changes**:
+    1. Reduce leading edge bluntness by exploring negative or lower radius values for the nose control point.
+    2. Test extreme `angle_param` values to shift the center of lift and modify the aerodynamic chord.
+    3. Push the `edgy_param` to boundaries (-1.0 and 1.0) at different points to investigate the trade-off between smooth flow and sharp geometric definition.

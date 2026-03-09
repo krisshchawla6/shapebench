@@ -1,0 +1,5 @@
+*   **Apply Exploitation Strategy**: This design builds directly on the successful parameter clusters identified in Design 1 and Design 5, which occupy the top ranks. By interpolating between their best values, we aim to find the peak of the current local reward hill.
+*   **Parameter Convergence**: Analysis shows that `r0` and `r2` should be near 1.0 for maximum span, while `r1` acts as a internal height/camber control. I am setting `r1` to 0.2225, a midpoint between the two best designs.
+*   **Curvature Continuity**: High rewards are associated with `e0` and `e2` values near -1.0. This ensures a laminar-friendly, smooth profile on the critical pressure and suction surfaces.
+*   **Sharpness Optimization**: Design 5 had a higher `e3` (0.93) than Design 1 (0.83). To exploit this, the new design pushes `e3` even higher (0.985) to create a more idealized, sharp trailing edge for improved pressure recovery.
+*   **Angular Refinement**: The angular offset `a1` is held near 0.65, which corresponds to a specific maximum thickness location that has proven effective for lift generation in this specific population.

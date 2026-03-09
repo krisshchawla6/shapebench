@@ -1,0 +1,7 @@
+**Image & Flow Analysis (based on Design 1 observations):**
+*   **Geometry:** The Design 1 airfoil (Rank 13) features a standard asymmetric camber with a rounded leading edge (LE) and a sharp trailing edge (TE). The upper surface curvature (controlled by CP1) is moderate, creating a typical "hump" at roughly 30-40% chord. The lower surface is relatively flat with slight concavity.
+*   **Flow Field:** As a mid-ranked design (Rank 13 vs Rank 46), the flow likely remains attached over the majority of the chord but may suffer from separation near the trailing edge or a transition that is not optimized for drag reduction (pressure recovery). The pressure distribution likely shows a suction peak that is possibly too far forward or too sharp, leading to wave drag or early turbulent transition.
+*   **Flaws & Mappings:**
+    *   **CP1 (Upper Surface):** The radius (0.326) and angle (0.588) creates a standard thickness. Higher ranked designs (Design 2) tweak this slightly. The "safe" zone seems clustered here.
+    *   **CP3 (Lower Surface):** The lower surface is quite thin (radius 0.13). This might limit the lift generation or structural volume.
+    *   **Underexplored:** The population database lacks designs with **higher thickness** (larger CP1/CP3 radii) or **varied sharpness** (edgy_param > -1.0) on the main body. Most body points are set to maximum smoothness (-1.0).

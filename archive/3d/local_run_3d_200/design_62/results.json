@@ -1,0 +1,33 @@
+{
+  "design_name": "HighCamber_Thin_PosTwist_HighDihedral",
+  "design_params": {
+    "le_sweep_deg": 54.030816707233924,
+    "root_chord_in": 41.85959672376002,
+    "twist_root_deg": -0.3644546481750761,
+    "twist_tip_deg": -3.4689885204978843,
+    "dihedral_deg": 9.342907247809082,
+    "naca": {
+      "m": 4,
+      "p": 4,
+      "t": 9,
+      "chord_length": 1.0
+    }
+  },
+  "sim_conditions": {
+    "aoa_deg": 10.0,
+    "mach": 0.3,
+    "reynolds": 3000000.0
+  },
+  "vlm_results": {
+    "CL": 0.6948425957875625,
+    "CDi": 0.08000920044331253,
+    "CM": -0.6858223139611543,
+    "L_D": 8.684533677847046
+  },
+  "corrected_results": {
+    "CL": 0.1462037373933133,
+    "CDi": 0.006255925715016695,
+    "CM": -0.0784705241754368,
+    "L_D": 23.370440132044173
+  }
+}

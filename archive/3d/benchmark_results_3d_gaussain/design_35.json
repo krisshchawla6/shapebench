@@ -1,0 +1,14 @@
+{
+  "design_name": "HighSweep_HighCamber_ModWashout",
+  "le_sweep": 68.2413413186692,
+  "root_chord_in": 35.1932056589292,
+  "twist_root": 2.5033246771125244,
+  "twist_tip": -3.8240257390468333,
+  "dihedral": 9.465848366811322,
+  "naca": {
+    "m": 4,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

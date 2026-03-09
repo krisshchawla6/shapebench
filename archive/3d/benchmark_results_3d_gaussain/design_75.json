@@ -1,0 +1,14 @@
+{
+  "design_name": "RefinedMinSweepHighWashout",
+  "le_sweep": 45.0,
+  "root_chord_in": 40.05076360713967,
+  "twist_root": 8.959258736841019,
+  "twist_tip": -5.0852048283683216,
+  "dihedral": 9.15107172109874,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 12,
+    "chord_length": 1.0
+  }
+}

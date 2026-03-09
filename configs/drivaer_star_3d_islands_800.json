@@ -1,0 +1,13 @@
+{
+  "framework": "drivaer_star_3d_islands",
+  "environment": "DrivAer_Star",
+  "iterations": 800,
+  "inspirations": 5,
+  "initialize_n_sample": 6,
+  "action": "gaussain",
+  "num_islands": 3,
+  "migration_interval": 10,
+  "migration_rate": 0.3,
+  "pw_alpha": 3.0,
+  "debug": true
+}

@@ -1,0 +1,14 @@
+{
+  "design_name": "LowerSweep_ThinnerCamber_BalancedTwist",
+  "le_sweep": 62.37283475129052,
+  "root_chord_in": 29.114458224548535,
+  "twist_root": 6.232890390777723,
+  "twist_tip": -3.3724085415726153,
+  "dihedral": 5.8583555741124105,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 7,
+    "chord_length": 1.0
+  }
+}
