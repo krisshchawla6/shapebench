@@ -1,1 +1,9 @@
 CFD_solver/
+
+# Large simulation outputs / datasets (not code)
+**/results/
+environments/DrivAer_Star/data/
+environments/DrivAer_Star/test_case/
+
+# Environment variable files (may contain API keys)
+**/.env
