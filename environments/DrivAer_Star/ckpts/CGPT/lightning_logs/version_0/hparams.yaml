@@ -1,0 +1,22 @@
+hyperparameter:
+  epochs: 500
+  lr: 0.001
+  max_grad_norm: 0.1
+  ntrain: 50
+  weight_decay: 0.0001
+model:
+  act: gelu
+  attn_dropout: 0.0
+  attn_type: linear
+  branch_sizes: []
+  ffn_dropout: 0.0
+  horiz_fourier_dim: 0
+  mlp_layers: 3
+  n_experts: 1
+  n_head: 1
+  n_hidden: 8
+  n_inner: 4
+  n_layers: 3
+  output_size: 4
+  space_dim: 2
+  trunk_size: 3

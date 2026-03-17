@@ -1,0 +1,29 @@
+Data:
+  args:
+    batch_size: 4
+    data_cache_file: /mnt/nfs_project_a/yichen/star_cache/DrivAerStar_3Vehicles.pt
+    data_dirs:
+    - /mnt/nfs_project_a/leiyao/dataset/DrivAerStar_144/vtk_E/
+    - /mnt/nfs_project_a/leiyao/dataset/DrivAerStar_144/vtk_F/
+    - /mnt/nfs_project_a/leiyao/dataset/DrivAerStar_144/vtk_N/
+    no_cache: false
+    num_test: 150
+    num_train: 12000
+    num_val: 150
+    val_batch_size: 1
+  type: DrivAerStar_3Vehicles
+Seed: 42
+Trainer:
+  args:
+    accelerator: gpu
+    devices: 1
+    max_epochs: 500
+load_ckpt: null
+network:
+  args:
+    epochs: 500
+    lr: 0.001
+    max_grad_norm: 0.1
+    ntrain: 50
+    weight_decay: 0.0001
+  type: pointnet
