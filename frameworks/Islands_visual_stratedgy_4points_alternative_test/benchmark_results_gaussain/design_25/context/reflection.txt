@@ -1,0 +1,18 @@
+This design iteration resulted in a **Geometric Collapse**, often referred to in this parameter space as the "Pebble Trap." While the intent was to maximize performance by pushing the boundaries of the chord length, the parameters exceeded the mathematical limits of the spline generation, causing the airfoil to "implode" into a small, non-aerodynamic shape.
+
+### Parameter Prediction vs. Outcome Analysis
+
+| Parameter | Predicted Effect | Actual Outcome |
+| :--- | :--- | :--- |
+| **$r_0$ (0.9619) & $r_2$ (0.9271)** | Maximize chord length to increase lifting surface area. | **Failure.** Pushing both primary radii above ~0.90 simultaneously triggered a "Stretching Paradox." Instead of extending the chord, the control points likely overlapped or crossed, forcing the geometry to collapse into a dense, rounded blob. |
+| **$e_3$ (-0.2801)** | Shallow the lower-surface notch to reduce pressure drag. | **Inconclusive.** Because the global geometry failed to extend, the "belly" of the airfoil never formed. The value was swallowed by the collapse. |
+| **$e_2$ (0.9745)** | Enforce a sharp trailing edge for better flow closure (Kutta condition). | **Failure.** The trailing edge in the image is rounded and blunt. The high $e_2$ value cannot create a sharp edge if the $r_2$ distance has collapsed. |
+| **$a_1$ (-0.4435) & $e_1$ (-0.8841)** | Maintain a high-lift forward peak and smooth upper surface. | **Failure.** The "upper surface" is now just the top curve of a pebble. The intended peak suction distribution is impossible with this low fineness ratio (length vs. thickness). |
+| **$r_1$ (0.3535) & $r_3$ (0.6196)** | Maintain structural volume and convexity. | **Partial (Accidental) Success.** The shape is convex and thick, but it lacks the necessary chord length to generate any meaningful lift-to-drag ratio. |
+
+### Key Learnings
+
+1.  **The Stretching Limit is Hard**: There is a non-linear "cliff" in the design space. While $r_0=0.90$ was successful in Design 1, moving to $r_0=0.96$ and $r_2=0.92$ exceeded the total allowable "stretch" for the spline solver. To maximize chord, one radius likely needs to be traded against the other (e.g., a very long nose $r_0$ requires a more modest tail $r_2$).
+2.  **Geometric Sensitivity**: When the airfoil collapses into a "pebble," aerodynamic rewards drop to near zero or negative values because the object acts as a bluff body (like a cylinder) rather than a lifting wing.
+3.  **The "Fang" vs. "Pebble" Trade-off**: In Design 1, the $e_3$ "fang" was a localized aerodynamic flaw, but the overall shape was functional. In this design, the attempt to fix the $e_3$ flaw while simultaneously pushing $r$ values caused a total system failure.
+4.  **Refinement Strategy**: For the next iteration, the $r$ values must be dialed back to the "last known good" configuration (near 0.90) before attempting to fine-tune the curvature parameters ($e_1, e_3$). You cannot optimize surface smoothness on a geometry that has failed to instantiate.

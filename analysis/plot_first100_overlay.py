@@ -32,19 +32,21 @@ C_BASELINE = '#27ae60'
 
 
 def load_rewards(csv_path, max_iter=100):
-    iters, rewards = [], []
+    if not os.path.exists(csv_path):
+        return np.array([]), np.array([]), np.array([])
+    # Deduplicate: last row per iteration = most recent run
+    rows_by_iter = {}
     with open(csv_path) as f:
         for row in csv.DictReader(f):
             try:
-                iters.append(int(row['iteration']))
-                rewards.append(float(row['reward']))
+                rows_by_iter[int(row['iteration'])] = float(row['reward'])
             except (ValueError, KeyError):
                 continue
-    iters, rewards = np.array(iters), np.array(rewards)
-    order = np.argsort(iters)
-    iters, rewards = iters[order], rewards[order]
+    iters = np.array(sorted(rows_by_iter.keys()))
+    rewards = np.array([rows_by_iter[i] for i in iters])
     mask = np.arange(len(iters)) < max_iter
-    return iters[mask], rewards[mask], np.maximum.accumulate(rewards[mask])
+    iters, rewards = iters[mask], rewards[mask]
+    return iters, rewards, np.maximum.accumulate(rewards)
 
 
 def rolling(arr, w=15):
@@ -55,12 +57,11 @@ def rolling(arr, w=15):
     return np.arange(w // 2, w // 2 + len(rm)), rm
 
 
-def make_overlay(env_name, ttt25_csv, ttt50_csv, baseline_csv, ylabel, out_path):
+def make_overlay(env_name, ttt_csv, baseline_csv, ylabel, out_path):
     plt.rcParams.update(STYLE)
     runs = []
     for path, label, color in [
-        (ttt25_csv,    'TTT 25-epoch',      C_TTT25),
-        (ttt50_csv,    'TTT 50-epoch',      C_TTT50),
+        (ttt_csv,      'TTT 1000',          C_TTT25),
         (baseline_csv, 'Baseline (Gemini)', C_BASELINE),
     ]:
         if os.path.exists(path):
@@ -111,16 +112,14 @@ if __name__ == '__main__':
     os.makedirs(out_dir, exist_ok=True)
     make_overlay(
         'BlendedNet',
-        os.path.join(REPO, 'environments/BlendedNet/results/test_time_discovery_750/results.csv'),
-        os.path.join(REPO, 'environments/BlendedNet/results/test_time_discovery_50steps/results.csv'),
+        os.path.join(REPO, 'environments/BlendedNet/results/ttt_1000/results.csv'),
         os.path.join(REPO, 'environments/BlendedNet/results/run_blended_net_3d/results.csv'),
         ylabel='Reward (L/D)',
         out_path=os.path.join(out_dir, 'BlendedNet_first100_overlay.png'),
     )
     make_overlay(
         'Delta Wing 2-Point',
-        os.path.join(REPO, 'environments/vlm_3d_2pt/results/test_time_discovery_750/results.csv'),
-        os.path.join(REPO, 'environments/vlm_3d_2pt/results/test_time_discovery_50steps/results.csv'),
+        os.path.join(REPO, 'environments/vlm_3d_2pt/results/ttt_1000/results.csv'),
         os.path.join(REPO, 'environments/vlm_3d_2pt/results/run_delta_wing_3d_750/results.csv'),
         ylabel='Reward',
         out_path=os.path.join(out_dir, 'vlm_3d_2pt_first100_overlay.png'),

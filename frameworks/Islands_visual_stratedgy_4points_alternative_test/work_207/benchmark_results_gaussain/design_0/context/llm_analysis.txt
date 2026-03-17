@@ -1,0 +1,21 @@
+- **Geometry Observation**:
+    - The shape is a perfectly symmetric, smooth circle.
+    - Eight control points are distributed at equal intervals (45-degree increments) around the perimeter.
+    - There is no elongation or directional bias; the thickness-to-chord ratio is effectively 1:1, making it a bluff body rather than an airfoil.
+    - There are no visible geometric flaws like pinch points, but the lack of a sharp trailing edge is a major aerodynamic flaw for lift generation and drag reduction.
+
+- **Flow Field Analysis**:
+    - The velocity field shows a classic stagnation point at the front center (left side) and high-velocity regions on the top and bottom "shoulders" of the circle.
+    - There is a massive, symmetric wake region behind the circle (right side) where velocity is near zero, indicating high pressure drag.
+    - Flow separation occurs very early on the top and bottom curves, preventing the flow from recovering behind the body.
+    - Pressure spikes are visible at the front stagnation point, while large suction zones on the sides do not contribute to lift due to symmetry.
+
+- **Reference to Design 1**:
+    - Design 1 (and all others) used `radius_param=1.0` for all points, resulting in the maximum possible radial distance for every control point, forming a circle.
+    - The `edgy_param=0.0` across all points produced the perfectly smooth boundary.
+    - Reward is very low (-0.0036) because the drag of a cylinder is significantly higher than that of a streamlined airfoil.
+
+- **Key Changes Needed**:
+    - **Elongation**: Increase the ratio between horizontal length and vertical thickness by reducing the radii of the top and bottom control points.
+    - **Sharpen Trailing Edge**: Use a high `edgy_param` at the rear point to force flow off the back without massive separation.
+    - **Asymmetry**: Introduce subtle differences between the upper and lower surfaces to generate a pressure differential (camber).

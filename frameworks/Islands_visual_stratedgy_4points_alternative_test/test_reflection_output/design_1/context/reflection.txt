@@ -1,0 +1,24 @@
+This analysis critically examines the transition from the "blob" of Design 1 to the "slug" of Design 2 (Spread_Camber_V1).
+
+### Parameter-by-Parameter Analysis
+
+| Parameter | Prediction | Outcome | Analysis |
+| :--- | :--- | :--- | :--- |
+| **Point 0 [R: 0.98, A: 0.92, E: 0.85]** | High R and A to stretch the TE; High E to create a sharp point for flow reattachment. | **Partial Success.** A sharp "stinger" or trailing point is clearly visible on the right side of the geometry. | The high `edgy_param` successfully broke the symmetry of the previous "pebble" shape, creating a localized area of high curvature (a sharp edge). However, its orientation suggests the "tail" is angled, which might induce unwanted pitch. |
+| **Point 4 [R: 0.92, A: -0.95, E: -0.45]** | High R and extreme negative A to stretch the LE forward; negative E for a rounded nose. | **Success.** The left side of the object is significantly elongated and maintains a smooth, circular profile. | This parameter successfully established the "Leading Edge." The wide angular separation between Point 4 (~ -0.95) and Point 0 (~ 0.92) successfully created a horizontal chord. |
+| **Point 2 [R: 0.45, A: 0.25, E: -0.85]** | Moderate R on upper surface for a "hump"; very negative E for smooth suction side. | **Partial Success.** The top surface is smoother and flatter than the bottom. | While smooth, the "hump" is underdeveloped. The transition from the LE (Point 4) to the TE (Point 0) via the upper points (1, 2, 3) is too direct, resulting in a shape that lacks the volume typically needed for high lift. |
+| **Point 6 [R: 0.22, A: -0.25, E: -0.90]** | Low R on bottom to pull the belly inward, creating a thickness gradient. | **Failure.** The shape remains excessively thick and "bottom-heavy." | Even with a lower radius (0.22), the proximity of other points with higher radii (like Point 5 at 0.38) and the overall scale of the chord meant the "belly" didn't thin out enough. The result is a high-drag "slug" profile rather than a thin foil. |
+
+### Key Learnings
+
+**1. The "Chord vs. Thickness" Ratio**
+While the designer successfully established a chord by pushing Point 0 and Point 4 to opposite angular extremes, the airfoil is still far too thick. In aerodynamics, the thickness-to-chord ratio ($t/c$) is critical. To achieve a "foil" rather than a "slug," the `radius_param` for all intermediate points (1, 2, 3 and 5, 6, 7) needs to be significantly reduced relative to the LE/TE radii.
+
+**2. Edgy Param as a Flow Regulator**
+The use of a high `edgy_param` at Point 0 proved to be the correct "fix" for the 0.0 reward issue. It forces a geometric singularity that helps the simulation define where the flow should leave the body (the Kutta condition). Without this, the flow simply wraps around a rounded back-end, causing total pressure drag and zero lift.
+
+**3. Angular Sequencing Matters**
+The resulting shape has a slight "hook" or "kink" on the lower-right. This suggests that the sequence of points (0 through 7) combined with their `angle_param` values is creating a non-monotonic boundary. To create a clean airfoil, the angles should ideally progress smoothly from the TE, around the LE, and back to the TE.
+
+**4. Camber is more than Radius**
+The attempt at camber (asymmetric radii) resulted in a shape that looks more like a "comma." True aerodynamic camber requires the *mean camber line* (the halfway point between top and bottom) to be curved. Currently, the shape is just an asymmetric distribution of thickness. To improve, the upper surface points need higher `radius_param` values combined with specific `angle_param` placements to "arch" the entire body.

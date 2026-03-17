@@ -1,0 +1,18 @@
+- **Geometry Observation**: 
+    - The shape in the images (Design 1) resembles a "pebble" or a thick "seed." It is extremely stubby with a very low chord-to-thickness ratio.
+    - The leading edge is broad and well-rounded, but the profile transitions almost immediately into a thick upper hump.
+    - The trailing edge is sharp (high `edgy_param`), but because the radius at that point is high, the rear of the airfoil is a thick wedge rather than a tapered point.
+    - There is a lack of longitudinal stretching, resulting in a shape that looks more like a rounded triangle than a streamlined wing.
+
+- **Flow Field / Simulation Observation**:
+    - **Pressure (p)**: There is a clear stagnation point at the nose with high pressure. A large low-pressure "suction" zone exists over the steep upper hump, but it is concentrated in a small area.
+    - **Velocity U**: The horizontal velocity shows a massive, thick wake trailing behind the airfoil, indicating very high pressure drag due to the blunt rear geometry.
+    - **Velocity V**: The vertical velocity plots show flow being forced abruptly upward and then down, but the steep angles on the rear half suggest significant flow separation or at least a very messy recovery.
+    - **Overall**: The "stubby" nature prevents efficient pressure recovery, leading to the poor reward (-0.0959).
+
+- **Reference Mapping & Key Changes**:
+    - Design 1's `params[1][0]` (Upper Radius) is 0.929, which caused the "bloated hump."
+    - Design 1's `params[2][0]` (TE Radius) is 0.677, which caused the "blunt wedge" effect instead of a tapered tail.
+    - Key Change 1: Drastically reduce CP1 radius to thin the airfoil and improve the fineness ratio.
+    - Key Change 2: Drastically reduce CP2 radius to ensure the trailing edge is a slim taper, not a thick block.
+    - Key Change 3: Shift the CP1 angle forward to move the peak suction point toward the leading edge.

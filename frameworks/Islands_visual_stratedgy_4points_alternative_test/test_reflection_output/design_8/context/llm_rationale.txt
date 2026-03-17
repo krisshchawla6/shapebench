@@ -1,0 +1,14 @@
+* **Novel Design Strategy**: I am abandoning the "collapsed" configuration of Design 1 entirely. Instead of incremental adjustments, I am building a "Cambered High-Aspect-Ratio" profile from first principles.
+* **Radial Expansion**: I will set mid-body radii to roughly 70-85% of the chord length. This ensures the airfoil has enough thickness to prevent the flow from "ignoring" the shape while remaining thin enough to minimize drag.
+* **Camber Generation**: By setting the upper surface points (CP1, 2) to higher radii ($r \approx 0.82$) than the lower surface points (CP4, 5, $r \approx 0.62$), I will create a curved mean camber line, which is the primary driver for lift in subsonic flight.
+* **Kutta Condition & LE Smoothness**: I will enforce a sharp Trailing Edge (CP0, 7) using $e=1.0$ and a perfectly smooth Leading Edge (CP3) and mid-body using $e=-1.0$. This ensures the flow exits the TE cleanly and accelerates smoothly over the nose.
+* **Angular Distribution**: I will space the angles monotonically from $1.0$ to $-1.0$ to ensure a clean wrap-around geometry without self-intersection or "beaking" at the nose.
+
+## Per-Parameter Predictions
+* **r0, r7 (0.9850)**: I am setting these near 1.0 to maximize the chord length at the Trailing Edge.
+* **r3 (1.0000)**: I am setting this to 1.0 to ensure the Leading Edge reaches the maximum forward extent.
+* **r1, r2 (0.8200, 0.8500)**: I predict these high radii on the upper surface will create a convex loft that generates low pressure (lift).
+* **r4, r5 (0.6200, 0.5800)**: I predict these lower radii on the bottom surface will create the necessary camber to increase the lift coefficient.
+* **a1, a2 (0.6500, 0.3000)**: I am spacing these to provide structural support to the upper surface between the TE and LE.
+* **e0, e7 (1.0000)**: I am setting these to maximum sharpness to create the "stinger" required for the Kutta condition and flow separation.
+* **e1-e5 (-1.0000)**: I am setting these to maximum smoothness to "heal" the surface into a continuous curve, preventing drag-inducing pressure spikes.

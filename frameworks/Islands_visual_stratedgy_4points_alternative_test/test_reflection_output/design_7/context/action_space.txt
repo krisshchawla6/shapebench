@@ -1,0 +1,28 @@
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 7)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0, r \approx 1.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0, r \approx 1.0$ [iter 3-7].
+*   **Fineness Ratio (The Volume Trap)**: High-performance airfoils require a low thickness-to-chord ratio (6–15%). Pushing mid-body radii too high ($r > 0.45$) creates a "bloated blob" or "square" with massive drag [iter 5, 7].
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound**: $r < 0.3$ for intermediate points can cause **radial collapse** (wasp-waist) [iter 4, 6].
+    *   **Upper Bound**: $r > 0.8$ for all points causes **chord compression** or a "bluff body" [iter 5, 7].
+    *   **Optimal**: LE/TE at $r \approx 1.0$; mid-body points (CP1, 2, 4, 5, 6) must "ramp down" to $r \approx 0.1–0.3$ to stretch the profile into a thin wing [iter 6, 7].
+*   **Kutta Condition**: A geometric singularity ($e \approx 1.0$) at the Trailing Edge (CP0/7) is mandatory. It requires a radius "taper" from neighboring points to prevent a "thorn-on-a-rock" geometry [iter 2-7].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values (~0.9+) are required at the LE and TE poles to establish primary length [iter 1-7].
+*   **Relative Radius**: The "thickness" is defined by mid-body radii. If CP2 and CP4 radii are nearly equal to the LE pole (CP3), the nose flattens into a vertical "flat face" [iter 7].
+*   **The Shard vs. The Bloat**: Extreme gradients ($r < 0.3$) create "shards" [iter 6], while insufficient gradients ($r > 0.5$ mid-body) create a "bloated" rectangle [iter 7].
+*   **Camber & Lift**: Asymmetric radii between upper (CP4-6) and lower (CP1-2) surfaces create camber. Higher upper radii create high-speed lofting [iter 4-7].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3-7].
+*   **Parabolic Entry (Clustering)**: Neighboring angles must cluster near the LE pole (e.g., $a \approx \pm 0.05$) to avoid a "beak." **Crucial**: These clustered points must have lower radii than the LE pole to prevent a "flat face" [iter 5, 6, 7].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create self-intersecting loops [iter 2, 5, 6].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 1.0$) at the Trailing Edge create the "stinger" for flow separation. This effect is neutralized if the radius transition from $r_{mid}$ to $r_{TE}$ is too abrupt [iter 2-7].
+*   **Surface Healing**: Extreme negative values ($e \approx -1.0$) at mid-body and LE are the most effective way to "heal" a polygon into a smooth silhouette. However, smoothing cannot fix "bloat" caused by poor $r$ values; it merely turns a rectangle into a "rounded blob" [iter 1, 4-7].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE ensures smooth flow acceleration, provided the $r$ and $a$ values allow for a parabolic taper [iter 5, 6, 7].

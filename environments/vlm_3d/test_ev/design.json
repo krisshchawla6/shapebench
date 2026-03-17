@@ -1,0 +1,9 @@
+{
+  "design_name": "test_sweep55_naca0010",
+  "le_sweep": 55,
+  "naca": {
+    "m": 0,
+    "p": 0,
+    "t": 10
+  }
+}

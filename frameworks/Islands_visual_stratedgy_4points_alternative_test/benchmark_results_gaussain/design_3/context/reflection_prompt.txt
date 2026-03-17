@@ -1,0 +1,68 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Visual Intuition Strategy:** I am designing a shape that mimics high-performance subsonic airfoils (like the NACA 4-digit series). This requires a well-defined, rounded nose for stagnation point stability and a razor-sharp trailing edge to satisfy the Kutta condition and minimize wake turbulence.
+*   **Leading Edge (LE) Definition:** I will use a moderate radius (0.48) for CP0 with an extremely low "edgy" value (-0.96). Visually, this creates a smooth, parabolic entry that prevents early flow separation at varying angles of attack.
+*   **Upper Surface (Thickness/Lift):** By setting CP1's angle to a negative value (-0.28), I shift the maximum thickness forward (approx. 35% of the chord). This reduces the pressure gradient on the rear half of the airfoil, helping to maintain a laminar boundary layer.
+*   **Trailing Edge (TE) Sharpness:** To solve the "Base Drag Trap," I am setting the TE (CP2) radius to a very low value (0.10). Combined with a maximum "edgy" value (0.99), this creates a geometric singularity (a point), forcing the flow to leave the airfoil cleanly without a blunt-face recirculation zone.
+*   **Lower Surface Camber:** CP3 is set with a lower radius than CP1 to ensure the airfoil is not too thick, achieving a better aerodynamic aspect ratio as suggested by the "Thinning Strategy" in the reference card.
+
+## Per-Parameter Predictions
+*   **param[0][0] (LE Radius):** I am setting this to 0.4852 to create a robust, rounded nose that allows for a stable stagnation point.
+*   **param[0][1] (LE Angle):** I am setting this to 0.0000 to keep the leading edge centered on the horizontal axis.
+*   **param[0][2] (LE Edgy):** I am setting this to -0.9654 to ensure C-infinity continuity and a perfectly smooth nose curve.
+*   **param[1][0] (Upper Radius):** I am setting this to 0.3341 to create a moderate peak height for lift without making the profile "stubby."
+*   **param[1][1] (Upper Angle):** I am setting this to -0.2851 to shift the maximum thickness forward, reducing the severity of the pressure recovery slope.
+*   **param[1][2] (Upper Edgy):** I am setting this to -0.8122 to maintain a smooth, non-jagged upper surface transition.
+*   **param[2][0] (TE Radius):** I am setting this to 0.1054 to minimize the thickness of the trailing edge and avoid the "bloat trap."
+*   **param[2][1] (TE Angle):** I am setting this to 0.0000 to keep the chord line horizontal.
+*   **param[2][2] (TE Edgy):** I am setting this to 0.9945 to create a sharp, knife-like point at the trailing edge.
+*   **param[3][0] (Lower Radius):** I am setting this to 0.1982 to produce a thinner lower profile than the upper, creating positive camber.
+*   **param[3][1] (Lower Angle):** I am setting this to 0.1421 to slightly tuck the lower surface forward and up, aiding in a clean closure at the TE.
+*   **param[3][2] (Lower Edgy):** I am setting this to -0.8841 to ensure the lower surface remains smooth and free of sharp discontinuities.
+
+No images or previous designs were provided for this initial iteration. However, based on the **Parameter-Geometry Knowledge** (Reference Card) derived from previous general optimization sessions:
+*   **Geometric Heuristics:** High-radius control points (especially at the trailing edge) lead to "pebble" or "blunt wedge" shapes that suffer from high pressure drag and base drag.
+*   **Flow Considerations:** To maintain flow attachment, the transition from the leading edge to the trailing edge must be gradual. Steep slopes on the upper surface (CP1) or extreme radius disparity between the upper and lower surfaces create separation bubbles.
+*   **Baseline Defects to Avoid:** The "Base Drag Trap" (high TE radius + high TE edgy) and the "Stretch Paradox" (confusing high radius for chord length) are the primary failures to avoid.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.4852,
+      0.0,
+      -0.9654
+    ],
+    [
+      0.3341,
+      -0.2851,
+      -0.8122
+    ],
+    [
+      0.1054,
+      0.0,
+      0.9945
+    ],
+    [
+      0.1982,
+      0.1421,
+      -0.8841
+    ]
+  ],
+  "name": "laminar_alpha_v1"
+}
+```
+
+Sampled action vector:
+['0.3959', '-0.0314', '-1.0000', '0.2860', '-0.3604', '-0.8020', '0.0887', '0.0206', '0.9870', '0.2284', '0.2603', '-0.9136']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

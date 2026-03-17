@@ -1,0 +1,30 @@
+# Airfoil Optimization Reference Card
+
+## General Design Rules
+*   **Flow Direction**: Right-to-Left. CP0=LE (Nose); CP4=TE (Tail) [iter 2].
+*   **TE Sharpness**: CP4 must be $r, e = 1.0$ to satisfy Kutta condition and reduce drag [iter 5].
+*   **Radius Monotonicity**: Avoid "necking." Radii must transition smoothly; if $r_{CP4}=1.0$, then $r_{CP3/5}$ must be sufficiently high ($>0.6$) to prevent an "hourglass" spike [iter 8].
+*   **Camber Limits**: Maintain $r_{CP2} > r_{CP6}$ for lift, but keep $\Delta r < 0.2$ to prevent lower surface collapse/concavity [iter 8].
+*   **Concavity Risk**: Non-monotonic thickness (pinching at CP3/CP5) creates "dead air" pockets and flow separation [iter 5, 8].
+*   **Scale Maintenance**: Avoid reducing all radii simultaneously; this shrinks the chord and creates a "bulbous" LE [iter 8].
+
+## Degree of Freedom Mapping
+
+| Control Point | Geometric Role | Optimal Range / Setting | Effect [Source] |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Leading Edge | $r \approx 0.8 / e: -0.4$ to $-0.6$ | Prevents "flat-face" stagnation and sharp shoulder separation [iter 5]. |
+| **CP1 (U-Front)** | Transition | Gradual $e$ transition | Bridges LE to Suction side; sensitive to edginess jumps [iter 4]. |
+| **CP2 (Top)** | Suction Side | $r \approx 0.5 - 0.6$ | Defines upper thickness; must stay $> r_{CP6}$ for lift [iter 8]. |
+| **CP3 (U-Back)** | Transition | **$r > 0.6$** | Supports TE; $r < 0.5$ creates a "neck" or "waist" near the tail [iter 8]. |
+| **CP4 (Tail)** | Trailing Edge | **$r: 1.0 / e: 1.0$** | **Mandatory** for lift; creates the vertex required for the Kutta condition [iter 5]. |
+| **CP5 (L-Back)** | Transition | **$r > 0.6$** | Mirrors CP3; critical to prevent "bottleneck" flow separation [iter 8]. |
+| **CP6 (Bottom)** | Pressure Side | $r \approx 0.35 - 0.45$ | Lower than CP2 creates camber; too low ($<0.3$) causes surface collapse [iter 8]. |
+| **CP7 (L-Front)** | Transition | Gradual $e$ transition | Prevents early LE separation; must maintain monotonic curvature [iter 4]. |
+| **Angle Offsets** | Thickness Dist. | $a < 0.1$ | Shifts thickness; excessive values distort chord length [iter 4]. |
+| **Edginess** | Surface Profile | $\Delta e < 0.5$ (adj. pts) | High $e$ at CP4 creates the point; negative $e$ at CP0 rounds the nose [iter 5, 8]. |
+
+## New Evidence (Iteration 8)
+*   **The Necking Effect**: Setting CP4 to $r=1.0$ while neighbors (CP3/CP5) are $r \approx 0.48$ creates a non-monotonic "spike." This "hourglass" shape triggers massive flow separation [iter 8].
+*   **Camber vs. Collapse**: A radius delta between CP2 and CP6 is necessary for lift, but $r_{CP6} = 0.32$ was too low, resulting in a "pinched" or concave underside rather than a smooth pressure surface [iter 8].
+*   **Volume/Chord Loss**: Reducing all radii relative to the baseline shrinks the airfoil's effective size, making the LE appear disproportionately bulbous if not balanced [iter 8].
+*   **Vertex Stability**: $e=1.0$ at CP4 successfully creates a sharp TE, but requires high radius support from CP3/CP5 to function as an airfoil rather than a needle [iter 8].

@@ -1,0 +1,16 @@
+*   **Geometry Observations**:
+    *   The airfoil features a significantly elongated chord with a long, tapering trailing edge and a somewhat "beaked" leading edge.
+    *   The upper surface has a clear, smooth peak located approximately 25% along the chord, followed by a long, straight recovery section.
+    *   The lower surface exhibits a problematic "fang" or sharp concavity near the leading edge, creating a distinct notch where the lower surface meets the nose.
+    *   The trailing edge is exceptionally sharp and well-defined, with no visible thickness or bluntness.
+
+*   **Flow Field Observations**:
+    *   **Pressure (p)**: A massive stagnation point (high pressure red zone) is visible at the very tip of the nose, but more importantly, a secondary high-pressure trap exists inside the "fang" concavity on the lower surface.
+    *   **Velocity (u)**: Flow accelerates rapidly over the upper surface peak (high velocity red zone), but there is a clear "dead zone" or localized deceleration inside the lower-surface notch.
+    *   **Vertical Velocity (v)**: There is strong downward deflection behind the upper peak, but the flow near the lower "fang" shows localized upward redirection, likely causing turbulence or high pressure-drag.
+
+*   **Mapping & Refinement (Design 1)**:
+    *   The **"fang"** is caused by the combination of a high lower radius ($r_3 = 0.501$), a positive angle ($a_3 = 0.299$), and critically, a very low edginess ($e_3 = -0.925$), which forces a sharp concave curve.
+    *   The **"beaked" nose** is a result of $r_0 = 0.819$ and $e_0 = -1.0$; while smooth, the high $r_0$ starts to sharpen the nose radius.
+    *   **Trailing Edge Alignment**: The high reward of Design 1 (3.11) is likely due to the excellent closure provided by $r_2 = 0.971$ and $e_2 = 1.0$.
+    *   **Key Changes Needed**: To exceed Design 1, we must eliminate the lower-surface pressure trap by increasing $e_3$ (making it less concave) and reducing $r_3$ to flatten the belly. We will also maximize $r_0$ and $r_2$ to stretch the chord further.

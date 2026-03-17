@@ -1,5 +1,5 @@
 {
-  "framework": "blended_net_3d_islands",
+  "framework": "islands",
   "environment": "BlendedNet",
   "iterations": 1000,
   "inspirations": 5,

@@ -1,0 +1,98 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Visual Intuition Strategy**: The primary goal is to transform the high-drag cylinder into a low-drag teardrop shape. By looking at the massive wake in the velocity plot, it is clear that the "shoulders" of the shape ($P_2, P_6$) are too wide, and the rear is too blunt.
+- **Chord Elongation**: I will maximize the distance between the leading edge ($P_4$) and trailing edge ($P_0$) to increase the chord length, which naturally reduces the thickness-to-chord ratio.
+- **Wake Reduction**: By sharpening the trailing edge ($e_0 \rightarrow 1.0$), I am forcing the flow to leave the surface at a single point, significantly narrowing the wake and reducing pressure drag.
+- **Transition Smoothing**: To avoid the "waisting" or "peanut" failure seen in Design 4, I will set transition radii ($P_1, P_7, P_3, P_5$) to intermediate values that ensure a strictly convex hull.
+- **Camber Introduction**: I will make the upper surface ($r_2$) slightly more extended than the lower surface ($r_6$) and shift the upper points forward using $a_2$ to mimic high-performance NACA profiles.
+
+## Per-Parameter Predictions
+- I am setting **params[0][0]** to **0.9850** because I predict it will extend the trailing edge to the maximum allowable chord length.
+- I am setting **params[0][2]** to **0.9900** because I predict it will create a knife-like trailing edge, fixing the Kutta condition.
+- I am setting **params[4][0]** to **0.8800** because I predict it will create a distinct, forward-reaching leading edge.
+- I am setting **params[4][2]** to **-0.9000** because I predict it will result in a smooth, blunt nose capable of handling varying flow incidence.
+- I am setting **params[2][0]** to **0.3200** because I predict it will significantly thin the profile, reducing the frontal area and pressure drag.
+- I am setting **params[2][1]** to **0.1800** because I predict it will shift the maximum thickness forward to approximately 30% of the chord.
+- I am setting **params[6][0]** to **0.2400** because I predict that making the bottom surface thinner than the top will create positive camber and lift.
+- I am setting **params[1][0] and params[7][0]** to **0.6800** because I predict these bridge values will maintain a smooth taper from the midsection to the sharp tail.
+
+- **Geometry**:
+    - The observed shape is a perfect circle, representing a non-streamlined bluff body.
+    - It is perfectly symmetric both horizontally and vertically, with a 1:1 aspect ratio.
+    - The control points are placed at equal radial distances, creating a smooth but aerodynamically inefficient boundary.
+    - There is no distinct trailing edge to facilitate flow recombination, which is a fundamental geometric flaw for lift generation.
+
+- **Flow Field / Simulation Results**:
+    - The pressure field shows a classic stagnation point at the leading face and symmetric low-pressure regions at the zenith and nadir.
+    - Significant flow separation is visible; the flow cannot follow the steep curvature of the rear hemisphere, leading to a massive wake.
+    - The velocity plot reveals a broad, low-energy wake region extending downstream, which is the primary source of the high pressure drag.
+    - The lack of asymmetry in the pressure distribution confirms that the design produces zero net lift.
+
+- **Parameter Mapping & Necessary Changes**:
+    - Design 1 uses `radius_param = 1.0` for all points, resulting in the observed circle.
+    - The reward is poor because the "airfoil" is actually a cylinder, maximizing drag.
+    - Key Change 1: Increase $r_0$ and $r_4$ while decreasing $r_2$ and $r_6$ to create a streamlined chord.
+    - Key Change 2: Set $e_0$ to a high positive value to create a sharp trailing edge, which is essential for reducing the wake size.
+    - Key Change 3: Apply subtle asymmetry in $r_2$ vs $r_6$ and $a_2$ vs $a_6$ to introduce camber for lift generation.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.99
+    ],
+    [
+      0.68,
+      0.02,
+      0.1
+    ],
+    [
+      0.32,
+      0.18,
+      -0.2
+    ],
+    [
+      0.55,
+      0.08,
+      -0.6
+    ],
+    [
+      0.88,
+      0.0,
+      -0.92
+    ],
+    [
+      0.55,
+      -0.08,
+      -0.6
+    ],
+    [
+      0.24,
+      -0.18,
+      -0.2
+    ],
+    [
+      0.68,
+      -0.02,
+      0.1
+    ]
+  ],
+  "name": "streamlined_cambered_teardrop"
+}
+```
+
+Sampled action vector:
+['1.0000', '-0.0043', '0.9570', '0.7141', '0.0325', '0.0993', '0.3628', '0.1679', '-0.2186', '0.5060', '0.1454', '-0.5957', '0.9768', '-0.0167', '-0.9255', '0.5267', '-0.0677', '-0.6300', '0.2296', '-0.1477', '-0.1689', '0.6365', '-0.0542', '0.1183']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

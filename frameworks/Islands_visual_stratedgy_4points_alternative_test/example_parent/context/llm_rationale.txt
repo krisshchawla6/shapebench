@@ -1,0 +1,5 @@
+*   **Strategy Focus (Exploitation)**: This design is a targeted refinement of Design 1. By staying within the parameter neighborhood of the top performer, we aim to find a local optimum that yields even higher efficiency.
+*   **Curvature Smoothing**: Increasing `radius_param` for P1 (0.8450) and P2 (0.8900) to create a slightly fuller forward-upper section, which typically improves the pressure distribution and delays separation.
+*   **TE Geometry**: Point 4 is kept at max sharpness (`edgy_param = 1.0`). We adjust `angle_param` for P3, P4, and P5 to maintain the high-performing "pinched" trailing edge while slightly smoothing the approach to reduce wake thickness.
+*   **Lower Surface Optimization**: Adjusting P6 to `radius_param = -0.8750` and `angle_param = 0.4850` to deepen the concave section slightly, potentially increasing lift-to-drag by enhancing the pressure difference.
+*   **Leading Edge Consistency**: Maintaining the high-performing smooth LE (P0) with a slightly more negative `edgy_param` (-0.9450) to ensure robust flow attachment.

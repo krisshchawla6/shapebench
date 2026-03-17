@@ -1,0 +1,21 @@
+*   **Geometry Observation**: 
+    *   The airfoil in Design 1 is an extremely slender, high-aspect-ratio profile with a maximized chord length.
+    *   The leading edge (LE) is narrow but rounded, avoiding a sharp "beak" despite the high radius parameter.
+    *   The upper surface peaks early (around 30% chord), while the lower surface exhibits a slight "waisted" concavity towards the rear half.
+    *   The trailing edge (TE) is sharp and well-defined, though there is a very slight upward inclination at the termination point.
+
+*   **Flow Field / Simulation Results**:
+    *   The pressure plot shows a strong, localized suction peak (low pressure) on the upper surface near the leading edge, which then recovers smoothly toward the trailing edge.
+    *   The velocity magnitude (U) confirms high-speed flow over the upper surface, indicating significant lift generation.
+    *   The vertical velocity (V) plot shows clear upwash at the nose and downwash at the tail, confirming a healthy circulation pattern.
+    *   The wake is notably thin and stable, suggesting very low profile drag, which explains the high reward (2.9294).
+
+*   **Design 1 Mapping & Flaws**:
+    *   The high reward is driven by the maximum trailing edge radius ($r_2 = 1.0$) and a very high leading edge radius ($r_0 = 0.949$).
+    *   The "waisted" lower surface is a result of $r_3$ (0.494) being significantly larger than $r_1$ (0.400) while $a_3$ (0.189) pushes the control point slightly back.
+    *   The non-zero $a_2$ (-0.018) and $a_0$ (0.035) create a slight pitch in the chord line that may not be perfectly optimal.
+    *   **Key Changes Needed**: 
+        1. Reduce mid-body thickness ($r_1, r_3$) to further decrease drag.
+        2. Align the trailing edge ($a_2$) perfectly to 0.0 to ensure neutral exit flow.
+        3. Shift the upper peak ($a_1$) slightly more forward to test if a steeper pressure recovery is beneficial.
+        4. Smooth all non-TE edgy parameters to -1.0 for maximum continuity.

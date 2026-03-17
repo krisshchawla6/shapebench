@@ -1,0 +1,14 @@
+[run_drivaer_star_3d_islands] Computing global image crop ...
+  Crop: rows 222-1080, cols 0-1844
+[run_drivaer_star_3d_islands] Rendering 201 frames ...
+  20/201 frames
+  40/201 frames
+  60/201 frames
+  80/201 frames
+  100/201 frames
+  120/201 frames
+  140/201 frames
+  160/201 frames
+  180/201 frames
+  200/201 frames
+  -> environments/DrivAer_Star/results/run_drivaer_star_3d_islands/evolution.gif  (209 frames, 56.5 MB)

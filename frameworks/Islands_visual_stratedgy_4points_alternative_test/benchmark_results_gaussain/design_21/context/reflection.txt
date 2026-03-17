@@ -1,0 +1,19 @@
+This design represents a **catastrophic geometric failure**. While the intent was to refine the "chubby" Design 1 into a more slender, high-performance shape, the resulting geometry is non-functional and likely aerodynamic "nonsense."
+
+### Individual Parameter Analysis: Prediction vs. Outcome
+
+| Parameter | Value (Sampled) | Prediction | Actual Outcome |
+| :--- | :--- | :--- | :--- |
+| **param[0][0] ($r_0$)** | 0.8193 | Elongated, rounded nose for improved stagnation. | The nose is rounded but appears truncated due to the massive distortion of the rest of the body. |
+| **param[1][0] ($r_1$)** | 0.3933 | Lower upper peak to reduce "mountain" drag. | The upper surface is indeed lower, but it lacks a smooth transition to the trailing edge. |
+| **param[1][1] ($a_1$)** | -0.4311 | Maintain suction peak at ~30% chord. | Irrelevant; the flow would separate immediately due to the lower surface deformity. |
+| **param[2][0] ($r_2$)** | 0.9711 | Maximize chord-to-thickness ratio. | The "trailing edge" is a thick, blunt vertical face rather than a sharp point, failing the Kutta condition. |
+| **param[3][0] ($r_3$)** | 0.5010 | "Sweet spot" for convexity (flattening the belly). | **Total Failure.** Instead of flattening, the lower surface "dived" into a sharp, downward-pointing hook/fang. |
+| **param[3][1] ($a_3$)** | 0.3000 | Smooth "tuck" in the lower-aft section. | **Total Failure.** The angle, combined with the radius, caused the spline to loop or kink, creating a massive protrusion. |
+
+### Key Learnings
+
+1.  **The "Hook" Threshold**: There is a critical non-linear boundary in the parameter space where the lower surface radius ($r_3$) and angle ($a_3$) transition from a "convex belly" to a "self-intersecting hook." This design crossed that line. A value of $r_3 \approx 0.5$ is clearly too high when $a_3$ is positive, as it pulls the control point too far from the chord line.
+2.  **Volume Budget Backfire**: The attempt to "save volume" by reducing $r_1$ while keeping $r_3$ relatively high (0.50) created a massive vertical imbalance. This shifted the center of area so far down that the spline could not close gracefully at the trailing edge.
+3.  **Topology vs. Optimization**: Aerodynamic optimization assumes a valid manifold shape. This design highlights the "fragility" of spline-based geometries; small numerical shifts in $a_3$ (from the predicted 0.24 to the sampled 0.30) can transform a "refined" shape into a "broken" one.
+4.  **The "Pebble" Limit**: Design 1 was "chubby" but topologically stable. This design suggests that the "Volume Budget" law cannot be applied to the lower surface ($r_3$) as aggressively as the upper surface ($r_1$) without risking these sharp "cusps" that destroy the trailing edge closure. For future designs, $r_3$ likely needs to stay below 0.40 if $a_3$ is positive.

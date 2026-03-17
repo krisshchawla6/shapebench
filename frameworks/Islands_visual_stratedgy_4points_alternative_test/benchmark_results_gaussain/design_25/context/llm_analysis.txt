@@ -1,0 +1,15 @@
+The geometry in the provided images (Design 1) shows a high-camber airfoil with a distinct "beaked" leading edge and a pronounced concave "notch" on the lower surface. 
+*   **Geometry Observations**: 
+    - The leading edge (LE) is well-defined but slightly angular, suggesting the transition from CP0 to CP1/CP3 is aggressive.
+    - The upper surface is smooth and convex, with the maximum thickness located forward (around 25-30% chord).
+    - The lower surface features a significant "fang" or concave inward curve, which likely creates a localized stagnation or separation zone.
+    - The trailing edge (TE) appears slightly truncated or blunt, not coming to a perfectly sharp point in the flow field.
+*   **Flow Field Observations**:
+    - Pressure ($p$): There is a strong low-pressure zone (blue) on the upper surface, contributing to high lift, but a distinct pressure spike/recirculation zone near the lower-surface notch.
+    - Velocity ($u$): Flow accelerates significantly over the upper crest, but the wake behind the TE is relatively thick, indicating drag from the blunt closure and lower-surface geometry.
+    - Velocity ($v$): Shows strong upwash at the nose and downwash at the tail, confirming high circulation.
+
+Design 1's success (Reward 2.47) is driven by its high chord length ($r_0=0.90, r_2=0.95$) and effective peak positioning ($a_1=-0.44$). However, the "fang" caused by $e_3 = -0.907$ is a major drag source. Key changes needed:
+1.  Increase $e_3$ toward zero to smooth the lower surface notch while maintaining volume.
+2.  Enforce $e_2=1.0$ to sharpen the Kutta condition and thin the wake.
+3.  Slightly increase $r_0$ and $r_2$ to further stretch the chord without hitting the "Stretching Paradox" collapse.

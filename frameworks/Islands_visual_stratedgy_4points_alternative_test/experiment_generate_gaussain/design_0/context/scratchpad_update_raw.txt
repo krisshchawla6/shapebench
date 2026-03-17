@@ -1,0 +1,19 @@
+## Reference Card (Iteration 1)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n$ must be $> 0$. Negative values cause the surface to cross the origin, creating non-physical "pinched" or "peanut" geometries [iter 1].
+*   **Gradient Continuity:** Large deltas between adjacent $r$ values (e.g., $r_1$ vs $r_2$) create concave "valleys" and flow separation. Thickness must be managed as a smooth gradient from LE to TE [iter 1].
+*   **Aspect Ratio Control:** Increasing the ratio of $\{r_0, r_4\}$ relative to $\{r_2, r_6\}$ successfully transitions circular profiles into high-aspect-ratio lifting bodies [iter 1].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | Trailing Edge (TE) extension. | Increases chord length and potential for lift [iter 1]. |
+| **$e_0$** | TE sharpness/eccentricity. | High values force a sharp point, facilitating the Kutta condition [iter 1]. |
+| **$r_2$** | Upper surface (suction side) height. | Controls mid-chord thickness; local minima create drag-inducing "valleys" [iter 1]. |
+| **$a_2$** | Upper surface angular bias. | Shifts the longitudinal position of maximum thickness or concavity [iter 1]. |
+| **$r_4$** | Leading Edge (LE) extension. | Sets the forward boundary of the chord [iter 1]. |
+| **$e_4$** | LE bluntness/eccentricity. | High magnitude values create smooth, rounded radii for attached flow [iter 1]. |
+| **$r_6$** | Lower surface (pressure side) height. | Primary control for camber; must remain positive to maintain convexity [iter 1]. |
+| **$r_{1,3,5,7}$** | Transition radii. | Bridge the LE/TE poles; must be tuned to prevent "dumbbell" effects [iter 1]. |

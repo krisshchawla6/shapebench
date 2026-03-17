@@ -1,0 +1,15 @@
+*   **Geometry Observations**:
+    *   The airfoil is extremely thin and slender, exhibiting a high aspect ratio (long chord relative to thickness).
+    *   The leading edge (LE) is significantly "beaked" or sharp, resulting from the high radius parameter at CP0 (~0.95).
+    *   The trailing edge (TE) is sharp and well-defined, aligning with the horizontal axis.
+    *   The mid-section (CP1 and CP3) appears "waisted" or pinched, with radii values near 0.31, which is below the recommended 0.45 threshold for convex stability.
+
+*   **Flow Field / Simulation Observations**:
+    *   **Pressure (p)**: There is a very intense, localized suction peak on the upper leading edge, which quickly dissipates. This suggests a high sensitivity to angle of attack.
+    *   **Velocity (u, v)**: The flow remains largely attached, but the velocity gradient near the upper surface is very steep. The wake is narrow, indicating low pressure drag but potentially low lift due to the lack of volume/camber.
+    *   **Potential Issues**: The extremely thin profile likely suffers from low structural integrity and a very narrow laminar bucket; any slight change in incidence would cause flow separation at the sharp LE.
+
+*   **Design 1 Mapping & Flaws**:
+    *   **CP0 Radius (0.957)**: Directly caused the sharp "beaked" nose, which creates the extreme localized pressure spike.
+    *   **CP1/CP3 Radii (0.319/0.312)**: Caused the "waisted" geometry. While this reduces frontal area, it likely hurts the lift-to-drag ratio by failing to generate a robust pressure differential.
+    *   **Key Changes Needed**: Round the LE (reduce CP0 Radius), thicken the mid-body to exit the "waisted trap" (increase CP1/CP3 Radii), and ensure the lower surface reaches the "concavity floor" (~0.50).

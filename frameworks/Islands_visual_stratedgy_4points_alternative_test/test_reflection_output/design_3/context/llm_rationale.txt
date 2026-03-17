@@ -1,0 +1,16 @@
+*   **Exploration Strategy (Boundary Exploration)**: To advance the population from the current zero-reward state, I am exploring the boundary conditions of the chord length. I will place the Trailing Edge (TE) at the extreme limits (-1.0 and 1.0) and the Leading Edge (LE) at the exact opposite pole (0.0). This is a region of the parameter space that Design 1 failed to bridge.
+*   **Geometric Diversity (Asymmetric Camber)**: I will investigate an underexplored region of the space by applying an asymmetric radius distribution. The upper surface (CP 1-2) will have slightly higher radii than the lower surface (CP 4-5) to create a cambered profile, which is theoretically superior for lift than the symmetric shapes seen in early iterations.
+*   **Flow Reattachment (Kutta Point)**: I am setting the TE `edgy_param` to the maximum (1.0) to force a geometric singularity. This is an exploration of the "stinger" effect described in the Reference Card, intended to facilitate flow separation and satisfy the Kutta condition.
+*   **Nose Smoothing**: I will push the LE `edgy_param` to the negative limit (-1.0). This explores the "Geometry Healing" capability of the parameter to create a perfectly rounded nose, minimizing pressure spikes at the stagnation point.
+*   **Sequencing**: I will use a linear progression of angles from -1.0 to 1.0 to ensure the shape wraps cleanly around the origin without "kinks."
+
+## Per-Parameter Predictions
+
+*   **CP0 `[0.9800, -1.0000, 1.0000]`**: I am setting the TE at the maximum radius and extreme angle with maximum sharpness to define a crisp, high-aspect-ratio trailing edge.
+*   **CP1 `[0.2200, -0.7000, -0.5000]`**: I am setting a low radius at a mid-angle to create a thin, smooth upper-aft section.
+*   **CP2 `[0.3200, -0.3000, -0.9000]`**: I am setting a slightly higher radius here to create the "hump" of the suction surface.
+*   **CP3 `[0.9500, 0.0000, -1.0000]`**: I am placing the LE at the opposite pole (angle 0) with maximum smoothness to create a blunt, aerodynamic nose.
+*   **CP4 `[0.2500, 0.3000, -0.8000]`**: I am setting a moderate radius to provide thickness for the lower-forward surface.
+*   **CP5 `[0.1800, 0.7000, -0.5000]`**: I am setting a lower radius here compared to the upper surface to induce positive camber.
+*   **CP6 `[0.8500, 0.9500, 0.5000]`**: I am stretching this point near the TE to ensure a clean convergence of the upper and lower surfaces.
+*   **CP7 `[0.9800, 1.0000, 1.0000]`**: I am closing the loop at the same spatial point as CP0, reinforcing the sharp TE "stinger."

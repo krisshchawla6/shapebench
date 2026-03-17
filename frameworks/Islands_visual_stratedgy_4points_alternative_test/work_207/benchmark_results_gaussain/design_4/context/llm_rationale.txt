@@ -1,0 +1,12 @@
+- **Visual Intuition Strategy**: Looking at the wake in the second image, it is clear the flow "gives up" trying to follow the circle's rear curve. To fix this, I must extend the tail to a sharp point, allowing the flow to leave the surface smoothly. 
+- **Chord Elongation**: I will maintain a high radius at CP0 (Nose) and CP4 (Tail) while pulling in the "waist" of the shape (CP2, CP3, CP5, CP6) to transform the circle into a slender blade.
+- **Leading Edge Profile**: A circular nose is okay, but a slightly parabolic one is better. I'll use a high negative edginess at CP0 to broaden the stagnation region and prevent early separation.
+- **Trailing Edge Sharpness**: Following the Design Rules, CP4 needs "support." I will set CP3 and CP5 to low radii to ensure the shape tapers monotonically toward the sharp TE at CP4.
+- **Camber Introduction**: To generate lift, I will make the lower surface (CP6) slightly flatter (lower radius) than the upper surface (CP2), creating a subtle camber.
+
+## Per-Parameter Predictions
+- **CP0 [0.8800, 0.0000, -0.8500]**: Setting radius to 0.88 and edginess to -0.85 will create a blunt, rounded nose to handle various angles of attack.
+- **CP2 [0.2800, -0.0500, 0.0000]**: Shrinking radius to 0.28 will reduce total thickness to ~14% of chord, drastically reducing pressure drag.
+- **CP4 [1.0000, 0.0000, 1.0000]**: Setting edginess to 1.0 at maximum radius will create the sharp trailing edge necessary to eliminate the large wake observed in the circle.
+- **CP3 & CP5 [0.2200, 0.0000, 0.4000]**: Using low radii here will "pinch" the shape toward the back, ensuring the flow accelerates properly toward the TE.
+- **CP6 [0.2200, 0.0000, 0.1000]**: Keeping radius slightly lower than CP2 will create a flatter bottom, inducing positive camber and lift.

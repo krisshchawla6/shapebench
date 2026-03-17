@@ -1,0 +1,20 @@
+The images of Design 1 reveal a catastrophic geometric failure commonly referred to in the Reference Card as a "shard." 
+
+*   **Geometry Observations**:
+    *   The airfoil is a collapsed, one-dimensional line or "needle" extending from the center point.
+    *   There is zero internal volume or thickness; it lacks a distinct upper and lower surface.
+    *   The leading and trailing edges appear to be located at the same angular position, causing the shape to fold onto itself.
+    *   The total chord length is minimal because the geometry does not span across the origin.
+
+*   **Flow Field Observations**:
+    *   The pressure and velocity fields are likely uniform or non-existent (yielding 0.0000 reward) because the solver cannot resolve flow around a zero-thickness singularity.
+    *   There is no stagnation point at the nose or suction peak on the upper surface.
+    *   No visible wake or circulation is present, indicating zero lift generation.
+
+*   **Action Vector Mapping & Fixes**:
+    *   **The Pole Trap**: Design 1 used `angle_param` -1.0 for point 0 and 1.0 for point 3. In a polar coordinate mapping, -1.0 and 1.0 represent the same angle ($\pi$ or $-\pi$). This placed the LE and TE on the same side of the origin.
+    *   **Collapse**: Because the intermediate angles were not distributed across the full range (0.0 to 1.0 and 0.0 to -1.0), the entire shape clustered on one side.
+    *   **Key Changes Needed**: 
+        1.  Place the LE at `angle_param` $\approx 0.0$ and the TE at `angle_param` $\pm 1.0$ to maximize chord across the origin.
+        2.  Enforce strict monotonic sequencing of angles to prevent self-intersection.
+        3.  Ensure intermediate `radius_param` values are non-zero but low ($0.15-0.3$) to create a "wing" instead of a "slug" or "shard."

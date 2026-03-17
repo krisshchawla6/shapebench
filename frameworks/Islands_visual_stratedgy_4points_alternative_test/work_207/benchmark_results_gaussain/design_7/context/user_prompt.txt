@@ -1,0 +1,157 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+# Airfoil Optimization Reference Card
+
+## General Design Rules
+*   **Flow Direction**: Right-to-Left. CP0=LE; CP4=TE [iter 2].
+*   **TE Dominance**: CP4 is the most critical feature; sharpening it ($r, e \to 1.0$) is the primary driver for drag reduction [iter 5].
+*   **Tadpole Effect**: Avoid extreme radius differences between the nose/tail (high $r$) and the midsection (low $r$); high curvature gradients create difficult pressure recovery [iter 5].
+*   **Concavity Risk**: Aggressive "pinching" in the rear (CP3/CP5) creates concave surfaces that risk boundary layer separation [iter 5].
+*   **Shoulder Drag**: Excessive negative edginess at CP0 creates a flat face with sharp "shoulders," causing localized flow acceleration/separation [iter 5].
+*   **Decoupling Strategy**: Use the delta between CP2 and CP6 radii to tune camber independently of thickness [iter 5].
+
+## Degree of Freedom Mapping
+
+| Control Point | Geometric Role | Optimal Range / Setting | Effect [Source] |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Leading Edge | Rad: ~0.8 / Edg: -0.4 to -0.6 | Avoid extreme negative edginess (-0.9) to prevent "flat-face" shoulders [iter 5]. |
+| **CP1 (U-Front)** | Transition | Gradual $e$ transition | Bridges LE to Suction side; sensitive to edginess jumps [iter 4]. |
+| **CP2 (Top)** | Suction Side | Rad: > 0.25 | Controls thickness; if too low relative to CP0, creates "tadpole" shape [iter 5]. |
+| **CP3 (U-Back)** | Transition | Radius > 0.22 | Supports TE; too much "pinching" creates separation-prone concavity [iter 5]. |
+| **CP4 (Tail)** | Trailing Edge | **Rad: 1.0 / Edg: 1.0** | **Mandatory** for Kutta condition; primary source of performance gains [iter 5]. |
+| **CP5 (L-Back)** | Transition | Radius > 0.22 | Mirrors CP3; critical for preventing blunt wake and rear concavity [iter 5]. |
+| **CP6 (Bottom)** | Pressure Side | Rad: 0.2 - 0.3 | Lower $r$ than CP2 creates positive camber; avoid "chin" protrusions [iter 5]. |
+| **CP7 (L-Front)** | Transition | Gradual $e$ transition | Prevents early LE separation; must maintain monotonic curvature [iter 4]. |
+| **Angle Offsets** | Thickness Dist. | $a < 0.1$ | Shifts thickness; excessive values distort chord length [iter 4]. |
+| **Edginess** | Surface Profile | $\Delta e < 0.5$ (adj. pts) | Defines curvature; high negative $e$ at LE creates stagnation flats [iter 5]. |
+
+## New Evidence (Iteration 5)
+*   **Successful Sharp TE**: Confirmed $r=1.0, e=1.0$ at CP4 successfully enforces the Kutta condition, transforming the body from a bluff shape to a lifting airfoil.
+*   **Camber Control**: Successfully decoupled thickness and camber by setting CP6 radius lower than CP2.
+*   **Curvature Gradients**: The "streamlined_kutta_taper" revealed that while thinning the airfoil is good, doing it too abruptly (pinching CP3/CP5) creates "dead air" concavities.
+*   **Nose Geometry**: $e = -0.85$ at CP0 is too aggressive; it creates a flat stagnation face that forces the flow to "turn the corner" too sharply at the shoulders.
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 2:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 3:
+  - Action: [1.0, 0.047288, -0.9507, 0.687392, 0.122513, -0.372405, 0.280432, 0.056985, 0.002414, 0.56557, -0.053374, 0.381797, 1.0, 0.04196, 0.99963, 0.485748, -0.06876, 0.371236, 0.117001, 0.133533, -0.042453, 0.588365, 0.077472, -0.481966]
+  - Reward: -5.0000
+  - Rank: 2
+
+Design 4:
+  - Action: [0.824762, 0.057054, -0.534045, 0.75647, 0.035595, -0.18844, 0.526863, -0.021864, 0.100592, 0.519917, -0.011579, 0.51342, 0.990263, -0.003585, 1.0, 0.628529, -0.015133, 0.499966, 0.357513, -0.037894, -0.017977, 0.700019, 0.041422, -0.269213]
+  - Reward: -5.0000
+  - Rank: 1
+
+Design 5:
+  - Action: [0.835729, -0.057072, -0.911754, 0.600116, 0.050522, -0.327881, 0.338943, 0.153879, -0.02306, 0.571677, 0.08995, 0.423606, 0.97262, 0.038312, 0.976813, 0.491134, -0.018377, 0.412026, 0.139484, 0.211269, -0.004717, 0.625442, -0.016038, -0.302452]
+  - Reward: -5.0000
+  - Rank: 7
+
+Design 6:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.
+
+
+# Task: Generate New Airfoil Design (with Direct Values)
+
+First, analyze the provided information:
+
+1. **Image Analysis**: If images are provided, they show a representative design sampled from the population (listed as Design 1 above for reference). You MUST first describe what you actually see in the images before analyzing action vectors:
+
+- In 3-4 bullet points, describe the **geometry** you observe: What does the shape look like? Is it smooth or jagged? Symmetric or asymmetric? Thick or thin? Are there any obvious geometric flaws visible (discontinuities, pinch points, blunt edges, odd proportions)?
+- In 3-4 bullet points, describe the **flow field / simulation results** you observe: What do the pressure, velocity, or other field plots show? Where are high/low regions? Is there visible flow separation, recirculation, wake asymmetry, or pressure spikes?
+
+Only AFTER describing what you see in the images, reference Design 1's action vector and reward to learn parameter-geometry mappings.
+
+Critically and relentlessly assess the design shown:
+- Which visible geometric features are problematic and why?
+- Which action parameters likely caused the geometric flaws you see?
+- List 3-4 key design/geometric changes needed to improve designs in the population
+
+
+**Strategy Focus**: **Hybrid Strategy**: Examine the design database and identify 2-3 designs with complementary strengths 
+    (e.g., one with good lift, another with low drag). Analyze their parameter vectors and geometric features from the images. 
+    Your new design should blend parameter characteristics from these designs, creating values that interpolate 
+    or combine their successful traits into a novel hybrid configuration.
+
+
+2. **Design Reasoning**: Based on the design database and population state, think step-by-step about what NEW design should be explored to advance the population. **Follow the Strategy Focus guidance above** - this determines HOW you should approach the design. Consider unexplored geometric variations and different aerodynamic strategies. Focus on diversity and bold exploration, not incremental tweaking of existing designs based on aerodynamic principles.
+
+In your reasoning, provide 4-6 bullet points that:
+- **Apply the Strategy Focus approach described above**
+- Draw insights from the population database (what patterns lead to high/low rewards?)
+- Incorporate observations from the image analysis (what aerodynamic phenomena are present?)
+- Identify specific geometric parameters to explore and WHY
+- Apply your judgment as an evolutionary optimizer (what will advance the search?)
+
+Then, create a new airfoil by specifying precise values for each parameter. Use 4+ decimals. n_cp=8 n_sp=20.
+
+Design considerations: The reasoning above should be applied to the design parameters to evolve the population.
+
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [<r0>, <a0>, <e0>],
+    [<r1>, <a1>, <e1>],
+    [<r2>, <a2>, <e2>],
+    [<r3>, <a3>, <e3>],
+    [<r4>, <a4>, <e4>],
+    [<r5>, <a5>, <e5>],
+    [<r6>, <a6>, <e6>],
+    [<r7>, <a7>, <e7>]
+  ],
+  "name": "<descriptive_name>"
+}
+
+Replace all <placeholders> with actual float values in [-1.0, 1.0].
+Each inner array is [radius_param, angle_param, edgy_param] for that control point.
+
+
+**Response Format:**
+Provide your response in the following structure:
+
+## Analysis
+[If images provided: first describe the geometry (3-4 bullets on what you see) and the flow fields (3-4 bullets on what you see). Then reference Design 1's action vector and reward. Identify which visible flaws map to which parameters, and list 3-4 key changes needed]
+
+## Reasoning
+[4-6 key bullet points with design insights: combine population database patterns, image analysis observations, the Strategy Focus guidance above, and your judgment as an evolutionary optimizer to justify the new design strategy. Explicitly explain how your design follows the Strategy Focus.]
+
+## Per-Parameter Predictions
+For EACH parameter you set, state your PREDICTION of what it will mechanically do:
+- "I am setting param[i][j] to VALUE because I predict it will CAUSE [specific geometric effect]"
+- Be specific about the predicted physical outcome, not just your goal
+
+## Design Parameters
+[Your JSON with the design parameters as shown in the example above]

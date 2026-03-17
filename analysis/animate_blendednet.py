@@ -50,10 +50,19 @@ def load_csv(results_dir):
     with open(csv_path) as f:
         reader = csv_mod.DictReader(f)
         for row in reader:
-            data['iteration'].append(int(row['iteration']))
-            data['design'].append(row['design'])
+            it = int(row['iteration'])
+            data['iteration'].append(it)
+            design_ref = row.get('design')
+            if not design_ref:
+                particle = row.get('particle')
+                if particle is not None and particle != '':
+                    design_ref = f'iter_{it:04d}_p{int(float(particle)):03d}'
+                else:
+                    design_ref = f'design_{it}'
+            data['design'].append(design_ref)
             data['reward'].append(float(row['reward']))
-            data['best_reward'].append(float(row['best_reward']))
+            best_raw = row.get('best_reward', row.get('gbest_reward', row.get('reward', 0)))
+            data['best_reward'].append(float(best_raw))
             data['Cp_mean'].append(float(row.get('Cp_mean', 0)))
             data['Cfx_mean'].append(float(row.get('Cfx_mean', 0)))
             data['L_D'].append(float(row.get('L_D', 0)))
@@ -77,11 +86,21 @@ def load_lineage(results_dir):
     return parent_of
 
 
-def get_design_image(results_dir, design_idx):
-    for img in ['Cp_iso.png', 'Cp_top.png']:
-        p = os.path.join(results_dir, f'design_{design_idx}', 'save', 'sol', img)
-        if os.path.exists(p):
-            return Image.open(p)
+def get_design_image(results_dir, design_ref):
+    candidates = []
+    if isinstance(design_ref, str):
+        candidates.append(design_ref)
+        if design_ref.startswith('design_'):
+            suffix = design_ref.split('design_', 1)[1]
+            if suffix.isdigit():
+                candidates.append(f'design_{int(suffix)}')
+    else:
+        candidates.append(f'design_{int(design_ref)}')
+    for design_dir in candidates:
+        for img in ['Cp_iso.png', 'Cp_top.png']:
+            p = os.path.join(results_dir, design_dir, 'save', 'sol', img)
+            if os.path.exists(p):
+                return Image.open(p)
     return None
 
 
@@ -400,16 +419,39 @@ def make_summary(results_dir):
 
 # ── comparison GIF (stacked: plots left, bird's-eye Cp right) ───────────
 
-def _get_top_image(results_dir, design_idx):
-    p = os.path.join(results_dir, f'design_{design_idx}', 'save', 'sol', 'Cp_top.png')
-    if os.path.exists(p):
-        return Image.open(p)
+def _get_top_image(results_dir, design_ref):
+    if isinstance(design_ref, str):
+        candidates = [design_ref]
+    else:
+        candidates = [f'design_{int(design_ref)}']
+    for design_dir in candidates:
+        p = os.path.join(results_dir, design_dir, 'save', 'sol', 'Cp_top.png')
+        if os.path.exists(p):
+            return Image.open(p)
     return None
 
 
 def _best_so_far_idx(data, up_to):
     """Index of the design with highest reward up to (inclusive)."""
     return int(np.argmax(data['reward'][:up_to + 1]))
+
+
+def _compute_plot_x(iterations):
+    """Fractional x-axis: iteration + within-iteration index/count."""
+    it = np.asarray(iterations, dtype=int)
+    if len(it) == 0:
+        return np.array([], dtype=float)
+    counts = {}
+    for v in it:
+        counts[v] = counts.get(v, 0) + 1
+    seen = {}
+    x = np.zeros(len(it), dtype=float)
+    for i, v in enumerate(it):
+        idx = seen.get(v, 0)
+        seen[v] = idx + 1
+        denom = counts[v]
+        x[i] = float(v) if denom <= 1 else float(v) + idx / float(denom)
+    return x
 
 
 def make_comparison(dir1, dir2, label1=None, label2=None, output_dir=None):
@@ -422,10 +464,21 @@ def make_comparison(dir1, dir2, label1=None, label2=None, output_dir=None):
 
     output_dir = output_dir or os.path.dirname(dir1)
 
-    all_rewards = np.concatenate([d1['reward'], d2['reward']])
-    p5, p95 = np.percentile(all_rewards, 5), np.percentile(all_rewards, 95)
-    margin = max((p95 - p5) * 0.25, 2.0)
-    y_lo, y_hi = p5 - margin, p95 + margin
+    # Comparison view in minimization form: objective = -reward.
+    obj1 = np.maximum(-d1['reward'], 1e-9)
+    obj2 = np.maximum(-d2['reward'], 1e-9)
+    best_obj1 = np.minimum.accumulate(obj1)
+    best_obj2 = np.minimum.accumulate(obj2)
+    x1 = _compute_plot_x(d1['iteration'])
+    x2 = _compute_plot_x(d2['iteration'])
+
+    all_obj = np.concatenate([obj1, obj2])
+    p5, p95 = np.percentile(all_obj, 5), np.percentile(all_obj, 95)
+    y_lo = max(min(np.min(all_obj) * 0.8, p5 * 0.8), 1e-9)
+    y_hi = max(np.max(all_obj) * 1.2, p95 * 1.2)
+    x_min = -0.1
+    x_max = max(float(np.max(x1)) if len(x1) else 0.0,
+                float(np.max(x2)) if len(x2) else 0.0) + 0.1
 
     plt.rcParams.update(STYLE)
     frames = []
@@ -437,65 +490,72 @@ def make_comparison(dir1, dir2, label1=None, label2=None, output_dir=None):
     print(f"[comparison] Rendering {len(frame_indices)} frames ...")
 
     for fi, up_to in enumerate(frame_indices):
-        # 2 rows x 2 cols: left = reward plots stacked, right = Cp_top stacked
-        fig = plt.figure(figsize=(14, 10), facecolor='white')
-        gs = fig.add_gridspec(2, 2, width_ratios=[1.3, 1],
-                              hspace=0.30, wspace=0.08)
+        # 1x2 layout: left = single overlaid objective plot, right = top views stacked
+        fig = plt.figure(figsize=(14, 7), facecolor='white')
+        gs = fig.add_gridspec(1, 2, width_ratios=[1.45, 1], wspace=0.06)
+        gs_right = gs[1].subgridspec(2, 1, hspace=0.12)
 
-        for row, (data, rdir, label) in enumerate(
-                [(d1, dir1, label1), (d2, dir2, label2)]):
-            k = min(up_to + 1, len(data['iteration']))
+        k1 = min(up_to + 1, len(d1['iteration']))
+        k2 = min(up_to + 1, len(d2['iteration']))
 
-            # ── left: reward scatter + best line ──
-            ax = fig.add_subplot(gs[row, 0])
-            if k == 0:
-                ax.set_title(f'{label}  (no data yet)')
+        ax = fig.add_subplot(gs[0])
+        if k1 > 0:
+            ax.scatter(x1[:k1], np.clip(obj1[:k1], y_lo, y_hi), s=12, alpha=0.55,
+                       color='#1f77b4', edgecolors='k', linewidths=0.1, zorder=2)
+            ax.plot(x1[:k1], np.clip(best_obj1[:k1], y_lo, y_hi), color='#1f77b4',
+                    lw=1.5, zorder=3, label=f'{label1} best')
+            ax.scatter([x1[k1 - 1]], [np.clip(obj1[k1 - 1], y_lo, y_hi)], s=80,
+                       facecolors='none', edgecolors='#1f77b4', linewidths=1.8, zorder=5,
+                       label=f'{label1} current')
+        if k2 > 0:
+            ax.scatter(x2[:k2], np.clip(obj2[:k2], y_lo, y_hi), s=12, alpha=0.55,
+                       color='#d62728', edgecolors='k', linewidths=0.1, zorder=2)
+            ax.plot(x2[:k2], np.clip(best_obj2[:k2], y_lo, y_hi), color='#d62728',
+                    lw=1.5, zorder=3, label=f'{label2} best')
+            ax.scatter([x2[k2 - 1]], [np.clip(obj2[k2 - 1], y_lo, y_hi)], s=80,
+                       facecolors='none', edgecolors='#d62728', linewidths=1.8, zorder=5,
+                       label=f'{label2} current')
+
+        ax.set_xlim(x_min, x_max)
+        ax.set_ylim(y_lo, y_hi)
+        ax.set_yscale('log')
+        ax.set_xlabel('LLM calls')
+        ax.set_ylabel('Objective  (-reward, lower is better)')
+        for sp in ['top', 'right']:
+            ax.spines[sp].set_visible(False)
+        ax.legend(loc='upper right', fontsize=8.5, framealpha=0.95, ncol=2)
+        t1 = best_obj1[k1 - 1] if k1 > 0 else float('nan')
+        t2 = best_obj2[k2 - 1] if k2 > 0 else float('nan')
+        ax.set_title(f'Comparison objective @ frame {up_to}:  best={t1:.4f} vs {t2:.4f}',
+                     fontweight='medium', pad=8)
+
+        # Right top: dir1 DrivAer top view
+        ax_img1 = fig.add_subplot(gs_right[0])
+        ax_img1.axis('off')
+        if k1 > 0:
+            current_design1 = d1['design'][k1 - 1]
+            img1 = _get_top_image(dir1, current_design1)
+            if img1 is not None:
+                ax_img1.imshow(img1)
+                ax_img1.set_title(f'{label1} top view ({current_design1})',
+                                  fontsize=9, fontweight='medium', pad=4)
             else:
-                islands = data['island'][:k]
-                n_isl = int(islands.max()) + 1
-                ic = plt.cm.Set2(np.linspace(0, 1, max(n_isl, 2)))
-                cols = [ic[int(isl)] for isl in islands]
+                ax_img1.text(0.5, 0.5, '(no top view)', ha='center', va='center',
+                             fontsize=10, transform=ax_img1.transAxes, color='#888')
 
-                ax.scatter(data['iteration'][:k],
-                           np.clip(data['reward'][:k], y_lo, y_hi),
-                           c=cols, s=14, alpha=0.7,
-                           edgecolors='k', linewidths=0.15, zorder=2)
-                ax.plot(data['iteration'][:k],
-                        np.clip(data['best_reward'][:k], y_lo, y_hi),
-                        color=C_BEST, lw=1.4, zorder=3)
-                ax.scatter([data['iteration'][k - 1]],
-                           [np.clip(data['reward'][k - 1], y_lo, y_hi)],
-                           s=80, facecolors='none', edgecolors=C_CURRENT,
-                           linewidths=2, zorder=5)
-
-                ax.set_xlim(-0.5, n - 0.5)
-                ax.set_ylim(y_lo, y_hi)
-                ax.set_xlabel('Iteration')
-                ax.set_ylabel('L/D')
-                for sp in ['top', 'right']:
-                    ax.spines[sp].set_visible(False)
-
-                r_best = data['best_reward'][k - 1]
-                ax.set_title(f'{label}      Iter {k-1}    Best $L/D={r_best:.1f}$',
-                             fontweight='medium', pad=6)
-
-            # ── right: Cp_top bird's-eye view ──
-            ax_img = fig.add_subplot(gs[row, 1])
-            ax_img.axis('off')
-            if k > 0:
-                best_idx = _best_so_far_idx(data, k - 1)
-                img = _get_top_image(rdir, k - 1)
-                best_img = _get_top_image(rdir, best_idx) if best_idx != k - 1 else img
-                show_img = best_img if best_img is not None else img
-                if show_img is not None:
-                    ax_img.imshow(show_img)
-                    ax_img.set_title(
-                        f'$C_p$ top — best design {best_idx}',
-                        fontsize=9, fontweight='medium', pad=4)
-                else:
-                    ax_img.text(0.5, 0.5, '(no image)',
-                                ha='center', va='center', fontsize=10,
-                                transform=ax_img.transAxes, color='#888')
+        # Right bottom: dir2 DrivAer top view
+        ax_img2 = fig.add_subplot(gs_right[1])
+        ax_img2.axis('off')
+        if k2 > 0:
+            current_design2 = d2['design'][k2 - 1]
+            img2 = _get_top_image(dir2, current_design2)
+            if img2 is not None:
+                ax_img2.imshow(img2)
+                ax_img2.set_title(f'{label2} top view ({current_design2})',
+                                  fontsize=9, fontweight='medium', pad=4)
+            else:
+                ax_img2.text(0.5, 0.5, '(no top view)', ha='center', va='center',
+                             fontsize=10, transform=ax_img2.transAxes, color='#888')
 
         fig.subplots_adjust(left=0.06, right=0.98, top=0.94, bottom=0.06)
         fig.canvas.draw()

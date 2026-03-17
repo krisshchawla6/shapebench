@@ -1,0 +1,12 @@
+/scratch/SUAVE/trunk/SUAVE/Plugins/pint/__init__.py:17: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[test] Design: {'design_name': 'test_sweep55_naca0010', 'le_sweep': 55, 'naca': {'m': 0, 'p': 0, 't': 10}}
+[test] case_dir: /scratch/ShapeEvolve/environments/vlm_3d/test_ev
+[test] Running simulate() ...
+[single_pt] CL=29.0915 CDi=5.12962 CM=-23.1348 L/D=5.671 reward=0.2213
+
+[test] === RESULT ===
+  reward : 0.2213
+  metrics: {'CL': 29.091518854916544, 'CDi': 5.129619640324143, 'CM': -23.134827792655795, 'L_D': 5.671281867806916, 'reward': 0.2212818678069155}
+  outputs in /scratch/ShapeEvolve/environments/vlm_3d/test_ev: ['design.json', 'geometry.png', 'results.json', 'test_run.log', 'NACA0010.dat']
+[test] Done.

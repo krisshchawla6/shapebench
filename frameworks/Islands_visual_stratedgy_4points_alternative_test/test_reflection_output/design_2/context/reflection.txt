@@ -1,0 +1,21 @@
+This analysis evaluates the "sharpened_thin_camber_blade" design. The resulting geometry is a small, compact shard rather than the intended high-aspect-ratio airfoil.
+
+### Per-Parameter Analysis
+
+| Parameter Group | Prediction | Actual (Action Vector) | Outcome vs. Prediction |
+| :--- | :--- | :--- | :--- |
+| **TE Definition** (params[0] & [7]) | Create a long, sharp trailing edge by setting max radius and extreme angles ($a \approx -1.0$). | $r_0=0.94, a_0=-1.0, e_0=0.98$ / $r_7=1.0, a_7=-1.0, e_7=1.0$ | **Failed Strategy.** Because $a=-1.0$ and $a=1.0$ represent the same angular position ($-\pi$ and $\pi$) in a polar mapping, points 0 and 7 are stacked. Instead of a "long" edge, this created a single sharp spike at one location. |
+| **LE Definition** (params[3]) | Complete the "longitudinal stretch" by setting angle to the opposite extreme ($a \approx 1.0$). | $r_3=0.91, a_3=1.0, e_3=-0.98$ | **Failed Strategy.** The designer assumed $a=-1$ and $a=1$ were opposite poles. In reality, they are the same location. This point clustered with the TE points, preventing any horizontal stretching. |
+| **Thickness Control** (params[1], [2], [4], [5], [6]) | Reduce radii to $0.15-0.30$ to transform the "slug" into a "blade." | $r \in [0.14, 0.30]$ | **Partial Success / Total Collapse.** The radii were indeed low, but because the "ends" (LE/TE) weren't actually at opposite sides, these low radii simply collapsed the entire shape toward the origin $(0,0)$, creating a tiny shard. |
+| **Edginess/Smoothness** ($e$ values) | High $e$ at TE for Kutta condition; low $e$ at LE for smooth stagnation. | $e_{0,7} \approx 1.0, e_3 \approx -0.98$ | **Successful.** The resulting shard has one very sharp "tail" and one very rounded "nose," proving the edginess parameter works as intended. |
+| **Camber** (upper vs. lower $r$) | $r_{1,2} > r_{5,6}$ to create path length difference. | $r_1=0.30, r_2=0.19$ vs $r_5=0.14, r_6=0.24$ | **Inconclusive.** The global topology was so distorted by the angular clustering that the intended camber effect was lost in the collapsed geometry. |
+
+### Key Learnings
+
+1.  **Polar Coordinate Mapping Awareness**: The most critical failure was the assumption that $a=-1$ and $a=1$ are opposite ends of a line. In this parameter space, the angles likely represent a full circle ($-\pi$ to $\pi$). To create a horizontal airfoil, the LE and TE should be roughly $1.0$ unit apart in the action space (e.g., $a=0.0$ for the front and $a=1.0/-1.0$ for the back).
+2.  **The "Origin" Trap**: When all intermediate radii are set very low, the shape is "sucked" into the center. If the LE and TE are not properly placed at opposite angles, the entire shape becomes a small object near the origin rather than a long body spanning the domain.
+3.  **Sharpness vs. Curvature**: The `edgy_param` is highly effective. Even in this collapsed geometry, the distinction between the "needle" point (high $e$) and the "circular" point (low $e$) is visually obvious.
+4.  **Scaling and Reward**: The reward remains near zero because the resulting shape is too small to generate significant lift and is oriented poorly relative to the flow. Aerodynamic performance requires the chord length to be maximized relative to thickness, which requires spreading the control points across the angular spectrum ($a$).
+
+### Next Step Recommendation
+To achieve the "blade" geometry, keep the $r$ and $e$ strategies but redistribute the angles ($a$). Set the TE points at $a \approx \pm 1.0$ and the LE point at $a \approx 0.0$. This will force the spline to stretch across the origin, creating the desired horizontal chord.

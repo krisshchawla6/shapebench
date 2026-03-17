@@ -1,0 +1,13 @@
+The images provided show Design 2 (the baseline cylinder/circle), as indicated by the uniform black dots arranged in a perfect circle and the resulting flow field.
+- **Geometry**:
+    - The shape is a perfect circle (the default [0,0,0] state).
+    - It is perfectly symmetric across both the horizontal and vertical axes.
+    - It lacks any traditional aerodynamic features such as a sharp trailing edge or a distinct nose.
+    - The control points are evenly spaced, resulting in a bluff body rather than a streamlined airfoil.
+- **Flow Field**:
+    - There is a massive, symmetric wake region behind the shape, indicating very high pressure drag.
+    - Stagnation points are visible at the front (high pressure, yellow/green) and rear (if flow were attached, but here it's a low-pressure separation zone).
+    - The velocity plot shows high-speed flow (yellow) accelerating over the top and bottom "shoulders" of the circle, where separation occurs almost immediately after the peak.
+    - The wake is broad and turbulent, contributing to the very low reward (-0.0036).
+
+Design 1 (Reward -5.0) attempted a more complex shape but likely failed due to self-intersection or non-physical radial gradients (e.g., $r_4=0.54$ vs $r_3=-0.26$ is a recipe for a loop-de-loop). To improve, we must maintain radial positivity and ensure intermediate points ($r_

@@ -1,0 +1,118 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## General Design Rules
+*   **Flow Direction**: Right-to-Left. CP0=LE; CP4=TE [iter 2].
+*   **TE Dominance**: CP4 is the most critical feature; sharpening it ($r, e \to 1.0$) is the primary driver for drag reduction [iter 5].
+*   **Tadpole Effect**: Avoid extreme radius differences between the nose/tail (high $r$) and the midsection (low $r$); high curvature gradients create difficult pressure recovery [iter 5].
+*   **Concavity Risk**: Aggressive "pinching" in the rear (CP3/CP5) creates concave surfaces that risk boundary layer separation [iter 5].
+*   **Shoulder Drag**: Excessive negative edginess at CP0 creates a flat face with sharp "shoulders," causing localized flow acceleration/separation [iter 5].
+*   **Decoupling Strategy**: Use the delta between CP2 and CP6 radii to tune camber independently of thickness [iter 5].
+
+## Degree of Freedom Mapping
+
+| Control Point | Geometric Role | Optimal Range / Setting | Effect [Source] |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Leading Edge | Rad: ~0.8 / Edg: -0.4 to -0.6 | Avoid extreme negative edginess (-0.9) to prevent "flat-face" shoulders [iter 5]. |
+| **CP1 (U-Front)** | Transition | Gradual $e$ transition | Bridges LE to Suction side; sensitive to edginess jumps [iter 4]. |
+| **CP2 (Top)** | Suction Side | Rad: > 0.25 | Controls thickness; if too low relative to CP0, creates "tadpole" shape [iter 5]. |
+| **CP3 (U-Back)** | Transition | Radius > 0.22 | Supports TE; too much "pinching" creates separation-prone concavity [iter 5]. |
+| **CP4 (Tail)** | Trailing Edge | **Rad: 1.0 / Edg: 1.0** | **Mandatory** for Kutta condition; primary source of performance gains [iter 5]. |
+| **CP5 (L-Back)** | Transition | Radius > 0.22 | Mirrors CP3; critical for preventing blunt wake and rear concavity [iter 5]. |
+| **CP6 (Bottom)** | Pressure Side | Rad: 0.2 - 0.3 | Lower $r$ than CP2 creates positive camber; avoid "chin" protrusions [iter 5]. |
+| **CP7 (L-Front)** | Transition | Gradual $e$ transition | Prevents early LE separation; must maintain monotonic curvature [iter 4]. |
+| **Angle Offsets** | Thickness Dist. | $a < 0.1$ | Shifts thickness; excessive values distort chord length [iter 4]. |
+| **Edginess** | Surface Profile | $\Delta e < 0.5$ (adj. pts) | Defines curvature; high negative $e$ at LE creates stagnation flats [iter 5]. |
+
+## New Evidence (Iteration 5)
+*   **Successful Sharp TE**: Confirmed $r=1.0, e=1.0$ at CP4 successfully enforces the Kutta condition, transforming the body from a bluff shape to a lifting airfoil.
+*   **Camber Control**: Successfully decoupled thickness and camber by setting CP6 radius lower than CP2.
+*   **Curvature Gradients**: The "streamlined_kutta_taper" revealed that while thinning the airfoil is good, doing it too abruptly (pinching CP3/CP5) creates "dead air" concavities.
+*   **Nose Geometry**: $e = -0.85$ at CP0 is too aggressive; it creates a flat stagnation face that forces the flow to "turn the corner" too sharply at the shoulders.
+
+## New Evidence (Iteration 8)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9125,
+      0.0,
+      -0.4215
+    ],
+    [
+      0.7842,
+      0.0125,
+      -0.1542
+    ],
+    [
+      0.5543,
+      0.0,
+      0.0521
+    ],
+    [
+      0.4821,
+      -0.0125,
+      0.4512
+    ],
+    [
+      1.0,
+      0.0,
+      1.0
+    ],
+    [
+      0.4512,
+      0.0125,
+      0.4512
+    ],
+    [
+      0.3245,
+      0.0,
+      0.0521
+    ],
+    [
+      0.7512,
+      -0.0125,
+      -0.1542
+    ]
+  ],
+  "name": "hybrid_stabilized_camber_v1"
+}
+```
+
+Observations:
+This analysis critiques the **hybrid_stabilized_camber_v1** design based on the provided outcome image and the designer's stated goals.
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter | Prediction | Outcome | Analysis |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Leading Edge)** | $r=0.9125, e=-0.4215$: Create a robust, rounded nose to prevent separation. | The "nose" (right side) is indeed rounded but appears disproportionately large compared to the rest of the body. | While the nose is rounded, the overall reduction in other radii has made the leading edge the most dominant feature, creating a "bulbous" front rather than a streamlined one. |
+| **CP2 (Top)** | $r=0.5543$: Define upper thickness and prevent "tadpole" constriction. | The top surface is relatively smooth, but the transition to the trailing edge is very steep. | The radius was likely still too low relative to the chord length, contributing to the "tadpole" shape the designer explicitly sought to avoid. |
+| **CP6 (Bottom)** | $r=0.3245$: Create positive camber by being lower than CP2. | There is extreme asymmetry, but instead of camber, it created a "pinched" underside. | The delta between CP2 (0.55) and CP6 (0.32) was too aggressive. This caused the bottom surface to pull inward too sharply, creating a near-concave profile. |
+| **CP4 (Trailing Edge)** | $r=1.0, e=1.0$: Create a perfectly sharp trailing edge to satisfy the Kutta condition. | A sharp point was successfully created, but it is pointing to the left (upstream if flow is L $\to$ R). | The geometry successfully reached a point, but the "sharpness" is coupled with a very narrow "neck," making it look like a tail rather than an airfoil TE. |
+| **CP3 & CP5 (Transitions)** | $r \approx 0.48$: Provide a gradual taper to the TE and prevent separation. | These points failed to provide a gradual taper; instead, they created a "waist" or "necking" effect. | Even at 0.48, these radii were too small compared to the $r=1.0$ at CP4. This created a "bottleneck" where the shape thins out before expanding back to the TE point. |
+
+### Key Learnings
+
+1.  **The "Neck" Effect (Radius Ratios):**
+    The most significant failure in this iteration was the ratio between the transition points (CP3, CP5) and the trailing edge (CP4). By setting CP4 to $r=1.0$ and the neighbors to $\approx 0.48$, the designer created a shape that pinches inward before flaring out to the point. This "hourglass" or "tadpole" geometry is aerodynamically disastrous as it triggers massive flow separation in the concave regions.
+
+2.  **Camber vs. Distortion:**
+    The "Decoupling Strategy" (setting CP6 significantly lower than CP2) was intended to create lift. However, in this parameter space, a radius of $0.32$ (CP6) is likely below the threshold for maintaining a convex hull when the neighboring points are also constricted. This resulted in a "collapsed" bottom surface rather than a smooth cambered one.
+
+3.  **Orientation and Scale:**
+    The resulting shape is much smaller in volume than the Baseline Circle (Design 1). While reducing thickness is generally good for airfoils, reducing *all* radii (except the TE) simultaneously causes the shape to shrink toward the origin. The sharp point (CP4) is on the left, suggesting the coordinate system or flow direction needs to be carefully re-verified to ensure the "Trailing Edge" isn't actually facing into the wind.
+
+4.  **Edginess Sensitivity:**
+    The use of $e=1.0$ at CP4 successfully created a vertex, but without sufficient radius support from CP3 and CP5, it creates a "spike." For a stable airfoil, the transition from the midsection to the TE must be monotonic (constantly decreasing in thickness) to keep the flow attached. This design is non-monotonic (it gets thinner, then thicker at the spike).
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

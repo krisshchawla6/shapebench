@@ -1,0 +1,21 @@
+*   **Geometry Observation**:
+    *   The shape is a "stunted teardrop" or a "blunt pebble." It lacks the slenderness of a conventional airfoil.
+    *   The trailing edge is rounded and truncated, not sharp, which prevents a proper Kutta condition from being established.
+    *   The chord length (horizontal span) is very short relative to the thickness, leading to a bluff-body profile rather than a lifting one.
+    *   There is a visible discontinuity or "step" near the rear upper surface, likely where the control points are fighting for continuity.
+
+*   **Flow Field Observation**:
+    *   **Pressure (p)**: There is a massive stagnation region at the front and a lack of a clear pressure recovery at the rear. The pressure gradient is very steep, suggesting imminent separation.
+    *   **Velocity (u)**: The wake is thick and disorganized, indicating high pressure drag and low aerodynamic efficiency.
+    *   **Velocity (v)**: The vertical velocity field shows the flow being forced abruptly around the blunt shape, rather than being guided smoothly to generate circulation.
+
+*   **Action Mapping & Flaws**:
+    *   **CP2 Radius (-0.1516)**: This is the primary culprit. A negative radius on the trailing edge point "swallows" the tail, pulling it inward and creating a truncated, blunt rear end.
+    *   **CP3 Radius (-0.4743)**: This negative value creates a "concave dent" on the lower surface, disrupting the smooth pressure distribution.
+    *   **Proportions**: The combination of high CP0 radius (0.78) and low/negative CP2 radius creates an extremely unbalanced, front-heavy shape.
+
+*   **Key Changes Needed**:
+    1.  **Stretch the Chord**: Dramatically increase CP2 radius to ~0.95 to create a long, slender tail.
+    2.  **Enforce Sharpness**: Maintain the CP2 Edgy parameter at 1.0 but combine it with a large radius to ensure a clean, sharp trailing edge point.
+    3.  **Thin the Profile**: Reduce the radii of CP1 (Upper) and CP3 (Lower) to ~0.2-0.3 to transition from a "pebble" to a "blade" geometry.
+    4.  **Forward Loading**: Shift CP1's angle forward to move the maximum thickness toward the leading edge.

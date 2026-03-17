@@ -1,0 +1,15 @@
+- **Apply Visual Intuition Strategy**: My primary goal is to "heal" the mangled geometry seen in Design 1. By visually smoothing the contour and adding volume, I aim to eliminate the massive separation bubble seen in the U-velocity field.
+- **Geometric Regularization**: I am moving away from the "pinched" tail of Design 1 by keeping point 5 and 6's radii positive. This creates a "fuller" belly for the airfoil, which should stabilize the lower-surface pressure.
+- **Leading Edge Robustness**: I will expand the radius at the nose (Point 0) and use a very smooth `edgy_param` to create a rounded leading edge, allowing the stagnation point to shift without triggering a massive suction peak.
+- **Wake Reduction**: By creating a monotonic taper toward the trailing edge (Points 3 and 4), I predict the flow will remain attached longer, significantly reducing the wake size seen in the velocity plots.
+- **Evolutionary Step**: This design moves the population from "randomly generated shapes" toward "engineered profiles" by enforcing thickness and smoothness, which are the two most glaring deficiencies in the current best design.
+
+## Per-Parameter Predictions
+- **Point 0 [0.7250, 0.0000, -0.9500]**: Setting r0 to 0.725 and e0 to -0.95 to create a rounded, blunt nose for better angle-of-attack tolerance.
+- **Point 1 [0.8840, 0.1250, -0.9000]**: Setting r1 to 0.884 to build a "shoulder" on the upper surface to accelerate flow and generate suction lift.
+- **Point 2 [0.9500, 0.0500, -0.9200]**: Setting r2 to 0.95 to establish the maximum thickness point at roughly 30% chord.
+- **Point 3 [0.7800, -0.1000, -0.8500]**: Setting r3 to 0.78 to begin a gradual, smooth descent toward the tail.
+- **Point 4 [0.4500, 0.0000, 0.1500]**: Setting r4 to 0.45 and e4 to 0.15 to create a defined, slightly sharp trailing edge to control the exit flow angle.
+- **Point 5 [0.3800, 0.0800, -0.7500]**: Setting r5 to 0.38 (instead of -1.0) to prevent the "pinch" and maintain a healthy lower-surface gap.
+- **Point 6 [0.4200, 0.0000, -0.8800]**: Setting r6 to 0.42 to ensure a slightly concave/flat lower surface for high-pressure lift.
+- **Point 7 [0.5500, -0.1500, -0.9200]**: Setting r7 to 0.55 to smooth the transition from the lower surface back into the rounded leading edge.

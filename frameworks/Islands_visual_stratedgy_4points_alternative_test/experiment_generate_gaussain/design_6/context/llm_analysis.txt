@@ -1,0 +1,18 @@
+In the provided images of Design 1 (representative of the current population), I observe the following:
+
+- **Geometry**:
+    - The shape is a perfect unit circle (cylinder), exhibiting perfect bilateral and vertical symmetry.
+    - All 8 control points are placed at an equal radial distance (radius_param = 1.0) with zero angular offset or edginess.
+    - There is no distinct leading or trailing edge, and the thickness-to-chord ratio is 100%, which is extremely high for aerodynamic performance.
+    - The surface is perfectly smooth with no discontinuities, but lacks any streamlined features.
+
+- **Flow Field / Simulation Results**:
+    - The pressure plot shows classic symmetric flow around a cylinder: high-pressure stagnation points at the front and back (yellow/green) and low-pressure zones on the top and bottom (dark purple).
+    - The velocity/wake plot shows a massive, symmetric separated wake extending far downstream, indicating very high pressure drag.
+    - There is no lift generated (zero asymmetry in pressure), and the reward of -0.0036 reflects the high drag coefficient of a bluff body.
+    - No visible vortex shedding is captured in this steady-state snapshot, but the wide wake confirms the flow is not remaining attached.
+
+Design 1's action vector `[1.0, 0.0, 0.0, ...]` directly maps to this circular geometry. The primary geometric flaws are the lack of a sharp trailing edge (causing wake separation) and the excessive thickness. To improve the population, we must:
+1.  **Reduce thickness**: Lower the radial values for the top ($r_2$) and bottom ($r_6$) points.
+2.  **Introduce a Trailing Edge**: Greatly extend $r_0$ while "pinching" $r_1$ and $r_7$ to create a teardrop taper.
+3.  **Break Symmetry**: Implement camber by making the upper surface ($r_2$) larger than the lower surface ($r_6$).

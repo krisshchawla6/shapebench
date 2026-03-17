@@ -1,0 +1,35 @@
+This design, "high_camber_explorer_v1," successfully avoided the geometric collapse of previous iterations but encountered a new topological issue: **Chord Compression.** By pushing almost all radii to their maximum limits, the resulting shape is a "stubby" or "pebble-like" body rather than a streamlined airfoil.
+
+### Per-Parameter Analysis
+
+*   **CP0 [0.99, -1.0, 1.0] & CP7 [1.0, 1.0, 1.0] (Trailing Edge)**
+    *   **Prediction:** Sharp start/end points to create a "stinger" TE.
+    *   **Outcome:** **Successful.** The edginess value of 1.0 created clear, sharp corners at the rear of the shape. However, because both are at the maximum radius, the "trailing edge" is essentially a flat vertical face or a very blunt closure rather than a tapered tail.
+
+*   **CP3 [0.98, 0.02, -1.0] (Leading Edge)**
+    *   **Prediction:** Perfectly rounded, blunt Leading Edge at the furthest forward point.
+    *   **Outcome:** **Mixed.** While the edginess of -1.0 did create a smooth curve, the high radius (0.98) relative to the other points meant the LE didn't "protrude." Instead of a nose, it formed the front face of a thick block.
+
+*   **CP1 [0.73, -0.58, -0.86] & CP2 [0.69, -0.34, -1.0] (Lower Surface)**
+    *   **Prediction:** Moderate radii forming a flatter or concave lower surface.
+    *   **Outcome:** **Successful.** There is a visible "tuck-in" on the lower-left quadrant. This created the intended asymmetry, giving the shape a distinct "top" and "bottom."
+
+*   **CP4 [0.99, 0.30, -0.96], CP5 [0.93, 0.73, -0.95], CP6 [0.81, 0.90, -0.40] (Upper Surface)**
+    *   **Prediction:** High radii to maximize pressure differential via a highly convex upper surface.
+    *   **Outcome:** **Successful (Geometry) / Failed (Aerodynamics).** The upper surface is indeed a massive, smooth arc. However, because the chord (length) is so short, this curvature is too aggressive, likely leading to massive flow separation rather than lift.
+
+---
+
+### Key Learnings
+
+#### 1. The "Radius Normalization" Trap
+By setting nearly all `radius_param` values to $>0.8$, the designer inadvertently created a shape with an aspect ratio near 1:1. In this coordinate system, if the "middle" points (CP1-CP2 and CP4-CP6) have radii similar to the LE (CP3) and TE (CP0/7), the airfoil loses its elongated "wing" shape and becomes a cylinder or a D-shape. **To gain aerodynamic efficiency, the radii of the mid-body points must be lower than the LE and TE to "stretch" the chord.**
+
+#### 2. Edginess as a "Smoothing" Tool
+The use of extreme negative edginess ($e \approx -1.0$) for the majority of the points successfully created a very smooth, continuous surface. This confirms that negative edginess is the correct path for the "wetted surface" of the airfoil to prevent turbulent transitions caused by micro-ridges.
+
+#### 3. Angular Distribution vs. Chord Length
+The strict monotonicity of `angle_param` prevented "hooks" and self-intersection. However, the resulting shape shows that the flow would see a very "blunt" object. To improve this, the angles need to be clustered more strategically, or the radii must be differentiated significantly to create a "sharp" LE and a "tapered" TE.
+
+#### 4. The "High-Volume" Limit
+The strategy of "Counteracting Radial Collapse" was over-corrected. While a radius of $0.0$ causes a crash, a radius of $1.0$ everywhere creates a "slug." The optimal "waist" for a high-performance airfoil likely lives in the $0.3$ to $0.5$ range for internal points, while keeping the LE and TE near $1.0$.

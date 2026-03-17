@@ -1,0 +1,14 @@
+- **Strategy Focus (Exploration)**: The current population is clumped at the default circular configuration (`r=1.0`). I am moving the search to the opposite boundaries of the parameter space, specifically targeting low radius values (`r < -0.8`) for thickness control and high sharpness values (`e > 0.9`) for the trailing edge.
+- **Chord Stretching**: By keeping the leading (left) and trailing (right) edges at high radius values while pulling the internal points significantly inward, I will transform the circle into a streamlined, thin shape.
+- **Wake Suppression**: A sharp trailing edge is essential to fix the separation seen in the circle images. I will maximize the `edgy_param` for the rear-most point to ensure a clean flow departure.
+- **Leading Edge Optimization**: I will use a high negative `edgy_param` for the front point to ensure a rounded leading edge, which is robust to changes in the angle of attack and prevents flow separation at the nose.
+- **Camber Introduction**: By slightly varying the radius and angle parameters between the top and bottom points, I will introduce a slight upward curve to explore the generation of lift.
+
+## Per-Parameter Predictions
+
+- I am setting `params[0][0]` (Trailing Edge) to `0.9852` because I predict it will CAUSE the shape to extend far to the right, increasing the chord length.
+- I am setting `params[0][2]` to `0.9412` because I predict it will CAUSE a sharp point at the rear, reducing the wake size significantly.
+- I am setting `params[4][0]` (Leading Edge) to `0.4500` because I predict it will CAUSE a blunter, more controlled nose compared to the trailing edge.
+- I am setting `params[4][2]` to `-0.9500` because I predict it will CAUSE maximum smoothness at the stagnation point to prevent flow separation.
+- I am setting `params[2][0]` (Top) and `params[6][0]` (Bottom) to `-0.8950` because I predict it will CAUSE the airfoil to become very thin, reducing the frontal area and pressure drag.
+- I am setting `params[1][1]` to `-0.4200` and `params[7][1]` to `0.4200` because I predict it will CAUSE the points to migrate toward the rear, creating a long, tapered aft-section.

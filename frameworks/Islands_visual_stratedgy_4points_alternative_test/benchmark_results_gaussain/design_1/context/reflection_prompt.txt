@@ -1,0 +1,65 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Strategy Focus (Hybrid Strategy):** I am hybridizing the "Blunt Nose Robustness" (CP0) with a "Stretched Laminar" aft section (CP2). By combining a smooth, circular stagnation point with a high-aspect-ratio chord, I aim to create a design that captures the flow cleanly and maintains attachment over a longer distance.
+- **Stretching the Chord:** To move away from the "pebble" archetype, I will maximize the radius of CP2 (TE). This increases the longitudinal scale relative to the thickness.
+- **Flow Attachment Management:** I am setting CP1's peak further aft than Design 1 (using a neutral/slightly forward angle) and reducing its radius to 0.45 to ensure the pressure gradient is less adverse.
+- **Lower Surface Normalization:** Design 1's "pinched" lower surface is a drag trap. I will increase CP3's radius and set a smooth "edgy" parameter to create a slightly convex, high-pressure lower surface.
+- **Kutta Condition Enforcement:** I will maintain a high "edgy" value at CP2 (0.98) to ensure a sharp trailing edge, which is essential for defining the exit flow angle and generating lift.
+
+## Per-Parameter Predictions
+- **CP0 radius_param (0.2500):** I predict this will create a defined but not overly bulbous leading edge, reducing displacement thickness at the nose.
+- **CP0 edgy_param (-0.9500):** I predict this will ensure a perfectly smooth, circular stagnation point to prevent premature transition to turbulence.
+- **CP1 radius_param (0.4500):** I predict this will create a moderate thickness-to-chord ratio (approx 12-15%) suitable for subsonic flight.
+- **CP1 angle_param (-0.2500):** I predict this will shift the max thickness to approximately 35% of the chord, balancing lift and pressure recovery.
+- **CP2 radius_param (0.9500):** I predict this will maximize the horizontal stretch, transitioning the shape from a "teardrop" to a "high-performance airfoil."
+- **CP2 edgy_param (0.9850):** I predict this will create a sharp trailing edge to satisfy the Kutta condition and fix the rear stagnation point.
+- **CP3 radius_param (0.3800):** I predict this will eliminate the "pinched" concavity seen in previous failures, creating a flatter lower surface for better L/D.
+- **CP3 angle_param (0.2000):** I predict this will slightly pull the lower surface peak rearward to mirror the upper surface's pressure distribution.
+
+Since no images or specific population database results were provided for the current iteration beyond the Reference Card heuristics, I am analyzing the "Design 1" archetypal failure described in the context. 
+- **Geometry Observation:** Design 1 was described as a "stubby/pebble" shape with a high CP1 radius and a short distance between CP0 (LE) and CP2 (TE). This creates a low chord-to-thickness ratio.
+- **Flow Field Observation:** The "steep recovery slope" caused by the forward-biased peak and blunt TE resulted in "massive flow separation," likely appearing as a large recirculating wake in velocity plots and a collapsed pressure recovery on the aft upper surface.
+- **Mapping:** The "pinched" underbelly (low lift, high drag) maps to the low CP3 radius (0.22). The blunt nose maps to high CP0 radius (>0.6). The lack of chord length maps to low CP2 radius.
+- **Key Changes:** 1) Drastically increase CP2 radius to stretch the chord. 2) Lower CP1 radius to reduce thickness. 3) Increase CP3 radius to flatten the lower surface.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.25,
+      0.0,
+      -0.95
+    ],
+    [
+      0.45,
+      -0.25,
+      -0.3
+    ],
+    [
+      0.95,
+      0.0,
+      0.985
+    ],
+    [
+      0.38,
+      0.2,
+      -0.5
+    ]
+  ],
+  "name": "Hybrid_Stretched_Laminar_V1"
+}
+```
+
+Sampled action vector:
+['0.2587', '0.0057', '-0.9782', '0.4173', '-0.2006', '-0.3274', '0.8502', '0.0205', '1.0000', '0.3845', '0.0808', '-0.5400']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

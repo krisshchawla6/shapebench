@@ -1,0 +1,19 @@
+This analysis compares the **Designer's Predictions** against the **Sampled Action Vector** and the resulting geometry shown in the image.
+
+### Per-Parameter Analysis
+
+| Parameter | Predicted | Sampled | Outcome vs. Prediction |
+| :--- | :--- | :--- | :--- |
+| **r0 (LE Radius)** | 0.9525 | **0.9862** | **Exceeded.** The sampled value pushed the leading edge even further forward than predicted, creating an exceptionally long chord length which typically aids in maximizing reward in this environment. |
+| **a0 (LE Angle)** | 0.0245 | **0.0074** | **More Aggressive.** The sampled value is nearly zero, resulting in a perfectly horizontal leading edge. This achieved the goal of minimizing frontal area and stagnation drag even better than predicted. |
+| **r1 (Upper Rad)** | 0.3942 | **0.3930** | **Accurate.** The thickness is very low, creating the "slender" profile intended. The upper surface is flat, minimizing pressure drag. |
+| **a1 (Upper Ang)** | -0.4268 | **-0.4280** | **Accurate.** The peak thickness is successfully shifted forward (approx. 25% chord), creating a sharp acceleration zone followed by a long recovery ramp. |
+| **r3 (Lower Rad)** | 0.4895 | **0.4768** | **Negative Interaction.** While close to the prediction, this radius combined with the "edgy" parameter created a sharp concavity rather than a smooth belly. |
+| **a3 (Lower Ang)** | 0.1782 | **0.1997** | **Failed Prediction.** Despite the intent to "flatten the belly" and "prevent fang formation," the resulting geometry has a distinct **"fang"** (a concave hook) at the lower leading edge. |
+
+### Key Learnings
+
+1.  **The "Fang" Persistence**: Even with an increased $a_3$ (0.1997), the design fell into the "fang" trap. This indicates that the lower surface (CP3) is extremely sensitive to the `edgy` parameter ($e_3 = -0.9660$). A high negative edgy value on the lower surface tends to create a cusp or hook unless the radius ($r_3$) is much larger or the angle ($a_3$) is significantly more positive.
+2.  **Chord Maximization**: The design successfully exploited the parameter space to maximize chord length ($r_0$ and $r_2$ both near 1.0). This creates a high-aspect-ratio profile that distributes lift over a larger area, reducing the pressure gradient per unit length.
+3.  **Stagnation Alignment**: The near-zero $a_0$ (0.0074) is a highly effective "exploitation" move. It aligns the sharpest point of the airfoil directly into the flow, which is ideal for the low-drag requirements of high-performing designs in this simulation.
+4.  **Geometry Bottleneck**: The primary factor limiting this design from reaching the 3.0+ reward range is the lower-surface concavity. The "fang" creates a localized high-pressure zone and potential flow separation/recirculation early on the pressure side, which increases drag and offsets the gains made by the slender upper profile. To improve, the lower surface needs to be transitioned from concave to strictly convex or flat.

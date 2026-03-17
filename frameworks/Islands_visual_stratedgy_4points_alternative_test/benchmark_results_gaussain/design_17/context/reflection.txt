@@ -1,0 +1,34 @@
+This analysis compares your predictions for the "rounded-nose-convex-slender" design against the actual geometry produced by the sampled action vector.
+
+### Per-Parameter Analysis
+
+*   **CP0 Radius [Predicted: 0.8350 | Actual: 0.8516]**
+    *   **Prediction vs. Outcome**: You predicted this would round the leading edge and eliminate the "beak."
+    *   **Result**: **Partial Success.** The sharp, needle-like beak from Design 1 is gone. The nose is significantly more blunt. However, the interaction with the other parameters has caused the leading edge to point upward, creating a high-camber entry rather than a symmetric slender nose.
+
+*   **CP1 Radius [Predicted: 0.4650 | Actual: 0.4454]**
+    *   **Prediction vs. Outcome**: You predicted this would thicken the mid-section and avoid the "waisted" look.
+    *   **Result**: **Success/Over-correction.** The "waisting" is gone, but the upper surface is now extremely convex. Instead of a slender transition, the airfoil has a pronounced "hump," which will likely cause a very strong suction peak followed by immediate flow separation.
+
+*   **CP1 Angle [Predicted: -0.3800 | Actual: -0.3883]**
+    *   **Prediction vs. Outcome**: You predicted this would shift maximum thickness aft to extend the laminar region.
+    *   **Result**: **Success.** The peak of the upper surface is indeed moved further back compared to the forward-leaning peak of Design 1.
+
+*   **CP2 Radius [Predicted: 0.9850 | Actual: 0.9815]**
+    *   **Prediction vs. Outcome**: You predicted this would maximize chord length and increase the fineness ratio.
+    *   **Result**: **Failure.** Despite the high radius value, the resulting airfoil is visually much shorter (lower aspect ratio) than Design 1. This suggests a "folding" effect where the high curvature of the other points is pulling the TE and LE closer together in coordinate space, or the high camber is masking the linear chord length.
+
+*   **CP2 Edgy [Predicted: 1.0000 | Actual: 1.0000]**
+    *   **Prediction vs. Outcome**: You predicted a mathematically sharp trailing edge.
+    *   **Result**: **Success.** The trailing edge is perfectly sharp, which is essential for the Kutta condition.
+
+*   **CP3 Angle [Predicted: 0.0450 | Actual: -0.0564]**
+    *   **Prediction vs. Outcome**: You predicted this would remove the "scooped" lower profile and create a flatter pressure surface.
+    *   **Result**: **Catastrophic Failure.** The actual sampled value (-0.0564) moved in the opposite direction of your intent. Instead of flattening the bottom, it created a massive, deep "under-scoop" or "shrimp-tail" effect. This is the opposite of a "pressure face" and will likely create a massive recirculating bubble on the lower surface.
+
+### Key Learnings
+
+1.  **The "Camber Trap"**: By trying to fix the "waisting" (CP1) and the "beak" (CP0) simultaneously, the design transitioned from a slender, high-speed shape into a high-camber, "thick" shape. The aerodynamic performance will likely drop significantly due to pressure drag from the blunt profile.
+2.  **Angle Sensitivity**: The lower surface (CP3) is extremely sensitive to the Angle parameter. A move from a small positive angle to a small negative angle transformed a "slight hook" into a deep cavity. This suggests the "Concavity Floor" is much higher than 0.0 for this parameter set.
+3.  **Chord Length is Relative**: High radii for CP0 and CP2 do not guarantee a "slender" look if the mid-body (CP1/CP3) is expanded. The fineness ratio is a result of the *ratio* between chord length and thickness; here, the thickness increased so much that the "slender" goal was lost.
+4.  **The "Shrimp" Geometry**: The resulting shape resembles a high-lift, low-speed device rather than an optimized airfoil. While it might generate high lift at very low speeds, the drag penalty at any significant Reynolds number would be prohibitive. The "waisted" look of Design 1, while visually "fragile," was likely much more aerodynamically efficient.

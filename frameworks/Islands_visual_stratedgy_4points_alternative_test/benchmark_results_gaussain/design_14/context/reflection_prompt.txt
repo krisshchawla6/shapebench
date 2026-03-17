@@ -1,0 +1,73 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Exploration Strategy**: This design targets the **"Thick-Convex"** region of the parameter space, which is currently underexplored. While the top designs are all "waisted" and thin, this design pushes side radii (r1, r3) toward the upper boundaries (0.8+) to see if a fuller, more conventional laminar-flow shape yields higher lift-to-drag.
+- **Chord Tension Balance**: I will use a high but not extreme chord (r0=0.88, r2=0.92) to maintain length while avoiding the geometric singularities (beaking) seen when radius equals 1.0.
+- **Forward-Loaded Camber**: By setting a1 to a significant negative value (-0.6) and a3 to a smaller negative value (-0.2), I am exploring an asymmetric, forward-loaded thickness distribution, which is common in high-performance subsonic airfoils but absent in the current population.
+- **Smoothing vs. Edgy**: I will use a moderate "edgy" value for the upper peak (e1=-0.4) to test if a slightly less-than-perfectly-smooth peak helps transition the boundary layer in this thicker regime.
+- **Kutta Condition**: Maintaining e2 at 1.0 is essential to ensure the simulation treats the trailing edge as a sharp flow-shedding point.
+
+## Per-Parameter Predictions
+- I am setting **r0 to 0.88** because I predict it will create a rounded, robust leading edge that avoids the "beaking" seen in Design 1.
+- I am setting **r1 to 0.82** and **r3 to 0.78** because I predict these high values will completely eliminate the "waisted" concavity and create a convex, high-volume airfoil.
+- I am setting **a1 to -0.60** because I predict it will shift the maximum thickness to roughly 25-30% of the chord, creating a favorable pressure gradient.
+- I am setting **a3 to -0.20** because I predict it will create a subtle camber when paired with the upper surface's more aggressive forward shift.
+- I am setting **e2 to 1.0** because I predict it will enforce the Kutta condition and prevent flow wrapping around the trailing edge.
+
+- **Geometry Observation**: 
+    - The airfoil in the images is extremely thin, almost needle-like, with a high chord-to-thickness ratio.
+    - The leading edge is excessively sharp ("beaked"), and the mid-section is significantly "waisted" or concave, particularly on the lower surface.
+    - The trailing edge is sharp and appears to have a slight downward hook.
+    - There is a noticeable "pinch" between the leading edge and the mid-body, creating a non-convex, boomerang-like profile.
+
+- **Flow Field Observation**:
+    - **Pressure (p)**: There is a localized high-pressure zone at the extreme tip of the leading edge, but the pressure recovery along the upper surface is poor due to the concave "waist."
+    - **Velocity (u)**: High-speed flow is concentrated over the initial upper surface, but there is clear evidence of flow instability or a thin wake behind the extremely slender trailing edge.
+    - **Velocity (v)**: There is very little vertical displacement of the flow, indicating that the design is generating minimal lift despite its length.
+
+- **Mapping & Key Changes**:
+    - Design 1's high reward (1.18) comes from its extreme chord (r0=1.0, r2=1.0), but its geometric flaws (waisting) are caused by side radii being too low (r1=0.18, r3=0.21).
+    - To improve, the side radii (CP1 and CP3) must be increased above the "waisted trap" threshold (~0.45) to ensure a convex, structurally sound profile.
+    - The LE radius (r0) should be slightly reduced from 1.0 to avoid the "beaking" effect and provide a smoother stagnation point.
+    - The peak of the upper surface (a1) should be moved forward to encourage a long, gentle pressure recovery toward the tail.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.88,
+      0.05,
+      -0.9
+    ],
+    [
+      0.82,
+      -0.6,
+      -0.4
+    ],
+    [
+      0.92,
+      -0.02,
+      1.0
+    ],
+    [
+      0.78,
+      -0.2,
+      -0.85
+    ]
+  ],
+  "name": "convex_forward_loaded_explorer"
+}
+```
+
+Sampled action vector:
+['0.9433', '0.0886', '-0.9600', '0.8651', '-0.5488', '-0.4510', '0.8902', '-0.0353', '0.9966', '0.7819', '-0.1222', '-0.8711']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

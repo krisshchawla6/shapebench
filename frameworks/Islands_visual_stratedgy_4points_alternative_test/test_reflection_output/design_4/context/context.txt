@@ -1,0 +1,47 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 4)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE at $a \approx 0.0$ and the TE at the polar limits $a \approx \pm 1.0$. Spanning the origin is necessary to create a 2D object with volume [iter 3, 4].
+*   **Structural Priority**: `angle_param` (chord/placement) > `radius_param` (thickness/body) > `edgy_param` (flow regulation) [iter 1, 2, 4].
+*   **The "Waist" Trap**: Intermediate radii must be comparable to (or larger than) LE/TE radii. Dropping intermediate radii to $r < 0.4$ while LE/TE are at $r \approx 0.9$ causes **radial collapse**, resulting in a "wasp-waist" or "bone" shape that yields zero reward [iter 4].
+*   **Kutta Condition Necessity**: A geometric singularity (high `edgy_param` $\approx 1.0$) at the Trailing Edge is mandatory to define flow reattachment [iter 2, 3, 4].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values (~0.9+) are required at the LE and TE poles to establish the primary dimension of the wing [iter 1, 2, 3, 4].
+*   **Body Establishment**: To avoid a "waisted slug," intermediate points (CP1-2, CP4-5) must maintain high radii. The "thickness" of the airfoil is the delta between upper and lower radii at similar angles, not the distance from the origin [iter 4].
+*   **Camber Manifestation**: Asymmetric radii between upper and lower surfaces create camber, but this only generates lift if a continuous "body" (sufficient radius) exists to support the pressure differential [iter 4].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point. The LE must be at $a \approx 0.0$ if the TE is at the polar limits to maximize chord length [iter 3, 4].
+*   **Chord Establishment**: The most critical parameter for unfolding the geometry. Clustering angles near one pole creates "shards"; spanning the poles creates a functional profile [iter 1, 3, 4].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create "hooks" or self-intersecting loops [iter 2].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 0.85$ to $1.0$) at the Trailing Edge create the "stinger" necessary for flow separation [iter 2, 3, 4].
+*   **LE Nose Rounding**: Extreme negative values ($e \approx -0.85$ to $-1.0$) at the Leading Edge (CP3) ensure smooth flow acceleration and prevent "lumpy" pressure distributions [iter 1, 2, 3, 4].
+*   **Geometry Healing**: Extreme negative values force the smoothest possible transition between points, effectively "healing" polygons into continuous curves [iter 1, 4].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.986617, -0.949368, 0.995682, 0.262769, -0.665264, -0.40894, 0.378293, -0.348114, -0.989335, 1.0, 0.022609, -1.0, 0.218745, 0.239599, -0.889054, 0.141124, 0.675418, -0.434456, 0.830651, 0.934487, 0.75254, 0.988437, 1.0, 0.999599]
+  - Reward: 0.0000
+  - Rank: N/A
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

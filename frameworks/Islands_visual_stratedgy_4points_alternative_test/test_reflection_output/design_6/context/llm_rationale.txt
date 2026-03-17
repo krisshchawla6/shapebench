@@ -1,0 +1,13 @@
+- **Exploration Focus (Boundary Testing)**: To deviate from the "pinched" failure of Design 1, I will explore the "High-Volume/High-Camber" region. I am pushing `radius_params` toward the upper boundary (0.7-0.9) for the upper surface to see if a "blunt-top" airfoil yields better stability.
+- **Counter-Shard Strategy**: I am intentionally avoiding any radius values below 0.45 for mid-body points to ensure the "wasp-waist" phenomenon is eliminated.
+- **LE Parabolic Refinement**: I will test a very tight angular cluster around the LE ($\pm 0.08$) combined with maximum smoothing ($e=-1.0$) to force the generation of a proper NACA-style nose.
+- **Trailing Edge Definition**: I will maximize the "stinger" effect by setting $e=1.0$ at the TE poles while maintaining maximum chord length ($r=1.0$).
+- **Asymmetric Loading**: By setting the upper radii to ~0.8 and lower radii to ~0.5, I am creating a "flat-bottomed" high-lift profile, which is an underexplored topological contrast to the "needle" seen previously.
+
+## Per-Parameter Predictions
+- **CP0 & CP7 [r=1.0, e=1.0]**: I am setting these to maximum radius and sharpness to create a clean, singular Kutta-condition trailing edge.
+- **CP3 [r=0.95, a=0.0, e=-1.0]**: I am setting a high radius and max smoothness at the LE pole to ensure the chord is long but the nose is rounded.
+- **CP2 & CP4 [a = \pm 0.08]**: I am clustering these close to CP3 to provide the "shoulder" volume needed to prevent the nose from becoming a "beak."
+- **CP5 & CP6 [r=0.82, r=0.75]**: I am setting high radii on the upper surface to create a "thick-wing" loft that encourages high-speed flow over the top.
+- **CP1 & CP2 [r=0.52, r=0.48]**: I am setting these to "mid-range" radii to define a flatter lower surface, creating the pressure differential necessary for lift.
+- **Global [e = -1.0 except TE]**: I am using extreme negative values to "heal" the surface into a continuous curve, mitigating the blockiness of the control point skeleton.

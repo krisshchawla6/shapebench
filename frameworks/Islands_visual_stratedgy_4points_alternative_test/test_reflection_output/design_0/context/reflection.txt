@@ -1,0 +1,29 @@
+This design outcome represents a significant failure in translating "visual intuition" into the actual parameter space. Instead of an engineered airfoil, the result is a small, compact "blob" that lacks the necessary aspect ratio (chord length) to function aerodynamically.
+
+### Per-Parameter Analysis: Prediction vs. Outcome
+
+| Parameter (Point) | Predicted Effect | Actual Outcome |
+| :--- | :--- | :--- |
+| **Point 0 (Nose)** | Rounded, blunt nose for AoA tolerance. | Contributed to a blunt, non-distinct front of a nearly circular mass. |
+| **Point 1 (Shoulder)** | Suction-generating shoulder. | Point is clustered too closely to the others; no "shoulder" formed. |
+| **Point 2 (Max Thick)** | Max thickness at 30% chord. | The "chord" is non-existent. Point 2 is just one of several vertices in a lumpy polygon. |
+| **Point 3 (Aft Upper)** | Smooth descent toward the tail. | No descent occurred because there is no horizontal extension. |
+| **Point 4 (Tail)** | Defined, sharp trailing edge. | The `angle_param` (0.0061) failed to "pull" this point back into a tail. |
+| **Point 5 (Lower Aft)** | Fuller belly, prevented "pinch." | Successfully prevented the pinch, but contributed to the "blob" shape. |
+| **Point 6 (Lower Mid)** | Flat/concave lower surface. | Resulted in a slightly lumpy, convex bottom. |
+| **Point 7 (Lower Front)** | Smooth transition to leading edge. | Merged into the general circularity of the shape. |
+
+### Critical Assessment of the Design Failure
+
+The primary reason for this failure is a **misunderstanding of the `angle_param` (the second value in each triplet)**. 
+
+1.  **Angular Clustering**: The designer chose `angle_param` values very close to zero (ranging from -0.25 to +0.11). In many airfoil parameterizations (like polar-based ones), these values determine the angular distribution of the control points. By keeping them all near zero, the designer effectively bunched all 8 control points into a narrow arc rather than spreading them out 360 degrees (or along the length of a chord).
+2.  **Loss of Aspect Ratio**: An airfoil needs to be significantly longer than it is thick. By setting `radius_param` values to be relatively uniform (mostly between 0.4 and 0.9) and not using the `angle_param` to stretch the shape, the resulting geometry has an aspect ratio of roughly 1:1. 
+3.  **The "Blob" Effect**: Because the `edgy_param` values were mostly strongly negative (around -0.9), the system attempted to create the smoothest possible curve through these tightly clustered points, resulting in the "river stone" or "blob" appearance.
+
+### Key Learnings
+
+*   **The Angle Parameter is Structural, Not Decorative**: The designer treated the second parameter as a minor adjustment. In reality, it appears to control the fundamental distribution of points. To get a "tail," one or more points must have significantly different angular/horizontal values than the "nose."
+*   **Radius is Relative to the Center**: High `radius_param` values across all points without sufficient angular spread will always result in a circle or a lumpy polygon. To create a thin trailing edge, the radius at the tail must be balanced against a very specific angle.
+*   **"Healing" requires Extension**: You cannot fix a "mangled" geometry by simply smoothing it if the underlying points are too close together. The next iteration must focus on **stretching** the geometry along the X-axis to establish a clear Leading Edge (LE) and Trailing Edge (TE).
+*   **Reward Impact**: This shape will likely have a near-zero or negative reward. It produces high pressure drag (like a cylinder) and almost no lift, as there is no surface area for a pressure differential to act upon effectively.

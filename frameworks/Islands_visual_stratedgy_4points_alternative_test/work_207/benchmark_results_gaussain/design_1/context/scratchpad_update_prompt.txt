@@ -1,0 +1,95 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+(Empty - first iteration)
+
+## New Evidence (Iteration 2)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.8542,
+      0.0,
+      -0.9211
+    ],
+    [
+      0.4821,
+      -0.1542,
+      -0.6541
+    ],
+    [
+      0.2512,
+      -0.1023,
+      -0.4214
+    ],
+    [
+      0.3214,
+      0.0842,
+      0.5231
+    ],
+    [
+      0.9876,
+      0.0,
+      1.0
+    ],
+    [
+      0.2842,
+      -0.0954,
+      0.5231
+    ],
+    [
+      0.1523,
+      0.0654,
+      -0.4214
+    ],
+    [
+      0.3842,
+      0.1842,
+      -0.6541
+    ]
+  ],
+  "name": "streamlined_cambered_teardrop"
+}
+```
+
+Observations:
+This design represents a massive leap in aerodynamic sophistication compared to the initial circular profile. You have successfully transitioned from a bluff body to a streamlined lifting surface.
+
+### Parameter Analysis: Prediction vs. Outcome
+
+*   **CP0 (Nose - Leading Edge)**
+    *   **Prediction**: `radius_param` 0.85, `edgy_param` -0.9 to create a smooth, rounded nose.
+    *   **Outcome**: **Successful.** The rightmost part of the airfoil (the leading edge) is blunt and rounded. This creates a stable stagnation point. However, the high radius relative to the rest of the body makes the nose look slightly "heavy" or bulbous, which might create a localized pressure spike.
+
+*   **CP2 (Top - Suction Side)**
+    *   **Prediction**: `radius_param` 0.25 to thin the profile and reduce shoulder acceleration.
+    *   **Outcome**: **Successful.** The vertical thickness is drastically reduced. The transition from the nose to the upper surface is much smoother than the circle, which will significantly reduce pressure drag and prevent early flow separation.
+
+*   **CP4 (Tail - Trailing Edge)**
+    *   **Prediction**: `radius_param` 1.0, `edgy_param` 1.0 to create a sharp, elongated trailing edge.
+    *   **Outcome**: **Highly Successful.** This is the most critical change. The left side of the shape now terminates in a sharp point (the Kutta condition). The extension of the radius to 1.0 has effectively increased the chord length, resulting in a much lower thickness-to-chord ratio.
+
+*   **CP6 (Bottom - Pressure Side)**
+    *   **Prediction**: `radius_param` 0.15 to create a flatter bottom for lift.
+    *   **Outcome**: **Successful.** The bottom surface is visibly closer to the centerline than the top surface. This asymmetry (camber) is the primary driver for generating a pressure differential (lift) even at low angles of attack.
+
+*   **Angle Parameters**
+    *   **Prediction**: Small offsets to shift thickness toward the leading edge.
+    *   **Outcome**: **Successful.** The "maximum thickness" of the airfoil is located roughly in the first 25-30% of the chord. This is consistent with high-performance subsonic airfoils (like the NACA 4-digit series), allowing for a long recovery region toward the tail.
+
+### Key Learnings
+
+1.  **Edginess Extremes are Powerful**: The contrast between the maximum negative edginess at the nose (-0.94) and maximum positive edginess at the tail (0.97) is the most effective way to define the primary axis of an airfoil.
+2.  **Chord vs. Thickness**: By maximizing the radius of the trailing edge (CP4) while minimizing the radii of the vertical points (CP2, CP6), you effectively "stretched" the shape. This reduction in thickness-to-chord ratio is the single most important factor in reducing pressure drag.
+3.  **Camber is Sensitive**: The small difference between CP2 (top) and CP6 (bottom) created a clear camber. However, looking at the visual result, there is a slight "kink" or unevenness on the lower surface near the front. This suggests that the intermediate points (CP5 and CP7) need to be carefully tuned to ensure the curvature is monotonic and smooth.
+4.  **Flow Direction Confirmation**: The result confirms the simulation environment's orientation: flow moves from the rounded CP0 (right) toward the sharp CP4 (left).
+5.  **Refinement Opportunity**: The next step for optimization is "smoothing." The current shape is functional but has slight surface irregularities (especially on the bottom). Adjusting the `radius_param` and `edgy_param` of the diagonal points (CP1, 3, 5, 7) to better interpolate between the nose and tail will further reduce skin friction and prevent micro-separations.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

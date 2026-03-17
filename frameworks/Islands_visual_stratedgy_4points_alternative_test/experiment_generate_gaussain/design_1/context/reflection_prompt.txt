@@ -1,0 +1,99 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Strategy Focus (Novel Design)**: I am abandoning the circular baseline entirely. Instead of incremental changes to the radius of 1.0, I am implementing a classical "NACA-inspired" teardrop profile using first principles of streamlining and airfoil geometry.
+- **Pressure Drag Reduction**: By reducing the thickness (lowering $r_2$ and $r_6$), I will move the separation point toward the trailing edge, narrowing the wake significantly.
+- **Lift Generation**: I will set $r_2 > r_6$ to create a larger suction surface on the top, encouraging lower pressure and positive lift.
+- **Leading Edge Management**: I am using a negative $e_4$ value to maintain a blunt, rounded leading edge, which is more robust to changes in angle of attack than a sharp leading edge.
+- **Longitudinal Balance**: I will use $a_2$ and $a_6$ to shift the maximum thickness forward (approx. 30% chord), which helps maintain attached flow over the rear of the airfoil.
+
+## Per-Parameter Predictions
+
+- I am setting `param[0][0]` (r0) to **0.9850** because I predict it will extend the chord rearward to form a distinct trailing edge.
+- I am setting `param[0][2]` (e0) to **0.9500** because I predict it will create a sharp point at the trailing edge to satisfy the Kutta condition.
+- I am setting `param[4][0]` (r4) to **0.8500** because I predict it will provide a substantial forward chord extension for streamlining.
+- I am setting `param[4][2]` (e4) to **-0.8000** because I predict it will create a blunt, circular leading edge to prevent early flow separation.
+- I am setting `param[2][0]` (r2) to **0.3200** because I predict it will define the upper suction surface height, significantly thinning the profile compared to the circle.
+- I am setting `param[6][0]` (r6) to **0.2200** because I predict it will create a thinner lower surface than the top, establishing the necessary camber for lift.
+- I am setting `param[2][1]` (a2) to **-0.3000** because I predict it will shift the maximum thickness of the upper surface forward.
+- I am setting `param[1][0]` and `param[7][0]` to intermediate values (**0.6500**) to ensure a smooth, tapered transition toward the sharp trailing edge.
+
+The images reveal a design that is fundamentally non-aerodynamic for lift generation:
+
+- **Geometry**:
+    - The shape is a perfect circle (cylinder), created by uniform radial parameters ($r_n = 1.0$).
+    - It is perfectly symmetric and smooth, with a thickness-to-chord ratio of 1.0.
+    - There is no distinct leading or trailing edge; the geometry is a bluff body.
+- **Flow Field / Simulation**:
+    - The pressure plot shows high-pressure stagnation at the front and low-pressure acceleration at the top and bottom, but it is entirely symmetric, resulting in zero lift.
+    - The velocity field shows massive flow separation immediately after the mid-point, creating a wide, turbulent wake.
+    - The third plot indicates the onset of periodic vortex shedding (Von Karman vortex street), which causes high pressure drag and structural vibration.
+
+**Mapping to Parameters**:
+Design 1's action vector [1.0, 0.0, 0.0...] confirms that setting all radii to 1.0 and all edgy/angle params to 0.0 creates a unit circle. This shape is the worst-case scenario for lift-to-drag ratio. 
+
+**Key Changes Needed**:
+1.  **Extreme Aspect Ratio Increase**: Stretch the chord by maximizing $r_0$ and $r_4$ while significantly reducing $r_2$ and $r_6$ to transition from a bluff body to a streamlined body.
+2.  **Kutta Condition Enforcement**: Set a high $e_0$ value to sharpen the trailing edge, forcing the flow to leave smoothly and establishing circulation.
+3.  **Camber Introduction**: Differentiate $r_2$ (suction side) and $r_6$ (pressure side) to create an asymmetric pressure distribution.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.95
+    ],
+    [
+      0.65,
+      -0.12,
+      0.15
+    ],
+    [
+      0.32,
+      -0.3,
+      -0.25
+    ],
+    [
+      0.52,
+      0.18,
+      -0.45
+    ],
+    [
+      0.85,
+      0.0,
+      -0.8
+    ],
+    [
+      0.48,
+      -0.18,
+      -0.45
+    ],
+    [
+      0.22,
+      0.3,
+      -0.25
+    ],
+    [
+      0.62,
+      0.12,
+      0.15
+    ]
+  ],
+  "name": "streamlined_cambered_teardrop"
+}
+```
+
+Sampled action vector:
+['1.0000', '-0.0226', '0.8961', '0.6506', '-0.1678', '0.1484', '0.3436', '-0.2604', '-0.2346', '0.5424', '0.2412', '-0.4188', '0.8926', '-0.0698', '-0.7945', '0.4690', '-0.1564', '-0.4506', '0.2451', '0.3627', '-0.3207', '0.6205', '0.0934', '0.1734']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

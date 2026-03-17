@@ -1,0 +1,79 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Hybrid Strategy**: This design blends the high-chord, slender characteristics of Design 1 (`r0`, `r2` near 1.0) with the slightly more robust upper-surface "hump" seen in Design 2 (`r1` ~ 0.35) to improve lift characteristics. 
+- **Correcting Flaws**: The primary advancement is fixing the "waisted" lower surface of Design 1. By setting `r3` to 0.485 (well above the 0.40 floor), I aim to create a "Flat-Bottom" or slightly convex lower surface, which is traditionally more efficient for subsonic lift.
+- **Peak Shifting**: I will set `a1` to -0.45 to shift the upper peak forward to approximately 30% chord, which promotes a longer, gentler recovery ramp for the flow on the upper surface.
+- **TE Alignment**: I will maintain `r2` at 0.985 and `e2` at 1.0 to ensure a sharp trailing edge with maximum chord extension, as seen in the successful high-reward designs.
+- **Diversity**: This moves the population away from the "boomerang" morphology of Design 1 toward a more conventional high-performance slender airfoil with a proper lower-surface pressure face.
+
+## Per-Parameter Predictions
+- **r0 [0.9625]**: Predict this will maintain high chord length while reducing the "beaking" sharpness of the nose compared to Design 1.
+- **a1 [-0.4500]**: Predict this will shift the maximum thickness point forward, creating a more favorable pressure gradient over the rear 70% of the chord.
+- **r1 [0.3850]**: Predict this will increase the upper thickness compared to Design 1, preventing mid-body collapse and providing better lift.
+- **r2 [0.9850] and e2 [1.0]**: Predict this will maintain the sharp, high-aspect-ratio trailing edge necessary for low drag.
+- **r3 [0.4850]**: Predict this will cross the "Concavity Floor," turning the lower-surface "scoop" into a smooth, flat-to-convex surface.
+- **a3 [0.1500]**: Predict this will slightly tuck the lower-rear inward to meet the trailing edge cleanly without creating a "hooked" tail.
+
+- **Geometry of Design 1**:
+    - The airfoil is extremely slender with a very high chord length (long and thin).
+    - There is a noticeable "beaking" effect at the leading edge, where the nose is sharply pointed rather than rounded, likely due to extreme radial tension.
+    - The upper surface is nearly flat, while the lower surface exhibits a significant "waisted" or concave "scoop" near the mid-section.
+    - The trailing edge is sharp and well-defined, aligned horizontally with the flow.
+
+- **Flow Field of Design 1**:
+    - **Pressure (p)**: There is a strong stagnation point at the sharp nose. The concave "bite" on the lower surface creates a localized region of higher pressure that may contribute to drag rather than efficient lift.
+    - **Velocity (u, v)**: The flow appears mostly attached on the upper surface due to the thin profile, but the sharp leading edge likely triggers a small separation bubble or pressure spike at non-zero angles of attack.
+    - **Wake**: The wake is relatively thin, indicating low profile drag, but the lower surface geometry is suboptimal for pressure distribution.
+
+- **Parameter-Geometry Mapping**:
+    - `r0 = 1.0` (CP0 Radius) created the extreme chord length but also the "beaking" flaw.
+    - `r1 = 0.186` (CP1 Radius) resulted in an extremely thin upper profile, bordering on a "waisted" look when combined with low CP3 values.
+    - `r3 = 0.215` (CP3 Radius) is clearly below the "Concavity Floor" (~0.40), causing the visible lower-surface scoop/bite.
+    - `e2 = 1.0` (CP2 Edgy) successfully enforced the sharp trailing edge Kutta condition.
+
+- **Key Changes Needed**:
+    - Increase `r3` (Lower Surface Radius) to > 0.45 to eliminate the lower-surface concavity and create a flat/convex belly.
+    - Slightly reduce `r0` from 1.0 to ~0.96 to mitigate the "beaking" effect and round the leading edge for better stagnation.
+    - Increase `r1` (Upper Surface Radius) to ~0.38 to provide more volume for lift while maintaining a high-speed slender profile.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9625,
+      0.0125,
+      -0.98
+    ],
+    [
+      0.385,
+      -0.45,
+      -0.85
+    ],
+    [
+      0.985,
+      0.0,
+      1.0
+    ],
+    [
+      0.485,
+      0.15,
+      -0.92
+    ]
+  ],
+  "name": "hybrid_slender_flatbelly"
+}
+```
+
+Sampled action vector:
+['0.9497', '0.0359', '-1.0000', '0.4005', '-0.4150', '-0.8862', '1.0000', '-0.0182', '1.0000', '0.4948', '0.1898', '-0.9210']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

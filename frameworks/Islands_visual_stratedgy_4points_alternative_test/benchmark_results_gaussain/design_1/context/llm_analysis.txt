@@ -1,0 +1,5 @@
+Since no images or specific population database results were provided for the current iteration beyond the Reference Card heuristics, I am analyzing the "Design 1" archetypal failure described in the context. 
+- **Geometry Observation:** Design 1 was described as a "stubby/pebble" shape with a high CP1 radius and a short distance between CP0 (LE) and CP2 (TE). This creates a low chord-to-thickness ratio.
+- **Flow Field Observation:** The "steep recovery slope" caused by the forward-biased peak and blunt TE resulted in "massive flow separation," likely appearing as a large recirculating wake in velocity plots and a collapsed pressure recovery on the aft upper surface.
+- **Mapping:** The "pinched" underbelly (low lift, high drag) maps to the low CP3 radius (0.22). The blunt nose maps to high CP0 radius (>0.6). The lack of chord length maps to low CP2 radius.
+- **Key Changes:** 1) Drastically increase CP2 radius to stretch the chord. 2) Lower CP1 radius to reduce thickness. 3) Increase CP3 radius to flatten the lower surface.

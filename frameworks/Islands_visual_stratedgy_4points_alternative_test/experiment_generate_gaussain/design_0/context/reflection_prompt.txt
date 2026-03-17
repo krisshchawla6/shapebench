@@ -1,0 +1,97 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Strategy Focus (Hybrid Strategy)**: Since the current database consists only of identical circles, I am hybridizing the "stable circular footprint" (to maintain structural integrity) with a "theoretical high-performance airfoil" profile. I will keep the leading edge robust but radically thin the rest of the body.
+*   **Thinning Strategy**: I will set the radial parameters for the top (Point 2) and bottom (Point 6) to very low values (near 0.1) while keeping the leading (Point 4) and trailing (Point 0) edges near 1.0 to maximize chord length relative to thickness.
+*   **Trailing Edge Sharpness**: Point 0 will be assigned a high `edgy_param` (0.95) to force a Kutta condition, which is essential for reducing the wake size seen in the current simulation.
+*   **Camber Introduction**: By shifting the `angle_param` of the upper points forward and the lower points slightly backward/inward, I will create an asymmetric curvature (camber) to generate a pressure differential between the surfaces.
+*   **Evolutionary Jump**: Rather than incremental changes, I am moving from a 1:1 thickness-to-chord ratio to approximately 1:5, which should significantly boost the reward by reducing drag and potentially generating the first bit of positive lift.
+
+## Per-Parameter Predictions
+
+*   **param[0][0] (r0) to 0.9850**: I predict this will extend the trailing edge to the maximum possible chord length.
+*   **param[0][2] (e0) to 0.9500**: I predict this will create a sharp point at the trailing edge, significantly reducing the wake size observed in the circular design.
+*   **param[2][0] (r2) to 0.1840**: I predict this will "crush" the top of the circle, creating a thin upper surface.
+*   **param[6][0] (r6) to 0.0820**: I predict this will bring the bottom surface very close to the center, creating an overall thin, cambered profile when combined with the low r2.
+*   **param[4][0] (r4) to 0.9250**: I predict this will maintain a strong leading edge position for a long chord.
+*   **param[4][2] (e4) to -0.8500**: I predict this will ensure the leading edge remains very rounded and smooth to prevent early flow separation.
+*   **param[2][1] (a2) to 0.3200**: I predict this will shift the maximum thickness point forward on the upper surface, mimicking modern laminar flow airfoils.
+
+*   **Geometry**:
+    *   The shape is a perfect circle, representing a highly non-aerodynamic baseline.
+    *   The surface is perfectly smooth with no discontinuities or sharp features.
+    *   The design is perfectly symmetric across both the horizontal and vertical axes.
+    *   The "thickness" is equal to the "chord," making it extremely bluff and prone to high pressure drag.
+
+*   **Flow Field / Simulation Results**:
+    *   The pressure plot shows a clear stagnation point at the front (high pressure) and significant low-pressure zones on the upper and lower shoulders where flow accelerates.
+    *   The velocity field reveals a massive, symmetric wake extending far downstream, indicating total flow separation.
+    *   There is zero lift generated because the flow field is top-bottom symmetric.
+    *   The drag is clearly dominated by "form drag" rather than skin friction, caused by the lack of a tapered trailing edge.
+
+**Relentless Assessment**:
+*   The blunt rear of the design is the primary failure; it prevents flow recovery and forces a massive separation zone.
+*   The excessive thickness causes unnecessary flow acceleration and low-pressure regions that contribute to drag without providing lift.
+*   The mapping shows that setting all `radius_param` values to 1.0 creates this circle. To improve, we must vary these radii to create an elongated chord and a much thinner profile.
+*   Key changes needed: (1) Elongate the chord by keeping leading/trailing radii high while collapsing the "shoulder" radii, (2) Implement a sharp trailing edge using the `edgy_param`, (3) Introduce camber to break symmetry and generate lift.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9854,
+      0.0,
+      0.9521
+    ],
+    [
+      0.5241,
+      0.1522,
+      0.12
+    ],
+    [
+      0.1842,
+      0.3215,
+      -0.45
+    ],
+    [
+      0.6214,
+      0.1241,
+      -0.72
+    ],
+    [
+      0.9251,
+      0.0,
+      -0.8842
+    ],
+    [
+      0.4215,
+      -0.0842,
+      -0.68
+    ],
+    [
+      0.0821,
+      -0.2141,
+      -0.35
+    ],
+    [
+      0.3524,
+      -0.1524,
+      0.15
+    ]
+  ],
+  "name": "cambered_thin_hybrid_v1"
+}
+```
+
+Sampled action vector:
+['0.9800', '0.0914', '0.9723', '0.4639', '0.1281', '0.1213', '0.2178', '0.3138', '-0.4502', '0.6620', '0.1122', '-0.7819', '0.9085', '0.0218', '-0.9504', '0.3798', '-0.0612', '-0.7230', '-0.0365', '-0.1578', '-0.2874', '0.3548', '-0.1855', '0.1396']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

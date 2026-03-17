@@ -1,0 +1,13 @@
+*   **Exploitation Strategy:** I am exploiting the established polar coordinate logic (LE at $a=0$, TE at $a \approx \pm1$) but applying the "Goldilocks Radius" rule derived from the failure of Design 1. By collapsing the mid-body radii while keeping the poles extended, I will transform the "bean" into a "blade."
+*   **Camber Generation:** I will set CP1 and CP2 radii to $\approx 0.40$ and CP4, CP5 to $\approx 0.25$. This $0.15$ radial delta creates a curved mean camber line, which is essential for generating lift at low angles of attack.
+*   **Smoothing (The "Healer"):** I will set all mid-body and LE `edgy_param` values to $-1.0$. This ensures the transition from the thin mid-body to the extended LE and TE is organic and differentiable, preventing the "starfish" spikes seen in earlier iterations.
+*   **Thickness Control:** By keeping the maximum thickness (the delta between upper and lower mid-body points) small, I aim to minimize the pressure drag that neutralized Design 1.
+*   **Aft Loading:** I will position the angular parameters to ensure a gradual closure toward the Trailing Edge, encouraging the Kutta condition to settle at the sharp tip.
+
+## Per-Parameter Predictions
+
+*   **CP3 (LE) [1.0, 0.0, -1.0]:** I am setting this to these values to maximize chord length and ensure a perfectly smooth, parabolic nose.
+*   **CP1, CP2 (Upper Mid) [r $\approx$ 0.4]:** I am setting these to lower values than Design 1 to reduce thickness while maintaining a convex upper loft.
+*   **CP4, CP5 (Lower Mid) [r $\approx$ 0.25]:** I am setting these lower than the upper points to create a "scooped" lower surface, inducing positive camber.
+*   **CP0, CP7 (TE) [1.0, $\pm$1.0, 1.0]:** I am setting these to maximum radius and maximum edginess to create a sharp, elongated trailing edge for clean flow separation.
+*   **CP6 (Aft Transition) [r=0.45]:** I am setting this slightly higher than CP5 to bridge the gap between the thin lower body and the $r=1.0$ trailing edge smoothly.

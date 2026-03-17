@@ -1,0 +1,21 @@
+## Reference Card (Iteration 3)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n > 0$ to prevent non-physical origin-crossing [iter 1].
+*   **Radial Gradient Continuity:** Large deltas between adjacent $r$ values (e.g., $r_4$ vs $r_5$) create "kinks" or "steps." Smooth transitions are mandatory for boundary layer attachment [iter 2, 3].
+*   **Convexity Priority:** Subsonic airfoils must remain primarily convex. Aggressive thinning (low $r_6$) creates "concave scoops" that trigger early flow separation and high drag [iter 3].
+*   **Eccentricity Polarity (Inverted):** $e \rightarrow -1$ creates sharp, high-curvature vertices ("beaks"). $e \rightarrow +1$ creates broad, low-curvature surfaces ("bulbs") [iter 3].
+*   **Chord Alignment:** $r_4$ defines the Leading Edge (LE); $r_0$ defines the Trailing Edge (TE). Swapping their sharpness/bluntness profiles results in "flying backwards" [iter 3].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | Trailing Edge (TE) extension. | Sets chord length; must be balanced with $r_1, r_7$ to avoid "bulbous tails" [iter 1, 3]. |
+| **$e_0$** | TE Sharpness. | **Negative** values ($<0$) sharpen the TE for Kutta condition; **Positive** values blunt it, causing pressure drag [iter 3]. |
+| **$r_2$** | Upper surface (suction) height. | Controls thickness; must be higher than $r_{1,3}$ to maintain a convex "roof" [iter 2, 3]. |
+| **$a_2$** | Upper surface angular bias. | Shifts max thickness location; used to control pressure gradients [iter 1, 2]. |
+| **$r_4$** | Leading Edge (LE) extension. | Sets forward chord boundary; requires high $r_3, r_5$ support to prevent "pinched noses" [iter 1, 3]. |
+| **$e_4$** | LE Bluntness. | **Positive** values ($>0.5$) create rounded, stall-resistant noses; **Negative** values create sharp "beaks" prone to stalling [iter 3]. |
+| **$r_6$** | Lower surface (pressure) height. | Camber control; values too low relative to $r_4, r_0$ create concave "scoops" that destroy lift-to-drag [iter 3]. |
+| **$r_{1,3,5,7}$** | Transition radii. | Critical bridge parameters; must be intermediate between $r_{even}$ neighbors to ensure monotonicity and prevent "kinks" [iter 2, 3]. |

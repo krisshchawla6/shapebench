@@ -1,0 +1,11 @@
+- **Exploitation Focus**: I am exploiting the negative lesson learned from Design 1: "Angular Clustering = Failure." I will move from a "blob" to a "foil" by maximizing the angular spread of control points.
+- **Chord Establishment**: I will designate Control Point 4 as the Leading Edge (LE) and Control Point 0 as the Trailing Edge (TE). By setting their `radius_param` high and their `angle_param` at opposite extremes, I will pull the geometry into a high-aspect-ratio shape.
+- **Camber and Thickness**: I will use asymmetric `radius_param` values for the upper surface (points 1-3) versus the lower surface (points 5-7). By making the lower radii smaller, I will create a cambered profile to generate lift.
+- **Flow Control (TE)**: To solve the 0.0 reward issue, the trailing edge (Point 0) must be sharp. I will use a high `edgy_param` value here to force a geometric termination point for the flow.
+- **Strategic Smoothing**: While the TE needs to be sharp, the LE needs to be rounded to handle varying angles of attack. I will keep Point 4's `edgy_param` moderately negative.
+
+## Per-Parameter Predictions
+- **Point 0 [0.9850, 0.9200, 0.8500]**: High radius and high angle to stretch the trailing edge as far back as possible; high edgy value to create a sharp point for flow reattachment.
+- **Point 4 [0.9200, -0.9500, -0.4500]**: High radius and extreme negative angle to stretch the leading edge forward; moderately negative edgy value to maintain a smooth, rounded nose.
+- **Point 2 [0.4500, 0.2500, -0.8500]**: Moderate radius on the upper surface to create the "hump" of the airfoil; very negative edgy to ensure a smooth transition over the suction side.
+- **Point 6 [0.2200, -0.2500, -0.9000]**: Low radius on the bottom surface to pull the lower belly inward, creating the thickness gradient and camber necessary for lift.

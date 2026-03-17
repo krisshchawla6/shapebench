@@ -1,0 +1,20 @@
+In the provided image of Design 1, the following observations can be made:
+
+**Geometry Observations:**
+*   The shape is a "bluff body" resembling a thick bean or pebble rather than a streamlined wing.
+*   The thickness-to-chord ratio is extremely high (estimated at 60-70%), which is far outside the efficient subsonic range.
+*   The Trailing Edge (TE) features a sharp "stinger" due to the high `edgy_param`, but it is attached to a massive, rounded base, preventing efficient flow closure.
+*   The Leading Edge (LE) is smooth and rounded, but its transition into the mid-body is too abrupt because of the high mid-body radii.
+
+**Flow Field / Simulation Observations:**
+*   **Pressure Field:** There is a massive high-pressure stagnation zone at the nose. Because the body is so thick, the pressure gradient becomes adverse very early on the upper and lower surfaces.
+*   **Velocity Field:** The velocity plot shows massive flow separation starting near the mid-chord. A large, turbulent wake is visible behind the airfoil, indicating high pressure drag (form drag).
+*   **Lift/Drag:** The symmetry and thickness suggest the lift-to-drag ratio is likely near zero or negative, explaining the 0.0000 reward. The flow is completely stalled.
+
+**Parameter Mapping & Improvements:**
+*   Design 1's failure is primarily caused by `radius_params` for CP1, CP2, CP4, CP5, and CP6 being in the "Bloat Zone" ($r \in [0.58, 0.83]$).
+*   The `edgy_param` values are mostly correct (smooth mid-body, sharp TE), but they cannot compensate for the poor radial distribution.
+*   **Key Changes Needed:** 
+    1. Dramatically reduce mid-body radii ($r$) to the range of $0.20-0.45$ to achieve a fineness ratio of 10-15%.
+    2. Maintain the $r \approx 1.0$ at CP3 (LE) and CP0/7 (TE) to maximize chord length.
+    3. Introduce camber by setting the upper radii (CP1, CP2) significantly higher than the lower radii (CP4, CP5).

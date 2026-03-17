@@ -1,0 +1,47 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Driven by `angle_param` ($a$) distribution. Max chord length requires LE and TE to be placed at opposite poles (e.g., $a_{TE} \approx \pm 1.0$ and $a_{LE} \approx 0.0$). Using $a=-1.0$ and $a=1.0$ for LE/TE fails because they map to the same angular position ($-\pi \equiv \pi$), resulting in a collapsed "shard" [iter 1, 2, 3].
+*   **Structural Priority**: `angle_param` (chord/placement) > `radius_param` (thickness/scale) > `edgy_param` (flow regulation/smoothing) [iter 1, 2].
+*   **The "Shard" vs. "Slug"**: While intermediate radii must be low ($r < 0.4$) to prevent a thick "slug," they must be paired with a wide angular spread. If angles cluster, low radii suck the geometry into the origin, creating a tiny, non-functional "shard" [iter 2, 3].
+*   **Kutta Condition Necessity**: A geometric singularity (high `edgy_param`) at the Trailing Edge is mandatory to define flow reattachment and move beyond zero reward [iter 2, 3].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values (~0.9+) are required at the LE and TE. These must be at opposite angular positions to span the coordinate space [iter 1, 2, 3].
+*   **Thickness Control ($t/c$)**: Intermediate radii (points between LE and TE) must be significantly reduced (e.g., $0.15–0.30$) to thin the airfoil. High intermediate radii result in "slug" profiles; excessively low radii without chord stretch cause geometric collapse [iter 2, 3].
+*   **Asymmetric Camber**: Varying radii between upper (points 1-3) and lower (points 5-7) surfaces creates thickness gradients, though this is secondary to establishing a valid chord [iter 2, 3].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: Values $a=-1.0$ and $a=1.0$ represent the same point in space. To maximize aspect ratio, the LE must be placed at $a \approx 0.0$ if the TE is at $a \approx \pm 1.0$ [iter 3].
+*   **Chord Establishment**: The most critical parameter. Restricting values to a narrow range or clustering LE/TE at the same pole creates "river stones" or "shards" with near-zero aerodynamic reward [iter 1, 3].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE); non-monotonic jumps create "kinks" or "hooks" that disrupt flow [iter 2].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **Flow Regulation (TE)**: High positive values ($e \approx 0.85$ to $1.0$) at the Trailing Edge create the "stinger" or "needle" necessary for flow separation and Kutta condition compliance [iter 2, 3].
+*   **Nose Rounding (LE)**: Extreme negative values ($e \approx -0.85$ to $-0.98$) at the Leading Edge ensure smooth flow acceleration and prevent "lumpy" pressure distributions [iter 1, 2, 3].
+*   **Geometry Healing**: Extreme negative values force the smoothest possible transition between points, effectively "healing" polygons into continuous curves [iter 1].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.948589, -1.0, 0.981699, 0.306972, -0.646275, -0.918689, 0.199263, 0.116627, -0.977078, 0.910752, 1.0, -0.986986, 0.292868, 0.600931, -0.901643, 0.141747, -0.014209, -0.916713, 0.247235, -0.603667, -0.820043, 1.0, -1.0, 1.0]
+  - Reward: 0.0000
+  - Rank: N/A
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

@@ -1,0 +1,19 @@
+*   **Visual Intuition Strategy:** I am designing a shape that mimics high-performance subsonic airfoils (like the NACA 4-digit series). This requires a well-defined, rounded nose for stagnation point stability and a razor-sharp trailing edge to satisfy the Kutta condition and minimize wake turbulence.
+*   **Leading Edge (LE) Definition:** I will use a moderate radius (0.48) for CP0 with an extremely low "edgy" value (-0.96). Visually, this creates a smooth, parabolic entry that prevents early flow separation at varying angles of attack.
+*   **Upper Surface (Thickness/Lift):** By setting CP1's angle to a negative value (-0.28), I shift the maximum thickness forward (approx. 35% of the chord). This reduces the pressure gradient on the rear half of the airfoil, helping to maintain a laminar boundary layer.
+*   **Trailing Edge (TE) Sharpness:** To solve the "Base Drag Trap," I am setting the TE (CP2) radius to a very low value (0.10). Combined with a maximum "edgy" value (0.99), this creates a geometric singularity (a point), forcing the flow to leave the airfoil cleanly without a blunt-face recirculation zone.
+*   **Lower Surface Camber:** CP3 is set with a lower radius than CP1 to ensure the airfoil is not too thick, achieving a better aerodynamic aspect ratio as suggested by the "Thinning Strategy" in the reference card.
+
+## Per-Parameter Predictions
+*   **param[0][0] (LE Radius):** I am setting this to 0.4852 to create a robust, rounded nose that allows for a stable stagnation point.
+*   **param[0][1] (LE Angle):** I am setting this to 0.0000 to keep the leading edge centered on the horizontal axis.
+*   **param[0][2] (LE Edgy):** I am setting this to -0.9654 to ensure C-infinity continuity and a perfectly smooth nose curve.
+*   **param[1][0] (Upper Radius):** I am setting this to 0.3341 to create a moderate peak height for lift without making the profile "stubby."
+*   **param[1][1] (Upper Angle):** I am setting this to -0.2851 to shift the maximum thickness forward, reducing the severity of the pressure recovery slope.
+*   **param[1][2] (Upper Edgy):** I am setting this to -0.8122 to maintain a smooth, non-jagged upper surface transition.
+*   **param[2][0] (TE Radius):** I am setting this to 0.1054 to minimize the thickness of the trailing edge and avoid the "bloat trap."
+*   **param[2][1] (TE Angle):** I am setting this to 0.0000 to keep the chord line horizontal.
+*   **param[2][2] (TE Edgy):** I am setting this to 0.9945 to create a sharp, knife-like point at the trailing edge.
+*   **param[3][0] (Lower Radius):** I am setting this to 0.1982 to produce a thinner lower profile than the upper, creating positive camber.
+*   **param[3][1] (Lower Angle):** I am setting this to 0.1421 to slightly tuck the lower surface forward and up, aiding in a clean closure at the TE.
+*   **param[3][2] (Lower Edgy):** I am setting this to -0.8841 to ensure the lower surface remains smooth and free of sharp discontinuities.

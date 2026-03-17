@@ -1,0 +1,7 @@
+- **Geometry Inference**: Based on the parameters of Design 1 (the current population representative), the geometry appears to have disjointed curvature. Specifically, CP4 has an `edgy_param` of 1.0 (maximum sharpness) while adjacent points are smoother. This likely creates a geometric "kink" or discontinuity on the upper surface. Additionally, CP5 drops to a `radius_param` of -1.0 immediately after, suggesting a sudden collapse in thickness or a pinched mid-section.
+- **Flow Field Inference**: A sharp kink at CP4 followed by a pinched section (CP5) would almost certainly trigger premature flow separation (stall) and a turbulent wake, as seen in the "simulated" analysis of such features. The pressure recovery would be poor, leading to high drag penalties despite potentially high lift from the camber.
+- **Flaws & Parameters**: The primary visible flaw is the discontinuity at the leading/upper edge transition. This maps to `CP4: [..., ..., 1.0]` (sharpness) and `CP5: [-1.0, ..., ...]` (radius collapse).
+- **Key Changes Needed**:
+    1.  Eliminate the sharp corner at CP4 by reducing `edgy_param` towards -1.0 (smooth).
+    2.  Recover the volume in the mid-section by increasing CP5's radius from -1.0 to a positive value.
+    3.  Harmonize the angular distribution to ensure a smooth transition from the leading edge to the trailing edge.

@@ -1,0 +1,21 @@
+This analysis evaluates the **boundary_explorer_v1** design, which attempted to establish a high-performance baseline by testing the limits of the parameter space.
+
+### Comparison: Prediction vs. Outcome
+
+| Parameter | Value | Prediction | Outcome |
+| :--- | :--- | :--- | :--- |
+| **CP0 radius_param** | 0.9369 | Create a large, robust nose and provide primary chord length. | **Failed.** While the nose is rounded, the overall chord length is extremely short. The design fell into the "pebble" morphology despite the high radius. |
+| **CP0 edgy_param** | -1.0000 | Eliminate nose discontinuities for a smooth stagnation point. | **Confirmed.** The leading edge is perfectly smooth and circular. |
+| **CP1 radius_param** | 0.6353 | Create a distinct upper "hump" for pressure differential. | **Confirmed.** There is a clear upper peak, but its proximity to the LE and TE makes it look more like a wedge than a wing. |
+| **CP1 angle_param** | -0.3667 | Shift peak forward to 30-35% chord. | **Partially Confirmed.** The peak is forward-leaning, but the lack of total chord length makes the gradient too steep for effective laminar flow. |
+| **CP2 radius_param** | 0.1318 | Keep the trailing edge compact to prevent blunt base drag. | **Confirmed.** The trailing edge is very small and tucked in. |
+| **CP2 edgy_param** | 1.0000 | Enforce a sharp geometric singularity for the Kutta condition. | **Confirmed.** There is a sharp, distinct point at the rear, successfully testing the maximum "edgy" boundary. |
+| **CP3 radius_param** | 0.2776 | "Pinch" the lower surface to create high-lift camber. | **Failed.** The lower surface is too short to develop a meaningful camber line; the shape remains essentially a thick, asymmetric triangle. |
+| **CP3 angle_param** | 0.1608 | Tuck the lower rear inward to sharpen the taper. | **Confirmed.** The lower surface curves upward toward the trailing edge point. |
+
+### Key Learnings
+
+1.  **Radius is not Chord:** The most significant learning is that maximizing the Leading Edge (CP0) radius does not guarantee a long chord or a "large" airfoil. The resulting geometry is a low-aspect-ratio "stub." This suggests that chord length is a product of the *relative displacement* of control points rather than the magnitude of the radius parameters alone.
+2.  **The "Stub" Penalty:** By setting CP1 and CP3 to relatively high radii while keeping the CP2 (Trailing Edge) radius very low, the geometry essentially "collapsed" into a triangular shape. The high thickness-to-chord ratio (low fineness ratio) seen here would likely result in massive pressure drag and early flow separation.
+3.  **Boundary Success:** The experiment successfully proved that the generator can handle extreme `edgy_param` values. The transition from the perfectly smooth `edgy: -1.0` (CP0) to the perfectly sharp `edgy: 1.0` (CP2) was handled without mesh artifacts or geometry errors.
+4.  **Angle Sensitivity:** To escape the "pebble" morphology, future iterations must likely focus on the `angle_param` values. The current angles were too conservative, failing to "stretch" the control points far enough apart to create a slender, aerodynamic profile. The "front-loading" strategy (CP1 angle at -0.3667) worked geometrically but was undermined by the lack of longitudinal extension.

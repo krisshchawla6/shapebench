@@ -1,0 +1,28 @@
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 8)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0, r \approx 1.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0, r \approx 1.0$ [iter 3-8].
+*   **Fineness Ratio (Thickness)**: Thickness is the delta between polar $r$ and mid-body $r$. Pushing mid-body $r$ too high ($>0.45$ relative to centroid) creates "bloat" [iter 5, 7], but too low creates "collapse" [iter 8]. 
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound (Radial Collapse)**: $r < 0.4$ for mid-body points (CP1, 2, 4, 5, 6) pulls the surface inward, creating a "pinched wedge" or "starfish" with concave surfaces [iter 4, 6, 8]. 
+    *   **Upper Bound (The Bloat)**: $r > 0.8$ for all points creates a "bluff body" or "rounded rectangle" [iter 5, 7].
+    *   **Optimal**: LE/TE at $r \approx 1.0$; mid-body points must maintain $r \in [0.6, 0.8]$ to stretch the profile into a convex, high-aspect-ratio wing [iter 8].
+*   **Kutta Condition**: A geometric "stinger" ($e \approx 1.0$) at the Trailing Edge (CP0/7) is mandatory for flow separation [iter 2-8].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values ($r \approx 1.0$) are required at the LE and TE poles to establish primary chord length [iter 1-8].
+*   **Radial Collapse vs. Bloat**: If mid-body radii (CP1, 2, 4, 5, 6) are significantly lower than the poles ($r < 0.3$), the airfoil "pinches" into a non-aerodynamic arrowhead [iter 8].
+*   **Convexity Control**: To maintain a traditional subsonic convex shape, mid-body $r$ must be high enough to "push" the skin out ($r \approx 0.65+$) while remaining lower than the LE/TE to maintain thinness [iter 8].
+*   **Camber & Lift**: Asymmetric radii between upper (CP4-6) and lower (CP1-2) surfaces create camber. Higher upper radii relative to lower radii create lift-generating loft [iter 4-8].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3-8].
+*   **LE Support (Nose Shape)**: Neighboring angles (CP2, 4) must not cluster too tightly to the LE (e.g., $a \approx \pm 0.15$ with low $r$ creates a "beak"). Wider angular spacing is needed for a blunt, efficient parabolic entry [iter 5, 8].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create self-intersecting loops [iter 2, 5, 6, 8].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 1.0$) at the Trailing Edge create the "stinger" required for the Kutta condition [iter 2-8].
+*   **Surface Healing**: Extreme negative values ($e \approx -1.0$) at mid-body and LE are the most effective way to "heal" a polygon into a smooth, organic subsonic silhouette [iter 1, 4-8].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE ensures smooth flow acceleration and prevents "faceting," regardless of the $r$ value [iter 5-8].

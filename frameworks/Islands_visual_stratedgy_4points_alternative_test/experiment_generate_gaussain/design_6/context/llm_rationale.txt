@@ -1,0 +1,15 @@
+- **Hybrid Strategy Application**: I am hybridizing the geometric stability of the circle (uniformity and lack of "lumps") with the proportions of a low-speed NACA 4-series airfoil. I will keep the design relatively "thick" compared to high-performance wings to ensure the solver remains stable, while introducing clear functional features (LE, TE, Camber).
+- **The Pinch for TE**: Following Iteration 6 rules, I will set $r_0$ to a high value (0.85) and use $r_1, r_7$ as bridge points to "stretch" the spline into a sharp point, using a negative $e_0$ to enforce a Kutta condition cusp.
+- **Camber for Lift**: By setting $r_2 = 0.32$ and $r_6 = 0.28$, I create a subtle vertical asymmetry ($r_2 > r_6$). This should shift the stagnation point and generate a pressure differential between the surfaces.
+- **Max Thickness Shift**: Using the `angle_param` ($a_2, a_6$), I will shift the max thickness points slightly forward toward the leading edge. This mimics successful natural and engineered airfoils where thickness peaks around 30% chord.
+- **Laminar Delta Rule**: I have carefully tuned the radii to ensure that the difference between any two adjacent control points ($\Delta r$) does not exceed 0.35, which should prevent the "Radial Collapse" and "Peanut" penalties that ruined Design 5.
+- **Optimization Goal**: This design moves the search from "bluff body" (circle) to "streamlined body" (teardrop). Even a modest improvement in drag reduction and lift generation will significantly advance the population reward beyond -0.0036.
+
+## Per-Parameter Predictions
+
+- **param[0][0] (r0) to 0.8500**: I predict this will CAUSE a significant extension of the trailing edge, increasing the chord length relative to the thickness.
+- **param[0][2] (e0) to -0.8500**: I predict this will CAUSE a sharp, pinched trailing edge (Kutta cusp), encouraging flow to leave the surface tangentially and reducing pressure drag.
+- **param[4][0] (r4) to 0.4800**: I predict this will CAUSE a defined leading edge that is significantly shorter than the trailing edge, moving the aerodynamic center forward.
+- **param[4][2] (e4) to 0.3500**: I predict this will CAUSE a blunter, rounded nose profile, which improves stall characteristics and smooths the transition of the stagnation point.
+- **param[2][0] (r2) to 0.3200 and param[6][0] (r6) to 0.2800**: I predict this asymmetry will CAUSE a cambered profile, generating positive lift.
+- **param[2][1] (a2) to 0.1800 and param[6][1] (a6) to -0.1800**: I predict this will CAUSE the upper and lower "shoulders" of the airfoil to shift forward, placing the maximum thickness closer to the leading edge.

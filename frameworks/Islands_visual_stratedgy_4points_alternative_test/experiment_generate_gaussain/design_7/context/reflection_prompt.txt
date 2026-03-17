@@ -1,0 +1,100 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Exploitation Strategy**: This design takes the "Circle" baseline (the most stable design in the population) and applies fundamental streamlining principles to transform it into a teardrop airfoil.
+*   **The Scale Rule Implementation**: To avoid the "Nugget" penalty (high pressure drag), I am maintaining $r_0 = 1.0$ and $r_4 = 1.0$, ensuring the total chord is 2.0.
+*   **Thickness Optimization**: Following the "Chord-to-Thickness" rule, I am setting $r_2$ and $r_6$ to target a total thickness of ~17% of the chord ($0.34 / 2.0$), which significantly reduces the profile drag seen in the cylinder.
+*   **Trailing Edge Sharpness**: By setting $e_0 = -0.925$ and using $r_1, r_7$ as "pinch" points ($r \approx 0.58$), I am forcing the spline to stretch into a sharp point, which is essential for pressure recovery and lift generation.
+*   **Leading Edge Rounding**: $e_4$ is set to a positive value ($0.485$) to blunt the nose, preventing the "sharp nose" failures seen in Design 4 and ensuring smooth flow attachment.
+*   **Surface Bias**: Subtle $a_n$ offsets are used to shift the maximum thickness slightly forward (~35% chord), approximating a NACA-style laminar distribution.
+
+## Per-Parameter Predictions
+
+*   **param[0][0] (r0) to 1.0000**: I predict this will maintain the maximum possible trailing edge extension to maximize chord length.
+*   **param[0][2] (e0) to -0.9250**: I predict this will create a sharp Kutta cusp at the trailing edge, reducing wake turbulence.
+*   **param[4][0] (r4) to 1.0000**: I predict this will maintain the maximum possible leading edge extension.
+*   **param[4][2] (e4) to 0.4850**: I predict this will round the nose to create a stable stagnation point.
+*   **param[2][0] (r2) to 0.1915**: I predict this will thin the upper surface to 10% of chord, reducing the frontal area and pressure drag.
+*   **param[6][0] (r6) to 0.1423**: I predict this will thin the lower surface and create slight camber relative to r2.
+*   **param[2][1] (a2) to 0.1250**: I predict this will shift the upper max-thickness point forward toward the leading edge.
+*   **param[1][0] & param[7][0] to 0.5821**: I predict these "pinch" radii will create the necessary inward taper for a streamlined aft section.
+
+*   **Geometry Observation**: 
+    *   The observed shape in the images is a perfect circle (a 2D cylinder). 
+    *   The eight control points (black dots) are distributed equidistantly at a radius of 1.0 from the center, creating a completely symmetric, smooth "nugget" or bluff body. 
+    *   There is no streamlining, no distinct leading or trailing edge, and no chord-wise elongation beyond the base diameter.
+
+*   **Flow Field Observation**:
+    *   **Pressure**: There is a clear stagnation point at the leading face (high pressure, yellow) and high-velocity acceleration zones at the top and bottom apexes (low pressure, dark purple).
+    *   **Velocity/Wake**: A massive, steady wake is visible behind the cylinder. The flow separates almost immediately after the 90-degree and 270-degree points, leading to a large region of recirculating or low-energy flow.
+    *   **Drag**: The lack of pressure recovery at the rear (due to the blunt trailing side) suggests high pressure drag. The symmetry indicates zero lift.
+
+*   **Design 1 Mapping**:
+    *   Action vector `[1.0, 0.0, 0.0, ...]` maps to a circle of radius 1.0. The reward of -0.0036 is the baseline for a non-aerodynamic bluff body.
+    *   **Key Problems**: 1) Total absence of a tapered trailing edge causes massive separation. 2) The thickness-to-chord ratio is 100%, whereas aerodynamic wings typically range from 8% to 18%. 3) The lack of a sharp trailing edge prevents the Kutta condition from being satisfied.
+
+*   **Key Improvements Needed**:
+    *   Introduce **chord-wise extension** by maintaining max $r_0$ and $r_4$ while significantly reducing $r_2$ and $r_6$.
+    *   Apply the **Pinch Technique** to sharpen the aft section ($r_1, r_7 < r_0$) and set $e_0$ to a negative value for a Kutta cusp.
+    *   Round the leading edge using $e_4$ to improve stagnation behavior.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      -0.925
+    ],
+    [
+      0.5821,
+      0.045,
+      0.0
+    ],
+    [
+      0.1915,
+      0.125,
+      0.0
+    ],
+    [
+      0.6542,
+      0.082,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.485
+    ],
+    [
+      0.6542,
+      -0.082,
+      0.0
+    ],
+    [
+      0.1423,
+      -0.125,
+      0.0
+    ],
+    [
+      0.5821,
+      -0.045,
+      0.0
+    ]
+  ],
+  "name": "Streamlined_Circle_Refinement_v1"
+}
+```
+
+Sampled action vector:
+['0.9325', '0.0323', '-0.8891', '0.6108', '-0.0188', '-0.0195', '0.2559', '0.1829', '0.0049', '0.7186', '0.0709', '-0.0714', '0.9946', '-0.0384', '0.5006', '0.6721', '-0.0813', '0.0756', '0.1212', '-0.0535', '0.0350', '0.5209', '-0.0698', '-0.0131']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

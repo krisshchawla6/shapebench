@@ -1,0 +1,29 @@
+### Parameter Analysis: Prediction vs. Outcome
+
+| Parameter Group | Prediction | Outcome |
+| :--- | :--- | :--- |
+| **CP0 & CP7 (TE Poles)** | $r \approx 1.0, e = 1.0$: To create a clean, singular Kutta-condition trailing edge "stinger." | **Partial Success / Failure**: While a sharp point exists at the bottom-right, the overall shape is so bloated that the "trailing edge" looks like a small thorn on a large rock rather than a streamlined termination. |
+| **CP3 (LE Pole)** | $r = 0.95, e = -1.0$: To ensure a long chord with a rounded, parabolic nose. | **Failure**: The nose is nearly flat. Because the surrounding points (CP2, CP4) also have very high radii, the LE pole lost its prominence, resulting in a blunt, vertical-ish front face. |
+| **CP2 & CP4 (LE Shoulders)** | $a = \pm 0.08$: Tight clustering to provide volume and prevent a "beaked" nose. | **Failure**: The clustering was *too* tight and the radii *too* high. Instead of forming a rounded shoulder, they formed a flat wall. The "nose" is effectively a vertical line. |
+| **CP5 & CP6 (Upper Surface)** | $r = 0.82, 0.75$: High radii to create a thick-wing loft for high-speed flow. | **Failure**: These values, combined with the others, created a "block" shape. There is no "lofting" or curvature toward the TE; it remains thick until the very last moment. |
+| **CP1 & CP2 (Lower Surface)** | $r \approx 0.5$: Mid-range radii to create a "flat-bottomed" profile. | **Success (Technically)**: The bottom is indeed flatter than the top, but the "mid-range" of 0.5 is still far too thick for an airfoil when the chord length is constrained. |
+| **Global Smoothing** | $e = -1.0$: To "heal" the surface into a continuous, non-blocky curve. | **Inverted Outcome**: The smoothing did prevent sharp corners, but it turned what would have been a rectangle into a "rounded blob." It could not overcome the extreme bulk of the control point placement. |
+
+---
+
+### Key Learnings
+
+**1. The "Volume Trap": Over-correction leads to Bloat**
+In an attempt to avoid the "pinched" mid-body of previous designs, the minimum radius was set too high ($>0.45$). For a shape to look like an airfoil, the "sides" (mid-body points) must have significantly lower radii than the "ends" (LE and TE). By keeping all radii high, the design became a square rather than a wing.
+
+**2. Relative Radius is King**
+An airfoil's performance comes from its **fineness ratio** (length vs. thickness). By pushing all $r$ values toward the outer boundary, the "thickness" became nearly 80% of the "length." High-performance airfoils typically have a thickness-to-chord ratio of 6% to 15%. This design is closer to 80%.
+
+**3. LE Clustering requires Radius Gradient**
+Clustering points at $a = \pm 0.08$ only creates a "nose" if those points have a lower radius than the LE pole (CP3). Because CP2 and CP4 had radii nearly as large as CP3, the "nose" flattened out into a blunt face, which would create massive drag (a "bluff body" effect).
+
+**4. The "Stinger" requires Taper**
+A sharp Trailing Edge ($e=1.0$) cannot create a Kutta condition if the preceding points (CP1 and CP6) do not "ramp down" toward it. The transition from $r=0.72$ (CP6) to the TE is too abrupt, creating a shape that looks more like a speech bubble than a wing.
+
+**5. Strategy for Next Iteration**
+To achieve the "High-Camber" goal without the "Blob" outcome, the mid-body radii (CP1, CP2, CP5, CP6) must be aggressively reduced (likely to the 0.1–0.3 range) while keeping the LE/TE radii high to maintain chord length. This will "stretch" the blob into a thin, functional foil.

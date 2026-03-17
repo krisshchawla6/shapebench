@@ -1,0 +1,7 @@
+*   **Strategy Focus: "Volumetric Smoothing"**: Instead of mimicking the thin, shell-like nature of Design 1, I will generate a "High-Volume Laminar" profile. The goal is to maximize the Lift-to-Drag ratio by smoothing the curvature continuity (G2 continuity approximation) which the previous jagged parameters failed to do.
+*   **Database Insight**: Design 1 achieved a positive reward despite its flaws, suggesting that the general camber line (high upper, low lower) is correct. However, the *magnitude* of the lower surface constriction (`-1.0`) is an optimization artifact (island of local optima) that likely penalizes drag.
+*   **Geometric Heuristic**: I will implement a "tear-drop" distribution logic.
+    *   **CP0 (LE)**: Moderate radius, neutral angle, maximum smoothness.
+    *   **CP1-CP3 (Upper)**: High radius decaying smoothly towards TE to guide flow acceleration.
+    *   **CP5-CP7 (Lower)**: Moderate negative radius (approx -0.4) to create a semi-flat but volumetric bottom, avoiding the "pinch" of -1.0.
+*   **Exploration**: I am explicitly moving away from the boundary value `r=-1.0` on the lower surface to explore the "thick airfoil" subspace, which usually offers better stall characteristics and structural feasibility.

@@ -1,0 +1,80 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** Radius functions as polar distance from centroid. Maximize LE (CP0) and TE (CP2) while minimizing Upper (CP1) and Lower (CP3) to maximize chord and fineness [iter 7, 8].
+*   **The Volume Budget (Chord Collapse):** High radii on CP1/CP3 (>0.45) "steal" length from the chord. High mid-body radii force "Pebble" morphology [iter 21].
+*   **The Waisted Trap:** Side radii < 0.40 under high chord tension creates "boomerang" profiles. CP1/CP3 must be $\ge$ 0.40 to maintain convexity [iter 11, 13, 17].
+*   **The Hook/Fang Boundary:** High lower radius ($r_3 \ge 0.50$) combined with positive lower angle ($a_3 \ge 0.30$) triggers self-intersecting "hooks" or "fangs," destroying the manifold [iter 22].
+*   **The Closure Imbalance:** Aggressively reducing $r_1$ (upper) while maintaining high $r_3$ (lower) shifts the center of area downward, preventing TE closure and creating blunt, high-drag vertical faces [iter 22].
+*   **The Beaking Threshold:** CP0 Radius > 0.90 creates a sharp "wedge" nose. Rounded subsonic stagnation requires Radius < 0.85 [iter 13, 17, 21].
+*   **The Kutta Singularity:** TE Edgy [2][2] = 1.0 is mandatory. Orientation [2][1] must be ~0.0 to avoid "hooked" tail drag [iter 2, 11, 21, 22].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Chord driver. 0.80-0.85 for rounding. Values ~0.82 are stable but appear truncated if the spline fails downstream [iter 13, 21, 22].
+*   **Angle [0][1]:** Controls vertical incidence/centering [iter 4].
+*   **Edgy [0][2]:** -1.0 for C-infinity continuity [iter 2].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Thickness control. 0.35-0.40 is the "slender limit." Must be balanced against $r_3$ to ensure trailing edge convergence [iter 8, 21, 22].
+*   **Angle [1][1]:** Negative values (~ -0.4) shift peak forward to ~30% chord [iter 1, 17, 21].
+*   **Edgy [1][2]:** Low values ensure smooth apex curvature [iter 4, 22].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Rearward extension. 1.0 maximizes aspect ratio. This is neutralized if CP3 geometry forces a blunt vertical face [iter 7, 11, 22].
+*   **Angle [2][1]:** Horizontal alignment; keep near 0.0 [iter 4, 11, 22].
+*   **Edgy [2][2]:** 1.0 enforces Kutta condition; critical for flow closure [iter 2, 21, 22].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Stability Anchor. ~0.45 is the "Concavity Floor." Exceeding 0.50 with positive angles causes catastrophic "hook" deformities [iter 17, 21, 22]. For slender airfoils, $r_3$ must stay $< 0.40$ if $a_3$ is positive [iter 22].
+*   **Angle [3][1]:** Tuck control. $a_3 \approx 0.2$ is smooth; $a_3 \ge 0.3$ risks spline looping and "fang" formation [iter 8, 17, 22].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain lower surface continuity [iter 4, 21].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.949743, 0.035924, -1.0, 0.400522, -0.41496, -0.886166, 1.0, -0.018247, 0.999991, 0.494804, 0.189797, -0.920955]
+  - Reward: 2.9294
+  - Rank: 1
+
+Design 2:
+  - Action: [0.816017, -0.011503, -0.933498, 0.450279, -0.482354, -0.810366, 1.0, -0.026067, 0.99953, 0.516875, 0.141953, -0.932418]
+  - Reward: 2.3536
+  - Rank: 3
+
+Design 3:
+  - Action: [0.93645, 0.065921, -0.981101, 0.497529, -0.461771, -0.904503, 1.0, -0.026386, 0.965074, 0.518689, 0.147568, -0.855963]
+  - Reward: 2.1122
+  - Rank: 5
+
+Design 4:
+  - Action: [1.0, 0.01433, -0.948667, 0.18655, -0.513524, -0.844058, 1.0, 0.010529, 1.0, 0.215968, 0.491189, -0.867744]
+  - Reward: 1.1814
+  - Rank: 8
+
+Design 5:
+  - Action: [0.258685, 0.005655, -0.978195, 0.417332, -0.200579, -0.327383, 0.850204, 0.020501, 1.0, 0.38446, 0.080813, -0.539991]
+  - Reward: -5.0000
+  - Rank: 18
+
+Design 6:
+  - Action: [0.946319, 0.039871, -1.0, 0.353806, 0.528146, -0.760201, 0.9415, -0.015359, 0.968784, 0.36199, -0.469306, -0.928418]
+  - Reward: 1.1107
+  - Rank: 10
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

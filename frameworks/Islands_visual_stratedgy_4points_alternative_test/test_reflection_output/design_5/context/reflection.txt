@@ -1,0 +1,33 @@
+This analysis examines the transition from the "slug" (Design 1) to the "asymmetric needle" (Design 2) by evaluating the impact of aggressive radial thinning and angular clustering.
+
+### Per-Parameter Analysis
+
+| Parameter | Prediction | Outcome | Correspondence |
+| :--- | :--- | :--- | :--- |
+| **CP0 [r=1.0, e=1.0]** | Sharp, max-extent Trailing Edge (TE). | The rightmost point of the airfoil is a perfectly sharp, singular vertex. | **High** |
+| **CP1 [r=0.25, e=-1.0]** | Aggressively thin the lower-rear to prevent "slug" shape. | The lower-rear boundary is pulled significantly inward, creating a concave-style taper toward the TE. | **High** |
+| **CP2 [r=0.18, e=-1.0]** | Deeply recessed lower-front to encourage flow attachment. | This created a sharp "cut-back" under the nose. Instead of a smooth underside, it created a jagged, wedge-like profile. | **Medium** |
+| **CP3 [r=0.96, e=-1.0]** | Long, smooth leading edge "nose." | Because CP2 and CP4 were so thin (r < 0.4), CP3 became a sharp "beak." It is the furthest point left, but the transition is too abrupt to be a "nose." | **Low** |
+| **CP4 [r=0.38, e=-1.0]** | Asymmetric upper bulge for camber. | Successfully created a higher shoulder than the lower surface (CP2), giving the airfoil a distinct "top" and "bottom." | **High** |
+| **CP5 [r=0.44, e=-1.0]** | Max thickness at 30-40% chord. | The "thickness" is deceptive. Because CP3 is so far out and CP4/5 are so far in, the thickest part is actually the vertical span of the leading "beak." | **Low** |
+| **CP6 [r=0.32, e=-1.0]** | Taper upper surface smoothly to TE. | Created a very straight, clean line from the mid-body to the sharp trailing edge. | **High** |
+| **CP7 [r=1.0, e=1.0]** | Close the shape at the TE pole. | Successfully merged with CP0 to create a definitive, sharp termination point. | **High** |
+
+---
+
+### Key Learnings
+
+#### 1. The "Shard" Effect (Radial Discontinuity)
+The "Needle" strategy was partially successful in increasing the aspect ratio, but it revealed a new flaw: **Radial Gradient Extremity.** By setting the poles (CP3, CP0/7) to ~1.0 and the immediate neighbors to ~0.2, the designer created a "shard" or "wedge" rather than a streamlined airfoil. The flow will likely still see the front as a blunt obstruction because the transition from the tip (CP3) to the body (CP2/CP4) is too steep.
+
+#### 2. Camber vs. Thickness
+The attempt at asymmetry (CP4 > CP2) successfully broke the "block" symmetry of Design 1. The resulting shape has a flat-bottomed, sloped-top profile resembling a high-speed wedge. While this is better than a circle, the "waist" of the airfoil is now perhaps *too* thin, which may lead to structural instability or flow separation immediately behind the leading edge.
+
+#### 3. Angular Clustering is the "Chord Multiplier"
+The clustering of CP3 at $a=0$ and CP0/7 at $a=1.0$ effectively stretched the design. However, the "flatness" of the leading edge is determined by the angular distance to the next points (CP2 and CP4). Because $a=0.28$ and $a=-0.22$ are relatively far from the pole at $a=0$, the "nose" is not a point but a broad triangle. To get a "needle," the neighboring angles need to be much closer to 0 (e.g., $\pm 0.05$).
+
+#### 4. Edgy Param Logic
+Setting `edgy_param` to -1.0 for the body successfully eliminated the "corners" seen in Design 1. The resulting silhouette is composed of clean, mathematical curves (or lines, given the high tension), proving that the "blockiness" of the previous iteration was a result of neutral or positive `edgy_param` values.
+
+### Summary for Next Iteration
+The design has moved from a **Volume-Maximized Block** to a **Surface-Area-Minimized Shard**. The next step is to "smooth the transition" by raising the mid-body radii slightly (0.4-0.6) and tightening the angular spread around the nose to create a parabolic entry rather than a triangular one.

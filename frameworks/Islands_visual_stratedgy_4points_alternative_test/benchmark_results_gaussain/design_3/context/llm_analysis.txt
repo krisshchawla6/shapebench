@@ -1,0 +1,4 @@
+No images or previous designs were provided for this initial iteration. However, based on the **Parameter-Geometry Knowledge** (Reference Card) derived from previous general optimization sessions:
+*   **Geometric Heuristics:** High-radius control points (especially at the trailing edge) lead to "pebble" or "blunt wedge" shapes that suffer from high pressure drag and base drag.
+*   **Flow Considerations:** To maintain flow attachment, the transition from the leading edge to the trailing edge must be gradual. Steep slopes on the upper surface (CP1) or extreme radius disparity between the upper and lower surfaces create separation bubbles.
+*   **Baseline Defects to Avoid:** The "Base Drag Trap" (high TE radius + high TE edgy) and the "Stretch Paradox" (confusing high radius for chord length) are the primary failures to avoid.

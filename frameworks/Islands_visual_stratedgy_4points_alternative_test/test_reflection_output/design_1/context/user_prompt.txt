@@ -1,0 +1,125 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping
+
+### Global Design Rules
+*   **Aspect Ratio Dominance**: Aspect ratio is not automatic; it is a function of `angle_param` distribution. Clustering angles near zero results in a 1:1 "blob" [iter 1].
+*   **Structural Priority**: `angle_param` is the primary structural driver, `radius_param` is the secondary scale driver, and `edgy_param` is the tertiary smoothing driver [iter 1].
+*   **The "Blob" Failure**: High `radius_param` + Clustered `angle_param` + Negative `edgy_param` = A non-aerodynamic "river stone" with near-zero reward [iter 1].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Radial Extension**: Defines the distance of the control point from the geometric center [iter 1].
+*   **Uniformity Risk**: Relatively uniform values (0.4 to 0.9) across all points fail to create a distinct nose or tail unless the angular distribution is wide [iter 1].
+*   **Tail Formation**: To generate a trailing edge, the radius at the "tail" index must be coordinated with a specific angle to stretch the chord [iter 1].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Point Distribution**: Controls the fundamental placement of points around the center; the most critical parameter for establishing chord length [iter 1].
+*   **Clustering Effect**: Values restricted to a narrow range (-0.25 to +0.11) cause "Angular Clustering," bunching points into a small arc and destroying the airfoil's aspect ratio [iter 1].
+*   **Chord Establishment**: Requires a wide spread of values to pull points apart into a distinct Leading Edge (LE) and Trailing Edge (TE) [iter 1].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **Smoothing Effect**: Strongly negative values (e.g., -0.85 to -0.95) force the system to draw the smoothest possible curve through control points [iter 1].
+*   **Geometry "Healing"**: Can turn a lumpy polygon into a smooth "blob," but cannot fix a lack of aspect ratio caused by poor angular distribution [iter 1].
+*   **Sharpness Control**: Intended to define features like a sharp trailing edge, but ineffective if the underlying control points are too clustered [iter 1].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.708164, 0.041093, -0.869849, 0.899081, 0.098165, -0.862434, 0.931048, 0.116622, -0.83678, 0.832531, -0.07295, -0.802702, 0.485564, 0.006134, 0.138332, 0.336368, 0.102738, -0.768098, 0.380906, 0.025559, -0.862441, 0.435841, -0.253699, -0.929489]
+  - Reward: 0.0000
+  - Rank: N/A
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.
+
+
+# Task: Generate New Airfoil Design (with Direct Values)
+
+First, analyze the provided information:
+
+1. **Image Analysis**: If images are provided, they show a representative design sampled from the population (listed as Design 1 above for reference). You MUST first describe what you actually see in the images before analyzing action vectors:
+
+- In 3-4 bullet points, describe the **geometry** you observe: What does the shape look like? Is it smooth or jagged? Symmetric or asymmetric? Thick or thin? Are there any obvious geometric flaws visible (discontinuities, pinch points, blunt edges, odd proportions)?
+- In 3-4 bullet points, describe the **flow field / simulation results** you observe: What do the pressure, velocity, or other field plots show? Where are high/low regions? Is there visible flow separation, recirculation, wake asymmetry, or pressure spikes?
+
+Only AFTER describing what you see in the images, reference Design 1's action vector and reward to learn parameter-geometry mappings.
+
+Critically and relentlessly assess the design shown:
+- Which visible geometric features are problematic and why?
+- Which action parameters likely caused the geometric flaws you see?
+- List 3-4 key design/geometric changes needed to improve designs in the population
+
+
+**Strategy Focus**: **Exploitation Strategy**: Analyze the design database to identify the highest-reward designs. 
+    Study their parameter patterns and geometric characteristics from the action vectors. 
+    Your new design should specify parameter values that aim to maximze and significantly improve the reward from these parameter values. 
+    Focus on refining what already works rather than exploring radically new territory.
+
+
+2. **Design Reasoning**: Based on the design database and population state, think step-by-step about what NEW design should be explored to advance the population. **Follow the Strategy Focus guidance above** - this determines HOW you should approach the design. Consider unexplored geometric variations and different aerodynamic strategies. Focus on diversity and bold exploration, not incremental tweaking of existing designs based on aerodynamic principles.
+
+In your reasoning, provide 4-6 bullet points that:
+- **Apply the Strategy Focus approach described above**
+- Draw insights from the population database (what patterns lead to high/low rewards?)
+- Incorporate observations from the image analysis (what aerodynamic phenomena are present?)
+- Identify specific geometric parameters to explore and WHY
+- Apply your judgment as an evolutionary optimizer (what will advance the search?)
+
+Then, create a new airfoil by specifying precise values for each parameter. Use 4+ decimals. n_cp=8 n_sp=20.
+
+Design considerations: The reasoning above should be applied to the design parameters to evolve the population.
+
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [<r0>, <a0>, <e0>],
+    [<r1>, <a1>, <e1>],
+    [<r2>, <a2>, <e2>],
+    [<r3>, <a3>, <e3>],
+    [<r4>, <a4>, <e4>],
+    [<r5>, <a5>, <e5>],
+    [<r6>, <a6>, <e6>],
+    [<r7>, <a7>, <e7>]
+  ],
+  "name": "<descriptive_name>"
+}
+
+Replace all <placeholders> with actual float values in [-1.0, 1.0].
+Each inner array is [radius_param, angle_param, edgy_param] for that control point.
+
+
+**Response Format:**
+Provide your response in the following structure:
+
+## Analysis
+[If images provided: first describe the geometry (3-4 bullets on what you see) and the flow fields (3-4 bullets on what you see). Then reference Design 1's action vector and reward. Identify which visible flaws map to which parameters, and list 3-4 key changes needed]
+
+## Reasoning
+[4-6 key bullet points with design insights: combine population database patterns, image analysis observations, the Strategy Focus guidance above, and your judgment as an evolutionary optimizer to justify the new design strategy. Explicitly explain how your design follows the Strategy Focus.]
+
+## Per-Parameter Predictions
+For EACH parameter you set, state your PREDICTION of what it will mechanically do:
+- "I am setting param[i][j] to VALUE because I predict it will CAUSE [specific geometric effect]"
+- Be specific about the predicted physical outcome, not just your goal
+
+## Design Parameters
+[Your JSON with the design parameters as shown in the example above]

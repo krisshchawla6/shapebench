@@ -1,0 +1,34 @@
+This design, "Hybrid_Cambered_Teardrop_v1," represents a significant departure from the cylinder (Design 1), but the visual outcome reveals that the geometric transformation was more conservative than intended. The resulting shape is a small, slightly asymmetrical "nugget" rather than a streamlined airfoil.
+
+### Per-Parameter Analysis: Prediction vs. Outcome
+
+*   **param[0][0] (r0) to 0.8500 (Trailing Edge Radius)**
+    *   **Prediction**: Significant extension of the trailing edge, increasing chord length.
+    *   **Outcome**: **Failed**. While $r_0$ is the largest radius in the set, the overall scale of the shape is much smaller than the original circle (where all $r=1.0$). Because the leading edge ($r_4$) and sides ($r_2, r_6$) were also reduced significantly, the total chord length ($r_0 + r_4 \approx 1.33$) is actually shorter than the diameter of the original circle (2.0). It did not "stretch" the wing; it shrunk the whole object.
+
+*   **param[0][2] (e0) to -0.8500 (Trailing Edge Edginess)**
+    *   **Prediction**: Sharp, pinched trailing edge (Kutta cusp).
+    *   **Outcome**: **Successful**. There is a visible "pinch" or point on the right side of the silhouette. However, because the tail is so short, it looks more like a small protrusion than a functional aerodynamic surface.
+
+*   **param[4][0] (r4) to 0.4800 (Leading Edge Radius)**
+    *   **Prediction**: Defined leading edge, shorter than the trailing edge.
+    *   **Outcome**: **Successful**. The left side of the shape is clearly closer to the center than the right side, establishing a basic front-back orientation.
+
+*   **param[4][2] (e4) to 0.3500 (Leading Edge Edginess)**
+    *   **Prediction**: Blunter, rounded nose profile.
+    *   **Outcome**: **Successful**. The left side (LE) is visibly rounder and "flatter" compared to the sharp point of the right side (TE).
+
+*   **param[2][0] (r2) to 0.3200 and param[6][0] (r6) to 0.2800 (Camber Asymmetry)**
+    *   **Prediction**: Cambered profile generating positive lift.
+    *   **Outcome**: **Partially Successful**. There is a slight vertical asymmetry (the top is "taller" than the bottom), but the effect is minimized by the high thickness-to-chord ratio. The shape resembles a tilted bean rather than a cambered wing.
+
+*   **param[2][1] (a2) to 0.1800 and param[6][1] (a6) to -0.1800 (Thickness Shift)**
+    *   **Prediction**: Maximum thickness shifts forward toward the leading edge.
+    *   **Outcome**: **Inconclusive**. The shape is so compact that it is difficult to identify a distinct "maximum thickness point." The angular offsets ($a_2, a_6$) seem to have contributed more to a slight "rotation" or tilting of the shape than a longitudinal shift in volume.
+
+### Key Learnings
+
+1.  **The Scale Trap**: By reducing all radial parameters to stay "safe" and avoid the "Peanut" penalty, the designer created a much smaller object. While a smaller object has less surface area (reducing skin friction drag), it lacks the streamlined chord length necessary to significantly reduce pressure drag or generate efficient lift.
+2.  **Relative vs. Absolute Radius**: A radius of 0.85 is only "long" if the other points are significantly smaller. To achieve a true "NACA-style" teardrop, the ratio between the trailing edge ($r_0$) and the thickness ($r_2, r_6$) needs to be much higher (e.g., $r_0$ at 2.0 and $r_2$ at 0.3).
+3.  **Edginess and Scale**: Negative edginess ($e_0$) creates a very effective point, but its aerodynamic utility is tied to the length of the "tail." On this short shape, the flow likely detaches before it even reaches the "cusp."
+4.  **Geometric Stability vs. Performance**: The "Laminar Delta Rule" (keeping $\Delta r$ small) successfully prevented a simulation crash or a "broken" geometry, but it resulted in a "bluff body" (a nugget) rather than a "streamlined body." The next step requires increasing the $r_0$ extension more aggressively while maintaining the smooth transition.

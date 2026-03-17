@@ -1,0 +1,4628 @@
+==========================================
+Job ID: 212
+Node: compute-dy-hpc-128vcpu-1
+Date: Sat Feb 14 02:01:42 UTC 2026
+Action: gaussain
+Iterations: 80
+Max Inspirations: 5
+Initialize N Sample: 6 (first 6 designs generated without context)
+Islands: 3 (migration every 5 iters, rate 0.2)
+Working Directory: /scratch/Higher_dims/Islands_visual_stratedgy/work_212
+Output: /scratch/Higher_dims/Islands_visual_stratedgy/experiment_generate_gaussain
+==========================================
+Setting up isolated workspace...
+Starting benchmark run with reflection...
+Starting from scratch (no baseline)
+
+--- Iteration 1/80 [INITIAL SAMPLE 1/6] (action: gaussain, island: 0, no context) ---
+  Scratchpad: 0 chars
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.4215,
+      0.0,
+      -0.85
+    ],
+    [
+      0.582,
+      0.2214,
+      -0.4
+    ],
+    [
+      0.7155,
+      0.4852,
+      -0.25
+    ],
+    [
+      0.854,
+      0.7631,
+      0.15
+    ],
+    [
+      0.98,
+      1.0,
+      0.98
+    ],
+    [
+      0.72,
+      -0.7421,
+      0.35
+    ],
+    [
+      0.385,
+      -0.4563,
+      -0.3
+    ],
+    [
+      0.2105,
+      -0.1854,
+      -0.75
+    ]
+  ],
+  "name": "Supercritical_AftLoaded_Alpha_1"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 0
+***    Starting control 0
+-2.5527619571300457 -0.3462812427707361
+good epoch; reward: 0.13564964089328735
+Reward: 0.1356, Drag: -2.5528, Lift: 0.3463
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3296 chars
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 965: ordinal not in range(128)
+Reward: 0.1356, Best: 0.1356, Islands: {0: 1, 1: 0, 2: 0}
+
+--- Iteration 2/80 [INITIAL SAMPLE 2/6] (action: gaussain, island: 1, no context) ---
+  Scratchpad: 0 chars
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.3521,
+      0.0,
+      -0.45
+    ],
+    [
+      0.6214,
+      0.15,
+      -0.85
+    ],
+    [
+      0.8245,
+      0.22,
+      -0.85
+    ],
+    [
+      0.5841,
+      0.05,
+      -0.85
+    ],
+    [
+      0.0821,
+      0.95,
+      0.921
+    ],
+    [
+      -0.1245,
+      -0.05,
+      -0.62
+    ],
+    [
+      -0.2154,
+      -0.18,
+      -0.75
+    ],
+    [
+      -0.1542,
+      -0.12,
+      -0.58
+    ]
+  ],
+  "name": "Hybrid_Founder_Camber_Max"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 1
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 21543 nodes for 10772 points.
+-3.5544149343824607 -0.6548610225669106
+good epoch; reward: 0.1842387663388223
+Reward: 0.1842, Drag: -3.5544, Lift: 0.6549
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2019' in position 37: ordinal not in range(128)
+Reward: 0.1842, Best: 0.1842, Islands: {0: 1, 1: 1, 2: 0}
+
+--- Iteration 3/80 [INITIAL SAMPLE 3/6] (action: gaussain, island: 2, no context) ---
+  Scratchpad: 0 chars
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.85,
+      0.0,
+      0.95
+    ],
+    [
+      0.42,
+      0.15,
+      -0.2
+    ],
+    [
+      0.68,
+      0.0,
+      -0.5
+    ],
+    [
+      0.45,
+      -0.18,
+      -0.4
+    ],
+    [
+      0.82,
+      0.0,
+      -0.98
+    ],
+    [
+      0.18,
+      0.18,
+      -0.4
+    ],
+    [
+      0.12,
+      0.0,
+      -0.3
+    ],
+    [
+      0.18,
+      -0.18,
+      -0.2
+    ]
+  ],
+  "name": "Cambered_Baseline_Alpha"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 2
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 21591 nodes for 10796 points.
+-1.695247151409559 2.2733157628842116
+good epoch; reward: -1.3409937076101273
+Reward: -1.3410, Drag: -1.6952, Lift: -2.2733
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 4019 chars
+  Scratchpad: 1900 chars
+Reward: -1.3410, Best: 0.1842, Islands: {0: 1, 1: 1, 2: 1}
+
+--- Iteration 4/80 [INITIAL SAMPLE 4/6] (action: gaussain, island: 0, no context) ---
+  Scratchpad: 1900 chars
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.82,
+      0.05,
+      0.92
+    ],
+    [
+      0.42,
+      0.25,
+      -0.4
+    ],
+    [
+      0.55,
+      0.0,
+      -0.75
+    ],
+    [
+      0.4,
+      -0.45,
+      -0.6
+    ],
+    [
+      0.28,
+      0.0,
+      -1.0
+    ],
+    [
+      0.12,
+      0.35,
+      -0.45
+    ],
+    [
+      -0.15,
+      0.0,
+      -0.3
+    ],
+    [
+      0.22,
+      -0.55,
+      0.45
+    ]
+  ],
+  "name": "exploration_cambered_subsonic_v1"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 3
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22931 nodes for 11466 points.
+-1.4026930566370153 0.7602046086554871
+good epoch; reward: -0.5419607697197083
+Reward: -0.5420, Drag: -1.4027, Lift: -0.7602
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3956 chars
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 231: ordinal not in range(128)
+Reward: -0.5420, Best: 0.1842, Islands: {0: 2, 1: 1, 2: 1}
+
+--- Iteration 5/80 [INITIAL SAMPLE 5/6] (action: gaussain, island: 1, no context) ---
+  Scratchpad: 1900 chars
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.82,
+      0.0,
+      0.95
+    ],
+    [
+      0.45,
+      -0.05,
+      0.1
+    ],
+    [
+      0.51,
+      0.0,
+      -0.4
+    ],
+    [
+      0.28,
+      -0.15,
+      -0.5
+    ],
+    [
+      0.22,
+      0.0,
+      -0.98
+    ],
+    [
+      0.18,
+      0.1,
+      -0.5
+    ],
+    [
+      0.12,
+      0.0,
+      0.0
+    ],
+    [
+      0.32,
+      0.12,
+      0.2
+    ]
+  ],
+  "name": "smooth_camber_supercritical_v1"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 4
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 21559 nodes for 10780 points.
+-1.4171481258779806 0.7528356366422003
+good epoch; reward: -0.5312328491954842
+Reward: -0.5312, Drag: -1.4171, Lift: -0.7528
+  Reflection failed (non-fatal): 'ascii' codec can't decode byte 0xe2 in position 92: ordinal not in range(128)
+Reward: -0.5312, Best: 0.1842, Islands: {0: 2, 1: 2, 2: 1}
+
+--- Iteration 6/80 [INITIAL SAMPLE 6/6] (action: gaussain, island: 2, no context) ---
+  Scratchpad: 1900 chars
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.85,
+      0.0,
+      0.95
+    ],
+    [
+      0.55,
+      -0.35,
+      -0.2
+    ],
+    [
+      0.46,
+      0.0,
+      -0.5
+    ],
+    [
+      0.38,
+      0.15,
+      -0.4
+    ],
+    [
+      0.28,
+      0.0,
+      -0.98
+    ],
+    [
+      0.18,
+      -0.12,
+      -0.4
+    ],
+    [
+      0.08,
+      0.0,
+      -0.3
+    ],
+    [
+      0.28,
+      0.4,
+      -0.1
+    ]
+  ],
+  "name": "Subsonic_Camber_Baseline_v1"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 5
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 21127 nodes for 10564 points.
+-1.0423193907492148 0.2905563574430252
+good epoch; reward: -0.278759428272916
+Reward: -0.2788, Drag: -1.0423, Lift: -0.2906
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't decode byte 0xe2 in position 120: ordinal not in range(128)
+Reward: -0.2788, Best: 0.1842, Islands: {0: 2, 1: 2, 2: 2}
+
+--- Iteration 7/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 1900 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.52,
+      0.0,
+      0.95
+    ],
+    [
+      0.46,
+      -0.45,
+      -0.6
+    ],
+    [
+      0.54,
+      0.05,
+      -0.85
+    ],
+    [
+      0.48,
+      0.35,
+      -0.9
+    ],
+    [
+      0.325,
+      0.0,
+      -1.0
+    ],
+    [
+      0.18,
+      -0.3,
+      -0.75
+    ],
+    [
+      0.12,
+      0.0,
+      -0.8
+    ],
+    [
+      0.28,
+      0.4,
+      -0.65
+    ]
+  ],
+  "name": "smooth_supercritical_teardrop"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 6
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22947 nodes for 11474 points.
+-1.3259787722083265 -0.5634498078958711
+good epoch; reward: 0.4249312430224536
+Reward: 0.4249, Drag: -1.3260, Lift: 0.5634
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2019' in position 2469: ordinal not in range(128)
+Reward: 0.4249, Best: 0.4249, Islands: {0: 3, 1: 2, 2: 2}
+
+--- Iteration 8/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 1900 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_7/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_7/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_7/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_7/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.825,
+      0.01,
+      0.98
+    ],
+    [
+      0.485,
+      -0.15,
+      -0.25
+    ],
+    [
+      0.52,
+      -0.05,
+      -0.45
+    ],
+    [
+      0.385,
+      -0.12,
+      -0.6
+    ],
+    [
+      0.295,
+      0.02,
+      -1.0
+    ],
+    [
+      0.21,
+      0.08,
+      -0.5
+    ],
+    [
+      0.12,
+      0.0,
+      -0.35
+    ],
+    [
+      0.36,
+      0.18,
+      -0.2
+    ]
+  ],
+  "name": "Hybrid_Cambered_Subsonic_v1"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 7
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 21395 nodes for 10698 points.
+-1.408239942986125 0.8656362871424355
+good epoch; reward: -0.6146937469383826
+Reward: -0.6147, Drag: -1.4082, Lift: -0.8656
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't decode byte 0xe2 in position 258: ordinal not in range(128)
+Reward: -0.6147, Best: 0.4249, Islands: {0: 3, 1: 2, 2: 3}
+
+--- Iteration 9/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 1900 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_8/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_8/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_8/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_8/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      -0.2,
+      0.0,
+      1.0
+    ],
+    [
+      0.45,
+      1.0,
+      -1.0
+    ],
+    [
+      0.85,
+      0.0,
+      -1.0
+    ],
+    [
+      0.55,
+      -1.0,
+      -1.0
+    ],
+    [
+      0.1,
+      0.0,
+      -1.0
+    ],
+    [
+      -0.3,
+      -1.0,
+      -1.0
+    ],
+    [
+      -0.75,
+      0.0,
+      -1.0
+    ],
+    [
+      -0.4,
+      1.0,
+      -1.0
+    ]
+  ],
+  "name": "extreme_camber_sharp_te_explorer"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 8
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 20395 nodes for 10198 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = -nan).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3348 chars
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\xb1' in position 125: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 3, 1: 3, 2: 3}
+
+--- Iteration 10/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 1900 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_9/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_9/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_9/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_9/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.825,
+      0.005,
+      0.98
+    ],
+    [
+      0.485,
+      -0.15,
+      -0.18
+    ],
+    [
+      0.44,
+      -0.02,
+      -0.45
+    ],
+    [
+      0.34,
+      0.16,
+      -0.36
+    ],
+    [
+      0.28,
+      0.02,
+      -1.0
+    ],
+    [
+      0.22,
+      -0.12,
+      -0.42
+    ],
+    [
+      0.12,
+      -0.03,
+      -0.25
+    ],
+    [
+      0.275,
+      0.25,
+      -0.05
+    ]
+  ],
+  "name": "refined_laminar_smoothing"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 9
+***    Starting control 0
+-1.0518168661933005 0.6959106951007294
+good epoch; reward: -0.6616272446926484
+Reward: -0.6616, Drag: -1.0518, Lift: -0.6959
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2014' in position 223: ordinal not in range(128)
+Reward: -0.6616, Best: 0.4249, Islands: {0: 3, 1: 3, 2: 4}
+
+--- Iteration 11/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 1900 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_10/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_10/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_10/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_10/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9245,
+      0.1523,
+      1.0
+    ],
+    [
+      0.3852,
+      -0.7561,
+      -0.2541
+    ],
+    [
+      0.7821,
+      0.1124,
+      -0.8542
+    ],
+    [
+      0.6124,
+      -0.9521,
+      -0.9854
+    ],
+    [
+      0.4512,
+      0.0,
+      -1.0
+    ],
+    [
+      -0.4125,
+      0.9214,
+      -0.7521
+    ],
+    [
+      -0.8541,
+      -0.1245,
+      -0.9124
+    ],
+    [
+      -0.3542,
+      0.8561,
+      0.2451
+    ]
+  ],
+  "name": "explorer_thick_camber_v1"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 10
+***    Starting control 0
+'triangle'
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3771 chars
+  Scratchpad: 2300 chars
+Reward: -5.0000, Best: 0.4249, Islands: {0: 3, 1: 4, 2: 4}
+
+--- Iteration 12/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2300 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_11/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_11/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_11/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_11/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.05,
+      1.0
+    ],
+    [
+      0.12,
+      -0.92,
+      -0.45
+    ],
+    [
+      0.94,
+      0.45,
+      0.92
+    ],
+    [
+      0.25,
+      0.98,
+      -0.85
+    ],
+    [
+      0.72,
+      0.0,
+      -1.0
+    ],
+    [
+      -0.65,
+      -0.95,
+      0.88
+    ],
+    [
+      -0.88,
+      0.1,
+      -0.95
+    ],
+    [
+      -0.15,
+      0.92,
+      0.75
+    ]
+  ],
+  "name": "boundary_reflex_diamond"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 11
+***    Starting control 0
+'triangle'
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3724 chars
+  Scratchpad: 2514 chars
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 4, 2: 4}
+
+--- Iteration 13/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2514 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.12,
+      0.0,
+      0.95
+    ],
+    [
+      0.15,
+      -0.05,
+      -0.2
+    ],
+    [
+      0.26,
+      0.02,
+      -0.4
+    ],
+    [
+      0.22,
+      0.08,
+      -0.5
+    ],
+    [
+      0.18,
+      0.0,
+      -0.85
+    ],
+    [
+      0.12,
+      -0.05,
+      -0.5
+    ],
+    [
+      -0.08,
+      0.0,
+      -0.4
+    ],
+    [
+      -0.04,
+      0.08,
+      -0.3
+    ]
+  ],
+  "name": "slender_smooth_cusp"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 12
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22751 nodes for 11376 points.
+-1.2244378033401586 0.11533138283269874
+good epoch; reward: -0.0941912953994763
+Reward: -0.0942, Drag: -1.2244, Lift: -0.1153
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3534 chars
+  Scratchpad: 2469 chars
+Reward: -0.0942, Best: 0.4249, Islands: {0: 4, 1: 5, 2: 4}
+
+--- Iteration 14/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2469 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.45,
+      0.0,
+      0.985
+    ],
+    [
+      0.22,
+      -0.08,
+      -0.25
+    ],
+    [
+      0.285,
+      0.0,
+      -0.75
+    ],
+    [
+      0.21,
+      0.08,
+      -0.3
+    ],
+    [
+      0.15,
+      0.0,
+      -0.95
+    ],
+    [
+      0.11,
+      -0.05,
+      -0.4
+    ],
+    [
+      0.1,
+      0.0,
+      -0.7
+    ],
+    [
+      0.14,
+      0.05,
+      -0.35
+    ]
+  ],
+  "name": "streamlined_laminar_v1"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 13
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22711 nodes for 11356 points.
+-0.8490840597070302 -0.1621998155220807
+good epoch; reward: 0.1910291609738222
+Reward: 0.1910, Drag: -0.8491, Lift: 0.1622
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 1577: ordinal not in range(128)
+Reward: 0.1910, Best: 0.4249, Islands: {0: 4, 1: 6, 2: 4}
+
+--- Iteration 15/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2469 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_14/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_14/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_14/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_14/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.7254,
+      0.0215,
+      0.9982
+    ],
+    [
+      0.2412,
+      -0.1245,
+      -0.2103
+    ],
+    [
+      0.3241,
+      -0.0125,
+      -0.5214
+    ],
+    [
+      0.2687,
+      0.0842,
+      -0.8123
+    ],
+    [
+      0.1834,
+      0.0,
+      -1.0
+    ],
+    [
+      0.1421,
+      -0.0632,
+      -0.8541
+    ],
+    [
+      0.1215,
+      0.0412,
+      0.2156
+    ],
+    [
+      0.1842,
+      0.1523,
+      0.6124
+    ]
+  ],
+  "name": "supercritical_laminar_v1"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 14
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 23339 nodes for 11670 points.
+-0.8704497155205994 0.36362659885145016
+good epoch; reward: -0.4177456691268743
+Reward: -0.4177, Drag: -0.8704, Lift: -0.3636
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't decode byte 0xe2 in position 485: ordinal not in range(128)
+Reward: -0.4177, Best: 0.4249, Islands: {0: 5, 1: 6, 2: 4}
+
+--- Iteration 16/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2469 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_15/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_15/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_15/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_15/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.32,
+      0.01,
+      0.98
+    ],
+    [
+      0.28,
+      -0.04,
+      -0.3
+    ],
+    [
+      0.42,
+      0.02,
+      -0.65
+    ],
+    [
+      0.32,
+      0.08,
+      -0.5
+    ],
+    [
+      0.16,
+      0.0,
+      -0.96
+    ],
+    [
+      0.12,
+      -0.06,
+      -0.4
+    ],
+    [
+      0.14,
+      0.02,
+      -0.55
+    ],
+    [
+      0.22,
+      0.05,
+      -0.45
+    ]
+  ],
+  "name": "Hybrid_Laminar_Reflex_Smooth"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 15
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22051 nodes for 11026 points.
+-1.9730761283970133 0.12920562940163818
+good epoch; reward: -0.06548436096411989
+Reward: -0.0655, Drag: -1.9731, Lift: -0.1292
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3597 chars
+  Scratchpad: 3127 chars
+Reward: -0.0655, Best: 0.4249, Islands: {0: 5, 1: 7, 2: 4}
+
+--- Iteration 17/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3127 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_16/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_16/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_16/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_5/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_16/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.72,
+      0.0,
+      0.95
+    ],
+    [
+      0.47,
+      -0.28,
+      -0.15
+    ],
+    [
+      0.42,
+      -0.04,
+      -0.45
+    ],
+    [
+      0.32,
+      0.16,
+      -0.4
+    ],
+    [
+      0.22,
+      0.0,
+      -1.0
+    ],
+    [
+      0.2,
+      -0.08,
+      -0.4
+    ],
+    [
+      0.14,
+      -0.03,
+      -0.25
+    ],
+    [
+      0.26,
+      0.12,
+      -0.1
+    ]
+  ],
+  "name": "refined_thin_longtail_v1"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 16
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22267 nodes for 11134 points.
+-1.2092424723702084 0.4674489292089838
+good epoch; reward: -0.3865634394173634
+Reward: -0.3866, Drag: -1.2092, Lift: -0.4674
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3469 chars
+  Scratchpad: 3472 chars
+  Triggering migration at context iteration 10
+  Migration: moved 3 designs between islands
+Reward: -0.3866, Best: 0.4249, Islands: {0: 4, 1: 8, 2: 5}
+
+--- Iteration 18/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3472 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_17/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_17/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_17/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_17/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.5521,
+      0.0542,
+      0.9213
+    ],
+    [
+      0.2645,
+      -0.1234,
+      -0.1543
+    ],
+    [
+      0.3678,
+      -0.2112,
+      -0.6543
+    ],
+    [
+      0.2891,
+      0.1432,
+      -0.5432
+    ],
+    [
+      0.2105,
+      0.0123,
+      -0.9543
+    ],
+    [
+      0.1765,
+      -0.1123,
+      -0.6543
+    ],
+    [
+      0.2234,
+      0.0876,
+      -0.4321
+    ],
+    [
+      0.1654,
+      0.0987,
+      -0.3214
+    ]
+  ],
+  "name": "Cambered_Explorer_V1"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 17
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22907 nodes for 11454 points.
+-1.4718523102857217 0.2690598225960213
+good epoch; reward: -0.1828035467388643
+Reward: -0.1828, Drag: -1.4719, Lift: -0.2691
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3681 chars
+  Scratchpad: 3775 chars
+Reward: -0.1828, Best: 0.4249, Islands: {0: 4, 1: 9, 2: 5}
+
+--- Iteration 19/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3775 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_18/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_18/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_18/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_18/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.425,
+      0.0,
+      0.92
+    ],
+    [
+      0.55,
+      0.12,
+      -0.78
+    ],
+    [
+      0.75,
+      0.18,
+      -0.85
+    ],
+    [
+      0.58,
+      0.15,
+      -0.75
+    ],
+    [
+      0.185,
+      0.92,
+      -0.85
+    ],
+    [
+      0.15,
+      -0.15,
+      -0.6
+    ],
+    [
+      0.12,
+      -0.18,
+      -0.6
+    ],
+    [
+      0.14,
+      -0.1,
+      -0.6
+    ]
+  ],
+  "name": "smooth_nose_cambered_foil"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 18
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 23303 nodes for 11652 points.
+-2.9440387288352037 -0.200546138292096
+good epoch; reward: 0.0681193954168671
+Reward: 0.0681, Drag: -2.9440, Lift: 0.2005
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3175 chars
+  Scratchpad: 3434 chars
+Reward: 0.0681, Best: 0.4249, Islands: {0: 4, 1: 9, 2: 6}
+
+--- Iteration 20/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3434 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_19/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_19/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_19/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_19/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.215,
+      0.0105,
+      0.95
+    ],
+    [
+      0.125,
+      0.25,
+      -0.45
+    ],
+    [
+      0.145,
+      0.5,
+      -0.22
+    ],
+    [
+      0.165,
+      0.75,
+      0.1
+    ],
+    [
+      0.185,
+      0.985,
+      -0.92
+    ],
+    [
+      0.165,
+      -0.75,
+      0.1
+    ],
+    [
+      0.145,
+      -0.5,
+      -0.22
+    ],
+    [
+      0.125,
+      -0.25,
+      -0.45
+    ]
+  ],
+  "name": "slender_stretched_exploration"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 19
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22191 nodes for 11096 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.866876e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2014' in position 2720: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 9, 2: 7}
+
+--- Iteration 21/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3434 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_20/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_20/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_20/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_20/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.385,
+      0.0,
+      0.96
+    ],
+    [
+      0.225,
+      0.18,
+      -0.25
+    ],
+    [
+      0.255,
+      0.48,
+      -0.45
+    ],
+    [
+      0.215,
+      0.78,
+      -0.35
+    ],
+    [
+      0.125,
+      0.985,
+      -0.95
+    ],
+    [
+      0.085,
+      -0.78,
+      -0.35
+    ],
+    [
+      0.115,
+      -0.48,
+      -0.45
+    ],
+    [
+      0.165,
+      -0.18,
+      -0.3
+    ]
+  ],
+  "name": "Stretched_Laminar_Refinement"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 20
+***    Starting control 0
+Iteration exceeded 45-minute time limit
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't decode byte 0xe2 in position 73: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 10, 2: 7}
+
+--- Iteration 22/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3434 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_21/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_21/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_21/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_21/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.11,
+      0.0,
+      0.95
+    ],
+    [
+      0.135,
+      0.22,
+      -0.15
+    ],
+    [
+      0.175,
+      0.48,
+      -0.1
+    ],
+    [
+      0.155,
+      0.78,
+      -0.25
+    ],
+    [
+      0.125,
+      0.98,
+      -0.65
+    ],
+    [
+      0.105,
+      -0.82,
+      -0.3
+    ],
+    [
+      0.095,
+      -0.45,
+      -0.1
+    ],
+    [
+      0.085,
+      -0.18,
+      0.1
+    ]
+  ],
+  "name": "stretched_camber_v1"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 21
+***    Starting control 0
+Iteration exceeded 45-minute time limit
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3693 chars
+  Scratchpad: 3220 chars
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 11, 2: 7}
+
+--- Iteration 23/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3220 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_17/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_22/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_17/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_22/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_17/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_22/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_17/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_22/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.32,
+      0.0,
+      1.0
+    ],
+    [
+      0.2,
+      0.28,
+      -0.35
+    ],
+    [
+      0.24,
+      0.58,
+      -0.65
+    ],
+    [
+      0.19,
+      0.82,
+      -0.4
+    ],
+    [
+      0.155,
+      0.995,
+      -1.0
+    ],
+    [
+      0.135,
+      -0.82,
+      -0.3
+    ],
+    [
+      0.16,
+      -0.58,
+      -0.6
+    ],
+    [
+      0.185,
+      -0.28,
+      -0.35
+    ]
+  ],
+  "name": "Stretched_Cambered_Laminar"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 22
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 3.932978e+03).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\xb1' in position 1395: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 12, 2: 7}
+
+--- Iteration 24/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3220 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_23/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_23/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_23/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_23/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.52,
+      0.0,
+      0.98
+    ],
+    [
+      0.35,
+      0.28,
+      -0.1
+    ],
+    [
+      0.42,
+      0.55,
+      -0.3
+    ],
+    [
+      0.38,
+      0.82,
+      -0.5
+    ],
+    [
+      0.3,
+      0.995,
+      -0.85
+    ],
+    [
+      0.22,
+      -0.85,
+      -0.4
+    ],
+    [
+      0.25,
+      -0.55,
+      -0.1
+    ],
+    [
+      0.3,
+      -0.25,
+      0.2
+    ]
+  ],
+  "name": "stretched_camber_blade"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 23
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 10000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 7.865600e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3470 chars
+  Scratchpad: 2942 chars
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 13, 2: 7}
+
+--- Iteration 25/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2942 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_24/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_24/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_24/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_24/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.55,
+      0.0,
+      1.0
+    ],
+    [
+      0.48,
+      0.28,
+      -0.55
+    ],
+    [
+      0.65,
+      0.52,
+      -0.82
+    ],
+    [
+      0.55,
+      0.82,
+      -0.6
+    ],
+    [
+      0.45,
+      1.0,
+      -1.0
+    ],
+    [
+      0.4,
+      -0.85,
+      -0.5
+    ],
+    [
+      0.38,
+      -0.55,
+      -0.7
+    ],
+    [
+      0.42,
+      -0.25,
+      -0.45
+    ]
+  ],
+  "name": "robust_cambered_lifting_body"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 24
+***    Starting control 0
+Iteration exceeded 45-minute time limit
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2014' in position 192: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 13, 2: 8}
+
+--- Iteration 26/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2942 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_25/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_25/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_25/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_25/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.8521,
+      0.0,
+      0.9854
+    ],
+    [
+      0.4215,
+      0.3125,
+      -0.45
+    ],
+    [
+      0.5568,
+      0.6241,
+      -0.7521
+    ],
+    [
+      0.4182,
+      0.8842,
+      -0.4852
+    ],
+    [
+      0.8596,
+      1.0,
+      -0.9921
+    ],
+    [
+      0.3214,
+      -0.8562,
+      -0.5124
+    ],
+    [
+      0.2845,
+      -0.5841,
+      -0.7258
+    ],
+    [
+      0.3421,
+      -0.2845,
+      -0.4652
+    ]
+  ],
+  "name": "stretched_cambered_exploitation"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 25
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 2.385863e+80).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't decode byte 0xe2 in position 1553: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 14, 2: 8}
+
+--- Iteration 27/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2942 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_26/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_26/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_26/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_26/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.6542,
+      0.0,
+      1.0
+    ],
+    [
+      0.5218,
+      0.2845,
+      -0.65
+    ],
+    [
+      0.7821,
+      0.5123,
+      -0.65
+    ],
+    [
+      0.5567,
+      0.8234,
+      -0.65
+    ],
+    [
+      0.4821,
+      1.0,
+      -1.0
+    ],
+    [
+      0.4123,
+      -0.8122,
+      -0.45
+    ],
+    [
+      0.3845,
+      -0.5234,
+      -0.45
+    ],
+    [
+      0.4219,
+      -0.2567,
+      -0.45
+    ]
+  ],
+  "name": "explorer_max_chord_cambered_v1"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 26
+***    Starting control 0
+Iteration exceeded 45-minute time limit
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 2116: ordinal not in range(128)
+  Triggering migration at context iteration 20
+  Migration: moved 3 designs between islands
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 14, 2: 9}
+
+--- Iteration 28/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2942 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_27/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_27/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_27/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_12/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_27/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.85,
+      0.0,
+      1.0
+    ],
+    [
+      0.42,
+      0.35,
+      -0.4
+    ],
+    [
+      0.55,
+      0.65,
+      -0.2
+    ],
+    [
+      0.45,
+      0.88,
+      -0.5
+    ],
+    [
+      0.82,
+      1.0,
+      -1.0
+    ],
+    [
+      0.32,
+      -0.82,
+      -0.4
+    ],
+    [
+      0.26,
+      -0.55,
+      -0.1
+    ],
+    [
+      0.35,
+      -0.22,
+      -0.5
+    ]
+  ],
+  "name": "expanded_camber_high_chord"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 27
+***    Starting control 0
+-1.7866922336831677 1.2778493199687009
+good epoch; reward: -0.7152039371293873
+Reward: -0.7152, Drag: -1.7867, Lift: -1.2778
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2014' in position 3320: ordinal not in range(128)
+Reward: -0.7152, Best: 0.4249, Islands: {0: 4, 1: 15, 2: 9}
+
+--- Iteration 29/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2942 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_28/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_28/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_28/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_28/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.45,
+      0.0,
+      1.0
+    ],
+    [
+      0.55,
+      0.25,
+      -0.7
+    ],
+    [
+      0.85,
+      0.5,
+      -0.6
+    ],
+    [
+      0.65,
+      0.8,
+      -0.8
+    ],
+    [
+      0.42,
+      1.0,
+      -1.0
+    ],
+    [
+      0.32,
+      -0.8,
+      -0.7
+    ],
+    [
+      0.28,
+      -0.5,
+      -0.6
+    ],
+    [
+      0.35,
+      -0.25,
+      -0.5
+    ]
+  ],
+  "name": "Hybrid_Camber_SharpTE_MaxChord"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 28
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22035 nodes for 11018 points.
+Iteration exceeded 45-minute time limit
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 2794: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 15, 2: 10}
+
+--- Iteration 30/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2942 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_29/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_29/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_29/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_29/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.6542,
+      0.0,
+      1.0
+    ],
+    [
+      0.4821,
+      0.2854,
+      -0.4512
+    ],
+    [
+      0.8567,
+      0.4521,
+      -0.8234
+    ],
+    [
+      0.5532,
+      0.8123,
+      -0.8845
+    ],
+    [
+      0.4521,
+      1.0,
+      -1.0
+    ],
+    [
+      0.3214,
+      -0.8234,
+      -0.4123
+    ],
+    [
+      0.2845,
+      -0.5512,
+      -0.2145
+    ],
+    [
+      0.3123,
+      -0.2234,
+      -0.3521
+    ]
+  ],
+  "name": "high_camber_exploration_v1"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 29
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 8.282365e+131).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3045 chars
+  Scratchpad: 3059 chars
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 15, 2: 11}
+
+--- Iteration 31/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3059 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_15/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_30/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_15/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_30/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_15/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_30/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_15/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_30/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.78,
+      0.0,
+      0.96
+    ],
+    [
+      0.42,
+      0.015,
+      -0.25
+    ],
+    [
+      0.52,
+      0.035,
+      -0.45
+    ],
+    [
+      0.55,
+      0.02,
+      -0.35
+    ],
+    [
+      0.62,
+      0.0,
+      -0.92
+    ],
+    [
+      0.32,
+      -0.015,
+      -0.35
+    ],
+    [
+      0.22,
+      -0.035,
+      -0.45
+    ],
+    [
+      0.28,
+      -0.015,
+      -0.28
+    ]
+  ],
+  "name": "Stretched_Camber_Refinement"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 30
+***    Starting control 0
+-1.284173348281424 0.19083191308470587
+good epoch; reward: -0.1486029229154236
+Reward: -0.1486, Drag: -1.2842, Lift: -0.1908
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 2248: ordinal not in range(128)
+Reward: -0.1486, Best: 0.4249, Islands: {0: 4, 1: 16, 2: 11}
+
+--- Iteration 32/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3059 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_31/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_31/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_31/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_31/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.5,
+      0.0,
+      0.95
+    ],
+    [
+      0.42,
+      0.22,
+      -0.65
+    ],
+    [
+      0.92,
+      0.55,
+      -0.85
+    ],
+    [
+      0.65,
+      0.82,
+      -0.6
+    ],
+    [
+      0.55,
+      1.0,
+      -0.45
+    ],
+    [
+      0.32,
+      -0.82,
+      -0.55
+    ],
+    [
+      0.28,
+      -0.55,
+      -0.75
+    ],
+    [
+      0.35,
+      -0.22,
+      -0.6
+    ]
+  ],
+  "name": "stretched_camber_explorer"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 31
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 22323 nodes for 11162 points.
+-4.1306484565518256 0.9632251514109232
+good epoch; reward: -0.2331898154835966
+Reward: -0.2332, Drag: -4.1306, Lift: -0.9632
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3829 chars
+  Scratchpad: 3273 chars
+Reward: -0.2332, Best: 0.4249, Islands: {0: 4, 1: 16, 2: 12}
+
+--- Iteration 33/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3273 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_32/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_32/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_32/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_32/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.85,
+      0.0,
+      0.92
+    ],
+    [
+      0.55,
+      0.25,
+      -0.2
+    ],
+    [
+      0.65,
+      0.55,
+      -0.4
+    ],
+    [
+      0.6,
+      0.85,
+      -0.3
+    ],
+    [
+      0.9,
+      1.0,
+      -0.65
+    ],
+    [
+      0.52,
+      -0.85,
+      -0.3
+    ],
+    [
+      0.48,
+      -0.55,
+      -0.3
+    ],
+    [
+      0.45,
+      -0.25,
+      -0.2
+    ]
+  ],
+  "name": "Stretched_Laminar_Camber"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 32
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 19871 nodes for 9936 points.
+-2.093807372204425 2.094672162990952
+good epoch; reward: -1.0004130230879913
+Reward: -1.0004, Drag: -2.0938, Lift: -2.0947
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 2287: ordinal not in range(128)
+Reward: -1.0004, Best: 0.4249, Islands: {0: 4, 1: 17, 2: 12}
+
+--- Iteration 34/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3273 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_33/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_33/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_33/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_33/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.725,
+      0.0,
+      0.98
+    ],
+    [
+      0.48,
+      0.22,
+      -0.35
+    ],
+    [
+      0.895,
+      0.52,
+      -0.42
+    ],
+    [
+      0.68,
+      0.78,
+      -0.3
+    ],
+    [
+      0.78,
+      0.98,
+      -0.55
+    ],
+    [
+      0.55,
+      -0.82,
+      -0.32
+    ],
+    [
+      0.52,
+      -0.55,
+      -0.28
+    ],
+    [
+      0.45,
+      -0.28,
+      -0.2
+    ]
+  ],
+  "name": "Exploited_Laminar_Crest"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 33
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 21199 nodes for 10600 points.
+-4.082154951099285 9.408620672220532e-05
+good epoch; reward: -2.3048171333346575e-05
+Reward: -0.0000, Drag: -4.0822, Lift: -0.0001
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3317 chars
+  Scratchpad: 3328 chars
+Reward: -0.0000, Best: 0.4249, Islands: {0: 4, 1: 17, 2: 13}
+
+--- Iteration 35/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3328 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_34/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_34/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_34/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_34/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.95,
+      0.0,
+      1.0
+    ],
+    [
+      0.65,
+      0.28,
+      -0.35
+    ],
+    [
+      0.88,
+      0.55,
+      -0.15
+    ],
+    [
+      0.72,
+      0.82,
+      -0.25
+    ],
+    [
+      0.98,
+      1.0,
+      0.1
+    ],
+    [
+      0.58,
+      -0.78,
+      -0.3
+    ],
+    [
+      0.52,
+      -0.52,
+      -0.1
+    ],
+    [
+      0.48,
+      -0.25,
+      -0.35
+    ]
+  ],
+  "name": "High_Camber_Max_Chord_Explorer"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 34
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 21359 nodes for 10680 points.
+-2.778201539619573 2.4810203564296454
+good epoch; reward: -0.893031092614461
+Reward: -0.8930, Drag: -2.7782, Lift: -2.4810
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3371 chars
+  Scratchpad: 3068 chars
+Reward: -0.8930, Best: 0.4249, Islands: {0: 5, 1: 17, 2: 13}
+
+--- Iteration 36/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3068 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_35/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_35/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_35/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_35/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9821,
+      0.0215,
+      0.9542
+    ],
+    [
+      0.7845,
+      0.2833,
+      -0.3122
+    ],
+    [
+      0.6812,
+      0.5244,
+      -0.2055
+    ],
+    [
+      0.8533,
+      0.7867,
+      -0.1123
+    ],
+    [
+      0.9956,
+      1.0,
+      0.1544
+    ],
+    [
+      0.7211,
+      -0.7643,
+      -0.2088
+    ],
+    [
+      0.4822,
+      -0.4812,
+      -0.3155
+    ],
+    [
+      0.6677,
+      -0.2245,
+      -0.2566
+    ]
+  ],
+  "name": "SuperStretched_Camber_Opt"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 35
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 19747 nodes for 9874 points.
+-2.0539705955702643 0.39214423375280333
+good epoch; reward: -0.1909200816207052
+Reward: -0.1909, Drag: -2.0540, Lift: -0.3921
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't decode byte 0xe2 in position 682: ordinal not in range(128)
+Reward: -0.1909, Best: 0.4249, Islands: {0: 5, 1: 18, 2: 13}
+
+--- Iteration 37/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3068 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_36/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_36/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_36/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_36/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.98
+    ],
+    [
+      0.92,
+      0.25,
+      -0.45
+    ],
+    [
+      0.88,
+      0.55,
+      -0.5
+    ],
+    [
+      0.92,
+      0.85,
+      -0.4
+    ],
+    [
+      0.985,
+      1.0,
+      0.0
+    ],
+    [
+      0.78,
+      -0.85,
+      -0.35
+    ],
+    [
+      0.7,
+      -0.55,
+      -0.45
+    ],
+    [
+      0.85,
+      -0.25,
+      -0.4
+    ]
+  ],
+  "name": "Supercritical_Stretched_Camber"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 36
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 19267 nodes for 9634 points.
+-3.709041603326966 -0.35618823657077053
+good epoch; reward: 0.09603241879284231
+Reward: 0.0960, Drag: -3.7090, Lift: 0.3562
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 4334 chars
+  Scratchpad: 2760 chars
+  Triggering migration at context iteration 30
+  Migration: moved 3 designs between islands
+Reward: 0.0960, Best: 0.4249, Islands: {0: 4, 1: 18, 2: 15}
+
+--- Iteration 38/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2760 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_37/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_37/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_37/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_37/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.98
+    ],
+    [
+      0.28,
+      0.02,
+      0.15
+    ],
+    [
+      0.185,
+      0.05,
+      0.1
+    ],
+    [
+      0.28,
+      0.02,
+      0.1
+    ],
+    [
+      0.96,
+      0.0,
+      0.05
+    ],
+    [
+      0.24,
+      -0.02,
+      0.1
+    ],
+    [
+      0.125,
+      -0.05,
+      0.1
+    ],
+    [
+      0.24,
+      -0.02,
+      0.15
+    ]
+  ],
+  "name": "Supercritical_Slender_Camber"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 37
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 17779 nodes for 8890 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 2.019012e+112).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3351 chars
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 644: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 4, 1: 19, 2: 15}
+
+--- Iteration 39/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2760 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_38/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_38/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_38/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_38/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.95,
+      0.0,
+      0.98
+    ],
+    [
+      0.45,
+      0.25,
+      0.2
+    ],
+    [
+      0.32,
+      0.55,
+      0.1
+    ],
+    [
+      0.55,
+      0.82,
+      0.05
+    ],
+    [
+      0.99,
+      1.0,
+      0.1
+    ],
+    [
+      0.52,
+      -0.82,
+      0.05
+    ],
+    [
+      0.26,
+      -0.55,
+      0.1
+    ],
+    [
+      0.45,
+      -0.25,
+      0.2
+    ]
+  ],
+  "name": "high_reach_supercritical_v1"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 38
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 1.994938e+108).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\xb0' in position 707: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 5, 1: 19, 2: 15}
+
+--- Iteration 40/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2760 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_39/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_39/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_39/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_39/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.95
+    ],
+    [
+      0.35,
+      0.25,
+      0.2
+    ],
+    [
+      0.12,
+      0.5,
+      0.1
+    ],
+    [
+      0.42,
+      0.75,
+      0.1
+    ],
+    [
+      0.99,
+      0.99,
+      0.15
+    ],
+    [
+      0.42,
+      -0.75,
+      0.1
+    ],
+    [
+      0.12,
+      -0.5,
+      0.1
+    ],
+    [
+      0.35,
+      -0.25,
+      0.2
+    ]
+  ],
+  "name": "slender_smooth_convex_v1"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 39
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = inf).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't decode byte 0xe2 in position 299: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 6, 1: 19, 2: 15}
+
+--- Iteration 41/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2760 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_40/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_40/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_40/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_40/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.98,
+      0.0,
+      0.95
+    ],
+    [
+      0.32,
+      0.05,
+      0.1
+    ],
+    [
+      0.115,
+      0.0,
+      0.05
+    ],
+    [
+      0.32,
+      -0.05,
+      0.05
+    ],
+    [
+      0.985,
+      0.0,
+      0.05
+    ],
+    [
+      0.32,
+      0.05,
+      0.05
+    ],
+    [
+      0.115,
+      0.0,
+      0.05
+    ],
+    [
+      0.32,
+      -0.05,
+      0.1
+    ]
+  ],
+  "name": "slender_high_aspect_chord"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 40
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 1.451947e+77).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2014' in position 2738: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 6, 1: 19, 2: 16}
+
+--- Iteration 42/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2760 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_41/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_41/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_41/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_41/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9725,
+      0.0012,
+      0.9812
+    ],
+    [
+      0.3214,
+      0.0156,
+      0.5123
+    ],
+    [
+      0.2456,
+      0.0024,
+      0.5567
+    ],
+    [
+      0.3678,
+      -0.0121,
+      0.4891
+    ],
+    [
+      0.9341,
+      0.0005,
+      0.1523
+    ],
+    [
+      0.3543,
+      0.0089,
+      0.5012
+    ],
+    [
+      0.1782,
+      -0.0041,
+      0.5342
+    ],
+    [
+      0.3123,
+      0.0195,
+      0.4789
+    ]
+  ],
+  "name": "high_ar_cambered_smooth_nose"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 41
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 4.488103e+146).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 4122 chars
+  Scratchpad: 2833 chars
+Reward: -5.0000, Best: 0.4249, Islands: {0: 6, 1: 20, 2: 16}
+
+--- Iteration 43/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2833 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_36/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_42/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_36/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_42/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_36/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_42/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_36/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_42/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.95,
+      0.0,
+      0.95
+    ],
+    [
+      0.25,
+      0.2,
+      0.2
+    ],
+    [
+      0.05,
+      0.5,
+      0.1
+    ],
+    [
+      0.25,
+      0.85,
+      0.2
+    ],
+    [
+      0.92,
+      1.0,
+      0.15
+    ],
+    [
+      0.25,
+      -0.85,
+      0.2
+    ],
+    [
+      0.05,
+      -0.5,
+      0.1
+    ],
+    [
+      0.25,
+      -0.2,
+      0.2
+    ]
+  ],
+  "name": "slender_blade_v1"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 42
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = inf).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2019' in position 2947: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 6, 1: 20, 2: 17}
+
+--- Iteration 44/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2833 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_43/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_43/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_43/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_43/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.885,
+      0.0,
+      0.92
+    ],
+    [
+      0.18,
+      0.25,
+      0.2
+    ],
+    [
+      0.0625,
+      0.55,
+      0.2
+    ],
+    [
+      0.18,
+      0.82,
+      0.2
+    ],
+    [
+      0.91,
+      1.0,
+      0.15
+    ],
+    [
+      0.18,
+      -0.82,
+      0.2
+    ],
+    [
+      0.0625,
+      -0.55,
+      0.2
+    ],
+    [
+      0.18,
+      -0.25,
+      0.2
+    ]
+  ],
+  "name": "Stabilized_Hybrid_Needle"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 43
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = inf).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3698 chars
+  Scratchpad: 2730 chars
+Reward: -5.0000, Best: 0.4249, Islands: {0: 6, 1: 20, 2: 18}
+
+--- Iteration 45/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2730 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_44/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_44/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_44/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_44/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.95,
+      0.0,
+      0.8
+    ],
+    [
+      0.55,
+      0.25,
+      0.3
+    ],
+    [
+      0.2,
+      0.5,
+      0.25
+    ],
+    [
+      0.55,
+      0.75,
+      0.25
+    ],
+    [
+      1.0,
+      1.0,
+      0.35
+    ],
+    [
+      0.55,
+      -0.75,
+      0.25
+    ],
+    [
+      0.16,
+      -0.5,
+      0.3
+    ],
+    [
+      0.55,
+      -0.25,
+      0.3
+    ]
+  ],
+  "name": "stabilized_cambered_wing"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 44
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = inf).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2014' in position 1870: ordinal not in range(128)
+Reward: -5.0000, Best: 0.4249, Islands: {0: 6, 1: 20, 2: 19}
+
+--- Iteration 46/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2730 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_45/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_45/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_45/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_45/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.88,
+      0.0,
+      0.95
+    ],
+    [
+      0.15,
+      0.32,
+      0.4
+    ],
+    [
+      0.22,
+      0.65,
+      0.1
+    ],
+    [
+      0.125,
+      0.9,
+      0.12
+    ],
+    [
+      0.95,
+      1.0,
+      0.25
+    ],
+    [
+      0.125,
+      -0.9,
+      0.35
+    ],
+    [
+      0.22,
+      -0.65,
+      0.45
+    ],
+    [
+      0.15,
+      -0.32,
+      0.55
+    ]
+  ],
+  "name": "long_chord_stabilized_shoulder"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 45
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 4.803174e+148).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3509 chars
+  Scratchpad: 2855 chars
+Reward: -5.0000, Best: 0.4249, Islands: {0: 6, 1: 21, 2: 19}
+
+--- Iteration 47/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2855 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_46/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_46/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_46/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_46/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.75,
+      0.0,
+      0.9
+    ],
+    [
+      0.825,
+      0.1,
+      0.2
+    ],
+    [
+      0.88,
+      0.2,
+      0.15
+    ],
+    [
+      0.95,
+      0.1,
+      0.15
+    ],
+    [
+      1.0,
+      0.0,
+      0.25
+    ],
+    [
+      0.95,
+      -0.1,
+      0.15
+    ],
+    [
+      0.88,
+      -0.2,
+      0.15
+    ],
+    [
+      0.825,
+      -0.1,
+      0.2
+    ]
+  ],
+  "name": "High_Volume_Full_Body_Explorer"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 46
+***    Starting control 0
+-4.507220910738969 -0.029219065260962348
+good epoch; reward: 0.00648272313241727
+Reward: 0.0065, Drag: -4.5072, Lift: 0.0292
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 2438: ordinal not in range(128)
+  Triggering migration at context iteration 40
+  Migration: moved 5 designs between islands
+Reward: 0.0065, Best: 0.4249, Islands: {0: 9, 1: 19, 2: 19}
+
+--- Iteration 48/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2855 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_47/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_47/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_47/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_47/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9,
+      0.0,
+      0.95
+    ],
+    [
+      0.62,
+      0.25,
+      0.2
+    ],
+    [
+      0.48,
+      0.55,
+      0.1
+    ],
+    [
+      0.78,
+      0.88,
+      0.12
+    ],
+    [
+      1.0,
+      1.0,
+      0.15
+    ],
+    [
+      0.78,
+      -0.88,
+      0.12
+    ],
+    [
+      0.48,
+      -0.55,
+      0.1
+    ],
+    [
+      0.62,
+      -0.25,
+      0.2
+    ]
+  ],
+  "name": "Hybrid_SharpTail_Inflaton_Wing"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 47
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 18335 nodes for 9168 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 8.571163e+120).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3783 chars
+  Scratchpad: 2719 chars
+Reward: -5.0000, Best: 0.4249, Islands: {0: 10, 1: 19, 2: 19}
+
+--- Iteration 49/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2719 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_48/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_48/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_48/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_48/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.95,
+      0.0,
+      0.85
+    ],
+    [
+      0.85,
+      0.25,
+      0.2
+    ],
+    [
+      0.75,
+      0.5,
+      0.1
+    ],
+    [
+      0.92,
+      0.75,
+      0.1
+    ],
+    [
+      0.98,
+      1.0,
+      0.15
+    ],
+    [
+      0.92,
+      -0.75,
+      0.1
+    ],
+    [
+      0.65,
+      -0.5,
+      0.1
+    ],
+    [
+      0.8,
+      -0.25,
+      0.2
+    ]
+  ],
+  "name": "Hybrid_Cambered_Lifting_Body"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 48
+***    Starting control 0
+-2.6961145512470592 -0.27685994551554227
+good epoch; reward: 0.10268849496305105
+Reward: 0.1027, Drag: -2.6961, Lift: 0.2769
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3639 chars
+  Scratchpad: 2976 chars
+Reward: 0.1027, Best: 0.4249, Islands: {0: 10, 1: 20, 2: 19}
+
+--- Iteration 50/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 2976 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_49/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_49/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_49/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_49/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9852,
+      0.0,
+      0.8821
+    ],
+    [
+      0.7245,
+      0.185,
+      0.354
+    ],
+    [
+      0.4521,
+      0.5214,
+      -0.125
+    ],
+    [
+      0.8842,
+      0.821,
+      0.105
+    ],
+    [
+      0.9568,
+      0.9985,
+      0.2541
+    ],
+    [
+      0.8814,
+      -0.825,
+      0.105
+    ],
+    [
+      0.2215,
+      -0.524,
+      -0.125
+    ],
+    [
+      0.7024,
+      -0.184,
+      0.354
+    ]
+  ],
+  "name": "cambered_slender_v1"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 49
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 18235 nodes for 9118 points.
+-1.6770284332131247 0.0351227455500723
+good epoch; reward: -0.02094344070409016
+Reward: -0.0209, Drag: -1.6770, Lift: -0.0351
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3744 chars
+  Scratchpad: 3552 chars
+Reward: -0.0209, Best: 0.4249, Islands: {0: 10, 1: 20, 2: 20}
+
+--- Iteration 51/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3552 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_50/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_50/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_50/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_0/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_50/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.92
+    ],
+    [
+      0.42,
+      0.28,
+      0.1
+    ],
+    [
+      0.165,
+      0.55,
+      0.05
+    ],
+    [
+      0.45,
+      0.82,
+      0.1
+    ],
+    [
+      0.96,
+      1.0,
+      0.15
+    ],
+    [
+      0.4,
+      -0.82,
+      0.1
+    ],
+    [
+      0.105,
+      -0.55,
+      0.05
+    ],
+    [
+      0.38,
+      -0.28,
+      0.1
+    ]
+  ],
+  "name": "slender_hybrid_camber_v1"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 50
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 18111 nodes for 9056 points.
+-0.9897201352807199 0.498299828095043
+good epoch; reward: -0.5034754880011685
+Reward: -0.5035, Drag: -0.9897, Lift: -0.4983
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3150 chars
+  Scratchpad: 3995 chars
+Reward: -0.5035, Best: 0.4249, Islands: {0: 11, 1: 20, 2: 20}
+
+--- Iteration 52/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3995 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_18/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_51/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_18/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_51/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_18/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_51/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_18/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_51/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.98
+    ],
+    [
+      0.342,
+      0.28,
+      0.15
+    ],
+    [
+      0.115,
+      0.58,
+      -0.35
+    ],
+    [
+      0.365,
+      0.86,
+      0.05
+    ],
+    [
+      0.995,
+      1.0,
+      0.22
+    ],
+    [
+      0.358,
+      -0.86,
+      0.05
+    ],
+    [
+      0.072,
+      -0.58,
+      -0.35
+    ],
+    [
+      0.339,
+      -0.28,
+      0.15
+    ]
+  ],
+  "name": "slender_smooth_camber_v2"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 51
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 18703 nodes for 9352 points.
+-1.1259188380994238 0.7280427676197934
+good epoch; reward: -0.6466210023173126
+Reward: -0.6466, Drag: -1.1259, Lift: -0.7280
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3220 chars
+  Scratchpad: 3621 chars
+Reward: -0.6466, Best: 0.4249, Islands: {0: 11, 1: 20, 2: 21}
+
+--- Iteration 53/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3621 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.995,
+      0.0,
+      0.98
+    ],
+    [
+      0.35,
+      0.02,
+      0.3
+    ],
+    [
+      0.12,
+      0.0,
+      -0.1
+    ],
+    [
+      0.38,
+      -0.05,
+      0.1
+    ],
+    [
+      0.985,
+      0.0,
+      0.2
+    ],
+    [
+      0.36,
+      0.05,
+      0.1
+    ],
+    [
+      0.082,
+      0.0,
+      -0.1
+    ],
+    [
+      0.32,
+      -0.02,
+      0.3
+    ]
+  ],
+  "name": "slender_high_aspect_camber"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 52
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 20283 nodes for 10142 points.
+-0.7721034871177264 -0.27364322791914586
+good epoch; reward: 0.354412630540836
+Reward: 0.3544, Drag: -0.7721, Lift: 0.2736
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 2999 chars
+  Scratchpad: 3811 chars
+Reward: 0.3544, Best: 0.4249, Islands: {0: 11, 1: 21, 2: 21}
+
+--- Iteration 54/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3811 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_53/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_53/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_53/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_13/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_53/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      0.85
+    ],
+    [
+      0.52,
+      0.05,
+      0.15
+    ],
+    [
+      0.2,
+      0.1,
+      -0.05
+    ],
+    [
+      0.52,
+      0.15,
+      0.15
+    ],
+    [
+      1.0,
+      0.0,
+      0.25
+    ],
+    [
+      0.45,
+      -0.15,
+      0.15
+    ],
+    [
+      0.12,
+      -0.1,
+      -0.05
+    ],
+    [
+      0.45,
+      -0.05,
+      0.15
+    ]
+  ],
+  "name": "hybrid_camber_smooth_convex"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 53
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 18007 nodes for 9004 points.
+-0.9321418380617175 -0.30659918773381883
+good epoch; reward: 0.32891902842957554
+Reward: 0.3289, Drag: -0.9321, Lift: 0.3066
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3589 chars
+  Scratchpad: 3517 chars
+Reward: 0.3289, Best: 0.4249, Islands: {0: 11, 1: 22, 2: 21}
+
+--- Iteration 55/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3517 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_54/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_54/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_54/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_54/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.95
+    ],
+    [
+      0.585,
+      0.25,
+      -0.6
+    ],
+    [
+      0.185,
+      0.5,
+      -0.85
+    ],
+    [
+      0.585,
+      0.75,
+      -0.6
+    ],
+    [
+      1.0,
+      1.0,
+      0.15
+    ],
+    [
+      0.525,
+      -0.75,
+      -0.5
+    ],
+    [
+      0.115,
+      -0.5,
+      -0.8
+    ],
+    [
+      0.525,
+      -0.25,
+      -0.5
+    ]
+  ],
+  "name": "hybrid_cambered_convex_wing"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 54
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 19159 nodes for 9580 points.
+-1.3930054925307098 1.9925280169021244
+good epoch; reward: -1.4303805890113515
+Reward: -1.4304, Drag: -1.3930, Lift: -1.9925
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3724 chars
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2013' in position 797: ordinal not in range(128)
+Reward: -1.4304, Best: 0.4249, Islands: {0: 11, 1: 22, 2: 22}
+
+--- Iteration 56/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3517 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_55/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_55/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_55/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_55/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0502,
+      0.92
+    ],
+    [
+      0.445,
+      -0.043,
+      0.25
+    ],
+    [
+      0.185,
+      -0.0874,
+      -0.1
+    ],
+    [
+      0.485,
+      -0.107,
+      0.15
+    ],
+    [
+      0.985,
+      -0.0441,
+      0.185
+    ],
+    [
+      0.425,
+      0.1516,
+      0.1
+    ],
+    [
+      0.095,
+      0.0478,
+      -0.1
+    ],
+    [
+      0.385,
+      -0.0231,
+      0.28
+    ]
+  ],
+  "name": "hybrid_convex_stable_lift"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 55
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 18547 nodes for 9274 points.
+-0.8572610950303162 -0.01109108871675032
+good epoch; reward: 0.012937818805784127
+Reward: 0.0129, Drag: -0.8573, Lift: 0.0111
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 3548 chars
+  Scratchpad: 3573 chars
+Reward: 0.0129, Best: 0.4249, Islands: {0: 11, 1: 23, 2: 22}
+
+--- Iteration 57/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3573 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_56/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_56/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_56/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_56/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      0.95
+    ],
+    [
+      0.8854,
+      0.0211,
+      0.1205
+    ],
+    [
+      0.7423,
+      0.0452,
+      0.0521
+    ],
+    [
+      0.8912,
+      -0.0324,
+      0.1124
+    ],
+    [
+      1.0,
+      0.0,
+      0.2241
+    ],
+    [
+      0.9125,
+      0.0215,
+      0.1542
+    ],
+    [
+      0.5632,
+      -0.0124,
+      0.0842
+    ],
+    [
+      0.8745,
+      -0.0412,
+      0.1321
+    ]
+  ],
+  "name": "convex_supercritical_v1"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 56
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 18819 nodes for 9410 points.
+-3.178677141508967 0.458510384768957
+good epoch; reward: -0.14424566080696546
+Reward: -0.1442, Drag: -3.1787, Lift: -0.4585
+Warning: Could not extract structured analysis, returning raw response
+  Reflection: 4110 chars
+  Scratchpad: 3729 chars
+  Triggering migration at context iteration 50
+  Migration: moved 5 designs between islands
+Reward: -0.1442, Best: 0.4249, Islands: {0: 13, 1: 23, 2: 21}
+
+--- Iteration 58/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3729 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_57/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_57/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_57/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_52/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_57/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      0.85
+    ],
+    [
+      0.915,
+      0.25,
+      0.15
+    ],
+    [
+      0.78,
+      0.52,
+      0.08
+    ],
+    [
+      0.91,
+      0.82,
+      0.18
+    ],
+    [
+      1.0,
+      1.0,
+      0.22
+    ],
+    [
+      0.91,
+      -0.82,
+      0.18
+    ],
+    [
+      0.62,
+      -0.52,
+      0.08
+    ],
+    [
+      0.915,
+      -0.25,
+      0.15
+    ]
+  ],
+  "name": "Exploited_Cambered_Supercritical_v1"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 57
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 17951 nodes for 8976 points.
+-2.9693627650664176 0.30283913310463373
+good epoch; reward: -0.10198792032669
+Reward: -0.1020, Drag: -2.9694, Lift: -0.3028
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\u2019' in position 37: ordinal not in range(128)
+Reward: -0.1020, Best: 0.4249, Islands: {0: 13, 1: 24, 2: 21}
+
+--- Iteration 59/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3729 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_58/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_58/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_58/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_6/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_58/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9855,
+      0.0,
+      0.95
+    ],
+    [
+      0.9241,
+      0.2855,
+      0.12
+    ],
+    [
+      0.865,
+      0.5521,
+      0.08
+    ],
+    [
+      0.9422,
+      0.8244,
+      0.15
+    ],
+    [
+      1.0,
+      1.0,
+      0.25
+    ],
+    [
+      0.9355,
+      -0.8244,
+      0.15
+    ],
+    [
+      0.625,
+      -0.5521,
+      0.08
+    ],
+    [
+      0.8955,
+      -0.2855,
+      0.12
+    ]
+  ],
+  "name": "stretched_camber_supercritical_v1"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 58
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 17715 nodes for 8858 points.
+-3.590844992302193 0.19326285708685464
+good epoch; reward: -0.05382099686874769
+Reward: -0.0538, Drag: -3.5908, Lift: -0.1933
+Warning: Could not extract structured analysis, returning raw response
+  Reflection failed (non-fatal): 'ascii' codec can't encode character '\xb0' in position 635: ordinal not in range(128)
+Reward: -0.0538, Best: 0.4249, Islands: {0: 14, 1: 24, 2: 21}
+
+--- Iteration 60/80 (action: gaussain, inspirations: 5, islands: 3) ---
+  Scratchpad: 3729 chars
+DEBUG image copy: idx=0, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/png/shape_1.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_59/context/image_0_shape_1.png
+DEBUG image copy: idx=1, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_p.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_59/context/image_1_1_p.png
+DEBUG image copy: idx=2, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_u.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_59/context/image_2_1_u.png
+DEBUG image copy: idx=3, img_path=/scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_1/save/sol/1_v.png, exists=True
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_212
+DEBUG image copy: Copying to /scratch/Higher_dims/Islands_visual_stratedgy/benchmark_results_gaussain/design_59/context/image_3_1_v.png
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.95
+    ],
+    [
+      0.92,
+      0.25,
+      0.05
+    ],
+    [
+      0.82,
+      0.5,
+      0.1
+    ],
+    [
+      0.94,
+      0.78,
+      0.15
+    ],
+    [
+      1.0,
+      1.0,
+      0.28
+    ],
+    [
+      0.94,
+      -0.78,
+      0.15
+    ],
+    [
+      0.7,
+      -0.5,
+      0.1
+    ],
+    [
+      0.92,
+      -0.25,
+      0.05
+    ]
+  ],
+  "name": "expanded_camber_v1"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 59
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 17659 nodes for 8830 points.

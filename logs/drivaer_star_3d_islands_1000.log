@@ -1,0 +1,3222 @@
+/scratch/ShapeEvolve/frameworks/drivaer_star_3d_islands/agent.py:7: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+/home/ubuntu/miniconda3/lib/python3.13/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+2026-03-10 22:35:20.282 (  30.587s) [    7497BAE3F740]vtkXOpenGLRenderWindow.:1460  WARN| bad X server connection. DISPLAY=
+============================================================
+  Framework:   drivaer_star_3d_islands
+  Environment: DrivAer_Star
+  Output:      /scratch/ShapeEvolve/environments/DrivAer_Star/results/run_drivaer_star_3d_islands
+  Config:      /scratch/ShapeEvolve/environments/DrivAer_Star/results/run_drivaer_star_3d_islands/run_config.json
+============================================================
+
+--- Iteration 1/1000 [INIT 1/6] (action: gaussain, island: 0, no context) ---
+Reward: -0.2610, Best: -0.2610, Islands: {0: 1, 1: 0, 2: 0}
+
+--- Iteration 2/1000 [INIT 2/6] (action: gaussain, island: 1, no context) ---
+Reward: -0.2162, Best: -0.2162, Islands: {0: 1, 1: 1, 2: 0}
+
+--- Iteration 3/1000 [INIT 3/6] (action: gaussain, island: 2, no context) ---
+Reward: -0.2338, Best: -0.2162, Islands: {0: 1, 1: 1, 2: 1}
+
+--- Iteration 4/1000 [INIT 4/6] (action: gaussain, island: 0, no context) ---
+Reward: -0.1997, Best: -0.1997, Islands: {0: 2, 1: 1, 2: 1}
+
+--- Iteration 5/1000 [INIT 5/6] (action: gaussain, island: 1, no context) ---
+Reward: -0.2340, Best: -0.1997, Islands: {0: 2, 1: 2, 2: 1}
+
+--- Iteration 6/1000 [INIT 6/6] (action: gaussain, island: 2, no context) ---
+Reward: -0.2110, Best: -0.1997, Islands: {0: 2, 1: 2, 2: 2}
+
+--- Iteration 7/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2719, Best: -0.1997, Islands: {0: 3, 1: 2, 2: 2}
+
+--- Iteration 8/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2206, Best: -0.1997, Islands: {0: 3, 1: 3, 2: 2}
+
+--- Iteration 9/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2462, Best: -0.1997, Islands: {0: 4, 1: 3, 2: 2}
+
+--- Iteration 10/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2111, Best: -0.1997, Islands: {0: 4, 1: 4, 2: 2}
+
+--- Iteration 11/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1865, Best: -0.1865, Islands: {0: 4, 1: 5, 2: 2}
+
+--- Iteration 12/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2380, Best: -0.1865, Islands: {0: 4, 1: 6, 2: 2}
+
+--- Iteration 13/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2096, Best: -0.1865, Islands: {0: 5, 1: 6, 2: 2}
+
+--- Iteration 14/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2061, Best: -0.1865, Islands: {0: 5, 1: 7, 2: 2}
+
+--- Iteration 15/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1806, Best: -0.1806, Islands: {0: 5, 1: 7, 2: 3}
+
+--- Iteration 16/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1619, Best: -0.1619, Islands: {0: 5, 1: 7, 2: 4}
+
+--- Iteration 17/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 10
+  Migration: moved 4 designs between islands
+Reward: -0.1709, Best: -0.1619, Islands: {0: 6, 1: 6, 2: 5}
+
+--- Iteration 18/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1485, Best: -0.1485, Islands: {0: 6, 1: 7, 2: 5}
+
+--- Iteration 19/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1623, Best: -0.1485, Islands: {0: 6, 1: 7, 2: 6}
+
+--- Iteration 20/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1590, Best: -0.1485, Islands: {0: 6, 1: 8, 2: 6}
+
+--- Iteration 21/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1406, Best: -0.1406, Islands: {0: 6, 1: 9, 2: 6}
+
+--- Iteration 22/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1665, Best: -0.1406, Islands: {0: 6, 1: 9, 2: 7}
+
+--- Iteration 23/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1627, Best: -0.1406, Islands: {0: 6, 1: 9, 2: 8}
+
+--- Iteration 24/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1621, Best: -0.1406, Islands: {0: 6, 1: 10, 2: 8}
+
+--- Iteration 25/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1625, Best: -0.1406, Islands: {0: 6, 1: 11, 2: 8}
+
+--- Iteration 26/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1677, Best: -0.1406, Islands: {0: 6, 1: 12, 2: 8}
+
+--- Iteration 27/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 20
+  Migration: moved 7 designs between islands
+Reward: -0.1591, Best: -0.1406, Islands: {0: 7, 1: 11, 2: 9}
+
+--- Iteration 28/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1053, Best: -0.1053, Islands: {0: 7, 1: 12, 2: 9}
+
+--- Iteration 29/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1696, Best: -0.1053, Islands: {0: 7, 1: 13, 2: 9}
+
+--- Iteration 30/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1645, Best: -0.1053, Islands: {0: 8, 1: 13, 2: 9}
+
+--- Iteration 31/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1580, Best: -0.1053, Islands: {0: 8, 1: 14, 2: 9}
+
+--- Iteration 32/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1591, Best: -0.1053, Islands: {0: 8, 1: 15, 2: 9}
+
+--- Iteration 33/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1534, Best: -0.1053, Islands: {0: 9, 1: 15, 2: 9}
+
+--- Iteration 34/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1325, Best: -0.1053, Islands: {0: 9, 1: 16, 2: 9}
+
+--- Iteration 35/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1919, Best: -0.1053, Islands: {0: 10, 1: 16, 2: 9}
+
+--- Iteration 36/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1692, Best: -0.1053, Islands: {0: 10, 1: 16, 2: 10}
+
+--- Iteration 37/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 30
+  Migration: moved 12 designs between islands
+Reward: -0.1754, Best: -0.1053, Islands: {0: 14, 1: 13, 2: 10}
+
+--- Iteration 38/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2469, Best: -0.1053, Islands: {0: 14, 1: 13, 2: 11}
+
+--- Iteration 39/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1666, Best: -0.1053, Islands: {0: 14, 1: 13, 2: 12}
+
+--- Iteration 40/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1610, Best: -0.1053, Islands: {0: 14, 1: 14, 2: 12}
+
+--- Iteration 41/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1520, Best: -0.1053, Islands: {0: 15, 1: 14, 2: 12}
+
+--- Iteration 42/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2406, Best: -0.1053, Islands: {0: 15, 1: 14, 2: 13}
+
+--- Iteration 43/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1627, Best: -0.1053, Islands: {0: 15, 1: 14, 2: 14}
+
+--- Iteration 44/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1496, Best: -0.1053, Islands: {0: 15, 1: 14, 2: 15}
+
+--- Iteration 45/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1712, Best: -0.1053, Islands: {0: 16, 1: 14, 2: 15}
+
+--- Iteration 46/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1654, Best: -0.1053, Islands: {0: 16, 1: 14, 2: 16}
+
+--- Iteration 47/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 40
+  Migration: moved 15 designs between islands
+Reward: -0.1984, Best: -0.1053, Islands: {0: 16, 1: 15, 2: 16}
+
+--- Iteration 48/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1609, Best: -0.1053, Islands: {0: 16, 1: 15, 2: 17}
+
+--- Iteration 49/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1283, Best: -0.1053, Islands: {0: 17, 1: 15, 2: 17}
+
+--- Iteration 50/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1656, Best: -0.1053, Islands: {0: 18, 1: 15, 2: 17}
+
+--- Iteration 51/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1291, Best: -0.1053, Islands: {0: 19, 1: 15, 2: 17}
+
+--- Iteration 52/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1104, Best: -0.1053, Islands: {0: 19, 1: 16, 2: 17}
+
+--- Iteration 53/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2087, Best: -0.1053, Islands: {0: 20, 1: 16, 2: 17}
+
+--- Iteration 54/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1590, Best: -0.1053, Islands: {0: 20, 1: 16, 2: 18}
+
+--- Iteration 55/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1675, Best: -0.1053, Islands: {0: 20, 1: 16, 2: 19}
+
+--- Iteration 56/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1614, Best: -0.1053, Islands: {0: 20, 1: 17, 2: 19}
+
+--- Iteration 57/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 50
+  Migration: moved 19 designs between islands
+Reward: -0.1545, Best: -0.1053, Islands: {0: 19, 1: 19, 2: 19}
+
+--- Iteration 58/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1623, Best: -0.1053, Islands: {0: 19, 1: 20, 2: 19}
+
+--- Iteration 59/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2470, Best: -0.1053, Islands: {0: 19, 1: 20, 2: 20}
+
+--- Iteration 60/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1062, Best: -0.1053, Islands: {0: 19, 1: 21, 2: 20}
+
+--- Iteration 61/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1208, Best: -0.1053, Islands: {0: 20, 1: 21, 2: 20}
+
+--- Iteration 62/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1719, Best: -0.1053, Islands: {0: 20, 1: 21, 2: 21}
+
+--- Iteration 63/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2102, Best: -0.1053, Islands: {0: 20, 1: 21, 2: 22}
+
+--- Iteration 64/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1720, Best: -0.1053, Islands: {0: 21, 1: 21, 2: 22}
+
+--- Iteration 65/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1685, Best: -0.1053, Islands: {0: 21, 1: 21, 2: 23}
+
+--- Iteration 66/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1038, Best: -0.1038, Islands: {0: 21, 1: 22, 2: 23}
+
+--- Iteration 67/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 60
+  Migration: moved 21 designs between islands
+Reward: -0.1130, Best: -0.1038, Islands: {0: 27, 1: 21, 2: 19}
+
+--- Iteration 68/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1045, Best: -0.1038, Islands: {0: 27, 1: 22, 2: 19}
+
+--- Iteration 69/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1061, Best: -0.1038, Islands: {0: 27, 1: 23, 2: 19}
+
+--- Iteration 70/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1511, Best: -0.1038, Islands: {0: 27, 1: 23, 2: 20}
+
+--- Iteration 71/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1752, Best: -0.1038, Islands: {0: 27, 1: 23, 2: 21}
+
+--- Iteration 72/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1724, Best: -0.1038, Islands: {0: 27, 1: 24, 2: 21}
+
+--- Iteration 73/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1651, Best: -0.1038, Islands: {0: 27, 1: 24, 2: 22}
+
+--- Iteration 74/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1146, Best: -0.1038, Islands: {0: 27, 1: 25, 2: 22}
+
+--- Iteration 75/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1008, Best: -0.1008, Islands: {0: 27, 1: 26, 2: 22}
+
+--- Iteration 76/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2954, Best: -0.1008, Islands: {0: 27, 1: 26, 2: 23}
+
+--- Iteration 77/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 70
+  Migration: moved 26 designs between islands
+Reward: -0.1638, Best: -0.1008, Islands: {0: 27, 1: 27, 2: 23}
+
+--- Iteration 78/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1045, Best: -0.1008, Islands: {0: 27, 1: 28, 2: 23}
+
+--- Iteration 79/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1148, Best: -0.1008, Islands: {0: 28, 1: 28, 2: 23}
+
+--- Iteration 80/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1056, Best: -0.1008, Islands: {0: 28, 1: 29, 2: 23}
+
+--- Iteration 81/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1685, Best: -0.1008, Islands: {0: 28, 1: 29, 2: 24}
+
+--- Iteration 82/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1203, Best: -0.1008, Islands: {0: 28, 1: 30, 2: 24}
+
+--- Iteration 83/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1672, Best: -0.1008, Islands: {0: 29, 1: 30, 2: 24}
+
+--- Iteration 84/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1067, Best: -0.1008, Islands: {0: 29, 1: 30, 2: 25}
+
+--- Iteration 85/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1778, Best: -0.1008, Islands: {0: 30, 1: 30, 2: 25}
+
+--- Iteration 86/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1671, Best: -0.1008, Islands: {0: 30, 1: 31, 2: 25}
+
+--- Iteration 87/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 80
+  Migration: moved 29 designs between islands
+Reward: -0.1660, Best: -0.1008, Islands: {0: 32, 1: 32, 2: 23}
+
+--- Iteration 88/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2322, Best: -0.1008, Islands: {0: 32, 1: 32, 2: 24}
+
+--- Iteration 89/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1149, Best: -0.1008, Islands: {0: 32, 1: 33, 2: 24}
+
+--- Iteration 90/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1095, Best: -0.1008, Islands: {0: 32, 1: 33, 2: 25}
+
+--- Iteration 91/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1056, Best: -0.1008, Islands: {0: 32, 1: 33, 2: 26}
+
+--- Iteration 92/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1003, Best: -0.1003, Islands: {0: 32, 1: 33, 2: 27}
+
+--- Iteration 93/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1568, Best: -0.1003, Islands: {0: 32, 1: 33, 2: 28}
+
+--- Iteration 94/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2181, Best: -0.1003, Islands: {0: 33, 1: 33, 2: 28}
+
+--- Iteration 95/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1073, Best: -0.1003, Islands: {0: 33, 1: 34, 2: 28}
+
+--- Iteration 96/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1810, Best: -0.1003, Islands: {0: 33, 1: 34, 2: 29}
+
+--- Iteration 97/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 90
+  Migration: moved 32 designs between islands
+Reward: -0.1208, Best: -0.1003, Islands: {0: 34, 1: 35, 2: 28}
+
+--- Iteration 98/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1103, Best: -0.1003, Islands: {0: 35, 1: 35, 2: 28}
+
+--- Iteration 99/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1641, Best: -0.1003, Islands: {0: 35, 1: 35, 2: 29}
+
+--- Iteration 100/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1200, Best: -0.1003, Islands: {0: 35, 1: 35, 2: 30}
+
+--- Iteration 101/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1163, Best: -0.1003, Islands: {0: 35, 1: 36, 2: 30}
+
+--- Iteration 102/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1073, Best: -0.1003, Islands: {0: 35, 1: 36, 2: 31}
+
+--- Iteration 103/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1088, Best: -0.1003, Islands: {0: 36, 1: 36, 2: 31}
+
+--- Iteration 104/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1117, Best: -0.1003, Islands: {0: 36, 1: 37, 2: 31}
+
+--- Iteration 105/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1052, Best: -0.1003, Islands: {0: 36, 1: 38, 2: 31}
+
+--- Iteration 106/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1032, Best: -0.1003, Islands: {0: 36, 1: 39, 2: 31}
+
+--- Iteration 107/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 100
+  Migration: moved 37 designs between islands
+Reward: -0.1588, Best: -0.1003, Islands: {0: 33, 1: 41, 2: 33}
+
+--- Iteration 108/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1588, Best: -0.1003, Islands: {0: 34, 1: 41, 2: 33}
+
+--- Iteration 109/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0968, Best: -0.0968, Islands: {0: 34, 1: 42, 2: 33}
+
+--- Iteration 110/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1686, Best: -0.0968, Islands: {0: 35, 1: 42, 2: 33}
+
+--- Iteration 111/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1055, Best: -0.0968, Islands: {0: 35, 1: 42, 2: 34}
+
+--- Iteration 112/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1060, Best: -0.0968, Islands: {0: 35, 1: 43, 2: 34}
+
+--- Iteration 113/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1188, Best: -0.0968, Islands: {0: 35, 1: 43, 2: 35}
+
+--- Iteration 114/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1572, Best: -0.0968, Islands: {0: 35, 1: 43, 2: 36}
+
+--- Iteration 115/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0999, Best: -0.0968, Islands: {0: 36, 1: 43, 2: 36}
+
+--- Iteration 116/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1256, Best: -0.0968, Islands: {0: 36, 1: 43, 2: 37}
+
+--- Iteration 117/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 110
+  Migration: moved 40 designs between islands
+Reward: -0.1202, Best: -0.0968, Islands: {0: 39, 1: 45, 2: 33}
+
+--- Iteration 118/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1310, Best: -0.0968, Islands: {0: 40, 1: 45, 2: 33}
+
+--- Iteration 119/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1056, Best: -0.0968, Islands: {0: 40, 1: 46, 2: 33}
+
+--- Iteration 120/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1024, Best: -0.0968, Islands: {0: 40, 1: 46, 2: 34}
+
+--- Iteration 121/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1470, Best: -0.0968, Islands: {0: 41, 1: 46, 2: 34}
+
+--- Iteration 122/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0978, Best: -0.0968, Islands: {0: 42, 1: 46, 2: 34}
+
+--- Iteration 123/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1847, Best: -0.0968, Islands: {0: 42, 1: 46, 2: 35}
+
+--- Iteration 124/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1131, Best: -0.0968, Islands: {0: 42, 1: 46, 2: 36}
+
+--- Iteration 125/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1137, Best: -0.0968, Islands: {0: 42, 1: 47, 2: 36}
+
+--- Iteration 126/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1108, Best: -0.0968, Islands: {0: 42, 1: 47, 2: 37}
+
+--- Iteration 127/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 120
+  Migration: moved 42 designs between islands
+Reward: -0.1032, Best: -0.0968, Islands: {0: 45, 1: 45, 2: 37}
+
+--- Iteration 128/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1659, Best: -0.0968, Islands: {0: 46, 1: 45, 2: 37}
+
+--- Iteration 129/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1040, Best: -0.0968, Islands: {0: 47, 1: 45, 2: 37}
+
+--- Iteration 130/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1003, Best: -0.0968, Islands: {0: 47, 1: 46, 2: 37}
+
+--- Iteration 131/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1164, Best: -0.0968, Islands: {0: 47, 1: 47, 2: 37}
+
+--- Iteration 132/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1131, Best: -0.0968, Islands: {0: 47, 1: 48, 2: 37}
+
+--- Iteration 133/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1372, Best: -0.0968, Islands: {0: 47, 1: 49, 2: 37}
+
+--- Iteration 134/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1007, Best: -0.0968, Islands: {0: 47, 1: 49, 2: 38}
+
+--- Iteration 135/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1026, Best: -0.0968, Islands: {0: 47, 1: 49, 2: 39}
+
+--- Iteration 136/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1599, Best: -0.0968, Islands: {0: 47, 1: 49, 2: 40}
+
+--- Iteration 137/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 130
+  Migration: moved 45 designs between islands
+Reward: -0.1664, Best: -0.0968, Islands: {0: 51, 1: 47, 2: 39}
+
+--- Iteration 138/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1086, Best: -0.0968, Islands: {0: 51, 1: 47, 2: 40}
+
+--- Iteration 139/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1106, Best: -0.0968, Islands: {0: 51, 1: 48, 2: 40}
+
+--- Iteration 140/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1090, Best: -0.0968, Islands: {0: 51, 1: 49, 2: 40}
+
+--- Iteration 141/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1096, Best: -0.0968, Islands: {0: 51, 1: 49, 2: 41}
+
+--- Iteration 142/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1189, Best: -0.0968, Islands: {0: 51, 1: 50, 2: 41}
+
+--- Iteration 143/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2578, Best: -0.0968, Islands: {0: 51, 1: 50, 2: 42}
+
+--- Iteration 144/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1030, Best: -0.0968, Islands: {0: 52, 1: 50, 2: 42}
+
+--- Iteration 145/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1830, Best: -0.0968, Islands: {0: 52, 1: 51, 2: 42}
+
+--- Iteration 146/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1033, Best: -0.0968, Islands: {0: 52, 1: 51, 2: 43}
+
+--- Iteration 147/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 140
+  Migration: moved 50 designs between islands
+Reward: -0.1178, Best: -0.0968, Islands: {0: 53, 1: 51, 2: 43}
+
+--- Iteration 148/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1164, Best: -0.0968, Islands: {0: 53, 1: 52, 2: 43}
+
+--- Iteration 149/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2003, Best: -0.0968, Islands: {0: 54, 1: 52, 2: 43}
+
+--- Iteration 150/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1365, Best: -0.0968, Islands: {0: 54, 1: 52, 2: 44}
+
+--- Iteration 151/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1023, Best: -0.0968, Islands: {0: 55, 1: 52, 2: 44}
+
+--- Iteration 152/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1020, Best: -0.0968, Islands: {0: 55, 1: 53, 2: 44}
+
+--- Iteration 153/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1050, Best: -0.0968, Islands: {0: 56, 1: 53, 2: 44}
+
+--- Iteration 154/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1107, Best: -0.0968, Islands: {0: 57, 1: 53, 2: 44}
+
+--- Iteration 155/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1703, Best: -0.0968, Islands: {0: 57, 1: 53, 2: 45}
+
+--- Iteration 156/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1032, Best: -0.0968, Islands: {0: 57, 1: 54, 2: 45}
+
+--- Iteration 157/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 150
+  Migration: moved 54 designs between islands
+Reward: -0.1030, Best: -0.0968, Islands: {0: 60, 1: 54, 2: 43}
+
+--- Iteration 158/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1122, Best: -0.0968, Islands: {0: 61, 1: 54, 2: 43}
+
+--- Iteration 159/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2167, Best: -0.0968, Islands: {0: 61, 1: 54, 2: 44}
+
+--- Iteration 160/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1634, Best: -0.0968, Islands: {0: 61, 1: 55, 2: 44}
+
+--- Iteration 161/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2377, Best: -0.0968, Islands: {0: 61, 1: 56, 2: 44}
+
+--- Iteration 162/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1030, Best: -0.0968, Islands: {0: 62, 1: 56, 2: 44}
+
+--- Iteration 163/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1104, Best: -0.0968, Islands: {0: 63, 1: 56, 2: 44}
+
+--- Iteration 164/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1040, Best: -0.0968, Islands: {0: 64, 1: 56, 2: 44}
+
+--- Iteration 165/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2156, Best: -0.0968, Islands: {0: 64, 1: 57, 2: 44}
+
+--- Iteration 166/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1107, Best: -0.0968, Islands: {0: 65, 1: 57, 2: 44}
+
+--- Iteration 167/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 160
+  Migration: moved 58 designs between islands
+Reward: -0.1031, Best: -0.0968, Islands: {0: 60, 1: 62, 2: 45}
+
+--- Iteration 168/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1715, Best: -0.0968, Islands: {0: 60, 1: 63, 2: 45}
+
+--- Iteration 169/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1460, Best: -0.0968, Islands: {0: 60, 1: 64, 2: 45}
+
+--- Iteration 170/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1560, Best: -0.0968, Islands: {0: 60, 1: 65, 2: 45}
+
+--- Iteration 171/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1017, Best: -0.0968, Islands: {0: 60, 1: 66, 2: 45}
+
+--- Iteration 172/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1015, Best: -0.0968, Islands: {0: 61, 1: 66, 2: 45}
+
+--- Iteration 173/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0976, Best: -0.0968, Islands: {0: 62, 1: 66, 2: 45}
+
+--- Iteration 174/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1676, Best: -0.0968, Islands: {0: 62, 1: 67, 2: 45}
+
+--- Iteration 175/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1017, Best: -0.0968, Islands: {0: 62, 1: 67, 2: 46}
+
+--- Iteration 176/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1966, Best: -0.0968, Islands: {0: 62, 1: 67, 2: 47}
+
+--- Iteration 177/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 170
+  Migration: moved 62 designs between islands
+Reward: -0.1136, Best: -0.0968, Islands: {0: 63, 1: 62, 2: 52}
+
+--- Iteration 178/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1064, Best: -0.0968, Islands: {0: 63, 1: 62, 2: 53}
+
+--- Iteration 179/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1117, Best: -0.0968, Islands: {0: 64, 1: 62, 2: 53}
+
+--- Iteration 180/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1018, Best: -0.0968, Islands: {0: 64, 1: 63, 2: 53}
+
+--- Iteration 181/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1085, Best: -0.0968, Islands: {0: 64, 1: 63, 2: 54}
+
+--- Iteration 182/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1699, Best: -0.0968, Islands: {0: 64, 1: 64, 2: 54}
+
+--- Iteration 183/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1061, Best: -0.0968, Islands: {0: 64, 1: 65, 2: 54}
+
+--- Iteration 184/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1209, Best: -0.0968, Islands: {0: 65, 1: 65, 2: 54}
+
+--- Iteration 185/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1051, Best: -0.0968, Islands: {0: 65, 1: 65, 2: 55}
+
+--- Iteration 186/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1544, Best: -0.0968, Islands: {0: 65, 1: 65, 2: 56}
+
+--- Iteration 187/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 180
+  Migration: moved 64 designs between islands
+Reward: -0.1117, Best: -0.0968, Islands: {0: 69, 1: 65, 2: 53}
+
+--- Iteration 188/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1030, Best: -0.0968, Islands: {0: 69, 1: 66, 2: 53}
+
+--- Iteration 189/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1096, Best: -0.0968, Islands: {0: 69, 1: 67, 2: 53}
+
+--- Iteration 190/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1180, Best: -0.0968, Islands: {0: 70, 1: 67, 2: 53}
+
+--- Iteration 191/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1035, Best: -0.0968, Islands: {0: 71, 1: 67, 2: 53}
+
+--- Iteration 192/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1619, Best: -0.0968, Islands: {0: 71, 1: 68, 2: 53}
+
+--- Iteration 193/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1016, Best: -0.0968, Islands: {0: 72, 1: 68, 2: 53}
+
+--- Iteration 194/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2071, Best: -0.0968, Islands: {0: 72, 1: 69, 2: 53}
+
+--- Iteration 195/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1019, Best: -0.0968, Islands: {0: 72, 1: 70, 2: 53}
+
+--- Iteration 196/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1014, Best: -0.0968, Islands: {0: 72, 1: 71, 2: 53}
+
+--- Iteration 197/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 190
+  Migration: moved 68 designs between islands
+Reward: -0.1050, Best: -0.0968, Islands: {0: 72, 1: 71, 2: 54}
+
+--- Iteration 198/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1063, Best: -0.0968, Islands: {0: 72, 1: 72, 2: 54}
+
+--- Iteration 199/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1007, Best: -0.0968, Islands: {0: 73, 1: 72, 2: 54}
+
+--- Iteration 200/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1036, Best: -0.0968, Islands: {0: 74, 1: 72, 2: 54}
+
+--- Iteration 201/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1050, Best: -0.0968, Islands: {0: 75, 1: 72, 2: 54}
+
+--- Iteration 202/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1626, Best: -0.0968, Islands: {0: 75, 1: 73, 2: 54}
+
+--- Iteration 203/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1561, Best: -0.0968, Islands: {0: 76, 1: 73, 2: 54}
+
+--- Iteration 204/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1111, Best: -0.0968, Islands: {0: 76, 1: 74, 2: 54}
+
+--- Iteration 205/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1015, Best: -0.0968, Islands: {0: 77, 1: 74, 2: 54}
+
+--- Iteration 206/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1026, Best: -0.0968, Islands: {0: 77, 1: 75, 2: 54}
+
+--- Iteration 207/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 200
+  Migration: moved 70 designs between islands
+Reward: -0.2559, Best: -0.0968, Islands: {0: 79, 1: 76, 2: 52}
+
+--- Iteration 208/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1145, Best: -0.0968, Islands: {0: 79, 1: 76, 2: 53}
+
+--- Iteration 209/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1178, Best: -0.0968, Islands: {0: 79, 1: 76, 2: 54}
+
+--- Iteration 210/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1138, Best: -0.0968, Islands: {0: 79, 1: 77, 2: 54}
+
+--- Iteration 211/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1643, Best: -0.0968, Islands: {0: 79, 1: 78, 2: 54}
+
+--- Iteration 212/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1159, Best: -0.0968, Islands: {0: 80, 1: 78, 2: 54}
+
+--- Iteration 213/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2312, Best: -0.0968, Islands: {0: 81, 1: 78, 2: 54}
+
+--- Iteration 214/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1623, Best: -0.0968, Islands: {0: 81, 1: 79, 2: 54}
+
+--- Iteration 215/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1059, Best: -0.0968, Islands: {0: 81, 1: 79, 2: 55}
+
+--- Iteration 216/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1942, Best: -0.0968, Islands: {0: 81, 1: 80, 2: 55}
+
+--- Iteration 217/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 210
+  Migration: moved 74 designs between islands
+Reward: -0.1652, Best: -0.0968, Islands: {0: 85, 1: 79, 2: 53}
+
+--- Iteration 218/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1611, Best: -0.0968, Islands: {0: 85, 1: 79, 2: 54}
+
+--- Iteration 219/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1143, Best: -0.0968, Islands: {0: 86, 1: 79, 2: 54}
+
+--- Iteration 220/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1063, Best: -0.0968, Islands: {0: 86, 1: 79, 2: 55}
+
+--- Iteration 221/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1064, Best: -0.0968, Islands: {0: 87, 1: 79, 2: 55}
+
+--- Iteration 222/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1069, Best: -0.0968, Islands: {0: 88, 1: 79, 2: 55}
+
+--- Iteration 223/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1093, Best: -0.0968, Islands: {0: 88, 1: 79, 2: 56}
+
+--- Iteration 224/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1779, Best: -0.0968, Islands: {0: 88, 1: 80, 2: 56}
+
+--- Iteration 225/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1031, Best: -0.0968, Islands: {0: 88, 1: 80, 2: 57}
+
+--- Iteration 226/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1041, Best: -0.0968, Islands: {0: 88, 1: 81, 2: 57}
+
+--- Iteration 227/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 220
+  Migration: moved 77 designs between islands
+Reward: -0.1020, Best: -0.0968, Islands: {0: 93, 1: 76, 2: 58}
+
+--- Iteration 228/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1178, Best: -0.0968, Islands: {0: 93, 1: 76, 2: 59}
+
+--- Iteration 229/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0990, Best: -0.0968, Islands: {0: 93, 1: 77, 2: 59}
+
+--- Iteration 230/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1683, Best: -0.0968, Islands: {0: 93, 1: 77, 2: 60}
+
+--- Iteration 231/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1105, Best: -0.0968, Islands: {0: 94, 1: 77, 2: 60}
+
+--- Iteration 232/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1083, Best: -0.0968, Islands: {0: 94, 1: 78, 2: 60}
+
+--- Iteration 233/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1004, Best: -0.0968, Islands: {0: 94, 1: 78, 2: 61}
+
+--- Iteration 234/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1832, Best: -0.0968, Islands: {0: 94, 1: 78, 2: 62}
+
+--- Iteration 235/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1017, Best: -0.0968, Islands: {0: 94, 1: 78, 2: 63}
+
+--- Iteration 236/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1062, Best: -0.0968, Islands: {0: 95, 1: 78, 2: 63}
+
+--- Iteration 237/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 230
+  Migration: moved 83 designs between islands
+Reward: -0.1290, Best: -0.0968, Islands: {0: 91, 1: 78, 2: 68}
+
+--- Iteration 238/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1009, Best: -0.0968, Islands: {0: 92, 1: 78, 2: 68}
+
+--- Iteration 239/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1072, Best: -0.0968, Islands: {0: 92, 1: 79, 2: 68}
+
+--- Iteration 240/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1348, Best: -0.0968, Islands: {0: 92, 1: 79, 2: 69}
+
+--- Iteration 241/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1190, Best: -0.0968, Islands: {0: 93, 1: 79, 2: 69}
+
+--- Iteration 242/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1020, Best: -0.0968, Islands: {0: 94, 1: 79, 2: 69}
+
+--- Iteration 243/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0990, Best: -0.0968, Islands: {0: 95, 1: 79, 2: 69}
+
+--- Iteration 244/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0986, Best: -0.0968, Islands: {0: 96, 1: 79, 2: 69}
+
+--- Iteration 245/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1588, Best: -0.0968, Islands: {0: 96, 1: 80, 2: 69}
+
+--- Iteration 246/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1705, Best: -0.0968, Islands: {0: 97, 1: 80, 2: 69}
+
+--- Iteration 247/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 240
+  Migration: moved 86 designs between islands
+Reward: -0.1129, Best: -0.0968, Islands: {0: 98, 1: 81, 2: 68}
+
+--- Iteration 248/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1660, Best: -0.0968, Islands: {0: 98, 1: 81, 2: 69}
+
+--- Iteration 249/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1754, Best: -0.0968, Islands: {0: 98, 1: 82, 2: 69}
+
+--- Iteration 250/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1156, Best: -0.0968, Islands: {0: 98, 1: 82, 2: 70}
+
+--- Iteration 251/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0990, Best: -0.0968, Islands: {0: 98, 1: 83, 2: 70}
+
+--- Iteration 252/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1248, Best: -0.0968, Islands: {0: 98, 1: 84, 2: 70}
+
+--- Iteration 253/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1112, Best: -0.0968, Islands: {0: 99, 1: 84, 2: 70}
+
+--- Iteration 254/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2738, Best: -0.0968, Islands: {0: 99, 1: 85, 2: 70}
+
+--- Iteration 255/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1517, Best: -0.0968, Islands: {0: 99, 1: 85, 2: 71}
+
+--- Iteration 256/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1013, Best: -0.0968, Islands: {0: 99, 1: 85, 2: 72}
+
+--- Iteration 257/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 250
+  Migration: moved 88 designs between islands
+Reward: -0.1732, Best: -0.0968, Islands: {0: 101, 1: 88, 2: 68}
+
+--- Iteration 258/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1473, Best: -0.0968, Islands: {0: 101, 1: 89, 2: 68}
+
+--- Iteration 259/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1263, Best: -0.0968, Islands: {0: 102, 1: 89, 2: 68}
+
+--- Iteration 260/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0987, Best: -0.0968, Islands: {0: 103, 1: 89, 2: 68}
+
+--- Iteration 261/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1737, Best: -0.0968, Islands: {0: 103, 1: 90, 2: 68}
+
+--- Iteration 262/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1384, Best: -0.0968, Islands: {0: 103, 1: 90, 2: 69}
+
+--- Iteration 263/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1156, Best: -0.0968, Islands: {0: 103, 1: 90, 2: 70}
+
+--- Iteration 264/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1978, Best: -0.0968, Islands: {0: 103, 1: 91, 2: 70}
+
+--- Iteration 265/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1105, Best: -0.0968, Islands: {0: 104, 1: 91, 2: 70}
+
+--- Iteration 266/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1362, Best: -0.0968, Islands: {0: 104, 1: 92, 2: 70}
+
+--- Iteration 267/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 260
+  Migration: moved 92 designs between islands
+Reward: -0.0973, Best: -0.0968, Islands: {0: 106, 1: 91, 2: 70}
+
+--- Iteration 268/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1198, Best: -0.0968, Islands: {0: 106, 1: 91, 2: 71}
+
+--- Iteration 269/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1024, Best: -0.0968, Islands: {0: 106, 1: 92, 2: 71}
+
+--- Iteration 270/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1614, Best: -0.0968, Islands: {0: 106, 1: 92, 2: 72}
+
+--- Iteration 271/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1059, Best: -0.0968, Islands: {0: 106, 1: 93, 2: 72}
+
+--- Iteration 272/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1040, Best: -0.0968, Islands: {0: 107, 1: 93, 2: 72}
+
+--- Iteration 273/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1066, Best: -0.0968, Islands: {0: 107, 1: 93, 2: 73}
+
+--- Iteration 274/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1103, Best: -0.0968, Islands: {0: 107, 1: 94, 2: 73}
+
+--- Iteration 275/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1679, Best: -0.0968, Islands: {0: 108, 1: 94, 2: 73}
+
+--- Iteration 276/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2172, Best: -0.0968, Islands: {0: 109, 1: 94, 2: 73}
+
+--- Iteration 277/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 270
+  Migration: moved 95 designs between islands
+Reward: -0.1913, Best: -0.0968, Islands: {0: 110, 1: 92, 2: 75}
+
+--- Iteration 278/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0994, Best: -0.0968, Islands: {0: 110, 1: 93, 2: 75}
+
+--- Iteration 279/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1095, Best: -0.0968, Islands: {0: 111, 1: 93, 2: 75}
+
+--- Iteration 280/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1030, Best: -0.0968, Islands: {0: 111, 1: 94, 2: 75}
+
+--- Iteration 281/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1409, Best: -0.0968, Islands: {0: 112, 1: 94, 2: 75}
+
+--- Iteration 282/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1153, Best: -0.0968, Islands: {0: 113, 1: 94, 2: 75}
+
+--- Iteration 283/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1204, Best: -0.0968, Islands: {0: 113, 1: 95, 2: 75}
+
+--- Iteration 284/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1057, Best: -0.0968, Islands: {0: 114, 1: 95, 2: 75}
+
+--- Iteration 285/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0988, Best: -0.0968, Islands: {0: 114, 1: 95, 2: 76}
+
+--- Iteration 286/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1786, Best: -0.0968, Islands: {0: 114, 1: 95, 2: 77}
+
+--- Iteration 287/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 280
+  Migration: moved 99 designs between islands
+Reward: -0.1052, Best: -0.0968, Islands: {0: 118, 1: 90, 2: 79}
+
+--- Iteration 288/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1050, Best: -0.0968, Islands: {0: 118, 1: 91, 2: 79}
+
+--- Iteration 289/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1060, Best: -0.0968, Islands: {0: 118, 1: 91, 2: 80}
+
+--- Iteration 290/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1262, Best: -0.0968, Islands: {0: 118, 1: 92, 2: 80}
+
+--- Iteration 291/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1437, Best: -0.0968, Islands: {0: 119, 1: 92, 2: 80}
+
+--- Iteration 292/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1664, Best: -0.0968, Islands: {0: 119, 1: 93, 2: 80}
+
+--- Iteration 293/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1647, Best: -0.0968, Islands: {0: 120, 1: 93, 2: 80}
+
+--- Iteration 294/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1231, Best: -0.0968, Islands: {0: 120, 1: 93, 2: 81}
+
+--- Iteration 295/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1533, Best: -0.0968, Islands: {0: 120, 1: 94, 2: 81}
+
+--- Iteration 296/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1024, Best: -0.0968, Islands: {0: 121, 1: 94, 2: 81}
+
+--- Iteration 297/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 290
+  Migration: moved 104 designs between islands
+Reward: -0.0991, Best: -0.0968, Islands: {0: 113, 1: 102, 2: 82}
+
+--- Iteration 298/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1119, Best: -0.0968, Islands: {0: 114, 1: 102, 2: 82}
+
+--- Iteration 299/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1138, Best: -0.0968, Islands: {0: 114, 1: 102, 2: 83}
+
+--- Iteration 300/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1036, Best: -0.0968, Islands: {0: 114, 1: 102, 2: 84}
+
+--- Iteration 301/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1043, Best: -0.0968, Islands: {0: 114, 1: 103, 2: 84}
+
+--- Iteration 302/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1115, Best: -0.0968, Islands: {0: 114, 1: 104, 2: 84}
+
+--- Iteration 303/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1343, Best: -0.0968, Islands: {0: 114, 1: 105, 2: 84}
+
+--- Iteration 304/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1099, Best: -0.0968, Islands: {0: 115, 1: 105, 2: 84}
+
+--- Iteration 305/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1017, Best: -0.0968, Islands: {0: 115, 1: 106, 2: 84}
+
+--- Iteration 306/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1019, Best: -0.0968, Islands: {0: 115, 1: 107, 2: 84}
+
+--- Iteration 307/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 300
+  Migration: moved 106 designs between islands
+Reward: -0.1018, Best: -0.0968, Islands: {0: 118, 1: 103, 2: 86}
+
+--- Iteration 308/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1071, Best: -0.0968, Islands: {0: 118, 1: 103, 2: 87}
+
+--- Iteration 309/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1056, Best: -0.0968, Islands: {0: 118, 1: 104, 2: 87}
+
+--- Iteration 310/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1003, Best: -0.0968, Islands: {0: 119, 1: 104, 2: 87}
+
+--- Iteration 311/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1195, Best: -0.0968, Islands: {0: 120, 1: 104, 2: 87}
+
+--- Iteration 312/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1069, Best: -0.0968, Islands: {0: 120, 1: 105, 2: 87}
+
+--- Iteration 313/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1795, Best: -0.0968, Islands: {0: 120, 1: 105, 2: 88}
+
+--- Iteration 314/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1037, Best: -0.0968, Islands: {0: 120, 1: 106, 2: 88}
+
+--- Iteration 315/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1021, Best: -0.0968, Islands: {0: 121, 1: 106, 2: 88}
+
+--- Iteration 316/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0993, Best: -0.0968, Islands: {0: 122, 1: 106, 2: 88}
+
+--- Iteration 317/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 310
+  Migration: moved 110 designs between islands
+Reward: -0.1675, Best: -0.0968, Islands: {0: 129, 1: 106, 2: 82}
+
+--- Iteration 318/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1221, Best: -0.0968, Islands: {0: 130, 1: 106, 2: 82}
+
+--- Iteration 319/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0974, Best: -0.0968, Islands: {0: 130, 1: 107, 2: 82}
+
+--- Iteration 320/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1159, Best: -0.0968, Islands: {0: 130, 1: 108, 2: 82}
+
+--- Iteration 321/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1058, Best: -0.0968, Islands: {0: 130, 1: 109, 2: 82}
+
+--- Iteration 322/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0991, Best: -0.0968, Islands: {0: 130, 1: 109, 2: 83}
+
+--- Iteration 323/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1283, Best: -0.0968, Islands: {0: 130, 1: 109, 2: 84}
+
+--- Iteration 324/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0994, Best: -0.0968, Islands: {0: 130, 1: 109, 2: 85}
+
+--- Iteration 325/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1625, Best: -0.0968, Islands: {0: 130, 1: 109, 2: 86}
+
+--- Iteration 326/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1548, Best: -0.0968, Islands: {0: 130, 1: 110, 2: 86}
+
+--- Iteration 327/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 320
+  Migration: moved 114 designs between islands
+Reward: -0.0998, Best: -0.0968, Islands: {0: 128, 1: 112, 2: 87}
+
+--- Iteration 328/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1043, Best: -0.0968, Islands: {0: 129, 1: 112, 2: 87}
+
+--- Iteration 329/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1053, Best: -0.0968, Islands: {0: 129, 1: 113, 2: 87}
+
+--- Iteration 330/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1664, Best: -0.0968, Islands: {0: 129, 1: 114, 2: 87}
+
+--- Iteration 331/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1048, Best: -0.0968, Islands: {0: 129, 1: 115, 2: 87}
+
+--- Iteration 332/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1682, Best: -0.0968, Islands: {0: 129, 1: 116, 2: 87}
+
+--- Iteration 333/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1058, Best: -0.0968, Islands: {0: 129, 1: 117, 2: 87}
+
+--- Iteration 334/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1686, Best: -0.0968, Islands: {0: 129, 1: 118, 2: 87}
+
+--- Iteration 335/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0998, Best: -0.0968, Islands: {0: 130, 1: 118, 2: 87}
+
+--- Iteration 336/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1060, Best: -0.0968, Islands: {0: 131, 1: 118, 2: 87}
+
+--- Iteration 337/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 330
+  Migration: moved 117 designs between islands
+Reward: -0.1035, Best: -0.0968, Islands: {0: 127, 1: 122, 2: 88}
+
+--- Iteration 338/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1037, Best: -0.0968, Islands: {0: 128, 1: 122, 2: 88}
+
+--- Iteration 339/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1198, Best: -0.0968, Islands: {0: 128, 1: 123, 2: 88}
+
+--- Iteration 340/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1030, Best: -0.0968, Islands: {0: 129, 1: 123, 2: 88}
+
+--- Iteration 341/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1049, Best: -0.0968, Islands: {0: 129, 1: 124, 2: 88}
+
+--- Iteration 342/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1155, Best: -0.0968, Islands: {0: 129, 1: 124, 2: 89}
+
+--- Iteration 343/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0988, Best: -0.0968, Islands: {0: 130, 1: 124, 2: 89}
+
+--- Iteration 344/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1053, Best: -0.0968, Islands: {0: 131, 1: 124, 2: 89}
+
+--- Iteration 345/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1063, Best: -0.0968, Islands: {0: 132, 1: 124, 2: 89}
+
+--- Iteration 346/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0996, Best: -0.0968, Islands: {0: 133, 1: 124, 2: 89}
+
+--- Iteration 347/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 340
+  Migration: moved 121 designs between islands
+Reward: -0.1049, Best: -0.0968, Islands: {0: 139, 1: 119, 2: 89}
+
+--- Iteration 348/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1128, Best: -0.0968, Islands: {0: 139, 1: 120, 2: 89}
+
+--- Iteration 349/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1039, Best: -0.0968, Islands: {0: 139, 1: 120, 2: 90}
+
+--- Iteration 350/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1933, Best: -0.0968, Islands: {0: 139, 1: 120, 2: 91}
+
+--- Iteration 351/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2481, Best: -0.0968, Islands: {0: 139, 1: 121, 2: 91}
+
+--- Iteration 352/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1045, Best: -0.0968, Islands: {0: 139, 1: 121, 2: 92}
+
+--- Iteration 353/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1054, Best: -0.0968, Islands: {0: 139, 1: 121, 2: 93}
+
+--- Iteration 354/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1058, Best: -0.0968, Islands: {0: 139, 1: 121, 2: 94}
+
+--- Iteration 355/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0963, Best: -0.0963, Islands: {0: 140, 1: 121, 2: 94}
+
+--- Iteration 356/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1600, Best: -0.0963, Islands: {0: 141, 1: 121, 2: 94}
+
+--- Iteration 357/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 350
+  Migration: moved 125 designs between islands
+Reward: -0.1969, Best: -0.0963, Islands: {0: 145, 1: 116, 2: 96}
+
+--- Iteration 358/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1023, Best: -0.0963, Islands: {0: 146, 1: 116, 2: 96}
+
+--- Iteration 359/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1074, Best: -0.0963, Islands: {0: 146, 1: 116, 2: 97}
+
+--- Iteration 360/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1056, Best: -0.0963, Islands: {0: 146, 1: 117, 2: 97}
+
+--- Iteration 361/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0977, Best: -0.0963, Islands: {0: 146, 1: 118, 2: 97}
+
+--- Iteration 362/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1099, Best: -0.0963, Islands: {0: 146, 1: 118, 2: 98}
+
+--- Iteration 363/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0984, Best: -0.0963, Islands: {0: 147, 1: 118, 2: 98}
+
+--- Iteration 364/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1042, Best: -0.0963, Islands: {0: 148, 1: 118, 2: 98}
+
+--- Iteration 365/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1859, Best: -0.0963, Islands: {0: 149, 1: 118, 2: 98}
+
+--- Iteration 366/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1049, Best: -0.0963, Islands: {0: 149, 1: 119, 2: 98}
+
+--- Iteration 367/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 360
+  Migration: moved 128 designs between islands
+Reward: -0.1018, Best: -0.0963, Islands: {0: 144, 1: 122, 2: 101}
+
+--- Iteration 368/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2533, Best: -0.0963, Islands: {0: 144, 1: 122, 2: 102}
+
+--- Iteration 369/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0973, Best: -0.0963, Islands: {0: 144, 1: 123, 2: 102}
+
+--- Iteration 370/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1651, Best: -0.0963, Islands: {0: 145, 1: 123, 2: 102}
+
+--- Iteration 371/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1066, Best: -0.0963, Islands: {0: 145, 1: 123, 2: 103}
+
+--- Iteration 372/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1046, Best: -0.0963, Islands: {0: 145, 1: 124, 2: 103}
+
+--- Iteration 373/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1046, Best: -0.0963, Islands: {0: 145, 1: 125, 2: 103}
+
+--- Iteration 374/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1772, Best: -0.0963, Islands: {0: 146, 1: 125, 2: 103}
+
+--- Iteration 375/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.3589, Best: -0.0963, Islands: {0: 146, 1: 125, 2: 104}
+
+--- Iteration 376/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1054, Best: -0.0963, Islands: {0: 146, 1: 125, 2: 105}
+
+--- Iteration 377/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 370
+  Migration: moved 131 designs between islands
+Reward: -0.1215, Best: -0.0963, Islands: {0: 148, 1: 126, 2: 103}
+
+--- Iteration 378/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2073, Best: -0.0963, Islands: {0: 149, 1: 126, 2: 103}
+
+--- Iteration 379/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1104, Best: -0.0963, Islands: {0: 149, 1: 127, 2: 103}
+
+--- Iteration 380/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1157, Best: -0.0963, Islands: {0: 149, 1: 127, 2: 104}
+
+--- Iteration 381/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1007, Best: -0.0963, Islands: {0: 149, 1: 127, 2: 105}
+
+--- Iteration 382/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1044, Best: -0.0963, Islands: {0: 149, 1: 128, 2: 105}
+
+--- Iteration 383/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0998, Best: -0.0963, Islands: {0: 149, 1: 129, 2: 105}
+
+--- Iteration 384/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1084, Best: -0.0963, Islands: {0: 149, 1: 129, 2: 106}
+
+--- Iteration 385/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1083, Best: -0.0963, Islands: {0: 150, 1: 129, 2: 106}
+
+--- Iteration 386/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1225, Best: -0.0963, Islands: {0: 150, 1: 130, 2: 106}
+
+--- Iteration 387/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 380
+  Migration: moved 132 designs between islands
+Reward: -0.1047, Best: -0.0963, Islands: {0: 157, 1: 129, 2: 101}
+
+--- Iteration 388/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1477, Best: -0.0963, Islands: {0: 157, 1: 130, 2: 101}
+
+--- Iteration 389/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1663, Best: -0.0963, Islands: {0: 157, 1: 130, 2: 102}
+
+--- Iteration 390/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0979, Best: -0.0963, Islands: {0: 158, 1: 130, 2: 102}
+
+--- Iteration 391/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1608, Best: -0.0963, Islands: {0: 159, 1: 130, 2: 102}
+
+--- Iteration 392/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1057, Best: -0.0963, Islands: {0: 159, 1: 131, 2: 102}
+
+--- Iteration 393/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1028, Best: -0.0963, Islands: {0: 160, 1: 131, 2: 102}
+
+--- Iteration 394/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1007, Best: -0.0963, Islands: {0: 160, 1: 131, 2: 103}
+
+--- Iteration 395/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1123, Best: -0.0963, Islands: {0: 161, 1: 131, 2: 103}
+
+--- Iteration 396/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0874, Best: -0.0874, Islands: {0: 161, 1: 131, 2: 104}
+
+--- Iteration 397/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 390
+  Migration: moved 139 designs between islands
+Reward: -0.1505, Best: -0.0874, Islands: {0: 154, 1: 138, 2: 105}
+
+--- Iteration 398/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1104, Best: -0.0874, Islands: {0: 155, 1: 138, 2: 105}
+
+--- Iteration 399/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.3243, Best: -0.0874, Islands: {0: 155, 1: 139, 2: 105}
+
+--- Iteration 400/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0914, Best: -0.0874, Islands: {0: 155, 1: 139, 2: 106}
+
+--- Iteration 401/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1084, Best: -0.0874, Islands: {0: 155, 1: 140, 2: 106}
+
+--- Iteration 402/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1046, Best: -0.0874, Islands: {0: 155, 1: 141, 2: 106}
+
+--- Iteration 403/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1011, Best: -0.0874, Islands: {0: 155, 1: 142, 2: 106}
+
+--- Iteration 404/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1224, Best: -0.0874, Islands: {0: 155, 1: 142, 2: 107}
+
+--- Iteration 405/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1159, Best: -0.0874, Islands: {0: 155, 1: 142, 2: 108}
+
+--- Iteration 406/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1002, Best: -0.0874, Islands: {0: 156, 1: 142, 2: 108}
+
+--- Iteration 407/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 400
+  Migration: moved 140 designs between islands
+Reward: -0.0880, Best: -0.0874, Islands: {0: 158, 1: 141, 2: 108}
+
+--- Iteration 408/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0991, Best: -0.0874, Islands: {0: 158, 1: 142, 2: 108}
+
+--- Iteration 409/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1065, Best: -0.0874, Islands: {0: 158, 1: 143, 2: 108}
+
+--- Iteration 410/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1385, Best: -0.0874, Islands: {0: 158, 1: 144, 2: 108}
+
+--- Iteration 411/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1047, Best: -0.0874, Islands: {0: 158, 1: 145, 2: 108}
+
+--- Iteration 412/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2626, Best: -0.0874, Islands: {0: 158, 1: 146, 2: 108}
+
+--- Iteration 413/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1469, Best: -0.0874, Islands: {0: 159, 1: 146, 2: 108}
+
+--- Iteration 414/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1027, Best: -0.0874, Islands: {0: 159, 1: 146, 2: 109}
+
+--- Iteration 415/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1041, Best: -0.0874, Islands: {0: 159, 1: 147, 2: 109}
+
+--- Iteration 416/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1062, Best: -0.0874, Islands: {0: 160, 1: 147, 2: 109}
+
+--- Iteration 417/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 410
+  Migration: moved 145 designs between islands
+Reward: -0.1041, Best: -0.0874, Islands: {0: 154, 1: 153, 2: 110}
+
+--- Iteration 418/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1025, Best: -0.0874, Islands: {0: 154, 1: 153, 2: 111}
+
+--- Iteration 419/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1633, Best: -0.0874, Islands: {0: 154, 1: 153, 2: 112}
+
+--- Iteration 420/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1656, Best: -0.0874, Islands: {0: 154, 1: 153, 2: 113}
+
+--- Iteration 421/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1726, Best: -0.0874, Islands: {0: 154, 1: 154, 2: 113}
+
+--- Iteration 422/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0895, Best: -0.0874, Islands: {0: 154, 1: 154, 2: 114}
+
+--- Iteration 423/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1511, Best: -0.0874, Islands: {0: 154, 1: 155, 2: 114}
+
+--- Iteration 424/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1083, Best: -0.0874, Islands: {0: 155, 1: 155, 2: 114}
+
+--- Iteration 425/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1020, Best: -0.0874, Islands: {0: 156, 1: 155, 2: 114}
+
+--- Iteration 426/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1053, Best: -0.0874, Islands: {0: 157, 1: 155, 2: 114}
+
+--- Iteration 427/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 420
+  Migration: moved 148 designs between islands
+Reward: -0.2859, Best: -0.0874, Islands: {0: 165, 1: 150, 2: 112}
+
+--- Iteration 428/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1457, Best: -0.0874, Islands: {0: 165, 1: 151, 2: 112}
+
+--- Iteration 429/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1711, Best: -0.0874, Islands: {0: 165, 1: 152, 2: 112}
+
+--- Iteration 430/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0985, Best: -0.0874, Islands: {0: 165, 1: 153, 2: 112}
+
+--- Iteration 431/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1776, Best: -0.0874, Islands: {0: 165, 1: 154, 2: 112}
+
+--- Iteration 432/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0957, Best: -0.0874, Islands: {0: 165, 1: 154, 2: 113}
+
+--- Iteration 433/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1091, Best: -0.0874, Islands: {0: 165, 1: 154, 2: 114}
+
+--- Iteration 434/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1085, Best: -0.0874, Islands: {0: 165, 1: 155, 2: 114}
+
+--- Iteration 435/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1105, Best: -0.0874, Islands: {0: 165, 1: 156, 2: 114}
+
+--- Iteration 436/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1291, Best: -0.0874, Islands: {0: 165, 1: 156, 2: 115}
+
+--- Iteration 437/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 430
+  Migration: moved 152 designs between islands
+Reward: -0.0893, Best: -0.0874, Islands: {0: 173, 1: 146, 2: 118}
+
+--- Iteration 438/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0999, Best: -0.0874, Islands: {0: 174, 1: 146, 2: 118}
+
+--- Iteration 439/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0982, Best: -0.0874, Islands: {0: 175, 1: 146, 2: 118}
+
+--- Iteration 440/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1496, Best: -0.0874, Islands: {0: 175, 1: 146, 2: 119}
+
+--- Iteration 441/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0893, Best: -0.0874, Islands: {0: 175, 1: 147, 2: 119}
+
+--- Iteration 442/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1013, Best: -0.0874, Islands: {0: 176, 1: 147, 2: 119}
+
+--- Iteration 443/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.3485, Best: -0.0874, Islands: {0: 176, 1: 148, 2: 119}
+
+--- Iteration 444/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1009, Best: -0.0874, Islands: {0: 176, 1: 149, 2: 119}
+
+--- Iteration 445/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0886, Best: -0.0874, Islands: {0: 176, 1: 149, 2: 120}
+
+--- Iteration 446/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1111, Best: -0.0874, Islands: {0: 176, 1: 150, 2: 120}
+
+--- Iteration 447/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 440
+  Migration: moved 156 designs between islands
+Reward: -0.0989, Best: -0.0874, Islands: {0: 179, 1: 151, 2: 117}
+
+--- Iteration 448/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2500, Best: -0.0874, Islands: {0: 179, 1: 151, 2: 118}
+
+--- Iteration 449/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0926, Best: -0.0874, Islands: {0: 179, 1: 152, 2: 118}
+
+--- Iteration 450/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1258, Best: -0.0874, Islands: {0: 179, 1: 153, 2: 118}
+
+--- Iteration 451/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0879, Best: -0.0874, Islands: {0: 179, 1: 153, 2: 119}
+
+--- Iteration 452/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0874, Best: -0.0874, Islands: {0: 179, 1: 154, 2: 119}
+
+--- Iteration 453/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0986, Best: -0.0874, Islands: {0: 180, 1: 154, 2: 119}
+
+--- Iteration 454/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1018, Best: -0.0874, Islands: {0: 181, 1: 154, 2: 119}
+
+--- Iteration 455/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1588, Best: -0.0874, Islands: {0: 181, 1: 155, 2: 119}
+
+--- Iteration 456/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0935, Best: -0.0874, Islands: {0: 181, 1: 155, 2: 120}
+
+--- Iteration 457/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 450
+  Migration: moved 161 designs between islands
+Reward: -0.0998, Best: -0.0874, Islands: {0: 171, 1: 157, 2: 129}
+
+--- Iteration 458/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1429, Best: -0.0874, Islands: {0: 171, 1: 157, 2: 130}
+
+--- Iteration 459/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1162, Best: -0.0874, Islands: {0: 172, 1: 157, 2: 130}
+
+--- Iteration 460/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0898, Best: -0.0874, Islands: {0: 172, 1: 157, 2: 131}
+
+--- Iteration 461/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1116, Best: -0.0874, Islands: {0: 172, 1: 158, 2: 131}
+
+--- Iteration 462/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0888, Best: -0.0874, Islands: {0: 172, 1: 158, 2: 132}
+
+--- Iteration 463/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1632, Best: -0.0874, Islands: {0: 172, 1: 158, 2: 133}
+
+--- Iteration 464/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1040, Best: -0.0874, Islands: {0: 172, 1: 159, 2: 133}
+
+--- Iteration 465/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0874, Best: -0.0874, Islands: {0: 172, 1: 160, 2: 133}
+
+--- Iteration 466/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1620, Best: -0.0874, Islands: {0: 173, 1: 160, 2: 133}
+
+--- Iteration 467/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 460
+  Migration: moved 161 designs between islands
+Reward: -0.1339, Best: -0.0874, Islands: {0: 179, 1: 164, 2: 124}
+
+--- Iteration 468/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1138, Best: -0.0874, Islands: {0: 179, 1: 165, 2: 124}
+
+--- Iteration 469/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0855, Best: -0.0855, Islands: {0: 179, 1: 165, 2: 125}
+
+--- Iteration 470/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0875, Best: -0.0855, Islands: {0: 180, 1: 165, 2: 125}
+
+--- Iteration 471/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2161, Best: -0.0855, Islands: {0: 180, 1: 166, 2: 125}
+
+--- Iteration 472/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0855, Islands: {0: 180, 1: 166, 2: 126}
+
+--- Iteration 473/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1210, Best: -0.0855, Islands: {0: 180, 1: 166, 2: 127}
+
+--- Iteration 474/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0860, Best: -0.0855, Islands: {0: 180, 1: 167, 2: 127}
+
+--- Iteration 475/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1114, Best: -0.0855, Islands: {0: 181, 1: 167, 2: 127}
+
+--- Iteration 476/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1653, Best: -0.0855, Islands: {0: 181, 1: 168, 2: 127}
+
+--- Iteration 477/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 470
+  Migration: moved 167 designs between islands
+Reward: -0.0906, Best: -0.0855, Islands: {0: 186, 1: 158, 2: 133}
+
+--- Iteration 478/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0921, Best: -0.0855, Islands: {0: 186, 1: 159, 2: 133}
+
+--- Iteration 479/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0930, Best: -0.0855, Islands: {0: 186, 1: 159, 2: 134}
+
+--- Iteration 480/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1840, Best: -0.0855, Islands: {0: 186, 1: 160, 2: 134}
+
+--- Iteration 481/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1138, Best: -0.0855, Islands: {0: 186, 1: 160, 2: 135}
+
+--- Iteration 482/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0879, Best: -0.0855, Islands: {0: 186, 1: 161, 2: 135}
+
+--- Iteration 483/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1199, Best: -0.0855, Islands: {0: 186, 1: 162, 2: 135}
+
+--- Iteration 484/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0855, Islands: {0: 187, 1: 162, 2: 135}
+
+--- Iteration 485/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0876, Best: -0.0855, Islands: {0: 188, 1: 162, 2: 135}
+
+--- Iteration 486/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1197, Best: -0.0855, Islands: {0: 189, 1: 162, 2: 135}
+
+--- Iteration 487/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 480
+  Migration: moved 171 designs between islands
+Reward: -0.1536, Best: -0.0855, Islands: {0: 188, 1: 161, 2: 138}
+
+--- Iteration 488/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0855, Islands: {0: 189, 1: 161, 2: 138}
+
+--- Iteration 489/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1572, Best: -0.0855, Islands: {0: 189, 1: 162, 2: 138}
+
+--- Iteration 490/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1435, Best: -0.0855, Islands: {0: 189, 1: 163, 2: 138}
+
+--- Iteration 491/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1059, Best: -0.0855, Islands: {0: 190, 1: 163, 2: 138}
+
+--- Iteration 492/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1126, Best: -0.0855, Islands: {0: 191, 1: 163, 2: 138}
+
+--- Iteration 493/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1623, Best: -0.0855, Islands: {0: 191, 1: 164, 2: 138}
+
+--- Iteration 494/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0980, Best: -0.0855, Islands: {0: 191, 1: 164, 2: 139}
+
+--- Iteration 495/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1245, Best: -0.0855, Islands: {0: 191, 1: 164, 2: 140}
+
+--- Iteration 496/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1139, Best: -0.0855, Islands: {0: 191, 1: 164, 2: 141}
+
+--- Iteration 497/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 490
+  Migration: moved 173 designs between islands
+Reward: -0.0949, Best: -0.0855, Islands: {0: 195, 1: 161, 2: 141}
+
+--- Iteration 498/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1928, Best: -0.0855, Islands: {0: 196, 1: 161, 2: 141}
+
+--- Iteration 499/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0920, Best: -0.0855, Islands: {0: 197, 1: 161, 2: 141}
+
+--- Iteration 500/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1743, Best: -0.0855, Islands: {0: 198, 1: 161, 2: 141}
+
+--- Iteration 501/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0904, Best: -0.0855, Islands: {0: 198, 1: 161, 2: 142}
+
+--- Iteration 502/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0855, Islands: {0: 198, 1: 162, 2: 142}
+
+--- Iteration 503/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0881, Best: -0.0855, Islands: {0: 199, 1: 162, 2: 142}
+
+--- Iteration 504/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1041, Best: -0.0855, Islands: {0: 199, 1: 162, 2: 143}
+
+--- Iteration 505/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0874, Best: -0.0855, Islands: {0: 199, 1: 162, 2: 144}
+
+--- Iteration 506/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1532, Best: -0.0855, Islands: {0: 199, 1: 162, 2: 145}
+
+--- Iteration 507/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 500
+  Migration: moved 177 designs between islands
+Reward: -0.0993, Best: -0.0855, Islands: {0: 192, 1: 176, 2: 139}
+
+--- Iteration 508/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0948, Best: -0.0855, Islands: {0: 193, 1: 176, 2: 139}
+
+--- Iteration 509/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1222, Best: -0.0855, Islands: {0: 194, 1: 176, 2: 139}
+
+--- Iteration 510/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0887, Best: -0.0855, Islands: {0: 194, 1: 177, 2: 139}
+
+--- Iteration 511/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0877, Best: -0.0855, Islands: {0: 194, 1: 178, 2: 139}
+
+--- Iteration 512/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1026, Best: -0.0855, Islands: {0: 194, 1: 179, 2: 139}
+
+--- Iteration 513/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1795, Best: -0.0855, Islands: {0: 194, 1: 180, 2: 139}
+
+--- Iteration 514/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1037, Best: -0.0855, Islands: {0: 194, 1: 181, 2: 139}
+
+--- Iteration 515/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0906, Best: -0.0855, Islands: {0: 194, 1: 182, 2: 139}
+
+--- Iteration 516/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1159, Best: -0.0855, Islands: {0: 194, 1: 182, 2: 140}
+
+--- Iteration 517/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 510
+  Migration: moved 179 designs between islands
+Reward: -0.1210, Best: -0.0855, Islands: {0: 203, 1: 173, 2: 141}
+
+--- Iteration 518/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0871, Best: -0.0855, Islands: {0: 204, 1: 173, 2: 141}
+
+--- Iteration 519/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1044, Best: -0.0855, Islands: {0: 205, 1: 173, 2: 141}
+
+--- Iteration 520/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0898, Best: -0.0855, Islands: {0: 206, 1: 173, 2: 141}
+
+--- Iteration 521/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0872, Best: -0.0855, Islands: {0: 206, 1: 174, 2: 141}
+
+--- Iteration 522/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1601, Best: -0.0855, Islands: {0: 207, 1: 174, 2: 141}
+
+--- Iteration 523/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0895, Best: -0.0855, Islands: {0: 208, 1: 174, 2: 141}
+
+--- Iteration 524/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1285, Best: -0.0855, Islands: {0: 208, 1: 174, 2: 142}
+
+--- Iteration 525/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1138, Best: -0.0855, Islands: {0: 208, 1: 174, 2: 143}
+
+--- Iteration 526/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0864, Best: -0.0855, Islands: {0: 208, 1: 175, 2: 143}
+
+--- Iteration 527/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 520
+  Migration: moved 185 designs between islands
+Reward: -0.0865, Best: -0.0855, Islands: {0: 202, 1: 185, 2: 140}
+
+--- Iteration 528/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0880, Best: -0.0855, Islands: {0: 203, 1: 185, 2: 140}
+
+--- Iteration 529/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1059, Best: -0.0855, Islands: {0: 203, 1: 185, 2: 141}
+
+--- Iteration 530/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0874, Best: -0.0855, Islands: {0: 203, 1: 185, 2: 142}
+
+--- Iteration 531/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0874, Best: -0.0855, Islands: {0: 203, 1: 185, 2: 143}
+
+--- Iteration 532/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1200, Best: -0.0855, Islands: {0: 204, 1: 185, 2: 143}
+
+--- Iteration 533/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1113, Best: -0.0855, Islands: {0: 205, 1: 185, 2: 143}
+
+--- Iteration 534/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0925, Best: -0.0855, Islands: {0: 205, 1: 186, 2: 143}
+
+--- Iteration 535/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0943, Best: -0.0855, Islands: {0: 205, 1: 187, 2: 143}
+
+--- Iteration 536/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1022, Best: -0.0855, Islands: {0: 206, 1: 187, 2: 143}
+
+--- Iteration 537/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 530
+  Migration: moved 187 designs between islands
+Reward: -0.0865, Best: -0.0855, Islands: {0: 214, 1: 178, 2: 145}
+
+--- Iteration 538/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1397, Best: -0.0855, Islands: {0: 215, 1: 178, 2: 145}
+
+--- Iteration 539/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0868, Best: -0.0855, Islands: {0: 216, 1: 178, 2: 145}
+
+--- Iteration 540/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0880, Best: -0.0855, Islands: {0: 216, 1: 179, 2: 145}
+
+--- Iteration 541/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1478, Best: -0.0855, Islands: {0: 216, 1: 179, 2: 146}
+
+--- Iteration 542/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1081, Best: -0.0855, Islands: {0: 216, 1: 180, 2: 146}
+
+--- Iteration 543/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0871, Best: -0.0855, Islands: {0: 216, 1: 181, 2: 146}
+
+--- Iteration 544/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1052, Best: -0.0855, Islands: {0: 216, 1: 182, 2: 146}
+
+--- Iteration 545/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0899, Best: -0.0855, Islands: {0: 216, 1: 183, 2: 146}
+
+--- Iteration 546/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0855, Islands: {0: 216, 1: 184, 2: 146}
+
+--- Iteration 547/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 540
+  Migration: moved 191 designs between islands
+Reward: -0.0961, Best: -0.0855, Islands: {0: 223, 1: 177, 2: 147}
+
+--- Iteration 548/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0870, Best: -0.0855, Islands: {0: 223, 1: 177, 2: 148}
+
+--- Iteration 549/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0908, Best: -0.0855, Islands: {0: 224, 1: 177, 2: 148}
+
+--- Iteration 550/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0871, Best: -0.0855, Islands: {0: 225, 1: 177, 2: 148}
+
+--- Iteration 551/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0994, Best: -0.0855, Islands: {0: 225, 1: 178, 2: 148}
+
+--- Iteration 552/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0951, Best: -0.0855, Islands: {0: 225, 1: 178, 2: 149}
+
+--- Iteration 553/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0872, Best: -0.0855, Islands: {0: 225, 1: 179, 2: 149}
+
+--- Iteration 554/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0855, Best: -0.0855, Islands: {0: 225, 1: 180, 2: 149}
+
+--- Iteration 555/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0896, Best: -0.0855, Islands: {0: 226, 1: 180, 2: 149}
+
+--- Iteration 556/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1707, Best: -0.0855, Islands: {0: 227, 1: 180, 2: 149}
+
+--- Iteration 557/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 550
+  Migration: moved 195 designs between islands
+Reward: -0.1023, Best: -0.0855, Islands: {0: 224, 1: 185, 2: 148}
+
+--- Iteration 558/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0876, Best: -0.0855, Islands: {0: 225, 1: 185, 2: 148}
+
+--- Iteration 559/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1694, Best: -0.0855, Islands: {0: 226, 1: 185, 2: 148}
+
+--- Iteration 560/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0872, Best: -0.0855, Islands: {0: 226, 1: 185, 2: 149}
+
+--- Iteration 561/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0869, Best: -0.0855, Islands: {0: 227, 1: 185, 2: 149}
+
+--- Iteration 562/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0871, Best: -0.0855, Islands: {0: 227, 1: 185, 2: 150}
+
+--- Iteration 563/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0876, Best: -0.0855, Islands: {0: 227, 1: 185, 2: 151}
+
+--- Iteration 564/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0875, Best: -0.0855, Islands: {0: 227, 1: 186, 2: 151}
+
+--- Iteration 565/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0855, Islands: {0: 228, 1: 186, 2: 151}
+
+--- Iteration 566/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0897, Best: -0.0855, Islands: {0: 229, 1: 186, 2: 151}
+
+--- Iteration 567/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 560
+  Migration: moved 199 designs between islands
+Reward: -0.1692, Best: -0.0855, Islands: {0: 220, 1: 190, 2: 157}
+
+--- Iteration 568/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0866, Best: -0.0855, Islands: {0: 220, 1: 191, 2: 157}
+
+--- Iteration 569/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0999, Best: -0.0855, Islands: {0: 220, 1: 192, 2: 157}
+
+--- Iteration 570/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0972, Best: -0.0855, Islands: {0: 221, 1: 192, 2: 157}
+
+--- Iteration 571/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1149, Best: -0.0855, Islands: {0: 222, 1: 192, 2: 157}
+
+--- Iteration 572/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0933, Best: -0.0855, Islands: {0: 222, 1: 193, 2: 157}
+
+--- Iteration 573/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0981, Best: -0.0855, Islands: {0: 222, 1: 193, 2: 158}
+
+--- Iteration 574/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0934, Best: -0.0855, Islands: {0: 222, 1: 193, 2: 159}
+
+--- Iteration 575/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0887, Best: -0.0855, Islands: {0: 222, 1: 194, 2: 159}
+
+--- Iteration 576/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1596, Best: -0.0855, Islands: {0: 223, 1: 194, 2: 159}
+
+--- Iteration 577/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 570
+  Migration: moved 200 designs between islands
+Reward: -0.1011, Best: -0.0855, Islands: {0: 232, 1: 192, 2: 153}
+
+--- Iteration 578/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1113, Best: -0.0855, Islands: {0: 232, 1: 193, 2: 153}
+
+--- Iteration 579/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0869, Best: -0.0855, Islands: {0: 233, 1: 193, 2: 153}
+
+--- Iteration 580/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0998, Best: -0.0855, Islands: {0: 234, 1: 193, 2: 153}
+
+--- Iteration 581/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2477, Best: -0.0855, Islands: {0: 234, 1: 194, 2: 153}
+
+--- Iteration 582/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2579, Best: -0.0855, Islands: {0: 234, 1: 195, 2: 153}
+
+--- Iteration 583/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0928, Best: -0.0855, Islands: {0: 234, 1: 195, 2: 154}
+
+--- Iteration 584/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0921, Best: -0.0855, Islands: {0: 235, 1: 195, 2: 154}
+
+--- Iteration 585/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1703, Best: -0.0855, Islands: {0: 235, 1: 196, 2: 154}
+
+--- Iteration 586/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0965, Best: -0.0855, Islands: {0: 236, 1: 196, 2: 154}
+
+--- Iteration 587/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 580
+  Migration: moved 206 designs between islands
+Reward: -0.1038, Best: -0.0855, Islands: {0: 234, 1: 197, 2: 156}
+
+--- Iteration 588/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2083, Best: -0.0855, Islands: {0: 234, 1: 198, 2: 156}
+
+--- Iteration 589/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0903, Best: -0.0855, Islands: {0: 235, 1: 198, 2: 156}
+
+--- Iteration 590/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0974, Best: -0.0855, Islands: {0: 236, 1: 198, 2: 156}
+
+--- Iteration 591/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1236, Best: -0.0855, Islands: {0: 236, 1: 198, 2: 157}
+
+--- Iteration 592/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0897, Best: -0.0855, Islands: {0: 236, 1: 198, 2: 158}
+
+--- Iteration 593/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0875, Best: -0.0855, Islands: {0: 236, 1: 199, 2: 158}
+
+--- Iteration 594/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0903, Best: -0.0855, Islands: {0: 237, 1: 199, 2: 158}
+
+--- Iteration 595/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1032, Best: -0.0855, Islands: {0: 237, 1: 199, 2: 159}
+
+--- Iteration 596/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0969, Best: -0.0855, Islands: {0: 237, 1: 200, 2: 159}
+
+--- Iteration 597/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 590
+  Migration: moved 211 designs between islands
+Reward: -0.1681, Best: -0.0855, Islands: {0: 237, 1: 196, 2: 164}
+
+--- Iteration 598/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1904, Best: -0.0855, Islands: {0: 238, 1: 196, 2: 164}
+
+--- Iteration 599/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0929, Best: -0.0855, Islands: {0: 238, 1: 197, 2: 164}
+
+--- Iteration 600/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0970, Best: -0.0855, Islands: {0: 238, 1: 198, 2: 164}
+
+--- Iteration 601/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0905, Best: -0.0855, Islands: {0: 238, 1: 199, 2: 164}
+
+--- Iteration 602/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0855, Islands: {0: 238, 1: 200, 2: 164}
+
+--- Iteration 603/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1749, Best: -0.0855, Islands: {0: 238, 1: 201, 2: 164}
+
+--- Iteration 604/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1086, Best: -0.0855, Islands: {0: 238, 1: 202, 2: 164}
+
+--- Iteration 605/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1150, Best: -0.0855, Islands: {0: 239, 1: 202, 2: 164}
+
+--- Iteration 606/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1067, Best: -0.0855, Islands: {0: 239, 1: 202, 2: 165}
+
+--- Iteration 607/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 600
+  Migration: moved 211 designs between islands
+Reward: -0.1105, Best: -0.0855, Islands: {0: 243, 1: 200, 2: 164}
+
+--- Iteration 608/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0855, Islands: {0: 244, 1: 200, 2: 164}
+
+--- Iteration 609/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0984, Best: -0.0855, Islands: {0: 244, 1: 200, 2: 165}
+
+--- Iteration 610/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0866, Best: -0.0855, Islands: {0: 244, 1: 200, 2: 166}
+
+--- Iteration 611/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0895, Best: -0.0855, Islands: {0: 244, 1: 201, 2: 166}
+
+--- Iteration 612/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0888, Best: -0.0855, Islands: {0: 245, 1: 201, 2: 166}
+
+--- Iteration 613/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0952, Best: -0.0855, Islands: {0: 246, 1: 201, 2: 166}
+
+--- Iteration 614/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0962, Best: -0.0855, Islands: {0: 246, 1: 202, 2: 166}
+
+--- Iteration 615/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0855, Islands: {0: 246, 1: 203, 2: 166}
+
+--- Iteration 616/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0881, Best: -0.0855, Islands: {0: 246, 1: 204, 2: 166}
+
+--- Iteration 617/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 610
+  Migration: moved 218 designs between islands
+Reward: -0.0878, Best: -0.0855, Islands: {0: 240, 1: 203, 2: 174}
+
+--- Iteration 618/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0894, Best: -0.0855, Islands: {0: 241, 1: 203, 2: 174}
+
+--- Iteration 619/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0884, Best: -0.0855, Islands: {0: 241, 1: 204, 2: 174}
+
+--- Iteration 620/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0966, Best: -0.0855, Islands: {0: 242, 1: 204, 2: 174}
+
+--- Iteration 621/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0872, Best: -0.0855, Islands: {0: 242, 1: 204, 2: 175}
+
+--- Iteration 622/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1124, Best: -0.0855, Islands: {0: 242, 1: 205, 2: 175}
+
+--- Iteration 623/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1219, Best: -0.0855, Islands: {0: 243, 1: 205, 2: 175}
+
+--- Iteration 624/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0967, Best: -0.0855, Islands: {0: 243, 1: 206, 2: 175}
+
+--- Iteration 625/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0874, Best: -0.0855, Islands: {0: 243, 1: 206, 2: 176}
+
+--- Iteration 626/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0905, Best: -0.0855, Islands: {0: 244, 1: 206, 2: 176}
+
+--- Iteration 627/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 620
+  Migration: moved 220 designs between islands
+Reward: -0.0881, Best: -0.0855, Islands: {0: 248, 1: 205, 2: 174}
+
+--- Iteration 628/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1032, Best: -0.0855, Islands: {0: 248, 1: 206, 2: 174}
+
+--- Iteration 629/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0929, Best: -0.0855, Islands: {0: 248, 1: 207, 2: 174}
+
+--- Iteration 630/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0966, Best: -0.0855, Islands: {0: 248, 1: 208, 2: 174}
+
+--- Iteration 631/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0989, Best: -0.0855, Islands: {0: 248, 1: 209, 2: 174}
+
+--- Iteration 632/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0909, Best: -0.0855, Islands: {0: 248, 1: 210, 2: 174}
+
+--- Iteration 633/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0938, Best: -0.0855, Islands: {0: 248, 1: 211, 2: 174}
+
+--- Iteration 634/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1155, Best: -0.0855, Islands: {0: 249, 1: 211, 2: 174}
+
+--- Iteration 635/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0855, Islands: {0: 250, 1: 211, 2: 174}
+
+--- Iteration 636/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0867, Best: -0.0855, Islands: {0: 250, 1: 211, 2: 175}
+
+--- Iteration 637/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 630
+  Migration: moved 222 designs between islands
+Reward: -0.0877, Best: -0.0855, Islands: {0: 250, 1: 216, 2: 171}
+
+--- Iteration 638/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0875, Best: -0.0855, Islands: {0: 250, 1: 216, 2: 172}
+
+--- Iteration 639/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0854, Best: -0.0854, Islands: {0: 251, 1: 216, 2: 172}
+
+--- Iteration 640/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1040, Best: -0.0854, Islands: {0: 252, 1: 216, 2: 172}
+
+--- Iteration 641/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1088, Best: -0.0854, Islands: {0: 252, 1: 216, 2: 173}
+
+--- Iteration 642/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1067, Best: -0.0854, Islands: {0: 252, 1: 217, 2: 173}
+
+--- Iteration 643/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0889, Best: -0.0854, Islands: {0: 253, 1: 217, 2: 173}
+
+--- Iteration 644/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1162, Best: -0.0854, Islands: {0: 254, 1: 217, 2: 173}
+
+--- Iteration 645/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0936, Best: -0.0854, Islands: {0: 254, 1: 218, 2: 173}
+
+--- Iteration 646/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0878, Best: -0.0854, Islands: {0: 255, 1: 218, 2: 173}
+
+--- Iteration 647/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 640
+  Migration: moved 226 designs between islands
+Reward: -0.1591, Best: -0.0854, Islands: {0: 256, 1: 218, 2: 173}
+
+--- Iteration 648/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0944, Best: -0.0854, Islands: {0: 256, 1: 219, 2: 173}
+
+--- Iteration 649/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0876, Best: -0.0854, Islands: {0: 257, 1: 219, 2: 173}
+
+--- Iteration 650/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0876, Best: -0.0854, Islands: {0: 257, 1: 220, 2: 173}
+
+--- Iteration 651/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0852, Best: -0.0852, Islands: {0: 257, 1: 221, 2: 173}
+
+--- Iteration 652/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0982, Best: -0.0852, Islands: {0: 257, 1: 221, 2: 174}
+
+--- Iteration 653/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0878, Best: -0.0852, Islands: {0: 257, 1: 221, 2: 175}
+
+--- Iteration 654/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1137, Best: -0.0852, Islands: {0: 257, 1: 222, 2: 175}
+
+--- Iteration 655/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1229, Best: -0.0852, Islands: {0: 257, 1: 223, 2: 175}
+
+--- Iteration 656/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0852, Islands: {0: 258, 1: 223, 2: 175}
+
+--- Iteration 657/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 650
+  Migration: moved 231 designs between islands
+Reward: -0.1121, Best: -0.0852, Islands: {0: 262, 1: 212, 2: 183}
+
+--- Iteration 658/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1682, Best: -0.0852, Islands: {0: 263, 1: 212, 2: 183}
+
+--- Iteration 659/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1053, Best: -0.0852, Islands: {0: 264, 1: 212, 2: 183}
+
+--- Iteration 660/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1300, Best: -0.0852, Islands: {0: 264, 1: 213, 2: 183}
+
+--- Iteration 661/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0953, Best: -0.0852, Islands: {0: 264, 1: 214, 2: 183}
+
+--- Iteration 662/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0884, Best: -0.0852, Islands: {0: 265, 1: 214, 2: 183}
+
+--- Iteration 663/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0905, Best: -0.0852, Islands: {0: 265, 1: 215, 2: 183}
+
+--- Iteration 664/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1035, Best: -0.0852, Islands: {0: 265, 1: 215, 2: 184}
+
+--- Iteration 665/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0880, Best: -0.0852, Islands: {0: 265, 1: 215, 2: 185}
+
+--- Iteration 666/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1083, Best: -0.0852, Islands: {0: 265, 1: 215, 2: 186}
+
+--- Iteration 667/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 660
+  Migration: moved 232 designs between islands
+Reward: -0.1602, Best: -0.0852, Islands: {0: 260, 1: 225, 2: 182}
+
+--- Iteration 668/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0889, Best: -0.0852, Islands: {0: 260, 1: 226, 2: 182}
+
+--- Iteration 669/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1869, Best: -0.0852, Islands: {0: 260, 1: 226, 2: 183}
+
+--- Iteration 670/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0879, Best: -0.0852, Islands: {0: 261, 1: 226, 2: 183}
+
+--- Iteration 671/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0852, Islands: {0: 262, 1: 226, 2: 183}
+
+--- Iteration 672/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0918, Best: -0.0852, Islands: {0: 262, 1: 226, 2: 184}
+
+--- Iteration 673/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1088, Best: -0.0852, Islands: {0: 262, 1: 227, 2: 184}
+
+--- Iteration 674/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1253, Best: -0.0852, Islands: {0: 262, 1: 228, 2: 184}
+
+--- Iteration 675/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0917, Best: -0.0852, Islands: {0: 263, 1: 228, 2: 184}
+
+--- Iteration 676/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2193, Best: -0.0852, Islands: {0: 263, 1: 228, 2: 185}
+
+--- Iteration 677/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 670
+  Migration: moved 236 designs between islands
+Reward: -0.1123, Best: -0.0852, Islands: {0: 272, 1: 224, 2: 181}
+
+--- Iteration 678/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1108, Best: -0.0852, Islands: {0: 272, 1: 225, 2: 181}
+
+--- Iteration 679/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0872, Best: -0.0852, Islands: {0: 273, 1: 225, 2: 181}
+
+--- Iteration 680/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0876, Best: -0.0852, Islands: {0: 273, 1: 226, 2: 181}
+
+--- Iteration 681/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0895, Best: -0.0852, Islands: {0: 274, 1: 226, 2: 181}
+
+--- Iteration 682/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1219, Best: -0.0852, Islands: {0: 275, 1: 226, 2: 181}
+
+--- Iteration 683/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1115, Best: -0.0852, Islands: {0: 275, 1: 226, 2: 182}
+
+--- Iteration 684/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1119, Best: -0.0852, Islands: {0: 276, 1: 226, 2: 182}
+
+--- Iteration 685/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1116, Best: -0.0852, Islands: {0: 276, 1: 227, 2: 182}
+
+--- Iteration 686/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1360, Best: -0.0852, Islands: {0: 276, 1: 228, 2: 182}
+
+--- Iteration 687/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 680
+  Migration: moved 239 designs between islands
+Reward: -0.1546, Best: -0.0852, Islands: {0: 284, 1: 221, 2: 182}
+
+--- Iteration 688/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0864, Best: -0.0852, Islands: {0: 285, 1: 221, 2: 182}
+
+--- Iteration 689/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0852, Islands: {0: 286, 1: 221, 2: 182}
+
+--- Iteration 690/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0879, Best: -0.0852, Islands: {0: 287, 1: 221, 2: 182}
+
+--- Iteration 691/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1244, Best: -0.0852, Islands: {0: 287, 1: 221, 2: 183}
+
+--- Iteration 692/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1546, Best: -0.0852, Islands: {0: 287, 1: 222, 2: 183}
+
+--- Iteration 693/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0899, Best: -0.0852, Islands: {0: 287, 1: 222, 2: 184}
+
+--- Iteration 694/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0864, Best: -0.0852, Islands: {0: 287, 1: 223, 2: 184}
+
+--- Iteration 695/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1641, Best: -0.0852, Islands: {0: 288, 1: 223, 2: 184}
+
+--- Iteration 696/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0974, Best: -0.0852, Islands: {0: 289, 1: 223, 2: 184}
+
+--- Iteration 697/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 690
+  Migration: moved 245 designs between islands
+Reward: -0.1050, Best: -0.0852, Islands: {0: 284, 1: 224, 2: 189}
+
+--- Iteration 698/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0954, Best: -0.0852, Islands: {0: 285, 1: 224, 2: 189}
+
+--- Iteration 699/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0892, Best: -0.0852, Islands: {0: 285, 1: 225, 2: 189}
+
+--- Iteration 700/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1326, Best: -0.0852, Islands: {0: 286, 1: 225, 2: 189}
+
+--- Iteration 701/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0990, Best: -0.0852, Islands: {0: 287, 1: 225, 2: 189}
+
+--- Iteration 702/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0997, Best: -0.0852, Islands: {0: 288, 1: 225, 2: 189}
+
+--- Iteration 703/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1028, Best: -0.0852, Islands: {0: 288, 1: 226, 2: 189}
+
+--- Iteration 704/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0865, Best: -0.0852, Islands: {0: 289, 1: 226, 2: 189}
+
+--- Iteration 705/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0863, Best: -0.0852, Islands: {0: 289, 1: 226, 2: 190}
+
+--- Iteration 706/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0852, Islands: {0: 289, 1: 227, 2: 190}
+
+--- Iteration 707/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 700
+  Migration: moved 247 designs between islands
+Reward: -0.1608, Best: -0.0852, Islands: {0: 286, 1: 229, 2: 192}
+
+--- Iteration 708/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1540, Best: -0.0852, Islands: {0: 286, 1: 230, 2: 192}
+
+--- Iteration 709/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2226, Best: -0.0852, Islands: {0: 287, 1: 230, 2: 192}
+
+--- Iteration 710/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0875, Best: -0.0852, Islands: {0: 287, 1: 231, 2: 192}
+
+--- Iteration 711/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1472, Best: -0.0852, Islands: {0: 287, 1: 232, 2: 192}
+
+--- Iteration 712/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0917, Best: -0.0852, Islands: {0: 287, 1: 233, 2: 192}
+
+--- Iteration 713/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0872, Best: -0.0852, Islands: {0: 287, 1: 233, 2: 193}
+
+--- Iteration 714/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0852, Islands: {0: 287, 1: 234, 2: 193}
+
+--- Iteration 715/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0959, Best: -0.0852, Islands: {0: 288, 1: 234, 2: 193}
+
+--- Iteration 716/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1252, Best: -0.0852, Islands: {0: 288, 1: 235, 2: 193}
+
+--- Iteration 717/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 710
+  Migration: moved 252 designs between islands
+Reward: -0.1102, Best: -0.0852, Islands: {0: 289, 1: 237, 2: 191}
+
+--- Iteration 718/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1237, Best: -0.0852, Islands: {0: 290, 1: 237, 2: 191}
+
+--- Iteration 719/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0933, Best: -0.0852, Islands: {0: 290, 1: 237, 2: 192}
+
+--- Iteration 720/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1123, Best: -0.0852, Islands: {0: 290, 1: 238, 2: 192}
+
+--- Iteration 721/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1228, Best: -0.0852, Islands: {0: 290, 1: 239, 2: 192}
+
+--- Iteration 722/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0977, Best: -0.0852, Islands: {0: 290, 1: 240, 2: 192}
+
+--- Iteration 723/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0875, Best: -0.0852, Islands: {0: 290, 1: 240, 2: 193}
+
+--- Iteration 724/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0912, Best: -0.0852, Islands: {0: 291, 1: 240, 2: 193}
+
+--- Iteration 725/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0950, Best: -0.0852, Islands: {0: 291, 1: 241, 2: 193}
+
+--- Iteration 726/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1012, Best: -0.0852, Islands: {0: 292, 1: 241, 2: 193}
+
+--- Iteration 727/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 720
+  Migration: moved 255 designs between islands
+Reward: -0.0898, Best: -0.0852, Islands: {0: 284, 1: 247, 2: 196}
+
+--- Iteration 728/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1650, Best: -0.0852, Islands: {0: 284, 1: 247, 2: 197}
+
+--- Iteration 729/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1159, Best: -0.0852, Islands: {0: 285, 1: 247, 2: 197}
+
+--- Iteration 730/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1559, Best: -0.0852, Islands: {0: 285, 1: 247, 2: 198}
+
+--- Iteration 731/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0979, Best: -0.0852, Islands: {0: 285, 1: 247, 2: 199}
+
+--- Iteration 732/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0872, Best: -0.0852, Islands: {0: 285, 1: 247, 2: 200}
+
+--- Iteration 733/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2505, Best: -0.0852, Islands: {0: 285, 1: 248, 2: 200}
+
+--- Iteration 734/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0852, Islands: {0: 286, 1: 248, 2: 200}
+
+--- Iteration 735/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0852, Islands: {0: 286, 1: 248, 2: 201}
+
+--- Iteration 736/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0868, Best: -0.0852, Islands: {0: 287, 1: 248, 2: 201}
+
+--- Iteration 737/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 730
+  Migration: moved 258 designs between islands
+Reward: -0.2612, Best: -0.0852, Islands: {0: 285, 1: 246, 2: 206}
+
+--- Iteration 738/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1054, Best: -0.0852, Islands: {0: 285, 1: 247, 2: 206}
+
+--- Iteration 739/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1089, Best: -0.0852, Islands: {0: 285, 1: 247, 2: 207}
+
+--- Iteration 740/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0952, Best: -0.0852, Islands: {0: 286, 1: 247, 2: 207}
+
+--- Iteration 741/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1022, Best: -0.0852, Islands: {0: 286, 1: 248, 2: 207}
+
+--- Iteration 742/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1011, Best: -0.0852, Islands: {0: 286, 1: 248, 2: 208}
+
+--- Iteration 743/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1086, Best: -0.0852, Islands: {0: 287, 1: 248, 2: 208}
+
+--- Iteration 744/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1181, Best: -0.0852, Islands: {0: 287, 1: 249, 2: 208}
+
+--- Iteration 745/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0957, Best: -0.0852, Islands: {0: 287, 1: 249, 2: 209}
+
+--- Iteration 746/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1128, Best: -0.0852, Islands: {0: 287, 1: 249, 2: 210}
+
+--- Iteration 747/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 740
+  Migration: moved 261 designs between islands
+Reward: -0.0901, Best: -0.0852, Islands: {0: 291, 1: 246, 2: 210}
+
+--- Iteration 748/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0864, Best: -0.0852, Islands: {0: 291, 1: 247, 2: 210}
+
+--- Iteration 749/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0885, Best: -0.0852, Islands: {0: 291, 1: 248, 2: 210}
+
+--- Iteration 750/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1111, Best: -0.0852, Islands: {0: 291, 1: 248, 2: 211}
+
+--- Iteration 751/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1172, Best: -0.0852, Islands: {0: 291, 1: 248, 2: 212}
+
+--- Iteration 752/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0887, Best: -0.0852, Islands: {0: 291, 1: 248, 2: 213}
+
+--- Iteration 753/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0971, Best: -0.0852, Islands: {0: 291, 1: 248, 2: 214}
+
+--- Iteration 754/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0902, Best: -0.0852, Islands: {0: 291, 1: 248, 2: 215}
+
+--- Iteration 755/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1053, Best: -0.0852, Islands: {0: 292, 1: 248, 2: 215}
+
+--- Iteration 756/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1130, Best: -0.0852, Islands: {0: 293, 1: 248, 2: 215}
+
+--- Iteration 757/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 750
+  Migration: moved 263 designs between islands
+Reward: -0.0875, Best: -0.0852, Islands: {0: 299, 1: 248, 2: 210}
+
+--- Iteration 758/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0998, Best: -0.0852, Islands: {0: 299, 1: 249, 2: 210}
+
+--- Iteration 759/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1128, Best: -0.0852, Islands: {0: 299, 1: 250, 2: 210}
+
+--- Iteration 760/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1183, Best: -0.0852, Islands: {0: 299, 1: 250, 2: 211}
+
+--- Iteration 761/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0978, Best: -0.0852, Islands: {0: 299, 1: 250, 2: 212}
+
+--- Iteration 762/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2915, Best: -0.0852, Islands: {0: 299, 1: 251, 2: 212}
+
+--- Iteration 763/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1128, Best: -0.0852, Islands: {0: 300, 1: 251, 2: 212}
+
+--- Iteration 764/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2689, Best: -0.0852, Islands: {0: 300, 1: 251, 2: 213}
+
+--- Iteration 765/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1130, Best: -0.0852, Islands: {0: 300, 1: 252, 2: 213}
+
+--- Iteration 766/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1072, Best: -0.0852, Islands: {0: 300, 1: 253, 2: 213}
+
+--- Iteration 767/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 760
+  Migration: moved 271 designs between islands
+Reward: -0.1062, Best: -0.0852, Islands: {0: 298, 1: 263, 2: 206}
+
+--- Iteration 768/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1223, Best: -0.0852, Islands: {0: 298, 1: 264, 2: 206}
+
+--- Iteration 769/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0879, Best: -0.0852, Islands: {0: 299, 1: 264, 2: 206}
+
+--- Iteration 770/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0894, Best: -0.0852, Islands: {0: 299, 1: 265, 2: 206}
+
+--- Iteration 771/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.3672, Best: -0.0852, Islands: {0: 300, 1: 265, 2: 206}
+
+--- Iteration 772/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0919, Best: -0.0852, Islands: {0: 300, 1: 266, 2: 206}
+
+--- Iteration 773/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1029, Best: -0.0852, Islands: {0: 301, 1: 266, 2: 206}
+
+--- Iteration 774/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1103, Best: -0.0852, Islands: {0: 301, 1: 266, 2: 207}
+
+--- Iteration 775/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0869, Best: -0.0852, Islands: {0: 301, 1: 267, 2: 207}
+
+--- Iteration 776/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1045, Best: -0.0852, Islands: {0: 301, 1: 268, 2: 207}
+
+--- Iteration 777/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 770
+  Migration: moved 273 designs between islands
+Reward: -0.0885, Best: -0.0852, Islands: {0: 307, 1: 258, 2: 212}
+
+--- Iteration 778/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1697, Best: -0.0852, Islands: {0: 307, 1: 259, 2: 212}
+
+--- Iteration 779/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1080, Best: -0.0852, Islands: {0: 307, 1: 260, 2: 212}
+
+--- Iteration 780/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0956, Best: -0.0852, Islands: {0: 308, 1: 260, 2: 212}
+
+--- Iteration 781/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0898, Best: -0.0852, Islands: {0: 308, 1: 260, 2: 213}
+
+--- Iteration 782/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0927, Best: -0.0852, Islands: {0: 308, 1: 260, 2: 214}
+
+--- Iteration 783/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0920, Best: -0.0852, Islands: {0: 309, 1: 260, 2: 214}
+
+--- Iteration 784/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0905, Best: -0.0852, Islands: {0: 310, 1: 260, 2: 214}
+
+--- Iteration 785/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1114, Best: -0.0852, Islands: {0: 310, 1: 260, 2: 215}
+
+--- Iteration 786/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Error: Missing required field 'car_size'. Got: ['analysis', 'reasoning', 'design_parameters']
+Reward: -10.0000, Best: -0.0852, Islands: {0: 310, 1: 260, 2: 215}
+
+--- Iteration 787/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 780
+  Migration: moved 278 designs between islands
+Reward: -0.0979, Best: -0.0852, Islands: {0: 310, 1: 260, 2: 216}
+
+--- Iteration 788/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0977, Best: -0.0852, Islands: {0: 310, 1: 260, 2: 217}
+
+--- Iteration 789/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0879, Best: -0.0852, Islands: {0: 311, 1: 260, 2: 217}
+
+--- Iteration 790/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0858, Best: -0.0852, Islands: {0: 311, 1: 261, 2: 217}
+
+--- Iteration 791/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0852, Islands: {0: 311, 1: 262, 2: 217}
+
+--- Iteration 792/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2158, Best: -0.0852, Islands: {0: 311, 1: 263, 2: 217}
+
+--- Iteration 793/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0898, Best: -0.0852, Islands: {0: 312, 1: 263, 2: 217}
+
+--- Iteration 794/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0958, Best: -0.0852, Islands: {0: 312, 1: 263, 2: 218}
+
+--- Iteration 795/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1494, Best: -0.0852, Islands: {0: 313, 1: 263, 2: 218}
+
+--- Iteration 796/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0866, Best: -0.0852, Islands: {0: 314, 1: 263, 2: 218}
+
+--- Iteration 797/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 790
+  Migration: moved 279 designs between islands
+Reward: -0.1606, Best: -0.0852, Islands: {0: 318, 1: 259, 2: 219}
+
+--- Iteration 798/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1236, Best: -0.0852, Islands: {0: 318, 1: 259, 2: 220}
+
+--- Iteration 799/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0893, Best: -0.0852, Islands: {0: 319, 1: 259, 2: 220}
+
+--- Iteration 800/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0877, Best: -0.0852, Islands: {0: 319, 1: 260, 2: 220}
+
+--- Iteration 801/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0878, Best: -0.0852, Islands: {0: 320, 1: 260, 2: 220}
+
+--- Iteration 802/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1078, Best: -0.0852, Islands: {0: 320, 1: 261, 2: 220}
+
+--- Iteration 803/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1099, Best: -0.0852, Islands: {0: 320, 1: 261, 2: 221}
+
+--- Iteration 804/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0889, Best: -0.0852, Islands: {0: 321, 1: 261, 2: 221}
+
+--- Iteration 805/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0907, Best: -0.0852, Islands: {0: 322, 1: 261, 2: 221}
+
+--- Iteration 806/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2358, Best: -0.0852, Islands: {0: 322, 1: 261, 2: 222}
+
+--- Iteration 807/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 800
+  Migration: moved 283 designs between islands
+Reward: -0.1123, Best: -0.0852, Islands: {0: 314, 1: 276, 2: 216}
+
+--- Iteration 808/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0870, Best: -0.0852, Islands: {0: 315, 1: 276, 2: 216}
+
+--- Iteration 809/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1208, Best: -0.0852, Islands: {0: 315, 1: 277, 2: 216}
+
+--- Iteration 810/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2521, Best: -0.0852, Islands: {0: 315, 1: 278, 2: 216}
+
+--- Iteration 811/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1451, Best: -0.0852, Islands: {0: 315, 1: 278, 2: 217}
+
+--- Iteration 812/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1025, Best: -0.0852, Islands: {0: 315, 1: 279, 2: 217}
+
+--- Iteration 813/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1351, Best: -0.0852, Islands: {0: 316, 1: 279, 2: 217}
+
+--- Iteration 814/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0898, Best: -0.0852, Islands: {0: 316, 1: 279, 2: 218}
+
+--- Iteration 815/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0935, Best: -0.0852, Islands: {0: 317, 1: 279, 2: 218}
+
+--- Iteration 816/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0905, Best: -0.0852, Islands: {0: 317, 1: 279, 2: 219}
+
+--- Iteration 817/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 810
+  Migration: moved 286 designs between islands
+Reward: -0.0902, Best: -0.0852, Islands: {0: 318, 1: 281, 2: 217}
+
+--- Iteration 818/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0889, Best: -0.0852, Islands: {0: 318, 1: 282, 2: 217}
+
+--- Iteration 819/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0868, Best: -0.0852, Islands: {0: 318, 1: 282, 2: 218}
+
+--- Iteration 820/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1283, Best: -0.0852, Islands: {0: 318, 1: 283, 2: 218}
+
+--- Iteration 821/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0896, Best: -0.0852, Islands: {0: 318, 1: 284, 2: 218}
+
+--- Iteration 822/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0867, Best: -0.0852, Islands: {0: 318, 1: 285, 2: 218}
+
+--- Iteration 823/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0908, Best: -0.0852, Islands: {0: 318, 1: 286, 2: 218}
+
+--- Iteration 824/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1047, Best: -0.0852, Islands: {0: 319, 1: 286, 2: 218}
+
+--- Iteration 825/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1406, Best: -0.0852, Islands: {0: 319, 1: 287, 2: 218}
+
+--- Iteration 826/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0868, Best: -0.0852, Islands: {0: 320, 1: 287, 2: 218}
+
+--- Iteration 827/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 820
+  Migration: moved 291 designs between islands
+Reward: -0.0896, Best: -0.0852, Islands: {0: 325, 1: 280, 2: 221}
+
+--- Iteration 828/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1307, Best: -0.0852, Islands: {0: 325, 1: 281, 2: 221}
+
+--- Iteration 829/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1480, Best: -0.0852, Islands: {0: 325, 1: 281, 2: 222}
+
+--- Iteration 830/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1759, Best: -0.0852, Islands: {0: 325, 1: 281, 2: 223}
+
+--- Iteration 831/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1021, Best: -0.0852, Islands: {0: 326, 1: 281, 2: 223}
+
+--- Iteration 832/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1119, Best: -0.0852, Islands: {0: 326, 1: 281, 2: 224}
+
+--- Iteration 833/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0875, Best: -0.0852, Islands: {0: 327, 1: 281, 2: 224}
+
+--- Iteration 834/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0900, Best: -0.0852, Islands: {0: 327, 1: 282, 2: 224}
+
+--- Iteration 835/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1622, Best: -0.0852, Islands: {0: 327, 1: 283, 2: 224}
+
+--- Iteration 836/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1246, Best: -0.0852, Islands: {0: 327, 1: 283, 2: 225}
+
+--- Iteration 837/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 830
+  Migration: moved 295 designs between islands
+Reward: -0.0857, Best: -0.0852, Islands: {0: 331, 1: 275, 2: 230}
+
+--- Iteration 838/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0870, Best: -0.0852, Islands: {0: 331, 1: 275, 2: 231}
+
+--- Iteration 839/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0878, Best: -0.0852, Islands: {0: 332, 1: 275, 2: 231}
+
+--- Iteration 840/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0886, Best: -0.0852, Islands: {0: 333, 1: 275, 2: 231}
+
+--- Iteration 841/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1874, Best: -0.0852, Islands: {0: 334, 1: 275, 2: 231}
+
+--- Iteration 842/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0861, Best: -0.0852, Islands: {0: 334, 1: 275, 2: 232}
+
+--- Iteration 843/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0883, Best: -0.0852, Islands: {0: 335, 1: 275, 2: 232}
+
+--- Iteration 844/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1149, Best: -0.0852, Islands: {0: 335, 1: 276, 2: 232}
+
+--- Iteration 845/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0871, Best: -0.0852, Islands: {0: 336, 1: 276, 2: 232}
+
+--- Iteration 846/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2203, Best: -0.0852, Islands: {0: 336, 1: 277, 2: 232}
+
+--- Iteration 847/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 840
+  Migration: moved 295 designs between islands
+Reward: -0.1094, Best: -0.0852, Islands: {0: 351, 1: 263, 2: 232}
+
+--- Iteration 848/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1211, Best: -0.0852, Islands: {0: 351, 1: 264, 2: 232}
+
+--- Iteration 849/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1498, Best: -0.0852, Islands: {0: 351, 1: 265, 2: 232}
+
+--- Iteration 850/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0852, Islands: {0: 351, 1: 265, 2: 233}
+
+--- Iteration 851/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0923, Best: -0.0852, Islands: {0: 351, 1: 266, 2: 233}
+
+--- Iteration 852/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1538, Best: -0.0852, Islands: {0: 351, 1: 266, 2: 234}
+
+--- Iteration 853/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1010, Best: -0.0852, Islands: {0: 352, 1: 266, 2: 234}
+
+--- Iteration 854/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1167, Best: -0.0852, Islands: {0: 352, 1: 267, 2: 234}
+
+--- Iteration 855/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0881, Best: -0.0852, Islands: {0: 352, 1: 267, 2: 235}
+
+--- Iteration 856/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1111, Best: -0.0852, Islands: {0: 352, 1: 268, 2: 235}
+
+--- Iteration 857/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 850
+  Migration: moved 300 designs between islands
+Reward: -0.0894, Best: -0.0852, Islands: {0: 348, 1: 277, 2: 231}
+
+--- Iteration 858/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0915, Best: -0.0852, Islands: {0: 348, 1: 278, 2: 231}
+
+--- Iteration 859/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1142, Best: -0.0852, Islands: {0: 348, 1: 278, 2: 232}
+
+--- Iteration 860/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0887, Best: -0.0852, Islands: {0: 348, 1: 278, 2: 233}
+
+--- Iteration 861/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1145, Best: -0.0852, Islands: {0: 348, 1: 279, 2: 233}
+
+--- Iteration 862/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0862, Best: -0.0852, Islands: {0: 349, 1: 279, 2: 233}
+
+--- Iteration 863/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1838, Best: -0.0852, Islands: {0: 349, 1: 280, 2: 233}
+
+--- Iteration 864/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0911, Best: -0.0852, Islands: {0: 349, 1: 280, 2: 234}
+
+--- Iteration 865/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1860, Best: -0.0852, Islands: {0: 350, 1: 280, 2: 234}
+
+--- Iteration 866/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0988, Best: -0.0852, Islands: {0: 350, 1: 280, 2: 235}
+
+--- Iteration 867/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 860
+  Migration: moved 304 designs between islands
+Reward: -0.0866, Best: -0.0852, Islands: {0: 345, 1: 287, 2: 234}
+
+--- Iteration 868/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1750, Best: -0.0852, Islands: {0: 345, 1: 288, 2: 234}
+
+--- Iteration 869/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0877, Best: -0.0852, Islands: {0: 346, 1: 288, 2: 234}
+
+--- Iteration 870/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0876, Best: -0.0852, Islands: {0: 346, 1: 288, 2: 235}
+
+--- Iteration 871/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1619, Best: -0.0852, Islands: {0: 347, 1: 288, 2: 235}
+
+--- Iteration 872/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0967, Best: -0.0852, Islands: {0: 347, 1: 289, 2: 235}
+
+--- Iteration 873/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0877, Best: -0.0852, Islands: {0: 347, 1: 290, 2: 235}
+
+--- Iteration 874/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2747, Best: -0.0852, Islands: {0: 347, 1: 291, 2: 235}
+
+--- Iteration 875/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0877, Best: -0.0852, Islands: {0: 347, 1: 291, 2: 236}
+
+--- Iteration 876/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0946, Best: -0.0852, Islands: {0: 348, 1: 291, 2: 236}
+
+--- Iteration 877/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 870
+  Migration: moved 307 designs between islands
+Reward: -0.1093, Best: -0.0852, Islands: {0: 347, 1: 289, 2: 240}
+
+--- Iteration 878/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0885, Best: -0.0852, Islands: {0: 348, 1: 289, 2: 240}
+
+--- Iteration 879/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1372, Best: -0.0852, Islands: {0: 348, 1: 290, 2: 240}
+
+--- Iteration 880/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1054, Best: -0.0852, Islands: {0: 349, 1: 290, 2: 240}
+
+--- Iteration 881/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1088, Best: -0.0852, Islands: {0: 349, 1: 291, 2: 240}
+
+--- Iteration 882/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1572, Best: -0.0852, Islands: {0: 349, 1: 291, 2: 241}
+
+--- Iteration 883/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0985, Best: -0.0852, Islands: {0: 349, 1: 291, 2: 242}
+
+--- Iteration 884/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0982, Best: -0.0852, Islands: {0: 350, 1: 291, 2: 242}
+
+--- Iteration 885/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1091, Best: -0.0852, Islands: {0: 351, 1: 291, 2: 242}
+
+--- Iteration 886/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0866, Best: -0.0852, Islands: {0: 351, 1: 292, 2: 242}
+
+--- Iteration 887/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 880
+  Migration: moved 310 designs between islands
+Reward: -0.2931, Best: -0.0852, Islands: {0: 362, 1: 281, 2: 243}
+
+--- Iteration 888/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0920, Best: -0.0852, Islands: {0: 362, 1: 281, 2: 244}
+
+--- Iteration 889/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1783, Best: -0.0852, Islands: {0: 363, 1: 281, 2: 244}
+
+--- Iteration 890/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1044, Best: -0.0852, Islands: {0: 363, 1: 282, 2: 244}
+
+--- Iteration 891/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1444, Best: -0.0852, Islands: {0: 363, 1: 283, 2: 244}
+
+--- Iteration 892/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0863, Best: -0.0852, Islands: {0: 364, 1: 283, 2: 244}
+
+--- Iteration 893/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0929, Best: -0.0852, Islands: {0: 364, 1: 284, 2: 244}
+
+--- Iteration 894/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0887, Best: -0.0852, Islands: {0: 365, 1: 284, 2: 244}
+
+--- Iteration 895/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1358, Best: -0.0852, Islands: {0: 365, 1: 284, 2: 245}
+
+--- Iteration 896/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1177, Best: -0.0852, Islands: {0: 365, 1: 285, 2: 245}
+
+--- Iteration 897/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 890
+  Migration: moved 314 designs between islands
+Reward: -0.1589, Best: -0.0852, Islands: {0: 371, 1: 282, 2: 243}
+
+--- Iteration 898/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0940, Best: -0.0852, Islands: {0: 371, 1: 283, 2: 243}
+
+--- Iteration 899/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0995, Best: -0.0852, Islands: {0: 371, 1: 283, 2: 244}
+
+--- Iteration 900/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1725, Best: -0.0852, Islands: {0: 371, 1: 283, 2: 245}
+
+--- Iteration 901/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.4101, Best: -0.0852, Islands: {0: 371, 1: 283, 2: 246}
+
+--- Iteration 902/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1147, Best: -0.0852, Islands: {0: 371, 1: 284, 2: 246}
+
+--- Iteration 903/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1575, Best: -0.0852, Islands: {0: 371, 1: 285, 2: 246}
+
+--- Iteration 904/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0873, Best: -0.0852, Islands: {0: 371, 1: 285, 2: 247}
+
+--- Iteration 905/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0857, Best: -0.0852, Islands: {0: 371, 1: 285, 2: 248}
+
+--- Iteration 906/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0890, Best: -0.0852, Islands: {0: 371, 1: 286, 2: 248}
+
+--- Iteration 907/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 900
+  Migration: moved 321 designs between islands
+Reward: -0.1629, Best: -0.0852, Islands: {0: 363, 1: 294, 2: 249}
+
+--- Iteration 908/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0878, Best: -0.0852, Islands: {0: 363, 1: 295, 2: 249}
+
+--- Iteration 909/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0896, Best: -0.0852, Islands: {0: 363, 1: 295, 2: 250}
+
+--- Iteration 910/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2196, Best: -0.0852, Islands: {0: 364, 1: 295, 2: 250}
+
+--- Iteration 911/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0892, Best: -0.0852, Islands: {0: 365, 1: 295, 2: 250}
+
+--- Iteration 912/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0916, Best: -0.0852, Islands: {0: 366, 1: 295, 2: 250}
+
+--- Iteration 913/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0897, Best: -0.0852, Islands: {0: 367, 1: 295, 2: 250}
+
+--- Iteration 914/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0864, Best: -0.0852, Islands: {0: 367, 1: 295, 2: 251}
+
+--- Iteration 915/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1212, Best: -0.0852, Islands: {0: 368, 1: 295, 2: 251}
+
+--- Iteration 916/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1331, Best: -0.0852, Islands: {0: 368, 1: 296, 2: 251}
+
+--- Iteration 917/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 910
+  Migration: moved 322 designs between islands
+Reward: -0.1007, Best: -0.0852, Islands: {0: 368, 1: 297, 2: 251}
+
+--- Iteration 918/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0899, Best: -0.0852, Islands: {0: 368, 1: 298, 2: 251}
+
+--- Iteration 919/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1150, Best: -0.0852, Islands: {0: 368, 1: 298, 2: 252}
+
+--- Iteration 920/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1823, Best: -0.0852, Islands: {0: 369, 1: 298, 2: 252}
+
+--- Iteration 921/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1001, Best: -0.0852, Islands: {0: 369, 1: 298, 2: 253}
+
+--- Iteration 922/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0872, Best: -0.0852, Islands: {0: 370, 1: 298, 2: 253}
+
+--- Iteration 923/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0852, Islands: {0: 370, 1: 298, 2: 254}
+
+--- Iteration 924/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0911, Best: -0.0852, Islands: {0: 370, 1: 299, 2: 254}
+
+--- Iteration 925/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0965, Best: -0.0852, Islands: {0: 371, 1: 299, 2: 254}
+
+--- Iteration 926/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0960, Best: -0.0852, Islands: {0: 371, 1: 300, 2: 254}
+
+--- Iteration 927/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 920
+  Migration: moved 326 designs between islands
+Reward: -0.0895, Best: -0.0852, Islands: {0: 368, 1: 298, 2: 260}
+
+--- Iteration 928/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.2019, Best: -0.0852, Islands: {0: 369, 1: 298, 2: 260}
+
+--- Iteration 929/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0893, Best: -0.0852, Islands: {0: 370, 1: 298, 2: 260}
+
+--- Iteration 930/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0852, Islands: {0: 370, 1: 298, 2: 261}
+
+--- Iteration 931/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0939, Best: -0.0852, Islands: {0: 370, 1: 298, 2: 262}
+
+--- Iteration 932/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1704, Best: -0.0852, Islands: {0: 371, 1: 298, 2: 262}
+
+--- Iteration 933/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0886, Best: -0.0852, Islands: {0: 371, 1: 298, 2: 263}
+
+--- Iteration 934/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1101, Best: -0.0852, Islands: {0: 371, 1: 299, 2: 263}
+
+--- Iteration 935/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0889, Best: -0.0852, Islands: {0: 372, 1: 299, 2: 263}
+
+--- Iteration 936/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1159, Best: -0.0852, Islands: {0: 373, 1: 299, 2: 263}
+
+--- Iteration 937/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 930
+  Migration: moved 326 designs between islands
+Reward: -0.1092, Best: -0.0852, Islands: {0: 367, 1: 310, 2: 259}
+
+--- Iteration 938/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0887, Best: -0.0852, Islands: {0: 367, 1: 310, 2: 260}
+
+--- Iteration 939/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1768, Best: -0.0852, Islands: {0: 368, 1: 310, 2: 260}
+
+--- Iteration 940/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1021, Best: -0.0852, Islands: {0: 368, 1: 310, 2: 261}
+
+--- Iteration 941/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1687, Best: -0.0852, Islands: {0: 368, 1: 311, 2: 261}
+
+--- Iteration 942/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0914, Best: -0.0852, Islands: {0: 369, 1: 311, 2: 261}
+
+--- Iteration 943/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1735, Best: -0.0852, Islands: {0: 370, 1: 311, 2: 261}
+
+--- Iteration 944/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1649, Best: -0.0852, Islands: {0: 370, 1: 312, 2: 261}
+
+--- Iteration 945/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0926, Best: -0.0852, Islands: {0: 370, 1: 312, 2: 262}
+
+--- Iteration 946/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1672, Best: -0.0852, Islands: {0: 370, 1: 313, 2: 262}
+
+--- Iteration 947/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 940
+  Migration: moved 333 designs between islands
+Reward: -0.0873, Best: -0.0852, Islands: {0: 376, 1: 304, 2: 266}
+
+--- Iteration 948/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0899, Best: -0.0852, Islands: {0: 377, 1: 304, 2: 266}
+
+--- Iteration 949/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0852, Islands: {0: 377, 1: 305, 2: 266}
+
+--- Iteration 950/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1259, Best: -0.0852, Islands: {0: 377, 1: 306, 2: 266}
+
+--- Iteration 951/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0882, Best: -0.0852, Islands: {0: 377, 1: 307, 2: 266}
+
+--- Iteration 952/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1185, Best: -0.0852, Islands: {0: 377, 1: 308, 2: 266}
+
+--- Iteration 953/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1329, Best: -0.0852, Islands: {0: 378, 1: 308, 2: 266}
+
+--- Iteration 954/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0876, Best: -0.0852, Islands: {0: 379, 1: 308, 2: 266}
+
+--- Iteration 955/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0986, Best: -0.0852, Islands: {0: 379, 1: 308, 2: 267}
+
+--- Iteration 956/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1845, Best: -0.0852, Islands: {0: 379, 1: 308, 2: 268}
+
+--- Iteration 957/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 950
+  Migration: moved 337 designs between islands
+Reward: -0.0887, Best: -0.0852, Islands: {0: 376, 1: 304, 2: 276}
+
+--- Iteration 958/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1795, Best: -0.0852, Islands: {0: 376, 1: 305, 2: 276}
+
+--- Iteration 959/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0935, Best: -0.0852, Islands: {0: 376, 1: 306, 2: 276}
+
+--- Iteration 960/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1580, Best: -0.0852, Islands: {0: 376, 1: 306, 2: 277}
+
+--- Iteration 961/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0971, Best: -0.0852, Islands: {0: 376, 1: 307, 2: 277}
+
+--- Iteration 962/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1149, Best: -0.0852, Islands: {0: 377, 1: 307, 2: 277}
+
+--- Iteration 963/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0905, Best: -0.0852, Islands: {0: 377, 1: 307, 2: 278}
+
+--- Iteration 964/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0873, Best: -0.0852, Islands: {0: 378, 1: 307, 2: 278}
+
+--- Iteration 965/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0878, Best: -0.0852, Islands: {0: 378, 1: 307, 2: 279}
+
+--- Iteration 966/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1001, Best: -0.0852, Islands: {0: 378, 1: 307, 2: 280}
+
+--- Iteration 967/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 960
+  Migration: moved 340 designs between islands
+Reward: -0.1646, Best: -0.0852, Islands: {0: 377, 1: 316, 2: 273}
+
+--- Iteration 968/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1040, Best: -0.0852, Islands: {0: 377, 1: 317, 2: 273}
+
+--- Iteration 969/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1917, Best: -0.0852, Islands: {0: 377, 1: 317, 2: 274}
+
+--- Iteration 970/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1575, Best: -0.0852, Islands: {0: 377, 1: 318, 2: 274}
+
+--- Iteration 971/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0914, Best: -0.0852, Islands: {0: 377, 1: 319, 2: 274}
+
+--- Iteration 972/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1270, Best: -0.0852, Islands: {0: 377, 1: 319, 2: 275}
+
+--- Iteration 973/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0999, Best: -0.0852, Islands: {0: 377, 1: 319, 2: 276}
+
+--- Iteration 974/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0865, Best: -0.0852, Islands: {0: 377, 1: 319, 2: 277}
+
+--- Iteration 975/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0869, Best: -0.0852, Islands: {0: 378, 1: 319, 2: 277}
+
+--- Iteration 976/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0967, Best: -0.0852, Islands: {0: 379, 1: 319, 2: 277}
+
+--- Iteration 977/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 970
+  Migration: moved 341 designs between islands
+Reward: -0.1149, Best: -0.0852, Islands: {0: 378, 1: 331, 2: 267}
+
+--- Iteration 978/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1067, Best: -0.0852, Islands: {0: 378, 1: 331, 2: 268}
+
+--- Iteration 979/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0923, Best: -0.0852, Islands: {0: 378, 1: 331, 2: 269}
+
+--- Iteration 980/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0923, Best: -0.0852, Islands: {0: 379, 1: 331, 2: 269}
+
+--- Iteration 981/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0868, Best: -0.0852, Islands: {0: 379, 1: 332, 2: 269}
+
+--- Iteration 982/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1023, Best: -0.0852, Islands: {0: 379, 1: 332, 2: 270}
+
+--- Iteration 983/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0888, Best: -0.0852, Islands: {0: 379, 1: 333, 2: 270}
+
+--- Iteration 984/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1029, Best: -0.0852, Islands: {0: 379, 1: 334, 2: 270}
+
+--- Iteration 985/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0943, Best: -0.0852, Islands: {0: 379, 1: 334, 2: 271}
+
+--- Iteration 986/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0887, Best: -0.0852, Islands: {0: 380, 1: 334, 2: 271}
+
+--- Iteration 987/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 980
+  Migration: moved 347 designs between islands
+Reward: -0.1021, Best: -0.0852, Islands: {0: 384, 1: 333, 2: 269}
+
+--- Iteration 988/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0868, Best: -0.0852, Islands: {0: 385, 1: 333, 2: 269}
+
+--- Iteration 989/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0896, Best: -0.0852, Islands: {0: 386, 1: 333, 2: 269}
+
+--- Iteration 990/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0880, Best: -0.0852, Islands: {0: 386, 1: 333, 2: 270}
+
+--- Iteration 991/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Gemini Error: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 1.
+Error: LLM returned empty params
+Reward: -10.0000, Best: -0.0852, Islands: {0: 386, 1: 333, 2: 270}
+
+--- Iteration 992/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0875, Best: -0.0852, Islands: {0: 387, 1: 333, 2: 270}
+
+--- Iteration 993/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1012, Best: -0.0852, Islands: {0: 387, 1: 334, 2: 270}
+
+--- Iteration 994/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0900, Best: -0.0852, Islands: {0: 388, 1: 334, 2: 270}
+
+--- Iteration 995/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1586, Best: -0.0852, Islands: {0: 388, 1: 335, 2: 270}
+
+--- Iteration 996/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1030, Best: -0.0852, Islands: {0: 388, 1: 335, 2: 271}
+
+--- Iteration 997/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+  Triggering migration at context iteration 990
+  Migration: moved 350 designs between islands
+Reward: -0.0883, Best: -0.0852, Islands: {0: 397, 1: 329, 2: 269}
+
+--- Iteration 998/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1002, Best: -0.0852, Islands: {0: 397, 1: 329, 2: 270}
+
+--- Iteration 999/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.0868, Best: -0.0852, Islands: {0: 397, 1: 330, 2: 270}
+
+--- Iteration 1000/1000 (action: gaussain, inspirations: 5, islands: 3) ---
+Reward: -0.1000, Best: -0.0852, Islands: {0: 397, 1: 331, 2: 270}
+
+Best design: /scratch/ShapeEvolve/environments/DrivAer_Star/results/run_drivaer_star_3d_islands/design_650.json
+Results saved to /scratch/ShapeEvolve/environments/DrivAer_Star/results/run_drivaer_star_3d_islands/results.json

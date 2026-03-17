@@ -1,0 +1,21 @@
+### Parameter Prediction vs. Outcome Analysis
+
+The design intent was to transition from a circle (bluff body) to a streamlined airfoil. However, the **Sampled Action Vector** deviated significantly from the **Parameters Used** JSON, resulting in a failure to escape the "Nugget" trap.
+
+| Parameter | Predicted (JSON) | Sampled (Action Vector) | Outcome vs. Prediction |
+| :--- | :--- | :--- | :--- |
+| **r0 (TE Radius)** | 1.20 | 1.0000 | **Failure**: The intended extension to 1.2 was lost. The TE remains at the unit circle radius, preventing the formation of a tail. |
+| **e0 (TE Edginess)** | -0.80 | -0.8469 | **Partial Success**: The value is sharp/cusped, but without a radius extension ($r_0 > 1$), it manifests as a slight flattening of the rear rather than a sharp trailing edge. |
+| **r4 (LE Radius)** | 1.15 | 1.0000 | **Failure**: The intended nose extension was lost. The chord length ($r_0 + r_4$) is exactly 2.0, keeping the shape in the "Nugget" regime. |
+| **e4 (LE Edginess)** | 0.50 | 0.5106 | **Success**: The nose remains rounded, as intended for a robust stagnation point. |
+| **r2 (Upper Apex)** | 1.02 | 1.0000 | **Failure**: The subtle upper expansion was lost, resulting in a flat upper surface relative to the circle. |
+| **r6 (Lower Apex)** | 0.98 | 0.8839 | **Overshoot**: The sampling reduced $r_6$ much further than the intended 0.98. This created a significant "dent" or flat spot on the bottom. |
+| **Chord Length** | 2.35 | 2.00 | **Critical Failure**: By failing to exceed the 2.0 threshold, the geometry remains a "Nugget" (bluff body) with high pressure drag. |
+| **Asymmetry (a2, a6)**| 0.1 / -0.1 | 0.05 / -0.09 | **Partial Success**: The max thickness is shifted slightly forward, but the lack of chord length makes this effect negligible. |
+
+### Key Learnings
+
+1.  **The "Nugget" Threshold is Absolute**: Even with a sharp trailing edge ($e_0 = -0.84$), if the total chord ($r_0 + r_4$) does not significantly exceed 2.0, the physics engine treats the body as a cylinder/bluff body. The resulting reward will remain near zero (or negative) due to massive pressure drag from the lack of a tapered recovery section.
+2.  **Radius Dominates Edginess**: An "edgy" parameter ($e$) requires a corresponding radial extension ($r$) to create a functional feature. A sharp $e_0$ on a small $r_0$ just creates a flat-backed circle, which actually worsens flow separation compared to a smooth cylinder.
+3.  **The "Flat Tire" Effect**: Reducing $r_6$ to 0.88 while keeping other radii at 1.0 created a non-convexity (a "Peanut" variant). This is visible in the result image as a slight indentation on the lower-right quadrant. This irregularity disrupts the smooth acceleration of flow, likely increasing turbulence.
+4.  **Sampling Variance**: There is a significant disconnect between the "Designer's Predictions" and the "Sampled Action Vector." To optimize successfully, the designer must ensure the $r$ values are pushed aggressively past 1.0 to force the transition into the streamlined parameter space. The current design is still "clinging" to the safety of the circle.

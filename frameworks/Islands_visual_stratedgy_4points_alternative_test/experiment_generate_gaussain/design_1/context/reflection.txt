@@ -1,0 +1,29 @@
+This design, "streamlined_cambered_teardrop," represents a significant conceptual leap from the circular baseline. However, the resulting geometry reveals a "lumpy" or "pinched" profile rather than the smooth NACA-style airfoil intended. The transition between the high-radius leading/trailing edges and the low-radius midsection was too aggressive.
+
+### Per-Parameter Analysis
+
+*   **$r_0$ (0.985) & $r_4$ (0.850)**:
+    *   **Prediction**: Extend the chord forward and backward to create a streamlined longitudinal axis.
+    *   **Outcome**: **Successful in intent, but problematic in execution.** The chord is indeed much longer than the thickness, but because these values were so much higher than the neighboring $r$ values, they created a "bulbous" nose and a "protruding" tail rather than a continuous surface.
+*   **$e_0$ (0.950)**:
+    *   **Prediction**: Create a sharp trailing edge to satisfy the Kutta condition.
+    *   **Outcome**: **Successful.** The trailing edge is very sharp. However, combined with the relatively low $r_1$ and $r_7$ values, it created a concave "beak" shape rather than a tapered wedge.
+*   **$e_4$ (-0.800)**:
+    *   **Prediction**: Create a blunt, rounded leading edge.
+    *   **Outcome**: **Successful.** The leading edge is rounded, but the high negative edginess likely contributed to the "pinched" look immediately behind the nose as the geometry struggled to transition to the midsection.
+*   **$r_2$ (0.320) & $r_6$ (0.220)**:
+    *   **Prediction**: Define upper suction surface and lower pressure surface to create camber and reduce thickness.
+    *   **Outcome**: **Partial Success.** The airfoil is significantly thinner, and there is a visible asymmetry (camber). However, these values were *too low* relative to the chord length ($r_0, r_4$), resulting in a "waisted" or "peanut" shape in the middle.
+*   **$a_2$ (-0.300) & $a_6$ (0.300)**:
+    *   **Prediction**: Shift maximum thickness forward to 30% chord.
+    *   **Outcome**: **Ambiguous.** While the thickness does appear to peak forward of the center, the "lumpiness" caused by the radial values overrides the subtle effects of the angle parameters.
+*   **$r_1, r_7$ (0.650)**:
+    *   **Prediction**: Ensure a smooth, tapered transition to the trailing edge.
+    *   **Outcome**: **Failed.** 0.65 was too small to bridge the gap between the midsection ($r_2 \approx 0.3$) and the tail ($r_0 \approx 1.0$) smoothly. This caused the "pinched" neck before the sharp point of the tail.
+
+### Key Learnings
+
+1.  **Radial Gradient Sensitivity**: Aerodynamic performance relies on smooth pressure gradients. Large differences between adjacent radial parameters (e.g., $r_0=0.98$ vs $r_1=0.65$) create concave surfaces or "waists." In fluid dynamics, these concavities cause local flow acceleration followed by rapid deceleration, leading to premature flow separation and high drag.
+2.  **The "Peanut" Effect**: To achieve a true NACA-style profile, the transition from the thickest point to the leading and trailing edges must be monotonic or very gently curved. This design attempted to thin the airfoil too much ($r_2, r_6$) while keeping the ends long, which "collapsed" the middle of the shape.
+3.  **Edginess vs. Curvature**: High edginess ($e_0 = 0.95$) is excellent for a trailing edge, but it requires the surrounding radii to "support" the shape. Without higher $r_1$ and $r_7$ values, the sharp edge looks like an appendage rather than a termination of the body.
+4.  **Scaling and Proportions**: The next iteration needs to maintain a more consistent ratio between the chord-defining radii ($r_0, r_4$) and the thickness-defining radii ($r_2, r_6$). If the chord is ~1.8 units long, the thickness should likely be supported by higher intermediate radii to prevent the "lumpy" silhouette.

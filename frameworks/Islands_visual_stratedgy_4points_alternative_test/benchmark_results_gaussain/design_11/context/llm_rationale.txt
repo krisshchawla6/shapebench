@@ -1,0 +1,14 @@
+- **Exploration Strategy**: I will explore the "High-Chord/Balanced-Midsection" region. Design 1 was a bluff body (low `r2`), and Design 2 was a long chord but likely suffered from "waisting" (low side radii). I will push `r0` and `r2` to their near-maximums to maximize chord length but use higher `r1` and `r3` values than Design 2 to provide structural "fullness" and prevent the "waisted" boomerang effect.
+- **Camber Generation**: I will introduce asymmetry in the side angles (`a1` and `a3`). By shifting the upper peak forward (`a1` < 0) and tucking the lower rear inward (`a3` > 0), I aim to create a classical cambered profile within the polar coordinate system.
+- **Kutta Condition**: I will strictly enforce `e2 = 1.0` and `a2 = 0.0` to ensure a sharp, horizontally aligned trailing edge, which is essential for efficient flow shedding in slender designs.
+- **Leading Edge Refinement**: I will use a maximum negative `e0` (-1.0) to ensure the stagnation point is perfectly smooth, minimizing the risk of early separation.
+- **Boundary Exploration**: I am pushing the `r1` and `r3` parameters to a "Goldilocks" zone (~0.35-0.45) which is higher than the "collapsed" designs seen in previous iterations but lower than the "pebble" designs.
+
+## Per-Parameter Predictions
+- `param[0][0]` (0.9650): I predict this will maximize the forward reach of the leading edge, creating a long-chord foundation.
+- `param[1][1]` (-0.5500): I predict this will shift the upper maximum thickness point forward to approximately 30-35% of the chord.
+- `param[1][0]` (0.4200): I predict this radius will provide enough "outward push" to prevent the upper surface from becoming concave under the tension of the long chord.
+- `param[2][0]` (0.9850): I predict this will extend the tail to its maximum possible length to minimize thickness-to-chord ratio.
+- `param[2][2]` (1.0000): I predict this will create the sharp singularity required for the Kutta condition.
+- `param[3][0]` (0.3200): I predict a slightly lower radius than the upper surface will create a flatter or slightly concave lower surface for positive camber.
+- `param[3][1]` (0.3500): I predict shifting this angle will "tuck" the lower surface inward towards the trailing edge, refining the aft-loading.

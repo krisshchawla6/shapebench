@@ -1,0 +1,33 @@
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** $r_0$ and $r_2$ act as polar distance drivers. High values extend chord but require a strict balance to avoid geometric "slugging" [iter 7, 24, 27].
+*   **The Stretching Paradox (The Pebble Trap):** **Hard Limit: Sum $r_0 + r_2 < 1.80$.** Exceeding this (e.g., 1.82) triggers catastrophic collapse into a low-aspect-ratio "slug" [iter 25, 27].
+*   **The Kutta Erasure:** Approaching the Pebble Trap rounds the posterior, nullifying $e_2=1.0$. This destroys the Kutta condition, collapses lift, and spikes pressure drag [iter 27].
+*   **The Volume Budget:** High radii on CP1/CP3 (>0.45) "steal" chord length. Simultaneous high values across all four radii force "Pebble" morphology [iter 21, 25, 26].
+*   **The Waisted Trap:** Side radii < 0.40 under high chord tension creates "boomerang" profiles. CP1/CP3 must be $\ge$ 0.40 to maintain convexity [iter 11, 13, 17].
+*   **The Hook/Fang Boundary:** $e_3 < 0$ is the primary "Fang" driver. $e_3 \approx -0.35$ eliminates the notch but risks losing the high-pressure lift pocket if the chord is short [iter 24, 27].
+*   **The Beaking Threshold:** $r_0 > 0.90$ creates a "wedge" nose. $a_1 < -0.40$ combined with high $r_0$ concentrates volume into a forward "beak" [iter 13, 25].
+*   **The Stagnation Alignment:** $a_0 \approx 0.0$ minimizes frontal area and stagnation drag [iter 24, 27].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Chord driver. **New Limit: 0.85** if $r_2$ is near max. Values >0.85 risk the "Slug" collapse [iter 21, 27].
+*   **Angle [0][1]:** Vertical incidence. $a_0 \approx 0.0$ for minimum frontal drag [iter 4, 24].
+*   **Edgy [0][2]:** -1.0 for C-infinity continuity [iter 2].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Thickness control. 0.35-0.40 is the "slender limit." Values >0.41 accelerate the Pebble Trap [iter 8, 26, 27].
+*   **Angle [1][1]:** Peak positioning. $a_1 \approx -0.45$ shifts thickness to ~25% chord [iter 1, 25].
+*   **Edgy [1][2]:** Low values (-0.9) ensure smooth apex curvature [iter 4, 24].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Rearward extension. **New Limit: 0.95.** Must be traded against $r_0$ to keep sum $<1.80$ [iter 7, 27].
+*   **Angle [2][1]:** Horizontal alignment; keep near 0.0 to prevent lift-induced tail drag [iter 4, 11].
+*   **Edgy [2][2]:** 1.0 enforces Kutta condition; critical for flow closure. Effect is lost if $r_0+r_2$ is too high [iter 2, 27].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Stability Anchor. 0.42-0.45 is the "Concavity Floor." Values >0.50 risk geometric collapse [iter 17, 26].
+*   **Angle [3][1]:** Tuck control. $a_3 \approx 0.12$ is the limit for convexity when $e_3$ is negative [iter 8, 25].
+*   **Edgy [3][2]:** **The Fang Driver.** $e_3 \ge 0.0$ ensures convexity. $e_3 = -0.35$ provides smoothness but reduces the pressure pocket [iter 24, 27].

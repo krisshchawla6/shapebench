@@ -1,0 +1,102 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** Radius functions as a polar distance from the centroid. To maximize chord and fineness ratio: Maximize LE (CP0) and TE (CP2) radii while minimizing Upper (CP1) and Lower (CP3) radii [iter 7].
+*   **Chord Truncation:** Reducing TE Radius to "taper" the tail instead "shortens" the chord. Low TE Radius = "Thimble" morphology [iter 7].
+*   **The Scale Trap:** Low radii across all CPs create "miniature" or "seed" profiles. These act as bluff bodies with low Reynolds numbers, regardless of sharpness [iter 4, 7].
+*   **Chord-Thickness Ratio:** High-performance targets ~10:1 ratio. Small horizontal distance between CP0 and CP2 relative to CP1/CP3 height results in "stubby/pebble" shapes [iter 1, 4].
+*   **The Kutta Singularity:** TE Edgy [2][2] = 1.0 is mandatory to enforce a sharp vertex for flow shedding; however, without chord stretch (high CP2 Radius), it merely creates a "sharp wedge" [iter 2, 5, 7].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius + forward CP1 Angle) trigger massive flow separation [iter 1].
+*   **Thinning Strategy:** To achieve aerodynamic aspect ratios, *reduce* CP1 and CP3 radii to flatten the profile against the chord line [iter 2, 7].
+*   **Singularity Stability:** Extreme Edgy values (-1.0 to 1.0) are computationally stable; the generator handles the transition from perfectly smooth to perfectly sharp without artifacts [iter 5].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Primary driver of forward chord extension. High values (>0.9) stretch the nose forward; low values (<0.4) contribute to chord-length deficiency [iter 4, 7].
+*   **Angle [0][1]:** Controls vertical centering of the nose [iter 4].
+*   **Edgy [0][2]:** -1.0 ensures a perfectly circular, C-infinity continuous stagnation point [iter 2, 5, 7].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" fullness. High values create steep forward ramps; low values (~0.4) thin the profile and move toward laminar streamlines [iter 2, 7].
+*   **Angle [1][1]:** Lower values (~ -0.35) shift peak forward to ~30% chord [iter 1, 5].
+*   **Edgy [1][2]:** Low values ensure smooth transition over the peak [iter 4].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Primary driver of rearward chord extension. Must be high (>0.7) to prevent "Thimble" truncation. Low values pull the TE toward the LE [iter 5, 7].
+*   **Angle [2][1]:** Aligns tail point; must be near 0.0 for horizontal chord alignment [iter 4].
+*   **Edgy [2][2]:** 1.0 effectively enforces a sharp geometric singularity for the Kutta condition [iter 2, 5, 7].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Low values (~0.25) flatten the lower surface relative to the top, creating necessary camber for lift [iter 5, 7].
+*   **Angle [3][1]:** Positive values (~0.2) tuck the lower-rear inward [iter 2, 4].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain smooth lower surface continuity [iter 4].
+
+## New Evidence (Iteration 8)
+Parameters used:
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9654,
+      0.0,
+      -1.0
+    ],
+    [
+      0.2152,
+      -0.4215,
+      -0.7542
+    ],
+    [
+      0.9851,
+      0.0,
+      1.0
+    ],
+    [
+      0.1458,
+      0.1852,
+      -0.9214
+    ]
+  ],
+  "name": "super_slender_cambered_blade"
+}
+```
+
+Observations:
+This analysis compares your predictions for the "Super Slender Cambered Blade" against the resulting geometry.
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter | Predicted Effect | Actual Outcome |
+| :--- | :--- | :--- |
+| **CP0 Radius (0.9622)** | Stretch nose far forward, maximize chord length. | **Successful.** The leading edge is significantly extended, contributing to a much higher aspect ratio than previous designs. |
+| **CP1 Radius (0.2288)** | Thin the upper profile to prevent "hump" separation. | **Successful.** The upper surface is drastically flattened. The "pebble" morphology has been successfully broken. |
+| **CP1 Angle (-0.4062)** | Move max thickness to ~30% chord for pressure recovery. | **Partial Success.** The thickness peak is shifted forward, though the interaction with the lower surface creates an unconventional thickness distribution. |
+| **CP2 Radius (0.9902)** | Extend trailing edge to max rearward distance. | **Successful.** This, combined with CP0, has maximized the total chord length of the airfoil. |
+| **CP2 Edgy (0.9921)** | Ensure sharp Kutta condition/clean shedding. | **Successful.** The trailing edge is a sharp, distinct point, which is necessary for lift generation. |
+| **CP3 Radius (0.0615)** | Flatten bottom more than top to induce camber. | **Unintended Geometry.** The extremely low radius (0.06) combined with the angle offset created a **concave "hook" or "dent"** on the lower surface rather than a flat or gently cambered one. |
+
+### Key Learnings from "Super Slender Cambered Blade"
+
+**1. Chord Maximization Achieved**
+The strategy of pushing CP0 and CP2 radii to their positive limits (+1.0) while keeping CP1 and CP3 radii low successfully transformed the "blunt body" into a "slender body." This is a critical step forward in reducing pressure drag.
+
+**2. The "Lower Surface Hook" (CP3 Radius Sensitivity)**
+Your prediction that a lower CP3 radius would "flatten" the bottom was slightly off. In this parameterization, a very low radius (0.06) acts like a localized "gravity well" that pulls the surface inward. Because CP3 was set with a positive angle (0.18), it created a concave "chin" near the leading edge. While this creates high camber, the sharp concavity likely causes localized flow separation or a high-pressure drag penalty.
+
+**3. Geometric Balance**
+The airfoil now looks like a "supersonic" or "thin-plate" profile. While much better than the previous design, the transition from the leading edge (CP0) to the lower surface (CP3) is too abrupt. To achieve a smooth, high-performance "NACA-style" camber, the CP3 radius likely needs to be increased slightly to "fill out" that concave dent.
+
+**4. Transition to Performance**
+You have successfully exited the "stalled pebble" regime. The next challenge is refinement: smoothing the transitions between these extended control points to ensure the boundary layer stays attached across the entire chord, especially on the lower surface where the current "hook" might be trapping flow.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

@@ -1,0 +1,50 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 5)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0$. Spanning the origin is necessary to create volume [iter 3, 4, 5].
+*   **Structural Priority**: `angle_param` (chord) > `radius_param` (thickness/aspect ratio) > `edgy_param` (flow regulation/smoothing) [iter 1, 2, 4].
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound**: $r < 0.4$ for intermediate points causes **radial collapse** (wasp-waist/bone shape) [iter 4].
+    *   **Upper Bound**: $r > 0.8$ for all points causes **chord compression** (slug/pebble shape), destroying the aspect ratio [iter 5].
+    *   **Optimal**: LE/TE at $r \approx 1.0$, mid-body points at $r \approx 0.4–0.6$ to "stretch" the chord [iter 5].
+*   **Kutta Condition**: A geometric singularity (high `edgy_param` $\approx 1.0$) at the Trailing Edge is mandatory to define flow reattachment [iter 2, 3, 4, 5].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values (~0.9+) are required at the LE and TE poles to establish the primary length of the wing [iter 1, 2, 3, 4, 5].
+*   **Body Establishment**: To avoid a "slug" (aspect ratio 1:1), intermediate points must have significantly lower radii than the LE/TE. Setting all $r \approx 1.0$ creates a blunt cylinder rather than a streamlined foil [iter 5].
+*   **Camber & Lift**: Asymmetric radii between upper and lower surfaces create camber. However, if the chord is compressed (due to high mid-radii), this curvature becomes too aggressive, causing flow separation [iter 4, 5].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3, 4, 5].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create "hooks" or self-intersecting loops [iter 2, 5].
+*   **Bluntness Control**: Strategic clustering of angles near the LE/TE determines the "sharpness" of the profile. Uniform distribution with high radii leads to blunt, blocky faces [iter 5].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 0.85$ to $1.0$) at the Trailing Edge create the "stinger" necessary for flow separation [iter 2, 3, 4, 5].
+*   **Surface Healing**: Extreme negative values ($e \approx -1.0$) at mid-body points (CP1-2, CP4-6) and the LE (CP3) are the most effective way to "heal" a polygon into a smooth, continuous aerodynamic surface [iter 1, 4, 5].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE ensures smooth flow acceleration; however, if $r$ is too high at the LE, the nose becomes a flat "face" despite the smoothing [iter 5].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.990498, -1.0, 1.0, 0.733115, -0.578999, -0.858081, 0.688053, -0.344914, -1.0, 0.983605, 0.018061, -1.0, 0.993556, 0.299271, -0.961754, 0.928227, 0.729187, -0.947191, 0.811749, 0.90333, -0.400221, 1.0, 1.0, 0.993548]
+  - Reward: 0.0000
+  - Rank: N/A
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

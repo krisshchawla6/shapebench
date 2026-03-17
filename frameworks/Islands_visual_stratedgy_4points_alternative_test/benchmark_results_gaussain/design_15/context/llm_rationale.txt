@@ -1,0 +1,12 @@
+- **Strategy Focus**: This design is a **Hybrid** of Design 1's robust mid-body thickness and Design 2's aggressive chord extension. By interpolating these, I am targeting a "Super-Slender" profile that avoids the "Waisted Trap."
+- **Chord Extension**: I will push CP2 (TE) radius to 0.9350 (higher than Design 1) to maximize lift-producing surface area.
+- **Anti-Waisting**: I am setting CP3 (Lower) radius to 0.6200. This is significantly higher than Design 1 (0.55) and Design 2 (0.31). This "fattening" of the lower surface is predicted to create a perfectly flat/convex belly, eliminating the drag-heavy concavity seen in the images.
+- **Leading Edge Refinement**: Reducing CP0 radius to 0.8950 (from 0.93) to soften the "beaking" effect, allowing for a more rounded stagnation point which improves performance across a wider range of angles of attack.
+- **Peak Management**: CP1 radius will be set to 0.4800 with an angle of -0.3800, maintaining the forward-shifted thickness that successfully promoted laminar flow in Design 1.
+
+## Per-Parameter Predictions
+- **CP0 Radius [0.8950]**: I predict this will slightly shorten the chord but provide a blunter, more aerodynamic nose compared to Design 1's beak.
+- **CP1 Angle [-0.3800]**: I predict this will maintain the upper peak at ~30% chord, ensuring a long pressure recovery ramp.
+- **CP2 Radius [0.9350]**: I predict this will extend the TE further back, increasing the effective chord and lift potential.
+- **CP2 Angle [0.0000]**: I predict this will remove the "downward hook" seen in Design 1, aligning the Kutta condition with the horizontal flow.
+- **CP3 Radius [0.6200]**: I predict this will "push out" the lower surface, effectively curing the waisting/concavity and creating a cleaner lower pressure distribution.

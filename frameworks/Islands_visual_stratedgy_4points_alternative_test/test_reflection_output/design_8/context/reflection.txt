@@ -1,0 +1,29 @@
+This analysis examines the transition from the "collapsed" geometry of Design 1 to the "stubby" geometry of Design 2 (Cambered_Convex_V1).
+
+### Parameter Prediction vs. Outcome
+
+| Parameter | Predicted Role | Actual Outcome | Comparison |
+| :--- | :--- | :--- | :--- |
+| **r0, r7 (TE)** | Maximize chord length (~1.0). | Sampled at **1.0000**. | **Success**: The trailing edge points are at the maximum radial extent, providing a clear termination point. |
+| **r3 (LE)** | Maximum forward extent (1.0). | Sampled at **0.9674**. | **Success**: The nose reaches the forward boundary, establishing a full chord length. |
+| **r1, r2 (Upper)** | Convex loft for lift (0.82-0.85). | Sampled at **0.8328, 0.8390**. | **Over-predicted**: While they created a convex surface, these values are too high relative to the chord, resulting in a "bulge" rather than a sleek upper surface. |
+| **r4, r5 (Lower)** | Create camber (0.62-0.58). | Sampled at **0.6543, 0.5817**. | **Partial Success**: They are lower than the upper radii, creating asymmetry, but still too large to allow for a thin profile. |
+| **a1, a2 (Angles)** | Structural spacing (0.65, 0.30). | Sampled at **0.6396, 0.3702**. | **Success**: Provided a logical distribution of points along the upper surface. |
+| **e0, e7 (TE Edgy)** | Kutta condition sharpness (1.0). | Sampled at **1.0000**. | **Success**: The image shows a very sharp, distinct "stinger" at the trailing edge. |
+| **e1-e5 (Body Edgy)** | Smoothness (-1.0). | Sampled at **-1.0 to -0.97**. | **Success**: The body is perfectly smooth and organic, free of the "starfish" spikes seen in Design 1. |
+
+### Key Learnings
+
+#### 1. The "Goldilocks Zone" for Thickness
+In Design 1, radii of ~0.20 produced a collapsed, non-physical line. In Design 2, radii of ~0.60–0.85 produced a "pebble" or "bean" shape. 
+*   **The Problem**: An airfoil with a chord length of ~2.0 (from LE at $r=1, a=0$ to TE at $r=1, a=\pi$) and mid-body radii of ~0.7 creates a thickness-to-chord ratio of roughly 70%. 
+*   **The Fix**: To achieve a standard aerodynamic thickness (10-15%), the mid-body radii ($r_1, r_2, r_4, r_5$) likely need to be significantly lower, perhaps in the **0.15 to 0.40** range, provided the `edgy_param` remains negative to prevent collapse.
+
+#### 2. Polar Coordinate Sensitivity
+The designer successfully used asymmetry ($r_{upper} > r_{lower}$) to generate camber. However, in a polar system, as the points move toward the LE ($a=0$), the vertical distance between an upper point and a lower point diminishes rapidly. To maintain thickness and camber near the nose, the angular spacing ($a$) needs to be carefully tuned alongside the radii.
+
+#### 3. Successful "Healing" of the Geometry
+The most significant improvement is the use of `edgy_param = -1.0`. This successfully "healed" the geometry from the jagged mess of Design 1 into a continuous, differentiable manifold. This is a prerequisite for any valid CFD solution, even if the current shape is too "draggy" (bluff body) to produce high reward.
+
+#### 4. The "Stinger" Effect
+Setting $e=1.0$ at the trailing edge while the rest of the body is $e=-1.0$ creates a very specific geometric feature: a smooth bulbous body that terminates in a sharp needle. While aerodynamically better than a blunt rear, the transition from a very thick body to a sharp point causes massive flow separation. The body must become thinner overall for the Kutta condition (the sharp TE) to function effectively.

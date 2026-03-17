@@ -1,0 +1,15 @@
+*   **Exploitation Strategy**: I am leveraging the "Optimal Range" data from the Reference Card to transform the existing circular failure into a high-performance subsonic airfoil. Since the circle has maximum drag, I am focusing on the "Drag Reduction" and "Lift Generation" patterns identified in Iteration 2.
+*   **Chord Extension**: I will keep CP4 (Trailing Edge) at maximum radius (1.0) and CP0 (Leading Edge) at a high radius (0.85) to maximize the horizontal axis relative to the vertical axis.
+*   **Profile Thinning**: I am setting CP2 (Top) to a radius of ~0.28 and CP6 (Bottom) to ~0.16. This creates a thin, streamlined profile that reduces the massive pressure drag seen in the circular wake.
+*   **Kutta Condition**: I will set CP4's edginess to 1.0. This transforms the blunt rear of the circle into a sharp point, forcing the flow to leave the airfoil smoothly and reducing wake turbulence.
+*   **Camber and Asymmetry**: By setting CP6 radius significantly lower than CP2, I create a flatter lower surface and a curved upper surface, which will generate a pressure differential (lift).
+*   **Thickness Distribution**: I am applying positive angle offsets to CP2 and CP6 to shift the maximum thickness toward the first 30% of the chord, which is essential for maintaining laminar flow and preventing early separation.
+
+## Per-Parameter Predictions
+
+- **CP0 [0.85, 0.0, -0.9]**: I am setting r=0.85 and e=-0.9 because I predict it will create a blunt, rounded nose that is stable against varying angles of attack.
+- **CP4 [1.0, 0.0, 1.0]**: I am setting r=1.0 and e=1.0 because I predict it will create a sharp, elongated trailing edge that eliminates the circular wake.
+- **CP2 [0.28, 0.15, -0.1]**: I am setting r=0.28 and a=0.15 because I predict it will thin the upper surface and move the crest forward to improve pressure recovery.
+- **CP6 [0.16, 0.15, -0.1]**: I am setting r=0.16 and a=0.15 because I predict it will create a nearly flat lower surface, providing the necessary camber for lift.
+- **CP1 & CP7**: I am setting intermediate radii (~0.6) and negative edginess to ensure a smooth, monotonic transition from the blunt nose to the thinner mid-section.
+- **CP3 & CP5**: I am setting positive edginess (~0.4) to begin the "pinching" process that leads to the sharp trailing edge at CP4.

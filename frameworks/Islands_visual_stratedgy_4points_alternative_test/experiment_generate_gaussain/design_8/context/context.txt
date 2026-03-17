@@ -1,0 +1,70 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+## Reference Card (Iteration 8)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n > 0$ to prevent origin-crossing [iter 1].
+*   **Laminar Delta Rule:** Maintain $\Delta r < 0.1$ between adjacent $r_n$ to prevent separation [iter 2, 6].
+*   **The Convexity Constraint:** Avoid local minima at $r_2$ or $r_6$. If $r_2, r_6 < r_{neighbors}$, the spline collapses into a "Peanut" (concave waist) with massive drag [iter 8].
+*   **The Scale Rule:** Total chord ($r_0 + r_4$) must exceed 2.0 to avoid the "Nugget" (bluff body) trap [iter 7].
+*   **Polar Thickness Logic:** Unlike Cartesian thickness (subtraction), Polar thickness requires $r_2, r_6$ to be the apex. They must be supported by intermediate $r_{1,3,5,7}$ values to form a convex hull [iter 8].
+*   **The Pinch Technique:** To sharpen the Trailing Edge (TE), $r_1, r_7$ must be smaller than $r_0$ (if $r_0$ is the tip) or provide a monotonic taper [iter 6, 8].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | TE extension. | Defines aft chord. If $r_1, r_7 > r_0$, the TE becomes a bulbous "tail-head" rather than a point [iter 1, 8]. |
+| **$e_0$** | TE Sharpness. | **Negative** ($\rightarrow -1$) for Kutta cusp. Only effective if the global geometry tapers towards the TE [iter 3, 8]. |
+| **$r_2$** | Upper surface apex. | Primary thickness. Must be $\ge r_1, r_3$ to maintain convexity and prevent flow separation in "valleys" [iter 2, 8]. |
+| **$a_n$** | Surface bias. | Shifts max thickness location. In compact shapes, causes "rotation" rather than volume shift [iter 1, 7]. |
+| **$r_4$** | LE extension. | Defines forward chord. If $r_3, r_5 > r_4$, the LE becomes a bulbous "nose-head" [iter 1, 8]. |
+| **$e_4$** | LE Bluntness. | **Positive** ($\rightarrow +1$) rounds nose. $e \approx 0.5$ provides a smooth stagnation zone [iter 3, 8]. |
+| **$r_6$** | Lower surface apex. | Camber control. $r_6 < r_2$ creates lift. Must remain a local maximum relative to $r_5, r_7$ to avoid concavity [iter 3, 8]. |
+| **$r_{1,3,5,7}$** | Tapering support. | Bridges $r_{even}$ values. Must be intermediate (monotonic) to ensure a smooth teardrop transition [iter 2, 8]. |
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 2:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 3:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 4:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 5:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 6:
+  - Action: [0.983711, -0.025861, -0.954558, 0.540428, -0.1534, -0.018603, 0.300619, 0.160619, -0.056766, 0.516412, 0.033871, -0.008652, 0.863388, -0.022348, 0.915446, 0.486055, -0.111118, -0.032273, 0.014973, -0.081051, -0.097212, 0.555224, 0.018977, -0.014657]
+  - Reward: -5.0000
+  - Rank: 2
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

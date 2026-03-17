@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generate Action Direct",
+  "description": "Generate a new airfoil action vector (deformation parameters) directly.",
+  "type": "object",
+  "properties": {
+    "n_cp": {
+      "type": "integer",
+      "description": "Number of control points."
+    },
+    "n_sp": {
+      "type": "integer",
+      "description": "Bezier sampling resolution (unused for action generation, but kept for compatibility)."
+    },
+    "params": {
+      "type": "array",
+      "description": "List of [radius_param, angle_param, edgy_param] per control point. ALL VALUES MUST BE IN [-1.0, 1.0].",
+      "items": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 3,
+        "maxItems": 3
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "Base name for the file (default: 'shape')."
+    }
+  },
+  "required": ["n_cp", "n_sp", "params"]
+}

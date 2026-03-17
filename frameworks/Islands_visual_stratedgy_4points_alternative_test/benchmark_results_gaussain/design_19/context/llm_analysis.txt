@@ -1,0 +1,18 @@
+* **Geometry Observation**: 
+    * The design exhibits a very high fineness ratio with a significantly elongated chord, primarily driven by the extreme radii at the leading and trailing edges.
+    * The leading edge (LE) displays a distinct "beaking" effect—a sharp, wedge-like protrusion rather than a rounded nose—caused by a radius parameter exceeding 0.90.
+    * The upper surface is slender but remains convex, avoiding the "waisted" collapse, though the transition from the LE beak to the upper hump is quite abrupt.
+    * The trailing edge (TE) is perfectly sharp and aligned horizontally, which is ideal for flow shedding.
+
+* **Flow Field Observation**:
+    * The pressure field shows an intense stagnation point at the sharp LE tip, followed by a rapid acceleration (low pressure) on the upper surface.
+    * The velocity vectors show a well-attached flow over the majority of the chord, with no significant separation bubbles or wake turbulence visible at this scale.
+    * The pressure recovery on the aft upper surface appears linear and controlled, suggesting the negative angle parameter on CP1 is successfully lengthening the recovery ramp.
+    * There is a slight pressure concentration on the lower surface near the TE, suggesting the "hook" transition is minimal but present.
+
+* **Parameter Mapping & Key Changes**:
+    * **Visible Flaw**: The LE "beaking" (CP0 R=0.9497) creates a potential sensitivity to angle of attack and a drag-inducing stagnation spike.
+    * **Visible Flaw**: The lower surface (CP3 R=0.4948) is very close to the "Concavity Floor," and any further reduction would likely cause a "scoop" that ruins the pressure distribution.
+    * **Change 1**: Reduce CP0 Radius to ~0.88 to round the nose and create a more robust subsonic stagnation region.
+    * **Change 2**: Interpolate CP1 Radius to ~0.42 to ensure the upper surface remains "proud" and convex despite the long chord.
+    * **Change 3**: Maintain the maximum CP2 Radius (1.0) and Edgy (1.0) as they are the primary drivers of the high reward in Design 1.

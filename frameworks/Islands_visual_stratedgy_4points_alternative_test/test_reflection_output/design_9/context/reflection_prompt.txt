@@ -1,0 +1,98 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Exploitation Strategy:** I am exploiting the established polar coordinate logic (LE at $a=0$, TE at $a \approx \pm1$) but applying the "Goldilocks Radius" rule derived from the failure of Design 1. By collapsing the mid-body radii while keeping the poles extended, I will transform the "bean" into a "blade."
+*   **Camber Generation:** I will set CP1 and CP2 radii to $\approx 0.40$ and CP4, CP5 to $\approx 0.25$. This $0.15$ radial delta creates a curved mean camber line, which is essential for generating lift at low angles of attack.
+*   **Smoothing (The "Healer"):** I will set all mid-body and LE `edgy_param` values to $-1.0$. This ensures the transition from the thin mid-body to the extended LE and TE is organic and differentiable, preventing the "starfish" spikes seen in earlier iterations.
+*   **Thickness Control:** By keeping the maximum thickness (the delta between upper and lower mid-body points) small, I aim to minimize the pressure drag that neutralized Design 1.
+*   **Aft Loading:** I will position the angular parameters to ensure a gradual closure toward the Trailing Edge, encouraging the Kutta condition to settle at the sharp tip.
+
+## Per-Parameter Predictions
+
+*   **CP3 (LE) [1.0, 0.0, -1.0]:** I am setting this to these values to maximize chord length and ensure a perfectly smooth, parabolic nose.
+*   **CP1, CP2 (Upper Mid) [r $\approx$ 0.4]:** I am setting these to lower values than Design 1 to reduce thickness while maintaining a convex upper loft.
+*   **CP4, CP5 (Lower Mid) [r $\approx$ 0.25]:** I am setting these lower than the upper points to create a "scooped" lower surface, inducing positive camber.
+*   **CP0, CP7 (TE) [1.0, $\pm$1.0, 1.0]:** I am setting these to maximum radius and maximum edginess to create a sharp, elongated trailing edge for clean flow separation.
+*   **CP6 (Aft Transition) [r=0.45]:** I am setting this slightly higher than CP5 to bridge the gap between the thin lower body and the $r=1.0$ trailing edge smoothly.
+
+In the provided image of Design 1, the following observations can be made:
+
+**Geometry Observations:**
+*   The shape is a "bluff body" resembling a thick bean or pebble rather than a streamlined wing.
+*   The thickness-to-chord ratio is extremely high (estimated at 60-70%), which is far outside the efficient subsonic range.
+*   The Trailing Edge (TE) features a sharp "stinger" due to the high `edgy_param`, but it is attached to a massive, rounded base, preventing efficient flow closure.
+*   The Leading Edge (LE) is smooth and rounded, but its transition into the mid-body is too abrupt because of the high mid-body radii.
+
+**Flow Field / Simulation Observations:**
+*   **Pressure Field:** There is a massive high-pressure stagnation zone at the nose. Because the body is so thick, the pressure gradient becomes adverse very early on the upper and lower surfaces.
+*   **Velocity Field:** The velocity plot shows massive flow separation starting near the mid-chord. A large, turbulent wake is visible behind the airfoil, indicating high pressure drag (form drag).
+*   **Lift/Drag:** The symmetry and thickness suggest the lift-to-drag ratio is likely near zero or negative, explaining the 0.0000 reward. The flow is completely stalled.
+
+**Parameter Mapping & Improvements:**
+*   Design 1's failure is primarily caused by `radius_params` for CP1, CP2, CP4, CP5, and CP6 being in the "Bloat Zone" ($r \in [0.58, 0.83]$).
+*   The `edgy_param` values are mostly correct (smooth mid-body, sharp TE), but they cannot compensate for the poor radial distribution.
+*   **Key Changes Needed:** 
+    1. Dramatically reduce mid-body radii ($r$) to the range of $0.20-0.45$ to achieve a fineness ratio of 10-15%.
+    2. Maintain the $r \approx 1.0$ at CP3 (LE) and CP0/7 (TE) to maximize chord length.
+    3. Introduce camber by setting the upper radii (CP1, CP2) significantly higher than the lower radii (CP4, CP5).
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      0.3842,
+      0.6215,
+      -1.0
+    ],
+    [
+      0.4218,
+      0.3054,
+      -1.0
+    ],
+    [
+      1.0,
+      0.0021,
+      -1.0
+    ],
+    [
+      0.2845,
+      -0.3122,
+      -1.0
+    ],
+    [
+      0.2413,
+      -0.6584,
+      -1.0
+    ],
+    [
+      0.4852,
+      -0.8951,
+      -0.8521
+    ],
+    [
+      1.0,
+      -0.9999,
+      1.0
+    ]
+  ],
+  "name": "sleek_cambered_blade"
+}
+```
+
+Sampled action vector:
+['0.9730', '0.9889', '1.0000', '0.3732', '0.6875', '-1.0000', '0.4506', '0.2223', '-1.0000', '0.9425', '0.0288', '-1.0000', '0.2962', '-0.2892', '-1.0000', '0.2738', '-0.6793', '-1.0000', '0.5146', '-0.8528', '-0.8564', '0.9800', '-1.0000', '0.8813']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

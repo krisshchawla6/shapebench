@@ -26,6 +26,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
 
+import pickle
+
 import torch
 from scipy.spatial import distance_matrix
 
@@ -52,8 +54,16 @@ from VortexNet.VortexNetUtils import VortexNetUtils
 from SUAVE.Core import Units
 
 # ── constants ────────────────────────────────────────────────────────────────
-PRETRAINED_WEIGHTS = VNET_DIR / 'pretrained_model' / 'model_weights_20241116_045918.pth'
-PRETRAINED_HP      = VNET_DIR / 'pretrained_model' / 'tuning_results_20241116_045918.json'
+PRETRAINED_WEIGHTS = VNET_DIR / 'pretrained_model' / 'model_weights_20260217_022011.pth'
+PRETRAINED_HP      = VNET_DIR / 'pretrained_model' / 'tuning_results_20260217_022011.json'
+PRETRAINED_SCALER  = VNET_DIR / 'pretrained_model' / 'scaler_20260217_022011.pth'
+
+# Architecture recovered from weight tensor shapes (not stored in new tuning JSON):
+#   node_encoder.weight [3969, 11] → hidden_channels = sqrt(3969) = 63
+#   conv_layers.0.att   [1, 4, 63] → HEADS = 4
+#   conv_layers 0-9                → HOP   = 10
+# dropout_rate has no effect at inference (eval mode); ALPHA=0.5 is model.py default.
+_ARCH = dict(hidden_channels=63, HEADS=4, HOP=10, dropout_rate=0.2, ALPHA=0.5)
 
 # dataset-fixed constants (must match VortexNet training setup)
 _ROOT_CHORD_IN = 25.734
@@ -77,23 +87,20 @@ def _geom_kwargs():
 # ── model loading ────────────────────────────────────────────────────────────
 
 def load_vortexnet():
-    hp = json.load(open(PRETRAINED_HP))['hyperparameters']
     model = GNN4(
         node_in_channels=11,
         edge_in_channels=1,
-        hidden_channels=hp['hidden_channels'],
         out_channels=1,
         num_coarse=900,
         num_fine=900,
-        dropout_rate=hp['dropout_rate'],
-        HEADS=hp['HEADS'],
-        ALPHA=hp['ALPHA'],
-        HOP=hp['HOP'],
+        **_ARCH,
     )
     state = torch.load(str(PRETRAINED_WEIGHTS), map_location='cpu', weights_only=False)
     model.load_state_dict(state)
     model.eval()
-    return model
+    with open(str(PRETRAINED_SCALER), 'rb') as f:
+        scaler_dict = pickle.load(f)
+    return model, scaler_dict
 
 
 # ── geometry helpers ─────────────────────────────────────────────────────────
@@ -193,7 +200,7 @@ def compute_lattice_slopes_and_curvature(VD, naca_params, le_sweep):
 
 # ── graph construction for inference ─────────────────────────────────────────
 
-def build_graph_input(vlm_results, aoa_deg, mach, re, naca_params, le_sweep):
+def build_graph_input(vlm_results, aoa_deg, mach, re, naca_params, le_sweep, scaler_dict):
     """Build a PyG Data object from VLM results for VortexNet inference."""
     VD = vlm_results.VD
     cp = np.squeeze(vlm_results.cp)
@@ -206,16 +213,35 @@ def build_graph_input(vlm_results, aoa_deg, mach, re, naca_params, le_sweep):
     aoa_rad = aoa_deg * math.pi / 180.0
     ff = np.tile([tanh(aoa_rad), tanh(mach), re / 1e7], (n_panels, 1))
 
+    # Features 4-8 (thickness, curvatures, slopes) are fed raw to the scaler —
+    # the CnF training that produced the 20260217 weights/scaler did NOT apply
+    # tanh() to these features before fitting the StandardScaler.
+    # Proof: scaler mean for curv_u ≈ −27,139 (impossible after tanh bounded to ±1).
     node_features = np.hstack((
         cp.reshape(-1, 1),
         ff,
-        tanh(thickness).reshape(-1, 1),
-        tanh(curv_u).reshape(-1, 1),
-        tanh(curv_l).reshape(-1, 1),
-        tanh(slope_u).reshape(-1, 1),
-        tanh(slope_l).reshape(-1, 1),
+        thickness.reshape(-1, 1),
+        curv_u.reshape(-1, 1),
+        curv_l.reshape(-1, 1),
+        slope_u.reshape(-1, 1),
+        slope_l.reshape(-1, 1),
         coords,
     ))
+
+    # Apply the same normalization used during training:
+    # - StandardScaler on features [0..8] (all except x,y coords)
+    # - Coordinate normalization by root_chord_ref
+    feat_idx = scaler_dict['features_to_normalize_indices']   # [0..8]
+    coord_idx = scaler_dict['features_to_keep_indices']        # [9, 10]
+    node_features[:, feat_idx] = scaler_dict['scaler'].transform(
+        node_features[:, feat_idx]
+    )
+    if scaler_dict.get('normalize_coordinates', False):
+        root_chord_ref = scaler_dict['root_chord_ref']
+        apex_x = scaler_dict.get('apex_x', 0.0)
+        apex_y = scaler_dict.get('apex_y', 0.0)
+        node_features[:, coord_idx[0]] = (node_features[:, coord_idx[0]] - apex_x) / root_chord_ref
+        node_features[:, coord_idx[1]] = (node_features[:, coord_idx[1]] - apex_y) / root_chord_ref
 
     dist_mat = distance_matrix(coords, coords)
     edges = []
@@ -262,8 +288,8 @@ def run_full_pipeline(params, aoa, mach, re, output_dir):
 
         vlm_results = point_analysis(vehicle, aoa, mach, le_sweep, NACA_4DIGITS, **gkw)
 
-        model = load_vortexnet()
-        graph = build_graph_input(vlm_results, aoa, mach, re, NACA_4DIGITS, le_sweep)
+        model, scaler_dict = load_vortexnet()
+        graph = build_graph_input(vlm_results, aoa, mach, re, NACA_4DIGITS, le_sweep, scaler_dict)
 
         with torch.no_grad():
             predicted_dcp = model(graph).cpu().numpy().flatten()

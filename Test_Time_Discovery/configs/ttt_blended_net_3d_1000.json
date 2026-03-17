@@ -1,6 +1,6 @@
 {
   "environment": "BlendedNet",
-  "framework": "blended_net_3d",
+  "framework": "islands",
   "output_dir": "environments/BlendedNet/results/ttt_1000",
   "model_name": "openai/gpt-oss-120b",
   "lora_rank": 32,

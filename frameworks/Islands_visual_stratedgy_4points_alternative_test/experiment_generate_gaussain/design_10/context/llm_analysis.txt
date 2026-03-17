@@ -1,0 +1,13 @@
+*   **Geometry**: 
+    *   The shape is a perfect circle (a bluff body).
+    *   The control points (black dots) are positioned uniformly around the perimeter of the unit circle.
+    *   There is no streamlining, no distinct leading edge, and no sharp trailing edge.
+    *   It lacks the necessary chord length (elongation) required for an airfoil.
+*   **Flow Field**: 
+    *   **Pressure Plot**: Massive high-pressure (yellow) stagnation point at the front and a massive low-pressure (purple) wake region behind the cylinder, indicating severe pressure drag.
+    *   **Velocity Plot**: Significant flow separation occurs at the top and bottom apexes, creating a wide, turbulent wake downstream with a large velocity deficit.
+    *   **Streamlines**: The flow is forced to navigate a large frontal area, resulting in symmetric separation and zero lift but maximum drag.
+*   **Mapping & Improvements**: 
+    *   Design 1's action vector shows $r_n$ values mostly below $1.0$ (e.g., $r_2 = 0.255$, $r_6 = 0.121$). In this coordinate system, these values result in a small, nearly circular footprint. 
+    *   The reward of -5.0000 indicates a "Nugget Trap" or bluff body failure. 
+    *   **Key Changes**: 1) Dramatically increase $r_0$ and $r_4$ to satisfy the "Scale Rule" (Total chord $> 2.0$). 2) Apply a negative $e_0$ to create a sharp trailing edge. 3) Reduce the radius of intermediate points ($r_1, r_2, r_7$) to create a tapering teardrop profile.

@@ -57,9 +57,6 @@ logger = logging.getLogger(__name__)
 def _load_framework(name):
     return importlib.import_module(f"frameworks.{name}.run")
 
-def _load_agent(name):
-    return importlib.import_module(f"frameworks.{name}.agent")
-
 def _load_environment_class(name):
     mod = importlib.import_module(f"environments.{name}.environment")
     from environments.base import BaseEnvironment
@@ -225,7 +222,6 @@ def main():
 
     # --- Load framework & environment ---
     fw_module = _load_framework(fw_name)
-    fw_agent = _load_agent(fw_name)
     env_class = _load_environment_class(env_name)
 
     # Parse extra args (env-specific like --mach, --re, --alpha, etc.)
@@ -255,8 +251,7 @@ def main():
 
     environment = env_class(**env_kwargs)
 
-    prompt_blocks = environment.get_prompt_blocks()
-    fw_agent.set_env_format_context(prompt_blocks['format_context'])
+    # format_context is now set automatically inside environment.run_llm_action()
 
     # --- Tinker setup ---
     async def _setup_tinker():
@@ -299,13 +294,12 @@ def main():
         phase1_max_tokens=args.phase1_max_tokens,
         temperature=args.temperature,
     )
-    fw_agent.set_llm_backend(tinker_backend.generate_design)
+    environment.set_llm_backend(tinker_backend.generate_design)
 
     # --- Results tracking ---
     csv_path = os.path.join(output_dir, 'results.csv')
-    db_module = importlib.import_module(f"frameworks.{fw_name}.database")
-    update_database_fn = db_module.update_database
-    database = db_module.empty_database()
+    from frameworks.core.database import update_database as update_database_fn, empty_database
+    database = empty_database()
     iteration = 0
     best_reward = -np.inf
 

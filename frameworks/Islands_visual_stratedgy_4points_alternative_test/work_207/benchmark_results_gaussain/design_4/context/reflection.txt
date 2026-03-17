@@ -1,0 +1,33 @@
+This design, "streamlined_kutta_taper," represents a significant leap from the initial circular geometry. You have successfully transitioned from a bluff body to a streamlined, lifting shape.
+
+### Per-Parameter Prediction vs. Outcome Analysis
+
+**CP0 [Nose]**
+*   **Prediction**: $r=0.88, e=-0.85$ to create a blunt, parabolic nose.
+*   **Outcome**: The nose is indeed blunt, but the high negative edginess has created a very "flat-faced" leading edge. While this broadens the stagnation region, the transition from this flat face to the upper and lower surfaces is quite sharp, which might trigger localized flow acceleration or separation at the "corners" of the nose.
+
+**CP2 [Upper Surface]**
+*   **Prediction**: $r=0.28$ to reduce thickness to ~14% chord.
+*   **Outcome**: The thickness is drastically reduced compared to Design 1. However, because the nose (CP0) and tail (CP4) have high radii while the "waist" (CP2) is pulled in so tightly, the airfoil has a "bulbous" front and a very thin rear, resembling a tadpole. This creates a high-pressure gradient that might be difficult for the boundary layer to navigate.
+
+**CP4 [Trailing Edge]**
+*   **Prediction**: $r=1.0, e=1.0$ to create a sharp, extended trailing edge.
+*   **Outcome**: **Highly Successful.** This is the strongest feature of the design. The trailing edge is perfectly sharp and positioned at the maximum chord length. This will effectively enforce the Kutta condition, forcing the flow to leave the airfoil smoothly and significantly reducing pressure drag compared to the circle.
+
+**CP3 & CP5 [Rear Taper]**
+*   **Prediction**: $r \approx 0.22$ to "pinch" the shape toward the back.
+*   **Outcome**: The pinching worked, but it may be *too* aggressive. The transition from the thickest part of the airfoil to the thin tail is very abrupt. This "concavity" in the rear half of the airfoil can sometimes cause flow separation if the flow cannot stay attached to the rapidly narrowing surface.
+
+**CP6 [Lower Surface]**
+*   **Prediction**: $r=0.22$ (lower than CP2) to create a flatter bottom and positive camber.
+*   **Outcome**: Positive camber was successfully achieved. The lower surface is significantly flatter than the upper surface. However, the combination of the flat CP0 nose and the tucked-in CP6 has created a slight "chin" or protrusion on the lower-front section, which may create a secondary stagnation point or drag.
+
+---
+
+### Key Learnings
+
+1.  **The "Tadpole" Effect**: While pulling in the "waist" (CP2, CP3, CP5, CP6) reduces thickness, doing so too aggressively relative to the nose and tail creates a shape with high curvature gradients. A more "classic" airfoil would have a more gradual taper from the maximum thickness (usually around 30% chord) to the tail.
+2.  **Edginess Interaction**: High negative edginess ($e \approx -0.9$) at the nose creates a very flat leading edge. While good for stagnation, it creates "shoulders" where the flow must turn a sharp corner. A more moderate negative edginess (e.g., -0.4 to -0.6) might provide a smoother parabolic transition.
+3.  **Trailing Edge Dominance**: The shift from a reward of -0.0036 (circle) to a functional airfoil is primarily driven by the sharpening of CP4. This confirms that for aerodynamic performance, the trailing edge configuration is the most critical geometric feature.
+4.  **Camber vs. Thickness**: You successfully decoupled thickness (via $r2/r6$) from camber (via the difference between $r2$ and $r6$). This is a sophisticated control strategy that will be essential for tuning the lift-to-drag ratio in future iterations.
+5.  **Concavity Risks**: The "pinched" look between the main body and the tail introduces surface concavity. In subsonic aerodynamics, convex surfaces are generally preferred to keep the flow attached; concavity in the rear can lead to "dead air" pockets even with a sharp trailing edge.

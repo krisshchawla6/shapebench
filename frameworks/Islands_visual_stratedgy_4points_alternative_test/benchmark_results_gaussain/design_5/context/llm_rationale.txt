@@ -1,0 +1,13 @@
+*   **Strategy Focus (Exploration):** As this is the first design, I am testing the limits of the "Radius" parameter by using a negative value for the lower surface (CP3). This is an underexplored region aimed at determining if the generator treats negative radii as internal offsets or concavities.
+*   **Leading Edge Baseline:** I will set CP0 (LE) to a high radius (0.85) and minimum edginess (-1.0) to ensure a smooth, robust stagnation point, which is a hallmark of successful subsonic airfoils.
+*   **Asymmetric Peak Loading:** I will push the CP1 (Upper) angle to a forward extreme (-0.85) to test the "Forward-Loaded" aerodynamic concept. This explores the boundary of the longitudinal parameter space.
+*   **Kutta Condition Enforcement:** I will maximize CP2 (TE) edginess (1.0) and minimize its radius (-0.1) to create the sharpest possible trailing edge, testing the solver's stability with high-gradient geometry.
+*   **Camber Generation:** By setting CP3 (Lower) to a negative radius (-0.4), I am exploring whether this produces a "reflexed" or concave lower surface, which could significantly influence the pressure distribution and lift.
+
+## Per-Parameter Predictions
+*   **CP0 radius_param (0.8500):** I predict this will cause a large, bulbous leading edge that provides a wide range of stall-resistant angles of attack.
+*   **CP0 edgy_param (-1.0000):** I predict this will cause a perfectly circular transition at the nose, eliminating any local velocity spikes.
+*   **CP1 angle_param (-0.8500):** I predict this will move the maximum thickness point significantly forward (near 15-20% chord), creating a steep pressure recovery region.
+*   **CP2 radius_param (-0.1000):** I predict this will minimize the vertical thickness of the tail, preventing a "base drag" cliff and encouraging flow closure.
+*   **CP2 edgy_param (1.0000):** I predict this will cause a sharp geometric singularity, allowing the Kutta condition to be strictly satisfied in the simulation.
+*   **CP3 radius_param (-0.4000):** I predict this will "pull" the lower surface inward, potentially creating a concave/under-cambered profile that increases the pressure differential between surfaces.

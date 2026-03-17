@@ -1,0 +1,8 @@
+*   **Strategy Focus (Novelty)**: Instead of mutating the "blobby" Design 1, I will generate a **Laminar Flow Airfoil** variant. This design focuses on pushing the maximum thickness further aft (to ~50% chord) and thinning the profile significantly to minimize drag while maintaining lift.
+*   **Population Insight**: The previous design maximized radii likely to ensure volume, but this often penalizes L/D ratio. The evolutionary path forward is to find the "thin but efficient" region of the design space.
+*   **Geometric Construction**:
+    *   **LE (P0)**: Sharp but rounded (`r~0.2`, `smooth`), unlike the wall-like LE of Design 1.
+    *   **Upper Surface (P1-P3)**: Gradual thickness increase (`r` rising from 0.4 to 0.6) with the peak at P2 (mid-chord), keeping `edgy` low for attached flow.
+    *   **Trailing Edge (P4)**: Aggressive sharpness (`edgy=1.0`) and extended chord (`angle near 1.0`) with negative radius to thin it down.
+    *   **Lower Surface (P5-P7)**: Slight camber (negative radii) but much less extreme than Design 1, ensuring smooth recovery to the LE.
+*   **Aerodynamic Hypothesis**: By smoothing the curvature changes and reducing the frontal area, we should see a massive reduction in pressure drag, potentially yielding a higher overall reward even if max lift decreases slightly.

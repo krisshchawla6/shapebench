@@ -1,0 +1,14 @@
+*   **Visual Intuition Strategy**: The current circular profile is the antithesis of an airfoil. To improve the reward (reduce drag and increase lift), the shape must transition from a bluff body to a streamlined teardrop.
+*   **Thinning the Profile**: By drastically reducing the radius parameters of the vertical points (CP2 and CP6), I will collapse the circle into a thin profile, significantly reducing the frontal area and the associated pressure drag seen in the velocity field.
+*   **Trailing Edge Sharpness**: The Kutta condition requires a sharp trailing edge to fix the flow separation point and generate lift. Setting CP4's `edgy_param` to 1.0 and extending its radius will create this essential feature.
+*   **Leading Edge Smoothing**: I will keep CP0's `edgy_param` very low (negative) to ensure a robust, rounded nose that can handle varying angles of attack without immediate separation.
+*   **Asymmetry for Lift**: I will shift the `angle_param` of the upper points (CP1, CP2, CP3) slightly backward and maintain higher radii compared to the lower points, creating a cambered profile that encourages higher velocity (lower pressure) on the upper surface.
+*   **Optimizing the Search**: Moving away from the "all 1s" boundary is critical. Exploring the interaction between high edginess at the tail and low edginess at the nose will establish the primary aerodynamic axis.
+
+## Per-Parameter Predictions
+
+*   **CP0 (Nose)**: I am setting `radius_param` to 0.85 and `edgy_param` to -0.9 because I predict it will cause a smooth, rounded leading edge that prevents flow separation at the stagnation point.
+*   **CP2 (Top)**: I am setting `radius_param` to 0.25 because I predict it will significantly thin the airfoil, reducing the "shoulder" acceleration seen in the current suction plots.
+*   **CP4 (Tail)**: I am setting `radius_param` to 1.0 and `edgy_param` to 1.0 because I predict it will create a sharp, elongated trailing edge that recovers pressure and stabilizes the wake.
+*   **CP6 (Bottom)**: I am setting `radius_param` to 0.15 because I predict making the bottom flatter than the top will create the pressure differential necessary for lift.
+*   **Angle Params**: I am using small offsets (e.g., -0.1 to 0.1) to shift control points toward the trailing edge, concentrating the thickness in the first 30% of the chord.

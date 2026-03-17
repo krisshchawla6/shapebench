@@ -1,0 +1,127 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 8)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0, r \approx 1.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0, r \approx 1.0$ [iter 3-8].
+*   **Fineness Ratio (Thickness)**: Thickness is the delta between polar $r$ and mid-body $r$. Pushing mid-body $r$ too high ($>0.45$ relative to centroid) creates "bloat" [iter 5, 7], but too low creates "collapse" [iter 8]. 
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound (Radial Collapse)**: $r < 0.4$ for mid-body points (CP1, 2, 4, 5, 6) pulls the surface inward, creating a "pinched wedge" or "starfish" with concave surfaces [iter 4, 6, 8]. 
+    *   **Upper Bound (The Bloat)**: $r > 0.8$ for all points creates a "bluff body" or "rounded rectangle" [iter 5, 7].
+    *   **Optimal**: LE/TE at $r \approx 1.0$; mid-body points must maintain $r \in [0.6, 0.8]$ to stretch the profile into a convex, high-aspect-ratio wing [iter 8].
+*   **Kutta Condition**: A geometric "stinger" ($e \approx 1.0$) at the Trailing Edge (CP0/7) is mandatory for flow separation [iter 2-8].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values ($r \approx 1.0$) are required at the LE and TE poles to establish primary chord length [iter 1-8].
+*   **Radial Collapse vs. Bloat**: If mid-body radii (CP1, 2, 4, 5, 6) are significantly lower than the poles ($r < 0.3$), the airfoil "pinches" into a non-aerodynamic arrowhead [iter 8].
+*   **Convexity Control**: To maintain a traditional subsonic convex shape, mid-body $r$ must be high enough to "push" the skin out ($r \approx 0.65+$) while remaining lower than the LE/TE to maintain thinness [iter 8].
+*   **Camber & Lift**: Asymmetric radii between upper (CP4-6) and lower (CP1-2) surfaces create camber. Higher upper radii relative to lower radii create lift-generating loft [iter 4-8].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3-8].
+*   **LE Support (Nose Shape)**: Neighboring angles (CP2, 4) must not cluster too tightly to the LE (e.g., $a \approx \pm 0.15$ with low $r$ creates a "beak"). Wider angular spacing is needed for a blunt, efficient parabolic entry [iter 5, 8].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create self-intersecting loops [iter 2, 5, 6, 8].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 1.0$) at the Trailing Edge create the "stinger" required for the Kutta condition [iter 2-8].
+*   **Surface Healing**: Extreme negative values ($e \approx -1.0$) at mid-body and LE are the most effective way to "heal" a polygon into a smooth, organic subsonic silhouette [iter 1, 4-8].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE ensures smooth flow acceleration and prevents "faceting," regardless of the $r$ value [iter 5-8].
+
+## New Evidence (Iteration 9)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9855,
+      0.995,
+      1.0
+    ],
+    [
+      0.824,
+      0.65,
+      -1.0
+    ],
+    [
+      0.852,
+      0.32,
+      -1.0
+    ],
+    [
+      1.0,
+      0.0,
+      -1.0
+    ],
+    [
+      0.645,
+      -0.32,
+      -1.0
+    ],
+    [
+      0.582,
+      -0.65,
+      -1.0
+    ],
+    [
+      0.665,
+      -0.88,
+      -0.5
+    ],
+    [
+      0.9855,
+      -0.995,
+      1.0
+    ]
+  ],
+  "name": "Cambered_Convex_V1"
+}
+```
+
+Observations:
+This analysis examines the transition from the "collapsed" geometry of Design 1 to the "stubby" geometry of Design 2 (Cambered_Convex_V1).
+
+### Parameter Prediction vs. Outcome
+
+| Parameter | Predicted Role | Actual Outcome | Comparison |
+| :--- | :--- | :--- | :--- |
+| **r0, r7 (TE)** | Maximize chord length (~1.0). | Sampled at **1.0000**. | **Success**: The trailing edge points are at the maximum radial extent, providing a clear termination point. |
+| **r3 (LE)** | Maximum forward extent (1.0). | Sampled at **0.9674**. | **Success**: The nose reaches the forward boundary, establishing a full chord length. |
+| **r1, r2 (Upper)** | Convex loft for lift (0.82-0.85). | Sampled at **0.8328, 0.8390**. | **Over-predicted**: While they created a convex surface, these values are too high relative to the chord, resulting in a "bulge" rather than a sleek upper surface. |
+| **r4, r5 (Lower)** | Create camber (0.62-0.58). | Sampled at **0.6543, 0.5817**. | **Partial Success**: They are lower than the upper radii, creating asymmetry, but still too large to allow for a thin profile. |
+| **a1, a2 (Angles)** | Structural spacing (0.65, 0.30). | Sampled at **0.6396, 0.3702**. | **Success**: Provided a logical distribution of points along the upper surface. |
+| **e0, e7 (TE Edgy)** | Kutta condition sharpness (1.0). | Sampled at **1.0000**. | **Success**: The image shows a very sharp, distinct "stinger" at the trailing edge. |
+| **e1-e5 (Body Edgy)** | Smoothness (-1.0). | Sampled at **-1.0 to -0.97**. | **Success**: The body is perfectly smooth and organic, free of the "starfish" spikes seen in Design 1. |
+
+### Key Learnings
+
+#### 1. The "Goldilocks Zone" for Thickness
+In Design 1, radii of ~0.20 produced a collapsed, non-physical line. In Design 2, radii of ~0.60–0.85 produced a "pebble" or "bean" shape. 
+*   **The Problem**: An airfoil with a chord length of ~2.0 (from LE at $r=1, a=0$ to TE at $r=1, a=\pi$) and mid-body radii of ~0.7 creates a thickness-to-chord ratio of roughly 70%. 
+*   **The Fix**: To achieve a standard aerodynamic thickness (10-15%), the mid-body radii ($r_1, r_2, r_4, r_5$) likely need to be significantly lower, perhaps in the **0.15 to 0.40** range, provided the `edgy_param` remains negative to prevent collapse.
+
+#### 2. Polar Coordinate Sensitivity
+The designer successfully used asymmetry ($r_{upper} > r_{lower}$) to generate camber. However, in a polar system, as the points move toward the LE ($a=0$), the vertical distance between an upper point and a lower point diminishes rapidly. To maintain thickness and camber near the nose, the angular spacing ($a$) needs to be carefully tuned alongside the radii.
+
+#### 3. Successful "Healing" of the Geometry
+The most significant improvement is the use of `edgy_param = -1.0`. This successfully "healed" the geometry from the jagged mess of Design 1 into a continuous, differentiable manifold. This is a prerequisite for any valid CFD solution, even if the current shape is too "draggy" (bluff body) to produce high reward.
+
+#### 4. The "Stinger" Effect
+Setting $e=1.0$ at the trailing edge while the rest of the body is $e=-1.0$ creates a very specific geometric feature: a smooth bulbous body that terminates in a sharp needle. While aerodynamically better than a blunt rear, the transition from a very thick body to a sharp point causes massive flow separation. The body must become thinner overall for the Kutta condition (the sharp TE) to function effectively.
+
+## Task
+Update the reference card. Do NOT rewrite from scratch -- MERGE new evidence into existing entries.
+- If new evidence CONFIRMS an existing bullet, strengthen it by adding the new iter citation
+- If new evidence CONTRADICTS an existing bullet, replace it only if the new evidence is clearly stronger (more iterations supporting it)
+- If an entry has no new evidence this iteration, KEEP IT UNCHANGED
+
+Include:
+- A brief overall rules section
+- An entry for each individual degree of freedom with 3-4 bullet points based on accumulated evidence
+
+Keep it terse. Cite [iter N] and specific values. Preserve hard-won knowledge from earlier iterations.

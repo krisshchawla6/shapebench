@@ -1,0 +1,74 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Visual Intuition Strategy**: I am prioritizing the correction of the "beaked" leading edge and the "waisted" upper-rear transition visible in the images. A more rounded nose will distribute the stagnation pressure better, while a thicker mid-section will prevent the "thinning" seen in Design 1.
+*   **Rounding the Stagnation Point**: Following the "Beaking Threshold," I am moving CP0 Radius from 0.906 down to 0.835. This should replace the sharp wedge with a rounded nose, improving flow attachment at varying angles of attack.
+*   **Avoiding the Waisted Trap**: Design 1 (R=0.424) looked slightly fragile in the mid-section. I will increase CP1 Radius to 0.465 to ensure the upper surface maintains a clean, convex curvature toward the TE.
+*   **Lower Surface Convexity**: The "Concavity Floor" heuristic suggests R ~ 0.50. Design 1 used 0.566 but with a high angle (0.165), causing a hook. I will use a radius of 0.525 and a much lower angle (0.045) to create a flatter "pressure face" on the bottom.
+*   **Maximizing Laminar Flow**: By shifting the CP1 peak slightly further back (Angle -0.38 instead of -0.44), I aim to extend the suction region and create a gentler pressure recovery, reducing the risk of boundary layer separation seen in the velocity plots.
+
+## Per-Parameter Predictions
+*   **CP0 Radius [0.8350]**: I predict this will round the leading edge, eliminating the sharp "beak" and spreading the pressure gradient at the nose.
+*   **CP1 Radius [0.4650]**: I predict this will thicken the airfoil's mid-section, avoiding the "waisted" look and providing a smoother transition to the tail.
+*   **CP1 Angle [-0.3800]**: I predict this will shift the maximum thickness slightly aft compared to Design 1, lengthening the favorable pressure gradient area.
+*   **CP2 Radius [0.9850]**: I predict this will maximize the chord length and increase the overall fineness ratio.
+*   **CP2 Edgy [1.0000]**: I am keeping this at 1.0 to ensure a mathematically sharp trailing edge for clean flow shedding.
+*   **CP3 Angle [0.0450]**: I predict this will remove the "scooped" lower-rear profile, creating a flatter, more efficient pressure surface.
+
+*   **Geometry Observation**:
+    *   The airfoil exhibits a very sharp, "beaked" leading edge (CP0) which significantly extends the chord but creates a high-curvature stagnation region.
+    *   The upper surface (CP1) has a forward-shifted peak, but there is a noticeable thinning or "waisting" in the transition toward the trailing edge.
+    *   The trailing edge (CP2) is extremely sharp and elongated, which is ideal for the Kutta condition, though the overall chord is dominated by the extreme LE and TE extensions.
+    *   The lower surface (CP3) shows a slight "scoop" or concave hook near the trailing edge, likely caused by the interaction between the lower radius and the rearward angle.
+
+*   **Flow Field Observation**:
+    *   **Pressure (p)**: There is an intense, localized pressure spike at the leading-edge "beak." The suction on the upper surface is strong but concentrated very far forward, leading to a long, steep pressure recovery ramp.
+    *   **Velocity (u)**: Flow is well-attached over the upper surface, but the boundary layer appears to thicken near the trailing edge where the geometry thins out.
+    *   **Velocity (v)**: The vertical velocity field shows a clean deflection, but the "hook" on the lower surface creates a small region of flow redirection that might be contributing to unnecessary pressure drag.
+
+*   **Mapping & Improvements**:
+    *   Design 1's high reward (2.4724) is driven by the extreme chord (CP0/CP2 Radii > 0.9).
+    *   The visible "beak" is caused by `CP0 Radius = 0.9065`. To improve subsonic efficiency and reduce the pressure spike, I need to round this by dropping the radius to the "Slender Transition" boundary.
+    *   The "waisting" on the upper surface is tied to `CP1 Radius = 0.424`. Increasing this slightly will promote a more robust convex profile.
+    *   Key changes: 1) Round the LE (reduce CP0 R), 2) Increase mid-body thickness (increase CP1 R), 3) Flatten the lower surface "hook" (reduce CP3 Angle).
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.835,
+      0.0,
+      -1.0
+    ],
+    [
+      0.465,
+      -0.38,
+      -0.75
+    ],
+    [
+      0.985,
+      0.0,
+      1.0
+    ],
+    [
+      0.525,
+      0.045,
+      -0.92
+    ]
+  ],
+  "name": "rounded-nose-convex-slender"
+}
+```
+
+Sampled action vector:
+['0.8516', '0.0032', '-1.0000', '0.4454', '-0.3883', '-0.7549', '0.9815', '-0.0042', '1.0000', '0.5615', '-0.0564', '-0.9164']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

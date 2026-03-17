@@ -1,0 +1,11 @@
+Design 1 is the current state-of-the-art with a reward of 1.0360, significantly outperforming others. Its geometry features a smooth, well-defined leading edge (P0 edgy_param = -0.9367) and a very sharp, swept-back trailing edge (P4 edgy_param = 1.0). The high reward is closely linked to the specific radial configuration where P5 is at the extreme limit (r = -1.0) and P3/P4/P5 create a "pinched" trailing edge structure. The flow fields for Design 1 (1_p, 1_u, 1_v) indicate a high-lift configuration with a concentrated suction peak, though the velocity field (1_u) shows boundary layer thickening towards the rear upper surface. 
+
+Geometric flaws observed:
+1.  **Upper Surface Curvature**: The transition between P1 (r=0.833) and P2 (r=0.879) is relatively flat, which may lead to adverse pressure gradients.
+2.  **Trailing Edge Alignment**: Point 4 is slightly "tucked" between P3 and P5 angularly, which creates the sharp edge but might be causing the wake thickening seen in the U-velocity plot.
+3.  **Lower Surface Concavity**: The transition from P6 to P7 is steep, potentially creating a small drag penalty.
+
+Key changes needed:
+1.  **Smooth Upper Transition**: Slightly increase the radius of P1 and P2 to create a more elliptical upper surface for better pressure recovery.
+2.  **Refine TE Pinch**: Maintain the sharp P4 (e=1.0) but slightly adjust the angles of P3 and P5 to streamline the termination.
+3.  **Exploit P5 Limit**: Design 1 and 2 both utilize r5 = -1.0; this extreme value is clearly beneficial for the lower-surface camber and must be preserved.

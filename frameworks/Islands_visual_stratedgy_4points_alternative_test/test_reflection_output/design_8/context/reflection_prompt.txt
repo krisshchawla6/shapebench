@@ -1,0 +1,94 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+* **Novel Design Strategy**: I am abandoning the "collapsed" configuration of Design 1 entirely. Instead of incremental adjustments, I am building a "Cambered High-Aspect-Ratio" profile from first principles.
+* **Radial Expansion**: I will set mid-body radii to roughly 70-85% of the chord length. This ensures the airfoil has enough thickness to prevent the flow from "ignoring" the shape while remaining thin enough to minimize drag.
+* **Camber Generation**: By setting the upper surface points (CP1, 2) to higher radii ($r \approx 0.82$) than the lower surface points (CP4, 5, $r \approx 0.62$), I will create a curved mean camber line, which is the primary driver for lift in subsonic flight.
+* **Kutta Condition & LE Smoothness**: I will enforce a sharp Trailing Edge (CP0, 7) using $e=1.0$ and a perfectly smooth Leading Edge (CP3) and mid-body using $e=-1.0$. This ensures the flow exits the TE cleanly and accelerates smoothly over the nose.
+* **Angular Distribution**: I will space the angles monotonically from $1.0$ to $-1.0$ to ensure a clean wrap-around geometry without self-intersection or "beaking" at the nose.
+
+## Per-Parameter Predictions
+* **r0, r7 (0.9850)**: I am setting these near 1.0 to maximize the chord length at the Trailing Edge.
+* **r3 (1.0000)**: I am setting this to 1.0 to ensure the Leading Edge reaches the maximum forward extent.
+* **r1, r2 (0.8200, 0.8500)**: I predict these high radii on the upper surface will create a convex loft that generates low pressure (lift).
+* **r4, r5 (0.6200, 0.5800)**: I predict these lower radii on the bottom surface will create the necessary camber to increase the lift coefficient.
+* **a1, a2 (0.6500, 0.3000)**: I am spacing these to provide structural support to the upper surface between the TE and LE.
+* **e0, e7 (1.0000)**: I am setting these to maximum sharpness to create the "stinger" required for the Kutta condition and flow separation.
+* **e1-e5 (-1.0000)**: I am setting these to maximum smoothness to "heal" the surface into a continuous curve, preventing drag-inducing pressure spikes.
+
+* **Geometry Observations**:
+    * The airfoil in Design 1 exhibits a severe "radial collapse" or "starfish" effect where the mid-body points are pulled tightly toward the centroid.
+    * The resulting shape is extremely thin, appearing as a nearly one-dimensional line or a very sharp, concave arrowhead rather than a convex lifting body.
+    * The trailing edge and leading edge are stretched to the polar limits, but the lack of internal volume (thickness) makes the geometry aerodynamically non-viable.
+* **Flow Field Observations**:
+    * The pressure and velocity plots show almost no interaction with the surrounding fluid; the body is too thin to displace air or generate a pressure differential between surfaces.
+    * There is no visible stagnation point at the nose or a smooth acceleration over the upper surface, leading to the 0.000 reward.
+    * The velocity field lacks a distinct wake structure, suggesting the flow simply bypasses the collapsed geometry.
+* **Parameter Mapping & Design Flaws**:
+    * **Low Mid-Body Radii**: The `radius_param` values for CP1, 2, 4, 5, 6 in Design 1 range from 0.19 to 0.31. This is the direct cause of the collapse. To create a functional wing, these must be increased to the "Goldilocks Zone" ($0.6 - 0.85$).
+    * **Angular Clustering**: While the LE is at $a \approx 0.0$, the neighboring points are relatively close, which, combined with low radii, created the "pinched" look.
+    * **Key Changes Needed**: 
+        1. Increase mid-body radii significantly to create thickness and convexity.
+        2. Implement asymmetry (camber) by setting upper surface radii (CP1, 2) higher than lower surface radii (CP4, 5, 6).
+        3. Use extreme negative `edgy_param` values (-1.0) on all points except the TE to ensure a smooth, organic subsonic surface.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9855,
+      0.995,
+      1.0
+    ],
+    [
+      0.824,
+      0.65,
+      -1.0
+    ],
+    [
+      0.852,
+      0.32,
+      -1.0
+    ],
+    [
+      1.0,
+      0.0,
+      -1.0
+    ],
+    [
+      0.645,
+      -0.32,
+      -1.0
+    ],
+    [
+      0.582,
+      -0.65,
+      -1.0
+    ],
+    [
+      0.665,
+      -0.88,
+      -0.5
+    ],
+    [
+      0.9855,
+      -0.995,
+      1.0
+    ]
+  ],
+  "name": "Cambered_Convex_V1"
+}
+```
+
+Sampled action vector:
+['1.0000', '1.0000', '1.0000', '0.8328', '0.6396', '-1.0000', '0.8390', '0.3702', '-1.0000', '0.9674', '-0.0228', '-1.0000', '0.6543', '-0.2889', '-0.9738', '0.5817', '-0.5957', '-1.0000', '0.6306', '-0.9244', '-0.4777', '1.0000', '-0.9824', '1.0000']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

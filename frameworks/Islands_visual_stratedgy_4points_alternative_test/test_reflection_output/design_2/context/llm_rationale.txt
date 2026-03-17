@@ -1,0 +1,16 @@
+*   **Visual Intuition Strategy**: I am moving away from the "blob" geometry by strictly enforcing a high-aspect-ratio horizontal chord. Looking at the simulation, the flow needs a "track" to follow; by thinning the middle and sharpening the end, I create a path for the air to stay attached.
+*   **Kutta Condition Enforcement**: I will set both the first and last control points (which meet at the trailing edge) to maximum sharpness and maximum radial distance at the same angular position to create a singular, needle-like exit.
+*   **Leading Edge Sculpting**: To address the pressure spike at the nose, I will use a very negative `edgy_param` at the LE ($a \approx 1.0$) to force a perfectly circular, smooth transition.
+*   **Thickness Reduction**: I will set intermediate radii to near-minimum values. This transforms the "slug" into a "blade," reducing the frontal area and the massive wake seen in the previous design.
+*   **Camber Introduction**: By making the upper surface radii slightly larger than the lower surface radii (asymmetry), I will attempt to generate lift by creating a path length difference between the two sides.
+
+## Per-Parameter Predictions
+
+*   **params[0][0] (0.9850)**: I am setting the TE radius to near-max to stretch the airfoil to its full possible length.
+*   **params[0][1] (-0.9950)**: I am setting the TE angle to the extreme limit to define the start of the chord.
+*   **params[0][2] (0.9500)**: I am setting the TE to be extremely sharp to fix the flow separation seen in the image.
+*   **params[3][0] (0.9200)**: I am setting the LE radius high to complete the longitudinal stretch.
+*   **params[3][1] (0.9800)**: I am setting the LE angle to the opposite extreme of the TE.
+*   **params[3][2] (-0.9500)**: I am setting the LE to be perfectly smooth to allow for a clean stagnation point.
+*   **params[1][0] (0.2200) & params[2][0] (0.2500)**: I am reducing these upper-surface radii to drastically thin the profile and eliminate the "slug" shape.
+*   **params[5][0] (0.1500) & params[6][0] (0.1800)**: I am setting these even lower than the upper surface to create a flat or slightly concave bottom, inducing positive camber.

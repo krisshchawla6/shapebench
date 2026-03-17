@@ -1,0 +1,78 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+# Airfoil Optimization Reference Card
+
+## General Design Rules
+*   **Flow Direction**: Right-to-Left. CP0=LE (Nose); CP4=TE (Tail) [iter 2].
+*   **TE Sharpness**: CP4 must be $r, e = 1.0$ for Kutta condition/drag reduction [iter 5].
+*   **Monotonicity Gradient**: Radii must generally decrease from Max Thickness toward the TE. $r_{CP3} > r_{CP2}$ creates a "molar tooth" bulb that triggers massive separation [iter 9].
+*   **Nose Parabola**: $r_{CP0}$ should be $\leq r_{CP1/7}$. If $r_{CP0}$ is significantly larger than neighbors, negative edginess creates a "hammerhead" flat-face [iter 9].
+*   **Anti-Necking vs. Bulbousness**: Maintain $r_{CP3/5}$ between $0.55$ and $0.75$. Below $0.5$ creates an "hourglass" neck [iter 8]; above $r_{CP2/6}$ creates a rear bulb [iter 9].
+*   **Camber Coordination**: $r_{CP2} > r_{CP6}$ provides lift, but the entire profile must remain convex. Local "saddles" (concavity) destroy the pressure gradient [iter 9].
+
+## Degree of Freedom Mapping
+
+| Control Point | Geometric Role | Optimal Range / Setting | Effect [Source] |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Leading Edge | $r \approx 0.6-0.7 / e < -0.4$ | Must be smaller than CP1 to prevent "hammerhead" stagnation [iter 9]. |
+| **CP1 (U-Front)** | Transition | $r_{CP0} < r_{CP1} < r_{CP2}$ | Bridges LE to suction side; prevents early "pinched" separation [iter 9]. |
+| **CP2 (Top)** | Max Thickness | $r \approx 0.7 - 0.8$ | Should be the local radius maximum for the upper surface [iter 9]. |
+| **CP3 (U-Back)** | Transition | **$0.6 < r < r_{CP2}$** | Prevents "necking" (if low) and "bulbous TE" (if high) [iter 8, 9]. |
+| **CP4 (Tail)** | Trailing Edge | **$r: 1.0 / e: 1.0$** | **Mandatory** vertex for Kutta condition [iter 5]. |
+| **CP5 (L-Back)** | Transition | **$0.6 < r < r_{CP6}$** | Mirrors CP3; critical for smooth recovery to TE [iter 8, 9]. |
+| **CP6 (Bottom)** | Pressure Side | $r \approx 0.4 - 0.5$ | Must be $< r_{CP2}$ for lift, but avoid $r < 0.35$ to prevent collapse [iter 8]. |
+| **CP7 (L-Front)** | Transition | $r_{CP0} < r_{CP7} < r_{CP6}$ | Prevents lower-surface "pinching" and LE separation [iter 9]. |
+| **Angle Offsets** | Thickness Dist. | $a < 0.1$ | Shifts thickness; excessive values distort chord length [iter 4]. |
+| **Edginess** | Surface Profile | $\Delta e < 0.5$ (adj. pts) | Negative $e$ rounds LE; $e=1.0$ sharpens TE [iter 5, 8]. |
+
+## New Evidence (Iteration 9)
+*   **The Molar Tooth Effect**: Setting $r_{CP3} (0.76) > r_{CP2} (0.54)$ creates a rear-heavy bulb. Airfoils must taper toward the TE; increasing radius mid-chord creates a "saddle" that kills lift [iter 9].
+*   **Hammerhead Nose**: High LE radius ($r_{CP0}=0.86$) combined with lower transition radii ($r_{CP1/7}=0.66$) creates a blunt, flat face that pushes flow outward, causing immediate separation [iter 9].
+*   **Radius Continuity**: An airfoil is a gradient. Abrupt jumps (e.g., $0.8 \rightarrow 0.6 \rightarrow 0.5 \rightarrow 0.7$) create wavy surfaces. Radii should follow a smooth $r_{LE} \rightarrow r_{Max} \rightarrow r_{TE}$ progression [iter 9].
+*   **Camber Sabotage**: Even with $r_{CP2} > r_{CP6}$, if the rear sections (CP3/5) are too thick/symmetric, the resulting wake negates any pressure differential generated at the front [iter 9].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.873401, 0.009823, -0.511302, 0.676639, -0.007963, -0.083039, 0.518843, -0.027823, 0.053749, 0.781099, -0.022655, 0.47711, 0.969401, 0.064772, 1.0, 0.782092, -0.021863, 0.442124, 0.457278, -0.004395, -0.017961, 0.628485, 0.010406, -0.155334]
+  - Reward: 0.5889
+  - Rank: 0
+
+Design 2:
+  - Action: [0.873401, 0.009823, -0.511302, 0.676639, -0.007963, -0.083039, 0.518843, -0.027823, 0.053749, 0.781099, -0.022655, 0.47711, 0.969401, 0.064772, 1.0, 0.782092, -0.021863, 0.442124, 0.457278, -0.004395, -0.017961, 0.628485, 0.010406, -0.155334]
+  - Reward: 0.5889
+  - Rank: 0
+
+Design 3:
+  - Action: [0.873401, 0.009823, -0.511302, 0.676639, -0.007963, -0.083039, 0.518843, -0.027823, 0.053749, 0.781099, -0.022655, 0.47711, 0.969401, 0.064772, 1.0, 0.782092, -0.021863, 0.442124, 0.457278, -0.004395, -0.017961, 0.628485, 0.010406, -0.155334]
+  - Reward: 0.5889
+  - Rank: 0
+
+Design 4:
+  - Action: [0.873401, 0.009823, -0.511302, 0.676639, -0.007963, -0.083039, 0.518843, -0.027823, 0.053749, 0.781099, -0.022655, 0.47711, 0.969401, 0.064772, 1.0, 0.782092, -0.021863, 0.442124, 0.457278, -0.004395, -0.017961, 0.628485, 0.010406, -0.155334]
+  - Reward: 0.5889
+  - Rank: 0
+
+Design 5:
+  - Action: [0.873401, 0.009823, -0.511302, 0.676639, -0.007963, -0.083039, 0.518843, -0.027823, 0.053749, 0.781099, -0.022655, 0.47711, 0.969401, 0.064772, 1.0, 0.782092, -0.021863, 0.442124, 0.457278, -0.004395, -0.017961, 0.628485, 0.010406, -0.155334]
+  - Reward: 0.5889
+  - Rank: 0
+
+Design 6:
+  - Action: [0.873401, 0.009823, -0.511302, 0.676639, -0.007963, -0.083039, 0.518843, -0.027823, 0.053749, 0.781099, -0.022655, 0.47711, 0.969401, 0.064772, 1.0, 0.782092, -0.021863, 0.442124, 0.457278, -0.004395, -0.017961, 0.628485, 0.010406, -0.155334]
+  - Reward: 0.5889
+  - Rank: 0
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

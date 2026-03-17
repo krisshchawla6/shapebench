@@ -1,0 +1,65 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Exploration Strategy**: I am targeting the **"Thin-Elongated" boundary region**, which is currently underexplored. Previous designs failed by being "half-long" (Design 1 had long LE, short TE; Design 2 had short LE, long TE). I will push both LE and TE radii to their maximum positive limits simultaneously while pushing the Upper and Lower radii to their minimums.
+- **Chord Extension**: By setting both CP0 and CP2 radii near +1.0, I intend to create the maximum possible distance between the nose and the tail, achieving a high aspect ratio.
+- **Flow Attachment**: To solve the massive separation seen in the images, I will lower the CP1 and CP3 radii to ~0.2. This creates a slender geometry where the flow recovery slope is gentle enough for the boundary layer to remain attached.
+- **Camber Introduction**: I will set the Lower Surface (CP3) radius slightly lower than the Upper Surface (CP1) radius and use a positive angle offset to "tuck" the lower surface, creating a positive camber line for lift generation.
+- **Singularity Enforcement**: I will maintain the sharp TE (CP2 Edgy = 1.0) and perfectly smooth LE (CP0 Edgy = -1.0) as these are stable geometric invariants for aerodynamic performance.
+
+## Per-Parameter Predictions
+- **CP0 Radius (0.9650)**: I predict this will stretch the nose far forward, maximizing the leading-edge contribution to chord length.
+- **CP1 Radius (0.2150)**: I predict this will significantly thin the upper profile, preventing the "hump" that caused separation in the previous design.
+- **CP1 Angle (-0.4200)**: I predict this will move the maximum thickness point forward to approximately 30% chord, which is optimal for pressure recovery.
+- **CP2 Radius (0.9850)**: I predict this will extend the trailing edge to the maximum possible rearward distance, creating a high-finesse ratio.
+- **CP2 Edgy (1.0000)**: I predict this will ensure a sharp Kutta condition at the extended tail for clean flow shedding.
+- **CP3 Radius (0.1450)**: I predict this will flatten the bottom surface more than the top, inducing the camber necessary for lift.
+
+- **Geometry Observation**: The airfoil in the image is extremely "stubby" and resembles a rounded pebble or a blunt ellipse rather than a streamlined wing. It lacks significant chord-wise elongation, with the leading edge (LE) and trailing edge (TE) being very close to the center. The trailing edge does have a sharp "beak" (likely due to Design 1's `edgy_param` of 1.0 at CP2), but the overall thickness-to-chord ratio is nearly 1:1, creating a bluff body shape.
+- **Flow Field Observation**: The pressure plot shows a massive stagnation region at the front and a very large wake. The velocity (U) field confirms this, showing a huge area of recirculating, low-velocity flow behind the thickest part of the shape. Flow separation occurs almost immediately after the leading edge radius transitions into the upper/lower surfaces because the "boattail" angle is too steep to maintain attachment.
+- **Mapping & Flaws**: Design 1's failure (Reward -5.0) stems from a "Chord-Thickness Imbalance." While the LE radius was high (0.9369), the TE radius was extremely low (0.1317), which "truncated" the tail and pulled the sharp point inward toward the centroid. This creates a high-drag, non-aerodynamic profile.
+- **Key Changes Needed**:
+    1.  **Maximize Chord Length**: Significantly increase the Trailing Edge (CP2) radius to move the sharp point far back from the center.
+    2.  **Minimize Thickness**: Drastically reduce the Upper (CP1) and Lower (CP3) radii to flatten the profile and prevent the "pebble" morphology.
+    3.  **Forward Loading**: Shift the upper peak (CP1 angle) forward to create a standard NACA-like thickness distribution.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9654,
+      0.0,
+      -1.0
+    ],
+    [
+      0.2152,
+      -0.4215,
+      -0.7542
+    ],
+    [
+      0.9851,
+      0.0,
+      1.0
+    ],
+    [
+      0.1458,
+      0.1852,
+      -0.9214
+    ]
+  ],
+  "name": "super_slender_cambered_blade"
+}
+```
+
+Sampled action vector:
+['0.9622', '0.0304', '-1.0000', '0.2288', '-0.4062', '-0.7331', '0.9902', '0.0057', '0.9921', '0.0615', '0.1805', '-0.9060']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

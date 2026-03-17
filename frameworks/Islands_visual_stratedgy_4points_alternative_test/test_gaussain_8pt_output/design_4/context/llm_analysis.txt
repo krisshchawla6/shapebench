@@ -1,0 +1,7 @@
+Based on the provided images for Design 1 (representative of the current best population):
+- **Geometry**: The airfoil exhibits a distinctive, somewhat irregular thickness distribution. The Leading Edge (LE) is blunt and thick (CP0 `r=1.0`), but the upper surface immediately downstream contracts (CP1 `r=0.83`) before expanding again (CP2 `r=0.88`, CP3 `r=1.0`). This creates a "saddle" or wavy profile on the suction side, which is generally aerodynamically inefficient. The Trailing Edge (TE) is sharp (CP4 `edgy=1.0`) but relatively thick (`r=0.93`), suggesting a large base area.
+- **Flow Field**: The pressure contours (`1_p.png`) likely show a complex pressure recovery on the upper surface due to the geometric inflection. The initial contraction near the LE might cause an early suction peak followed by a region of adverse pressure gradient where the surface expands again, potentially triggering laminar separation bubbles or turbulent transition earlier than optimal.
+- **Flaws & Mappings**: 
+    - **Wavy Upper Surface**: The parameter sequence `[1.0, 0.83, 0.88, 1.0]` for indices 0-3 causes the surface to dip and rise. This is the primary geometric flaw.
+    - **Thick Base**: The CP4 radius of `0.93` creates a blunt trailing edge base, which likely contributes to base drag.
+    - **Key Changes Needed**: Smooth the upper surface radius distribution to be convex or monotonically tapering. Reduce the TE radius to sharpen the aerodynamic closure.

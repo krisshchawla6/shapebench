@@ -1,0 +1,15 @@
+The provided images show Design 1, which corresponds to the baseline circular geometry (all parameters [1.0, 0.0, 0.0]).
+- **Geometry Observation**: 
+    - The shape is a perfect circle, which is the default starting point for the optimizer.
+    - The surface is perfectly smooth with no discontinuities, but it lacks any aerodynamic features like a leading-edge radius or a trailing-edge point.
+    - The geometry is perfectly symmetric along both the X and Y axes, resulting in zero net lift.
+- **Flow Field Observation**:
+    - The pressure plot shows high stagnation pressure at the front (yellow) and low pressure (purple) at the maximum thickness points (top and bottom), typical of flow around a cylinder.
+    - The velocity plot shows a massive, wide wake (dark purple region) extending far downstream, indicating total flow separation and extremely high pressure drag.
+    - There is no pressure differential between the upper and lower surfaces, confirming zero lift.
+- **Refinement Needs**:
+    - Design 1 has a reward of -0.0036; while "stable," it is not an airfoil.
+    - **Change 1**: CP4 must be set to $r=1.0, e=1.0$ to create a sharp trailing edge and satisfy the Kutta condition, which is essential for lift and wake reduction.
+    - **Change 2**: The leading edge (CP0) needs a negative edginess ($e \approx -0.5$) to create a rounded nose that prevents early separation.
+    - **Change 3**: Radius monotonicity must be enforced; CP3 and CP5 need high radii ($r > 0.7$) to support the trailing edge and prevent the "necking" failure observed in previous iterations.
+    - **Change 4**: Asymmetric radii ($r_

@@ -1,0 +1,164 @@
+[
+  {
+    "id": 0,
+    "parent_id": null,
+    "reward": -0.0958694947490295,
+    "island": 0
+  },
+  {
+    "id": 1,
+    "parent_id": null,
+    "reward": -5.0,
+    "island": 1
+  },
+  {
+    "id": 2,
+    "parent_id": null,
+    "reward": -5.0,
+    "island": 2
+  },
+  {
+    "id": 3,
+    "parent_id": null,
+    "reward": -5.0,
+    "island": 0
+  },
+  {
+    "id": 4,
+    "parent_id": null,
+    "reward": -5.0,
+    "island": 1
+  },
+  {
+    "id": 5,
+    "parent_id": null,
+    "reward": 0.5363795431935439,
+    "island": 2
+  },
+  {
+    "id": 6,
+    "parent_id": 0,
+    "reward": 0.18861483988170238,
+    "island": 0
+  },
+  {
+    "id": 7,
+    "parent_id": 4,
+    "reward": 0.94098015497712,
+    "island": 1
+  },
+  {
+    "id": 8,
+    "parent_id": 7,
+    "reward": 1.1107106354651888,
+    "island": 1
+  },
+  {
+    "id": 9,
+    "parent_id": 8,
+    "reward": 1.18139020910734,
+    "island": 1
+  },
+  {
+    "id": 10,
+    "parent_id": 5,
+    "reward": 0.5204668563234294,
+    "island": 2
+  },
+  {
+    "id": 11,
+    "parent_id": 5,
+    "reward": 0.8518661555918701,
+    "island": 2
+  },
+  {
+    "id": 12,
+    "parent_id": 0,
+    "reward": 1.1672232698673564,
+    "island": 0
+  },
+  {
+    "id": 13,
+    "parent_id": 12,
+    "reward": 2.311132044712188,
+    "island": 0
+  },
+  {
+    "id": 14,
+    "parent_id": 9,
+    "reward": -5.0,
+    "island": 1
+  },
+  {
+    "id": 15,
+    "parent_id": 13,
+    "reward": 2.4724409647391825,
+    "island": 0
+  },
+  {
+    "id": 16,
+    "parent_id": 9,
+    "reward": 2.9294410050136537,
+    "island": 1
+  },
+  {
+    "id": 17,
+    "parent_id": 15,
+    "reward": 2.0553259844609513,
+    "island": 0
+  },
+  {
+    "id": 18,
+    "parent_id": 16,
+    "reward": 2.3535916611563366,
+    "island": 1
+  },
+  {
+    "id": 19,
+    "parent_id": 16,
+    "reward": 2.1121753913587025,
+    "island": 1
+  },
+  {
+    "id": 20,
+    "parent_id": 12,
+    "reward": 1.8770938176297098,
+    "island": 2
+  },
+  {
+    "id": 21,
+    "parent_id": 20,
+    "reward": 3.1123143948097467,
+    "island": 2
+  },
+  {
+    "id": 22,
+    "parent_id": 16,
+    "reward": 2.420949338267711,
+    "island": 1
+  },
+  {
+    "id": 23,
+    "parent_id": 22,
+    "reward": 2.9435696325820366,
+    "island": 1
+  },
+  {
+    "id": 24,
+    "parent_id": 21,
+    "reward": 1.1892268128840944,
+    "island": 2
+  },
+  {
+    "id": 25,
+    "parent_id": 15,
+    "reward": 1.03261193209009,
+    "island": 0
+  },
+  {
+    "id": 26,
+    "parent_id": 21,
+    "reward": 1.0944891056791666,
+    "island": 2
+  }
+]

@@ -1,0 +1,101 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Strategy Focus (Exploration):** The current population is clustered at the "circle" origin. I am moving to an underexplored boundary by pushing $e_0$ and $e_4$ to their respective limits (-1.0 and 1.0) and utilizing $r$ values that create an extremely thin, high-camber profile.
+*   **Chord Maximization:** By setting $r_0$ near 1.0 and $r_4$ near 0.85, I am exploring a high-aspect-ratio design space that the current "circle-heavy" population lacks.
+*   **Thin-Film Aerodynamics:** I am testing the lower limits of the $r$ parameter ($r_6 \approx 0.08$) to see if the optimizer handles near-zero thickness. This pushes the geometry toward a "cambered plate" style, which is a significant departure from the current thick bluff body.
+*   **Angular Biasing:** I am introducing non-zero $a$ values (angle offsets) for the first time in the population. Shifting $a_2$ (upper surface) aft and $a_6$ (lower surface) forward should create a more efficient pressure distribution by delaying the suction peak.
+*   **Sharp vs. Blunt Polarity:** Following the Reference Card, I am applying extreme polarity to the edges ($e_0 = -0.99$, $e_4 = 0.85$) to definitively test the effect of edge geometry on the wake size.
+
+## Per-Parameter Predictions
+
+*   **r[0][0] to 0.9850**: I predict this will extend the trailing edge to the maximum possible distance from the origin, defining a long chord.
+*   **r[0][2] to -0.9950**: I predict this will sharpen the trailing edge into a needle-like point, forcing the flow to leave smoothly and reducing the wake.
+*   **r[4][0] to 0.8500**: I predict this will create a distinct forward protrusion for the leading edge.
+*   **r[4][2] to 0.8800**: I predict this will broaden the curvature at the nose, ensuring the stagnation point doesn't trigger separation at the front.
+*   **r[2][0] to 0.2800**: I predict this will significantly "squash" the circle's height, creating a streamlined subsonic profile.
+*   **r[6][0] to 0.0850**: I predict this will pull the lower surface very close to the center, creating a high-camber, thin-profile geometry.
+*   **r[1,3,5,7][0] (Intermediate values)**: I am setting these to roughly 0.45-0.55 to bridge the gap between the long chord and thin height, preventing the "kinks" mentioned in the Iteration 3 Reference Card.
+
+The images provided show **Design 1**, which currently exists as a perfect circle. 
+
+**Geometry Observations:**
+*   The shape is a perfectly symmetric, smooth unit circle defined by eight equidistant control points.
+*   There is no distinct leading or trailing edge, resulting in a shape that lacks any aerodynamic orientation.
+*   The thickness-to-chord ratio is 1.0 (100%), which is extremely high for subsonic flow and typical of a bluff body rather than a streamlined airfoil.
+*   The geometry is entirely convex but lacks the tapering necessary to manage flow recovery at the rear.
+
+**Flow Field / Simulation Observations:**
+*   **Stagnation and Pressure:** A prominent stagnation point is visible at the leading face (9 o'clock position), indicated by the high-pressure/low-velocity region.
+*   **Flow Separation:** The flow separates almost immediately after passing the vertical centerline (12 and 6 o'clock positions), as the adverse pressure gradient is too steep for the boundary layer to remain attached.
+*   **Wake:** A massive, symmetric wake of low-velocity, recirculating flow (deep purple in velocity plots) extends far behind the cylinder. This indicates extremely high pressure drag.
+*   **Lift:** Because the flow is perfectly symmetric top-to-bottom, the net lift is zero (reward -0.0036 is likely a small numerical error or purely drag-dominated).
+
+**Design 1 Mapping & Needed Changes:**
+*   **Action Mapping:** The vector `[1.0, 0.0, 0.0, ...]` across all points results in a circle because all radii are identical and edgy parameters are neutral.
+*   **Key Changes Needed:**
+    1.  **Chord Definition:** Drastically increase the ratio of horizontal length ($r_0, r_4$) to vertical thickness ($r_2, r_6$).
+    2.  **Kutta Condition:** Force $e_0$ toward -1.0 to create a sharp trailing edge, which is essential for establishing circulation and lift.
+    3.  **Leading Edge Profiling:** Use a positive $e_4$ to maintain a rounded nose that can handle varying angles of attack.
+    4.  **Camber Introduction:** Reduce $r_6$ (lower surface) significantly more than $r_2$ (upper surface) to create the asymmetry required for lift.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9854,
+      0.0,
+      -0.9952
+    ],
+    [
+      0.5235,
+      -0.1241,
+      0.0
+    ],
+    [
+      0.2842,
+      0.1555,
+      -0.1
+    ],
+    [
+      0.4876,
+      0.0543,
+      0.0
+    ],
+    [
+      0.8542,
+      0.0,
+      0.8841
+    ],
+    [
+      0.4532,
+      -0.0654,
+      0.0
+    ],
+    [
+      0.0821,
+      -0.1222,
+      -0.1
+    ],
+    [
+      0.5543,
+      0.1121,
+      0.0
+    ]
+  ],
+  "name": "slender_camber_explorer"
+}
+```
+
+Sampled action vector:
+['0.9837', '-0.0259', '-0.9546', '0.5404', '-0.1534', '-0.0186', '0.3006', '0.1606', '-0.0568', '0.5164', '0.0339', '-0.0087', '0.8634', '-0.0223', '0.9154', '0.4861', '-0.1111', '-0.0323', '0.0150', '-0.0811', '-0.0972', '0.5552', '0.0190', '-0.0147']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

@@ -1,0 +1,13 @@
+- **Hybrid Strategy Focus**: I am hybridizing the successful "Sharp TE" and "Smooth LE" traits of Design 1 with the "Thinning Strategy" and "Chord Illusion" heuristics from the knowledge base. Design 1 proved that the generator can create a sharp TE singularity, but it failed by making the rest of the body too thick.
+- **Chord Length Correction**: To escape the "Scale Trap" and the "Pebble" morphology, I will maintain a moderate LE radius (CP0) while shrinking the Upper (CP1) and Lower (CP3) radii to flatten the profile into a more traditional airfoil shape.
+- **Trailing Edge Refinement**: By setting CP2 Radius very low (~0.15) while keeping Edgy at 1.0, I will create a "needle-like" trailing edge that satisfies the Kutta condition without the base-drag penalty seen in the images.
+- **Peak Forward Loading**: Shifting the Upper surface angle (CP1) to a negative value will pull the maximum thickness forward, which typically improves lift-to-drag ratios by allowing for a longer pressure recovery region on the aft-body.
+- **Camber Introduction**: By keeping the Lower surface (CP3) radius smaller than the Upper surface (CP1) and using a positive angle to tuck the lower-rear, I aim to create a positive camber effect.
+
+## Per-Parameter Predictions
+- I am setting `param[1][0]` (Upper Radius) to **0.4824** because I predict it will **CAUSE the airfoil to lose its "hump" and become significantly thinner than Design 1.**
+- I am setting `param[2][0]` (TE Radius) to **0.1456** because I predict it will **CAUSE the trailing edge to taper into a sharp point rather than a thick wedge, reducing pressure drag.**
+- I am setting `param[1][1]` (Upper Angle) to **-0.2541** because I predict it will **CAUSE the peak thickness to shift toward the leading edge (roughly 30% chord).**
+- I am setting `param[0][2]` (LE Edgy) to **-0.9982** because I predict it will **CAUSE a perfectly smooth, circular stagnation point for stable flow attachment.**
+- I am setting `param[2][2]` (TE Edgy) to **1.0** because I predict it will **CAUSE a sharp geometric singularity necessary for proper flow shedding at the tail.**
+- I am setting `param[3][0]` (Lower Radius) to **0.2847** because I predict it will **CAUSE a flatter lower surface relative to the top, inducing aerodynamic camber.**

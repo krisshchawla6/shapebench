@@ -1,0 +1,16 @@
+*   **Geometry Observation**:
+    *   The airfoil exhibits a very sharp, "beaked" leading edge (CP0) which significantly extends the chord but creates a high-curvature stagnation region.
+    *   The upper surface (CP1) has a forward-shifted peak, but there is a noticeable thinning or "waisting" in the transition toward the trailing edge.
+    *   The trailing edge (CP2) is extremely sharp and elongated, which is ideal for the Kutta condition, though the overall chord is dominated by the extreme LE and TE extensions.
+    *   The lower surface (CP3) shows a slight "scoop" or concave hook near the trailing edge, likely caused by the interaction between the lower radius and the rearward angle.
+
+*   **Flow Field Observation**:
+    *   **Pressure (p)**: There is an intense, localized pressure spike at the leading-edge "beak." The suction on the upper surface is strong but concentrated very far forward, leading to a long, steep pressure recovery ramp.
+    *   **Velocity (u)**: Flow is well-attached over the upper surface, but the boundary layer appears to thicken near the trailing edge where the geometry thins out.
+    *   **Velocity (v)**: The vertical velocity field shows a clean deflection, but the "hook" on the lower surface creates a small region of flow redirection that might be contributing to unnecessary pressure drag.
+
+*   **Mapping & Improvements**:
+    *   Design 1's high reward (2.4724) is driven by the extreme chord (CP0/CP2 Radii > 0.9).
+    *   The visible "beak" is caused by `CP0 Radius = 0.9065`. To improve subsonic efficiency and reduce the pressure spike, I need to round this by dropping the radius to the "Slender Transition" boundary.
+    *   The "waisting" on the upper surface is tied to `CP1 Radius = 0.424`. Increasing this slightly will promote a more robust convex profile.
+    *   Key changes: 1) Round the LE (reduce CP0 R), 2) Increase mid-body thickness (increase CP1 R), 3) Flatten the lower surface "hook" (reduce CP3 Angle).

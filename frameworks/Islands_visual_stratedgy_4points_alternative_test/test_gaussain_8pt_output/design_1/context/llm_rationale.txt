@@ -1,0 +1,6 @@
+*   **Strategy Focus**: Using the "Visual Intuition Strategy," I will pivot away from the statistical "thin shell" optimum found in Design 1. Instead, I will engineer a **Volumetric Transonic Design**. The goal is to create a visually robust, "tear-drop" airfoil shape that looks structurally sound, anticipating that the physics simulation will reward reduced drag and delayed separation which strictly thin plates cannot achieve.
+*   **Diversity & Exploration**: The population is stuck in a "thin plate" local optimum. To escape, I will force a "Thick Airfoil" topology. This involves moving the lower surface parameters from the boundary (`-1.0`) to the interior (`-0.2` to `0.0`).
+*   **Aerodynamic Logic**:
+    *   **Round Nose**: By bringing CP0 (Top LE) down and CP7 (Bottom LE) up to meet at a similar moderate radius, I will create a rounded leading edge. This improves performance at varying angles of attack (soft stall).
+    *   **Thickness Distribution**: Increasing parameters for CP5 and CP6 (lower surface) adds "belly" to the airfoil, reducing the adverse pressure gradient on the bottom and reducing pressure drag.
+    *   **Sharp Trailing Edge**: I will maintain high edginess at the TE (CP3, CP4) to ensure clean flow release (Kutta condition), but align their angles to prevent a "fish-tail" crossover.

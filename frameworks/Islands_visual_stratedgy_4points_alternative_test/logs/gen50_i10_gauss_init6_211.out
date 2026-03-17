@@ -1,0 +1,934 @@
+==========================================
+Job ID: 211
+Node: compute-dy-hpc-128vcpu-1
+Date: Sat Feb 14 01:41:01 UTC 2026
+Action: gaussain
+Iterations: 80
+Max Inspirations: 5
+Initialize N Sample: 6 (first 6 designs generated without context)
+Islands: 3 (migration every 5 iters, rate 0.2)
+Working Directory: /scratch/Higher_dims/Islands_visual_stratedgy/work_211
+Output: /scratch/Higher_dims/Islands_visual_stratedgy/experiment_generate_gaussain
+==========================================
+Setting up isolated workspace...
+Starting benchmark run with reflection...
+****** Starting episode 0
+***    Starting control 0
+-3.2078641530265934 0.011533083517952548
+good epoch; reward: -0.0035952530929563146
+Reward: -0.0036, Drag: -3.2079, Lift: -0.0115
+
+--- Iteration 1/80 (action: gaussain) ---
+  Scratchpad: 0 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D7095C16680>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D70946FB8E0>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D70946FBD30>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9854,
+      0.0,
+      0.9521
+    ],
+    [
+      0.5241,
+      0.1522,
+      0.12
+    ],
+    [
+      0.1842,
+      0.3215,
+      -0.45
+    ],
+    [
+      0.6214,
+      0.1241,
+      -0.72
+    ],
+    [
+      0.9251,
+      0.0,
+      -0.8842
+    ],
+    [
+      0.4215,
+      -0.0842,
+      -0.68
+    ],
+    [
+      0.0821,
+      -0.2141,
+      -0.35
+    ],
+    [
+      0.3524,
+      -0.1524,
+      0.15
+    ]
+  ],
+  "name": "cambered_thin_hybrid_v1"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 1
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 17611 nodes for 8806 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = -nan).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection: 3752 chars
+  Scratchpad: 1701 chars
+  Reward: -5.0000, Best: -0.0036
+
+--- Iteration 2/80 (action: gaussain) ---
+  Scratchpad: 1701 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D708F989540>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D708F98AC80>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D708F9885E0>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.95
+    ],
+    [
+      0.65,
+      -0.12,
+      0.15
+    ],
+    [
+      0.32,
+      -0.3,
+      -0.25
+    ],
+    [
+      0.52,
+      0.18,
+      -0.45
+    ],
+    [
+      0.85,
+      0.0,
+      -0.8
+    ],
+    [
+      0.48,
+      -0.18,
+      -0.45
+    ],
+    [
+      0.22,
+      0.3,
+      -0.25
+    ],
+    [
+      0.62,
+      0.12,
+      0.15
+    ]
+  ],
+  "name": "streamlined_cambered_teardrop"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 2
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = inf).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection: 3802 chars
+  Scratchpad: 2127 chars
+  Reward: -5.0000, Best: -0.0036
+
+--- Iteration 3/80 (action: gaussain) ---
+  Scratchpad: 2127 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1AF5E0>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1AC070>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1AF340>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      0.0,
+      0.99
+    ],
+    [
+      0.68,
+      0.02,
+      0.1
+    ],
+    [
+      0.32,
+      0.18,
+      -0.2
+    ],
+    [
+      0.55,
+      0.08,
+      -0.6
+    ],
+    [
+      0.88,
+      0.0,
+      -0.92
+    ],
+    [
+      0.55,
+      -0.08,
+      -0.6
+    ],
+    [
+      0.24,
+      -0.18,
+      -0.2
+    ],
+    [
+      0.68,
+      -0.02,
+      0.1
+    ]
+  ],
+  "name": "streamlined_cambered_teardrop"
+}
+DEBUG: Strategy used: visual_intuition
+****** Starting episode 3
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = -nan).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection: 4380 chars
+  Scratchpad: 2246 chars
+  Reward: -5.0000, Best: -0.0036
+
+--- Iteration 4/80 (action: gaussain) ---
+  Scratchpad: 2246 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C184460>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1862F0>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C186920>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9854,
+      0.0,
+      -0.9952
+    ],
+    [
+      0.5235,
+      -0.1241,
+      0.0
+    ],
+    [
+      0.2842,
+      0.1555,
+      -0.1
+    ],
+    [
+      0.4876,
+      0.0543,
+      0.0
+    ],
+    [
+      0.8542,
+      0.0,
+      0.8841
+    ],
+    [
+      0.4532,
+      -0.0654,
+      0.0
+    ],
+    [
+      0.0821,
+      -0.1222,
+      -0.1
+    ],
+    [
+      0.5543,
+      0.1121,
+      0.0
+    ]
+  ],
+  "name": "slender_camber_explorer"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 4
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = inf).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection: 3914 chars
+  Scratchpad: 2123 chars
+  Reward: -5.0000, Best: -0.0036
+
+--- Iteration 5/80 (action: gaussain) ---
+  Scratchpad: 2123 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D708F98AB00>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D708F988DF0>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D708F989120>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9821,
+      0.0,
+      -0.8842
+    ],
+    [
+      0.6831,
+      -0.0215,
+      -0.3521
+    ],
+    [
+      0.3842,
+      -0.1542,
+      -0.1052
+    ],
+    [
+      0.6182,
+      -0.0512,
+      0.2843
+    ],
+    [
+      0.8524,
+      0.0,
+      0.7215
+    ],
+    [
+      0.5189,
+      0.0542,
+      0.3125
+    ],
+    [
+      0.1855,
+      0.1124,
+      -0.2241
+    ],
+    [
+      0.5838,
+      0.0315,
+      -0.5523
+    ]
+  ],
+  "name": "Cambered_Slender_Explorer"
+}
+DEBUG: Strategy used: diversify
+****** Starting episode 5
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = inf).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection: 3616 chars
+  Scratchpad: 2175 chars
+  Reward: -5.0000, Best: -0.0036
+
+--- Iteration 6/80 (action: gaussain) ---
+  Scratchpad: 2175 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1AD270>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1AC340>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1AC100>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      -0.98
+    ],
+    [
+      0.82,
+      -0.0542,
+      -0.21
+    ],
+    [
+      0.52,
+      0.1055,
+      0.0
+    ],
+    [
+      0.75,
+      0.0412,
+      0.35
+    ],
+    [
+      0.95,
+      0.0,
+      0.88
+    ],
+    [
+      0.72,
+      -0.0488,
+      0.35
+    ],
+    [
+      0.45,
+      -0.112,
+      0.0
+    ],
+    [
+      0.85,
+      0.0521,
+      -0.15
+    ]
+  ],
+  "name": "streamlined_exploitation_v1"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 6
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 7.273685e+136).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection: 4146 chars
+  Scratchpad: 2080 chars
+  Reward: -5.0000, Best: -0.0036
+
+--- Iteration 7/80 (action: gaussain) ---
+  Scratchpad: 2080 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D708F627FA0>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1F3130>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1F1390>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.85,
+      0.0,
+      -0.85
+    ],
+    [
+      0.52,
+      0.0,
+      0.0
+    ],
+    [
+      0.32,
+      0.18,
+      0.0
+    ],
+    [
+      0.38,
+      0.0,
+      0.0
+    ],
+    [
+      0.48,
+      0.0,
+      0.35
+    ],
+    [
+      0.38,
+      0.0,
+      0.0
+    ],
+    [
+      0.28,
+      -0.18,
+      0.0
+    ],
+    [
+      0.52,
+      0.0,
+      0.0
+    ]
+  ],
+  "name": "Hybrid_Cambered_Teardrop_v1"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 7
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = -nan).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection: 3955 chars
+  Scratchpad: 2226 chars
+  Reward: -5.0000, Best: -0.0036
+
+--- Iteration 8/80 (action: gaussain) ---
+  Scratchpad: 2226 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C184370>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C187220>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C186CE0>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      -0.925
+    ],
+    [
+      0.5821,
+      0.045,
+      0.0
+    ],
+    [
+      0.1915,
+      0.125,
+      0.0
+    ],
+    [
+      0.6542,
+      0.082,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.485
+    ],
+    [
+      0.6542,
+      -0.082,
+      0.0
+    ],
+    [
+      0.1423,
+      -0.125,
+      0.0
+    ],
+    [
+      0.5821,
+      -0.045,
+      0.0
+    ]
+  ],
+  "name": "Streamlined_Circle_Refinement_v1"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 8
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = inf).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection: 4058 chars
+  Scratchpad: 2213 chars
+  Reward: -5.0000, Best: -0.0036
+
+--- Iteration 9/80 (action: gaussain) ---
+  Scratchpad: 2213 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C187280>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C186F80>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C186B00>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      -0.85
+    ],
+    [
+      0.72,
+      0.0,
+      -0.1
+    ],
+    [
+      0.45,
+      0.25,
+      0.0
+    ],
+    [
+      0.68,
+      0.1,
+      0.0
+    ],
+    [
+      0.95,
+      0.0,
+      0.65
+    ],
+    [
+      0.65,
+      -0.1,
+      0.0
+    ],
+    [
+      0.35,
+      -0.25,
+      0.0
+    ],
+    [
+      0.7,
+      0.0,
+      -0.1
+    ]
+  ],
+  "name": "Laminar_Camber_Teardrop"
+}
+DEBUG: Strategy used: novel
+****** Starting episode 9
+***    Starting control 0
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = 2.060485e+133).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000
+  Reflection failed (non-fatal): 'ascii' codec can't decode byte 0xe2 in position 219: ordinal not in range(128)
+  Reward: -5.0000, Best: -0.0036
+
+--- Iteration 10/80 (action: gaussain) ---
+  Scratchpad: 2213 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1AF040>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1ADBD0>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1AC340>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.2,
+      0.0,
+      -0.8
+    ],
+    [
+      1.1,
+      0.0,
+      -0.2
+    ],
+    [
+      1.02,
+      0.1,
+      0.0
+    ],
+    [
+      1.08,
+      0.0,
+      0.2
+    ],
+    [
+      1.15,
+      0.0,
+      0.5
+    ],
+    [
+      1.08,
+      0.0,
+      0.2
+    ],
+    [
+      0.98,
+      -0.1,
+      0.0
+    ],
+    [
+      1.1,
+      0.0,
+      -0.2
+    ]
+  ],
+  "name": "streamlined_aero_nugget_v1"
+}
+DEBUG: Strategy used: exploit
+****** Starting episode 10
+***    Starting control 0
+-4.425734923320366 1.1061152127356246
+good epoch; reward: -0.24992803046273998
+Reward: -0.2499, Drag: -4.4257, Lift: -1.1061
+  Reflection: 3105 chars
+  Scratchpad: 2297 chars
+  Reward: -0.2499, Best: -0.0036
+
+--- Iteration 11/80 (action: gaussain) ---
+  Scratchpad: 2297 chars
+DEBUG image copy: idx=0, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F6C1F1360>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=1, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F677C7130>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG image copy: idx=2, img_path=<PIL.PngImagePlugin.PngImageFile image mode=RGBA size=496x330 at 0x7D6F64D99720>, exists=N/A
+DEBUG image copy: CWD=/scratch/Higher_dims/Islands_visual_stratedgy/work_211
+DEBUG: Gemini raw params: {
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.85,
+      0.0,
+      -0.95
+    ],
+    [
+      0.42,
+      0.05,
+      -0.2
+    ],
+    [
+      0.18,
+      0.25,
+      0.0
+    ],
+    [
+      0.22,
+      0.1,
+      0.1
+    ],
+    [
+      0.45,
+      0.0,
+      0.75
+    ],
+    [
+      0.22,
+      -0.1,
+      0.1
+    ],
+    [
+      0.05,
+      0.25,
+      0.0
+    ],
+    [
+      0.42,
+      -0.05,
+      -0.2
+    ]
+  ],
+  "name": "Hybrid_Teardrop_Cambered"
+}
+DEBUG: Strategy used: hybrid
+****** Starting episode 11
+***    Starting control 0
+Building point search tree to accelerate distance queries.
+Computed bounding box tree with 17631 nodes for 8816 points.
+
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 0 iterations (PETSc reason DIVERGED_NANORINF, residual norm ||r|| = -nan).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2019.1.0
+*** Git changeset:  828b3965c3ebcd128da494c596c78b17c0a303da
+*** -------------------------------------------------------------------------
+
+good epoch; reward: -5.0
+Reward: -5.0000, Drag: -1.0000, Lift: 0.0000

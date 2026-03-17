@@ -1,0 +1,103 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** Radius functions as polar distance from centroid. Maximize LE (CP0) and TE (CP2) radii while minimizing Upper (CP1) and Lower (CP3) radii to maximize chord and fineness ratio [iter 7, 8].
+*   **The Slender Transition:** To exit the "stalled pebble" regime, use extreme high radii for CP0/CP2 (>0.9) and low radii for CP1/CP3 (<0.25) [iter 8].
+*   **Chord Truncation:** Low TE Radius (CP2) "shortens" the chord, creating "Thimble" morphology [iter 7].
+*   **The Scale Trap:** Low radii across all CPs create "miniature" bluff bodies with low Reynolds numbers [iter 4, 7].
+*   **The Concavity Floor:** Radii below ~0.15 (specifically CP3) act as "gravity wells," creating concave "hooks" or "dents" rather than flat surfaces [iter 8].
+*   **The Kutta Singularity:** TE Edgy [2][2] = 1.0 is mandatory for flow shedding; requires high CP2 Radius to prevent a "sharp wedge" truncation [iter 2, 5, 7, 8].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius) trigger separation. Flattening via low CP1 Radius (~0.2) promotes laminar streamlines [iter 1, 8].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Primary driver of forward chord extension. High values (>0.9) are essential for high-aspect-ratio slender bodies [iter 4, 7, 8].
+*   **Angle [0][1]:** Controls vertical centering of the nose [iter 4].
+*   **Edgy [0][2]:** -1.0 ensures a circular, C-infinity continuous stagnation point [iter 2, 5, 7].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" fullness. Low values (~0.2) successfully thin the profile and break "pebble" morphology [iter 2, 7, 8].
+*   **Angle [1][1]:** Lower values (~ -0.4) shift peak forward to ~30% chord [iter 1, 5, 8].
+*   **Edgy [1][2]:** Low values ensure smooth transition over the peak [iter 4].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Primary driver of rearward chord extension. Must be near 1.0 to maximize total chord length and prevent truncation [iter 5, 7, 8].
+*   **Angle [2][1]:** Aligns tail point; must be near 0.0 for horizontal chord alignment [iter 4].
+*   **Edgy [2][2]:** 1.0 enforces a sharp geometric singularity for Kutta condition [iter 2, 5, 7, 8].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Flattening/Camber control. Values ~0.25 flatten the surface; extreme low values (<0.1) create an abrupt concave "hook" or "chin" [iter 5, 7, 8].
+*   **Angle [3][1]:** Positive values (~0.2) tuck the lower-rear inward. Combined with ultra-low radius, it creates localized concavity [iter 2, 4, 8].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain smooth lower surface continuity [iter 4].
+
+## New Evidence (Iteration 11)
+Parameters used:
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9525,
+      0.0,
+      -1.0
+    ],
+    [
+      0.245,
+      -0.45,
+      -0.75
+    ],
+    [
+      0.985,
+      0.0,
+      1.0
+    ],
+    [
+      0.21,
+      0.15,
+      -0.85
+    ]
+  ],
+  "name": "slender_kutta_stretcher"
+}
+```
+
+Observations:
+This analysis evaluates the "slender_kutta_stretcher" design. While the goal was a slender, high-performance wing, the resulting geometry is a highly cambered, "boomerang" or "hook" shape.
+
+### Per-Parameter Prediction vs. Outcome Analysis
+
+| Parameter | Value | Prediction | Outcome |
+| :--- | :--- | :--- | :--- |
+| **CP0 Radius** | 0.9393 | Extend the leading edge forward to create a pronounced "nose." | **Successful.** The leading edge is extremely elongated, creating a very long, thin forward section. |
+| **CP0 Edgy** | -1.0000 | Ensure a perfectly circular/smooth stagnation point. | **Successful.** The nose is perfectly smooth and rounded, providing a clean entry for the flow. |
+| **CP1 Radius** | 0.2641 | "Crush" the thickness to turn the pebble into a wing. | **Partial Success.** The upper surface is relatively low-profile, but it didn't "thin" the wing as much as expected because of the lower surface's behavior. |
+| **CP1 Angle** | -0.3977 | Shift thickest part forward to ~30% chord. | **Successful.** The maximum thickness of the upper lobe is shifted toward the front-center. |
+| **CP2 Radius** | 0.9840 | Stretch the tail far back to maximize chord and fix truncation. | **Successful.** The tail is extremely long, resolving the "bluntness" of Design 1. |
+| **CP2 Edgy** | 1.0000 | Create a geometric singularity for the Kutta condition. | **Successful.** The trailing edge is a sharp, distinct point, which is necessary for clean flow shedding. |
+| **CP3 Radius** | 0.1867 | Flatten the lower surface for high-pressure air. | **Failed.** Instead of flattening, this small radius caused a "collapse" between the two long poles (CP0 and CP2), creating a deep concave "bite" in the bottom of the airfoil. |
+| **CP3 Angle** | 0.1693 | Slightly tuck the lower-rear area to enhance camber. | **Over-corrected.** In combination with the small CP3 radius, this contributed to the extreme "hook" shape rather than a subtle camber. |
+
+### Key Learnings
+
+**1. The "Tension" Trap (Radius Ratios)**
+The designer attempted to maximize chord length using very high radii for CP0 and CP2 (~0.95+). However, when the "side" radii (CP1 and CP3) are significantly smaller (~0.2), the spline acts like a rubber band stretched between two distant poles. This creates a "waisted" or "collapsed" middle. To achieve a "slender blade," the side radii likely need to be higher to push the boundary outward, or the pole radii need to be moderated.
+
+**2. Concavity vs. Camber**
+The goal was a "slightly cambered" lower surface. The result was a highly concave lower surface. In aerodynamic terms, this "hook" shape creates a massive low-pressure pocket on the bottom, which likely generates significant drag and potentially flow separation inside the "hook," counteracting the lift benefits of the increased chord.
+
+**3. The Kutta Condition is Not Enough**
+The designer successfully implemented a sharp trailing edge (CP2 Edgy = 1.0), but the *orientation* of that edge is pointing significantly downward. While this increases lift (like a permanent flap), it also increases the frontal area (pressure drag). A high-performance airfoil needs the trailing edge to align more closely with the mean flow direction.
+
+**4. Geometric Sensitivity**
+Small changes in CP3 (Lower) parameters have a disproportionate effect on the final shape when CP0 and CP2 are at their extremes. The "slender wing" intuition was correct in principle, but the parameter execution created a "high-camber hook" rather than a "low-drag blade." To fix this, CP3 Radius must be increased to "push" the lower surface back out into a convex or flat profile.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

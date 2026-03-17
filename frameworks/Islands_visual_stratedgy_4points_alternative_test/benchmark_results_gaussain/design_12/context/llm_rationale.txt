@@ -1,0 +1,15 @@
+- **Strategy Focus (Hybrid Strategy)**: This design blends the successful "Sharp Kutta/Smooth Stagnation" logic of Design 2 (e0=-1.0, e2=1.0) with the "Slender Transition" heuristics derived from the failure of Design 1's "pebble" morphology. I am interpolating the need for a sharp tail with a significantly stretched chord.
+- **Chord Extension**: By setting CP0 and CP2 radii near 1.0, I maximize the chord length, which is necessary to reduce the thickness-to-chord ratio and move away from the "bluff body" regime seen in Design 1.
+- **Thickness Reduction**: Reducing CP1 radius to ~0.35 (compared to Design 1's 0.92) will flatten the "hump" that caused the flow separation in the provided images.
+- **Camber & Laminar Flow**: Shifting the CP1 angle forward (-0.45) moves the peak thickness to approximately 30% chord, which typically helps in maintaining a favorable pressure gradient for laminar attachment.
+- **Avoiding the "Waisted" Trap**: The Reference Card warns that if side radii are too low (<0.25) when chord radii are high, the shape becomes a boomerang. I am setting CP1/CP3 radii between 0.3-0.4 to ensure a slender but convex "blade" shape.
+
+## Per-Parameter Predictions
+- **CP0 Radius [0.9652]**: I am setting this to a high value to push the leading edge as far forward as possible, maximizing the chord.
+- **CP0 Edgy [-1.0000]**: I am setting this to -1.0 to ensure a perfectly smooth, circular stagnation point for clean flow splitting.
+- **CP1 Radius [0.3621]**: I am setting this to 0.3621 to drastically thin the profile compared to Design 1, reducing pressure drag.
+- **CP1 Angle [-0.4215]**: I am setting this to -0.4215 to shift the maximum thickness forward, mimicking high-performance laminar airfoils.
+- **CP2 Radius [0.9845]**: I am setting this to 0.9845 to extend the tail to the maximum rearward position.
+- **CP2 Edgy [1.0000]**: I am setting this to 1.0 to enforce the Kutta condition for clean flow shedding at the trailing edge.
+- **CP3 Radius [0.3224]**: I am setting this to 0.3224 to create a flatter lower surface than the upper surface, introducing positive camber.
+- **CP3 Angle [0.1823]**: I am setting this to 0.1823 to slightly tuck the lower-rear inward, sharpening the tail transition.

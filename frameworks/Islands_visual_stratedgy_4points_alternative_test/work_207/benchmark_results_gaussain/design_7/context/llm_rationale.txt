@@ -1,0 +1,12 @@
+- **Strategy Focus (Hybrid Strategy)**: I will hybridize the **structural stability** of Design 1 (keeping radii closer to the center to avoid mesh collapse) with the **sharp trailing edge** characteristic of Design 4. 
+- **Camber Integration**: To improve on the symmetric circle, I will use the "Decoupling Strategy" from the reference card: setting the CP6 (bottom) radius lower than CP2 (top) to create positive camber.
+- **Tapering and Pinching**: Failed designs 3 and 5 used very low radii (~0.1-0.2) at the transition points (CP3, CP5), which likely caused the -5.0 failure. I will use moderate radii (0.4-0.5) to ensure a smooth, non-concave transition to the tail.
+- **LE Smoothing**: Based on Iteration 5 evidence, I will avoid the "flat-face" stagnation by using a moderately negative edginess at CP0 (-0.4) rather than the extreme values used in failed Design 3.
+- **TE Enforcement**: CP4 will be strictly set to $r=1.0, e=1.0$ to satisfy the Kutta condition, which is the primary driver for transforming the circular bluff body into a lifting shape.
+
+## Per-Parameter Predictions
+- **CP0 [0.9125, 0.0, -0.4215]**: I am setting radius to 0.9125 and edgy to -0.4215 to create a robust, rounded nose that prevents the flow separation seen at the shoulders of the circle.
+- **CP2 [0.5543, 0.0, 0.0521]**: I am setting radius to 0.5543 to define the upper thickness, keeping it high enough to prevent a "tadpole" constriction.
+- **CP6 [0.3245, 0.0, 0.0521]**: I am setting radius to 0.3245 because I predict the delta between CP2 and CP6 will generate significant lift via positive camber.
+- **CP4 [1.0000, 0.0, 1.0000]**: I am setting these to 1.0 to create a perfectly sharp trailing edge, which will eliminate the broad wake seen in the circle images.
+- **CP3 & CP5 [~0.48]**: I am setting these radii to roughly 0.48 to provide a gradual taper to the TE, predicting this will prevent the flow separation/recirculation observed in the rear of the circle.

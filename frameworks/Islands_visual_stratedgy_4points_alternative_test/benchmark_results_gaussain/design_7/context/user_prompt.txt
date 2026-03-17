@@ -1,0 +1,136 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** Radius functions as a polar distance from the centroid. To maximize chord and fineness ratio: Maximize LE (CP0) and TE (CP2) radii while minimizing Upper (CP1) and Lower (CP3) radii [iter 7].
+*   **Chord Truncation:** Reducing TE Radius to "taper" the tail instead "shortens" the chord. Low TE Radius = "Thimble" morphology [iter 7].
+*   **The Scale Trap:** Low radii across all CPs create "miniature" or "seed" profiles. These act as bluff bodies with low Reynolds numbers, regardless of sharpness [iter 4, 7].
+*   **Chord-Thickness Ratio:** High-performance targets ~10:1 ratio. Small horizontal distance between CP0 and CP2 relative to CP1/CP3 height results in "stubby/pebble" shapes [iter 1, 4].
+*   **The Kutta Singularity:** TE Edgy [2][2] = 1.0 is mandatory to enforce a sharp vertex for flow shedding; however, without chord stretch (high CP2 Radius), it merely creates a "sharp wedge" [iter 2, 5, 7].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius + forward CP1 Angle) trigger massive flow separation [iter 1].
+*   **Thinning Strategy:** To achieve aerodynamic aspect ratios, *reduce* CP1 and CP3 radii to flatten the profile against the chord line [iter 2, 7].
+*   **Singularity Stability:** Extreme Edgy values (-1.0 to 1.0) are computationally stable; the generator handles the transition from perfectly smooth to perfectly sharp without artifacts [iter 5].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Primary driver of forward chord extension. High values (>0.9) stretch the nose forward; low values (<0.4) contribute to chord-length deficiency [iter 4, 7].
+*   **Angle [0][1]:** Controls vertical centering of the nose [iter 4].
+*   **Edgy [0][2]:** -1.0 ensures a perfectly circular, C-infinity continuous stagnation point [iter 2, 5, 7].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" fullness. High values create steep forward ramps; low values (~0.4) thin the profile and move toward laminar streamlines [iter 2, 7].
+*   **Angle [1][1]:** Lower values (~ -0.35) shift peak forward to ~30% chord [iter 1, 5].
+*   **Edgy [1][2]:** Low values ensure smooth transition over the peak [iter 4].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Primary driver of rearward chord extension. Must be high (>0.7) to prevent "Thimble" truncation. Low values pull the TE toward the LE [iter 5, 7].
+*   **Angle [2][1]:** Aligns tail point; must be near 0.0 for horizontal chord alignment [iter 4].
+*   **Edgy [2][2]:** 1.0 effectively enforces a sharp geometric singularity for the Kutta condition [iter 2, 5, 7].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Low values (~0.25) flatten the lower surface relative to the top, creating necessary camber for lift [iter 5, 7].
+*   **Angle [3][1]:** Positive values (~0.2) tuck the lower-rear inward [iter 2, 4].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain smooth lower surface continuity [iter 4].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.936939, -0.014141, -1.0, 0.635341, -0.366695, -0.796253, 0.131782, -0.065804, 1.0, 0.277615, 0.160792, -0.954905]
+  - Reward: -5.0000
+  - Rank: 4
+
+Design 2:
+  - Action: [0.258685, 0.005655, -0.978195, 0.417332, -0.200579, -0.327383, 0.850204, 0.020501, 1.0, 0.38446, 0.080813, -0.539991]
+  - Reward: -5.0000
+  - Rank: 6
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.
+
+
+# Task: Generate New Airfoil Design (with Direct Values)
+
+First, analyze the provided information:
+
+1. **Image Analysis**: If images are provided, they show a representative design sampled from the population (listed as Design 1 above for reference). You MUST first describe what you actually see in the images before analyzing action vectors:
+
+- In 3-4 bullet points, describe the **geometry** you observe: What does the shape look like? Is it smooth or jagged? Symmetric or asymmetric? Thick or thin? Are there any obvious geometric flaws visible (discontinuities, pinch points, blunt edges, odd proportions)?
+- In 3-4 bullet points, describe the **flow field / simulation results** you observe: What do the pressure, velocity, or other field plots show? Where are high/low regions? Is there visible flow separation, recirculation, wake asymmetry, or pressure spikes?
+
+Only AFTER describing what you see in the images, reference Design 1's action vector and reward to learn parameter-geometry mappings.
+
+Critically and relentlessly assess the design shown:
+- Which visible geometric features are problematic and why?
+- Which action parameters likely caused the geometric flaws you see?
+- List 3-4 key design/geometric changes needed to improve designs in the population
+
+
+**Strategy Focus**: **Exploration Strategy**: Review the design database to identify UNDEREXPLORED regions of the parameter space. 
+    Look for parameter combinations that have rarely been tested. 
+    Your new design should push toward boundary regions (near -1.0 or 1.0) or explore parameter combinations 
+    distinct from the existing population. Use the image analysis and design database to understand what geometries are missing.
+
+
+2. **Design Reasoning**: Based on the design database and population state, think step-by-step about what NEW design should be explored to advance the population. **Follow the Strategy Focus guidance above** - this determines HOW you should approach the design. Consider unexplored geometric variations and different aerodynamic strategies. Focus on diversity and bold exploration, not incremental tweaking of existing designs based on aerodynamic principles.
+
+In your reasoning, provide 4-6 bullet points that:
+- **Apply the Strategy Focus approach described above**
+- Draw insights from the population database (what patterns lead to high/low rewards?)
+- Incorporate observations from the image analysis (what aerodynamic phenomena are present?)
+- Identify specific geometric parameters to explore and WHY
+- Apply your judgment as an evolutionary optimizer (what will advance the search?)
+
+Then, create a new airfoil by specifying precise values for each parameter. Use 4+ decimals. n_cp=4 n_sp=20.
+
+Design considerations: The reasoning above should be applied to the design parameters to evolve the population.
+
+
+You MUST respond with ONLY a valid JSON object (no markdown, no schema definitions).
+Do NOT include $schema, title, description, type, properties, or required fields.
+
+Example response format:
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [<r0>, <a0>, <e0>],
+    [<r1>, <a1>, <e1>],
+    [<r2>, <a2>, <e2>],
+    [<r3>, <a3>, <e3>]
+  ],
+  "name": "<descriptive_name>"
+}
+
+Replace all <placeholders> with actual float values in [-1.0, 1.0].
+Each inner array is [radius_param, angle_param, edgy_param] for that control point.
+
+
+**Response Format:**
+Provide your response in the following structure:
+
+## Analysis
+[If images provided: first describe the geometry (3-4 bullets on what you see) and the flow fields (3-4 bullets on what you see). Then reference Design 1's action vector and reward. Identify which visible flaws map to which parameters, and list 3-4 key changes needed]
+
+## Reasoning
+[4-6 key bullet points with design insights: combine population database patterns, image analysis observations, the Strategy Focus guidance above, and your judgment as an evolutionary optimizer to justify the new design strategy. Explicitly explain how your design follows the Strategy Focus.]
+
+## Per-Parameter Predictions
+For EACH parameter you set, state your PREDICTION of what it will mechanically do:
+- "I am setting param[i][j] to VALUE because I predict it will CAUSE [specific geometric effect]"
+- Be specific about the predicted physical outcome, not just your goal
+
+## Design Parameters
+[Your JSON with the design parameters as shown in the example above]

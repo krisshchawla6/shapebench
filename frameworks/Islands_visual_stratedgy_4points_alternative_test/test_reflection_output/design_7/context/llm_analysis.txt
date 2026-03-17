@@ -1,0 +1,16 @@
+*   **Geometry Observation**: 
+    *   The shape is extremely "bloated" and resembles a blunt, rectangular block with a small tapering tail. 
+    *   The Leading Edge (LE) is nearly a vertical flat face rather than a streamlined curve, which will create massive stagnation and pressure drag.
+    *   The thickness-to-chord ratio is visually excessive (likely >40%), whereas high-performance airfoils usually sit between 8-15%.
+    *   The Trailing Edge (TE) has a sharp "stinger" (high edgy_param), but it is attached to a body that is far too thick to allow for smooth flow reattachment.
+
+*   **Flow Field/Simulation Observations**:
+    *   The flat front creates a huge high-pressure zone at the nose.
+    *   Flow separation likely occurs almost immediately behind the "corners" of the front face because the curvature is too aggressive.
+    *   The wake behind the airfoil is likely very wide, indicating high pressure drag (the "D-shape" drag penalty).
+    *   There is no clear evidence of a low-pressure suction peak on the upper surface that would indicate efficient lift generation.
+
+*   **Design 1 Mapping & Improvements**:
+    *   The "flat face" is caused by CP2, CP4, and CP5 having `radius_params` (0.44, 0.82, 0.93) that are too close to the LE pole CP3 (0.90). This prevents the geometry from tapering into a nose.
+    *   The thickness is caused by mid-body radii being too high (>0.7).
+    *   **Key Changes**: 1) Dramatically reduce mid-body `radius_params` (CP1, 2, 4, 5, 6) to the "Goldilocks" zone (<0.3) to stretch the airfoil; 2) Ensure CP3 remains at $r=1.0$ to define the nose tip; 3) Use aggressive smoothing ($e=-1.0$) on all body points to eliminate the "rectangular" corners.

@@ -1,0 +1,69 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+## Reference Card (Iteration 6)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n > 0$ to prevent origin-crossing [iter 1].
+*   **Laminar Delta Rule:** While $\Delta r < 0.3$ avoids "Radial Collapse" penalties [iter 2, 5], $\Delta r < 0.1$ is required between all adjacent $r_n$ to prevent "lumpy" high-curvature zones and flow separation [iter 6].
+*   **Teardrop Topology:** To avoid "Peanut/Waist" shapes, middle radii ($r_{1,2,3}$ and $r_{5,6,7}$) must be $\ge$ or provide a smooth bridge between end radii ($r_0, r_4$). Thinner middles create bluff-body-link structures [iter 6].
+*   **The Pinch Technique:** To achieve a sharp Trailing Edge (TE), adjacent radii ($r_1, r_7$) must be significantly smaller than $r_0$ to "stretch" the spline into a point [iter 6].
+*   **Thickness-to-Chord Ratio:** Target $r_{vertical} \approx 12\text{--}15\%$ of total chord ($r_0 + r_4$) [iter 5].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | TE extension. | Defines chord. Must be $> r_1, r_7$ to "pinch" into a sharp point [iter 1, 6]. |
+| **$e_0$** | TE Sharpness. | **Negative** ($\rightarrow -1$) for Kutta cusp. Ineffective if $r_1, r_7$ are too large (causes "stubby" tail) [iter 3, 6]. |
+| **$r_2$** | Upper surface height. | Primary thickness. Must be $\ge r_0, r_4$ to prevent "waisting" or "necking" [iter 2, 6]. |
+| **$a_n$** | Surface bias. | Fine-tunes max thickness location [iter 1, 2]. |
+| **$r_4$** | LE extension. | Defines forward chord. Requires $r_3, r_5$ support to avoid "pointed" nose [iter 1, 5]. |
+| **$e_4$** | LE Bluntness. | **Positive** ($\rightarrow +1$) rounds nose. Values $> 0.8$ create "boxy" faces; $e \approx 0$ is better for smooth stagnation [iter 3, 6]. |
+| **$r_6$** | Lower surface height. | Camber control. $r_6 < r_2$ creates lift. Must remain $\ge r_0, r_4$ to maintain structural bulk [iter 3, 6]. |
+| **$r_{1,3,5,7}$** | Tapering support. | Must bridge $r_{even}$ via $\Delta r < 0.1$ to maintain laminar flow and avoid "lumpy" separation [iter 2, 6]. |
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 2:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 3:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 4:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 5:
+  - Action: [1.0, 0.062373, -0.963537, 0.883461, -0.023559, -0.224488, 0.591996, 0.109001, 0.007873, 0.770407, 0.034322, 0.429345, 0.915121, -0.059629, 0.807914, 0.623195, -0.03128, 0.347731, 0.475627, -0.107922, -0.061128, 0.926956, 0.085465, -0.155355]
+  - Reward: -5.0000
+  - Rank: 2
+
+Design 6:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

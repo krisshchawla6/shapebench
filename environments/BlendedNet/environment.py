@@ -6,6 +6,7 @@ import numpy as np
 import torch
 
 from environments.base import BaseEnvironment
+from environments.base_reward import BaseReward
 from . import prompt_blocks
 from .mesh_generator import generate_mesh
 
@@ -16,7 +17,6 @@ sys.path.insert(0, MODEL_DIR)
 
 GEOM_KEYS = ["B1", "B2", "B3", "C2", "C3", "C4", "S1", "S2", "S3"]
 N_POINTS = 8192
-FAIL_REWARD = -5.0
 
 _model = None
 _norm = None
@@ -144,18 +144,12 @@ def _save_sol_images(mesh, result, sol_dir):
 class BlendedNetEnvironment(BaseEnvironment):
     """Transolver surrogate for BlendedNet blended-wing-body aerodynamics."""
 
-    def __init__(self, mach=0.3, re=1.0e7, alpha=5.0, **kwargs):
-        self.mach = mach
-        self.re = re
-        self.alpha = alpha
+    def __init__(self, reward: BaseReward, **kwargs):
+        self.reward = reward
 
-    @staticmethod
-    def add_args(parser):
-        parser.add_argument('--mach', type=float, default=0.3, help='Mach number')
-        parser.add_argument('--re', type=float, default=1.0e7, help='Reynolds number')
-        parser.add_argument('--alpha', type=float, default=5.0, help='Angle of attack (deg)')
-
-    def simulate(self, design_path: str, case_dir: str, **kwargs) -> tuple:
+    def _run_sim(self, design_path: str, case_dir: str,
+                 mach=0.3, re=1.0e7, alpha=5.0) -> dict:
+        """Run surrogate for given flight conditions; return raw field outputs."""
         save_dir = os.path.join(case_dir, "save")
         sol_dir = os.path.join(save_dir, "sol")
         os.makedirs(sol_dir, exist_ok=True)
@@ -163,62 +157,34 @@ class BlendedNetEnvironment(BaseEnvironment):
         with open(design_path) as f:
             params = json.load(f)
 
-        try:
-            geom_vals = [float(params[k]) for k in GEOM_KEYS]
-            re_val = float(params.get("Re", self.re))
-            mach = float(params.get("Mach", self.mach))
-            alpha = float(params.get("alpha", self.alpha))
-            flight_vals = [math.log10(re_val), mach, alpha]
+        geom_vals = [float(params[k]) for k in GEOM_KEYS]
+        re_val = float(params.get("Re", re))
+        mach_val = float(params.get("Mach", mach))
+        alpha_val = float(params.get("alpha", alpha))
+        flight_vals = [math.log10(re_val), mach_val, alpha_val]
 
-            mesh = generate_mesh(params)
-            result = _run_surrogate(mesh, geom_vals, flight_vals)
+        mesh = generate_mesh(params)
+        result = _run_surrogate(mesh, geom_vals, flight_vals)
 
-            Cp_mean = float(result["Cp"].mean())
-            Cfx_mean = float(result["Cfx"].mean())
-            Cfz_mean = float(result["Cfz"].mean())
-            CL_approx = float(-result["Cp"].mean())
-            CD_approx = float(result["Cfx"].mean())
-            LD = CL_approx / CD_approx if abs(CD_approx) > 1e-12 else 0.0
-            reward = LD
+        np.savez(os.path.join(save_dir, "fields.npz"),
+                 pos=result["pos"], Cp=result["Cp"],
+                 Cfx=result["Cfx"], Cfz=result["Cfz"])
 
-            np.savez(os.path.join(save_dir, "fields.npz"),
-                     pos=result["pos"], Cp=result["Cp"],
-                     Cfx=result["Cfx"], Cfz=result["Cfz"])
+        images = _save_sol_images(mesh, result, sol_dir)
 
-            results_dict = {
-                "design": params,
-                "Re": re_val, "Mach": mach, "alpha": alpha,
-                "Cp_mean": Cp_mean, "Cfx_mean": Cfx_mean, "Cfz_mean": Cfz_mean,
-                "CL_approx": CL_approx, "CD_approx": CD_approx, "L_D": LD,
-                "reward": reward,
-            }
-            with open(os.path.join(save_dir, "results.json"), "w") as f:
-                json.dump(results_dict, f, indent=2)
-
-            images = _save_sol_images(mesh, result, sol_dir)
-
-            return float(reward), {
-                "metrics": {
-                    "Cp_mean": Cp_mean, "Cfx_mean": Cfx_mean, "Cfz_mean": Cfz_mean,
-                    "CL_approx": CL_approx, "CD_approx": CD_approx, "L_D": LD,
-                    "reward": reward,
-                },
-                "images": images,
-                "feedback": "",
-            }
-
-        except Exception as e:
-            import traceback
-            traceback.print_exc()
-            print(f"[sim] FAILED: {e}")
-            return float(FAIL_REWARD), self._fail_results(FAIL_REWARD)
-
-    def _fail_results(self, reward):
         return {
-            "metrics": {"reward": reward},
-            "images": [],
-            "feedback": "Simulation failed.",
+            "params": params,
+            "Re": re_val, "Mach": mach_val, "alpha": alpha_val,
+            "Cp_mean": float(result["Cp"].mean()),
+            "Cfx_mean": float(result["Cfx"].mean()),
+            "Cfz_mean": float(result["Cfz"].mean()),
+            "save_dir": save_dir,
+            "images": images,
         }
+
+    def simulate(self, design_path: str, case_dir: str, **kwargs) -> tuple:
+        os.makedirs(case_dir, exist_ok=True)
+        return self.reward.evaluate(self._run_sim, design_path, case_dir)
 
     def build_context_entry(self, db_entry) -> dict:
         json_path = db_entry[0]
@@ -244,6 +210,9 @@ class BlendedNetEnvironment(BaseEnvironment):
         }
 
     def get_prompt_blocks(self) -> dict:
+        reward_pb = self.reward.get_prompt_blocks()
+        if reward_pb is not None:
+            return reward_pb
         return {
             "format_context": prompt_blocks.format_context,
             "format_response_instructions": prompt_blocks.format_response_instructions,
@@ -251,3 +220,45 @@ class BlendedNetEnvironment(BaseEnvironment):
             "DESIGN_ENTRY": prompt_blocks.DESIGN_ENTRY,
             "RESPONSE_FORMAT": prompt_blocks.RESPONSE_FORMAT,
         }
+
+    def run_llm_action(self, action, context_entries, output_dir, name,
+                       debug_dir=None, parent_path=None, scratchpad=""):
+        from . import agent
+        pb = self.get_prompt_blocks()
+        agent.set_env_format_context(pb['format_context'])
+        return agent.run_llm_action_bwb(
+            action, context_entries, output_dir, name=name, debug_dir=debug_dir)
+
+    def sample_gaussian(self, mean_params: dict, output_dir: str, name: str,
+                        std_scale: float = 1.0) -> str:
+        from .design_actions import gaussain_bwb
+        return gaussain_bwb(
+            params=mean_params, out_dir=output_dir, name=name, std_scale=std_scale)
+
+    def get_param_bounds(self):
+        from .design_actions import CONTINUOUS_KEYS, BOUNDS
+        lb = np.array([BOUNDS[k][0] for k in CONTINUOUS_KEYS])
+        ub = np.array([BOUNDS[k][1] for k in CONTINUOUS_KEYS])
+        return lb, ub
+
+    def write_design(self, x, output_dir: str, name: str) -> str:
+        from .design_actions import CONTINUOUS_KEYS, save_design_json
+        os.makedirs(output_dir, exist_ok=True)
+        params = {k: float(x[i]) for i, k in enumerate(CONTINUOUS_KEYS)}
+        params['name'] = name
+        path = os.path.join(output_dir, f'{name}.json')
+        return save_design_json(path, params)
+
+    def set_llm_backend(self, backend, image_analyzer=None):
+        from . import agent
+        agent.set_llm_backend(backend, image_analyzer)
+
+    def get_results_csv_columns(self):
+        return ['Cp_mean', 'Cfx_mean', 'L_D']
+
+    def get_results_csv_row(self, metrics):
+        return [
+            f"{metrics.get('Cp_mean', 0):.6f}",
+            f"{metrics.get('Cfx_mean', 0):.6f}",
+            f"{metrics.get('L_D', 0):.4f}",
+        ]

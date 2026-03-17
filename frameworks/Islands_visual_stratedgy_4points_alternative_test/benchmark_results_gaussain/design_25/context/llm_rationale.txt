@@ -1,0 +1,13 @@
+*   **Strategy Focus (Exploitation)**: I am refining the top-performing Design 1 by addressing its primary aerodynamic flaws (lower-surface separation and TE bluntness) while preserving its high-lift characteristics (forward peak, long chord).
+*   **Chord Extension**: Based on the "Radius-Distance Law," I will push $r_0$ and $r_2$ closer to their limits (0.92 and 0.97 respectively) to maximize the lifting surface area.
+*   **Lower Surface Smoothing**: The image analysis clearly shows the $e_3 = -0.9$ parameter creates a deep concave notch. I will move $e_3$ to -0.25 to create a gentler lower-surface curve that maintains camber without causing massive flow separation.
+*   **Kutta Refinement**: I will set $e_2$ to exactly 1.0. The Reference Card identifies this as mandatory for flow closure and reducing tail drag.
+*   **Volume Distribution**: Maintaining $r_1 \approx 0.41$ and $r_3 \approx 0.54$ ensures the airfoil remains convex and structural, avoiding the "waisted trap."
+*   **Alignment**: Keeping $a_0$ near $0.0$ and $a_2$ near $0.0$ ensures the airfoil is aligned with the freestream for minimum frontal drag.
+
+## Per-Parameter Predictions
+- I am setting **r0 to 0.9245** and **r2 to 0.9782** because I predict it will maximize chord length without triggering the pebble-like geometric collapse.
+- I am setting **e3 to -0.2500** because I predict it will shallow the lower-surface notch seen in Design 1, reducing pressure drag while maintaining lift-enhancing camber.
+- I am setting **e2 to 1.0000** because I predict it will enforce a sharp trailing edge, thinning the wake and improving the Kutta condition.
+- I am setting **a1 to -0.4550** because I predict it will maintain the high-lift forward peak position while smoothing the transition from the nose.
+- I am setting **e1 to -0.8500** because I predict it will create a smooth, continuous upper surface curvature to prevent premature flow separation.

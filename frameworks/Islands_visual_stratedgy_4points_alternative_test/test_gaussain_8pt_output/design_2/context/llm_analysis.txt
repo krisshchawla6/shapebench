@@ -1,0 +1,16 @@
+**Geometry Analysis (Design 1 Observations)**
+*   The shape appears asymmetric with a pronounced upper surface curvature and a significantly flattened or potentially concave lower surface (inferred from `r=-1.0` and `r=-0.96` values).
+*   The Leading Edge (LE) region (CP0) is extended (`r=1.0`), but the transition to the lower surface seems abrupt due to the drastic change in radius parameters (1.0 to negative values nearby).
+*   There is a visible disparity in smoothness; the Trailing Edge (TE) is sharp (`e=1.0`), but other regions may suffer from inconsistent curvature ("lumpiness") due to the alternating high/low radius parameters on the upper surface (`0.83` -> `0.88` -> `1.0`).
+*   Geometric flaw: The lower surface likely lacks sufficient internal volume for structural integrity and smooth pressure recovery, resembling a thin shell rather than a robust airfoil.
+
+**Flow Field Analysis (Design 1 Observations)**
+*   **Pressure**: High suction peak likely occurs very close to the leading edge due to the `r=1.0` extension, potentially followed by an adverse pressure gradient that is too steep.
+*   **Velocity**: The flow on the lower surface is likely decelerated or separated early due to the "hollowed out" geometry created by the negative radius parameters.
+*   **Wake**: The wake region may be wider than necessary, indicating drag penalties from the erratic surface curvature and potential separation on the aft upper surface.
+*   **Stability**: The pressure distribution is likely jagged, suggesting the shape is not optimized for laminar flow maintenance.
+
+**Key Changes Needed**
+*   **Stabilize Lower Surface**: Increase the radius parameters on the lower surface (currently saturated at `-1.0`) to visible negative values closer to 0 (e.g., `-0.4` to `-0.6`) to provide thickness and smooth pressure recovery.
+*   **Smooth Upper Curvature**: Create a monotonic or smoothly varying radius distribution for the upper surface to prevent pressure spikes and "lumps."
+*   **Refine Leading Edge**: Use a moderate, extremely smooth LE parameter set to ensure better stagnation point behavior and flow attachment.

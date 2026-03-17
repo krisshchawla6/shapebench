@@ -1,0 +1,104 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card (Iteration 4)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n > 0$ to prevent non-physical origin-crossing [iter 1].
+*   **Radial Gradient Continuity:** Large deltas between adjacent $r$ values (e.g., $r_0=1.0, r_1=0.5$) create a "pinched waist" or "mustache" effect. $r_{odd}$ must approximate the mean of $r_{even}$ neighbors for smooth transitions [iter 2, 4].
+*   **Convexity & Scalloping:** Subsonic airfoils require convexity. Extreme low values ($r_6 < 0.2$) create concave "scallops" or "dents" that trap vortices and increase pressure drag [iter 3, 4].
+*   **Eccentricity Polarity:** $e \rightarrow -1$ creates sharp, needle-like cusps (Kutta condition); $e \rightarrow +1$ creates broad, blunt bulbs (stall resistance) [iter 3, 4].
+*   **Chord Alignment:** $r_4$ is the Leading Edge (LE); $r_0$ is the Trailing Edge (TE). Horizontal elongation ($r_0, r_4 \gg r_2, r_6$) defines slender, high-speed profiles [iter 3, 4].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | TE extension. | Defines chord length; high values create slender profiles [iter 1, 4]. |
+| **$e_0$** | TE Sharpness. | **Negative** ($\rightarrow -1$) creates a needle-point cusp for clean flow exit (Kutta condition) [iter 3, 4]. |
+| **$r_2$** | Upper surface height. | Controls thickness; low values flatten the "roof" to reduce thickness drag [iter 2, 4]. |
+| **$a_2$** | Upper surface bias. | Shifts max thickness location to delay transition to turbulence [iter 1, 2]. |
+| **$r_4$** | LE extension. | Defines forward chord; requires $r_3, r_5$ support to avoid "detached" look [iter 1, 4]. |
+| **$e_4$** | LE Bluntness. | **Positive** ($\rightarrow +1$) rounds the nose; requires adjacent $r$ support to prevent "lumpy" transitions [iter 3, 4]. |
+| **$r_6$** | Lower surface height. | Camber control; extreme lows ($<0.1$) cause "scalloping" and high drag [iter 3, 4]. |
+| **$r_{1,3,5,7}$** | Structural support. | Must bridge $r_{even}$ neighbors; failure to provide "mid-point" support causes spline collapse/pinching [iter 2, 4]. |
+
+## New Evidence (Iteration 5)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9821,
+      0.0,
+      -0.8842
+    ],
+    [
+      0.6831,
+      -0.0215,
+      -0.3521
+    ],
+    [
+      0.3842,
+      -0.1542,
+      -0.1052
+    ],
+    [
+      0.6182,
+      -0.0512,
+      0.2843
+    ],
+    [
+      0.8524,
+      0.0,
+      0.7215
+    ],
+    [
+      0.5189,
+      0.0542,
+      0.3125
+    ],
+    [
+      0.1855,
+      0.1124,
+      -0.2241
+    ],
+    [
+      0.5838,
+      0.0315,
+      -0.5523
+    ]
+  ],
+  "name": "Cambered_Slender_Explorer"
+}
+```
+
+Observations:
+This analysis compares your predictions for the "Cambered_Slender_Explorer" against the visual outcome of the generated geometry.
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter | Designer's Prediction | Actual Outcome | Analysis of Discrepancy |
+| :--- | :--- | :--- | :--- |
+| **Chord Length ($r_0, r_4$)** | Setting $r_0 \approx 0.98$ and $r_4 \approx 0.85$ would create a long, slender horizontal chord. | The shape is elongated horizontally, but the "body" is thick and distorted. | High $r$ values at the poles succeeded in stretching the shape, but the intermediate $r$ values were too low to maintain a slender profile. |
+| **Kutta Condition ($e_0$)** | $e_0 = -0.88$ would create a sharp, needle-like trailing edge. | The trailing edge (right side) is a blunt, rounded "bulb." | Extreme negative eccentricity values often lead to "fat" spline interpolations or loops rather than sharp points if the neighboring control points are not perfectly aligned. |
+| **Asymmetric Camber ($r_2$ vs $r_6$)** | $r_2 (0.38) > r_6 (0.18)$ would create a lift-generating cambered profile. | The shape has a massive concave "bite" taken out of the bottom. | While $r_2 > r_6$ creates asymmetry, the value of $r_6$ (0.18) was so much smaller than the chord points (0.9+) that it caused a structural collapse (concavity) rather than a smooth camber. |
+| **Leading Edge ($e_4$)** | $e_4 = 0.72$ would create a blunt, robust nose. | The leading edge (left side) is irregularly shaped and somewhat pointed. | The interaction between the high $r_4$ and the $e_4$ value, combined with the sharp angles of the neighboring points, prevented the formation of a smooth, circular nose. |
+| **Intermediate Support ($r_1, r_3, r_5, r_7$)** | Use "Mean Support Rule" to ensure a physical shape. | The shape is highly non-physical, featuring a deep concave notch and jagged transitions. | The "Mean Support" was not sufficient. For example, the drop from $r_0=0.98$ to $r_7=0.58$ and then $r_6=0.18$ created a steep inward slope that ruined the streamlining. |
+
+### Key Learnings
+
+1.  **The "Radial Collapse" Trap**: You attempted to create a slender airfoil by making the "height" parameters ($r_2, r_6$) small while keeping the "length" parameters ($r_0, r_4$) large. However, if the intermediate points ($r_1, r_7$, etc.) are not carefully graduated, the spline collapses inward, creating a **concave bean shape** instead of a convex airfoil.
+2.  **Concavity is an Aerodynamic Killer**: The deep notch on the lower surface will cause immediate flow separation and a massive pressure drag penalty. Real airfoils are almost exclusively convex (or very slightly concave near the trailing edge only).
+3.  **Eccentricity ($e$) is Context-Dependent**: A high negative $e$ does not guaranteed a sharp point if the surrounding geometry is "pulling" the spline in a different direction. To get a sharp trailing edge, the radii of the points immediately adjacent to the tail ($r_1$ and $r_7$) must also be relatively large and taper gradually toward $r_0$.
+4.  **Symmetry vs. Performance**: Your move toward asymmetry ($r_2 \neq r_6$) is correct for generating lift, but the ratio was too extreme. An airfoil with a thickness-to-chord ratio of roughly 12-15% is usually ideal; here, the "waist" of the airfoil is too thin compared to the "head" and "tail."
+
+**Verdict**: The "Cambered_Slender_Explorer" failed because it prioritized extreme boundary values over **curvature continuity**. The resulting shape is a bluff body with a high-drag concave feature, likely resulting in a reward similar to or worse than the baseline circle.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

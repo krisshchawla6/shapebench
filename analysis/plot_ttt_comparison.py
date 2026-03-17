@@ -51,26 +51,22 @@ def load_results(results_dir):
     if not os.path.exists(csv_path):
         return None
 
-    iterations, rewards = [], []
+    # Read all rows in file order; last row per iteration = most recent run
+    rows_by_iter = {}
     with open(csv_path) as f:
-        reader = csv.DictReader(f)
-        for row in reader:
+        for row in csv.DictReader(f):
             try:
                 it = int(row['iteration'])
                 rw = float(row['reward'])
-                iterations.append(it)
-                rewards.append(rw)
+                rows_by_iter[it] = rw
             except (ValueError, KeyError):
                 continue
 
-    if not iterations:
+    if not rows_by_iter:
         return None
 
-    iterations = np.array(iterations)
-    rewards = np.array(rewards)
-    order = np.argsort(iterations)
-    iterations = iterations[order]
-    rewards = rewards[order]
+    iterations = np.array(sorted(rows_by_iter.keys()))
+    rewards = np.array([rows_by_iter[i] for i in iterations])
     best_so_far = np.maximum.accumulate(rewards)
 
     return {
@@ -205,8 +201,7 @@ def discover_runs(env_name):
     results_base = os.path.join(REPO_ROOT, 'environments', env_name, 'results')
     runs = []
     ttt_dirs = {
-        'test_time_discovery_750':     ('TTT 25-epoch', COLORS['ttt_25']),
-        'test_time_discovery_50steps': ('TTT 50-epoch', COLORS['ttt_50']),
+        'ttt_1000': ('TTT 1000', COLORS['ttt_25']),
     }
     for dirname, (label, color) in ttt_dirs.items():
         data = load_results(os.path.join(results_base, dirname))

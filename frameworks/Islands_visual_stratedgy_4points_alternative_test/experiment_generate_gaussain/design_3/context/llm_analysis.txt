@@ -1,0 +1,21 @@
+The images provided show **Design 1**, which currently exists as a perfect circle. 
+
+**Geometry Observations:**
+*   The shape is a perfectly symmetric, smooth unit circle defined by eight equidistant control points.
+*   There is no distinct leading or trailing edge, resulting in a shape that lacks any aerodynamic orientation.
+*   The thickness-to-chord ratio is 1.0 (100%), which is extremely high for subsonic flow and typical of a bluff body rather than a streamlined airfoil.
+*   The geometry is entirely convex but lacks the tapering necessary to manage flow recovery at the rear.
+
+**Flow Field / Simulation Observations:**
+*   **Stagnation and Pressure:** A prominent stagnation point is visible at the leading face (9 o'clock position), indicated by the high-pressure/low-velocity region.
+*   **Flow Separation:** The flow separates almost immediately after passing the vertical centerline (12 and 6 o'clock positions), as the adverse pressure gradient is too steep for the boundary layer to remain attached.
+*   **Wake:** A massive, symmetric wake of low-velocity, recirculating flow (deep purple in velocity plots) extends far behind the cylinder. This indicates extremely high pressure drag.
+*   **Lift:** Because the flow is perfectly symmetric top-to-bottom, the net lift is zero (reward -0.0036 is likely a small numerical error or purely drag-dominated).
+
+**Design 1 Mapping & Needed Changes:**
+*   **Action Mapping:** The vector `[1.0, 0.0, 0.0, ...]` across all points results in a circle because all radii are identical and edgy parameters are neutral.
+*   **Key Changes Needed:**
+    1.  **Chord Definition:** Drastically increase the ratio of horizontal length ($r_0, r_4$) to vertical thickness ($r_2, r_6$).
+    2.  **Kutta Condition:** Force $e_0$ toward -1.0 to create a sharp trailing edge, which is essential for establishing circulation and lift.
+    3.  **Leading Edge Profiling:** Use a positive $e_4$ to maintain a rounded nose that can handle varying angles of attack.
+    4.  **Camber Introduction:** Reduce $r_6$ (lower surface) significantly more than $r_2$ (upper surface) to create the asymmetry required for lift.

@@ -1,0 +1,4 @@
+*   **Strategy Focus (Exploration):** The current population (Design 1) occupies the "Max Thickness/Bulky" boundary of the design space. To maximize diversity, this new design targets the "Thin/Streamlined" region, which is currently unexplored.
+*   **Geometric Heuristics:** Standard high-performance airfoils (like NACA series) do not use maximum available thickness. By reducing the radius parameters to the $\pm 0.3 - 0.5$ range, we simulate a standard airfoil thickness ratio (~12-15%) rather than a circle/ellipse.
+*   **Camber Introduction:** By making the upper surface radii slightly larger magnitude (0.5) than the lower surface radii (-0.2 to -0.3), we introduce positive camber to generate lift efficiently, a configuration distinct from the bulky baseline.
+*   **Trailing Edge Definition:** We explicitly sharpen CP4 (Trailing Edge) with `edgy=1.0` and high extension `r=0.9` to define a clear stagnation point release, critical for Kutta condition satisfaction.

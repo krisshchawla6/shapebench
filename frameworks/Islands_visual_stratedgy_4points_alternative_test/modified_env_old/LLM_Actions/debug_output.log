@@ -1,0 +1,734 @@
+/home/ubuntu/.local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:275: FutureWarning: You are using a Python version (3.10.19) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.
+  warnings.warn(message, FutureWarning)
+/scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/LLM_agent.py:5: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+
+================================================================================
+COMPARATIVE ANALYSIS: generate_direct
+================================================================================
+
+================================================================================
+PART 1: WITH CONTEXT
+================================================================================
+
+================================================================================
+Testing generate_direct action
+Context: WITH
+Samples: 10
+================================================================================
+
+
+--- Sample 1/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.7,
+      0.3,
+      0.1
+    ],
+    [
+      0.7,
+      -0.3,
+      0.1
+    ],
+    [
+      0.7,
+      0.6,
+      0.0
+    ],
+    [
+      0.7,
+      -0.6,
+      0.0
+    ]
+  ],
+  "name": "Aggressive Camber Airfoil"
+}
+✓ Generated: test_0_0.csv
+
+--- Sample 2/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.75,
+      0.5,
+      0.2
+    ],
+    [
+      0.85,
+      -0.3,
+      0.1
+    ],
+    [
+      0.9,
+      -0.7,
+      0.3
+    ],
+    [
+      0.8,
+      0.8,
+      0.4
+    ]
+  ],
+  "name": "Aggressive_Camber_V1"
+}
+✓ Generated: test_1_0.csv
+  Diversity: 0.2896 (min dist: 2.0062)
+
+--- Sample 3/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.7,
+      0.3,
+      0.1
+    ],
+    [
+      0.9,
+      0.5,
+      0.2
+    ],
+    [
+      0.9,
+      -0.5,
+      0.2
+    ],
+    [
+      0.7,
+      -0.3,
+      0.1
+    ]
+  ],
+  "name": "Aggressive Camber Airfoil"
+}
+✓ Generated: test_2_0.csv
+  Diversity: 0.2074 (min dist: 1.4370)
+
+--- Sample 4/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.8,
+      0.2,
+      0.1
+    ],
+    [
+      0.9,
+      0.5,
+      0.3
+    ],
+    [
+      0.7,
+      -0.3,
+      0.2
+    ],
+    [
+      0.9,
+      -0.1,
+      0.1
+    ]
+  ],
+  "name": "Aggressive_Camber_Airfoil"
+}
+✓ Generated: test_3_0.csv
+  Diversity: 0.0629 (min dist: 0.4359)
+
+--- Sample 5/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.7,
+      0.3,
+      0.2
+    ],
+    [
+      0.8,
+      0.1,
+      0.1
+    ],
+    [
+      0.9,
+      -0.2,
+      0.1
+    ],
+    [
+      0.6,
+      -0.4,
+      0.2
+    ]
+  ],
+  "name": "Aggressive_Camber_Refinement"
+}
+✓ Generated: test_4_0.csv
+  Diversity: 0.0816 (min dist: 0.5657)
+
+--- Sample 6/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.7,
+      0.3,
+      0.1
+    ],
+    [
+      0.8,
+      -0.2,
+      0.2
+    ],
+    [
+      0.9,
+      0.1,
+      0.3
+    ],
+    [
+      0.6,
+      -0.4,
+      0.1
+    ]
+  ],
+  "name": "Aggressive Camber Airfoil"
+}
+✓ Generated: test_5_0.csv
+  Diversity: 0.0722 (min dist: 0.5000)
+
+--- Sample 7/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.75,
+      0.25,
+      0.1
+    ],
+    [
+      0.85,
+      0.5,
+      0.3
+    ],
+    [
+      0.7,
+      -0.5,
+      0.2
+    ],
+    [
+      0.9,
+      -0.25,
+      0.1
+    ]
+  ],
+  "name": "Aggressive Camber Airfoil"
+}
+✓ Generated: test_6_0.csv
+  Diversity: 0.0382 (min dist: 0.2646)
+
+--- Sample 8/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.7,
+      0.3,
+      0.1
+    ],
+    [
+      0.9,
+      0.1,
+      0.2
+    ],
+    [
+      0.8,
+      -0.2,
+      0.1
+    ],
+    [
+      0.6,
+      -0.5,
+      0.3
+    ]
+  ],
+  "name": "Aggressive Camber Airfoil"
+}
+✓ Generated: test_7_0.csv
+  Diversity: 0.0354 (min dist: 0.2449)
+
+--- Sample 9/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.7,
+      0.3,
+      0.2
+    ],
+    [
+      0.7,
+      -0.3,
+      0.2
+    ],
+    [
+      0.7,
+      0.6,
+      0.2
+    ],
+    [
+      0.7,
+      -0.6,
+      0.2
+    ]
+  ],
+  "name": "Aggressive_Cambered_Airfoil"
+}
+✓ Generated: test_8_0.csv
+  Diversity: 0.0456 (min dist: 0.3162)
+
+--- Sample 10/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.7,
+      0.3,
+      0.1
+    ],
+    [
+      0.9,
+      0.5,
+      0.2
+    ],
+    [
+      0.8,
+      -0.4,
+      0.3
+    ],
+    [
+      0.6,
+      -0.2,
+      0.1
+    ]
+  ],
+  "name": "Aggressive Camber Airfoil"
+}
+✓ Generated: test_9_0.csv
+  Diversity: 0.0323 (min dist: 0.2236)
+
+================================================================================
+ANALYSIS
+================================================================================
+
+Total designs: 10
+Unique designs: 10 (100.0%)
+Duplicates: 0 (0.0%)
+
+Parameter Statistics:
+  Mean: 0.3117
+  Std:  0.4088
+  Min:  -0.7000
+  Max:  0.9000
+
+Diversity Evolution:
+  Mean diversity: 0.0961
+  Std diversity:  0.0852
+  Min diversity:  0.0323
+  Max diversity:  0.2896
+  Near-duplicates (diversity < 0.05): 4/9
+
+Duplicate Analysis:
+
+First 5 Parameter Vectors:
+  Sample 0: [ 0.7  0.3  0.1  0.7 -0.3  0.1]... (showing first 6 params)
+  Sample 1: [ 0.75  0.5   0.2   0.85 -0.3   0.1 ]... (showing first 6 params)
+  Sample 2: [0.7 0.3 0.1 0.9 0.5 0.2]... (showing first 6 params)
+  Sample 3: [0.8 0.2 0.1 0.9 0.5 0.3]... (showing first 6 params)
+  Sample 4: [0.7 0.3 0.2 0.8 0.1 0.1]... (showing first 6 params)
+
+Detailed results saved to: /scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_with_context/debug_analysis.json
+
+================================================================================
+PART 2: WITHOUT CONTEXT
+================================================================================
+
+================================================================================
+Testing generate_direct action
+Context: WITHOUT
+Samples: 10
+================================================================================
+
+
+--- Sample 1/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.2,
+      0.3,
+      0.1
+    ],
+    [
+      0.7,
+      0.6,
+      -0.2
+    ],
+    [
+      -0.8,
+      -0.5,
+      0.3
+    ],
+    [
+      -0.2,
+      -0.1,
+      -0.9
+    ]
+  ],
+  "name": "Aggressive_Camber_Thin_TE"
+}
+✓ Generated: test_0_0.csv
+
+--- Sample 2/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      -0.1,
+      0.2,
+      0.0
+    ],
+    [
+      0.3,
+      0.8,
+      0.1
+    ],
+    [
+      0.7,
+      -0.5,
+      -0.2
+    ],
+    [
+      -0.4,
+      -0.6,
+      0.3
+    ]
+  ],
+  "name": "Initial_Airfoil_Design"
+}
+✓ Generated: test_1_0.csv
+  Diversity: 0.3106 (min dist: 2.1517)
+
+--- Sample 3/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.2,
+      0.3,
+      -0.1
+    ],
+    [
+      0.7,
+      0.5,
+      0.2
+    ],
+    [
+      -0.6,
+      -0.4,
+      0.1
+    ],
+    [
+      -0.1,
+      -0.2,
+      -0.3
+    ]
+  ],
+  "name": "Initial_Aggressive_Camber"
+}
+✓ Generated: test_2_0.csv
+  Diversity: 0.1190 (min dist: 0.8246)
+
+--- Sample 4/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.2,
+      0.3,
+      0.0
+    ],
+    [
+      0.7,
+      0.5,
+      0.2
+    ],
+    [
+      0.6,
+      -0.5,
+      0.1
+    ],
+    [
+      0.1,
+      -0.2,
+      0.0
+    ]
+  ],
+  "name": "Initial Airfoil Design"
+}
+✓ Generated: test_3_0.csv
+  Diversity: 0.1414 (min dist: 0.9798)
+
+--- Sample 5/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.2,
+      0.3,
+      0.1
+    ],
+    [
+      0.5,
+      0.7,
+      -0.2
+    ],
+    [
+      -0.5,
+      -0.4,
+      0.3
+    ],
+    [
+      -0.2,
+      -0.1,
+      -0.1
+    ]
+  ],
+  "name": "Initial_Aggressive_Camber"
+}
+✓ Generated: test_4_0.csv
+  Diversity: 0.0901 (min dist: 0.6245)
+
+--- Sample 6/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.2,
+      0.3,
+      0.1
+    ],
+    [
+      0.7,
+      0.5,
+      -0.2
+    ],
+    [
+      0.6,
+      -0.4,
+      0.3
+    ],
+    [
+      0.1,
+      -0.7,
+      -0.5
+    ]
+  ],
+  "name": "Aggressive_Camber_Airfoil"
+}
+✓ Generated: test_5_0.csv
+  Diversity: 0.1225 (min dist: 0.8485)
+
+--- Sample 7/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.2,
+      0.3,
+      0.1
+    ],
+    [
+      0.7,
+      0.6,
+      -0.2
+    ],
+    [
+      -0.6,
+      -0.5,
+      0.3
+    ],
+    [
+      -0.1,
+      -0.2,
+      -0.4
+    ]
+  ],
+  "name": "Initial_Aggressive_Camber"
+}
+✓ Generated: test_6_0.csv
+  Diversity: 0.0612 (min dist: 0.4243)
+
+--- Sample 8/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.2,
+      0.3,
+      0.1
+    ],
+    [
+      0.7,
+      0.6,
+      -0.2
+    ],
+    [
+      -0.4,
+      -0.5,
+      0.3
+    ],
+    [
+      -0.1,
+      -0.2,
+      -0.8
+    ]
+  ],
+  "name": "Initial_Aggressive_Camber"
+}
+✓ Generated: test_7_0.csv
+  Diversity: 0.0629 (min dist: 0.4359)
+
+--- Sample 9/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.2,
+      0.3,
+      0.1
+    ],
+    [
+      0.6,
+      0.7,
+      -0.2
+    ],
+    [
+      -0.5,
+      -0.4,
+      0.8
+    ],
+    [
+      -0.1,
+      -0.2,
+      -0.9
+    ]
+  ],
+  "name": "Initial_Optimistic_Airfoil"
+}
+✓ Generated: test_8_0.csv
+  Diversity: 0.0791 (min dist: 0.5477)
+
+--- Sample 10/10 ---
+DEBUG: Gemini raw params: {
+  "n_cp": 4,
+  "n_sp": 10,
+  "params": [
+    [
+      0.2,
+      0.3,
+      0.1
+    ],
+    [
+      0.7,
+      0.6,
+      -0.3
+    ],
+    [
+      0.5,
+      -0.4,
+      0.2
+    ],
+    [
+      -0.1,
+      -0.8,
+      -0.5
+    ]
+  ],
+  "name": "Initial_aggressive_camber"
+}
+✓ Generated: test_9_0.csv
+  Diversity: 0.0433 (min dist: 0.3000)
+
+================================================================================
+ANALYSIS
+================================================================================
+
+Total designs: 10
+Unique designs: 10 (100.0%)
+Duplicates: 0 (0.0%)
+
+Parameter Statistics:
+  Mean: 0.0425
+  Std:  0.4212
+  Min:  -0.9000
+  Max:  0.8000
+
+Diversity Evolution:
+  Mean diversity: 0.1145
+  Std diversity:  0.0758
+  Min diversity:  0.0433
+  Max diversity:  0.3106
+  Near-duplicates (diversity < 0.05): 1/9
+
+Duplicate Analysis:
+
+First 5 Parameter Vectors:
+  Sample 0: [ 0.2  0.3  0.1  0.7  0.6 -0.2]... (showing first 6 params)
+  Sample 1: [-0.1  0.2  0.   0.3  0.8  0.1]... (showing first 6 params)
+  Sample 2: [ 0.2  0.3 -0.1  0.7  0.5  0.2]... (showing first 6 params)
+  Sample 3: [0.2 0.3 0.  0.7 0.5 0.2]... (showing first 6 params)
+  Sample 4: [ 0.2  0.3  0.1  0.5  0.7 -0.2]... (showing first 6 params)
+
+Detailed results saved to: /scratch/LLM_Evolve/AirFoil_becnhmark/modified_env/LLM_Actions/debug_generate_direct_no_context/debug_analysis.json
+
+================================================================================
+COMPARISON SUMMARY
+================================================================================
+
+With Context:
+  Unique: 10/10 (100.0%)
+  Mean diversity: 0.0961
+
+Without Context:
+  Unique: 10/10 (100.0%)
+  Mean diversity: 0.1145
+
+Conclusion:
+  = Context has NO EFFECT on diversity

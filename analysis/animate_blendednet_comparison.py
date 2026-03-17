@@ -49,20 +49,18 @@ def load_run(results_dir, designs_subdir=None):
     csv_path = os.path.join(results_dir, 'results.csv')
     if not os.path.exists(csv_path):
         return None
-    iterations, rewards = [], []
+    # Deduplicate: last row per iteration = most recent run's data
+    rows_by_iter = {}
     with open(csv_path) as f:
         for row in csv_mod.DictReader(f):
             try:
-                iterations.append(int(row['iteration']))
-                rewards.append(float(row['reward']))
+                rows_by_iter[int(row['iteration'])] = float(row['reward'])
             except (ValueError, KeyError):
                 continue
-    if not iterations:
+    if not rows_by_iter:
         return None
-    iterations = np.array(iterations)
-    rewards = np.array(rewards)
-    order = np.argsort(iterations)
-    iterations, rewards = iterations[order], rewards[order]
+    iterations = np.array(sorted(rows_by_iter.keys()))
+    rewards = np.array([rows_by_iter[i] for i in iterations])
     best = np.maximum.accumulate(rewards)
     img_base = os.path.join(results_dir, designs_subdir) if designs_subdir else results_dir
     return dict(iterations=iterations, rewards=rewards, best=best,
@@ -196,11 +194,10 @@ if __name__ == '__main__':
     os.makedirs(out_dir, exist_ok=True)
 
     baseline = load_run(os.path.join(env_base, 'run_blended_net_3d'))
-    ttt25 = load_run(os.path.join(env_base, 'test_time_discovery_750'), designs_subdir='designs')
-    ttt50 = load_run(os.path.join(env_base, 'test_time_discovery_50steps'), designs_subdir='designs')
+    ttt1000 = load_run(os.path.join(env_base, 'ttt_1000'), designs_subdir='designs')
 
     if args.max_iter:
-        for d in [baseline, ttt25, ttt50]:
+        for d in [baseline, ttt1000]:
             if d is not None:
                 mask = np.arange(d['n']) < args.max_iter
                 for key in ('iterations', 'rewards', 'best'):
@@ -209,8 +206,7 @@ if __name__ == '__main__':
 
     runs = [
         ('Baseline (Gemini)', baseline, ROW_COLORS[0]),
-        ('TTT 25-epoch',      ttt25,    ROW_COLORS[1]),
-        ('TTT 50-epoch',      ttt50,    ROW_COLORS[2]),
+        ('TTT 1000',          ttt1000,  ROW_COLORS[1]),
     ]
 
     make_comparison_gif(runs, os.path.join(out_dir, 'BlendedNet_comparison.gif'),

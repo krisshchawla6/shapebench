@@ -1,0 +1,26 @@
+This analysis compares your predictions for the "Super Slender Cambered Blade" against the resulting geometry.
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter | Predicted Effect | Actual Outcome |
+| :--- | :--- | :--- |
+| **CP0 Radius (0.9622)** | Stretch nose far forward, maximize chord length. | **Successful.** The leading edge is significantly extended, contributing to a much higher aspect ratio than previous designs. |
+| **CP1 Radius (0.2288)** | Thin the upper profile to prevent "hump" separation. | **Successful.** The upper surface is drastically flattened. The "pebble" morphology has been successfully broken. |
+| **CP1 Angle (-0.4062)** | Move max thickness to ~30% chord for pressure recovery. | **Partial Success.** The thickness peak is shifted forward, though the interaction with the lower surface creates an unconventional thickness distribution. |
+| **CP2 Radius (0.9902)** | Extend trailing edge to max rearward distance. | **Successful.** This, combined with CP0, has maximized the total chord length of the airfoil. |
+| **CP2 Edgy (0.9921)** | Ensure sharp Kutta condition/clean shedding. | **Successful.** The trailing edge is a sharp, distinct point, which is necessary for lift generation. |
+| **CP3 Radius (0.0615)** | Flatten bottom more than top to induce camber. | **Unintended Geometry.** The extremely low radius (0.06) combined with the angle offset created a **concave "hook" or "dent"** on the lower surface rather than a flat or gently cambered one. |
+
+### Key Learnings from "Super Slender Cambered Blade"
+
+**1. Chord Maximization Achieved**
+The strategy of pushing CP0 and CP2 radii to their positive limits (+1.0) while keeping CP1 and CP3 radii low successfully transformed the "blunt body" into a "slender body." This is a critical step forward in reducing pressure drag.
+
+**2. The "Lower Surface Hook" (CP3 Radius Sensitivity)**
+Your prediction that a lower CP3 radius would "flatten" the bottom was slightly off. In this parameterization, a very low radius (0.06) acts like a localized "gravity well" that pulls the surface inward. Because CP3 was set with a positive angle (0.18), it created a concave "chin" near the leading edge. While this creates high camber, the sharp concavity likely causes localized flow separation or a high-pressure drag penalty.
+
+**3. Geometric Balance**
+The airfoil now looks like a "supersonic" or "thin-plate" profile. While much better than the previous design, the transition from the leading edge (CP0) to the lower surface (CP3) is too abrupt. To achieve a smooth, high-performance "NACA-style" camber, the CP3 radius likely needs to be increased slightly to "fill out" that concave dent.
+
+**4. Transition to Performance**
+You have successfully exited the "stalled pebble" regime. The next challenge is refinement: smoothing the transitions between these extended control points to ensure the boundary layer stays attached across the entire chord, especially on the lower surface where the current "hook" might be trapping flow.

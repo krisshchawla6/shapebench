@@ -1,0 +1,5 @@
+Following the **Exploitation Strategy**, I will refine Design 1, which currently holds Rank 0 (Reward 1.0360), by addressing its geometric irregularities while preserving its functional features.
+- **Smoothing Upper Surface**: I will replace the fluctuating radius sequence (`1.0 -> 0.83 -> 0.88 -> 1.0`) with a smoother, convex distribution (`1.0 -> 0.94 -> 0.96 -> 0.98`). This removes the "saddle" shape, promoting a cleaner pressure gradient and delaying separation.
+- **Refining Trailing Edge**: I will reduce the CP4 radius from `0.93` to `0.85` while maintaining `edgy=1.0`. This reduces base height/drag while keeping the sharp cutoff that the solver clearly prefers.
+- **Optimizing Lower Surface**: The lower surface (CP5-7) uses negative parameters. I will slightly smooth the transition from the mid-body to the LE (`-0.85` -> `-0.90`) to ensure a cleaner entry flow at the nose.
+- **Angle Distribution**: The angle parameters will be slightly adjusted to ensure even spacing of control points, preventing clustering that can cause local surface kinks.

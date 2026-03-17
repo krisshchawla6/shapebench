@@ -1,6 +1,6 @@
 {
   "environment": "vlm_3d_2pt",
-  "framework": "delta_wing_3d",
+  "framework": "islands",
   "output_dir": "environments/vlm_3d_2pt/results/ttt_1000",
   "model_name": "openai/gpt-oss-120b",
   "lora_rank": 32,

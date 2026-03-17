@@ -1,0 +1,94 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** Radius functions as polar distance from centroid. Maximize LE (CP0) and TE (CP2) while minimizing Upper (CP1) and Lower (CP3) to maximize chord and fineness [iter 7, 8].
+*   **The Volume Budget (Chord Collapse):** High radii on CP1/CP3 (>0.45) "steal" length from the chord. Even with CP2 at ~1.0, high mid-body radii force a "Slug" or "Pebble" morphology [iter 21].
+*   **The Waisted Trap:** Side radii < 0.40 under high chord tension creates "boomerang" profiles. CP1/CP3 must be $\ge$ 0.40 to maintain convexity [iter 11, 13, 17].
+*   **The Concavity Floor/Ceiling:** CP3 Radius ~0.50 is the "floor" for convexity but the "ceiling" for slenderness. Exceeding 0.50 creates a high-drag "pebble" belly [iter 17, 21].
+*   **The Beaking Threshold:** CP0 Radius > 0.90 creates a sharp "wedge" nose. Rounded subsonic stagnation requires Radius < 0.85 [iter 13, 17, 21].
+*   **The Kutta Singularity:** TE Edgy [2][2] = 1.0 is mandatory. Orientation [2][1] must be ~0.0 to avoid "hooked" tail drag [iter 2, 11, 21].
+*   **Flow Attachment:** High CP1 Radius (>0.45) creates "mountain" peaks and steep recovery ramps, triggering massive separation on short-chord bodies [iter 1, 21].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Chord driver. ~0.80-0.85 provides nose rounding; >0.90 beaks. On short chords, high radius creates a bulbous, blunt entry [iter 13, 21].
+*   **Angle [0][1]:** Controls vertical incidence/centering [iter 4].
+*   **Edgy [0][2]:** -1.0 for C-infinity continuity [iter 2].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Thickness control. 0.35-0.40 is the "sweet spot" for slender humps. >0.45 collapses chord and creates bluff-body "mountains" [iter 8, 17, 21].
+*   **Angle [1][1]:** Negative values (~ -0.4) shift peak forward to ~30% chord, lengthening the recovery ramp [iter 1, 17, 21].
+*   **Edgy [1][2]:** Low values ensure smooth apex curvature [iter 4].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Rearward extension. 1.0 maximizes aspect ratio *if* CP1/CP3 radii are kept low (<0.45) [iter 7, 11, 21].
+*   **Angle [2][1]:** Horizontal alignment; keep near 0.0 [iter 4, 11].
+*   **Edgy [2][2]:** 1.0 enforces Kutta condition [iter 2, 21].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Camber/Flatness. ~0.45-0.50 validates the "Concavity Floor." >0.52 creates a thick, high-drag "slug" profile [iter 11, 17, 21].
+*   **Angle [3][1]:** Positive values (~0.2) tuck the lower-rear inward for smooth TE transition [iter 8, 17, 21].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain lower surface continuity [iter 4, 21].
+
+## New Evidence (Iteration 22)
+Parameters used:
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.855,
+      0.005,
+      -1.0
+    ],
+    [
+      0.4125,
+      -0.425,
+      -0.35
+    ],
+    [
+      0.985,
+      0.012,
+      1.0
+    ],
+    [
+      0.472,
+      0.245,
+      -0.9
+    ]
+  ],
+  "name": "refined_forward_peak_slender"
+}
+```
+
+Observations:
+This design represents a **catastrophic geometric failure**. While the intent was to refine the "chubby" Design 1 into a more slender, high-performance shape, the resulting geometry is non-functional and likely aerodynamic "nonsense."
+
+### Individual Parameter Analysis: Prediction vs. Outcome
+
+| Parameter | Value (Sampled) | Prediction | Actual Outcome |
+| :--- | :--- | :--- | :--- |
+| **param[0][0] ($r_0$)** | 0.8193 | Elongated, rounded nose for improved stagnation. | The nose is rounded but appears truncated due to the massive distortion of the rest of the body. |
+| **param[1][0] ($r_1$)** | 0.3933 | Lower upper peak to reduce "mountain" drag. | The upper surface is indeed lower, but it lacks a smooth transition to the trailing edge. |
+| **param[1][1] ($a_1$)** | -0.4311 | Maintain suction peak at ~30% chord. | Irrelevant; the flow would separate immediately due to the lower surface deformity. |
+| **param[2][0] ($r_2$)** | 0.9711 | Maximize chord-to-thickness ratio. | The "trailing edge" is a thick, blunt vertical face rather than a sharp point, failing the Kutta condition. |
+| **param[3][0] ($r_3$)** | 0.5010 | "Sweet spot" for convexity (flattening the belly). | **Total Failure.** Instead of flattening, the lower surface "dived" into a sharp, downward-pointing hook/fang. |
+| **param[3][1] ($a_3$)** | 0.3000 | Smooth "tuck" in the lower-aft section. | **Total Failure.** The angle, combined with the radius, caused the spline to loop or kink, creating a massive protrusion. |
+
+### Key Learnings
+
+1.  **The "Hook" Threshold**: There is a critical non-linear boundary in the parameter space where the lower surface radius ($r_3$) and angle ($a_3$) transition from a "convex belly" to a "self-intersecting hook." This design crossed that line. A value of $r_3 \approx 0.5$ is clearly too high when $a_3$ is positive, as it pulls the control point too far from the chord line.
+2.  **Volume Budget Backfire**: The attempt to "save volume" by reducing $r_1$ while keeping $r_3$ relatively high (0.50) created a massive vertical imbalance. This shifted the center of area so far down that the spline could not close gracefully at the trailing edge.
+3.  **Topology vs. Optimization**: Aerodynamic optimization assumes a valid manifold shape. This design highlights the "fragility" of spline-based geometries; small numerical shifts in $a_3$ (from the predicted 0.24 to the sampled 0.30) can transform a "refined" shape into a "broken" one.
+4.  **The "Pebble" Limit**: Design 1 was "chubby" but topologically stable. This design suggests that the "Volume Budget" law cannot be applied to the lower surface ($r_3$) as aggressively as the upper surface ($r_1$) without risking these sharp "cusps" that destroy the trailing edge closure. For future designs, $r_3$ likely needs to stay below 0.40 if $a_3$ is positive.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

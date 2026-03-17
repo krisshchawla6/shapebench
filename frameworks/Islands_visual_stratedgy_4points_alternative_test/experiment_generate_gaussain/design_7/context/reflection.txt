@@ -1,0 +1,30 @@
+This analysis critically examines the transition from the "Circle" baseline to the **Streamlined_Circle_Refinement_v1** (the "Peanut" design).
+
+### Per-Parameter Analysis: Prediction vs. Outcome
+
+| Parameter | Predicted Effect | Actual Outcome | Analysis of Gap |
+| :--- | :--- | :--- | :--- |
+| **param[0][0] (r0) = 1.0** | Maximize trailing edge (TE) extension for chord length. | Created a bulbous rear lobe. | The prediction assumed $r_0$ would be the tip of a tapered tail. Instead, because neighboring points were too retracted, it became the center of a secondary mass. |
+| **param[0][2] (e0) = -0.925** | Create a sharp Kutta cusp at the TE. | The TE is pointed, but the "cusp" is disconnected from the main body flow. | High negative eccentricity successfully "sharpened" the point, but the global geometry failed to provide the "teardrop" context needed for a Kutta condition. |
+| **param[4][0] (r4) = 1.0** | Maximize leading edge (LE) extension. | Created a bulbous front lobe. | Similar to $r_0$, the lack of structural support from $r_3$ and $r_5$ turned the LE into a "head" rather than a nose. |
+| **param[4][2] (e4) = 0.485** | Round the nose for a stable stagnation point. | The nose is rounded and blunt. | **Success.** Positive eccentricity effectively blunted the point, creating a viable stagnation zone, though the overall shape is non-functional. |
+| **param[2][0] (r2) = 0.1915** | Thin the upper surface to ~10% chord. | Created a deep concave "valley" at the top of the airfoil. | **Critical Failure.** The designer treated $r_2$ as a local thickness measure, but in a polar coordinate spline, if $r_2$ is significantly smaller than its neighbors ($r_1, r_3$), the shape becomes **concave**. |
+| **param[6][0] (r6) = 0.1423** | Thin the lower surface/create camber. | Created a deep concave "valley" at the bottom. | Same failure as $r_2$. The "thickness" was achieved by collapsing the center of the airfoil rather than tapering the ends. |
+| **param[1][0] & [7][0] = 0.5821** | "Pinch" points for inward taper. | These acted as the "shoulders" of the rear bulb. | Because these values (0.58) were much larger than the "thickness" points (0.19), they prevented a smooth taper and forced the "peanut" waist. |
+
+### Key Learnings & Parameter Space Insights
+
+#### 1. The "Convexity Constraint"
+The most significant learning is that for a functional airfoil, the radii must generally follow a **convex profile**. If $r_2$ (the top) and $r_6$ (the bottom) are the smallest radii in the set while $r_0$ and $r_4$ are the largest, the spline will invariably collapse inward. To achieve a 17% thickness-to-chord ratio, $r_2$ and $r_6$ should actually be the *maximum* radii (or close to it) if the goal is a traditional wing, while $r_1, r_0, r_7$ provide the tapering.
+
+#### 2. Polar vs. Cartesian Thinking
+The designer attempted to apply Cartesian "thickness" logic to a Polar coordinate system. In this parameter space:
+*   $r_0$ and $r_4$ define the **length** (Chord).
+*   $r_2$ and $r_6$ define the **height** (Thickness).
+*   To avoid the "Peanut" (concavity), $r_1, r_3, r_5,$ and $r_7$ must act as a bridge. They should be intermediate in value between the chord-ends and the thickness-peaks.
+
+#### 3. Eccentricity ($e_n$) is Local, Radius ($r_n$) is Global
+The use of $e_0 = -0.925$ proved that we can successfully sharpen a trailing edge. However, a sharp trailing edge on a concave body creates massive flow separation in the "valleys" before the air even reaches the TE. Aerodynamic performance requires **pressure recovery**, which is impossible when the flow is forced to navigate a "waist."
+
+#### 4. The Scale Rule vs. The Curvature Rule
+While the designer successfully followed the "Scale Rule" (keeping $r_0 + r_4 = 2.0$), they violated the implicit "Curvature Rule." A high-performance airfoil must be a convex hull. The current design will likely result in a **lower reward than the Circle (Design 1)** because the concave valleys will create massive turbulence and drag, potentially even worse than a simple cylinder.

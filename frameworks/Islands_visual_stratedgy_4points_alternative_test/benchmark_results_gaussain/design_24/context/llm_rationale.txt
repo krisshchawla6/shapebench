@@ -1,0 +1,15 @@
+*   **Strategy Focus (Novel Design)**: I am abandoning the specific coordinates of previous successful designs to build a "Pure Laminar/Supercritical" hybrid from scratch. This involves maximizing chord length while strictly enforcing convexity on the lower surface to prevent the "fang" drag seen in the images.
+*   **Leading Edge Stretching**: I will set $r_0$ to 0.96 and $a_0$ to 0.0. This maximizes the frontal extension while ensuring the stagnation point hits the nose perfectly symmetrically, minimizing frontal area.
+*   **Upper Surface Laminarization**: By moving the peak ($a_1$) slightly further forward (-0.46) and keeping $r_1$ low (0.37), I create a slender upper profile that encourages a long, stable pressure recovery toward the tail.
+*   **Eliminating the "Fang"**: The "fang" is the primary reward-killer in Design 1. I will set $e_3$ to -0.4500 (much higher than -0.92) and reduce $r_3$ to 0.42. This removes the concavity, creating a flatter, aerodynamic "belly."
+*   **The Kutta-Chord Combo**: I will push $r_2$ to its absolute limit (1.0) with $e_2=1.0$ to maximize the aspect ratio, which historically correlates with the highest rewards by reducing induced effects.
+
+## Per-Parameter Predictions
+*   **param[0][0] (0.9600)**: I predict this will maximize chord length, creating a sharper but more efficient penetration of the flow.
+*   **param[0][1] (0.0000)**: I predict this will align the geometric leading edge exactly with the horizontal flow, minimizing stagnation drag.
+*   **param[1][0] (0.3700)**: I predict this will keep the airfoil slender, preventing the "pebble" morphology that increases pressure drag.
+*   **param[1][1] (-0.4600)**: I predict this will shift the maximum thickness forward, creating a long aft section for pressure recovery.
+*   **param[2][0] (1.0000)**: I predict this will maximize the effective chord and trailing edge extension.
+*   **param[2][2] (1.0000)**: I predict this will enforce the Kutta condition perfectly, ensuring clean flow separation at the tail.
+*   **param[3][0] (0.4200)**: I predict a lower $r_3$ will prevent the lower surface from "bulging" and causing the self-intersection seen in lower-ranked designs.
+*   **param[3][2] (-0.4500)**: I predict this "medium" edginess will result in a convex lower surface, completely removing the drag-inducing "fang" concavity.

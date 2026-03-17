@@ -1,0 +1,101 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+* **Exploration Strategy (Extreme Thinning):** The population is currently producing "slugs" because high radii are being rewarded by default volume. I will explore the "Needle" boundary—setting mid-body radii to near-minimum values (0.15-0.25) to see if a hyper-thin profile can trigger better flow attachment.
+* **Asymmetric Camber Trial:** To move away from the symmetric block, I will set the upper surface radii (CP4, CP5) slightly higher than the lower surface (CP1, CP2). This explores the "Camber" region of the design space.
+* **Angular Clustering for Chord length:** I will cluster the angles of the leading points very close to the centerline (a=0) and the trailing points close to the poles (a=±1) to maximize the chord length relative to the thickness.
+* **Kutta Condition Reinforcement:** I will set the Trailing Edge points (CP0, CP7) to maximum radius (1.0) and maximum edginess (1.0) to create a definitive, sharp separation point.
+* **Radial Gradient:** I am testing a "bone-like" radial distribution: high at the poles (LE/TE) and very low in the middle. This is an underexplored transition compared to the uniform-high radii of Design 1.
+
+## Per-Parameter Predictions
+* **CP0 [1.0, -1.0, 1.0]:** I am setting r=1.0 and e=1.0 to ensure the Trailing Edge is at the furthest possible horizontal extent and is physically sharp.
+* **CP1 [0.25, -0.75, -1.0]:** I am setting r=0.25 to aggressively thin the lower-rear section of the airfoil to prevent the "slug" shape.
+* **CP2 [0.20, -0.25, -1.0]:** I am setting r=0.20 and e=-1.0 to create a smooth, deeply recessed lower-front surface, encouraging flow to stay attached.
+* **CP3 [0.95, 0.0, -1.0]:** I am setting r=0.95 and e=-1.0 to create a long, smooth leading edge "nose" that transitions gradually into the thin body.
+* **CP4 [0.35, 0.25, -1.0]:** I am setting r=0.35 (higher than CP2) to create an asymmetric upper bulge, testing for lift-generating camber.
+* **CP5 [0.45, 0.70, -1.0]:** I am setting r=0.45 to place the maximum thickness point at approximately 30-40% chord length on the upper surface.
+* **CP6 [0.30, 0.90, -1.0]:** I am setting r=0.30 to taper the upper surface smoothly back towards the sharp trailing edge.
+* **CP7 [1.0, 1.0, 1.0]:** I am setting r=1.0 and e=1.0 to close the shape at the same horizontal pole as CP0, completing the sharp TE.
+
+**Geometry Observations:**
+* The airfoil is extremely blunt and thick, resembling a rounded rectangular "slug" or block rather than a streamlined wing.
+* The Leading Edge (LE) is essentially a flat vertical face, which causes massive drag.
+* The Trailing Edge (TE) has a slight point, but the overall aspect ratio is nearly 1:1, meaning the chord length is roughly equal to the thickness.
+* There is a slight "waist" or inward curvature on the lower surface, suggesting some points have lower radii, but not enough to create a slender profile.
+
+**Flow Field Observations:**
+* There is a massive stagnation point (high pressure, red) across the entire front face of the design.
+* Flow separation occurs almost immediately at the "corners" of the front face, leading to a huge, low-velocity wake (blue) behind the object.
+* The streamlines are deflected sharply away from the body, indicating zero aerodynamic efficiency and extremely high pressure drag.
+* There is no visible circulation or lift-generating pressure differential between the upper and lower surfaces.
+
+**Design 1 Mapping & Flaws:**
+* **Radius Overload:** Design 1 used very high `radius_param` values for almost all points (r0=0.99, r3=0.98, r4=0.99). This pushed all control points to the outer boundary, creating a circle/square rather than a stretched airfoil.
+* **Blunt LE:** Point CP3 (the LE) had a high radius (0.98) and its neighbors (CP2, CP4) were also pushed far out, preventing the formation of a sharp or even rounded nose.
+* **Lack of Chord Stretching:** The `angle_param` values were distributed such that the design didn't "stretch" across the x-axis.
+
+**Key Changes Needed:**
+1. **Pinch the Mid-body:** Drastically reduce the `radius_param` for CP1, CP2, CP4, CP5, and CP6 (to values < 0.3) to "collapse" the thickness and create a high aspect ratio.
+2. **Sharpen the Nose:** While keeping the LE (CP3) at a high radius, ensure its neighboring angles are very close to 0.0 to create a protruding "beak" rather than a flat face.
+3. **Enforce Extreme Smoothness:** Set `edgy_param` to -1.0 for all non-TE points to eliminate the "blocky" corners seen in Design 1.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      -1.0,
+      1.0
+    ],
+    [
+      0.2512,
+      -0.7543,
+      -1.0
+    ],
+    [
+      0.1856,
+      -0.221,
+      -1.0
+    ],
+    [
+      0.9654,
+      0.0,
+      -1.0
+    ],
+    [
+      0.3842,
+      0.2815,
+      -1.0
+    ],
+    [
+      0.4418,
+      0.7231,
+      -1.0
+    ],
+    [
+      0.3205,
+      0.9244,
+      -1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0
+    ]
+  ],
+  "name": "asymmetric_needle_v1"
+}
+```
+
+Sampled action vector:
+['0.9863', '-1.0000', '1.0000', '0.2832', '-0.8461', '-1.0000', '0.1691', '-0.2542', '-1.0000', '0.9964', '-0.0671', '-0.9994', '0.3997', '0.3046', '-0.9816', '0.4130', '0.7128', '-1.0000', '0.3409', '0.9620', '-0.9909', '0.9810', '0.9686', '0.9584']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

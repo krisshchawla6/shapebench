@@ -1,0 +1,13 @@
+*   **Strategy Focus (Exploitation)**: I am refining the successful "Forward Peak" morphology of Design 1. Design 1 is the clear leader, but its geometry is "chubby." By applying the "Volume Budget" law to reduce mid-body radii, I can increase the effective chord length and reduce drag without losing the beneficial pressure distribution.
+*   **Radius-Distance Law**: I will increase $r_0$ and $r_2$ slightly to maximize the horizontal extent (chord) while simultaneously restricting $r_1$ and $r_3$.
+*   **Volume Budget Refinement**: Design 1 has $r_1=0.52$. I will drop this to $0.41$. This avoids the "mountain" peak that triggers drag while maintaining enough volume for lift.
+*   **Concavity Floor Adjustment**: Design 1 has $r_3=0.54$, which the heuristics label as a "high-drag pebble belly." I will move this to $0.47$, the identified "sweet spot" for convexity without excessive thickness.
+*   **Peak Positioning**: I will maintain the $a_1 \approx -0.42$ and $a_3 \approx 0.25$ configuration from the high-performing designs, as these parameters correctly manage the flow transition toward the Trailing Edge.
+
+## Per-Parameter Predictions
+*   **param[0][0] (0.8550)**: I predict this will create a slightly more elongated, rounded nose compared to Design 1, improving subsonic stagnation.
+*   **param[1][0] (0.4125)**: I predict this will significantly lower the upper peak height, reducing the "mountain" drag while keeping the peak forward.
+*   **param[1][1] (-0.4250)**: I predict this will maintain the upper suction peak at ~30% chord, ensuring early lift generation.
+*   **param[2][0] (0.9850)**: I predict this will stretch the trailing edge to the limit of the domain, maximizing the chord-to-thickness ratio.
+*   **param[3][0] (0.4720)**: I predict this will flatten the lower surface relative to Design 1, reducing the "belly" drag.
+*   **param[3][1] (0.2450)**: I predict this will create a smooth "tuck" in the lower-aft section, facilitating cleaner flow closure at the Kutta-conditioned trailing edge.

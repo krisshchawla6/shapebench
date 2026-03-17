@@ -1,0 +1,25 @@
+Based on the visual evidence of the result and the provided parameters, here is the critical analysis of the **"refined_camber_exploitation"** design.
+
+### Comparison: Prediction vs. Outcome
+
+| Parameter | Predicted Value | Actual (Sampled) | Prediction Logic | Outcome / Analysis |
+| :--- | :--- | :--- | :--- | :--- |
+| **$r_0$ (param[0][0])** | 0.8525 | 0.8526 | Increase chord length and surface area. | **Failure.** While it did increase the leading-edge radius, it contributed to a total horizontal stretch that triggered a geometric collapse. |
+| **$a_0$ (param[0][1])** | 0.0125 | -0.0073 | Center the stagnation point to minimize drag. | **Neutral.** The slight negative shift is negligible compared to the catastrophic loss of the airfoil's profile. |
+| **$r_1$ (param[1][0])** | 0.4150 | 0.4074 | Prevent "waisting" as the chord lengthens. | **Inconsequential.** The airfoil did not "waist" (pinch in the middle); instead, it "slugged" (lost all length-to-width ratio). |
+| **$r_2$ (param[2][0])** | 0.9785 | 0.9669 | Provide max rearward extension and sharp Kutta closure. | **Failure.** The combined sum of $r_0 + r_2$ (1.8195) proved to be beyond the stable limit for this parameterization, resulting in the "Pebble Trap." |
+| **$e_3$ (param[3][2])** | -0.3500 | -0.3236 | Smooth the lower surface to avoid "Fang" instability. | **Success (Geometric) / Failure (Aero).** The lower surface is indeed smoother/rounder, but because the chord collapsed, the undercamber lift is gone. |
+
+### Key Learnings
+
+**1. The "Pebble Trap" Threshold is Lower than Predicted**
+The designer predicted a collapse at $>1.90$. However, this result shows that a combined $r_0 + r_2$ of **~1.82** is already deep within the "Pebble Trap." The airfoil has lost its slender profile and morphed into a low-aspect-ratio "slug." This suggests the "Radius-Distance Law" has a much narrower margin for error than previously assumed.
+
+**2. Loss of the Kutta Condition**
+By pushing $r_2$ (rear radius) and $r_0$ (front radius) to their limits simultaneously, the geometry engine appears to have prioritized a "closed loop" shape over a sharp trailing edge. The result is a rounded posterior which cannot effectively fix the stagnation point at the trailing edge, leading to a massive drop in lift and a surge in pressure drag.
+
+**3. The Risk of "Over-Smoothing"**
+While the goal of changing $e_3$ from -0.92 to -0.32 was to avoid the "Fang" (concavity) trap, it also removed the high-pressure "pocket" on the lower surface that contributed to Design 1's high reward. In the absence of a long chord, this smoothing turned the airfoil into a simple ellipse.
+
+**4. Exploitation vs. Fragility**
+This design demonstrates that in high-performance regions of the parameter space, the "reward landscape" is extremely steep. A small increase in chord (from 1.79 to 1.82) resulted in a total collapse rather than a marginal gain. Future iterations must treat the 1.80 limit for $r_0+r_2$ as a hard "Red Line."

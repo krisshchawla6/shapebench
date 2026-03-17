@@ -1,0 +1,117 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping
+
+### Global Design Rules
+*   **Aspect Ratio Dominance**: Aspect ratio is not automatic; it is a function of `angle_param` distribution. Clustering angles near zero results in a 1:1 "blob" [iter 1].
+*   **Structural Priority**: `angle_param` is the primary structural driver, `radius_param` is the secondary scale driver, and `edgy_param` is the tertiary smoothing driver [iter 1].
+*   **The "Blob" Failure**: High `radius_param` + Clustered `angle_param` + Negative `edgy_param` = A non-aerodynamic "river stone" with near-zero reward [iter 1].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Radial Extension**: Defines the distance of the control point from the geometric center [iter 1].
+*   **Uniformity Risk**: Relatively uniform values (0.4 to 0.9) across all points fail to create a distinct nose or tail unless the angular distribution is wide [iter 1].
+*   **Tail Formation**: To generate a trailing edge, the radius at the "tail" index must be coordinated with a specific angle to stretch the chord [iter 1].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Point Distribution**: Controls the fundamental placement of points around the center; the most critical parameter for establishing chord length [iter 1].
+*   **Clustering Effect**: Values restricted to a narrow range (-0.25 to +0.11) cause "Angular Clustering," bunching points into a small arc and destroying the airfoil's aspect ratio [iter 1].
+*   **Chord Establishment**: Requires a wide spread of values to pull points apart into a distinct Leading Edge (LE) and Trailing Edge (TE) [iter 1].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **Smoothing Effect**: Strongly negative values (e.g., -0.85 to -0.95) force the system to draw the smoothest possible curve through control points [iter 1].
+*   **Geometry "Healing"**: Can turn a lumpy polygon into a smooth "blob," but cannot fix a lack of aspect ratio caused by poor angular distribution [iter 1].
+*   **Sharpness Control**: Intended to define features like a sharp trailing edge, but ineffective if the underlying control points are too clustered [iter 1].
+
+## New Evidence (Iteration 2)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9852,
+      0.9214,
+      0.8512
+    ],
+    [
+      0.5521,
+      0.6241,
+      -0.7214
+    ],
+    [
+      0.4532,
+      0.251,
+      -0.8521
+    ],
+    [
+      0.4812,
+      0.0521,
+      -0.7512
+    ],
+    [
+      0.9214,
+      -0.9521,
+      -0.4512
+    ],
+    [
+      0.3812,
+      -0.6214,
+      -0.8214
+    ],
+    [
+      0.2214,
+      -0.2512,
+      -0.9012
+    ],
+    [
+      0.3512,
+      0.3214,
+      -0.8214
+    ]
+  ],
+  "name": "Spread_Camber_V1"
+}
+```
+
+Observations:
+This analysis critically examines the transition from the "blob" of Design 1 to the "slug" of Design 2 (Spread_Camber_V1).
+
+### Parameter-by-Parameter Analysis
+
+| Parameter | Prediction | Outcome | Analysis |
+| :--- | :--- | :--- | :--- |
+| **Point 0 [R: 0.98, A: 0.92, E: 0.85]** | High R and A to stretch the TE; High E to create a sharp point for flow reattachment. | **Partial Success.** A sharp "stinger" or trailing point is clearly visible on the right side of the geometry. | The high `edgy_param` successfully broke the symmetry of the previous "pebble" shape, creating a localized area of high curvature (a sharp edge). However, its orientation suggests the "tail" is angled, which might induce unwanted pitch. |
+| **Point 4 [R: 0.92, A: -0.95, E: -0.45]** | High R and extreme negative A to stretch the LE forward; negative E for a rounded nose. | **Success.** The left side of the object is significantly elongated and maintains a smooth, circular profile. | This parameter successfully established the "Leading Edge." The wide angular separation between Point 4 (~ -0.95) and Point 0 (~ 0.92) successfully created a horizontal chord. |
+| **Point 2 [R: 0.45, A: 0.25, E: -0.85]** | Moderate R on upper surface for a "hump"; very negative E for smooth suction side. | **Partial Success.** The top surface is smoother and flatter than the bottom. | While smooth, the "hump" is underdeveloped. The transition from the LE (Point 4) to the TE (Point 0) via the upper points (1, 2, 3) is too direct, resulting in a shape that lacks the volume typically needed for high lift. |
+| **Point 6 [R: 0.22, A: -0.25, E: -0.90]** | Low R on bottom to pull the belly inward, creating a thickness gradient. | **Failure.** The shape remains excessively thick and "bottom-heavy." | Even with a lower radius (0.22), the proximity of other points with higher radii (like Point 5 at 0.38) and the overall scale of the chord meant the "belly" didn't thin out enough. The result is a high-drag "slug" profile rather than a thin foil. |
+
+### Key Learnings
+
+**1. The "Chord vs. Thickness" Ratio**
+While the designer successfully established a chord by pushing Point 0 and Point 4 to opposite angular extremes, the airfoil is still far too thick. In aerodynamics, the thickness-to-chord ratio ($t/c$) is critical. To achieve a "foil" rather than a "slug," the `radius_param` for all intermediate points (1, 2, 3 and 5, 6, 7) needs to be significantly reduced relative to the LE/TE radii.
+
+**2. Edgy Param as a Flow Regulator**
+The use of a high `edgy_param` at Point 0 proved to be the correct "fix" for the 0.0 reward issue. It forces a geometric singularity that helps the simulation define where the flow should leave the body (the Kutta condition). Without this, the flow simply wraps around a rounded back-end, causing total pressure drag and zero lift.
+
+**3. Angular Sequencing Matters**
+The resulting shape has a slight "hook" or "kink" on the lower-right. This suggests that the sequence of points (0 through 7) combined with their `angle_param` values is creating a non-monotonic boundary. To create a clean airfoil, the angles should ideally progress smoothly from the TE, around the LE, and back to the TE.
+
+**4. Camber is more than Radius**
+The attempt at camber (asymmetric radii) resulted in a shape that looks more like a "comma." True aerodynamic camber requires the *mean camber line* (the halfway point between top and bottom) to be curved. Currently, the shape is just an asymmetric distribution of thickness. To improve, the upper surface points need higher `radius_param` values combined with specific `angle_param` placements to "arch" the entire body.
+
+## Task
+Update the reference card. Do NOT rewrite from scratch -- MERGE new evidence into existing entries.
+- If new evidence CONFIRMS an existing bullet, strengthen it by adding the new iter citation
+- If new evidence CONTRADICTS an existing bullet, replace it only if the new evidence is clearly stronger (more iterations supporting it)
+- If an entry has no new evidence this iteration, KEEP IT UNCHANGED
+
+Include:
+- A brief overall rules section
+- An entry for each individual degree of freedom with 3-4 bullet points based on accumulated evidence
+
+Keep it terse. Cite [iter N] and specific values. Preserve hard-won knowledge from earlier iterations.

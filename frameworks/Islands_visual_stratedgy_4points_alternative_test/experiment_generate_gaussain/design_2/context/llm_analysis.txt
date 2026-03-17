@@ -1,0 +1,18 @@
+- **Geometry**:
+    - The observed shape is a perfect circle, representing a non-streamlined bluff body.
+    - It is perfectly symmetric both horizontally and vertically, with a 1:1 aspect ratio.
+    - The control points are placed at equal radial distances, creating a smooth but aerodynamically inefficient boundary.
+    - There is no distinct trailing edge to facilitate flow recombination, which is a fundamental geometric flaw for lift generation.
+
+- **Flow Field / Simulation Results**:
+    - The pressure field shows a classic stagnation point at the leading face and symmetric low-pressure regions at the zenith and nadir.
+    - Significant flow separation is visible; the flow cannot follow the steep curvature of the rear hemisphere, leading to a massive wake.
+    - The velocity plot reveals a broad, low-energy wake region extending downstream, which is the primary source of the high pressure drag.
+    - The lack of asymmetry in the pressure distribution confirms that the design produces zero net lift.
+
+- **Parameter Mapping & Necessary Changes**:
+    - Design 1 uses `radius_param = 1.0` for all points, resulting in the observed circle.
+    - The reward is poor because the "airfoil" is actually a cylinder, maximizing drag.
+    - Key Change 1: Increase $r_0$ and $r_4$ while decreasing $r_2$ and $r_6$ to create a streamlined chord.
+    - Key Change 2: Set $e_0$ to a high positive value to create a sharp trailing edge, which is essential for reducing the wake size.
+    - Key Change 3: Apply subtle asymmetry in $r_2$ vs $r_6$ and $a_2$ vs $a_6$ to introduce camber for lift generation.

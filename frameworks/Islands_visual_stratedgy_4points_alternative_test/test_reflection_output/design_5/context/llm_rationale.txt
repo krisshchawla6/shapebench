@@ -1,0 +1,15 @@
+* **Exploration Strategy (Extreme Thinning):** The population is currently producing "slugs" because high radii are being rewarded by default volume. I will explore the "Needle" boundary—setting mid-body radii to near-minimum values (0.15-0.25) to see if a hyper-thin profile can trigger better flow attachment.
+* **Asymmetric Camber Trial:** To move away from the symmetric block, I will set the upper surface radii (CP4, CP5) slightly higher than the lower surface (CP1, CP2). This explores the "Camber" region of the design space.
+* **Angular Clustering for Chord length:** I will cluster the angles of the leading points very close to the centerline (a=0) and the trailing points close to the poles (a=±1) to maximize the chord length relative to the thickness.
+* **Kutta Condition Reinforcement:** I will set the Trailing Edge points (CP0, CP7) to maximum radius (1.0) and maximum edginess (1.0) to create a definitive, sharp separation point.
+* **Radial Gradient:** I am testing a "bone-like" radial distribution: high at the poles (LE/TE) and very low in the middle. This is an underexplored transition compared to the uniform-high radii of Design 1.
+
+## Per-Parameter Predictions
+* **CP0 [1.0, -1.0, 1.0]:** I am setting r=1.0 and e=1.0 to ensure the Trailing Edge is at the furthest possible horizontal extent and is physically sharp.
+* **CP1 [0.25, -0.75, -1.0]:** I am setting r=0.25 to aggressively thin the lower-rear section of the airfoil to prevent the "slug" shape.
+* **CP2 [0.20, -0.25, -1.0]:** I am setting r=0.20 and e=-1.0 to create a smooth, deeply recessed lower-front surface, encouraging flow to stay attached.
+* **CP3 [0.95, 0.0, -1.0]:** I am setting r=0.95 and e=-1.0 to create a long, smooth leading edge "nose" that transitions gradually into the thin body.
+* **CP4 [0.35, 0.25, -1.0]:** I am setting r=0.35 (higher than CP2) to create an asymmetric upper bulge, testing for lift-generating camber.
+* **CP5 [0.45, 0.70, -1.0]:** I am setting r=0.45 to place the maximum thickness point at approximately 30-40% chord length on the upper surface.
+* **CP6 [0.30, 0.90, -1.0]:** I am setting r=0.30 to taper the upper surface smoothly back towards the sharp trailing edge.
+* **CP7 [1.0, 1.0, 1.0]:** I am setting r=1.0 and e=1.0 to close the shape at the same horizontal pole as CP0, completing the sharp TE.

@@ -1,0 +1,6 @@
+- **Strategy Focus (Exploration)**: The current population is clustered at the origin (circles) or failed attempts. I am pushing into the boundary regions of the parameter space to define a "Slender Cambered" airfoil, which is entirely underexplored.
+- **Chord Definition**: I am setting $r_0$ and $r_4$ to near-maximum values (0.9+) to create a long horizontal chord, transforming the bluff circle into a slender profile.
+- **Kutta Condition**: I am setting $e_0$ to -0.85. This pushes the parameter toward its boundary to create a sharp, needle-like trailing edge, which is essential for forcing flow to leave the airfoil cleanly and reducing drag.
+- **Asymmetric Camber**: By setting $r_2$ (upper height) significantly higher than $r_6$ (lower height), I am introducing camber to the profile. This tests the solver's response to lift-generating asymmetry.
+- **Leading Edge Robustness**: I am setting $e_4$ to 0.75. This bluntness ensures the nose is rounded enough to prevent flow separation at the leading edge, even if the angle of attack varies slightly.
+- **Structural Integrity**: I will use the "Mean Support Rule" for $r_

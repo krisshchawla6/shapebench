@@ -1,0 +1,20 @@
+*   **Exploration Strategy:** I am targeting the **posterior-peak, convex-belly** quadrant of the design space, which is currently underexplored. While Design 1 found success with a forward peak and concave belly, the "laminar flow" airfoil archetype (where the thickness peak is shifted toward 50% chord) has not been tested.
+*   **Breaking the "Hook" Dependency:** I will intentionally set `r3` above the 0.15 threshold to see if we can maintain lift through camber rather than localized concavity.
+*   **Chord Maximization:** I will maintain the successful strategy of near-maximum radii for CP0 and CP2 to ensure a high Reynolds number and slender profile.
+*   **Upper Surface Volume:** By increasing `r1` (radius of the upper peak), I aim to test a "Supercritical" style roof, which can manage shock waves better at high speeds (though we are in a subsonic regime, the geometry is a valid exploration).
+*   **Angle Sensitivity:** I am shifting `a1` to a positive value (rearward shift) and `a3` to a negative value (forward shift) to create a diagonal asymmetry across the chord.
+
+## Per-Parameter Predictions
+
+*   **r0 [0.9742]:** I am setting this high to maintain the maximum forward chord extension found in the champion.
+*   **a0 [0.0512]:** I am setting this slightly positive to tilt the nose upward, potentially increasing the effective camber.
+*   **e0 [-1.0]:** I am setting this to minimum to ensure a perfectly smooth, non-turbulent leading edge.
+*   **r1 [0.4215]:** I am setting this higher than Design 1 to increase the thickness of the upper "hump" for a more robust pressure distribution.
+*   **a1 [0.5567]:** I am setting this positive to shift the maximum thickness point toward the rear (approx 60% chord), exploring a laminar-style roof.
+*   **e1 [-0.7821]:** I am setting this to be smooth to prevent any velocity spikes over the thickness peak.
+*   **r2 [0.9912]:** I am setting this near 1.0 to maximize total chord length and prevent the "thimble" truncation trap.
+*   **a2 [-0.0154]:** I am keeping this near zero to ensure the trailing edge remains aligned with the horizontal flow.
+*   **e2 [1.0]:** I am setting this to maximum to enforce a sharp Kutta condition for clean flow shedding.
+*   **r3 [0.3688]:** I am setting this significantly higher than Design 1 to move from a "concave hook" to a "convex belly."
+*   **a3 [-0.4821]:** I am setting this negative to shift the lower surface fullness forward, counter-balancing the rearward upper peak.
+*   **e3 [-0.8544]:** I am setting this to be smooth to ensure the lower surface remains a clean, attached streamline.

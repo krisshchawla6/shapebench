@@ -1,0 +1,13 @@
+* **Strategy Focus (Hybrid Strategy)**: This design blends the aggressive chord length and sharp TE of Design 1 with the more stable, rounded LE characteristics found in Design 2. By interpolating the radii of the upper and lower surfaces, I aim to find the optimal thickness that avoids "waisting" while maximizing the L/D ratio.
+* **LE Optimization**: Drawing from the "Beaking Threshold" heuristic, I am moving the CP0 radius from 0.95 down toward 0.88. This should transition the geometry from a sharp wedge to a high-curvature rounded nose, improving flow attachment at the entry.
+* **Upper Surface Refinement**: I am combining the forward peak position of Design 1 (A1 = -0.41) with a slightly increased radius (R1 = 0.425). This "Hybrid" approach maintains the long recovery ramp while providing more internal volume to prevent mid-body thinning.
+* **Lower Surface Stability**: I am fixing the CP3 radius at 0.505. This is the "Concavity Floor" identified in the heuristics, which ensures the lower surface is a functional pressure face without becoming a concave drag-trap.
+* **Kutta Condition Alignment**: The TE (CP2) parameters are held at their maximum values (R=1.0, E=1.0) to preserve the successful flow shedding observed in the top-ranked designs.
+
+## Per-Parameter Predictions
+* **CP0 Radius (0.8850)**: I predict this will round the leading edge, removing the sharp "beak" while still maintaining 95% of the maximum possible chord.
+* **CP1 Angle (-0.4400)**: I predict this will shift the crest further forward (approx 25-30% chord), creating a very long, gentle slope for pressure recovery.
+* **CP1 Radius (0.4250)**: I predict this will prevent the upper surface from appearing "pinched" between the extreme LE and TE points.
+* **CP2 Edgy (1.0000)**: I predict this will enforce a clean geometric singularity at the tail, minimizing base drag.
+* **CP3 Radius (0.5050)**: I predict this will establish a nearly flat, slightly convex belly, maximizing the pressure differential between upper and lower surfaces.
+* **CP3 Angle (0.1650)**: I predict this will "tuck" the lower rear surface inward, creating a smooth, non-concave transition to the trailing edge.

@@ -1,0 +1,78 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+# Airfoil Optimization Reference Card
+
+## General Design Rules
+*   **Flow Direction**: Right-to-Left. CP0=LE; CP4=TE [iter 2].
+*   **TE Dominance**: CP4 is the most critical feature; sharpening it ($r, e \to 1.0$) is the primary driver for drag reduction [iter 5].
+*   **Tadpole Effect**: Avoid extreme radius differences between the nose/tail (high $r$) and the midsection (low $r$); high curvature gradients create difficult pressure recovery [iter 5].
+*   **Concavity Risk**: Aggressive "pinching" in the rear (CP3/CP5) creates concave surfaces that risk boundary layer separation [iter 5].
+*   **Shoulder Drag**: Excessive negative edginess at CP0 creates a flat face with sharp "shoulders," causing localized flow acceleration/separation [iter 5].
+*   **Decoupling Strategy**: Use the delta between CP2 and CP6 radii to tune camber independently of thickness [iter 5].
+
+## Degree of Freedom Mapping
+
+| Control Point | Geometric Role | Optimal Range / Setting | Effect [Source] |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Leading Edge | Rad: ~0.8 / Edg: -0.4 to -0.6 | Avoid extreme negative edginess (-0.9) to prevent "flat-face" shoulders [iter 5]. |
+| **CP1 (U-Front)** | Transition | Gradual $e$ transition | Bridges LE to Suction side; sensitive to edginess jumps [iter 4]. |
+| **CP2 (Top)** | Suction Side | Rad: > 0.25 | Controls thickness; if too low relative to CP0, creates "tadpole" shape [iter 5]. |
+| **CP3 (U-Back)** | Transition | Radius > 0.22 | Supports TE; too much "pinching" creates separation-prone concavity [iter 5]. |
+| **CP4 (Tail)** | Trailing Edge | **Rad: 1.0 / Edg: 1.0** | **Mandatory** for Kutta condition; primary source of performance gains [iter 5]. |
+| **CP5 (L-Back)** | Transition | Radius > 0.22 | Mirrors CP3; critical for preventing blunt wake and rear concavity [iter 5]. |
+| **CP6 (Bottom)** | Pressure Side | Rad: 0.2 - 0.3 | Lower $r$ than CP2 creates positive camber; avoid "chin" protrusions [iter 5]. |
+| **CP7 (L-Front)** | Transition | Gradual $e$ transition | Prevents early LE separation; must maintain monotonic curvature [iter 4]. |
+| **Angle Offsets** | Thickness Dist. | $a < 0.1$ | Shifts thickness; excessive values distort chord length [iter 4]. |
+| **Edginess** | Surface Profile | $\Delta e < 0.5$ (adj. pts) | Defines curvature; high negative $e$ at LE creates stagnation flats [iter 5]. |
+
+## New Evidence (Iteration 5)
+*   **Successful Sharp TE**: Confirmed $r=1.0, e=1.0$ at CP4 successfully enforces the Kutta condition, transforming the body from a bluff shape to a lifting airfoil.
+*   **Camber Control**: Successfully decoupled thickness and camber by setting CP6 radius lower than CP2.
+*   **Curvature Gradients**: The "streamlined_kutta_taper" revealed that while thinning the airfoil is good, doing it too abruptly (pinching CP3/CP5) creates "dead air" concavities.
+*   **Nose Geometry**: $e = -0.85$ at CP0 is too aggressive; it creates a flat stagnation face that forces the flow to "turn the corner" too sharply at the shoulders.
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 2:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 3:
+  - Action: [1.0, 0.047288, -0.9507, 0.687392, 0.122513, -0.372405, 0.280432, 0.056985, 0.002414, 0.56557, -0.053374, 0.381797, 1.0, 0.04196, 0.99963, 0.485748, -0.06876, 0.371236, 0.117001, 0.133533, -0.042453, 0.588365, 0.077472, -0.481966]
+  - Reward: -5.0000
+  - Rank: 2
+
+Design 4:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 5:
+  - Action: [0.887743, 0.012079, -0.922938, 0.496272, 0.037177, -0.349639, 0.278936, -0.111546, 0.004614, 0.234982, -0.041749, 0.453886, 0.952366, 0.049094, 0.937193, 0.270291, 0.053202, 0.471396, 0.296825, -0.063534, 0.143697, 0.553504, -0.097801, -0.32546]
+  - Reward: -5.0000
+  - Rank: 1
+
+Design 6:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

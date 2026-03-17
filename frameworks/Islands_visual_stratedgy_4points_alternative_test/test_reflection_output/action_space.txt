@@ -1,0 +1,29 @@
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 10)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0, r \approx 1.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0, r \approx 1.0$ [iter 3-10].
+*   **Fineness Ratio (Thickness)**: Thickness is the delta between polar $r$ and mid-body $r$. $r \approx 0.7$ creates a "bean" (~70% thickness); $r \approx 0.5-0.6$ targets a sleek subsonic profile (~15-20%) [iter 9-10].
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound (Radial Collapse)**: $r < 0.5$ for mid-body points (when poles are at 1.0) creates a "pinched waist" or concave "starfish" effect [iter 4, 6, 8, 10]. 
+    *   **Upper Bound (The Bloat)**: $r > 0.65$ for mid-body points creates a high-drag "bluff body" [iter 5, 7, 9].
+    *   **Optimal (Sleek/Convex)**: LE/TE at $r \approx 1.0$; mid-body points must target $r \in [0.5, 0.6]$ to maintain a thin but **convex** profile [iter 10].
+*   **Kutta Condition**: A geometric "stinger" ($e \approx 1.0$) at the Trailing Edge (CP0/7) is mandatory for flow separation [iter 2-10].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values ($r \approx 1.0$) at LE and TE poles are required to establish primary chord length [iter 1-10].
+*   **The Radial Gradient Limit**: Transitions from $r=1.0$ (poles) to $r < 0.5$ (mid-body) are too steep for the spline, resulting in concave "scoops" and "shards" rather than a smooth blade [iter 10].
+*   **Thickness vs. Bloat**: Mid-body radii (CP1, 2, 4, 5, 6) control "fatness." $r \approx 0.6$ is the threshold; above is a "pebble," below (to 0.5) is a "blade" [iter 9-10].
+*   **Camber & Lift**: Asymmetric radii ($r_{upper} > r_{lower}$) create lift-generating loft, but extreme deltas (e.g., $0.4$ vs $0.25$) trigger geometric collapse [iter 4-10].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3-10].
+*   **LE Support (Nose Shape)**: Neighboring angles (CP2, 4) should be spaced (e.g., $a \approx \pm 0.3$) to avoid "beak" formations. If $r$ drops too sharply at these points, the LE becomes a detached "bulb" [iter 5, 8-10].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create self-intersecting loops [iter 2, 5, 6, 8-10].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 1.0$) at the Trailing Edge create the "stinger" required for the Kutta condition [iter 2-10].
+*   **Surface Healing Limit**: Extreme negative values ($e \approx -1.0$) ensure the curve is differentiable (no sharp corners), but **cannot** override concavity caused by extreme radial gradients [iter 4-10].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE (CP3) ensures smooth flow acceleration and prevents stagnation-point pressure spikes [iter 5-10].
+*   **Transition Risk**: Moving from a thick $e \approx -1.0$ body to a sharp $e \approx 1.0$ TE requires the mid-body to be sufficiently convex ($r \approx 0.55$) to prevent flow separation [iter 9-10].

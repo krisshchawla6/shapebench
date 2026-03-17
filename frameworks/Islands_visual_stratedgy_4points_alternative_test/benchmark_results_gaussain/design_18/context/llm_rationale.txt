@@ -1,0 +1,12 @@
+- **Strategy Focus (Visual Intuition):** Looking at the geometry of Design 1, the nose appears excessively "beaked." While aerodynamically efficient in some regimes, a slightly more rounded nose often improves off-design performance and softens the suction peak. I am visually smoothing the LE while preserving the overall slender aspect ratio.
+- **Chord Maintenance:** I am keeping CP2 (TE) at maximum radius (1.0) because Design 1 proves that maximizing chord length is the strongest predictor of high reward in this environment.
+- **Flow Attachment Heuristic:** By shifting the CP1 (Upper Peak) slightly more forward (Angle -0.46), I am attempting to create a longer, gentler slope toward the trailing edge, which visually should help keep the boundary layer attached longer under higher load.
+- **Thickness Balancing:** Increasing CP1 and CP3 radii slightly (0.42 and 0.55 respectively) will provide a more "robust" structural section. This directly counters the "Slender Transition" risk of structural collapse mentioned in the heuristics.
+- **Kutta Condition:** Maintaining CP2 Edgy at 1.0 is non-negotiable for a clean flow exit and realistic lift generation.
+
+## Per-Parameter Predictions
+- **CP0 Radius (0.8500):** I am setting this to 0.8500 because I predict it will blunt the leading edge relative to Design 1, creating a more stable stagnation point.
+- **CP1 Angle (-0.4600):** I am setting this to -0.4600 because I predict it will shift the maximum thickness point forward to ~25-30% chord, lengthening the recovery ramp.
+- **CP1 Radius (0.4200):** I am setting this to 0.4200 because I predict it will slightly increase upper surface thickness to test the limit of lift vs. separation.
+- **CP3 Radius (0.5500):** I am setting this to 0.5500 because I predict it will provide a strictly convex lower surface, reinforcing the "Concavity Floor" heuristic.
+- **CP2 Radius (1.0000):** I am setting this to 1.0000 because I predict it will maintain the maximum possible chord length for high aerodynamic efficiency.

@@ -1,0 +1,14 @@
+- **Geometry Observation**: 
+    - The airfoil in the images (Design 1) is a high-aspect-ratio, slender profile with a significantly elongated chord.
+    - The leading edge is relatively sharp but smooth, and the trailing edge is perfectly sharp, indicating a well-enforced Kutta condition.
+    - The upper surface has a peak thickness shifted forward (approximately 30-35% of the chord), while the lower surface is nearly flat or slightly convex, creating a classic lifting shape.
+    - There are no visible discontinuities or "fangs," though the leading edge radius is high enough to approach a wedge-like appearance.
+- **Flow Field Observation**:
+    - The pressure field (p) shows a high-pressure stagnation point at the nose and a wide low-pressure suction zone across the first 50% of the upper surface.
+    - The velocity magnitude (u) confirms acceleration over the top surface, with maximum velocity occurring near the upper peak.
+    - The vertical velocity (v) shows consistent downwash behind the trailing edge, which is a strong indicator of lift production.
+    - The flow appears fully attached across the entire chord length, with a thin, symmetric wake downstream.
+- **Mapping & Refinement**:
+    - Design 1 (Reward 2.42) uses CP0 Radius 0.946 and CP1 Angle -0.42. Design 2 (Reward 2.92) improves this by slightly increasing CP0 Radius to 0.949 and reducing CP0 Angle.
+    - The primary flaw to address is the fine-tuning of the lift-to-drag ratio by thinning the profile slightly ($r_1$) and optimizing the leading edge incidence ($a_0$) to reduce the stagnation spike.
+    - Key changes: 1. Slightly reduce $r_1$ to decrease thickness and drag. 2. Decrease $a_0$ closer to 0.0 for better alignment. 3. Smooth the lower surface transition by slightly reducing $a_3$.

@@ -1,0 +1,52 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 9)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0, r \approx 1.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0, r \approx 1.0$ [iter 3-9].
+*   **Fineness Ratio (Thickness)**: Thickness is the delta between polar $r$ and mid-body $r$. High mid-body $r$ ($0.6-0.85$) creates a "pebble" or "bean" with ~70% thickness-to-chord [iter 9]. Aerodynamic sleekness (10-15%) requires mid-body $r$ to be significantly lower ($0.15-0.40$) [iter 9].
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound (Radial Collapse)**: $r < 0.2$ for mid-body points pulls the surface into a non-physical line or "starfish" if $e$ is not minimized [iter 4, 6, 8]. 
+    *   **Upper Bound (The Bloat)**: $r > 0.6$ for mid-body points creates a high-drag "bluff body" [iter 5, 7, 9].
+    *   **Optimal (Sleek)**: LE/TE at $r \approx 1.0$; mid-body points must target $r \in [0.2, 0.4]$ combined with $e \approx -1.0$ to maintain a thin, convex profile [iter 9].
+*   **Kutta Condition**: A geometric "stinger" ($e \approx 1.0$) at the Trailing Edge (CP0/7) is mandatory for flow separation [iter 2-9].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values ($r \approx 1.0$) are required at the LE and TE poles to establish primary chord length [iter 1-9].
+*   **Thickness vs. Bloat**: Mid-body radii (CP1, 2, 4, 5, 6) control the "fatness" of the wing. Values of $0.6-0.8$ produce a "pebble" shape; values must drop toward $0.3$ for high-performance subsonic wings [iter 9].
+*   **Convexity Control**: To maintain a convex shape without "starfish" spikes, mid-body $r$ must be paired with extreme negative $e$ values [iter 8-9].
+*   **Camber & Lift**: Asymmetric radii between upper (CP1-2) and lower (CP4-6) surfaces create camber. $r_{upper} > r_{lower}$ creates lift-generating loft [iter 4-9].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3-9].
+*   **LE Support (Nose Shape)**: Neighboring angles (CP2, 4) should be spaced (e.g., $a \approx \pm 0.3$) to avoid "beak" formations and support a parabolic entry [iter 5, 8-9].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create self-intersecting loops [iter 2, 5, 6, 8-9].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 1.0$) at the Trailing Edge create the "stinger" required for the Kutta condition [iter 2-9].
+*   **Surface Healing (The "Healer")**: Extreme negative values ($e \approx -1.0$) at mid-body and LE are the primary tool for "healing" a jagged polygon into a smooth, organic, differentiable manifold [iter 4-9].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE (CP3) ensures smooth flow acceleration and prevents "faceting" or stagnation-point pressure spikes [iter 5-9].
+*   **Transition Risk**: Moving from a thick $e \approx -1.0$ body to a sharp $e \approx 1.0$ TE causes massive separation if the body is too "bloated" ($r > 0.6$) [iter 9].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [1.0, 1.0, 1.0, 0.832794, 0.639645, -1.0, 0.838976, 0.370231, -1.0, 0.967446, -0.022805, -1.0, 0.654315, -0.288884, -0.973751, 0.581723, -0.595731, -1.0, 0.63063, -0.924354, -0.477697, 1.0, -0.982358, 1.0]
+  - Reward: 0.0000
+  - Rank: N/A
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

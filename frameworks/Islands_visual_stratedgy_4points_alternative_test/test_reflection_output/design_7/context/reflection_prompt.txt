@@ -1,0 +1,92 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Visual Intuition Strategy**: I am identifying the "bloated block" as the primary failure mode. To fix this, I am mentally "stretching" the airfoil by pulling the mid-section points inward toward the center while keeping the LE and TE at the distal poles.
+*   **Applying the Goldilocks Radius Zone**: Previous iterations show that $r > 0.5$ for non-pole points causes the "blob" effect. I will set mid-body radii between 0.15 and 0.28 to create a thin, high-aspect-ratio wing.
+*   **Leading Edge Parabola**: By setting CP3 to $r=1.0$ and its neighbors (CP2, CP4) to $r \approx 0.2$ with clustered angles ($a \approx \pm 0.1$), I will create a smooth parabolic entry that minimizes the stagnation zone.
+*   **Camber Introduction**: I will set the upper surface points (CP4, 5, 6) to slightly higher radii than the lower surface points (CP1, 2) to create a curved upper loft, encouraging lift.
+*   **Kutta Condition enforcement**: I will keep CP0 and CP7 at $e=1.0$ and $r=0.98$ to ensure a clean, sharp trailing edge for flow separation control.
+
+## Per-Parameter Predictions
+*   **params[3][0] (LE radius) to 1.0**: I predict this will maximize the chord length by pushing the nose to the furthest possible forward point.
+*   **params[2][0] and params[4][0] to ~0.22**: I predict these low radii values, combined with their proximity to the LE, will "sharpen" the nose into a streamlined wedge instead of a flat face.
+*   **params[1,2,4,5,6][2] to -1.0**: I predict these "edgy" values will force the B-spline to stay as smooth as possible, preventing the "faceted" look of Design 1.
+*   **params[5][0] slightly higher than params[1][0]**: I predict this asymmetry will create positive camber, generating a pressure differential between the upper and lower surfaces.
+
+*   **Geometry Observation**: 
+    *   The shape is extremely "bloated" and resembles a blunt, rectangular block with a small tapering tail. 
+    *   The Leading Edge (LE) is nearly a vertical flat face rather than a streamlined curve, which will create massive stagnation and pressure drag.
+    *   The thickness-to-chord ratio is visually excessive (likely >40%), whereas high-performance airfoils usually sit between 8-15%.
+    *   The Trailing Edge (TE) has a sharp "stinger" (high edgy_param), but it is attached to a body that is far too thick to allow for smooth flow reattachment.
+
+*   **Flow Field/Simulation Observations**:
+    *   The flat front creates a huge high-pressure zone at the nose.
+    *   Flow separation likely occurs almost immediately behind the "corners" of the front face because the curvature is too aggressive.
+    *   The wake behind the airfoil is likely very wide, indicating high pressure drag (the "D-shape" drag penalty).
+    *   There is no clear evidence of a low-pressure suction peak on the upper surface that would indicate efficient lift generation.
+
+*   **Design 1 Mapping & Improvements**:
+    *   The "flat face" is caused by CP2, CP4, and CP5 having `radius_params` (0.44, 0.82, 0.93) that are too close to the LE pole CP3 (0.90). This prevents the geometry from tapering into a nose.
+    *   The thickness is caused by mid-body radii being too high (>0.7).
+    *   **Key Changes**: 1) Dramatically reduce mid-body `radius_params` (CP1, 2, 4, 5, 6) to the "Goldilocks" zone (<0.3) to stretch the airfoil; 2) Ensure CP3 remains at $r=1.0$ to define the nose tip; 3) Use aggressive smoothing ($e=-1.0$) on all body points to eliminate the "rectangular" corners.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      1.0,
+      1.0
+    ],
+    [
+      0.22,
+      0.65,
+      -1.0
+    ],
+    [
+      0.18,
+      0.15,
+      -1.0
+    ],
+    [
+      1.0,
+      0.0,
+      -1.0
+    ],
+    [
+      0.2,
+      -0.15,
+      -1.0
+    ],
+    [
+      0.28,
+      -0.65,
+      -1.0
+    ],
+    [
+      0.35,
+      -0.92,
+      -1.0
+    ],
+    [
+      0.985,
+      -1.0,
+      1.0
+    ]
+  ],
+  "name": "streamlined_thin_camber_v1"
+}
+```
+
+Sampled action vector:
+['0.9768', '0.9861', '1.0000', '0.2598', '0.6127', '-0.9478', '0.1994', '0.1758', '-1.0000', '1.0000', '-0.0077', '-1.0000', '0.2016', '-0.1321', '-0.9347', '0.2953', '-0.6023', '-1.0000', '0.3179', '-0.9303', '-1.0000', '0.9725', '-0.9442', '0.9361']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

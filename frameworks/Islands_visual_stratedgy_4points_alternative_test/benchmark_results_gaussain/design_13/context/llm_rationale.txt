@@ -1,0 +1,13 @@
+- **Strategy Focus**: This design employs an **Exploitation Strategy**. I am taking the successful "long-chord slender" DNA of Design 1 and applying the "Concavity Floor" and "Waisted Trap" heuristics from the Reference Card to refine the mid-body.
+- **Chord Maintenance**: I will maintain high radii for CP0 and CP2 (~0.95) to preserve the high reward associated with a long chord length seen in Design 1.
+- **Anti-Waisting**: To fix the geometric flaw seen in the images, I will increase CP1 Radius to 0.48 and CP3 Radius to 0.52. This follows the heuristic that radii $\ge$ 0.45 are required to transition from concave to convex/flat profiles.
+- **Camber Tuning**: I will set CP3's angle and radius slightly differently than CP1 to introduce a subtle positive camber, which should improve lift-to-drag ratios compared to the nearly symmetric Design 1.
+- **Leading Edge Refinement**: By slightly lowering CP0 Radius from 0.957 to 0.92, I aim to reduce the "beaking" effect, creating a slightly more rounded stagnation point for better flow attachment.
+
+## Per-Parameter Predictions
+- **CP0 Radius (0.9200)**: I am setting this to 0.9200 because I predict it will maintain a long chord while slightly rounding the LE to prevent the "beaked" geometric sharpening seen in Design 1.
+- **CP1 Radius (0.4850)**: I am setting this to 0.4850 because I predict it will push the upper surface outward, eliminating the "waisted" concavity and creating a smooth, convex suction side.
+- **CP1 Angle (-0.3500)**: I am setting this to -0.3500 to shift the thickness peak forward, facilitating a long, gentle pressure recovery toward the tail.
+- **CP2 Radius (0.9650)**: I am setting this to 0.9650 because I predict it will maximize the rearward chord extension, ensuring high fineness.
+- **CP2 Edgy (1.0000)**: I am setting this to 1.0000 to enforce a mathematically sharp Kutta condition for clean flow shedding.
+- **CP3 Radius (0.5150)**: I am setting this to 0.5150 because I predict it will create a slightly flatter/convex lower surface, providing "support" against the waisted tension and introducing mild camber.

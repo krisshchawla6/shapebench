@@ -1,0 +1,71 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+# Airfoil Optimization Reference Card
+
+## General Design Rules
+*   **Flow Direction**: Right-to-Left. CP0 is Leading Edge (LE); CP4 is Trailing Edge (TE) [iter 2].
+*   **Drag Reduction**: Maximize chord-to-thickness ratio by maximizing TE radius and minimizing vertical radii (CP2/CP6) [iter 2].
+*   **Lift Generation**: Introduce asymmetry (camber) by setting CP6 radius < CP2 radius [iter 2].
+*   **Pressure Recovery**: Position maximum thickness at 25-30% of chord (via angle offsets) for stable subsonic flow [iter 2].
+*   **Primary Axis**: Define via edginess extremes: LE (negative) vs. TE (positive) [iter 2].
+
+## Degree of Freedom Mapping
+
+| Control Point | Geometric Role | Optimal Range / Setting | Effect [Source] |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Leading Edge | Rad: ~0.85 / Edg: -0.9 | Creates blunt, stable stagnation point; avoid bulbous over-radius [iter 2]. |
+| **CP1 (Upper-Front)** | Transition | Intermediate | Smooths LE-to-Suction side transition; critical for avoiding pressure spikes [iter 2]. |
+| **CP2 (Top)** | Suction Side | Rad: ~0.25 | Thins profile; reduces flow acceleration over the shoulder [iter 2]. |
+| **CP3 (Upper-Back)** | Transition | Intermediate | Interpolates suction side to TE; affects flow separation at the rear [iter 2]. |
+| **CP4 (Tail)** | Trailing Edge | Rad: 1.0 / Edg: 1.0 | Forces Kutta condition (sharp point); maximizes chord length [iter 2]. |
+| **CP5 (Lower-Back)** | Transition | Intermediate | Interpolates TE to pressure side; sensitive to "kinks" or surface irregularities [iter 2]. |
+| **CP6 (Bottom)** | Pressure Side | Rad: ~0.15 | Flattens lower surface relative to CP2 to create lift-generating camber [iter 2]. |
+| **CP7 (Lower-Front)** | Transition | Intermediate | Critical for monotonic curvature; prevents early LE separation on the bottom [iter 2]. |
+| **Angle Offsets** | Thickness Dist. | Small offsets | Shifts max thickness toward LE (ideal: first 30% of chord) [iter 2]. |
+| **Edginess** | Surface Profile | -1.0 (Round) to 1.0 (Sharp) | Defines the "bluntness" or "sharpness" of the local curvature [iter 2]. |
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 2:
+  - Action: [0.89127, 0.047412, -0.939913, 0.521495, -0.14224, -0.6733, 0.248243, -0.05664, -0.38097, 0.36631, 0.106678, 0.44855, 1.0, 0.00915, 0.973566, 0.20712, -0.127227, 0.532873, 0.104258, 0.084675, -0.447022, 0.388018, 0.180131, -0.669897]
+  - Reward: -5.0000
+  - Rank: 1
+
+Design 3:
+  - Action: [1.0, 0.028603, 0.97475, -0.339198, -0.424159, 0.109713, -0.867368, 0.048556, -0.30896, -0.256093, 0.293975, -0.592904, 0.480285, -0.023014, -0.937747, -0.290022, -0.352331, -0.607504, -0.83926, -0.102773, -0.278376, -0.415808, 0.483731, 0.11521]
+  - Reward: -5.0000
+  - Rank: 2
+
+Design 4:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+Design 5:
+  - Action: [0.89127, 0.047412, -0.939913, 0.521495, -0.14224, -0.6733, 0.248243, -0.05664, -0.38097, 0.36631, 0.106678, 0.44855, 1.0, 0.00915, 0.973566, 0.20712, -0.127227, 0.532873, 0.104258, 0.084675, -0.447022, 0.388018, 0.180131, -0.669897]
+  - Reward: -5.0000
+  - Rank: 1
+
+Design 6:
+  - Action: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+  - Reward: -0.0036
+  - Rank: 0
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

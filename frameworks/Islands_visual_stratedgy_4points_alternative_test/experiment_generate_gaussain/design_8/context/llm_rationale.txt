@@ -1,0 +1,15 @@
+- **Strategy Focus (Novel Design)**: I am abandoning the circular symmetry of the initial population and the failed origin-crossing of Design 6. I will apply aerodynamic first principles to create a "Laminar Lens" shape—a streamlined, elongated profile.
+- **Scale Rule Application**: To minimize drag, I will maximize the chord length ($r_0 + r_4$) to reach the "Scale Rule" threshold (> 2.0), while keeping the vertical thickness ($r_2, r_6$) relatively low.
+- **Managing Convexity**: While the reference card warns against "Peanuts" (concave waists), a high-performance airfoil requires a taper. I will use a monotonic radial transition ($r_0 > r_1 > r_2$) to ensure the spline remains well-behaved while thinning the profile.
+- **Camber Introduction**: I will set $r_2 > r_6$ to create a larger upper surface curvature, generating a pressure differential (lift) even at zero angle of attack.
+- **Pinch and Bluntness**: I will implement a sharp TE ($e_0 = -0.85$) and a rounded LE ($e_4 = 0.55$) to transform the bluff body into a lifting surface.
+
+## Per-Parameter Predictions
+- **param[0][0] (r0) to 1.0**: I am setting this to 1.0 because I predict it will maximize the aft chord extension for a streamlined TE.
+- **param[0][2] (e0) to -0.85**: I am setting this to -0.85 because I predict it will create a sharp Kutta-condition trailing edge, reducing wake turbulence.
+- **param[4][0] (r4) to 0.95**: I am setting this to 0.95 because I predict it will extend the leading edge forward, creating a high-aspect-ratio chord.
+- **param[4][2] (e4) to 0.65**: I am setting this to 0.65 because I predict it will round the nose, allowing for a wider range of effective angles of attack.
+- **param[2][0] (r2) to 0.45**: I am setting this to 0.45 because I predict it will define the upper maximum thickness at a height significantly lower than the chord length.
+- **param[2][1] (a2) to 0.25**: I am setting this to 0.25 because I predict it will shift the upper apex forward towards the LE, characteristic of efficient subsonic airfoils.
+- **param[6][0] (r6) to 0.35**: I am setting this to 0.35 because I predict it will create an asymmetric lower surface (thinner than the top), inducing camber.
+- **param[1,3,5,7][0]**: I am setting these to intermediate values (0.65-0.75) to provide a smooth monotonic transition between the long chord tips and the narrow thickness peaks.

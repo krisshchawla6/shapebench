@@ -1,0 +1,96 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Strategy Focus: Exploitation**: The circle (Design 2-5) is the only successful geometry so far. I will use it as a template and apply a "stretching" transformation to move from a bluff body to a streamlined one.
+- **Applying the Scale Rule**: The total chord ($r_0 + r_4$) will be set to 2.35, exceeding the 2.0 threshold to avoid the "Nugget" trap while reducing the thickness-to-chord ratio.
+- **Camber Introduction**: I will set $r_2$ (upper apex) slightly higher than $r_6$ (lower apex) to create a subtle positive camber for lift generation.
+- **TE/LE Specialization**: Following the Reference Card, $e_0$ is set to -0.8 for a sharp Kutta condition at the tail, and $e_4$ is set to 0.5 to round the nose for a smoother stagnation zone.
+- **Curvature Control**: To avoid the "Peanut" (concave waist), I will maintain all radii near 1.0, ensuring that the "valleys" at $r_2$ and $r_6$ are very shallow and supported by strictly intermediate $r_1, r_3, r_5, r_7$ values.
+
+## Per-Parameter Predictions
+
+- **r0 (1.2000)**: I am setting this to extend the trailing edge, increasing the chord length.
+- **e0 (-0.8000)**: I am setting this to create a sharp, cusped trailing edge to control flow separation at the rear.
+- **r4 (1.1500)**: I am setting this to extend the leading edge forward.
+- **e4 (0.5000)**: I am setting this to ensure a blunt, rounded nose that is robust to varying angles of attack.
+- **r2 (1.0200) & r6 (0.9800)**: I am setting these to create a slight asymmetry (camber), with the upper surface being more curved than the lower.
+- **a2 (0.1000) & a6 (-0.1000)**: I am setting these to shift the maximum thickness slightly forward toward the leading edge.
+- **r1, r3, r5, r7**: I am setting these to values between the LE/TE and the apexes to ensure a smooth, convex transition (monotonicity).
+
+The provided images show a representative design from the population, which in this case is a near-perfect circle (as seen in the white shape).
+- **Geometry**:
+    - The shape is a highly symmetric, smooth bluff body (circle/cylinder).
+    - All control points are positioned at a constant radius, creating a "Nugget" geometry.
+    - There are no sharp features, discontinuities, or taper; the trailing and leading edges are identical.
+- **Flow Field**:
+    - The pressure field shows a clear stagnation point at the leading edge (high pressure) and significant low-pressure zones on the upper and lower shoulders where the flow accelerates.
+    - The velocity field reveals a massive, wide wake extending far downstream, indicating high pressure drag.
+    - The wake is symmetric, suggesting zero lift, and the flow remains attached until the "shoulders," after which large-scale separation occurs.
+
+Design 1's action vector (Reward -5.0000) shows irregular radius values ($r_2=0.21, r_6=-0.03$) and inconsistent angles. This confirms that deviating too wildly from the circle without maintaining convexity leads to the "Peanut" trap or geometric invalidity. Designs 2-5 (Reward -0.0036) represent the circle baseline, which is the current performance peak. To improve, we must transition from a circle to a streamlined airfoil while maintaining the stability of the circle's scale.
+
+**Key changes needed**:
+1.  **Chord Extension**: Increase $r_0$ (TE) and $r_4$ (LE) to create a longitudinal axis.
+2.  **Trailing Edge Definition**: Apply a negative `edgy_param` to $e_0$ to sharpen the aft section.
+3.  **Monotonic Tapering**: Ensure radial transitions between points follow the $\Delta r < 0.1$ rule to prevent the "Peanut" collapse.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.2,
+      0.0,
+      -0.8
+    ],
+    [
+      1.1,
+      0.0,
+      -0.2
+    ],
+    [
+      1.02,
+      0.1,
+      0.0
+    ],
+    [
+      1.08,
+      0.0,
+      0.2
+    ],
+    [
+      1.15,
+      0.0,
+      0.5
+    ],
+    [
+      1.08,
+      0.0,
+      0.2
+    ],
+    [
+      0.98,
+      -0.1,
+      0.0
+    ],
+    [
+      1.1,
+      0.0,
+      -0.2
+    ]
+  ],
+  "name": "streamlined_aero_nugget_v1"
+}
+```
+
+Sampled action vector:
+['1.0000', '-0.0967', '-0.8469', '1.0000', '0.0554', '-0.2112', '1.0000', '0.0504', '0.0210', '1.0000', '-0.0755', '0.2306', '1.0000', '-0.0113', '0.5106', '1.0000', '-0.0775', '0.2557', '0.8839', '-0.0921', '0.0003', '1.0000', '0.0358', '-0.2284']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

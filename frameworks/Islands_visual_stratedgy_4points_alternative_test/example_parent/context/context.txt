@@ -1,0 +1,46 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [1.0, 0.004328, -0.93674, 0.833076, 0.303893, -0.690358, 0.879421, 0.670615, -0.250714, 1.0, 0.937862, 0.125332, 0.932845, 0.870981, 1.0, -1.0, 0.935066, 0.175294, -0.853371, 0.498291, -0.355829, -0.96408, 0.011296, -0.87506]
+  - Reward: 1.0360
+  - Rank: 0
+
+Design 2:
+  - Action: [1.0, 0.01947, -1.0, 0.802665, 0.2024, -0.696197, 1.0, 0.669929, 0.002075, 1.0, 0.924226, 0.100435, 0.983329, 0.901238, 0.867571, -1.0, 0.926123, 0.057428, -0.665691, 0.422108, -0.376864, -0.85645, -0.014462, -0.794655]
+  - Reward: 0.7984
+  - Rank: 1
+
+Design 3:
+  - Action: [0.967926, 0.063081, -0.930786, 0.884884, 0.30547, -0.791409, 0.819787, 0.623992, -0.183054, 1.0, 0.922127, 0.249816, 1.0, 1.0, 0.931758, -1.0, 0.977918, 0.058008, -0.842464, 0.406067, -0.361683, -0.941042, -0.09918, -0.977069]
+  - Reward: 0.3390
+  - Rank: 2
+
+Design 4:
+  - Action: [0.965788, -0.035235, -1.0, 0.79208, 0.372817, -0.965141, 0.876234, 0.685678, -0.542731, 1.0, 0.9322, 0.12466, 0.887652, 0.824723, 1.0, -1.0, 0.933768, 0.249598, -1.0, 0.669855, -0.64103, -0.934778, -0.064809, -1.0]
+  - Reward: 0.0528
+  - Rank: 16
+
+Design 5:
+  - Action: [0.968374, 0.043013, -0.901772, 1.0, 0.313393, -0.957082, 0.848697, 0.714803, -0.563582, 1.0, 0.940738, 0.12967, 1.0, 0.828564, 1.0, -0.727035, 0.963148, -0.089018, -0.828145, 0.581338, -0.394589, -0.967563, 0.134633, -1.0]
+  - Reward: 0.3298
+  - Rank: 3
+
+Design 6:
+  - Action: [0.988785, 0.009164, -0.877039, 0.840162, 0.411521, -0.652824, 0.849906, 0.557443, -0.602754, 0.931439, 1.0, 0.186624, 1.0, 0.989161, 0.998049, -0.800389, 0.969227, -0.330559, -0.925439, 0.534455, -0.786769, -0.869328, -0.033546, -0.866268]
+  - Reward: 0.1510
+  - Rank: 10
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

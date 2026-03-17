@@ -1,0 +1,96 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** Radius functions as polar distance from centroid. Maximize LE (CP0) and TE (CP2) radii while minimizing Upper (CP1) and Lower (CP3) radii to maximize chord and fineness ratio [iter 7, 8].
+*   **The Waisted Trap:** Side radii < 0.40 under high chord tension creates "boomerang" or "waisted" morphology. CP1/CP3 must be $\ge$ 0.45 to maintain convex profiles [iter 11, 13, 17].
+*   **The Beaking Threshold:** CP0 Radius > 0.90 overrides smoothness settings, creating a sharp "wedge" nose. Truly rounded subsonic stagnation points likely require Radius < 0.80 [iter 13, 17].
+*   **The Concavity Floor:** CP3 Radius ~0.50 is the threshold to eliminate "scoops" and establish a convex "pressure face," essential for efficient lift and flow attachment [iter 8, 11, 17].
+*   **The Slender Transition:** To exit "stalled pebble" regime, use extreme radii for CP0/CP2 (>0.9) and low radii for CP1/CP3 (<0.4), though this risks structural collapse [iter 8, 13].
+*   **Chord Truncation:** Low TE Radius (CP2) "shortens" the chord, creating "Thimble" morphology [iter 7].
+*   **The Kutta Singularity:** TE Edgy [2][2] = 1.0 is mandatory for flow shedding. Orientation must align with mean flow to avoid "hooked" tail drag [iter 2, 11].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius) trigger separation. Flattening via lower CP1 Radius (~0.35-0.40) promotes laminar streamlines [iter 1, 8, 13, 17].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Primary chord driver. > 0.95 creates a sharp "beak." Lowering toward 0.80 is necessary for nose rounding [iter 7, 13, 17].
+*   **Angle [0][1]:** Controls vertical centering/incidence of the nose [iter 4].
+*   **Edgy [0][2]:** -1.0 targets C-infinity continuity; neutralized by high Radius tension [iter 2, 13].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" thickness. ~0.40 prevents mid-body collapse while maintaining a slender high-speed profile [iter 8, 17].
+*   **Angle [1][1]:** Negative values (~ -0.4) shift peak forward to ~30% chord, lengthening the recovery ramp [iter 1, 13, 17].
+*   **Edgy [1][2]:** Low values ensure smooth curvature over the apex [iter 4].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Rearward chord extension. 1.0 maximizes length and aspect ratio [iter 7, 11, 17].
+*   **Angle [2][1]:** Aligns tail point; must be near 0.0 for horizontal chord alignment [iter 4, 11].
+*   **Edgy [2][2]:** 1.0 enforces sharp geometric singularity for Kutta condition [iter 2, 8, 11].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Camber/Flatness control. ~0.50 validates the "Concavity Floor," producing a gently convex, high-lift belly [iter 11, 17].
+*   **Angle [3][1]:** Positive values (~0.19) tuck the lower-rear inward for a smooth, non-hooked transition to the TE [iter 8, 17].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain lower surface continuity [iter 4].
+
+## New Evidence (Iteration 21)
+Parameters used:
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.85,
+      0.025,
+      -0.95
+    ],
+    [
+      0.435,
+      -0.42,
+      -0.45
+    ],
+    [
+      0.985,
+      0.015,
+      1.0
+    ],
+    [
+      0.52,
+      0.185,
+      -0.92
+    ]
+  ],
+  "name": "hybrid_convex_slender"
+}
+```
+
+Observations:
+This analysis examines the disconnect between the **Hybrid Strategy** (intended to produce a slender, high-chord airfoil) and the resulting **"Slug" geometry** visible in the simulation output.
+
+### Per-Parameter Analysis: Prediction vs. Outcome
+
+| Parameter | Predicted Effect | Actual Outcome | Comparison & Critique |
+| :--- | :--- | :--- | :--- |
+| **CP0 Radius (0.7990)** | Round the leading edge (LE) and reduce pressure spikes. | Created a blunt, bulbous nose. | **Partial Success**: The LE is rounded, but because the overall chord collapsed, the "nose" constitutes a massive percentage of the total volume. |
+| **CP1 Radius (0.5200)** | Increase upper camber height; avoid "waisted" look. | Created a steep, triangular upper peak. | **Failure of Intent**: While it avoided the "waisted" look, the high radius combined with a short chord resulted in a "mountain" rather than a smooth camber. |
+| **CP1 Angle (-0.4015)** | Shift max thickness forward to ~30% chord. | Peak is forward, but the geometry is too short for a "ramp." | **Miscalculation**: The negative angle correctly positioned the peak, but without chord length, it just creates a blunt wedge. |
+| **CP2 Radius (0.9265)** | Maintain maximum possible chord length. | **Extreme Chord Collapse.** The airfoil is incredibly short. | **Critical Failure**: A radius of 0.92 was expected to stretch the TE far to the right. The resulting "slug" suggests a non-linear interaction where high radii on other points "pull" the TE forward or compress the coordinate space. |
+| **CP2 Edgy (0.9549)** | Enforce a sharp trailing edge (TE). | The TE is a sharp point. | **Success**: The Kutta condition is technically satisfied at the point, but the flow likely separates long before reaching it. |
+| **CP3 Radius (0.5433)** | Create a gently convex lower surface (Concavity Floor). | Created a highly convex, "pebble-like" belly. | **Overshot**: The "Concavity Floor" heuristic was applied to a slender model; on this short model, it created massive thickness and high pressure drag. |
+| **CP3 Angle (0.2279)** | Tuck the lower-rear surface inward to meet the TE. | Curvature is present, contributing to the triangular profile. | **Neutral**: The angle works as intended but cannot compensate for the lack of longitudinal scale. |
+
+### Key Learnings and Design Evolution
+
+1.  **The "Chord Collapse" Paradox**: This is the most significant finding. Despite CP2 (the TE control point) having a high radius (0.92), the airfoil failed to elongate. This suggests that the **relative radii** of CP0, CP1, and CP3 might act as a "volume budget." When CP1 and CP3 are both high (>0.5), the geometry engine may be normalizing the total area, causing the chord to shrink to accommodate the thickness.
+2.  **Radius-to-Chord Sensitivity**: The transition from the "waisted" Design 1 (Radii ~0.3) to this "slug" (Radii ~0.5) was too aggressive. There is a "sweet spot" for thickness that was bypassed. The "Concavity Floor" of 0.5 appears to be a maximum limit for thickness, not a minimum for stability in this parameter space.
+3.  **Aerodynamic Disaster**: The resulting shape functions more like a bluff body than an airfoil. The flow must navigate a very steep climb over the CP1 peak and a sharp drop to the TE, likely leading to massive flow separation and a large wake, resulting in a very low (likely negative) reward.
+4.  **Revised Strategy**: To regain the slender profile while avoiding the "waisted" look, future designs must **decouple thickness from chord**. CP1 and CP3 radii should likely be reduced back toward 0.40, while keeping CP2 at >0.95 and significantly reducing CP0 radius to further "pull" the nose forward and sharpen the entry.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

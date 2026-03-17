@@ -1,0 +1,27 @@
+This analysis compares the **Heuristic_Baseline_V1** design predictions against the visual outcome of the generated airfoil.
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter | Value (Sampled) | Prediction | Outcome |
+| :--- | :--- | :--- | :--- |
+| **CP0 Radius** | 0.5656 | Robust nose to handle AoA variations. | **Partial Success:** The leading edge is indeed rounded and robust, but because the overall scale is small, this radius accounts for nearly half the object's frontal area, creating a "bluff body" rather than a streamlined nose. |
+| **CP0 Edgy** | -0.9696 | Perfectly smooth, C-infinity continuous nose. | **Success:** The curvature at the leading edge is very smooth and lacks any "pinched" artifacts, confirming that high negative Edgy values enforce circular/elliptical regularity. |
+| **CP1 Radius** | 0.3536 | Thin upper surface, low peak velocity. | **Failure:** The profile is not "thin." A radius of 0.35 is surprisingly large relative to the resulting chord length, creating a high-thickness "hump" rather than a slender profile. |
+| **CP1 Angle** | -0.2617 | Shift max thickness forward (30-35% chord). | **Success:** The maximum thickness is clearly biased toward the front (left side), creating the intended "forward-loaded" silhouette. |
+| **CP2 Radius** | 0.1405 | Prevent trailing edge bloating; solve Stretch Paradox. | **Mixed:** While the trailing edge is not "bloated," the low radius failed to provide the necessary "stretch" to create a long aerodynamic tail. The result is a stubby, truncated shape. |
+| **CP2 Edgy** | 0.9405 | Sharp, knife-like trailing edge for Kutta condition. | **Success:** The trailing edge terminates in a distinct, sharp point. The high Edgy value effectively "sharpened" the corner. |
+| **CP3 Radius** | 0.2457 | Subtle camber/flat lower surface. | **Success:** The lower surface is noticeably flatter than the upper surface, creating an asymmetric (cambered) profile. |
+
+### Key Learnings & Parameter Space Insights
+
+1.  **The Scale/Chord Miscalculation:**
+    The most significant learning is that the "Radius" parameters are not just local curvature controls but appear to define the global footprint. By choosing moderate radii for all points (0.14 to 0.56), the resulting airfoil is extremely "short" and thick. To achieve a high-aspect-ratio (thin) airfoil, the sum of the radii likely needs to be distributed differently, or specific radii need to be much smaller to "stretch" the chord relative to the thickness.
+
+2.  **The "Nugget" Effect:**
+    Even with a sharp trailing edge (CP2 Edgy 0.94) and a smooth nose (CP0 Edgy -0.96), the airfoil failed to become a "wing" and instead became a "nugget." This suggests that **aerodynamic performance in this space is highly sensitive to the ratio between CP0/CP2 (length axis) and CP1/CP3 (thickness axis).**
+
+3.  **Edgy as a Curvature Filter:**
+    The results confirm the heuristic: Negative Edgy = Round/Smooth; Positive Edgy = Sharp/Angular. The transition from the smooth CP0 to the sharp CP2 is clean, but the distance between them is too short to be aerodynamically viable.
+
+4.  **Refining the "Stretch" Strategy:**
+    To move from this "baseline" to a high-performance shape, the next iteration must drastically reduce the CP1 and CP3 radii to "squash" the nugget into a plate, while perhaps increasing the distance or influence of the CP2 (Trailing Edge) to create a longer recovery ramp. The current design would suffer from massive pressure drag due to its thickness-to-chord ratio.

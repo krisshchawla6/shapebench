@@ -1,0 +1,23 @@
+This analysis compares the **Designer's Predictions** for the "sleek_cambered_blade" against the **visual outcome** of the generated airfoil.
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter | Predicted Effect | Actual Outcome | Analysis |
+| :--- | :--- | :--- | :--- |
+| **CP3 (LE) Radius** | $r=1.0$ for max chord and smooth parabolic nose. | A distinct, rounded protrusion on the left. | While the radius is high, the sudden drop in radius to CP2 and CP4 created a "bulb" rather than a continuous leading edge. |
+| **CP1, CP2 (Upper Mid)** | $r \approx 0.40$ to reduce thickness/bloat. | A deep concave "scoop" on the upper-forward surface. | The reduction was too aggressive. The spline "collapsed" toward the origin between the LE and the mid-body. |
+| **CP4, CP5 (Lower Mid)** | $r \approx 0.25$ to create positive camber. | A severe "pinched" waist on the lower surface. | Instead of a gentle curve, this created a sharp inward-pointing V-shape. The radius delta (1.0 to 0.25) was too large for the spline to bridge smoothly. |
+| **CP0, CP7 (TE)** | $r=1.0$, `edgy`=1.0 for a sharp, elongated tail. | A sharp, needle-like trailing edge. | **Success.** The polar logic for the TE worked as intended, creating a clear point of flow separation. |
+| **Smoothing (-1.0)** | To "heal" transitions and ensure organic flow. | Failed to prevent jaggedness/concavity. | `edgy_param` controls local curvature, but it cannot override extreme radial gradients. The "tension" of the spline pulling from $r=1.0$ to $r=0.25$ created a "starfish" effect. |
+
+### Geometry Observations
+*   **The "Pinched" Profile:** The design moved from a "Bean" (Design 1) to a "Shard" (Design 2). The goal of a "Blade" failed because the mid-body radii were too small relative to the poles.
+*   **Concavity:** The airfoil is significantly concave on both the upper and lower surfaces. In aerodynamics, concavity (especially near the leading edge) usually triggers immediate flow separation and massive drag.
+*   **Camber:** While there is a radial delta between the top and bottom, the shape is so distorted that "mean camber line" logic no longer applies in a traditional sense.
+
+### Key Learnings
+
+1.  **The "Radial Gradient" Limit:** You cannot transition from $r=1.0$ to $r=0.25$ across only 1 or 2 control points without creating a concave "waist." To maintain a convex, "blade-like" shape, the mid-body radii likely need to stay above $0.5-0.6$ if the poles are at $1.0$.
+2.  **Smoothing is Not a Panacea:** Setting `edgy_param` to $-1.0$ ensures the curve is differentiable, but it doesn't force the shape to be convex. The spline is simply doing the shortest path math between points of wildly different magnitudes.
+3.  **The "Starfish" Trap:** By maximizing the chord (LE and TE at $r=1.0$) while minimizing thickness (Mid at $r=0.25$), you inadvertently created a 2-pointed "starfish" variant. 
+4.  **Proposed Correction:** To achieve the "Blade" shape, the mid-body radii need to be increased (e.g., $r \approx 0.6$ for upper, $r \approx 0.5$ for lower) to eliminate concavity while still being much thinner than the original "Bean."

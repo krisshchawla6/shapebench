@@ -1,0 +1,74 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Strategy Focus (Exploitation)**: I am refining the successful "Forward Peak" morphology of Design 1. Design 1 is the clear leader, but its geometry is "chubby." By applying the "Volume Budget" law to reduce mid-body radii, I can increase the effective chord length and reduce drag without losing the beneficial pressure distribution.
+*   **Radius-Distance Law**: I will increase $r_0$ and $r_2$ slightly to maximize the horizontal extent (chord) while simultaneously restricting $r_1$ and $r_3$.
+*   **Volume Budget Refinement**: Design 1 has $r_1=0.52$. I will drop this to $0.41$. This avoids the "mountain" peak that triggers drag while maintaining enough volume for lift.
+*   **Concavity Floor Adjustment**: Design 1 has $r_3=0.54$, which the heuristics label as a "high-drag pebble belly." I will move this to $0.47$, the identified "sweet spot" for convexity without excessive thickness.
+*   **Peak Positioning**: I will maintain the $a_1 \approx -0.42$ and $a_3 \approx 0.25$ configuration from the high-performing designs, as these parameters correctly manage the flow transition toward the Trailing Edge.
+
+## Per-Parameter Predictions
+*   **param[0][0] (0.8550)**: I predict this will create a slightly more elongated, rounded nose compared to Design 1, improving subsonic stagnation.
+*   **param[1][0] (0.4125)**: I predict this will significantly lower the upper peak height, reducing the "mountain" drag while keeping the peak forward.
+*   **param[1][1] (-0.4250)**: I predict this will maintain the upper suction peak at ~30% chord, ensuring early lift generation.
+*   **param[2][0] (0.9850)**: I predict this will stretch the trailing edge to the limit of the domain, maximizing the chord-to-thickness ratio.
+*   **param[3][0] (0.4720)**: I predict this will flatten the lower surface relative to Design 1, reducing the "belly" drag.
+*   **param[3][1] (0.2450)**: I predict this will create a smooth "tuck" in the lower-aft section, facilitating cleaner flow closure at the Kutta-conditioned trailing edge.
+
+*   **Geometry**:
+    *   The airfoil exhibits a moderate thickness-to-chord ratio with a clearly defined upper-surface peak shifted toward the leading edge.
+    *   The leading edge is well-rounded, providing a smooth transition for the incoming flow, while the trailing edge is sharp and terminates at a high radius point, maximizing chord length.
+    *   The lower surface is convex and relatively "belly-heavy," resembling a "slug" or "pebble" morphology rather than a slender high-speed profile.
+    *   The overall shape is smooth without visible discontinuities, but the high thickness suggests a design limited by pressure drag.
+
+*   **Flow Field / Simulation Results**:
+    *   The pressure plot shows a strong suction peak (dark blue) on the upper surface near the leading edge, which is consistent with the forward-shifted thickness peak.
+    *   The velocity magnitude (U) confirms high-speed flow over the upper leading edge, but the wake area behind the trailing edge appears somewhat broad, indicating energy loss.
+    *   The vertical velocity (V) plot shows positive lift (upward flow at the nose, downward at the tail), but the stagnation point is slightly offset from the exact nose tip.
+    *   There is no evidence of catastrophic flow separation, but the thickness creates a large frontal area, likely penalizing the reward via high drag.
+
+*   **Mapping & Refinement**:
+    *   Reference Design 1 (Reward 1.8771): The $r_1$ (0.5199) and $r_3$ (0.5433) are significantly above the "Volume Budget" and "Concavity Floor" thresholds (0.45 and 0.50 respectively).
+    *   The high reward of Design 1 compared to the thinner Design 2 (1.1672) suggests that while slenderness is usually better, Design 1 captures a better chord-to-thickness ratio for the current Reynolds/Mach regime.
+    *   Key changes needed: Reduce $r_1$ to ~0.40 to thin the upper surface and reduce $r_3$ to ~0.47 to flatten the belly, while keeping the forward-shifted peak ($a_1 \approx -0.4$) that provides the suction peak seen in the images.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.855,
+      0.005,
+      -1.0
+    ],
+    [
+      0.4125,
+      -0.425,
+      -0.35
+    ],
+    [
+      0.985,
+      0.012,
+      1.0
+    ],
+    [
+      0.472,
+      0.245,
+      -0.9
+    ]
+  ],
+  "name": "refined_forward_peak_slender"
+}
+```
+
+Sampled action vector:
+['0.8193', '0.0244', '-1.0000', '0.3933', '-0.4311', '-0.3324', '0.9711', '0.0117', '1.0000', '0.5010', '0.3000', '-0.9257']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

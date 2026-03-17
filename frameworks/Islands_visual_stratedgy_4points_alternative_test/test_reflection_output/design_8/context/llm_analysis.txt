@@ -1,0 +1,15 @@
+* **Geometry Observations**:
+    * The airfoil in Design 1 exhibits a severe "radial collapse" or "starfish" effect where the mid-body points are pulled tightly toward the centroid.
+    * The resulting shape is extremely thin, appearing as a nearly one-dimensional line or a very sharp, concave arrowhead rather than a convex lifting body.
+    * The trailing edge and leading edge are stretched to the polar limits, but the lack of internal volume (thickness) makes the geometry aerodynamically non-viable.
+* **Flow Field Observations**:
+    * The pressure and velocity plots show almost no interaction with the surrounding fluid; the body is too thin to displace air or generate a pressure differential between surfaces.
+    * There is no visible stagnation point at the nose or a smooth acceleration over the upper surface, leading to the 0.000 reward.
+    * The velocity field lacks a distinct wake structure, suggesting the flow simply bypasses the collapsed geometry.
+* **Parameter Mapping & Design Flaws**:
+    * **Low Mid-Body Radii**: The `radius_param` values for CP1, 2, 4, 5, 6 in Design 1 range from 0.19 to 0.31. This is the direct cause of the collapse. To create a functional wing, these must be increased to the "Goldilocks Zone" ($0.6 - 0.85$).
+    * **Angular Clustering**: While the LE is at $a \approx 0.0$, the neighboring points are relatively close, which, combined with low radii, created the "pinched" look.
+    * **Key Changes Needed**: 
+        1. Increase mid-body radii significantly to create thickness and convexity.
+        2. Implement asymmetry (camber) by setting upper surface radii (CP1, 2) higher than lower surface radii (CP4, 5, 6).
+        3. Use extreme negative `edgy_param` values (-1.0) on all points except the TE to ensure a smooth, organic subsonic surface.

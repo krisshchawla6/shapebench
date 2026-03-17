@@ -1,0 +1,16 @@
+- **Geometry**: 
+    - The observed shape is a perfect circle, representing a classic bluff body.
+    - The eight control points are equidistantly distributed around the perimeter at a uniform radius.
+    - The surface is perfectly smooth with no curvature discontinuities or sharp features.
+- **Flow Field**:
+    - There is a massive wake region extending far downstream, indicated by the large dark purple area in the velocity magnitude plot.
+    - Flow separation occurs prematurely at approximately 90 and 270 degrees (the "shoulders" of the circle), leading to high pressure drag.
+    - A clear stagnation point is visible at the leading edge (the leftmost point) with a corresponding high-pressure zone.
+    - The flow is entirely symmetric, meaning the lift is zero and the drag is maximized for this volume.
+
+- **Mapping & Improvements**:
+    - Design 1's action vector `[1.0, 0.0, 0.0, ...]` maps directly to this circle: all radii are 1.0 (maximum), all angles are 0.0 (no offset), and all edginess values are 0.0 (perfectly smooth).
+    - **Change 1**: Sharpen CP4 (the trailing edge) to $r=1.0, e=1.0$ to enforce the Kutta condition and collapse the wake.
+    - **Change 2**: Significantly reduce the radii of CP2, CP3, CP5, and CP6 (the mid-section) to transform the circle into a slender, streamlined airfoil.
+    - **Change 3**: Introduce camber by making the upper radius (CP2) larger than the lower radius (CP6).
+    - **Change 4**: Adjust the nose (CP0) edginess to approximately -0.5 to maintain a robust, rounded leading edge that can handle variations in angle of attack without separation.

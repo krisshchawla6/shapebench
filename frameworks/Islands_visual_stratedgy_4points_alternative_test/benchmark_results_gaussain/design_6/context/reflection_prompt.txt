@@ -1,0 +1,76 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Hybrid Strategy Focus**: I am hybridizing the successful "Sharp TE" and "Smooth LE" traits of Design 1 with the "Thinning Strategy" and "Chord Illusion" heuristics from the knowledge base. Design 1 proved that the generator can create a sharp TE singularity, but it failed by making the rest of the body too thick.
+- **Chord Length Correction**: To escape the "Scale Trap" and the "Pebble" morphology, I will maintain a moderate LE radius (CP0) while shrinking the Upper (CP1) and Lower (CP3) radii to flatten the profile into a more traditional airfoil shape.
+- **Trailing Edge Refinement**: By setting CP2 Radius very low (~0.15) while keeping Edgy at 1.0, I will create a "needle-like" trailing edge that satisfies the Kutta condition without the base-drag penalty seen in the images.
+- **Peak Forward Loading**: Shifting the Upper surface angle (CP1) to a negative value will pull the maximum thickness forward, which typically improves lift-to-drag ratios by allowing for a longer pressure recovery region on the aft-body.
+- **Camber Introduction**: By keeping the Lower surface (CP3) radius smaller than the Upper surface (CP1) and using a positive angle to tuck the lower-rear, I aim to create a positive camber effect.
+
+## Per-Parameter Predictions
+- I am setting `param[1][0]` (Upper Radius) to **0.4824** because I predict it will **CAUSE the airfoil to lose its "hump" and become significantly thinner than Design 1.**
+- I am setting `param[2][0]` (TE Radius) to **0.1456** because I predict it will **CAUSE the trailing edge to taper into a sharp point rather than a thick wedge, reducing pressure drag.**
+- I am setting `param[1][1]` (Upper Angle) to **-0.2541** because I predict it will **CAUSE the peak thickness to shift toward the leading edge (roughly 30% chord).**
+- I am setting `param[0][2]` (LE Edgy) to **-0.9982** because I predict it will **CAUSE a perfectly smooth, circular stagnation point for stable flow attachment.**
+- I am setting `param[2][2]` (TE Edgy) to **1.0** because I predict it will **CAUSE a sharp geometric singularity necessary for proper flow shedding at the tail.**
+- I am setting `param[3][0]` (Lower Radius) to **0.2847** because I predict it will **CAUSE a flatter lower surface relative to the top, inducing aerodynamic camber.**
+
+- **Geometry Observation**: 
+    - The shape in the images (Design 1) resembles a "pebble" or a thick "seed." It is extremely stubby with a very low chord-to-thickness ratio.
+    - The leading edge is broad and well-rounded, but the profile transitions almost immediately into a thick upper hump.
+    - The trailing edge is sharp (high `edgy_param`), but because the radius at that point is high, the rear of the airfoil is a thick wedge rather than a tapered point.
+    - There is a lack of longitudinal stretching, resulting in a shape that looks more like a rounded triangle than a streamlined wing.
+
+- **Flow Field / Simulation Observation**:
+    - **Pressure (p)**: There is a clear stagnation point at the nose with high pressure. A large low-pressure "suction" zone exists over the steep upper hump, but it is concentrated in a small area.
+    - **Velocity U**: The horizontal velocity shows a massive, thick wake trailing behind the airfoil, indicating very high pressure drag due to the blunt rear geometry.
+    - **Velocity V**: The vertical velocity plots show flow being forced abruptly upward and then down, but the steep angles on the rear half suggest significant flow separation or at least a very messy recovery.
+    - **Overall**: The "stubby" nature prevents efficient pressure recovery, leading to the poor reward (-0.0959).
+
+- **Reference Mapping & Key Changes**:
+    - Design 1's `params[1][0]` (Upper Radius) is 0.929, which caused the "bloated hump."
+    - Design 1's `params[2][0]` (TE Radius) is 0.677, which caused the "blunt wedge" effect instead of a tapered tail.
+    - Key Change 1: Drastically reduce CP1 radius to thin the airfoil and improve the fineness ratio.
+    - Key Change 2: Drastically reduce CP2 radius to ensure the trailing edge is a slim taper, not a thick block.
+    - Key Change 3: Shift the CP1 angle forward to move the peak suction point toward the leading edge.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.5521,
+      0.0123,
+      -0.9982
+    ],
+    [
+      0.4824,
+      -0.2541,
+      -0.4125
+    ],
+    [
+      0.1456,
+      0.0051,
+      1.0
+    ],
+    [
+      0.2847,
+      0.1822,
+      -0.8954
+    ]
+  ],
+  "name": "thinned_hybrid_laminar_streamline"
+}
+```
+
+Sampled action vector:
+['0.6194', '0.0480', '-1.0000', '0.5283', '-0.2276', '-0.4520', '0.1286', '-0.0915', '0.9430', '0.2965', '0.2043', '-0.9761']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

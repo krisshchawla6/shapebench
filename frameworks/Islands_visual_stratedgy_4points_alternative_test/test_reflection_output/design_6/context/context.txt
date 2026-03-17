@@ -1,0 +1,50 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 6)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0, r \approx 1.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0, r \approx 1.0$. Spanning the origin creates necessary volume [iter 3, 4, 5, 6].
+*   **Structural Priority**: `angle_param` (chord) > `radius_param` (thickness/aspect ratio) > `edgy_param` (flow regulation/smoothing) [iter 1, 2, 4, 6].
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound**: $r < 0.3$ for intermediate points causes **radial collapse** (wasp-waist) or "shards" (jagged cut-backs) [iter 4, 6].
+    *   **Upper Bound**: $r > 0.8$ for all points causes **chord compression** (slug/pebble shape) [iter 5].
+    *   **Optimal**: LE/TE at $r \approx 1.0$, mid-body points at $r \approx 0.4–0.6$ to "stretch" the chord without creating a fragile "shard" [iter 5, 6].
+*   **Kutta Condition**: A geometric singularity (high `edgy_param` $\approx 1.0$) at the Trailing Edge (CP0/7) is mandatory to define flow reattachment [iter 2, 3, 4, 5, 6].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values (~0.9+) are required at the LE and TE poles to establish primary length [iter 1, 2, 3, 4, 5, 6].
+*   **The Shard Effect**: Extreme radial gradients between the LE pole ($r \approx 1.0$) and immediate neighbors ($r < 0.3$) create a triangular "beak" rather than a rounded nose. Mid-body points must be $> 0.4$ to maintain a streamlined profile [iter 6].
+*   **Camber & Lift**: Asymmetric radii between upper (CP4-6) and lower (CP1-2) surfaces create camber. A higher upper radius (e.g., $r=0.4$ vs $r=0.2$) creates a high-speed wedge/cambered profile [iter 4, 5, 6].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3, 4, 5, 6].
+*   **Parabolic Entry (Clustering)**: To avoid a "flat face" or "beak," neighboring angles must cluster tightly near the LE pole (e.g., $a \approx \pm 0.05$). Wide spreads ($a \approx \pm 0.25$) produce blunt or triangular leading edges [iter 5, 6].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create "hooks" or self-intersecting loops [iter 2, 5, 6].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 1.0$) at the Trailing Edge create the "stinger" necessary for flow separation [iter 2, 3, 4, 5, 6].
+*   **Surface Healing**: Extreme negative values ($e \approx -1.0$) at mid-body points and the LE are the most effective way to "heal" a polygon into a smooth, continuous aerodynamic silhouette, eliminating "blockiness" [iter 1, 4, 5, 6].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE ensures smooth flow acceleration; however, it cannot override poor $r$ or $a$ values—if $r$ is too high, the nose stays flat; if $r$ transitions are too steep, the nose becomes a "beak" [iter 5, 6].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.986335, -1.0, 1.0, 0.283154, -0.846077, -1.0, 0.16908, -0.254203, -1.0, 0.996416, -0.067076, -0.999361, 0.3997, 0.304558, -0.981629, 0.413028, 0.712831, -1.0, 0.340905, 0.961984, -0.990926, 0.981, 0.96858, 0.958368]
+  - Reward: 0.0000
+  - Rank: N/A
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

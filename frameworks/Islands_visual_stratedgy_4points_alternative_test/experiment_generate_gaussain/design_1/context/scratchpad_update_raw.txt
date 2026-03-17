@@ -1,0 +1,20 @@
+## Reference Card (Iteration 2)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n$ must be $> 0$ to prevent non-physical origin-crossing [iter 1].
+*   **Radial Gradient Continuity:** Large deltas between adjacent $r$ values (e.g., $r_0$ vs $r_1$) create concave "waists" or "necks." These cause local flow acceleration/separation and high drag [iter 2].
+*   **Chord-to-Thickness Ratio:** Increasing $\{r_0, r_4\}$ relative to $\{r_2, r_6\}$ improves aspect ratio, but midsection radii must remain high enough to "support" the chord and prevent a "peanut" profile [iter 1, 2].
+*   **Monotonicity Requirement:** For smooth NACA-style flow, transitions from the midsection ($r_2, r_6$) to the poles ($r_0, r_4$) should be near-monotonic to avoid lumpy, "bulbous" appendages [iter 2].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | Trailing Edge (TE) extension. | Sets chord length; requires high $r_1, r_7$ to avoid a "protruding tail" [iter 1, 2]. |
+| **$e_0$** | TE sharpness/eccentricity. | High positive values ($>0.9$) enforce Kutta condition; creates "beak" shape if $r_1, r_7$ are too small [iter 1, 2]. |
+| **$r_2$** | Upper surface (suction) height. | Controls thickness; values too low relative to $r_0, r_4$ cause "waisting" and drag [iter 1, 2]. |
+| **$a_2$** | Upper surface angular bias. | Shifts longitudinal position of max thickness; effect is secondary to radial lumpiness [iter 1, 2]. |
+| **$r_4$** | Leading Edge (LE) extension. | Sets forward chord boundary; requires support from $r_3, r_5$ to avoid "bulbous nose" [iter 1, 2]. |
+| **$e_4$** | LE bluntness/eccentricity. | High negative values create rounded LE; can cause "pinching" if transition to midsection is too aggressive [iter 1, 2]. |
+| **$r_6$** | Lower surface (pressure) height. | Primary camber control; must balance with $r_2$ to maintain structural volume and avoid "peanut" shapes [iter 1, 2]. |
+| **$r_{1,3,5,7}$** | Transition radii. | Critical bridges; must be tuned to $r_{even}$ values to prevent "pinched neck" or "dumbbell" effects [iter 1, 2]. |

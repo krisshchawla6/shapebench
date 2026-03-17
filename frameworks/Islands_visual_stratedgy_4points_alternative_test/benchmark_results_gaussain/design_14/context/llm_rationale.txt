@@ -1,0 +1,12 @@
+- **Exploration Strategy**: This design targets the **"Thick-Convex"** region of the parameter space, which is currently underexplored. While the top designs are all "waisted" and thin, this design pushes side radii (r1, r3) toward the upper boundaries (0.8+) to see if a fuller, more conventional laminar-flow shape yields higher lift-to-drag.
+- **Chord Tension Balance**: I will use a high but not extreme chord (r0=0.88, r2=0.92) to maintain length while avoiding the geometric singularities (beaking) seen when radius equals 1.0.
+- **Forward-Loaded Camber**: By setting a1 to a significant negative value (-0.6) and a3 to a smaller negative value (-0.2), I am exploring an asymmetric, forward-loaded thickness distribution, which is common in high-performance subsonic airfoils but absent in the current population.
+- **Smoothing vs. Edgy**: I will use a moderate "edgy" value for the upper peak (e1=-0.4) to test if a slightly less-than-perfectly-smooth peak helps transition the boundary layer in this thicker regime.
+- **Kutta Condition**: Maintaining e2 at 1.0 is essential to ensure the simulation treats the trailing edge as a sharp flow-shedding point.
+
+## Per-Parameter Predictions
+- I am setting **r0 to 0.88** because I predict it will create a rounded, robust leading edge that avoids the "beaking" seen in Design 1.
+- I am setting **r1 to 0.82** and **r3 to 0.78** because I predict these high values will completely eliminate the "waisted" concavity and create a convex, high-volume airfoil.
+- I am setting **a1 to -0.60** because I predict it will shift the maximum thickness to roughly 25-30% of the chord, creating a favorable pressure gradient.
+- I am setting **a3 to -0.20** because I predict it will create a subtle camber when paired with the upper surface's more aggressive forward shift.
+- I am setting **e2 to 1.0** because I predict it will enforce the Kutta condition and prevent flow wrapping around the trailing edge.

@@ -1,0 +1,33 @@
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** Radius functions as polar distance from centroid. Maximize LE (CP0) and TE (CP2) radii while minimizing Upper (CP1) and Lower (CP3) radii to maximize chord and fineness ratio [iter 7, 8].
+*   **The Tension Trap:** Extreme polar stretching (CP0/CP2 Radii > 0.9) combined with low side radii (CP1/CP3 < 0.25) creates a "waisted" or "collapsed" middle, resulting in a boomerang/hook shape rather than a slender blade [iter 11].
+*   **The Slender Transition:** To exit the "stalled pebble" regime, use extreme high radii for CP0/CP2 (>0.9) and low radii for CP1/CP3 (<0.25) [iter 8].
+*   **Chord Truncation:** Low TE Radius (CP2) "shortens" the chord, creating "Thimble" morphology [iter 7].
+*   **The Scale Trap:** Low radii across all CPs create "miniature" bluff bodies with low Reynolds numbers [iter 4, 7].
+*   **The Concavity Floor:** Radii below ~0.20 (specifically CP3) act as "gravity wells." Under high chord tension, they create concave "hooks" or "bites" rather than flat surfaces [iter 8, 11].
+*   **The Kutta Singularity:** TE Edgy [2][2] = 1.0 is mandatory for flow shedding. Orientation must align with mean flow to avoid high pressure drag from "hooked" tails [iter 2, 11].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius) trigger separation. Flattening via low CP1 Radius (~0.2) promotes laminar streamlines [iter 1, 8].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Primary driver of forward chord extension. High values (>0.9) essential for slender bodies, but requires balanced side radii to prevent "waisting" [iter 7, 11].
+*   **Angle [0][1]:** Controls vertical centering of the nose [iter 4].
+*   **Edgy [0][2]:** -1.0 ensures a circular, C-infinity continuous stagnation point [iter 2, 5, 7, 11].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" fullness. Low values (~0.2) thin the profile but must remain high enough to "push" the boundary out against polar tension [iter 8, 11].
+*   **Angle [1][1]:** Lower values (~ -0.4) shift peak forward to ~30% chord [iter 1, 5, 8, 11].
+*   **Edgy [1][2]:** Low values ensure smooth transition over the peak [iter 4].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Primary driver of rearward chord extension. Must be near 1.0 to maximize chord. Extreme values can pull the tail into a downward "hook" if CP3 is weak [iter 7, 11].
+*   **Angle [2][1]:** Aligns tail point; must be near 0.0 for horizontal chord alignment to minimize frontal area [iter 4, 11].
+*   **Edgy [2][2]:** 1.0 enforces a sharp geometric singularity for Kutta condition [iter 2, 5, 7, 8, 11].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Flattening/Camber control. Values < 0.2 cause "collapse" into deep concavity when CP0/CP2 are high; values ~0.3-0.4 are likely needed for flat/laminar bottoms [iter 8, 11].
+*   **Angle [3][1]:** Positive values (~0.2) tuck the lower-rear inward. Combined with ultra-low radius, it creates extreme "boomerang" camber [iter 8, 11].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain smooth lower surface continuity [iter 4].

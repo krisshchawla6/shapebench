@@ -1,0 +1,13 @@
+*   **Strategy Focus**: Following the Novel Design Strategy, I am establishing a "Cambered High-Lift" archetype. This avoids the neutral center of the parameter space and instead targets a functional teardrop shape with distinct asymmetry to maximize lift.
+*   **Leading Edge Geometry**: I will utilize a rounded, smooth leading edge (low edgy_param) to ensure a stable stagnation point and minimize the risk of early flow separation.
+*   **Upper Surface Curvature**: To generate a significant pressure differential, the upper control point will have a high radial distance. This increases the curvature and flow velocity over the top surface.
+*   **Trailing Edge Definition**: A sharp trailing edge (high edgy_param) is critical for aerodynamic performance. It satisfies the Kutta condition, ensuring that the flow leaves the airfoil smoothly and generates predictable circulation.
+*   **Bottom Surface Flatness**: By reducing the radial distance of the lower control point relative to the upper one, I create an asymmetric profile that encourages higher pressure on the lower surface.
+
+## Per-Parameter Predictions
+*   **param[0][0] (Radius 0)**: I am setting this to 0.6200 because I predict it will cause a sufficiently blunt nose to improve performance at varied angles of attack.
+*   **param[0][2] (Edgy 0)**: I am setting this to -0.9500 because I predict it will cause a perfectly smooth, circular leading edge.
+*   **param[1][0] (Radius 1)**: I am setting this to 0.8800 because I predict it will cause a high peak in the upper surface, increasing the effective camber.
+*   **param[1][1] (Angle 1)**: I am setting this to 0.1500 because I predict it will cause the maximum thickness to shift slightly forward, which is typical for efficient subsonic airfoils.
+*   **param[2][2] (Edgy 2)**: I am setting this to 0.9800 because I predict it will cause a very sharp trailing edge, minimizing the wake size.
+*   **param[3][0] (Radius 3)**: I am setting this to 0.2200 because I predict it will cause a relatively flat lower surface when compared to the top, promoting lift.

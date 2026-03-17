@@ -1,0 +1,13 @@
+- **Exploitation Strategy**: I am refining the parameters of Design 2, the current population leader, by applying small, targeted adjustments to the high-performing configuration.
+- **LE Alignment**: I will reduce CP0 angle ($a_0$) from 0.035 to 0.024. This aligns the chord line more effectively with the horizontal flow, potentially reducing the leading-edge pressure drag seen in the simulations.
+- **Thickness Reduction**: By lowering CP1 radius ($r_1$) from 0.40 to 0.394, I am slimming the upper surface to minimize the frontal area and pressure drag without sacrificing the forward-shifted peak that provides lift.
+- **Lower Surface Smoothing**: Adjusting $a_3$ from 0.189 to 0.178 will slightly flatten the belly of the airfoil, which helps in maintaining laminar flow on the pressure side and prevents "waisting" near the trailing edge.
+- **TE Stability**: CP2 parameters (Radius 1.0, Edgy 1.0) are kept at their limits to maximize chord length and ensure a sharp trailing edge, which is essential for the 2.9+ rewards observed.
+
+## Per-Parameter Predictions
+- **r0 (0.9525)**: I am setting this to 0.9525 because I predict it will maximize chord length while maintaining the successful "beaked" leading edge profile from the top-ranked designs.
+- **a0 (0.0245)**: I am setting this to 0.0245 because I predict it will lower the incidence of the stagnation point, reducing drag compared to Design 2.
+- **r1 (0.3942)**: I am setting this to 0.3942 because I predict it will thin the airfoil slightly, reducing volume and drag.
+- **a1 (-0.4268)**: I am setting this to -0.4268 because I predict it will maintain the optimal forward-shifted lift distribution.
+- **r3 (0.4895)**: I am setting this to 0.4895 because I predict it will provide enough thickness to avoid the "waisted trap" while keeping the lower surface smooth.
+- **a3 (0.1782)**: I am setting this to 0.1782 because I predict it will prevent the "fang" formation while maintaining a gentle camber.

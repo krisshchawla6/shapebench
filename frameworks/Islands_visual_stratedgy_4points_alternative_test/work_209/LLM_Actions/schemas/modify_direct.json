@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Modify Action Direct",
+  "description": "Modify an existing airfoil action vector by updating specific control points directly.",
+  "type": "object",
+  "properties": {
+    "base_csv": {
+      "type": "string",
+      "description": "Path to the base action CSV."
+    },
+    "pt_idx": {
+      "type": "array",
+      "description": "List of control point indices to modify (0-indexed).",
+      "items": { "type": "integer" }
+    },
+    "values": {
+      "type": "array",
+      "description": "List of [radius_param, angle_param, edgy_param] for each index in pt_idx. ALL VALUES MUST BE IN [-1.0, 1.0].",
+      "items": {
+        "type": "array",
+        "items": { "type": "number" },
+        "minItems": 3,
+        "maxItems": 3
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "Name for the new action file."
+    }
+  },
+  "required": ["base_csv", "pt_idx", "values"]
+}

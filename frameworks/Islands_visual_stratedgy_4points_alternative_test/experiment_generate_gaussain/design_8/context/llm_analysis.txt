@@ -1,0 +1,16 @@
+The provided images for Design 1 (reward -0.0036) represent a baseline circular geometry.
+- **Geometry**:
+    - The shape is a perfect, smooth circle.
+    - There is no chord-wise extension; the height is equal to the width.
+    - It lacks a defined leading edge (LE) or trailing edge (TE), functioning as a bluff body.
+- **Flow Fields**:
+    - **Pressure**: A high-pressure stagnation point is visible at the direct front, with a massive low-pressure wake region extending far behind the body.
+    - **Velocity**: Flow accelerates significantly over the crests but separates almost immediately past the 90-degree points, leading to a wide, low-velocity turbulent wake.
+    - **Overall**: The design suffers from massive pressure drag due to flow separation.
+
+Design 1's action vector consists of all radii at 1.0 and all other parameters at 0.0. This maps `radius_param=1.0` to the boundary of the design space. To improve, we must break this symmetry.
+- **Key Changes Needed**:
+    1.  **Introduce Aspect Ratio**: Significantly increase the ratio between $r_0, r_4$ (chord) and $r_2, r_6$ (thickness).
+    2.  **Sharpen the Trailing Edge**: Use negative `edgy_param` at $CP_0$ and ensure the radius tapers towards this point to satisfy the Kutta condition.
+    3.  **Round the Leading Edge**: Use positive `edgy_param` at $CP_4$ to create a stable stagnation zone.
+    4.  **Forward Volume Bias**: Shift the maximum thickness forward by adjusting $a_2$ and $a_6$ to delay separation.

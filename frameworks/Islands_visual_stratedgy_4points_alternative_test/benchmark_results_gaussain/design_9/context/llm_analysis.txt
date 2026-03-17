@@ -1,0 +1,20 @@
+**Geometry Observations:**
+*   The airfoil in Design 1 (reward 1.1107) is a relatively thick, bulbous shape with a well-defined, rounded leading edge and a sharp trailing edge.
+*   The upper surface (CP1) and lower surface (CP3) both exhibit significant "fullness," creating a high thickness-to-chord ratio that resembles a subsonic "fat" airfoil or a pebble-like morphology.
+*   The trailing edge is sharp, but the transition from the thick midsection to the tail is abrupt, suggesting a steep pressure recovery region.
+*   The overall symmetry is high, though slightly more volume is distributed on the upper half.
+
+**Flow Field Observations:**
+*   **Pressure (p):** A clear stagnation point exists at the nose. There is a broad low-pressure (suction) zone on the upper surface, but the pressure increases rapidly toward the rear, which often precedes flow separation in thicker designs.
+*   **Velocity (u):** Flow accelerates significantly over both the top and bottom peaks. There is a visible velocity deficit (wake) starting immediately at the trailing edge, likely due to the thickness-induced pressure drag.
+*   **Velocity (v):** Significant vertical flow deflection is visible near the leading edge and trailing edge, confirming lift generation, but the "bluntness" of the midsection forces the flow to move around a large obstacle.
+
+**Design 1 Mapping & Flaws:**
+*   **Flaw 1: Excessive Thickness.** CP1 Radius (0.3538) and CP3 Radius (0.3619) are too high, creating a high-drag "pebble" shape.
+*   **Flaw 2: Peak Positioning.** CP1 Angle (0.5281) pushes the upper peak relatively far back, while the goal for high-performance airfoils is often a more forward-biased thickness to maintain laminar flow.
+*   **Flaw 3: Drag Profile.** The large cross-sectional area visible in the velocity plot indicates high form drag.
+
+**Key Changes Needed:**
+1.  **Drastic Thinning:** Reduce CP1 and CP3 radii to the 0.15–0.22 range to create a slender profile.
+2.  **Forward Loading:** Shift the CP1 angle to negative values to move the maximum thickness toward the first 30% of the chord.
+3.  **Maximum Chord Extension:** Maximize CP0 and CP2 radii to 1.0 to increase the Reynolds number and fineness ratio.

@@ -1,0 +1,88 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Exploitation Strategy**: I am refining the circle's successful "smooth and thick" characteristic while introducing essential airfoil features (leading edge bluntness and trailing edge sharpness).
+- **Radial Delta Management**: To avoid the -5.0 penalty seen in Design 2 and 5, I will limit the change between adjacent radii to $\leq 0.3$. This ensures the spline remains convex and avoids the "notches" that cause radial collapse.
+- **Chord Extension**: By maintaining $r_0$ and $r_4$ near 1.0, I define a clear horizontal chord line, shifting the geometry from a bluff body to a streamlined one.
+- **TE Sharpening**: I will set $e_0$ to a high negative value (-0.95) to create a Kutta-condition-compliant trailing edge, which is essential for reducing the massive wake seen in the circle's flow field.
+- **Camber Introduction**: By setting $r_2$ (upper) slightly higher than $r_6$ (lower), I create a positive camber to generate lift while maintaining enough thickness ($>0.4$) to prevent flow separation.
+
+## Per-Parameter Predictions
+- I am setting `param[0][0]` to 1.0000 and `param[0][2]` to -0.9800 because I predict it will create a maximum-length, sharp trailing edge.
+- I am setting `param[1][0]` to 0.8200 and `param[7][0]` to 0.8500 because I predict these will provide the necessary radial support to bridge the long tail to the main body without concave "bites".
+- I am setting `param[2][0]` to 0.5200 and `param[6][0]` to 0.4500 because I predict this thickness ratio will provide a stable pressure gradient and meaningful lift.
+- I am setting `param[4][0]` to 0.9500 and `param[4][2]` to 0.8500 because I predict a slightly shorter, rounded nose will minimize the stagnation pressure spike.
+- I am setting `param[3][0]` and `param[5][0]` to ~0.7500 because I predict they will create a smooth "shoulder" for the leading edge, preventing premature separation.
+
+The images show a perfectly circular geometry (Design 1), which is the baseline population member. 
+- **Geometry**: 
+    - The shape is a perfect unit circle, characterized by equal radial parameters (1.0) and zero angular/edgy offsets.
+    - It is perfectly symmetric and lacks any streamlining or chord-wise extension.
+    - The trailing edge is as blunt as the leading edge, which is the primary geometric flaw for aerodynamic efficiency.
+- **Flow Field**:
+    - The velocity plot shows a massive, stagnant wake (dark purple) extending far behind the circle, indicating total flow separation.
+    - The pressure plot shows a high-pressure stagnation point at the leading edge (yellow) and a broad low-pressure zone on the sides, but the lack of a tapered trailing edge prevents pressure recovery.
+    - There is significant wake asymmetry/instability visible in the field plots, typical of high-drag bluff bodies.
+
+Design 1's reward of -0.0036 is the current benchmark. Designs 2 and 5 received a penalty reward of -5.0000. In Design 5, the parameter `r6` (lower surface) was 0.1335 and `r2` (upper surface) was 0.4184. The extreme drop from `r0=1.0` to these low values likely triggered the "Radial Collapse" mentioned in the reference card, causing a non-physical geometry. To improve, we must maintain radial support (keep $r_n > 0.35$) while stretching the circle into a chord.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      -0.98
+    ],
+    [
+      0.82,
+      -0.0542,
+      -0.21
+    ],
+    [
+      0.52,
+      0.1055,
+      0.0
+    ],
+    [
+      0.75,
+      0.0412,
+      0.35
+    ],
+    [
+      0.95,
+      0.0,
+      0.88
+    ],
+    [
+      0.72,
+      -0.0488,
+      0.35
+    ],
+    [
+      0.45,
+      -0.112,
+      0.0
+    ],
+    [
+      0.85,
+      0.0521,
+      -0.15
+    ]
+  ],
+  "name": "streamlined_exploitation_v1"
+}
+```
+
+Sampled action vector:
+['1.0000', '0.0624', '-0.9635', '0.8835', '-0.0236', '-0.2245', '0.5920', '0.1090', '0.0079', '0.7704', '0.0343', '0.4293', '0.9151', '-0.0596', '0.8079', '0.6232', '-0.0313', '0.3477', '0.4756', '-0.1079', '-0.0611', '0.9270', '0.0855', '-0.1554']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

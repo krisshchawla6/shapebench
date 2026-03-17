@@ -1,0 +1,97 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** Radius functions as polar distance from centroid. Maximize LE (CP0) and TE (CP2) radii while minimizing Upper (CP1) and Lower (CP3) radii to maximize chord and fineness ratio [iter 7, 8].
+*   **The Tension Trap:** Extreme polar stretching (CP0/CP2 Radii > 0.9) combined with low side radii (CP1/CP3 < 0.25) creates a "waisted" or "collapsed" middle, resulting in a boomerang/hook shape rather than a slender blade [iter 11].
+*   **The Slender Transition:** To exit the "stalled pebble" regime, use extreme high radii for CP0/CP2 (>0.9) and low radii for CP1/CP3 (<0.25) [iter 8].
+*   **Chord Truncation:** Low TE Radius (CP2) "shortens" the chord, creating "Thimble" morphology [iter 7].
+*   **The Scale Trap:** Low radii across all CPs create "miniature" bluff bodies with low Reynolds numbers [iter 4, 7].
+*   **The Concavity Floor:** Radii below ~0.20 (specifically CP3) act as "gravity wells." Under high chord tension, they create concave "hooks" or "bites" rather than flat surfaces [iter 8, 11].
+*   **The Kutta Singularity:** TE Edgy [2][2] = 1.0 is mandatory for flow shedding. Orientation must align with mean flow to avoid high pressure drag from "hooked" tails [iter 2, 11].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius) trigger separation. Flattening via low CP1 Radius (~0.2) promotes laminar streamlines [iter 1, 8].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Primary driver of forward chord extension. High values (>0.9) essential for slender bodies, but requires balanced side radii to prevent "waisting" [iter 7, 11].
+*   **Angle [0][1]:** Controls vertical centering of the nose [iter 4].
+*   **Edgy [0][2]:** -1.0 ensures a circular, C-infinity continuous stagnation point [iter 2, 5, 7, 11].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" fullness. Low values (~0.2) thin the profile but must remain high enough to "push" the boundary out against polar tension [iter 8, 11].
+*   **Angle [1][1]:** Lower values (~ -0.4) shift peak forward to ~30% chord [iter 1, 5, 8, 11].
+*   **Edgy [1][2]:** Low values ensure smooth transition over the peak [iter 4].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Primary driver of rearward chord extension. Must be near 1.0 to maximize chord. Extreme values can pull the tail into a downward "hook" if CP3 is weak [iter 7, 11].
+*   **Angle [2][1]:** Aligns tail point; must be near 0.0 for horizontal chord alignment to minimize frontal area [iter 4, 11].
+*   **Edgy [2][2]:** 1.0 enforces a sharp geometric singularity for Kutta condition [iter 2, 5, 7, 8, 11].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Flattening/Camber control. Values < 0.2 cause "collapse" into deep concavity when CP0/CP2 are high; values ~0.3-0.4 are likely needed for flat/laminar bottoms [iter 8, 11].
+*   **Angle [3][1]:** Positive values (~0.2) tuck the lower-rear inward. Combined with ultra-low radius, it creates extreme "boomerang" camber [iter 8, 11].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain smooth lower surface continuity [iter 4].
+
+## New Evidence (Iteration 13)
+Parameters used:
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9652,
+      0.0012,
+      -1.0
+    ],
+    [
+      0.3621,
+      -0.4215,
+      -0.45
+    ],
+    [
+      0.9845,
+      0.0051,
+      1.0
+    ],
+    [
+      0.3224,
+      0.1823,
+      -0.9
+    ]
+  ],
+  "name": "Slender_Hybrid_Laminar"
+}
+```
+
+Observations:
+This design, **"Slender_Hybrid_Laminar,"** represents a significant shift from the "pebble" morphology of previous attempts. While it successfully achieved a high thickness-to-chord ratio, it has fallen into the "waisted" or "boomerang" trap mentioned in the Reference Card, resulting in a highly concave lower surface and a non-traditional leading edge.
+
+### Parameter-by-Parameter Analysis
+
+| Parameter | Predicted Effect | Actual Outcome |
+| :--- | :--- | :--- |
+| **CP0 Radius (0.9574)** | Maximize chord length by pushing the leading edge forward. | **Success/Extreme**: The chord is significantly longer, but the nose is pushed so far relative to the side points that it has created a "beak" shape. |
+| **CP0 Edgy (-0.9542)** | Ensure a smooth, circular stagnation point. | **Failure**: Despite the "smooth" setting, the geometry is so stretched that the leading edge appears extremely sharp. The "smoothness" is lost to the extreme tension of the high radius. |
+| **CP1 Radius (0.3192)** | Drastically thin the profile to reduce pressure drag. | **Success**: The "hump" from Design 1 is gone. The airfoil is slender and resembles a high-speed blade. |
+| **CP1 Angle (-0.4215)** | Shift peak thickness forward to ~30% chord for laminar flow. | **Success**: The thickest part of the upper surface is correctly positioned forward, creating a long, tapering rear section. |
+| **CP2 Radius (0.9661)** | Extend the tail to the maximum rearward position. | **Success**: Combined with CP0, this has maximized the available chord length within the design space. |
+| **CP2 Edgy (1.0000)** | Enforce a sharp Kutta condition at the trailing edge. | **Success**: The trailing edge is perfectly sharp, which should allow for clean flow shedding. |
+| **CP3 Radius (0.3121)** | Create a flatter lower surface/positive camber. | **Failure**: Instead of being "flat," the lower surface is **concave**. This is the "boomerang" effect; the radius wasn't high enough to resist the pull of the distant LE/TE points. |
+| **CP3 Angle (0.1537)** | Tuck the lower-rear inward to sharpen the tail. | **Success**: It contributes to the sharp tail, but also exacerbates the "scooped out" look of the underbelly. |
+
+### Key Learnings
+
+1.  **The Chord/Thickness Tension**: When CP0 and CP2 (chord) radii are near 1.0, CP1 and CP3 (thickness) radii of ~0.3 are insufficient to maintain a convex shape. This confirms the **"Waisted Trap"**: to avoid a boomerang shape at maximum chord, the side radii must likely be increased to ~0.45 or 0.5.
+2.  **Leading Edge "Beaking"**: Setting CP0 Edgy to -1.0 (smooth) does not guarantee a blunt nose if the radius is extreme. The geometric tension between the forward-most point and the side points (CP1/CP3) creates a sharp transition. To get a rounded "NACA-style" nose, the CP0 radius may need to be slightly lower, or the side points moved further forward.
+3.  **Concavity and Drag**: The resulting "hook" shape on the lower surface (CP3) is likely to trap a recirculating bubble of air (a "cove"), which would significantly increase drag and counteract the benefits of the slender profile.
+4.  **Structural vs. Aerodynamic**: While this shape looks more like a "wing" than the previous "pebble," it has moved too far into the concave regime. The next iteration should focus on **"filling out the belly"** by increasing the CP3 radius to transition from concave to flat or slightly convex.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

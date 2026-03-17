@@ -1,0 +1,28 @@
+This analysis examines the transition from the "shard" failure of Design 1 to the "waisted slug" geometry of Design 2 (Cambered Boundary Explorer).
+
+### Per-Parameter Prediction vs. Outcome
+
+| Control Point | Parameter (R, A, E) | Prediction | Actual Outcome |
+| :--- | :--- | :--- | :--- |
+| **CP0 / CP7** | `[0.98, ±1.0, 1.0]` | Sharp "stinger" trailing edge at the polar limit. | **Success.** The points successfully merged at the pole (-1.0/1.0) to create the sharp, pointed tip visible at the left of the geometry. |
+| **CP3** | `[0.95, 0.0, -1.0]` | Blunt, rounded nose at the opposite pole (Angle 0). | **Success.** This created the wide, rounded "base" of the shape. The high negative `edgy_param` successfully rounded the curvature. |
+| **CP1 & CP2** | `[0.22, -0.7, -0.5]` `[0.34, -0.3, -0.9]` | Smooth upper-aft section and suction "hump." | **Failure.** Because the radii (0.22-0.34) are significantly smaller than the LE/TE radii (~0.95), the surface collapsed inward toward the origin instead of bowing outward. |
+| **CP4 & CP5** | `[0.24, 0.3, -0.8]` `[0.16, 0.7, -0.5]` | Lower surface thickness and positive camber. | **Failure.** Similar to the upper surface, the low radii created a "pinched" or "waisted" effect. The intended camber was overshadowed by the radical thickness contraction. |
+| **CP6** | `[0.88, 0.96, 0.75]` | Clean convergence near the TE. | **Partial Success.** It bridged the gap between the "waist" and the sharp TE, but the transition is abrupt. |
+
+### Key Learnings
+
+#### 1. The "Waist" Trap (Radius Delta)
+While Design 1 failed due to angular collapse, Design 2 suffered from **radial collapse**. By setting the LE and TE at maximum radii (~1.0) and the intermediate points at low radii (~0.2), you created a "bone" or "wasp-waist" shape. In this parameter space, an airfoil's "thickness" is not a single parameter; it is the delta between the radii of upper and lower control points at similar angles. To create a traditional wing, the radii of CP1-CP2 and CP4-CP5 must be *comparable* to (or slightly larger than) the LE/TE radii, not 80% smaller.
+
+#### 2. The Polar Chord Realization
+The strategy of placing the LE at `angle 0.0` and the TE at `angle 1.0/-1.0` is correct for maximizing chord length. The geometry now spans the origin. However, because the shape pinches to a near-zero thickness in the middle, the aerodynamic solver likely sees two separate blunt bodies or a non-physical singularity, resulting in the continued 0.0000 reward.
+
+#### 3. Geometry Healing vs. Edge Definition
+The `edgy_param` worked exactly as predicted. The combination of `-1.0` at the nose (CP3) and `1.0` at the tail (CP0/7) created a clear distinction between a "Leading Edge" and a "Trailing Edge." The next step is to "fill out" the body between these two functional poles.
+
+#### 4. Asymmetric Radius for Camber
+The attempt to induce camber by making CP1/2 slightly larger than CP4/5 was mathematically sound but visually irrelevant because both were too small. Camber is a subtle modification of a thick body; without the "body" (sufficient radius), the camber cannot manifest as lift.
+
+### Final Assessment
+Design 2 successfully "unfolded" the shard of Design 1 into a 2D object with volume. The failure is now one of **proportion**. The airfoil is "starved" in its midsection. To achieve a positive reward, the radial distribution must be flattened so that the middle of the wing is the thickest part, rather than the thinnest.

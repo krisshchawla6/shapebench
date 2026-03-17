@@ -1,0 +1,23 @@
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping
+
+### Global Design Rules
+*   **Aspect Ratio Dominance**: Aspect ratio is not automatic; it is a function of `angle_param` distribution. Clustering angles near zero results in a 1:1 "blob" [iter 1].
+*   **Structural Priority**: `angle_param` is the primary structural driver, `radius_param` is the secondary scale driver, and `edgy_param` is the tertiary smoothing driver [iter 1].
+*   **The "Blob" Failure**: High `radius_param` + Clustered `angle_param` + Negative `edgy_param` = A non-aerodynamic "river stone" with near-zero reward [iter 1].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Radial Extension**: Defines the distance of the control point from the geometric center [iter 1].
+*   **Uniformity Risk**: Relatively uniform values (0.4 to 0.9) across all points fail to create a distinct nose or tail unless the angular distribution is wide [iter 1].
+*   **Tail Formation**: To generate a trailing edge, the radius at the "tail" index must be coordinated with a specific angle to stretch the chord [iter 1].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Point Distribution**: Controls the fundamental placement of points around the center; the most critical parameter for establishing chord length [iter 1].
+*   **Clustering Effect**: Values restricted to a narrow range (-0.25 to +0.11) cause "Angular Clustering," bunching points into a small arc and destroying the airfoil's aspect ratio [iter 1].
+*   **Chord Establishment**: Requires a wide spread of values to pull points apart into a distinct Leading Edge (LE) and Trailing Edge (TE) [iter 1].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **Smoothing Effect**: Strongly negative values (e.g., -0.85 to -0.95) force the system to draw the smoothest possible curve through control points [iter 1].
+*   **Geometry "Healing"**: Can turn a lumpy polygon into a smooth "blob," but cannot fix a lack of aspect ratio caused by poor angular distribution [iter 1].
+*   **Sharpness Control**: Intended to define features like a sharp trailing edge, but ineffective if the underlying control points are too clustered [iter 1].

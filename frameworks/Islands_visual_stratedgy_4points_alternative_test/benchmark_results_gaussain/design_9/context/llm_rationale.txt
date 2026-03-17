@@ -1,0 +1,15 @@
+*   **Strategy Focus (Novel Design):** I am moving away from the "thick subsonic" regime of Design 1 toward a "Super-Slender Laminar" morphology. This prioritizes the reduction of pressure drag by minimizing the frontal area while maximizing the chord length to improve the lift-to-drag ratio.
+*   **Insight from Database:** Designs 3 and 4 failed (-5.0) because of extreme radius imbalances or truncation (Design 3 had a very low TE radius of 0.13). This confirms that high TE radius (CP2) is non-negotiable for a healthy chord.
+*   **Laminar Flow Control:** By setting a negative angle for CP1 and a positive angle for CP3, I will create a forward-biased thickness distribution, which helps maintain a favorable pressure gradient for longer stretches along the surface.
+*   **Concavity Exploration:** Setting CP3 (lower) to a very low radius (~0.16) while adjusting its angle will attempt to create a slight under-surface concavity (camber) to maintain lift even as the airfoil thins out.
+*   **Evolutionary Jump:** I am ignoring the moderate values of the previous winners and pushing the parameters to their functional limits to find the "global" slender optimum.
+
+## Per-Parameter Predictions
+*   **CP0 Radius [1.0]:** I predict this will extend the leading edge to the furthest possible forward point, maximizing chord length.
+*   **CP0 Edgy [-1.0]:** I predict this will create a perfectly smooth, circular stagnation point to prevent leading-edge separation.
+*   **CP1 Radius [0.1850]:** I predict this will drastically thin the upper surface, reducing the frontal area and form drag.
+*   **CP1 Angle [-0.5500]:** I predict this will shift the "peak" of the airfoil forward to approximately 25-30% chord.
+*   **CP2 Radius [1.0]:** I predict this will maximize the rearward extension, creating a very high-aspect-ratio slender body.
+*   **CP2 Edgy [1.0]:** I predict this will enforce a sharp Kutta condition for clean flow shedding at the tail.
+*   **CP3 Radius [0.1650]:** I predict this will flatten the bottom surface almost entirely, shifting the design toward a semi-flat-bottomed high-speed profile.
+*   **CP3 Angle [0.4500]:** I predict this will pull the lower surface volume slightly rearward to create a subtle camber effect when paired with the forward-leaning upper peak.

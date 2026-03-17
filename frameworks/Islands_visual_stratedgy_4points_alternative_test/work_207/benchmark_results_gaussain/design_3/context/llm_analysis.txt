@@ -1,0 +1,17 @@
+The provided images show the baseline design (Design 1) which is a perfect circle.
+- **Geometry**:
+    - The shape is a uniform cylinder/circle with a 1:1 thickness-to-chord ratio.
+    - It lacks any streamlining or a trailing edge to control flow separation.
+    - The control points are distributed at maximum radial distance (radius_param = 1.0) with no angular or sharpness variation.
+- **Flow Field**:
+    - There is a massive, symmetric stagnation zone at the front (leading edge).
+    - A very large, turbulent wake is visible behind the shape, indicated by the dark purple region in the velocity/pressure plots.
+    - The flow separates almost immediately after the vertical mid-points, leading to high pressure drag.
+    - There is no lift generated, as the flow is perfectly symmetric above and below the shape.
+
+Reference to Design 1: The action vector `[1.0, 0.0, 0.0, ...]` creates this circular profile. The reward of -0.0036 is the baseline for a non-aerodynamic body.
+To improve this, we must:
+1. Elongate the shape by increasing the chord length (CP0 and CP4).
+2. Drastically reduce thickness by lowering the radii of CP2 (top) and CP6 (bottom).
+3. Sharpen the trailing edge (CP4) to satisfy the Kutta condition and minimize the wake.
+4. Introduce camber by making the bottom surface flatter than the top.

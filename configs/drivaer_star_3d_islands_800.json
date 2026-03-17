@@ -1,5 +1,5 @@
 {
-  "framework": "drivaer_star_3d_islands",
+  "framework": "islands",
   "environment": "DrivAer_Star",
   "iterations": 800,
   "inspirations": 5,

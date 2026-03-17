@@ -1,0 +1,16 @@
+*   **Geometry Observation**:
+    *   The shape in the image is a "blob" or "slug" profile with extremely high thickness-to-chord ratio ($t/c$), looking more like a rounded pebble than an airfoil.
+    *   The trailing edge (right side) is completely blunt and rounded, which is a catastrophic aerodynamic flaw as it prevents the Kutta condition (flow reattachment).
+    *   The leading edge is indistinct and lacks a clear radius of curvature, leading to a blunt-body impact rather than smooth flow splitting.
+    *   There is no discernible camber; the shape is nearly symmetric but in a bulky, non-streamlined way.
+
+*   **Flow Field / Simulation Results Observation**:
+    *   The velocity field shows a massive wake region (dark blue area) extending far behind the shape, indicating total flow separation.
+    *   The pressure field shows a high-pressure stagnation point at the nose, but because the flow cannot stay attached to the rounded rear, there is no pressure recovery, resulting in massive pressure drag.
+    *   The streamlines do not follow the contour of the body; they diverge immediately at the "shoulders" of the shape.
+    *   The reward of 0.0000 is directly caused by the lack of a sharp trailing edge and the excessive thickness, which makes the shape a bluff body rather than an aerodynamic surface.
+
+*   **Action Vector Mapping & Fixes**:
+    *   **Bluntness**: Design 1 has high radii (e.g., $r_0=1.0, r_4=0.95$) at disparate angles, but the intermediate radii ($r_1, r_2, r_3$) are also quite high (0.4-0.5), which causes the "slug" thickness. 
+    *   **Inconsistent TE**: While $e_0$ is 0.87 (sharp), the surrounding points are very smooth ($e_1=-0.72, e_7=-0.81$), which "heals" the sharp point back into a curve.
+    *   **Key Changes**: 1) Force $r$ to be very low (e.g., < 0.25) for all points except the absolute Leading Edge (LE) and Trailing Edge (TE). 2) Use extreme $a$ values (-0.99 and 0.98) to stretch the chord. 3) Set $e$ to maximum at the TE and minimum at the LE.

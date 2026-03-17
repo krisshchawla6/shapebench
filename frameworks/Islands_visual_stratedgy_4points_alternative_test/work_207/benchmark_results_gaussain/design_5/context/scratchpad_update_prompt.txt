@@ -1,0 +1,121 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## General Design Rules
+*   **Flow Direction**: Right-to-Left. CP0=LE; CP4=TE [iter 2].
+*   **TE Dominance**: CP4 is the most critical feature; sharpening it ($r, e \to 1.0$) is the primary driver for drag reduction [iter 5].
+*   **Tadpole Effect**: Avoid extreme radius differences between the nose/tail (high $r$) and the midsection (low $r$); high curvature gradients create difficult pressure recovery [iter 5].
+*   **Concavity Risk**: Aggressive "pinching" in the rear (CP3/CP5) creates concave surfaces that risk boundary layer separation [iter 5].
+*   **Shoulder Drag**: Excessive negative edginess at CP0 creates a flat face with sharp "shoulders," causing localized flow acceleration/separation [iter 5].
+*   **Decoupling Strategy**: Use the delta between CP2 and CP6 radii to tune camber independently of thickness [iter 5].
+
+## Degree of Freedom Mapping
+
+| Control Point | Geometric Role | Optimal Range / Setting | Effect [Source] |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Leading Edge | Rad: ~0.8 / Edg: -0.4 to -0.6 | Avoid extreme negative edginess (-0.9) to prevent "flat-face" shoulders [iter 5]. |
+| **CP1 (U-Front)** | Transition | Gradual $e$ transition | Bridges LE to Suction side; sensitive to edginess jumps [iter 4]. |
+| **CP2 (Top)** | Suction Side | Rad: > 0.25 | Controls thickness; if too low relative to CP0, creates "tadpole" shape [iter 5]. |
+| **CP3 (U-Back)** | Transition | Radius > 0.22 | Supports TE; too much "pinching" creates separation-prone concavity [iter 5]. |
+| **CP4 (Tail)** | Trailing Edge | **Rad: 1.0 / Edg: 1.0** | **Mandatory** for Kutta condition; primary source of performance gains [iter 5]. |
+| **CP5 (L-Back)** | Transition | Radius > 0.22 | Mirrors CP3; critical for preventing blunt wake and rear concavity [iter 5]. |
+| **CP6 (Bottom)** | Pressure Side | Rad: 0.2 - 0.3 | Lower $r$ than CP2 creates positive camber; avoid "chin" protrusions [iter 5]. |
+| **CP7 (L-Front)** | Transition | Gradual $e$ transition | Prevents early LE separation; must maintain monotonic curvature [iter 4]. |
+| **Angle Offsets** | Thickness Dist. | $a < 0.1$ | Shifts thickness; excessive values distort chord length [iter 4]. |
+| **Edginess** | Surface Profile | $\Delta e < 0.5$ (adj. pts) | Defines curvature; high negative $e$ at LE creates stagnation flats [iter 5]. |
+
+## New Evidence (Iteration 5)
+*   **Successful Sharp TE**: Confirmed $r=1.0, e=1.0$ at CP4 successfully enforces the Kutta condition, transforming the body from a bluff shape to a lifting airfoil.
+*   **Camber Control**: Successfully decoupled thickness and camber by setting CP6 radius lower than CP2.
+*   **Curvature Gradients**: The "streamlined_kutta_taper" revealed that while thinning the airfoil is good, doing it too abruptly (pinching CP3/CP5) creates "dead air" concavities.
+*   **Nose Geometry**: $e = -0.85$ at CP0 is too aggressive; it creates a flat stagnation face that forces the flow to "turn the corner" too sharply at the shoulders.
+
+## New Evidence (Iteration 6)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.95,
+      0.0,
+      -0.5
+    ],
+    [
+      0.55,
+      0.0,
+      -0.2
+    ],
+    [
+      0.32,
+      0.05,
+      0.0
+    ],
+    [
+      0.38,
+      0.0,
+      0.3
+    ],
+    [
+      1.0,
+      0.0,
+      1.0
+    ],
+    [
+      0.38,
+      0.0,
+      0.3
+    ],
+    [
+      0.24,
+      0.05,
+      0.0
+    ],
+    [
+      0.55,
+      0.0,
+      -0.2
+    ]
+  ],
+  "name": "cambered_kutta_streamline"
+}
+```
+
+Observations:
+This analysis compares your predicted aerodynamic transformations against the resulting geometry. 
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter | Predicted Intent | Actual Outcome | Discrepancy Analysis |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Blunt, rounded leading edge ($r=0.95, e=-0.5$) to handle AoA. | A sharp, protruding "beak" on the left side of the geometry. | The negative edginess and high radius combined with the "pinched" neighboring points (CP1, CP7) created a sharp extension rather than a blunt nose. |
+| **CP4 (Tail)** | Sharp trailing edge ($r=1.0, e=1.0$) to enforce Kutta condition. | A massive, bulbous circular mass on the right side. | **Major Failure:** Despite $e=1.0$, the shape is extremely blunt. This suggests that high radius values at the poles, when mid-section points are small, default to "bulb" modes rather than "sharp" modes if the transition is too abrupt. |
+| **CP2 & CP6 (Camber)** | $r=0.32$ (top) vs $r=0.24$ (bottom) to create lift. | The shape is asymmetrical, but the "pinching" is so extreme it creates a "neck." | The radius values were too low relative to the poles ($r \approx 1.0$), causing a concave "waist" rather than a smooth airfoil surface. |
+| **CP3 & CP5 (Taper)** | Gradual convex taper ($r=0.38, e=0.3$). | Deep concave "scoops" before the rear bulb. | The edginess and radius values were insufficient to bridge the gap between the narrow mid-section and the massive rear bulb. |
+| **Chord Elongation** | Streamlined lifting body. | A "tadpole" or "spoon" shape facing backward. | Instead of a long chord, the design produced two distinct masses connected by a thin neck. |
+
+### Key Learnings
+
+#### 1. The "Dumbbell" Trap
+By setting the polar points (CP0 and CP4) to near-maximum radius ($0.95-1.0$) while pulling the mid-section points (CP2, CP3, CP5, CP6) to low values ($0.24-0.38$), you created a "dumbbell" effect. The geometry engine struggles to maintain a convex airfoil shape when the "waist" of the wing is significantly thinner than the "head" and "tail."
+
+#### 2. Edginess is Relative to Curvature
+Your prediction that $e=1.0$ at CP4 would "force the flow to leave smoothly" failed because the local radius was too high. A high radius (1.0) spread the "sharpness" over such a large area that it manifested as a broad curve rather than a point. To get a true trailing edge, the radius usually needs to be balanced with the surrounding points to allow the edginess to "pinch" into a vertex.
+
+#### 3. Concavity = Aerodynamic Failure
+The resulting shape features significant concavity (the "neck"). In subsonic aerodynamics, concave surfaces (except near the trailing edge of specific supercritical airfoils) almost always trigger immediate boundary layer separation. This shape likely has higher drag than the baseline circle because the flow must navigate a "neck" and then hit a flat-faced bulb.
+
+#### 4. Mapping Misalignment
+The "beak" appeared on the left (CP0) and the "bulb" on the right (CP4). If this were an airfoil, it would be flying "backward" (sharp leading edge, blunt trailing edge). This indicates a need to swap the logic: the trailing edge (CP4) requires a specific combination of low radius and high edginess to "stretch" the tail out, while the leading edge (CP0) needs a moderate radius to remain blunt.
+
+#### 5. The "Pinching" Limit
+You noted a desire to keep radii $> 0.25$ to prevent separation. However, even at $0.32$, the transition from $r=1.0$ (at the poles) to $r=0.32$ (at the shoulders) was too steep. The "slope" of the radius change between adjacent control points is more critical for flow attachment than the absolute radius value.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

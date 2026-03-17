@@ -1,0 +1,73 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Strategy Focus (Exploitation)**: I am refining the top-performing Design 1 by addressing its primary aerodynamic flaws (lower-surface separation and TE bluntness) while preserving its high-lift characteristics (forward peak, long chord).
+*   **Chord Extension**: Based on the "Radius-Distance Law," I will push $r_0$ and $r_2$ closer to their limits (0.92 and 0.97 respectively) to maximize the lifting surface area.
+*   **Lower Surface Smoothing**: The image analysis clearly shows the $e_3 = -0.9$ parameter creates a deep concave notch. I will move $e_3$ to -0.25 to create a gentler lower-surface curve that maintains camber without causing massive flow separation.
+*   **Kutta Refinement**: I will set $e_2$ to exactly 1.0. The Reference Card identifies this as mandatory for flow closure and reducing tail drag.
+*   **Volume Distribution**: Maintaining $r_1 \approx 0.41$ and $r_3 \approx 0.54$ ensures the airfoil remains convex and structural, avoiding the "waisted trap."
+*   **Alignment**: Keeping $a_0$ near $0.0$ and $a_2$ near $0.0$ ensures the airfoil is aligned with the freestream for minimum frontal drag.
+
+## Per-Parameter Predictions
+- I am setting **r0 to 0.9245** and **r2 to 0.9782** because I predict it will maximize chord length without triggering the pebble-like geometric collapse.
+- I am setting **e3 to -0.2500** because I predict it will shallow the lower-surface notch seen in Design 1, reducing pressure drag while maintaining lift-enhancing camber.
+- I am setting **e2 to 1.0000** because I predict it will enforce a sharp trailing edge, thinning the wake and improving the Kutta condition.
+- I am setting **a1 to -0.4550** because I predict it will maintain the high-lift forward peak position while smoothing the transition from the nose.
+- I am setting **e1 to -0.8500** because I predict it will create a smooth, continuous upper surface curvature to prevent premature flow separation.
+
+The geometry in the provided images (Design 1) shows a high-camber airfoil with a distinct "beaked" leading edge and a pronounced concave "notch" on the lower surface. 
+*   **Geometry Observations**: 
+    - The leading edge (LE) is well-defined but slightly angular, suggesting the transition from CP0 to CP1/CP3 is aggressive.
+    - The upper surface is smooth and convex, with the maximum thickness located forward (around 25-30% chord).
+    - The lower surface features a significant "fang" or concave inward curve, which likely creates a localized stagnation or separation zone.
+    - The trailing edge (TE) appears slightly truncated or blunt, not coming to a perfectly sharp point in the flow field.
+*   **Flow Field Observations**:
+    - Pressure ($p$): There is a strong low-pressure zone (blue) on the upper surface, contributing to high lift, but a distinct pressure spike/recirculation zone near the lower-surface notch.
+    - Velocity ($u$): Flow accelerates significantly over the upper crest, but the wake behind the TE is relatively thick, indicating drag from the blunt closure and lower-surface geometry.
+    - Velocity ($v$): Shows strong upwash at the nose and downwash at the tail, confirming high circulation.
+
+Design 1's success (Reward 2.47) is driven by its high chord length ($r_0=0.90, r_2=0.95$) and effective peak positioning ($a_1=-0.44$). However, the "fang" caused by $e_3 = -0.907$ is a major drag source. Key changes needed:
+1.  Increase $e_3$ toward zero to smooth the lower surface notch while maintaining volume.
+2.  Enforce $e_2=1.0$ to sharpen the Kutta condition and thin the wake.
+3.  Slightly increase $r_0$ and $r_2$ to further stretch the chord without hitting the "Stretching Paradox" collapse.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9245,
+      0.0021,
+      -1.0
+    ],
+    [
+      0.415,
+      -0.455,
+      -0.85
+    ],
+    [
+      0.9782,
+      0.015,
+      1.0
+    ],
+    [
+      0.542,
+      0.175,
+      -0.25
+    ]
+  ],
+  "name": "refined_long_chord_smooth_belly"
+}
+```
+
+Sampled action vector:
+['0.9619', '0.0262', '-1.0000', '0.3535', '-0.4435', '-0.8841', '0.9271', '-0.0037', '0.9745', '0.6196', '0.1752', '-0.2801']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

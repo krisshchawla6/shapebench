@@ -1,0 +1,114 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card (Iteration 5)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n > 0$ to prevent non-physical origin-crossing [iter 1].
+*   **Radial Tapering Rule:** Avoid steep deltas ($>0.3$) between adjacent $r$ values. Rapid drops (e.g., $r_0=0.9 \rightarrow r_7=0.5 \rightarrow r_6=0.1$) cause **Radial Collapse**, creating concave "notches" that kill lift [iter 2, 5].
+*   **Curvature Continuity:** Subsonic profiles must remain convex. Small $r_2, r_6$ relative to $r_0, r_4$ create "bean" shapes or "bites" that cause immediate flow separation [iter 3, 5].
+*   **Eccentricity Context:** $e$ values are not absolute. A sharp $e_0 \rightarrow -1$ or blunt $e_4 \rightarrow +1$ will fail or distort if adjacent radii ($r_1, r_7$ or $r_3, r_5$) pull the spline too sharply [iter 5].
+*   **Thickness-to-Chord Ratio:** Target $r_{vertical} \approx 12\text{--}15\%$ of total chord ($r_0 + r_4$) for optimal streamlining [iter 5].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | TE extension. | Defines chord; requires $r_1, r_7$ support to prevent "bulbous" tail distortion [iter 1, 5]. |
+| **$e_0$** | TE Sharpness. | **Negative** ($\rightarrow -1$) for Kutta cusp. Only effective if $r_1, r_7$ taper gradually toward $r_0$ [iter 3, 5]. |
+| **$r_2$** | Upper surface height. | Thickness control. Must be high enough to maintain convexity against $r_0, r_4$ [iter 2, 5]. |
+| **$a_n$** | Surface bias. | Shifts control point influence; used to fine-tune max thickness location [iter 1, 2]. |
+| **$r_4$** | LE extension. | Defines forward chord. High values require $r_3, r_5$ support to avoid "pointed" nose [iter 1, 5]. |
+| **$e_4$** | LE Bluntness. | **Positive** ($\rightarrow +1$) rounds the nose. Requires adjacent $r$ support to prevent "lumpy" or jagged LE [iter 3, 5]. |
+| **$r_6$** | Lower surface height. | Camber control. $r_6 < r_2$ creates lift, but $r_6 < 0.2$ often triggers "Radial Collapse" drag [iter 3, 5]. |
+| **$r_{1,3,5,7}$** | Tapering support. | Must bridge $r_{even}$ neighbors via gradual transition (not just mean) to prevent structural collapse [iter 2, 5]. |
+
+## New Evidence (Iteration 6)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      -0.98
+    ],
+    [
+      0.82,
+      -0.0542,
+      -0.21
+    ],
+    [
+      0.52,
+      0.1055,
+      0.0
+    ],
+    [
+      0.75,
+      0.0412,
+      0.35
+    ],
+    [
+      0.95,
+      0.0,
+      0.88
+    ],
+    [
+      0.72,
+      -0.0488,
+      0.35
+    ],
+    [
+      0.45,
+      -0.112,
+      0.0
+    ],
+    [
+      0.85,
+      0.0521,
+      -0.15
+    ]
+  ],
+  "name": "streamlined_exploitation_v1"
+}
+```
+
+Observations:
+Based on the provided parameters and the resulting geometry for **Design 6 (streamlined_exploitation_v1)**, here is the critical analysis of the outcome compared to your predictions.
+
+### Parameter-by-Parameter Analysis
+
+| Parameter | Prediction | Outcome |
+| :--- | :--- | :--- |
+| **`param[0]` (TE)** | $r_0=1.0, e_0=-0.98$ would create a sharp, maximum-length trailing edge. | **Failed.** The left side of the silhouette (trailing edge) appears rounded and "stubby." The high negative edginess did not produce a sharp point, likely because the adjacent radii ($r_1, r_7$) were too large, preventing the spline from "pinching" into a point. |
+| **`param[4]` (LE)** | $r_4=0.95, e_4=0.88$ would create a rounded nose. | **Partial Success.** The nose (right side) is rounded, but it is extremely blunt. The high edginess ($0.88$) created a "flat" face rather than a streamlined parabolic entry. |
+| **`param[2] & [6]`** | $r_2=0.52, r_6=0.45$ would provide thickness and positive camber. | **Failed.** Instead of providing "thickness" to a chord, these low values created a "waist" or "necking" effect. Because $r_0$ and $r_4$ are ~1.0, the middle of the shape is significantly thinner than the ends, creating a "peanut" shape rather than an airfoil. |
+| **`param[1, 3, 5, 7]`** | These would provide radial support and avoid concave "bites." | **Failed.** While they prevented the -5.0 "Radial Collapse" penalty, they created a "lumpy" perimeter. The transitions between $r_1(0.82) \rightarrow r_2(0.52) \rightarrow r_3(0.75)$ are too abrupt, creating high-curvature zones that will cause immediate flow separation. |
+| **Radial Delta** | Limiting change to $\leq 0.3$ avoids the -5.0 penalty. | **Success.** The geometry is valid and manifold (no penalty), but "valid" does not mean "aerodynamic." |
+
+### Critical Analysis of Design Outcomes
+
+**1. The "Inverted Thickness" Problem:**
+Standard airfoils are thickest near the 25-30% chord mark and taper toward the ends. Your design is **thickest at the ends** ($r_0=1.0, r_4=0.95$) and **thinnest in the middle** ($r_2, r_6 \approx 0.5$). This creates a "bluff-body-link-bluff-body" geometry. Aerodynamically, the flow will see the leading edge as a large obstacle, struggle to follow the "neck" inward, and then crash into the trailing edge bulb, causing massive turbulence.
+
+**2. Edginess Miscalculation:**
+*   **Trailing Edge:** To get a sharp TE, you need the angular offsets of $r_1$ and $r_7$ to move *away* from $r_0$, combined with a high negative edginess. Here, the radial support was too "crowded," resulting in a rounded protrusion.
+*   **Leading Edge:** An edginess of $0.85$ on the nose effectively turns the spline into a square-ish block. For a "stagnation-minimizing" nose, a lower edginess (closer to 0.0 or slightly negative) is usually better to maintain a smooth circle-to-ellipse transition.
+
+**3. Chord vs. Radius:**
+You attempted to define a chord by setting $r_0$ and $r_4$ to 1.0. However, in a polar coordinate system, if the "sides" ($r_2, r_6$) are only 0.5, you haven't made a long airfoil; you've made a small object with two long spikes. The "effective chord" is very short because the thickness ratio is nearly 1:1 at the peaks.
+
+### Key Learnings for the Next Iteration
+
+*   **Reverse the Radial Profile:** To achieve a streamlined shape, the "middle" radii ($r_1, r_2, r_3$ and $r_7, r_6, r_5$) should generally be *larger* or equal to the chord ends, or the chord ends should be the primary extensions with the rest of the body tapering toward them.
+*   **Smoothness over "Support":** Even if a radial delta of 0.3 is "legal," it is too aggressive for smooth flow. Aim for deltas of $<0.1$ between adjacent control points to maintain the laminar boundary layer.
+*   **The "Pinch" Technique:** To get a sharp Trailing Edge ($r_0$), try reducing the radii of $r_1$ and $r_7$ significantly while keeping $r_0$ at 1.0. This "stretches" the tail out into a point.
+*   **Camber vs. Symmetry:** The lumpy nature of the current design makes the 0.07 difference between $r_2$ and $r_6$ irrelevant. Focus on a smooth, global "tear-drop" shape before fine-tuning camber.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

@@ -1,0 +1,75 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Strategy Focus**: This design uses a **Hybrid Strategy**, blending the high-chord success of Design 1 with the "Global Heuristics" for thickness and concavity. I will maintain the aggressive TE length of Design 1 but modify the LE and mid-body using the "Radius-Distance Law" and "Concavity Floor" insights.
+*   **Leading Edge Modification**: I will reduce CP0 Radius from 0.95 to 0.85. According to the "Beaking Threshold," this should transition the nose from a sharp wedge to a more rounded subsonic stagnation point, improving flow attachment.
+*   **Thickening the Mid-body**: I will raise CP1 Radius to 0.43 and CP3 Radius to 0.52. This follows the "Concavity Floor" heuristic to eliminate the "scoop" visible in the images and establish a convex "pressure face" for efficient lift.
+*   **Upper Peak Positioning**: I will maintain a negative angle for CP1 (~ -0.42) to keep the peak suction shifted forward, which allows for a longer, gentler pressure recovery ramp toward the TE.
+*   **Maintaining Chord**: I will keep CP2 Radius at 0.98 to preserve the high chord and fineness ratio that contributed to Design 1's relatively high reward, ensuring the Kutta condition is enforced with an Edgy value of 1.0.
+
+## Per-Parameter Predictions
+
+*   **CP0 radius_param (0.8500)**: I predict this will round the leading edge, reducing the sharp pressure spike seen in the current simulation.
+*   **CP1 radius_param (0.4350)**: I predict this will increase the upper camber height, avoiding the "waisted" look and providing more volume for lift generation.
+*   **CP1 angle_param (-0.4200)**: I predict this will shift the maximum thickness forward to approximately 30% of the chord.
+*   **CP2 radius_param (0.9850)**: I predict this will maintain the maximum possible chord length for high-speed efficiency.
+*   **CP2 edgy_param (1.0000)**: I predict this will enforce a sharp trailing edge to satisfy the Kutta condition.
+*   **CP3 radius_param (0.5200)**: I predict this will create a gently convex lower surface, reaching the "Concavity Floor" to prevent flow separation on the belly.
+*   **CP3 angle_param (0.1850)**: I predict this will tuck the lower-rear surface inward to smoothly meet the trailing edge.
+
+*   **Geometry Observations**:
+    *   The airfoil is extremely thin and slender, exhibiting a high aspect ratio (long chord relative to thickness).
+    *   The leading edge (LE) is significantly "beaked" or sharp, resulting from the high radius parameter at CP0 (~0.95).
+    *   The trailing edge (TE) is sharp and well-defined, aligning with the horizontal axis.
+    *   The mid-section (CP1 and CP3) appears "waisted" or pinched, with radii values near 0.31, which is below the recommended 0.45 threshold for convex stability.
+
+*   **Flow Field / Simulation Observations**:
+    *   **Pressure (p)**: There is a very intense, localized suction peak on the upper leading edge, which quickly dissipates. This suggests a high sensitivity to angle of attack.
+    *   **Velocity (u, v)**: The flow remains largely attached, but the velocity gradient near the upper surface is very steep. The wake is narrow, indicating low pressure drag but potentially low lift due to the lack of volume/camber.
+    *   **Potential Issues**: The extremely thin profile likely suffers from low structural integrity and a very narrow laminar bucket; any slight change in incidence would cause flow separation at the sharp LE.
+
+*   **Design 1 Mapping & Flaws**:
+    *   **CP0 Radius (0.957)**: Directly caused the sharp "beaked" nose, which creates the extreme localized pressure spike.
+    *   **CP1/CP3 Radii (0.319/0.312)**: Caused the "waisted" geometry. While this reduces frontal area, it likely hurts the lift-to-drag ratio by failing to generate a robust pressure differential.
+    *   **Key Changes Needed**: Round the LE (reduce CP0 Radius), thicken the mid-body to exit the "waisted trap" (increase CP1/CP3 Radii), and ensure the lower surface reaches the "concavity floor" (~0.50).
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.85,
+      0.025,
+      -0.95
+    ],
+    [
+      0.435,
+      -0.42,
+      -0.45
+    ],
+    [
+      0.985,
+      0.015,
+      1.0
+    ],
+    [
+      0.52,
+      0.185,
+      -0.92
+    ]
+  ],
+  "name": "hybrid_convex_slender"
+}
+```
+
+Sampled action vector:
+['0.7990', '0.0092', '-0.9679', '0.5200', '-0.4015', '-0.4025', '0.9265', '0.0238', '0.9549', '0.5433', '0.2279', '-0.8645']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

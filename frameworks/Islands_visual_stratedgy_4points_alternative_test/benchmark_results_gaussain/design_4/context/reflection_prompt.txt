@@ -1,0 +1,62 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Strategy Focus (Exploration):** This design aims to explore the interaction between maximum leading-edge smoothness and maximum trailing-edge sharpness while pushing the chord-extension boundaries. I am setting several parameters to their absolute limits (-1.0 or 1.0) to observe the sensitivity of the reward function to "boundary-case" geometries.
+*   **Avoiding the "Scale Trap":** To ensure the airfoil has sufficient chord length to resolve flow, I am setting the Leading Edge (CP0) radius to a high value (0.9250). This should prevent the "seed" or "pebble" morphology common in initial random populations.
+*   **Implementing Kutta-Condition Sharpness:** I am setting the Trailing Edge (CP2) edgy_param to its maximum (1.0) and keeping the radius low (0.1500) to create a definitive, sharp point while avoiding the "beak" effect by maintaining a minimal radius.
+*   **Creating Camber via Asymmetry:** I will explore high radius disparity between the upper (CP1) and lower (CP3) surfaces. By setting CP1 Radius to 0.6500 and CP3 Radius to 0.2200, I intend to generate a high-lift cambered profile rather than a symmetric ellipse.
+*   **Front-Loading Thickness:** Shifting CP1's angle_param to -0.3500 will move the maximum thickness toward the 30-35% chord position, which is typical for high-performance subsonic airfoils.
+*   **Boundary Testing:** The use of -1.0 for CP0 edgy_param and 1.0 for CP2 edgy_param tests the optimizer's ability to handle extreme curvature transitions.
+
+## Per-Parameter Predictions
+*   **CP0 radius_param (0.9250):** I predict this will create a very large, robust nose that provides the primary volume and chord length for the design.
+*   **CP0 edgy_param (-1.0000):** I predict this will eliminate any possible discontinuities at the nose, ensuring a perfectly smooth stagnation point region.
+*   **CP1 radius_param (0.6500):** I predict this will create a distinct "hump" on the upper surface, providing the necessary thickness for a pressure differential.
+*   **CP1 angle_param (-0.3500):** I predict this will shift the upper peak forward, creating a favorable pressure gradient over the first third of the chord.
+*   **CP2 radius_param (0.1500):** I predict this will keep the trailing edge compact, preventing a "blunt base" drag penalty.
+*   **CP2 edgy_param (1.0000):** I predict this will enforce a sharp geometric singularity at the rear, necessary for the Kutta condition to be satisfied in the simulation.
+*   **CP3 radius_param (0.2200):** I predict this will "pinch" the lower surface relative to the upper, creating the desired camber.
+*   **CP3 angle_param (0.1800):** I predict this will slightly tuck the lower rear surface inward, sharpening the overall trailing edge taper.
+
+No previous designs or images are available for this initial iteration. As there is no Design 1 to analyze, I am proceeding with the **Exploration Strategy** to establish a high-performance baseline by testing the boundaries of the parameter space as defined in the Reference Card.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.925,
+      0.0,
+      -1.0
+    ],
+    [
+      0.65,
+      -0.35,
+      -0.85
+    ],
+    [
+      0.15,
+      0.0,
+      1.0
+    ],
+    [
+      0.22,
+      0.18,
+      -0.9
+    ]
+  ],
+  "name": "boundary_explorer_v1"
+}
+```
+
+Sampled action vector:
+['0.9369', '-0.0141', '-1.0000', '0.6353', '-0.3667', '-0.7963', '0.1318', '-0.0658', '1.0000', '0.2776', '0.1608', '-0.9549']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

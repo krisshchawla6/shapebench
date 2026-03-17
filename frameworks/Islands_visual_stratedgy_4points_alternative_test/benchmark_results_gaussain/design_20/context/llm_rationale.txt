@@ -1,0 +1,15 @@
+*   **Strategy Focus**: This design uses a **Hybrid Strategy**, blending the high-chord success of Design 1 with the "Global Heuristics" for thickness and concavity. I will maintain the aggressive TE length of Design 1 but modify the LE and mid-body using the "Radius-Distance Law" and "Concavity Floor" insights.
+*   **Leading Edge Modification**: I will reduce CP0 Radius from 0.95 to 0.85. According to the "Beaking Threshold," this should transition the nose from a sharp wedge to a more rounded subsonic stagnation point, improving flow attachment.
+*   **Thickening the Mid-body**: I will raise CP1 Radius to 0.43 and CP3 Radius to 0.52. This follows the "Concavity Floor" heuristic to eliminate the "scoop" visible in the images and establish a convex "pressure face" for efficient lift.
+*   **Upper Peak Positioning**: I will maintain a negative angle for CP1 (~ -0.42) to keep the peak suction shifted forward, which allows for a longer, gentler pressure recovery ramp toward the TE.
+*   **Maintaining Chord**: I will keep CP2 Radius at 0.98 to preserve the high chord and fineness ratio that contributed to Design 1's relatively high reward, ensuring the Kutta condition is enforced with an Edgy value of 1.0.
+
+## Per-Parameter Predictions
+
+*   **CP0 radius_param (0.8500)**: I predict this will round the leading edge, reducing the sharp pressure spike seen in the current simulation.
+*   **CP1 radius_param (0.4350)**: I predict this will increase the upper camber height, avoiding the "waisted" look and providing more volume for lift generation.
+*   **CP1 angle_param (-0.4200)**: I predict this will shift the maximum thickness forward to approximately 30% of the chord.
+*   **CP2 radius_param (0.9850)**: I predict this will maintain the maximum possible chord length for high-speed efficiency.
+*   **CP2 edgy_param (1.0000)**: I predict this will enforce a sharp trailing edge to satisfy the Kutta condition.
+*   **CP3 radius_param (0.5200)**: I predict this will create a gently convex lower surface, reaching the "Concavity Floor" to prevent flow separation on the belly.
+*   **CP3 angle_param (0.1850)**: I predict this will tuck the lower-rear surface inward to smoothly meet the trailing edge.

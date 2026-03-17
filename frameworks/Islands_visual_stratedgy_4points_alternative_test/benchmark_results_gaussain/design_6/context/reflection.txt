@@ -1,0 +1,29 @@
+This analysis examines the transition from the "Pebble" morphology of Design 1 to the "Thimble" morphology of Design 2 (the current result).
+
+### Parameter-by-Parameter Comparison
+
+| Parameter | Value | Prediction | Outcome vs. Prediction |
+| :--- | :--- | :--- | :--- |
+| **Upper Radius** `p[1][0]` | **0.4824** | Lose the "hump" and become significantly thinner. | **Partial Success.** The "hump" is gone, but the reduction in radius simply pulled the upper surface closer to the center, contributing to a smaller overall scale rather than a "stretched" profile. |
+| **TE Radius** `p[2][0]` | **0.1456** | Taper into a sharp point; reduce pressure drag. | **Failure.** While the edge is sharp, the low radius pulled the trailing edge inward toward the leading edge. This drastically shortened the chord, creating a "stubby" thimble shape instead of a long, tapered wing. |
+| **Upper Angle** `p[1][1]` | **-0.2541** | Shift peak thickness toward the LE (30% chord). | **Inconclusive.** The geometry is so compressed longitudinally that the peak thickness appears to be at the very front, but there is no "chord" length to sustain a pressure recovery region. |
+| **LE Edgy** `p[0][2]` | **-0.9982** | Smooth, circular stagnation point for stable flow. | **Success.** The leading edge (left side) shows a smooth, continuous curve. |
+| **TE Edgy** `p[2][2]` | **1.0** | Sharp geometric singularity for flow shedding. | **Success.** The trailing edge (bottom-right) exhibits a clear, sharp vertex, satisfying the geometric requirement of the Kutta condition. |
+| **Lower Radius** `p[3][0]` | **0.2847** | Flatter lower surface relative to top (camber). | **Success.** The bottom surface is indeed flatter than the top, creating a vaguely wedge-like profile. |
+
+### Key Learnings and Design Evolution
+
+**1. The "Radius = Distance" Realization**
+The most critical takeaway from this result is that the `radius` parameter for the control points likely acts as a distance from a central origin. By reducing the Trailing Edge (CP2) radius from 0.677 (Design 1) to 0.145, you did not "taper" the tail; you **truncated the chord**. To achieve a streamlined airfoil, the LE and TE radii must be maximized to stretch the shape horizontally, while the Upper and Lower radii must be minimized to compress it vertically.
+
+**2. The Scale Trap is Relative**
+The airfoil in the image is significantly smaller than Design 1. In aerodynamic simulations (like CFD), a smaller chord length at the same flow velocity results in a lower Reynolds number and usually a much lower Lift-to-Drag ratio. The "Thimble" shape is essentially a bluff body with a sharp corner, which will still suffer from massive pressure drag because the flow has no surface to "re-attach" to or recover pressure along.
+
+**3. Geometric Singularity vs. Taper**
+You successfully used `Edgy = 1.0` to create a sharp point. However, a sharp point on a stubby object is just a "sharp wedge." For an airfoil to be effective, that sharp point must be the termination of a gradual convergence. 
+
+**4. Strategic Pivot for Design 3**
+To escape the "Pebble/Thimble" morphology:
+*   **Increase CP0 and CP2 Radii:** Push the LE and TE as far apart as possible to maximize chord length.
+*   **Decrease CP1 and CP3 Radii:** Keep the top and bottom surfaces close to the centerline to ensure a high fineness ratio (thinness).
+*   **Maintain TE Edgy:** Keep the sharp point, but place it far away from the nose.

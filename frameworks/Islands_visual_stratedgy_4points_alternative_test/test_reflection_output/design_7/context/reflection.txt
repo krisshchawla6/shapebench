@@ -1,0 +1,19 @@
+This design represents a significant departure from the "bloated block" of Design 1, but it has overcorrected into a "pinched wedge" or "arrowhead" geometry. While the thickness was reduced, the structural distribution failed to create a traditional airfoil chord.
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter Group | Prediction | Actual Outcome | Analysis |
+| :--- | :--- | :--- | :--- |
+| **LE Tip (CP3)** | $r=1.0$ will maximize chord length and create a sharp nose. | Created a sharp, beak-like protrusion at the leading edge. | **Accurate.** The $r=1.0$ value successfully pushed the LE to the boundary, but the surrounding points were too "deep" to support a rounded nose. |
+| **Nose Radii (CP2, CP4)** | $r \approx 0.2$ will "sharpen" the nose into a streamlined wedge. | Created a severe "pinch" or concave transition behind the LE tip. | **Inaccurate.** Setting $r$ to $\sim 0.2$ while the LE is at $1.0$ caused the spline to collapse toward the origin immediately after the nose, creating a "neck" rather than a streamlined taper. |
+| **Mid-Body Radii (CP1, 5, 6)** | $r \in [0.15, 0.28]$ will create a thin, high-aspect-ratio wing. | Created a very short, triangular body with a "starfish" profile. | **Inaccurate.** The "Goldilocks Zone" was based on a misunderstanding of the radial coordinate system. Low radii pull the surface *inward* toward the center. To make a long wing, body points need $r$ values closer to $1.0$ with angles that spread them along the chord. |
+| **Smoothing (edgy=-1.0)** | Will prevent the "faceted" look and ensure smoothness. | The surface is perfectly smooth and organic, with no sharp corners. | **Successful.** The $e=-1.0$ strategy effectively neutralized the "blockiness" seen in previous iterations. |
+| **Camber (CP5 vs CP1)** | $r_{CP5} > r_{CP1}$ will create positive camber. | The shape is asymmetrical, but the "camber" is more of a structural skew. | **Partial Success.** There is a clear top/bottom difference, but the lack of a proper chord makes the aerodynamic benefit of this camber negligible. |
+| **TE Sharpness (CP0, 7)** | $e=1.0$ and $r=0.98$ will create a clean Kutta-condition tail. | Created a long, needle-like "stinger" at the trailing edge. | **Accurate.** This successfully enforced a sharp trailing edge, but it is disproportionately long compared to the collapsed mid-body. |
+
+### Key Learnings
+
+1.  **The "Radial Collapse" Trap**: Setting mid-body points to very low radii ($r < 0.3$) while the LE and TE are at $r \approx 1.0$ does not make the airfoil "thin"; it makes it "hollow" or "pinched." To achieve a high-aspect-ratio wing, the mid-body points must have radii that maintain the "stretch" between the two poles (likely $r > 0.6$).
+2.  **Angular Distribution is Chord Length**: The "beak" at the front occurred because CP2 and CP4 had angles ($a \approx \pm 0.15$) very close to the LE ($a=0$). This clustered the points at the nose. To create a blunt, efficient LE, these points need to be spread further apart in angular space.
+3.  **The "Stinger" Effect**: High $e$ values (1.0) combined with high $r$ values (0.98) at the poles (CP0, CP7) create very effective, sharp trailing edges. However, if the rest of the body is collapsed, this results in a "tadpole" shape which has poor lift-to-drag characteristics.
+4.  **Concavity vs. Convexity**: The current design is concave (bowed inward). High-performance subsonic airfoils are almost exclusively convex. To fix this, the mid-body $r$ values must be increased significantly to "push" the skin back out.

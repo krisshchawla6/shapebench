@@ -1,0 +1,42 @@
+This analysis compares your aerodynamic predictions against the generated geometry to understand the mapping between the parameter space and the resulting airfoil shape.
+
+### Parameter-by-Parameter Analysis
+
+*   **$P_0$ Radius ($r_0$) [Predicted: 0.9850 | Actual: 1.0000]**
+    *   **Prediction:** Extend the trailing edge to maximum chord.
+    *   **Outcome:** **Success.** The right-most point is at the maximum possible distance. However, because this was intended as the "trailing edge," the resulting shape is effectively flying "backwards" or is oriented incorrectly, as the right side is the bluntest part of the shape.
+
+*   **$P_0$ Eccentricity ($e_0$) [Predicted: 0.9900 | Actual: 0.9570]**
+    *   **Prediction:** Create a knife-like trailing edge.
+    *   **Outcome:** **Failed.** Instead of a sharp point, the high positive eccentricity coupled with the spline interpolation created a very broad, rounded "bulb" on the right side. This suggests that in this coordinate system, high positive eccentricity at $P_0$ expands the local curvature rather than sharpening it.
+
+*   **$P_4$ Radius ($r_4$) [Predicted: 0.8800 | Actual: 0.9768]**
+    *   **Prediction:** Create a forward-reaching leading edge.
+    *   **Outcome:** **Success.** The left side of the shape is significantly elongated, creating a long "nose."
+
+*   **$P_4$ Eccentricity ($e_4$) [Predicted: -0.9000 | Actual: -0.9255]**
+    *   **Prediction:** Smooth, blunt nose.
+    *   **Outcome:** **Failed.** The result is a sharp, "beak-like" vertex on the left. The negative eccentricity value compressed the curvature into a point. This is the opposite of the intended "blunt nose" effect.
+
+*   **$P_2$ Radius ($r_2$) [Predicted: 0.3200 | Actual: 0.3628]**
+    *   **Prediction:** Thin the profile to reduce frontal area.
+    *   **Outcome:** **Success.** The upper mid-section is pulled inward, successfully reducing the thickness of the upper hull.
+
+*   **$P_2$ Angle ($a_2$) [Predicted: 0.1800 | Actual: 0.1679]**
+    *   **Prediction:** Shift maximum thickness forward (approx. 30% chord).
+    *   **Outcome:** **Partial Success.** The "peak" of the upper surface is shifted toward the left, but the overall distortion of the shape makes "max thickness" difficult to define in a traditional aerodynamic sense.
+
+*   **$P_6$ Radius ($r_6$) [Predicted: 0.2400 | Actual: 0.2296]**
+    *   **Prediction:** Create positive camber by making the bottom thinner than the top.
+    *   **Outcome:** **Unintended Consequence.** While it did make the bottom thinner, the value was too low relative to $P_4$ and $P_0$. This caused a "waisted" or concave section on the lower-left surface. In fluid dynamics, this concavity would likely cause early flow separation and a massive drag penalty.
+
+*   **$P_1, P_7$ Radii [Predicted: 0.6800 | Actual: 0.7141, 0.6365]**
+    *   **Prediction:** Maintain a smooth taper to a sharp tail.
+    *   **Outcome:** **Failed.** There is a visible "kink" or "step" where $P_7$ meets the elongated $P_4$. The transition is not monotonic, leading to a jagged lower profile.
+
+### Key Learnings
+
+1.  **Eccentricity Inversion**: There is a fundamental misunderstanding of the eccentricity parameter ($e$). In this model, high negative values at the extremities (like $P_4$) appear to create sharp points ("beaks"), while high positive values at the extremities (like $P_0$) create blunt, rounded ends. To get a NACA-style airfoil, these roles likely need to be reversed.
+2.  **The "Beak" vs. The "Bulb"**: The design ended up with a sharp leading edge and a blunt trailing edge. This is the aerodynamic inverse of an efficient airfoil. A sharp leading edge is highly sensitive to the angle of attack and prone to stalling, while a blunt trailing edge creates a massive pressure-drag wake.
+3.  **Concavity is a Reward Killer**: The attempt to create camber by aggressively reducing $r_6$ and $r_5$ created a concave "scoop" on the bottom. For subsonic airfoils, the surface should generally remain convex (or only very slightly concave near the trailing edge) to keep the boundary layer attached.
+4.  **Radius Continuity**: To avoid the "peanut" or "kinked" shape, the transition radii ($P_1, P_3, P_5, P_7$) must be carefully balanced between the values of the leading/trailing edges and the midsection. Large jumps in radius between adjacent control points lead to non-aerodynamic "waisting."

@@ -1,0 +1,17 @@
+*   **Geometry**:
+    *   The shape is a perfect, large circle, centered in the flow field.
+    *   The 8 control points are distributed at equal 45-degree intervals along the circumference.
+    *   The boundary is perfectly smooth (`edgy_param` = 0.0) and thick, representing a non-aerodynamic bluff body.
+    *   Obvious flaws: The design has no streamlining, a blunt trailing edge, and excessive thickness-to-chord ratio (1:1).
+
+*   **Flow Field / Simulation Results**:
+    *   **Pressure**: High-pressure stagnation point at the leading edge (3 o'clock). Massive suction peaks on the upper and lower "shoulders" (12 and 6 o'clock). A wide, low-pressure wake region is visible behind the cylinder.
+    *   **Velocity**: Flow accelerates significantly over the top and bottom but reaches near-zero velocity at the front and in a large recirculation zone behind the shape.
+    *   **Wake/Vorticity**: A massive, unstable wake is shed behind the body, indicating high pressure drag and likely vortex shedding.
+
+*   **Action Mapping & Changes**:
+    *   Design 1's action ([1.0, 0.0, 0.0] repeated) creates a maximum-radius circle.
+    *   **Change 1**: Reduce `radius_param` for middle points (CP2, CP6) to thin the airfoil.
+    *   **Change 2**: Set `edgy_param` for the trailing edge (CP4) to 1.0 to create a sharp termination.
+    *   **Change 3**: Increase `radius_param` for CP4 to elongate the chord and reduce the pressure gradient.
+    *   **Change 4**: Introduce camber by making the upper surface (CP1-3) more convex than the lower surface (CP5-7).

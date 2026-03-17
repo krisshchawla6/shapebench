@@ -1,0 +1,13 @@
+*   **Strategy Focus**: Using a **Hybrid Strategy**, I will blend the geometric intent of Design 3 (which attempted sharpening) with the structural stability of the circle, while strictly applying the "Scale Rule" and "Synergy Rule" learned from the Reference Card.
+*   **Scale Rule Application**: I will set $r_0 = 0.8500$ and $r_4 = 0.4500$. Assuming a base radius of $1.0$, this ensures a total chord length of $R_0 + R_4 \approx 3.3$, well clear of the bluff-body penalty zone.
+*   **Synergy Rule (Sharp TE)**: Since $r_0 > 0$, I can now effectively use a highly negative $e_0 (-0.95)$ to create a Kutta-condition-compliant sharp trailing edge without it becoming a "flat-back" bluff face.
+*   **Convexity & Support**: I will set $r_1$ and $r_7$ at intermediate values ($0.4000$) to bridge the gap between the long trailing edge ($r_0$) and the main body, ensuring a monotonic taper that prevents early separation.
+*   **Lift Generation**: I will introduce slight asymmetry by setting $r_2$ (upper apex) slightly higher than $r_6$ (lower apex) and shifting the thickness forward using positive $a_2$ and $a_6$ values. This mimics the profile of high-performance low-speed airfoils.
+
+## Per-Parameter Predictions
+- **I am setting param[0][0] to 0.8500** because I predict it will CAUSE the trailing edge to extend significantly rearward, increasing the chord.
+- **I am setting param[0][2] to -0.9500** because I predict it will CAUSE a sharp Kutta cusp at the trailing edge, reducing pressure drag.
+- **I am setting param[4][0] to 0.4500** because I predict it will CAUSE a distinct, elongated nose section.
+- **I am setting param[4][2] to 0.7500** because I predict it will CAUSE a rounded, blunt leading edge to stabilize the stagnation point.
+- **I am setting param[2][0] to 0.1800 and param[6][0] to 0.0500** because I predict this difference will CAUSE camber, generating positive lift.
+- **I am setting param[2][1] and param[6][1] to 0.2500** because I predict it will CAUSE the maximum thickness to shift forward, helping to delay flow separation.

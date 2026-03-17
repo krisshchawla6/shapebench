@@ -1,0 +1,97 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **The Radius-Distance Law:** Radius acts as polar distance from centroid. Maximize LE ($r_0$) and TE ($r_2$) toward 1.0 to maximize chord length and aspect ratio [iter 7, 8, 24].
+*   **The Volume Budget (Chord Collapse):** High radii on CP1/CP3 (>0.45) "steal" length from the chord. High mid-body radii force "Pebble" morphology [iter 21].
+*   **The Waisted Trap:** Side radii < 0.40 under high chord tension creates "boomerang" profiles. CP1/CP3 must be $\ge$ 0.40 to maintain convexity [iter 11, 13, 17].
+*   **The Hook/Fang Boundary:** High lower radius ($r_3 \ge 0.50$) and positive lower angle ($a_3 \ge 0.30$) trigger self-intersecting "fangs" [iter 22]. **Update:** High negative lower edginess ($e_3 < -0.90$) creates a concave "fang" cusp even at moderate angles ($a_3 \approx 0.20$), causing high-pressure drag [iter 24].
+*   **The Closure Imbalance:** Aggressively reducing $r_1$ while maintaining high $r_3$ shifts the center of area downward, preventing TE closure and creating blunt vertical faces [iter 22].
+*   **The Beaking Threshold:** $r_0 > 0.90$ creates a sharp "wedge" nose. Rounded subsonic stagnation requires $r_0 < 0.85$ [iter 13, 17, 21]. **Update:** $r_0 \approx 0.98$ maximizes chord but requires perfect stagnation alignment [iter 24].
+*   **The Stagnation Alignment:** $a_0 \approx 0.0$ aligns the leading edge directly into the flow, minimizing frontal area and stagnation drag [iter 24].
+*   **The Kutta Singularity:** TE Edgy ($e_2 = 1.0$) is mandatory. Orientation $a_2 \approx 0.0$ avoids "hooked" tail drag [iter 2, 11, 21, 24].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** Chord driver. 0.82 for stability; 0.98 for maximum chord extension [iter 21, 24].
+*   **Angle [0][1]:** Controls vertical incidence. $a_0 \approx 0.0$ is the "exploitation move" for minimum frontal drag [iter 4, 24].
+*   **Edgy [0][2]:** -1.0 for C-infinity continuity [iter 2].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Thickness control. 0.35-0.40 is the "slender limit." Balances against $r_3$ for TE convergence [iter 8, 22, 24].
+*   **Angle [1][1]:** Peak positioning. $a_1 \approx -0.42$ shifts peak thickness forward to ~25% chord, creating a long recovery ramp [iter 1, 17, 24].
+*   **Edgy [1][2]:** Low values (-0.9) ensure smooth apex curvature and laminar acceleration [iter 4, 24].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Rearward extension. 1.0 maximizes aspect ratio. Neutralized if CP3 geometry forces bluntness [iter 7, 22, 24].
+*   **Angle [2][1]:** Horizontal alignment; keep near 0.0 to prevent lift-induced drag at the tail [iter 4, 11, 22].
+*   **Edgy [2][2]:** 1.0 enforces Kutta condition; critical for flow closure [iter 2, 21].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Stability Anchor. ~0.45 is the "Concavity Floor." $r_3 > 0.50$ risks fangs [iter 17, 21, 22].
+*   **Angle [3][1]:** Tuck control. $a_3 \approx 0.2$ is the limit for convexity. Higher values risk spline looping [iter 8, 17, 22].
+*   **Edgy [3][2]:** **The Fang Driver.** High negative values ($e_3 \approx -0.95$) create sharp lower-LE concavities (fangs) that trap pressure and limit reward [iter 24]. Needs $e_3 > -0.8$ or higher $a_3$ to flatten the belly.
+
+## New Evidence (Iteration 25)
+Parameters used:
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.96,
+      0.0,
+      -1.0
+    ],
+    [
+      0.37,
+      -0.46,
+      -0.9
+    ],
+    [
+      1.0,
+      0.0,
+      1.0
+    ],
+    [
+      0.42,
+      0.12,
+      -0.45
+    ]
+  ],
+  "name": "Laminar_Convex_Stretcher"
+}
+```
+
+Observations:
+This design, titled **"Laminar_Convex_Stretcher,"** represents a significant deviation from the predicted outcome. Instead of a long, slender, high-performance airfoil, the result is a truncated, "pebble-like" geometry with severe surface irregularities.
+
+### Per-Parameter Analysis: Prediction vs. Outcome
+
+| Parameter | Value | Prediction | Outcome |
+| :--- | :--- | :--- | :--- |
+| **param[0][0] ($r_0$)** | **0.9505** | Maximize chord length and penetration. | **Failed.** The airfoil is extremely short. High values for both $r_0$ and $r_2$ likely caused a geometric collapse or scaling error. |
+| **param[0][1] ($a_0$)** | **0.0245** | Align leading edge with horizontal flow. | **Partial Success.** The nose is relatively centered, but the overall distortion makes the alignment moot. |
+| **param[1][0] ($r_1$)** | **0.3809** | Keep the profile slender and prevent "pebble" morphology. | **Failed.** The profile is thick and "pebbly" because the chord length failed to materialize. |
+| **param[1][1] ($a_1$)** | **-0.4384** | Shift maximum thickness forward for long pressure recovery. | **Success (Geometric).** The peak is indeed very far forward, but without chord length, there is no recovery section. |
+| **param[2][0] ($r_2$)** | **1.0000** | Maximize trailing edge extension/aspect ratio. | **Failed.** Instead of extending the tail, the geometry appears to have "folded" or truncated, resulting in a blunt posterior. |
+| **param[2][2] ($e_2$)** | **1.0000** | Enforce Kutta condition/sharp flow separation. | **Failed.** The trailing edge is rounded and thick, likely due to the interaction with the high $r_2$ value. |
+| **param[3][0] ($r_3$)** | **0.4264** | Prevent lower surface "bulging." | **Failed.** The lower surface is highly irregular and exhibits significant bulging toward the rear. |
+| **param[3][2] ($e_3$)** | **-0.4071** | Create a convex surface and remove the "fang." | **Failed.** A deep, sharp notch (the "fang") is clearly visible near the leading edge, indicating that -0.40 is still far too concave. |
+
+### Key Learnings
+
+1.  **The "Stretching" Paradox**: Maximizing both $r_0$ (leading edge radius/extension) and $r_2$ (trailing edge radius/extension) to their limits (0.95 and 1.0) does not result in a super-long airfoil. Instead, it seems to break the geometric solver, leading to a "collapsed" or normalized shape that is much smaller and less efficient than Design 1.
+2.  **The "Fang" is Resilient**: The prediction that $e_3 = -0.45$ would create a convex "belly" was incorrect. The resulting image shows a severe concave notch. This suggests that the "edginess" parameter ($e$) must likely be positive (or much closer to 0) to achieve true convexity on the lower surface.
+3.  **Parameter Interaction (Coupling)**: The attempt to move the peak forward ($a_1 = -0.43$) while stretching the nose ($r_0 = 0.95$) created a "beaked" front end that effectively concentrated all the volume into the first 30% of the intended chord, leaving the rest of the geometry to fail or truncate.
+4.  **Reward Sensitivity**: This design likely has a very low reward. The blunt trailing edge and the deep notch on the lower surface are catastrophic for drag. The "Pure Laminar" strategy failed because the parameters were pushed into a non-physical or unstable region of the design space.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

@@ -1,0 +1,114 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card (Iteration 3)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n > 0$ to prevent non-physical origin-crossing [iter 1].
+*   **Radial Gradient Continuity:** Large deltas between adjacent $r$ values (e.g., $r_4$ vs $r_5$) create "kinks" or "steps." Smooth transitions are mandatory for boundary layer attachment [iter 2, 3].
+*   **Convexity Priority:** Subsonic airfoils must remain primarily convex. Aggressive thinning (low $r_6$) creates "concave scoops" that trigger early flow separation and high drag [iter 3].
+*   **Eccentricity Polarity (Inverted):** $e \rightarrow -1$ creates sharp, high-curvature vertices ("beaks"). $e \rightarrow +1$ creates broad, low-curvature surfaces ("bulbs") [iter 3].
+*   **Chord Alignment:** $r_4$ defines the Leading Edge (LE); $r_0$ defines the Trailing Edge (TE). Swapping their sharpness/bluntness profiles results in "flying backwards" [iter 3].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | Trailing Edge (TE) extension. | Sets chord length; must be balanced with $r_1, r_7$ to avoid "bulbous tails" [iter 1, 3]. |
+| **$e_0$** | TE Sharpness. | **Negative** values ($<0$) sharpen the TE for Kutta condition; **Positive** values blunt it, causing pressure drag [iter 3]. |
+| **$r_2$** | Upper surface (suction) height. | Controls thickness; must be higher than $r_{1,3}$ to maintain a convex "roof" [iter 2, 3]. |
+| **$a_2$** | Upper surface angular bias. | Shifts max thickness location; used to control pressure gradients [iter 1, 2]. |
+| **$r_4$** | Leading Edge (LE) extension. | Sets forward chord boundary; requires high $r_3, r_5$ support to prevent "pinched noses" [iter 1, 3]. |
+| **$e_4$** | LE Bluntness. | **Positive** values ($>0.5$) create rounded, stall-resistant noses; **Negative** values create sharp "beaks" prone to stalling [iter 3]. |
+| **$r_6$** | Lower surface (pressure) height. | Camber control; values too low relative to $r_4, r_0$ create concave "scoops" that destroy lift-to-drag [iter 3]. |
+| **$r_{1,3,5,7}$** | Transition radii. | Critical bridge parameters; must be intermediate between $r_{even}$ neighbors to ensure monotonicity and prevent "kinks" [iter 2, 3]. |
+
+## New Evidence (Iteration 4)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9854,
+      0.0,
+      -0.9952
+    ],
+    [
+      0.5235,
+      -0.1241,
+      0.0
+    ],
+    [
+      0.2842,
+      0.1555,
+      -0.1
+    ],
+    [
+      0.4876,
+      0.0543,
+      0.0
+    ],
+    [
+      0.8542,
+      0.0,
+      0.8841
+    ],
+    [
+      0.4532,
+      -0.0654,
+      0.0
+    ],
+    [
+      0.0821,
+      -0.1222,
+      -0.1
+    ],
+    [
+      0.5543,
+      0.1121,
+      0.0
+    ]
+  ],
+  "name": "slender_camber_explorer"
+}
+```
+
+Observations:
+This iteration represents a significant "jump" in the parameter space, moving from a unit circle to a highly experimental, slender geometry. While the design successfully broke the symmetry of the circle, it introduced new geometric instabilities.
+
+### Prediction vs. Outcome Analysis
+
+| Parameter | Prediction | Outcome | Comparison |
+| :--- | :--- | :--- | :--- |
+| **r[0][0] (TE Length)** | Extend trailing edge to max distance; define long chord. | The horizontal axis is significantly elongated. | **Success.** The chord is much longer than the previous circle. |
+| **e[0] (TE Sharpness)** | Sharpen TE into a needle-like point. | The rightmost point is significantly sharper than the circle. | **Success.** The "edgy" parameter successfully created a cusp-like exit. |
+| **r[4][0] (LE Length)** | Create a distinct forward protrusion. | The shape extends forward, but the "nose" appears somewhat recessed. | **Partial Success.** The length is there, but the "waist" of the shape makes it look detached. |
+| **e[4] (LE Bluntness)** | Broaden curvature at the nose for stagnation. | The nose is rounded, but the transition to the body is abrupt. | **Partial Success.** It avoided the needle-point of the TE, but lacks smooth integration. |
+| **r[2][0] (Upper Height)** | Squash height to create a streamlined profile. | The top surface is flattened compared to the circle. | **Success.** The vertical thickness at the 12 o'clock position is reduced. |
+| **r[6][0] (Lower Height)** | Pull lower surface to center for high-camber. | The bottom surface "caved in" toward the origin. | **Failure/Overshoot.** Instead of a smooth cambered curve, it created a concave "dent" or "scallop." |
+| **r[1,3,5,7] (Intermediates)** | Bridge the gap and prevent "kinks." | Created a "pinched waist" or "mustache" shape. | **Failure.** The delta between $r_0 \approx 1.0$ and $r_1 \approx 0.5$ was too steep, causing the spline to collapse inward. |
+| **a[2], a[6] (Angles)** | Shift peaks to delay suction/improve pressure. | Contributed to the "wavy" and non-convex look. | **Inconclusive.** The geometric distortion from $r$ values overwhelmed any subtle pressure benefits from angular shifting. |
+
+### Key Learnings
+
+1.  **The "Waist" Phenomenon (Spline Tension):**
+    The resulting "lips" or "mustache" shape reveals that if the primary axes ($r_0, r_2, r_4, r_6$) differ too wildly from the diagonal intermediates ($r_1, r_3, r_5, r_7$), the spline will "pinch." To get a traditional NACA-style airfoil, the intermediate radii must be mathematically closer to the average of their neighbors to provide structural support to the curve.
+
+2.  **Concavity vs. Camber:**
+    Pushing $r_6$ to extreme lows ($<0.1$) while keeping $r_5$ and $r_7$ at moderate levels ($0.5$) does not create a "cambered plate." Instead, it creates a **concave lower surface**. In subsonic aerodynamics, high-concavity on the lower surface can cause massive flow separation and "trapped" vortices, which usually penalize the lift-to-drag ratio unless designed very specifically (like a Jedelsky airfoil).
+
+3.  **The Sharpness Trade-off:**
+    The $e_0 = -0.99$ (trailing edge) worked perfectly to create a Kutta-condition-ready exit. However, the extreme $e_4$ (leading edge) combined with the "pinched" intermediate points created a lumpy leading edge. Leading-edge bluntness requires "support" from $r_3$ and $r_5$ to remain convex.
+
+4.  **Reward Impact:**
+    This design likely has lower drag than the circle but may suffer from "pressure drag" caused by the concave underside and the wavy surface. The "bumps" on the top and bottom will trigger premature transitions to turbulence or local separation bubbles.
+
+**Strategic Pivot for Next Iteration:** To achieve a "clean" airfoil, I must synchronize the $r$ values. If $r_0$ is 1.0 and $r_2$ is 0.3, $r_1$ should be roughly 0.6-0.7 to create a smooth, convex transition rather than a "dent."
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

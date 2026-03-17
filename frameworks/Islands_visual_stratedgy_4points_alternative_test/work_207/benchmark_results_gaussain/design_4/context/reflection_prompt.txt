@@ -1,0 +1,97 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Visual Intuition Strategy**: Looking at the wake in the second image, it is clear the flow "gives up" trying to follow the circle's rear curve. To fix this, I must extend the tail to a sharp point, allowing the flow to leave the surface smoothly. 
+- **Chord Elongation**: I will maintain a high radius at CP0 (Nose) and CP4 (Tail) while pulling in the "waist" of the shape (CP2, CP3, CP5, CP6) to transform the circle into a slender blade.
+- **Leading Edge Profile**: A circular nose is okay, but a slightly parabolic one is better. I'll use a high negative edginess at CP0 to broaden the stagnation region and prevent early separation.
+- **Trailing Edge Sharpness**: Following the Design Rules, CP4 needs "support." I will set CP3 and CP5 to low radii to ensure the shape tapers monotonically toward the sharp TE at CP4.
+- **Camber Introduction**: To generate lift, I will make the lower surface (CP6) slightly flatter (lower radius) than the upper surface (CP2), creating a subtle camber.
+
+## Per-Parameter Predictions
+- **CP0 [0.8800, 0.0000, -0.8500]**: Setting radius to 0.88 and edginess to -0.85 will create a blunt, rounded nose to handle various angles of attack.
+- **CP2 [0.2800, -0.0500, 0.0000]**: Shrinking radius to 0.28 will reduce total thickness to ~14% of chord, drastically reducing pressure drag.
+- **CP4 [1.0000, 0.0000, 1.0000]**: Setting edginess to 1.0 at maximum radius will create the sharp trailing edge necessary to eliminate the large wake observed in the circle.
+- **CP3 & CP5 [0.2200, 0.0000, 0.4000]**: Using low radii here will "pinch" the shape toward the back, ensuring the flow accelerates properly toward the TE.
+- **CP6 [0.2200, 0.0000, 0.1000]**: Keeping radius slightly lower than CP2 will create a flatter bottom, inducing positive camber and lift.
+
+The provided images show Design 1, which is a perfect circle. 
+- **Geometry**: 
+    - The shape is a bluff body (a cylinder) with a 1:1 aspect ratio.
+    - All control points are at maximum radial distance (1.0), creating a uniform perimeter.
+    - There is no trailing edge; the rear of the shape is as blunt as the front.
+    - The surface is perfectly smooth (edginess 0) but geometrically unsuitable for flight.
+- **Flow Field / Simulation**:
+    - There is a massive stagnation point at the leading edge (yellow/green region in pressure).
+    - A massive, wide wake (dark purple region) exists behind the circle, indicating total flow separation.
+    - High velocity gradients occur at the 12 o'clock and 6 o'clock positions where the flow is forced to accelerate around the "shoulders."
+    - The simulation results show high pressure drag and likely zero lift due to symmetry.
+
+Design 1's action vector `[1.0, 0.0, 0.0, ...]` maps directly to a circle. The reward (-0.0036) is near zero because it lacks any airfoil characteristics. 
+- **Visible Flaws**: 
+    - The excessive thickness (caused by `r2` and `r6` being 1.0) creates high drag.
+    - The blunt rear (caused by `r4=1.0` and `e4=0.0`) prevents the Kutta condition, causing the massive wake.
+- **Key Changes Needed**:
+    1. Dramatically reduce the thickness by shrinking radii for CP2 and CP6.
+    2. Sharpen the trailing edge by setting `e4` to 1.0.
+    3. Streamline the transition from the nose to the tail to prevent separation.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.8854,
+      0.0,
+      -0.8521
+    ],
+    [
+      0.5521,
+      0.0214,
+      -0.412
+    ],
+    [
+      0.2832,
+      -0.0652,
+      0.0
+    ],
+    [
+      0.2215,
+      0.0125,
+      0.45
+    ],
+    [
+      1.0,
+      0.0,
+      1.0
+    ],
+    [
+      0.2185,
+      -0.0125,
+      0.45
+    ],
+    [
+      0.2354,
+      0.0,
+      0.112
+    ],
+    [
+      0.5542,
+      -0.0214,
+      -0.412
+    ]
+  ],
+  "name": "streamlined_kutta_taper"
+}
+```
+
+Sampled action vector:
+['0.8877', '0.0121', '-0.9229', '0.4963', '0.0372', '-0.3496', '0.2789', '-0.1115', '0.0046', '0.2350', '-0.0417', '0.4539', '0.9524', '0.0491', '0.9372', '0.2703', '0.0532', '0.4714', '0.2968', '-0.0635', '0.1437', '0.5535', '-0.0978', '-0.3255']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

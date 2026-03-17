@@ -1,0 +1,96 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Visual Intuition Strategy**: The current circular profile is the antithesis of an airfoil. To improve the reward (reduce drag and increase lift), the shape must transition from a bluff body to a streamlined teardrop.
+*   **Thinning the Profile**: By drastically reducing the radius parameters of the vertical points (CP2 and CP6), I will collapse the circle into a thin profile, significantly reducing the frontal area and the associated pressure drag seen in the velocity field.
+*   **Trailing Edge Sharpness**: The Kutta condition requires a sharp trailing edge to fix the flow separation point and generate lift. Setting CP4's `edgy_param` to 1.0 and extending its radius will create this essential feature.
+*   **Leading Edge Smoothing**: I will keep CP0's `edgy_param` very low (negative) to ensure a robust, rounded nose that can handle varying angles of attack without immediate separation.
+*   **Asymmetry for Lift**: I will shift the `angle_param` of the upper points (CP1, CP2, CP3) slightly backward and maintain higher radii compared to the lower points, creating a cambered profile that encourages higher velocity (lower pressure) on the upper surface.
+*   **Optimizing the Search**: Moving away from the "all 1s" boundary is critical. Exploring the interaction between high edginess at the tail and low edginess at the nose will establish the primary aerodynamic axis.
+
+## Per-Parameter Predictions
+
+*   **CP0 (Nose)**: I am setting `radius_param` to 0.85 and `edgy_param` to -0.9 because I predict it will cause a smooth, rounded leading edge that prevents flow separation at the stagnation point.
+*   **CP2 (Top)**: I am setting `radius_param` to 0.25 because I predict it will significantly thin the airfoil, reducing the "shoulder" acceleration seen in the current suction plots.
+*   **CP4 (Tail)**: I am setting `radius_param` to 1.0 and `edgy_param` to 1.0 because I predict it will create a sharp, elongated trailing edge that recovers pressure and stabilizes the wake.
+*   **CP6 (Bottom)**: I am setting `radius_param` to 0.15 because I predict making the bottom flatter than the top will create the pressure differential necessary for lift.
+*   **Angle Params**: I am using small offsets (e.g., -0.1 to 0.1) to shift control points toward the trailing edge, concentrating the thickness in the first 30% of the chord.
+
+*   **Geometry**:
+    *   The shape is a perfect, large circle, centered in the flow field.
+    *   The 8 control points are distributed at equal 45-degree intervals along the circumference.
+    *   The boundary is perfectly smooth (`edgy_param` = 0.0) and thick, representing a non-aerodynamic bluff body.
+    *   Obvious flaws: The design has no streamlining, a blunt trailing edge, and excessive thickness-to-chord ratio (1:1).
+
+*   **Flow Field / Simulation Results**:
+    *   **Pressure**: High-pressure stagnation point at the leading edge (3 o'clock). Massive suction peaks on the upper and lower "shoulders" (12 and 6 o'clock). A wide, low-pressure wake region is visible behind the cylinder.
+    *   **Velocity**: Flow accelerates significantly over the top and bottom but reaches near-zero velocity at the front and in a large recirculation zone behind the shape.
+    *   **Wake/Vorticity**: A massive, unstable wake is shed behind the body, indicating high pressure drag and likely vortex shedding.
+
+*   **Action Mapping & Changes**:
+    *   Design 1's action ([1.0, 0.0, 0.0] repeated) creates a maximum-radius circle.
+    *   **Change 1**: Reduce `radius_param` for middle points (CP2, CP6) to thin the airfoil.
+    *   **Change 2**: Set `edgy_param` for the trailing edge (CP4) to 1.0 to create a sharp termination.
+    *   **Change 3**: Increase `radius_param` for CP4 to elongate the chord and reduce the pressure gradient.
+    *   **Change 4**: Introduce camber by making the upper surface (CP1-3) more convex than the lower surface (CP5-7).
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.8542,
+      0.0,
+      -0.9211
+    ],
+    [
+      0.4821,
+      -0.1542,
+      -0.6541
+    ],
+    [
+      0.2512,
+      -0.1023,
+      -0.4214
+    ],
+    [
+      0.3214,
+      0.0842,
+      0.5231
+    ],
+    [
+      0.9876,
+      0.0,
+      1.0
+    ],
+    [
+      0.2842,
+      -0.0954,
+      0.5231
+    ],
+    [
+      0.1523,
+      0.0654,
+      -0.4214
+    ],
+    [
+      0.3842,
+      0.1842,
+      -0.6541
+    ]
+  ],
+  "name": "streamlined_cambered_teardrop"
+}
+```
+
+Sampled action vector:
+['0.8913', '0.0474', '-0.9399', '0.5215', '-0.1422', '-0.6733', '0.2482', '-0.0566', '-0.3810', '0.3663', '0.1067', '0.4486', '1.0000', '0.0092', '0.9736', '0.2071', '-0.1272', '0.5329', '0.1043', '0.0847', '-0.4470', '0.3880', '0.1801', '-0.6699']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

@@ -1,0 +1,13 @@
+Role: You are an evolutionary optimizer.
+
+Task: You will MAXIMIZE a function F[r, angle, e] with 3 variables r, angle, e.
+
+Range: r, angle, e range between [-1, 1].
+
+Records: Below are the records of the top performing generations of [r, angle, e] values. Each line of records represents one generation. Different generations are sorted in ascending order based on their best objective function values F[r, angle, e]. Within one generation, the highest objective function value F[r, angle, e] and the corresponding [r, angle, e] values are listed first. After the semicolon ';', the top-performing [r, angle, e] values within that generation are listed.
+
+{records}
+
+Determine a new [r, angle, e] value for the next generation to achieve higher F[r, angle, e] values.
+
+Format your output as [r, angle, e]. No explanation needed.

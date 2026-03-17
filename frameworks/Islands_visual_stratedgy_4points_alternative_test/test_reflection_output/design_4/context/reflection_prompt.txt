@@ -1,0 +1,79 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+* **Strategy Focus (Exploration):** This design explores the **"High-Volume / High-Camber Boundary."** By pushing almost all `radius_param` values to their positive limits ($0.8$ to $1.0$), I am testing if a "maximized" geometry can yield a stable reward before refining for drag.
+* **Counteracting Radial Collapse:** To avoid the 0.0000 reward of Design 1, I am strictly avoiding any `radius_param` below 0.65. This ensures the "waist" is replaced by a robust aerodynamic body.
+* **Asymmetric Surface Mapping:** I will use a radius delta between the lower surface (CP1, CP2) and upper surface (CP4, CP5, CP6). Specifically, I'll set the upper radii to $\approx 0.95$ and lower radii to $\approx 0.70$ to explore high-lift camber configurations.
+* **Angular Monotonicity:** I will enforce a strict progression of `angle_param` (-0.99 $\to$ -0.6 $\to$ -0.3 $\to$ 0.0 $\to$ 0.3 $\to$ 0.6 $\to$ 0.9 $\to$ 0.99) to ensure the shape unfolds correctly without "hooks."
+* **Hybrid Edginess Strategy:** I am using extreme negative edginess ($e = -1.0$) for the entire front half of the airfoil to force the smoothest possible transition, while keeping $e = 1.0$ at the TE to satisfy the Kutta condition.
+
+## Per-Parameter Predictions
+
+* **CP0 [0.98, -0.99, 1.0]:** I predict $r=0.98$ and $e=1.0$ will create a definitive, sharp start point for the Trailing Edge.
+* **CP3 [1.0, 0.0, -1.0]:** I predict $r=1.0$ and $e=-1.0$ will create a perfectly rounded, blunt Leading Edge at the furthest forward point.
+* **CP1, CP2 [r ~0.7]:** I predict these moderate radii will form a slightly concave or flatter lower surface.
+* **CP4, CP5, CP6 [r ~0.95]:** I predict these high radii will create a highly convex upper surface, maximizing the pressure differential for lift.
+* **CP7 [0.98, 0.99, 1.0]:** I predict this will close the geometry at the TE with a sharp "stinger" to regulate flow separation.
+
+(no analysis provided)
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9821,
+      -0.995,
+      1.0
+    ],
+    [
+      0.7245,
+      -0.65,
+      -0.85
+    ],
+    [
+      0.7812,
+      -0.32,
+      -1.0
+    ],
+    [
+      1.0,
+      0.0,
+      -1.0
+    ],
+    [
+      0.9654,
+      0.35,
+      -1.0
+    ],
+    [
+      0.9231,
+      0.68,
+      -0.9
+    ],
+    [
+      0.8842,
+      0.92,
+      -0.45
+    ],
+    [
+      0.9821,
+      0.995,
+      1.0
+    ]
+  ],
+  "name": "high_camber_explorer_v1"
+}
+```
+
+Sampled action vector:
+['0.9905', '-1.0000', '1.0000', '0.7331', '-0.5790', '-0.8581', '0.6881', '-0.3449', '-1.0000', '0.9836', '0.0181', '-1.0000', '0.9936', '0.2993', '-0.9618', '0.9282', '0.7292', '-0.9472', '0.8117', '0.9033', '-0.4002', '1.0000', '1.0000', '0.9935']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

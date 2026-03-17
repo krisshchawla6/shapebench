@@ -1,0 +1,16 @@
+The provided images show a representative design from the population, which in this case is a near-perfect circle (as seen in the white shape).
+- **Geometry**:
+    - The shape is a highly symmetric, smooth bluff body (circle/cylinder).
+    - All control points are positioned at a constant radius, creating a "Nugget" geometry.
+    - There are no sharp features, discontinuities, or taper; the trailing and leading edges are identical.
+- **Flow Field**:
+    - The pressure field shows a clear stagnation point at the leading edge (high pressure) and significant low-pressure zones on the upper and lower shoulders where the flow accelerates.
+    - The velocity field reveals a massive, wide wake extending far downstream, indicating high pressure drag.
+    - The wake is symmetric, suggesting zero lift, and the flow remains attached until the "shoulders," after which large-scale separation occurs.
+
+Design 1's action vector (Reward -5.0000) shows irregular radius values ($r_2=0.21, r_6=-0.03$) and inconsistent angles. This confirms that deviating too wildly from the circle without maintaining convexity leads to the "Peanut" trap or geometric invalidity. Designs 2-5 (Reward -0.0036) represent the circle baseline, which is the current performance peak. To improve, we must transition from a circle to a streamlined airfoil while maintaining the stability of the circle's scale.
+
+**Key changes needed**:
+1.  **Chord Extension**: Increase $r_0$ (TE) and $r_4$ (LE) to create a longitudinal axis.
+2.  **Trailing Edge Definition**: Apply a negative `edgy_param` to $e_0$ to sharpen the aft section.
+3.  **Monotonic Tapering**: Ensure radial transitions between points follow the $\Delta r < 0.1$ rule to prevent the "Peanut" collapse.

@@ -1,0 +1,19 @@
+- **Exploration Strategy**: This design explores the "Aft-Peak Suction" boundary. While most successful designs (like Design 1) place the peak thickness forward ($a_1 \approx -0.45$), I am shifting $a_1$ to $-0.28$ to investigate the trade-off between leading-edge suction and mid-chord pressure recovery.
+- **Boundary Pushing**: I am pushing $r_2$ to a near-maximum value of $0.9855$ to maximize the trailing edge extension, while counter-balancing with a slightly lower $r_0$ ($0.81$) to stay within a safe "Chord-Sum" zone and prevent the "Pebble" collapse.
+- **Underexplored Combination**: I am testing a "Reduced Fang" strategy. By setting $e_3$ to $-0.18$ (instead of Design 1's aggressive $-0.90$), I am looking for a middle ground that maintains the pressure pocket without the risk of flow separation inside a deep notch.
+- **Volume Distribution**: I am reducing $r_1$ to $0.3785$. This creates an extremely thin upper profile, which, combined with the aft-shifted peak, should minimize wave drag and frontal area.
+- **Optimization Goal**: To find if a thinner, aft-loaded airfoil can outperform the current forward-loaded champion by reducing the pressure gradient over the first 30% of the chord.
+
+## Per-Parameter Predictions
+- **r[0][0] (0.8144)**: I am setting this to a moderate-high value to maintain chord length while providing "headroom" for a massive $r_2$.
+- **a[0][1] (0.0105)**: I am setting this near 0.0 to ensure the stagnation point is centered on the nose, minimizing drag.
+- **e[0][2] (-1.0)**: I am setting this to -1.0 to ensure a perfectly smooth, circular leading edge for robust off-design performance.
+- **r[1][0] (0.3785)**: I am setting this to 0.3785 to create a thinner upper surface, reducing the "thickness-to-chord" ratio.
+- **a[1][1] (-0.2844)**: I am setting this to -0.2844 to shift the peak thickness rearward, exploring the "aft-peak" region of the design space.
+- **e[1][2] (-0.9122)**: I am setting this to -0.9122 to maintain high-order continuity over the suction surface.
+- **r[2][0] (0.9855)**: I am setting this to 0.9855 to explore the maximum possible rearward extension allowed by the geometry engine.
+- **a[2][1] (0.0022)**: I am setting this to 0.0022 to keep the trailing edge strictly horizontal.
+- **e[2][2] (1.0)**: I am setting this to 1.0 to enforce a sharp Kutta condition for maximum lift generation.
+- **r[3][0] (0.4722)**: I am setting this to 0.4722 to provide just enough volume on the bottom to prevent "waisting" while keeping the profile slender.
+- **a[3][1] (0.1855)**: I am setting this to 0.1855 to shift the lower bulge forward, creating a longer "ramp" to the trailing edge.
+- **e[3][2] (-0.1822)**: I am setting this to -0.1822 to test a "soft-notch" geometry that balances pressure-trapping with flow attachment.

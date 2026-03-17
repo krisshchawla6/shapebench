@@ -1,0 +1,2 @@
+- **Visual Intuition Strategy**: The primary failure is "bluffness." To advance, I must transition the geometry from a cylinder-like shape to a slender, cambered airfoil. This requires increasing the length-to-thickness ratio and ensuring a sharp trailing edge.
+- **LE Refinement**: I will set $r_

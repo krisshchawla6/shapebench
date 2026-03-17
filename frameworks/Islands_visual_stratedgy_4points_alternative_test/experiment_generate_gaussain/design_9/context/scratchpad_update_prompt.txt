@@ -1,0 +1,106 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card (Iteration 8)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n > 0$ to prevent origin-crossing [iter 1].
+*   **Laminar Delta Rule:** Maintain $\Delta r < 0.1$ between adjacent $r_n$ to prevent separation [iter 2, 6].
+*   **The Convexity Constraint:** Avoid local minima at $r_2$ or $r_6$. If $r_2, r_6 < r_{neighbors}$, the spline collapses into a "Peanut" (concave waist) with massive drag [iter 8].
+*   **The Scale Rule:** Total chord ($r_0 + r_4$) must exceed 2.0 to avoid the "Nugget" (bluff body) trap [iter 7].
+*   **Polar Thickness Logic:** Unlike Cartesian thickness (subtraction), Polar thickness requires $r_2, r_6$ to be the apex. They must be supported by intermediate $r_{1,3,5,7}$ values to form a convex hull [iter 8].
+*   **The Pinch Technique:** To sharpen the Trailing Edge (TE), $r_1, r_7$ must be smaller than $r_0$ (if $r_0$ is the tip) or provide a monotonic taper [iter 6, 8].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | TE extension. | Defines aft chord. If $r_1, r_7 > r_0$, the TE becomes a bulbous "tail-head" rather than a point [iter 1, 8]. |
+| **$e_0$** | TE Sharpness. | **Negative** ($\rightarrow -1$) for Kutta cusp. Only effective if the global geometry tapers towards the TE [iter 3, 8]. |
+| **$r_2$** | Upper surface apex. | Primary thickness. Must be $\ge r_1, r_3$ to maintain convexity and prevent flow separation in "valleys" [iter 2, 8]. |
+| **$a_n$** | Surface bias. | Shifts max thickness location. In compact shapes, causes "rotation" rather than volume shift [iter 1, 7]. |
+| **$r_4$** | LE extension. | Defines forward chord. If $r_3, r_5 > r_4$, the LE becomes a bulbous "nose-head" [iter 1, 8]. |
+| **$e_4$** | LE Bluntness. | **Positive** ($\rightarrow +1$) rounds nose. $e \approx 0.5$ provides a smooth stagnation zone [iter 3, 8]. |
+| **$r_6$** | Lower surface apex. | Camber control. $r_6 < r_2$ creates lift. Must remain a local maximum relative to $r_5, r_7$ to avoid concavity [iter 3, 8]. |
+| **$r_{1,3,5,7}$** | Tapering support. | Bridges $r_{even}$ values. Must be intermediate (monotonic) to ensure a smooth teardrop transition [iter 2, 8]. |
+
+## New Evidence (Iteration 10)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.2,
+      0.0,
+      -0.8
+    ],
+    [
+      1.1,
+      0.0,
+      -0.2
+    ],
+    [
+      1.02,
+      0.1,
+      0.0
+    ],
+    [
+      1.08,
+      0.0,
+      0.2
+    ],
+    [
+      1.15,
+      0.0,
+      0.5
+    ],
+    [
+      1.08,
+      0.0,
+      0.2
+    ],
+    [
+      0.98,
+      -0.1,
+      0.0
+    ],
+    [
+      1.1,
+      0.0,
+      -0.2
+    ]
+  ],
+  "name": "streamlined_aero_nugget_v1"
+}
+```
+
+Observations:
+### Parameter Prediction vs. Outcome Analysis
+
+The design intent was to transition from a circle (bluff body) to a streamlined airfoil. However, the **Sampled Action Vector** deviated significantly from the **Parameters Used** JSON, resulting in a failure to escape the "Nugget" trap.
+
+| Parameter | Predicted (JSON) | Sampled (Action Vector) | Outcome vs. Prediction |
+| :--- | :--- | :--- | :--- |
+| **r0 (TE Radius)** | 1.20 | 1.0000 | **Failure**: The intended extension to 1.2 was lost. The TE remains at the unit circle radius, preventing the formation of a tail. |
+| **e0 (TE Edginess)** | -0.80 | -0.8469 | **Partial Success**: The value is sharp/cusped, but without a radius extension ($r_0 > 1$), it manifests as a slight flattening of the rear rather than a sharp trailing edge. |
+| **r4 (LE Radius)** | 1.15 | 1.0000 | **Failure**: The intended nose extension was lost. The chord length ($r_0 + r_4$) is exactly 2.0, keeping the shape in the "Nugget" regime. |
+| **e4 (LE Edginess)** | 0.50 | 0.5106 | **Success**: The nose remains rounded, as intended for a robust stagnation point. |
+| **r2 (Upper Apex)** | 1.02 | 1.0000 | **Failure**: The subtle upper expansion was lost, resulting in a flat upper surface relative to the circle. |
+| **r6 (Lower Apex)** | 0.98 | 0.8839 | **Overshoot**: The sampling reduced $r_6$ much further than the intended 0.98. This created a significant "dent" or flat spot on the bottom. |
+| **Chord Length** | 2.35 | 2.00 | **Critical Failure**: By failing to exceed the 2.0 threshold, the geometry remains a "Nugget" (bluff body) with high pressure drag. |
+| **Asymmetry (a2, a6)**| 0.1 / -0.1 | 0.05 / -0.09 | **Partial Success**: The max thickness is shifted slightly forward, but the lack of chord length makes this effect negligible. |
+
+### Key Learnings
+
+1.  **The "Nugget" Threshold is Absolute**: Even with a sharp trailing edge ($e_0 = -0.84$), if the total chord ($r_0 + r_4$) does not significantly exceed 2.0, the physics engine treats the body as a cylinder/bluff body. The resulting reward will remain near zero (or negative) due to massive pressure drag from the lack of a tapered recovery section.
+2.  **Radius Dominates Edginess**: An "edgy" parameter ($e$) requires a corresponding radial extension ($r$) to create a functional feature. A sharp $e_0$ on a small $r_0$ just creates a flat-backed circle, which actually worsens flow separation compared to a smooth cylinder.
+3.  **The "Flat Tire" Effect**: Reducing $r_6$ to 0.88 while keeping other radii at 1.0 created a non-convexity (a "Peanut" variant). This is visible in the result image as a slight indentation on the lower-right quadrant. This irregularity disrupts the smooth acceleration of flow, likely increasing turbulence.
+4.  **Sampling Variance**: There is a significant disconnect between the "Designer's Predictions" and the "Sampled Action Vector." To optimize successfully, the designer must ensure the $r$ values are pushed aggressively past 1.0 to force the transition into the streamlined parameter space. The current design is still "clinging" to the safety of the circle.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

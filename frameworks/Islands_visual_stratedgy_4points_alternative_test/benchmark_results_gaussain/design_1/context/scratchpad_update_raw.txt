@@ -1,0 +1,31 @@
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **Chord-Thickness Ratio:** Small horizontal distance between CP0 (LE) and CP2 (TE) relative to CP1/CP3 height results in "stubby/pebble" shapes with high pressure drag [iter 1].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius + forward CP1 Angle) trigger massive flow separation [iter 1].
+*   **Asymmetry Effects:** Extreme radius disparity between CP1 (Upper) and CP3 (Lower) produces "comma" or "hooked" profiles [iter 1].
+*   **The Stretch Paradox:** Radius does **not** equal Cartesian extension. Increasing CP2 Radius bloats the trailing sector into a blunt wedge rather than lengthening the chord [iter 2]. 
+*   **Thinning Strategy:** To achieve aerodynamic aspect ratios, *reduce* CP1 and CP3 radii to flatten the profile, rather than attempting to "pull" the TE [iter 2].
+*   **Base Drag Trap:** High TE Edgy + High TE Radius creates a flat/concave "cliff" face instead of a sharp Kutta-compliant point [iter 2].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** High values (>0.6) create bulbous noses [iter 1]. Low values (<0.3) combined with negative Edgy create "pinched," non-aerodynamic points [iter 2].
+*   **Angle [0][1]:** (Not isolated).
+*   **Edgy [0][2]:** Low values (-0.95) provide C-infinity continuity, but force extremely tight curvature if Radius is also low [iter 2].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" fullness. High values create steep forward ramps and "wedge" profiles if the chord is not sufficiently long [iter 2].
+*   **Angle [1][1]:** Lower values (~ -0.2) shift maximum thickness forward (~35% chord), increasing slope severity toward the TE [iter 1, 2].
+*   **Edgy [1][2]:** (Not isolated).
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Controls the "weight" or "influence" of the rear sector. High values (>0.8) produce a bloated, wide base rather than a long tail [iter 2].
+*   **Angle [2][1]:** (Not isolated).
+*   **Edgy [2][2]:** High values (~0.98) enforce sharp transitions. If Radius is high, this results in a vertical or concave rear face (base drag) [iter 2].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Low values (~0.22) create "pinched" concavity [iter 1]. Moderate values (~0.38) combined with positive angles create "underslung hooks" that trap flow [iter 2].
+*   **Angle [3][1]:** Positive values (~0.2) can verticalize the lower-rear section, contributing to a blunt trailing profile [iter 2].
+*   **Edgy [3][2]:** (Not isolated).

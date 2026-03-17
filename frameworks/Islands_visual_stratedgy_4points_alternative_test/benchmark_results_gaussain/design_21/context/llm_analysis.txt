@@ -1,0 +1,16 @@
+*   **Geometry**:
+    *   The airfoil exhibits a moderate thickness-to-chord ratio with a clearly defined upper-surface peak shifted toward the leading edge.
+    *   The leading edge is well-rounded, providing a smooth transition for the incoming flow, while the trailing edge is sharp and terminates at a high radius point, maximizing chord length.
+    *   The lower surface is convex and relatively "belly-heavy," resembling a "slug" or "pebble" morphology rather than a slender high-speed profile.
+    *   The overall shape is smooth without visible discontinuities, but the high thickness suggests a design limited by pressure drag.
+
+*   **Flow Field / Simulation Results**:
+    *   The pressure plot shows a strong suction peak (dark blue) on the upper surface near the leading edge, which is consistent with the forward-shifted thickness peak.
+    *   The velocity magnitude (U) confirms high-speed flow over the upper leading edge, but the wake area behind the trailing edge appears somewhat broad, indicating energy loss.
+    *   The vertical velocity (V) plot shows positive lift (upward flow at the nose, downward at the tail), but the stagnation point is slightly offset from the exact nose tip.
+    *   There is no evidence of catastrophic flow separation, but the thickness creates a large frontal area, likely penalizing the reward via high drag.
+
+*   **Mapping & Refinement**:
+    *   Reference Design 1 (Reward 1.8771): The $r_1$ (0.5199) and $r_3$ (0.5433) are significantly above the "Volume Budget" and "Concavity Floor" thresholds (0.45 and 0.50 respectively).
+    *   The high reward of Design 1 compared to the thinner Design 2 (1.1672) suggests that while slenderness is usually better, Design 1 captures a better chord-to-thickness ratio for the current Reynolds/Mach regime.
+    *   Key changes needed: Reduce $r_1$ to ~0.40 to thin the upper surface and reduce $r_3$ to ~0.47 to flatten the belly, while keeping the forward-shifted peak ($a_1 \approx -0.4$) that provides the suction peak seen in the images.

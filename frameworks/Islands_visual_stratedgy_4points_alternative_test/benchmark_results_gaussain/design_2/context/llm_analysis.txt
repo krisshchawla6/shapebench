@@ -1,0 +1,4 @@
+Since no previous designs or images were provided in the population database, I am initiating the optimization process by synthesizing the "Global Heuristics" and "Degree of Freedom Mapping" provided in the reference card. This baseline "Design 0" aims to exploit the known physics of flow attachment and drag reduction described in the heuristics.
+
+- **Geometric Flaws to Avoid:** I will avoid the "Stretch Paradox" (blunt trailing edges caused by high CP2 radius) and the "Base Drag Trap" (high TE radius with high edgy).
+- **Key Strategy:** To establish a high-reward baseline, I will prioritize a high-aspect-ratio (thin) profile with a sharp Kutta-compliant trailing edge and a smooth, forward-loaded upper surface.

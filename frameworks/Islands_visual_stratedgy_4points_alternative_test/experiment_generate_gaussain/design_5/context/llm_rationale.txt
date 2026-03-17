@@ -1,0 +1,12 @@
+- **Exploitation Strategy**: I am refining the circle's successful "smooth and thick" characteristic while introducing essential airfoil features (leading edge bluntness and trailing edge sharpness).
+- **Radial Delta Management**: To avoid the -5.0 penalty seen in Design 2 and 5, I will limit the change between adjacent radii to $\leq 0.3$. This ensures the spline remains convex and avoids the "notches" that cause radial collapse.
+- **Chord Extension**: By maintaining $r_0$ and $r_4$ near 1.0, I define a clear horizontal chord line, shifting the geometry from a bluff body to a streamlined one.
+- **TE Sharpening**: I will set $e_0$ to a high negative value (-0.95) to create a Kutta-condition-compliant trailing edge, which is essential for reducing the massive wake seen in the circle's flow field.
+- **Camber Introduction**: By setting $r_2$ (upper) slightly higher than $r_6$ (lower), I create a positive camber to generate lift while maintaining enough thickness ($>0.4$) to prevent flow separation.
+
+## Per-Parameter Predictions
+- I am setting `param[0][0]` to 1.0000 and `param[0][2]` to -0.9800 because I predict it will create a maximum-length, sharp trailing edge.
+- I am setting `param[1][0]` to 0.8200 and `param[7][0]` to 0.8500 because I predict these will provide the necessary radial support to bridge the long tail to the main body without concave "bites".
+- I am setting `param[2][0]` to 0.5200 and `param[6][0]` to 0.4500 because I predict this thickness ratio will provide a stable pressure gradient and meaningful lift.
+- I am setting `param[4][0]` to 0.9500 and `param[4][2]` to 0.8500 because I predict a slightly shorter, rounded nose will minimize the stagnation pressure spike.
+- I am setting `param[3][0]` and `param[5][0]` to ~0.7500 because I predict they will create a smooth "shoulder" for the leading edge, preventing premature separation.

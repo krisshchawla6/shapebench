@@ -1,0 +1,27 @@
+This analysis examines the "hybrid_slender_flatbelly" design, comparing the predicted geometric outcomes against the visual results of the sampled parameters.
+
+### Parameter-by-Parameter Analysis
+
+| Parameter | Value (Sampled) | Prediction | Outcome vs. Prediction |
+| :--- | :--- | :--- | :--- |
+| **r0 (CP0 Radius)** | **0.9497** | Maintain high chord while reducing "beaking" sharpness. | **Partial Success.** The chord remains long, but the leading edge is still remarkably sharp (wedge-like). The reduction from 1.0 was not enough to create a "rounded" subsonic nose. |
+| **a1 (CP1 Angle)** | **-0.4150** | Shift max thickness forward to ~30% chord for gentler recovery. | **Success.** The apex of the upper surface is clearly shifted toward the leading edge, creating a long, sloping rear-upper surface. |
+| **r1 (CP1 Radius)** | **0.4005** | Increase upper thickness to prevent mid-body collapse. | **Success.** The airfoil has significantly more volume than Design 1. It no longer looks "waisted" or "collapsed" on the top. |
+| **r2 (CP2 Radius)** | **1.0000** | Maintain high-aspect-ratio trailing edge. | **Success.** The trailing edge is extremely elongated, contributing to a high total chord length. |
+| **e2 (CP2 Edgy)** | **1.0000** | Ensure a sharp trailing edge (Kutta condition). | **Success.** The trailing edge is perfectly sharp, which is ideal for defining the flow separation point. |
+| **r3 (CP3 Radius)** | **0.4948** | Cross the "Concavity Floor" to create a flat/convex belly. | **Success.** The "scoop" from previous designs is entirely gone. The lower surface is now gently convex, resembling a more traditional high-lift airfoil. |
+| **a3 (CP3 Angle)** | **0.1898** | Tuck the lower-rear inward to meet the TE cleanly. | **Success.** The transition from the lower belly to the trailing edge is smooth, avoiding a "hooked" or "S-shape" near the rear. |
+
+### Key Learnings
+
+#### 1. The "Concavity Floor" is Validated
+Setting `r3` to ~0.50 effectively eliminated the structural weakness and aerodynamic inefficiency of the "waisted" lower surface seen in earlier iterations. This creates a "pressure face" on the bottom, which is essential for generating lift efficiently at subsonic speeds.
+
+#### 2. Thickness-Chord Tradeoff
+By increasing both `r1` (upper) and `r3` (lower), the design moved from a "slender filament" to a "substantial wing." While this increases the structural volume (good for real-world wings), it also increases the frontal area. The reward will now depend on whether the increased lift from the better pressure distribution outweighs the additional form drag from the increased thickness.
+
+#### 3. Leading Edge Sharpness Persistence
+Even with `r0` reduced to 0.95, the nose remains very sharp. This suggests that the "beaking" effect is a result of the high radial tension of CP0 in relation to the other control points. To achieve a truly rounded leading edge (which is more robust to changes in angle of attack), `r0` may need to be reduced significantly further (e.g., < 0.80) or the angles of CP1 and CP3 need to be adjusted to "push" more material forward.
+
+#### 4. High Camber Morphology
+The resulting shape has a high degree of camber (the curvature of the mean line). This design likely produces very high lift but might also generate a significant nose-down pitching moment. In the context of the reward function, this is a much "safer" aerodynamic shape than the previous "boomerang" styles.

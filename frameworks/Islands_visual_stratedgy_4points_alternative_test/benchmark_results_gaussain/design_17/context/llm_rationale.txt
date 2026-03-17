@@ -1,0 +1,13 @@
+*   **Visual Intuition Strategy**: I am prioritizing the correction of the "beaked" leading edge and the "waisted" upper-rear transition visible in the images. A more rounded nose will distribute the stagnation pressure better, while a thicker mid-section will prevent the "thinning" seen in Design 1.
+*   **Rounding the Stagnation Point**: Following the "Beaking Threshold," I am moving CP0 Radius from 0.906 down to 0.835. This should replace the sharp wedge with a rounded nose, improving flow attachment at varying angles of attack.
+*   **Avoiding the Waisted Trap**: Design 1 (R=0.424) looked slightly fragile in the mid-section. I will increase CP1 Radius to 0.465 to ensure the upper surface maintains a clean, convex curvature toward the TE.
+*   **Lower Surface Convexity**: The "Concavity Floor" heuristic suggests R ~ 0.50. Design 1 used 0.566 but with a high angle (0.165), causing a hook. I will use a radius of 0.525 and a much lower angle (0.045) to create a flatter "pressure face" on the bottom.
+*   **Maximizing Laminar Flow**: By shifting the CP1 peak slightly further back (Angle -0.38 instead of -0.44), I aim to extend the suction region and create a gentler pressure recovery, reducing the risk of boundary layer separation seen in the velocity plots.
+
+## Per-Parameter Predictions
+*   **CP0 Radius [0.8350]**: I predict this will round the leading edge, eliminating the sharp "beak" and spreading the pressure gradient at the nose.
+*   **CP1 Radius [0.4650]**: I predict this will thicken the airfoil's mid-section, avoiding the "waisted" look and providing a smoother transition to the tail.
+*   **CP1 Angle [-0.3800]**: I predict this will shift the maximum thickness slightly aft compared to Design 1, lengthening the favorable pressure gradient area.
+*   **CP2 Radius [0.9850]**: I predict this will maximize the chord length and increase the overall fineness ratio.
+*   **CP2 Edgy [1.0000]**: I am keeping this at 1.0 to ensure a mathematically sharp trailing edge for clean flow shedding.
+*   **CP3 Angle [0.0450]**: I predict this will remove the "scooped" lower-rear profile, creating a flatter, more efficient pressure surface.

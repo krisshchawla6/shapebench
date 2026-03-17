@@ -1,0 +1,81 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Visual Intuition Approach**: To move from a reward of 0.53 (Design 1) to a high-performance regime, the shape must transform from a bluff body into a slender wing. Visually, this means maximizing the distance between the LE and TE while minimizing vertical thickness.
+*   **Radius-Distance Law**: Following the reference card, I will set CP0 and CP2 to near-maximum radii. This maximizes chord length, which is essential for increasing the Reynolds number and improving the lift-to-drag ratio.
+*   **Eliminating Truncation**: By switching CP2's radius from negative to a high positive value, I will resolve the "truncated" tail visible in Design 1, allowing the flow to exit the airfoil smoothly.
+*   **Concavity Management**: I will set all radii to positive values. Specifically, CP3 at ~0.22 will create a slightly cambered but flat lower surface, avoiding the "hook" seen in low-radius designs.
+*   **Flow Attachment**: Reducing the CP1 (Upper) radius significantly (~0.25) will lower the "hump," reducing the adverse pressure gradient on the back half of the airfoil and preventing the massive separation wake seen in the velocity plots.
+
+## Per-Parameter Predictions
+*   **CP0 Radius (0.9525)**: I predict this will extend the leading edge forward, creating a more pronounced "nose."
+*   **CP0 Edgy (-1.0000)**: I predict this will ensure a perfectly circular stagnation point for smooth flow splitting.
+*   **CP1 Radius (0.2450)**: I predict this will "crush" the thickness of the airfoil, turning it from a pebble into a slender wing.
+*   **CP1 Angle (-0.4500)**: I predict this will shift the thickest part of the wing forward to approximately 30% chord.
+*   **CP2 Radius (0.9850)**: I predict this will stretch the tail far back, maximizing the chord length and correcting the truncation flaw.
+*   **CP2 Edgy (1.0000)**: I predict this will create the geometric singularity required for the Kutta condition and clean flow shedding.
+*   **CP3 Radius (0.2100)**: I predict this will flatten the lower surface, providing a clean path for high-pressure air.
+*   **CP3 Angle (0.1500)**: I predict this will slightly tuck the lower-rear area inward to enhance camber.
+
+*   **Geometry Observation**:
+    *   The shape is a "stunted teardrop" or a "blunt pebble." It lacks the slenderness of a conventional airfoil.
+    *   The trailing edge is rounded and truncated, not sharp, which prevents a proper Kutta condition from being established.
+    *   The chord length (horizontal span) is very short relative to the thickness, leading to a bluff-body profile rather than a lifting one.
+    *   There is a visible discontinuity or "step" near the rear upper surface, likely where the control points are fighting for continuity.
+
+*   **Flow Field Observation**:
+    *   **Pressure (p)**: There is a massive stagnation region at the front and a lack of a clear pressure recovery at the rear. The pressure gradient is very steep, suggesting imminent separation.
+    *   **Velocity (u)**: The wake is thick and disorganized, indicating high pressure drag and low aerodynamic efficiency.
+    *   **Velocity (v)**: The vertical velocity field shows the flow being forced abruptly around the blunt shape, rather than being guided smoothly to generate circulation.
+
+*   **Action Mapping & Flaws**:
+    *   **CP2 Radius (-0.1516)**: This is the primary culprit. A negative radius on the trailing edge point "swallows" the tail, pulling it inward and creating a truncated, blunt rear end.
+    *   **CP3 Radius (-0.4743)**: This negative value creates a "concave dent" on the lower surface, disrupting the smooth pressure distribution.
+    *   **Proportions**: The combination of high CP0 radius (0.78) and low/negative CP2 radius creates an extremely unbalanced, front-heavy shape.
+
+*   **Key Changes Needed**:
+    1.  **Stretch the Chord**: Dramatically increase CP2 radius to ~0.95 to create a long, slender tail.
+    2.  **Enforce Sharpness**: Maintain the CP2 Edgy parameter at 1.0 but combine it with a large radius to ensure a clean, sharp trailing edge point.
+    3.  **Thin the Profile**: Reduce the radii of CP1 (Upper) and CP3 (Lower) to ~0.2-0.3 to transition from a "pebble" to a "blade" geometry.
+    4.  **Forward Loading**: Shift CP1's angle forward to move the maximum thickness toward the leading edge.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9525,
+      0.0,
+      -1.0
+    ],
+    [
+      0.245,
+      -0.45,
+      -0.75
+    ],
+    [
+      0.985,
+      0.0,
+      1.0
+    ],
+    [
+      0.21,
+      0.15,
+      -0.85
+    ]
+  ],
+  "name": "slender_kutta_stretcher"
+}
+```
+
+Sampled action vector:
+['0.9393', '-0.0168', '-1.0000', '0.2641', '-0.3977', '-0.7208', '0.9840', '0.0676', '1.0000', '0.1867', '0.1693', '-0.7555']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

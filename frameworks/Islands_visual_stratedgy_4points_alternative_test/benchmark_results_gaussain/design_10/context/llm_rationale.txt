@@ -1,0 +1,15 @@
+*   **Visual Intuition Approach**: To move from a reward of 0.53 (Design 1) to a high-performance regime, the shape must transform from a bluff body into a slender wing. Visually, this means maximizing the distance between the LE and TE while minimizing vertical thickness.
+*   **Radius-Distance Law**: Following the reference card, I will set CP0 and CP2 to near-maximum radii. This maximizes chord length, which is essential for increasing the Reynolds number and improving the lift-to-drag ratio.
+*   **Eliminating Truncation**: By switching CP2's radius from negative to a high positive value, I will resolve the "truncated" tail visible in Design 1, allowing the flow to exit the airfoil smoothly.
+*   **Concavity Management**: I will set all radii to positive values. Specifically, CP3 at ~0.22 will create a slightly cambered but flat lower surface, avoiding the "hook" seen in low-radius designs.
+*   **Flow Attachment**: Reducing the CP1 (Upper) radius significantly (~0.25) will lower the "hump," reducing the adverse pressure gradient on the back half of the airfoil and preventing the massive separation wake seen in the velocity plots.
+
+## Per-Parameter Predictions
+*   **CP0 Radius (0.9525)**: I predict this will extend the leading edge forward, creating a more pronounced "nose."
+*   **CP0 Edgy (-1.0000)**: I predict this will ensure a perfectly circular stagnation point for smooth flow splitting.
+*   **CP1 Radius (0.2450)**: I predict this will "crush" the thickness of the airfoil, turning it from a pebble into a slender wing.
+*   **CP1 Angle (-0.4500)**: I predict this will shift the thickest part of the wing forward to approximately 30% chord.
+*   **CP2 Radius (0.9850)**: I predict this will stretch the tail far back, maximizing the chord length and correcting the truncation flaw.
+*   **CP2 Edgy (1.0000)**: I predict this will create the geometric singularity required for the Kutta condition and clean flow shedding.
+*   **CP3 Radius (0.2100)**: I predict this will flatten the lower surface, providing a clean path for high-pressure air.
+*   **CP3 Angle (0.1500)**: I predict this will slightly tuck the lower-rear area inward to enhance camber.

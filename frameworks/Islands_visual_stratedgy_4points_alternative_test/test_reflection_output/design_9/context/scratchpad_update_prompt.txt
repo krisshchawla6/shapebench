@@ -1,0 +1,122 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 9)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0, r \approx 1.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0, r \approx 1.0$ [iter 3-9].
+*   **Fineness Ratio (Thickness)**: Thickness is the delta between polar $r$ and mid-body $r$. High mid-body $r$ ($0.6-0.85$) creates a "pebble" or "bean" with ~70% thickness-to-chord [iter 9]. Aerodynamic sleekness (10-15%) requires mid-body $r$ to be significantly lower ($0.15-0.40$) [iter 9].
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound (Radial Collapse)**: $r < 0.2$ for mid-body points pulls the surface into a non-physical line or "starfish" if $e$ is not minimized [iter 4, 6, 8]. 
+    *   **Upper Bound (The Bloat)**: $r > 0.6$ for mid-body points creates a high-drag "bluff body" [iter 5, 7, 9].
+    *   **Optimal (Sleek)**: LE/TE at $r \approx 1.0$; mid-body points must target $r \in [0.2, 0.4]$ combined with $e \approx -1.0$ to maintain a thin, convex profile [iter 9].
+*   **Kutta Condition**: A geometric "stinger" ($e \approx 1.0$) at the Trailing Edge (CP0/7) is mandatory for flow separation [iter 2-9].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values ($r \approx 1.0$) are required at the LE and TE poles to establish primary chord length [iter 1-9].
+*   **Thickness vs. Bloat**: Mid-body radii (CP1, 2, 4, 5, 6) control the "fatness" of the wing. Values of $0.6-0.8$ produce a "pebble" shape; values must drop toward $0.3$ for high-performance subsonic wings [iter 9].
+*   **Convexity Control**: To maintain a convex shape without "starfish" spikes, mid-body $r$ must be paired with extreme negative $e$ values [iter 8-9].
+*   **Camber & Lift**: Asymmetric radii between upper (CP1-2) and lower (CP4-6) surfaces create camber. $r_{upper} > r_{lower}$ creates lift-generating loft [iter 4-9].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3-9].
+*   **LE Support (Nose Shape)**: Neighboring angles (CP2, 4) should be spaced (e.g., $a \approx \pm 0.3$) to avoid "beak" formations and support a parabolic entry [iter 5, 8-9].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create self-intersecting loops [iter 2, 5, 6, 8-9].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 1.0$) at the Trailing Edge create the "stinger" required for the Kutta condition [iter 2-9].
+*   **Surface Healing (The "Healer")**: Extreme negative values ($e \approx -1.0$) at mid-body and LE are the primary tool for "healing" a jagged polygon into a smooth, organic, differentiable manifold [iter 4-9].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE (CP3) ensures smooth flow acceleration and prevents "faceting" or stagnation-point pressure spikes [iter 5-9].
+*   **Transition Risk**: Moving from a thick $e \approx -1.0$ body to a sharp $e \approx 1.0$ TE causes massive separation if the body is too "bloated" ($r > 0.6$) [iter 9].
+
+## New Evidence (Iteration 10)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      1.0,
+      1.0
+    ],
+    [
+      0.3842,
+      0.6215,
+      -1.0
+    ],
+    [
+      0.4218,
+      0.3054,
+      -1.0
+    ],
+    [
+      1.0,
+      0.0021,
+      -1.0
+    ],
+    [
+      0.2845,
+      -0.3122,
+      -1.0
+    ],
+    [
+      0.2413,
+      -0.6584,
+      -1.0
+    ],
+    [
+      0.4852,
+      -0.8951,
+      -0.8521
+    ],
+    [
+      1.0,
+      -0.9999,
+      1.0
+    ]
+  ],
+  "name": "sleek_cambered_blade"
+}
+```
+
+Observations:
+This analysis compares the **Designer's Predictions** for the "sleek_cambered_blade" against the **visual outcome** of the generated airfoil.
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter | Predicted Effect | Actual Outcome | Analysis |
+| :--- | :--- | :--- | :--- |
+| **CP3 (LE) Radius** | $r=1.0$ for max chord and smooth parabolic nose. | A distinct, rounded protrusion on the left. | While the radius is high, the sudden drop in radius to CP2 and CP4 created a "bulb" rather than a continuous leading edge. |
+| **CP1, CP2 (Upper Mid)** | $r \approx 0.40$ to reduce thickness/bloat. | A deep concave "scoop" on the upper-forward surface. | The reduction was too aggressive. The spline "collapsed" toward the origin between the LE and the mid-body. |
+| **CP4, CP5 (Lower Mid)** | $r \approx 0.25$ to create positive camber. | A severe "pinched" waist on the lower surface. | Instead of a gentle curve, this created a sharp inward-pointing V-shape. The radius delta (1.0 to 0.25) was too large for the spline to bridge smoothly. |
+| **CP0, CP7 (TE)** | $r=1.0$, `edgy`=1.0 for a sharp, elongated tail. | A sharp, needle-like trailing edge. | **Success.** The polar logic for the TE worked as intended, creating a clear point of flow separation. |
+| **Smoothing (-1.0)** | To "heal" transitions and ensure organic flow. | Failed to prevent jaggedness/concavity. | `edgy_param` controls local curvature, but it cannot override extreme radial gradients. The "tension" of the spline pulling from $r=1.0$ to $r=0.25$ created a "starfish" effect. |
+
+### Geometry Observations
+*   **The "Pinched" Profile:** The design moved from a "Bean" (Design 1) to a "Shard" (Design 2). The goal of a "Blade" failed because the mid-body radii were too small relative to the poles.
+*   **Concavity:** The airfoil is significantly concave on both the upper and lower surfaces. In aerodynamics, concavity (especially near the leading edge) usually triggers immediate flow separation and massive drag.
+*   **Camber:** While there is a radial delta between the top and bottom, the shape is so distorted that "mean camber line" logic no longer applies in a traditional sense.
+
+### Key Learnings
+
+1.  **The "Radial Gradient" Limit:** You cannot transition from $r=1.0$ to $r=0.25$ across only 1 or 2 control points without creating a concave "waist." To maintain a convex, "blade-like" shape, the mid-body radii likely need to stay above $0.5-0.6$ if the poles are at $1.0$.
+2.  **Smoothing is Not a Panacea:** Setting `edgy_param` to $-1.0$ ensures the curve is differentiable, but it doesn't force the shape to be convex. The spline is simply doing the shortest path math between points of wildly different magnitudes.
+3.  **The "Starfish" Trap:** By maximizing the chord (LE and TE at $r=1.0$) while minimizing thickness (Mid at $r=0.25$), you inadvertently created a 2-pointed "starfish" variant. 
+4.  **Proposed Correction:** To achieve the "Blade" shape, the mid-body radii need to be increased (e.g., $r \approx 0.6$ for upper, $r \approx 0.5$ for lower) to eliminate concavity while still being much thinner than the original "Bean."
+
+## Task
+Update the reference card. Do NOT rewrite from scratch -- MERGE new evidence into existing entries.
+- If new evidence CONFIRMS an existing bullet, strengthen it by adding the new iter citation
+- If new evidence CONTRADICTS an existing bullet, replace it only if the new evidence is clearly stronger (more iterations supporting it)
+- If an entry has no new evidence this iteration, KEEP IT UNCHANGED
+
+Include:
+- A brief overall rules section
+- An entry for each individual degree of freedom with 3-4 bullet points based on accumulated evidence
+
+Keep it terse. Cite [iter N] and specific values. Preserve hard-won knowledge from earlier iterations.

@@ -1,0 +1,12 @@
+*   **Strategy Focus: Exploitation.** I am taking the successful blueprint of Design 1 and refining the specific parameters that contribute to its efficiency while adding safety margins to the lower surface geometry.
+*   **Chord Maximization:** Design 1 has a combined $r_0+r_2$ of 1.79. I will push this to approximately 1.83 to increase the Reynolds-related efficiency of the profile without triggering the "Pebble Trap" collapse ($>1.90$).
+*   **Nose Refinement:** I will increase $r_0$ to 0.85. According to the "Radius-Distance Law," this maximizes length. I will keep $a_0$ near zero to maintain the clean stagnation alignment seen in the pressure plots.
+*   **Lower Surface Smoothing:** The previous design used $e_3 = -0.92$, which is highly concave. I will move this toward -0.35. This "Exploitation" aims to retain the lift-generating undercamber but reduces the risk of the geometric "Fang" boundary which can cause simulation instability.
+*   **Thickness Control:** To prevent the "Waisted Trap," I will ensure $r_1$ and $r_3$ remain above 0.40 as the chord stretches, providing enough internal volume to maintain convexity.
+
+## Per-Parameter Predictions
+*   **I am setting param[0][0] (r0) to 0.8525** because I predict it will increase the total chord length and improve the lift-to-drag ratio by extending the surface area.
+*   **I am setting param[0][1] (a0) to 0.0125** because I predict it will keep the leading edge stagnation point centered, minimizing frontal drag.
+*   **I am setting param[1][0] (r1) to 0.4150** because I predict it will maintain sufficient thickness to prevent a "waisted" or "pinched" upper surface as the chord lengthens.
+*   **I am setting param[2][0] (r2) to 0.9785** because I predict it will provide maximum rearward extension and a sharp Kutta closure when combined with $e_2=1.0$.
+*   **I am setting param[3][2] (e3) to -0.3500** because I predict it will preserve the beneficial undercamber seen in Design 1 while smoothing the curvature to avoid geometric "notching."

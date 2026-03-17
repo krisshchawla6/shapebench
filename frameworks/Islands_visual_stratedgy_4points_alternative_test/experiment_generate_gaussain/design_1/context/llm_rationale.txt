@@ -1,0 +1,16 @@
+- **Strategy Focus (Novel Design)**: I am abandoning the circular baseline entirely. Instead of incremental changes to the radius of 1.0, I am implementing a classical "NACA-inspired" teardrop profile using first principles of streamlining and airfoil geometry.
+- **Pressure Drag Reduction**: By reducing the thickness (lowering $r_2$ and $r_6$), I will move the separation point toward the trailing edge, narrowing the wake significantly.
+- **Lift Generation**: I will set $r_2 > r_6$ to create a larger suction surface on the top, encouraging lower pressure and positive lift.
+- **Leading Edge Management**: I am using a negative $e_4$ value to maintain a blunt, rounded leading edge, which is more robust to changes in angle of attack than a sharp leading edge.
+- **Longitudinal Balance**: I will use $a_2$ and $a_6$ to shift the maximum thickness forward (approx. 30% chord), which helps maintain attached flow over the rear of the airfoil.
+
+## Per-Parameter Predictions
+
+- I am setting `param[0][0]` (r0) to **0.9850** because I predict it will extend the chord rearward to form a distinct trailing edge.
+- I am setting `param[0][2]` (e0) to **0.9500** because I predict it will create a sharp point at the trailing edge to satisfy the Kutta condition.
+- I am setting `param[4][0]` (r4) to **0.8500** because I predict it will provide a substantial forward chord extension for streamlining.
+- I am setting `param[4][2]` (e4) to **-0.8000** because I predict it will create a blunt, circular leading edge to prevent early flow separation.
+- I am setting `param[2][0]` (r2) to **0.3200** because I predict it will define the upper suction surface height, significantly thinning the profile compared to the circle.
+- I am setting `param[6][0]` (r6) to **0.2200** because I predict it will create a thinner lower surface than the top, establishing the necessary camber for lift.
+- I am setting `param[2][1]` (a2) to **-0.3000** because I predict it will shift the maximum thickness of the upper surface forward.
+- I am setting `param[1][0]` and `param[7][0]` to intermediate values (**0.6500**) to ensure a smooth, tapered transition toward the sharp trailing edge.

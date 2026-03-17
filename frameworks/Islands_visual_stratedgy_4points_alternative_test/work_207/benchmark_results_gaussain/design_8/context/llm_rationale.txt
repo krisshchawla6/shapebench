@@ -1,0 +1,16 @@
+- **Strategy Focus (Exploitation)**: I am taking the baseline circular profile (the only stable design in the database) and applying the "Optimal Range" rules from the Reference Card to transform it into a high-performance airfoil. 
+- **TE Definition**: I am fixing the Trailing Edge at CP4 with maximum radius and edginess ($1.0, 1.0$). This is the single most important step to move from "cylinder" to "airfoil."
+- **Anti-Necking Support**: To avoid the "hourglass" failure mentioned in Iteration 8, I am setting the transition points CP3 and CP5 to $r=0.7655$. This ensures the transition to the sharp TE is gradual rather than a sudden spike.
+- **Camber Calibration**: I am setting CP2 (top) to $r=0.5400$ and CP6 (bottom) to $r=0.4100$. This $\Delta r$ of $0.13$ provides sufficient camber for lift while staying well below the $0.20$ threshold that causes lower-surface concavity.
+- **Leading Edge Optimization**: CP0 is set to $r=0.8600$ and $e=-0.5200$. The high radius ensures the chord length isn't truncated, and the negative edginess creates a parabolic nose to minimize stagnation drag.
+- **Transition Smoothing**: CP1 and CP7 are given slight negative edginess to ensure the transition from the blunt nose to the suction/pressure surfaces is smooth, delaying transition to turbulence.
+
+## Per-Parameter Predictions
+- **CP0 [0.8600, 0.0000, -0.5200]**: I am setting these because I predict it will create a blunt, rounded leading edge that facilitates smooth stagnation.
+- **CP1 [0.6600, 0.0200, -0.1500]**: I am setting these because I predict a slight positive angle offset and negative edginess will smooth the flow acceleration onto the upper surface.
+- **CP2 [0.5400, 0.0000, 0.0500]**: I am setting these because I predict this radius will define the maximum thickness point of the suction side.
+- **CP3 [0.7655, -0.0200, 0.4500]**: I am setting these because I predict a high radius and increasing edginess will support the TE without creating a "bottleneck" or "neck."
+- **CP4 [1.0000, 0.0000, 1.0000]**: I am setting these because I predict it will create a sharp vertex required for the Kutta condition.
+- **CP5 [0.7655, 0.0200, 0.4500]**: I am setting these to mirror CP3, predicting it will prevent flow separation on the lower rear surface.
+- **CP6 [0.4100, 0.0000, 0.0000]**: I am setting this radius lower than CP2 because I predict it will create the camber necessary for lift.
+- **CP7 [0.6600, -0.0200, -0.1500]**: I am setting these to ensure the lower-front transition matches the upper-front for volume consistency.

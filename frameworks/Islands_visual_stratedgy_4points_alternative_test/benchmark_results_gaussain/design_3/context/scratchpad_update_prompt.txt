@@ -1,0 +1,110 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **Chord-Thickness Ratio:** Small horizontal distance between CP0 (LE) and CP2 (TE) relative to CP1/CP3 height results in "stubby/pebble" shapes with high pressure drag [iter 1].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius + forward CP1 Angle) trigger massive flow separation [iter 1].
+*   **Asymmetry Effects:** Extreme radius disparity between CP1 (Upper) and CP3 (Lower) produces "comma" or "hooked" profiles [iter 1].
+*   **The Stretch Paradox:** Radius does **not** equal Cartesian extension. Increasing CP2 Radius bloats the trailing sector into a blunt wedge rather than lengthening the chord [iter 2]. 
+*   **Thinning Strategy:** To achieve aerodynamic aspect ratios, *reduce* CP1 and CP3 radii to flatten the profile, rather than attempting to "pull" the TE [iter 2].
+*   **Base Drag Trap:** High TE Edgy + High TE Radius creates a flat/concave "cliff" face instead of a sharp Kutta-compliant point [iter 2].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** High values (>0.6) create bulbous noses [iter 1]. Low values (<0.3) combined with negative Edgy create "pinched," non-aerodynamic points [iter 2].
+*   **Angle [0][1]:** (Not isolated).
+*   **Edgy [0][2]:** Low values (-0.95) provide C-infinity continuity, but force extremely tight curvature if Radius is also low [iter 2].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" fullness. High values create steep forward ramps and "wedge" profiles if the chord is not sufficiently long [iter 2].
+*   **Angle [1][1]:** Lower values (~ -0.2) shift maximum thickness forward (~35% chord), increasing slope severity toward the TE [iter 1, 2].
+*   **Edgy [1][2]:** (Not isolated).
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Controls the "weight" or "influence" of the rear sector. High values (>0.8) produce a bloated, wide base rather than a long tail [iter 2].
+*   **Angle [2][1]:** (Not isolated).
+*   **Edgy [2][2]:** High values (~0.98) enforce sharp transitions. If Radius is high, this results in a vertical or concave rear face (base drag) [iter 2].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Low values (~0.22) create "pinched" concavity [iter 1]. Moderate values (~0.38) combined with positive angles create "underslung hooks" that trap flow [iter 2].
+*   **Angle [3][1]:** Positive values (~0.2) can verticalize the lower-rear section, contributing to a blunt trailing profile [iter 2].
+*   **Edgy [3][2]:** (Not isolated).
+
+## New Evidence (Iteration 4)
+Parameters used:
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.4852,
+      0.0,
+      -0.9654
+    ],
+    [
+      0.3341,
+      -0.2851,
+      -0.8122
+    ],
+    [
+      0.1054,
+      0.0,
+      0.9945
+    ],
+    [
+      0.1982,
+      0.1421,
+      -0.8841
+    ]
+  ],
+  "name": "laminar_alpha_v1"
+}
+```
+
+Observations:
+This analysis compares your predictions for the `laminar_alpha_v1` design against the resulting geometry shown in the provided image.
+
+### Parameter-by-Parameter Analysis
+
+| Parameter | Prediction | Actual (Action Vector) | Outcome vs. Prediction |
+| :--- | :--- | :--- | :--- |
+| **CP0 Radius (LE)** | 0.4852 (Robust nose) | **0.3959** | **Under-scaled.** While rounded, the radius was too small to establish a significant chord length, contributing to the "pebble" look. |
+| **CP0 Angle** | 0.0000 (Centered) | **-0.0314** | **Accurate.** The leading edge is centered on the horizontal axis. |
+| **CP0 Edgy** | -0.9654 (Smooth nose) | **-1.0000** | **Accurate.** The left side of the shape is a perfect, smooth arc. |
+| **CP1 Radius (Upper)** | 0.3341 (Moderate peak) | **0.2860** | **Too low.** The peak height is insufficient to create a functional lifting surface; it results in a squat, nearly symmetric vertical profile. |
+| **CP1 Angle** | -0.2851 (Forward thickness) | **-0.3604** | **Accurate in intent.** There is a slight forward bias to the thickness, but the effect is minimized by the overall small scale. |
+| **CP1 Edgy** | -0.8122 (Smooth upper) | **-0.8020** | **Accurate.** The upper transition is smooth and continuous. |
+| **CP2 Radius (TE)** | 0.1054 (Sharp/No bloat) | **0.0887** | **Failure of Scale.** While "sharp," the radius is so close to the origin that it doesn't function as a trailing edge. It acts as the back of a small seed. |
+| **CP2 Angle** | 0.0000 (Horizontal) | **0.0206** | **Accurate.** The "tail" point is aligned horizontally with the nose. |
+| **CP2 Edgy** | 0.9945 (Knife-like) | **0.9870** | **Accurate.** A sharp geometric singularity is visible, but it lacks the chord length to resolve flow. |
+| **CP3 Radius (Lower)** | 0.1982 (Thin profile) | **0.2284** | **Slightly thicker than intended.** This reduced the intended camber, making the shape more elliptical than airfoil-like. |
+| **CP3 Angle** | 0.1421 (Tuck forward) | **0.2603** | **Accurate.** The lower surface tucks inward as predicted. |
+| **CP3 Edgy** | -0.8841 (Smooth lower) | **-0.9136** | **Accurate.** The lower surface is smooth. |
+
+### Key Learnings and Critical Analysis
+
+**1. The "Miniature Trap" (Chord Length Deficiency)**
+The primary failure of this iteration is a misunderstanding of the relationship between **Radius** and **Chord Length**. By setting all radii (CP0 through CP3) to relatively low values (mostly < 0.4), the resulting shape is extremely small. In this parameter space, the distance between the Leading Edge (CP0) and Trailing Edge (CP2) defines the chord. To maximize aerodynamic performance, these radii must be large enough to "stretch" the airfoil out, creating a high-aspect-ratio wing.
+
+**2. The "Edgy" Miscalculation at the TE**
+While you successfully avoided the "Base Drag Trap" (blunt TE), you fell into a functional trap. A sharp TE (Edgy > 0.9) on a very short chord (Radius < 0.1) creates a "beak" rather than a trailing edge. For the Kutta condition to be aerodynamically useful, there must be a significant surface area preceding the TE to develop a pressure differential.
+
+**3. Camber vs. Thickness**
+The attempt at a "Thinning Strategy" was too aggressive. By setting the Lower Radius (CP3) so close to the Upper Radius (CP1), and both of them being small, you produced a shape that mimics a pebble. To achieve a high reward, the ratio between chord length (distance between CP0 and CP2) and maximum thickness (CP1/CP3) needs to be much higher (typically 10:1 or 12:1 for subsonic efficiency).
+
+**4. Visual Intuition vs. Geometric Reality**
+Your strategy aimed for a NACA-like profile, but the resulting geometry lacks the necessary "stretch." The "Visual Intuition Strategy" correctly identified the *features* (rounded nose, sharp tail) but failed on the *proportions*.
+
+**Optimization Recommendation for v2:**
+*   **Increase the "Stretch":** Significantly increase the Radius of CP0 and CP2 (e.g., > 0.8) to elongate the airfoil.
+*   **Refine Thickness Ratio:** Maintain the low "Edgy" values for smoothness but ensure CP1 (Upper Radius) provides enough volume to create a distinct upper curvature compared to the lower surface.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

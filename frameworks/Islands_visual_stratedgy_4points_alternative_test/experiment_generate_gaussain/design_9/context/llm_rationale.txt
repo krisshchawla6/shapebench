@@ -1,0 +1,15 @@
+- **Strategy Focus: Exploitation**: The circle (Design 2-5) is the only successful geometry so far. I will use it as a template and apply a "stretching" transformation to move from a bluff body to a streamlined one.
+- **Applying the Scale Rule**: The total chord ($r_0 + r_4$) will be set to 2.35, exceeding the 2.0 threshold to avoid the "Nugget" trap while reducing the thickness-to-chord ratio.
+- **Camber Introduction**: I will set $r_2$ (upper apex) slightly higher than $r_6$ (lower apex) to create a subtle positive camber for lift generation.
+- **TE/LE Specialization**: Following the Reference Card, $e_0$ is set to -0.8 for a sharp Kutta condition at the tail, and $e_4$ is set to 0.5 to round the nose for a smoother stagnation zone.
+- **Curvature Control**: To avoid the "Peanut" (concave waist), I will maintain all radii near 1.0, ensuring that the "valleys" at $r_2$ and $r_6$ are very shallow and supported by strictly intermediate $r_1, r_3, r_5, r_7$ values.
+
+## Per-Parameter Predictions
+
+- **r0 (1.2000)**: I am setting this to extend the trailing edge, increasing the chord length.
+- **e0 (-0.8000)**: I am setting this to create a sharp, cusped trailing edge to control flow separation at the rear.
+- **r4 (1.1500)**: I am setting this to extend the leading edge forward.
+- **e4 (0.5000)**: I am setting this to ensure a blunt, rounded nose that is robust to varying angles of attack.
+- **r2 (1.0200) & r6 (0.9800)**: I am setting these to create a slight asymmetry (camber), with the upper surface being more curved than the lower.
+- **a2 (0.1000) & a6 (-0.1000)**: I am setting these to shift the maximum thickness slightly forward toward the leading edge.
+- **r1, r3, r5, r7**: I am setting these to values between the LE/TE and the apexes to ensure a smooth, convex transition (monotonicity).

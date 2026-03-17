@@ -1,0 +1,16 @@
+- **Geometry Observation**: 
+    - The airfoil in the images is extremely thin, almost needle-like, with a high chord-to-thickness ratio.
+    - The leading edge is excessively sharp ("beaked"), and the mid-section is significantly "waisted" or concave, particularly on the lower surface.
+    - The trailing edge is sharp and appears to have a slight downward hook.
+    - There is a noticeable "pinch" between the leading edge and the mid-body, creating a non-convex, boomerang-like profile.
+
+- **Flow Field Observation**:
+    - **Pressure (p)**: There is a localized high-pressure zone at the extreme tip of the leading edge, but the pressure recovery along the upper surface is poor due to the concave "waist."
+    - **Velocity (u)**: High-speed flow is concentrated over the initial upper surface, but there is clear evidence of flow instability or a thin wake behind the extremely slender trailing edge.
+    - **Velocity (v)**: There is very little vertical displacement of the flow, indicating that the design is generating minimal lift despite its length.
+
+- **Mapping & Key Changes**:
+    - Design 1's high reward (1.18) comes from its extreme chord (r0=1.0, r2=1.0), but its geometric flaws (waisting) are caused by side radii being too low (r1=0.18, r3=0.21).
+    - To improve, the side radii (CP1 and CP3) must be increased above the "waisted trap" threshold (~0.45) to ensure a convex, structurally sound profile.
+    - The LE radius (r0) should be slightly reduced from 1.0 to avoid the "beaking" effect and provide a smoother stagnation point.
+    - The peak of the upper surface (a1) should be moved forward to encourage a long, gentle pressure recovery toward the tail.

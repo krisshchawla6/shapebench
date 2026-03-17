@@ -1,0 +1,11 @@
+*   **Visual Intuition Strategy**: I am identifying the "bloated block" as the primary failure mode. To fix this, I am mentally "stretching" the airfoil by pulling the mid-section points inward toward the center while keeping the LE and TE at the distal poles.
+*   **Applying the Goldilocks Radius Zone**: Previous iterations show that $r > 0.5$ for non-pole points causes the "blob" effect. I will set mid-body radii between 0.15 and 0.28 to create a thin, high-aspect-ratio wing.
+*   **Leading Edge Parabola**: By setting CP3 to $r=1.0$ and its neighbors (CP2, CP4) to $r \approx 0.2$ with clustered angles ($a \approx \pm 0.1$), I will create a smooth parabolic entry that minimizes the stagnation zone.
+*   **Camber Introduction**: I will set the upper surface points (CP4, 5, 6) to slightly higher radii than the lower surface points (CP1, 2) to create a curved upper loft, encouraging lift.
+*   **Kutta Condition enforcement**: I will keep CP0 and CP7 at $e=1.0$ and $r=0.98$ to ensure a clean, sharp trailing edge for flow separation control.
+
+## Per-Parameter Predictions
+*   **params[3][0] (LE radius) to 1.0**: I predict this will maximize the chord length by pushing the nose to the furthest possible forward point.
+*   **params[2][0] and params[4][0] to ~0.22**: I predict these low radii values, combined with their proximity to the LE, will "sharpen" the nose into a streamlined wedge instead of a flat face.
+*   **params[1,2,4,5,6][2] to -1.0**: I predict these "edgy" values will force the B-spline to stay as smooth as possible, preventing the "faceted" look of Design 1.
+*   **params[5][0] slightly higher than params[1][0]**: I predict this asymmetry will create positive camber, generating a pressure differential between the upper and lower surfaces.

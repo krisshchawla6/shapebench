@@ -1,0 +1,119 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## General Design Rules
+*   **Flow Direction**: Right-to-Left. CP0=LE (Nose); CP4=TE (Tail) [iter 2].
+*   **TE Sharpness**: CP4 must be $r, e = 1.0$ to satisfy Kutta condition and reduce drag [iter 5].
+*   **Radius Monotonicity**: Avoid "necking." Radii must transition smoothly; if $r_{CP4}=1.0$, then $r_{CP3/5}$ must be sufficiently high ($>0.6$) to prevent an "hourglass" spike [iter 8].
+*   **Camber Limits**: Maintain $r_{CP2} > r_{CP6}$ for lift, but keep $\Delta r < 0.2$ to prevent lower surface collapse/concavity [iter 8].
+*   **Concavity Risk**: Non-monotonic thickness (pinching at CP3/CP5) creates "dead air" pockets and flow separation [iter 5, 8].
+*   **Scale Maintenance**: Avoid reducing all radii simultaneously; this shrinks the chord and creates a "bulbous" LE [iter 8].
+
+## Degree of Freedom Mapping
+
+| Control Point | Geometric Role | Optimal Range / Setting | Effect [Source] |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Leading Edge | $r \approx 0.8 / e: -0.4$ to $-0.6$ | Prevents "flat-face" stagnation and sharp shoulder separation [iter 5]. |
+| **CP1 (U-Front)** | Transition | Gradual $e$ transition | Bridges LE to Suction side; sensitive to edginess jumps [iter 4]. |
+| **CP2 (Top)** | Suction Side | $r \approx 0.5 - 0.6$ | Defines upper thickness; must stay $> r_{CP6}$ for lift [iter 8]. |
+| **CP3 (U-Back)** | Transition | **$r > 0.6$** | Supports TE; $r < 0.5$ creates a "neck" or "waist" near the tail [iter 8]. |
+| **CP4 (Tail)** | Trailing Edge | **$r: 1.0 / e: 1.0$** | **Mandatory** for lift; creates the vertex required for the Kutta condition [iter 5]. |
+| **CP5 (L-Back)** | Transition | **$r > 0.6$** | Mirrors CP3; critical to prevent "bottleneck" flow separation [iter 8]. |
+| **CP6 (Bottom)** | Pressure Side | $r \approx 0.35 - 0.45$ | Lower than CP2 creates camber; too low ($<0.3$) causes surface collapse [iter 8]. |
+| **CP7 (L-Front)** | Transition | Gradual $e$ transition | Prevents early LE separation; must maintain monotonic curvature [iter 4]. |
+| **Angle Offsets** | Thickness Dist. | $a < 0.1$ | Shifts thickness; excessive values distort chord length [iter 4]. |
+| **Edginess** | Surface Profile | $\Delta e < 0.5$ (adj. pts) | High $e$ at CP4 creates the point; negative $e$ at CP0 rounds the nose [iter 5, 8]. |
+
+## New Evidence (Iteration 8)
+*   **The Necking Effect**: Setting CP4 to $r=1.0$ while neighbors (CP3/CP5) are $r \approx 0.48$ creates a non-monotonic "spike." This "hourglass" shape triggers massive flow separation [iter 8].
+*   **Camber vs. Collapse**: A radius delta between CP2 and CP6 is necessary for lift, but $r_{CP6} = 0.32$ was too low, resulting in a "pinched" or concave underside rather than a smooth pressure surface [iter 8].
+*   **Volume/Chord Loss**: Reducing all radii relative to the baseline shrinks the airfoil's effective size, making the LE appear disproportionately bulbous if not balanced [iter 8].
+*   **Vertex Stability**: $e=1.0$ at CP4 successfully creates a sharp TE, but requires high radius support from CP3/CP5 to function as an airfoil rather than a needle [iter 8].
+
+## New Evidence (Iteration 9)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.86,
+      0.0,
+      -0.52
+    ],
+    [
+      0.66,
+      0.02,
+      -0.15
+    ],
+    [
+      0.54,
+      0.0,
+      0.05
+    ],
+    [
+      0.7655,
+      -0.02,
+      0.45
+    ],
+    [
+      1.0,
+      0.0,
+      1.0
+    ],
+    [
+      0.7655,
+      0.02,
+      0.45
+    ],
+    [
+      0.41,
+      0.0,
+      0.0
+    ],
+    [
+      0.66,
+      -0.02,
+      -0.15
+    ]
+  ],
+  "name": "Exploitation_Cambered_Stabilized_TE"
+}
+```
+
+Observations:
+This analysis evaluates the "Exploitation_Cambered_Stabilized_TE" design. While the strategy aimed to move from a circle to a high-performance airfoil, the resulting geometry is a distorted, non-aerodynamic "bulbous" shape that likely suffers from severe separation and low reward.
+
+### Per-Parameter Analysis: Prediction vs. Outcome
+
+| Parameter | Prediction | Outcome |
+| :--- | :--- | :--- |
+| **CP0 (LE) [r: 0.86, e: -0.52]** | Blunt, rounded leading edge for smooth stagnation. | The LE is extremely blunt and appears nearly flat or slightly concave. The high radius relative to CP1/CP7, combined with negative edginess, created a "hammerhead" effect rather than a parabolic nose. |
+| **CP1/CP7 [r: 0.66, e: -0.15]** | Smooth flow acceleration onto suction/pressure surfaces. | These points have significantly lower radii than the LE (CP0) and the rear-support (CP3/CP5). This created a "pinched" neck at the front of the airfoil, causing immediate flow separation. |
+| **CP2 [r: 0.54, e: 0.05]** | Define maximum thickness point of the suction side. | At $r=0.54$, this is actually the *thinnest* part of the upper surface because CP3 is much larger ($r=0.76$). This created a concave "saddle" on the top of the airfoil. |
+| **CP3/CP5 [r: 0.7655, e: 0.45]** | Anti-necking support to ensure a gradual transition to TE. | **Failure.** Instead of preventing a neck, these created a massive "bulb" at the rear. Because their radii are ~40% larger than CP2, the airfoil expands toward the back before hitting the TE. |
+| **CP4 (TE) [r: 1.0, e: 1.0]** | Sharp vertex to satisfy the Kutta condition. | A sharp point is present, but it is attached to a bulbous rear section. The flow would likely separate long before reaching this point, rendering the Kutta condition moot. |
+| **CP6 [r: 0.41, e: 0.0]** | Create camber necessary for lift. | While it is lower than CP2, the surrounding geometry (the bulb at CP5 and the pinch at CP7) creates a highly irregular lower surface that would produce massive drag rather than clean lift. |
+
+### Key Learnings
+
+**1. The "Anti-Necking" Radius Paradox**
+The attempt to prevent "necking" (where the TE pinches in too fast) resulted in the opposite failure: a "bulbous" trailing edge. For a shape to be an airfoil, the radius must generally be monotonic (or nearly so) from the point of maximum thickness to the trailing edge. Setting $r_{CP3} > r_{CP2}$ is a fundamental geometric error that creates a "molar tooth" shape.
+
+**2. Relative Radii Matter More than Absolute Values**
+The strategy focused on "Optimal Ranges" for individual points but ignored the *gradient* between points. An airfoil is a continuous curve; if CP0 is $0.86$, CP1 is $0.66$, and CP2 is $0.54$, the shape is rapidly shrinking. If CP3 then jumps back to $0.76$, the geometry becomes wavy. Smoothness requires a logical progression of radii (e.g., $0.8 \rightarrow 0.7 \rightarrow 0.6 \rightarrow 0.5 \rightarrow 0.7 \rightarrow 1.0$).
+
+**3. Negative Edginess and "Nose Collapse"**
+The use of negative edginess at the leading edge (CP0) was intended to round the nose, but when combined with a radius that is much larger than the adjacent points (CP1/CP7), it pulls the surface inward between the control points, leading to the flattened/concave front profile seen in the result.
+
+**4. Camber requires Global Coordination**
+Camber isn't just about $r_{CP2} > r_{CP6}$; it requires the entire mean camber line to be curved. Because the rear of this design (CP3/CP5) is so thick and symmetric, any lift generated at the mid-section is likely negated by the massive, turbulent wake generated by the rear "bulb."
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

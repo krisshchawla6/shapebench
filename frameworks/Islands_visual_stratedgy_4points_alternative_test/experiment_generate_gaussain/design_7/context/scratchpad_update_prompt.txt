@@ -1,0 +1,115 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card (Iteration 7)
+
+### Global Design Rules
+*   **Radial Positivity:** All $r_n > 0$ to prevent origin-crossing [iter 1].
+*   **Laminar Delta Rule:** Maintain $\Delta r < 0.1$ between all adjacent $r_n$ to prevent "lumpy" high-curvature zones and flow separation [iter 2, 6].
+*   **Teardrop Topology:** Middle radii ($r_{1,2,3}$ and $r_{5,6,7}$) must be $\ge$ or provide a smooth bridge between end radii ($r_0, r_4$) to avoid "Peanut/Waist" shapes [iter 6].
+*   **The Scale Rule:** Total chord ($r_0 + r_4$) must exceed 2.0. Reducing all radii to avoid penalties creates a "Nugget" (bluff body) with high pressure drag [iter 7].
+*   **The Pinch Technique:** For a sharp Trailing Edge (TE), $r_1, r_7$ must be significantly smaller than $r_0$ to stretch the spline [iter 6].
+*   **Chord-to-Thickness Ratio:** Target $r_{vertical} (r_2, r_6) \approx 12\text{--}15\%$ of total chord ($r_0 + r_4$). High thickness-to-chord ratios (~45%) result in "tilted bean" profiles rather than wings [iter 5, 7].
+
+### Degree of Freedom Map
+
+| Parameter | Geometric Effect | Aerodynamic Implication |
+| :--- | :--- | :--- |
+| **$r_0$** | TE extension. | Defines aft chord. Must be $> 1.0$ if $r_{2,6}$ are small to avoid "Scale Trap" [iter 1, 7]. |
+| **$e_0$** | TE Sharpness. | **Negative** ($\rightarrow -1$) for Kutta cusp. Utility is lost if the tail is too short (flow detaches before cusp) [iter 3, 7]. |
+| **$r_2$** | Upper surface height. | Primary thickness. High $r_2$ relative to $r_0$ creates a bluff body [iter 2, 7]. |
+| **$a_n$** | Surface bias. | Shifts max thickness location. In compact/short shapes, causes "rotation/tilting" rather than volume shift [iter 1, 7]. |
+| **$r_4$** | LE extension. | Defines forward chord. Requires $r_3, r_5$ support to avoid "pointed" nose [iter 1, 5]. |
+| **$e_4$** | LE Bluntness. | **Positive** ($\rightarrow +1$) rounds nose. $e \approx 0.35$ provides smooth stagnation; $e > 0.8$ is "boxy" [iter 3, 7]. |
+| **$r_6$** | Lower surface height. | Camber control. $r_6 < r_2$ creates lift. Must maintain $r_6 \ge r_0, r_4$ for structural bulk [iter 3, 6]. |
+| **$r_{1,3,5,7}$** | Tapering support. | Bridges $r_{even}$ via $\Delta r < 0.1$ to maintain laminar flow [iter 2, 6]. |
+
+## New Evidence (Iteration 8)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      0.0,
+      -0.925
+    ],
+    [
+      0.5821,
+      0.045,
+      0.0
+    ],
+    [
+      0.1915,
+      0.125,
+      0.0
+    ],
+    [
+      0.6542,
+      0.082,
+      0.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.485
+    ],
+    [
+      0.6542,
+      -0.082,
+      0.0
+    ],
+    [
+      0.1423,
+      -0.125,
+      0.0
+    ],
+    [
+      0.5821,
+      -0.045,
+      0.0
+    ]
+  ],
+  "name": "Streamlined_Circle_Refinement_v1"
+}
+```
+
+Observations:
+This analysis critically examines the transition from the "Circle" baseline to the **Streamlined_Circle_Refinement_v1** (the "Peanut" design).
+
+### Per-Parameter Analysis: Prediction vs. Outcome
+
+| Parameter | Predicted Effect | Actual Outcome | Analysis of Gap |
+| :--- | :--- | :--- | :--- |
+| **param[0][0] (r0) = 1.0** | Maximize trailing edge (TE) extension for chord length. | Created a bulbous rear lobe. | The prediction assumed $r_0$ would be the tip of a tapered tail. Instead, because neighboring points were too retracted, it became the center of a secondary mass. |
+| **param[0][2] (e0) = -0.925** | Create a sharp Kutta cusp at the TE. | The TE is pointed, but the "cusp" is disconnected from the main body flow. | High negative eccentricity successfully "sharpened" the point, but the global geometry failed to provide the "teardrop" context needed for a Kutta condition. |
+| **param[4][0] (r4) = 1.0** | Maximize leading edge (LE) extension. | Created a bulbous front lobe. | Similar to $r_0$, the lack of structural support from $r_3$ and $r_5$ turned the LE into a "head" rather than a nose. |
+| **param[4][2] (e4) = 0.485** | Round the nose for a stable stagnation point. | The nose is rounded and blunt. | **Success.** Positive eccentricity effectively blunted the point, creating a viable stagnation zone, though the overall shape is non-functional. |
+| **param[2][0] (r2) = 0.1915** | Thin the upper surface to ~10% chord. | Created a deep concave "valley" at the top of the airfoil. | **Critical Failure.** The designer treated $r_2$ as a local thickness measure, but in a polar coordinate spline, if $r_2$ is significantly smaller than its neighbors ($r_1, r_3$), the shape becomes **concave**. |
+| **param[6][0] (r6) = 0.1423** | Thin the lower surface/create camber. | Created a deep concave "valley" at the bottom. | Same failure as $r_2$. The "thickness" was achieved by collapsing the center of the airfoil rather than tapering the ends. |
+| **param[1][0] & [7][0] = 0.5821** | "Pinch" points for inward taper. | These acted as the "shoulders" of the rear bulb. | Because these values (0.58) were much larger than the "thickness" points (0.19), they prevented a smooth taper and forced the "peanut" waist. |
+
+### Key Learnings & Parameter Space Insights
+
+#### 1. The "Convexity Constraint"
+The most significant learning is that for a functional airfoil, the radii must generally follow a **convex profile**. If $r_2$ (the top) and $r_6$ (the bottom) are the smallest radii in the set while $r_0$ and $r_4$ are the largest, the spline will invariably collapse inward. To achieve a 17% thickness-to-chord ratio, $r_2$ and $r_6$ should actually be the *maximum* radii (or close to it) if the goal is a traditional wing, while $r_1, r_0, r_7$ provide the tapering.
+
+#### 2. Polar vs. Cartesian Thinking
+The designer attempted to apply Cartesian "thickness" logic to a Polar coordinate system. In this parameter space:
+*   $r_0$ and $r_4$ define the **length** (Chord).
+*   $r_2$ and $r_6$ define the **height** (Thickness).
+*   To avoid the "Peanut" (concavity), $r_1, r_3, r_5,$ and $r_7$ must act as a bridge. They should be intermediate in value between the chord-ends and the thickness-peaks.
+
+#### 3. Eccentricity ($e_n$) is Local, Radius ($r_n$) is Global
+The use of $e_0 = -0.925$ proved that we can successfully sharpen a trailing edge. However, a sharp trailing edge on a concave body creates massive flow separation in the "valleys" before the air even reaches the TE. Aerodynamic performance requires **pressure recovery**, which is impossible when the flow is forced to navigate a "waist."
+
+#### 4. The Scale Rule vs. The Curvature Rule
+While the designer successfully followed the "Scale Rule" (keeping $r_0 + r_4 = 2.0$), they violated the implicit "Curvature Rule." A high-performance airfoil must be a convex hull. The current design will likely result in a **lower reward than the Circle (Design 1)** because the concave valleys will create massive turbulence and drag, potentially even worse than a simple cylinder.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

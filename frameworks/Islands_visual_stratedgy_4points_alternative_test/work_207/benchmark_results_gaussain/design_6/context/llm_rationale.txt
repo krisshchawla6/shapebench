@@ -1,0 +1,14 @@
+*   **Exploitation Strategy**: Since the only designs with non-failing rewards (-0.0036) are circles, I will use the circle as a geometric "safe zone" and apply targeted deformations based on the Airfoil Reference Card. This avoids the catastrophic mesh failures (-5.00) seen in Designs 2 and 4, which likely suffered from "pinched" geometries (radii too small or points crossing).
+*   **TE Mastery**: Following the Iteration 5 evidence, the most critical move is setting CP4 to absolute maximum radius and edginess (`r=1.0, e=1.0`). This forces the formation of a trailing edge.
+*   **Camber via Radius Differential**: To generate lift, I am creating an asymmetry between the suction side (CP2) and the pressure side (CP6). By setting CP2 at `r=0.52` and CP6 at `r=0.42`, I create a net curvature that should yield positive lift.
+*   **Preventing Pinching**: Designs 2 and 4 failed because they likely reduced mid-section radii too aggressively (some values were < 0.2). I will maintain "thick" transitions (`r > 0.4`) to ensure the geometry remains manifold and the mesh remains valid.
+*   **Nose Optimization**: I am adjusting CP0 from a perfect circle (e=0.0) to a rounded airfoil nose (e=-0.5). This prevents the "flat-face" shoulder drag mentioned in the reference card while maintaining enough volume to handle leading-edge stagnation.
+
+## Per-Parameter Predictions
+
+*   **CP0 [0.8500, 0.0000, -0.5000]**: I am reducing the radius slightly from 1.0 to 0.85 and setting edginess to -0.5 because I predict it will create a slightly narrower, rounded leading edge that reduces frontal area while remaining robust to angle of attack changes.
+*   **CP1 & CP7 [0.7200, 0.0000, -0.2000]**: I am setting these to bridge the LE to the mid-section because I predict they will smooth the transition from the nose to the maximum thickness, preventing separation bubbles.
+*   **CP2 [0.5200, 0.0000, 0.0000]**: I am setting the upper radius to 0.52 because I predict this will define the peak thickness of the suction side, accelerating flow to create lift.
+*   **CP6 [0.4200, 0.0000, 0.0000]**: I am setting the lower radius to 0.42 (lower than CP2) because I predict it will create positive camber, ensuring a pressure differential between the two surfaces.
+*   **CP3 & CP5 [0.6200, 0.0000, 0.5000]**: I am setting these to a larger radius than the mid-section with positive edginess because I predict they will create the "tapering" effect toward the tail without the "pinching" that causes mesh errors.
+*   **CP4 [1.0000, 0.0000, 1.0000]**: I am setting this to maximum radius and edginess because I predict it will enforce the Kutta condition, resulting in a sharp trailing edge and a massive reduction in wake drag.

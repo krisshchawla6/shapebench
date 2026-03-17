@@ -1,0 +1,105 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+# Airfoil Optimization Reference Card
+
+## General Design Rules
+*   **Flow Direction**: Right-to-Left. CP0 is Leading Edge (LE); CP4 is Trailing Edge (TE) [iter 2].
+*   **Drag Reduction**: Maximize chord-to-thickness ratio by maximizing TE radius and minimizing vertical radii (CP2/CP6) [iter 2].
+*   **Lift Generation**: Introduce asymmetry (camber) by setting CP6 radius < CP2 radius [iter 2].
+*   **Pressure Recovery**: Position maximum thickness at 25-30% of chord (via angle offsets) for stable subsonic flow [iter 2].
+*   **Primary Axis**: Define via edginess extremes: LE (negative) vs. TE (positive) [iter 2].
+
+## Degree of Freedom Mapping
+
+| Control Point | Geometric Role | Optimal Range / Setting | Effect [Source] |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Nose)** | Leading Edge | Rad: ~0.85 / Edg: -0.9 | Creates blunt, stable stagnation point; avoid bulbous over-radius [iter 2]. |
+| **CP1 (Upper-Front)** | Transition | Intermediate | Smooths LE-to-Suction side transition; critical for avoiding pressure spikes [iter 2]. |
+| **CP2 (Top)** | Suction Side | Rad: ~0.25 | Thins profile; reduces flow acceleration over the shoulder [iter 2]. |
+| **CP3 (Upper-Back)** | Transition | Intermediate | Interpolates suction side to TE; affects flow separation at the rear [iter 2]. |
+| **CP4 (Tail)** | Trailing Edge | Rad: 1.0 / Edg: 1.0 | Forces Kutta condition (sharp point); maximizes chord length [iter 2]. |
+| **CP5 (Lower-Back)** | Transition | Intermediate | Interpolates TE to pressure side; sensitive to "kinks" or surface irregularities [iter 2]. |
+| **CP6 (Bottom)** | Pressure Side | Rad: ~0.15 | Flattens lower surface relative to CP2 to create lift-generating camber [iter 2]. |
+| **CP7 (Lower-Front)** | Transition | Intermediate | Critical for monotonic curvature; prevents early LE separation on the bottom [iter 2]. |
+| **Angle Offsets** | Thickness Dist. | Small offsets | Shifts max thickness toward LE (ideal: first 30% of chord) [iter 2]. |
+| **Edginess** | Surface Profile | -1.0 (Round) to 1.0 (Sharp) | Defines the "bluntness" or "sharpness" of the local curvature [iter 2]. |
+
+## New Evidence (Iteration 4)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.8542,
+      0.0,
+      -0.9125
+    ],
+    [
+      0.6235,
+      0.045,
+      -0.35
+    ],
+    [
+      0.28,
+      0.152,
+      -0.05
+    ],
+    [
+      0.556,
+      0.08,
+      0.42
+    ],
+    [
+      1.0,
+      0.0,
+      1.0
+    ],
+    [
+      0.556,
+      -0.08,
+      0.42
+    ],
+    [
+      0.16,
+      0.152,
+      -0.05
+    ],
+    [
+      0.6235,
+      -0.045,
+      -0.35
+    ]
+  ],
+  "name": "asymmetric_streamlined_camber_v1"
+}
+```
+
+Observations:
+Based on a critical analysis of the design parameters and the resulting geometry, here is the comparison of your predictions versus the actual outcome.
+
+### Parameter-by-Parameter Analysis
+
+| Parameter Group | Prediction | Outcome | Analysis |
+| :--- | :--- | :--- | :--- |
+| **CP0 (Leading Edge)** | **r=0.85, e=-0.9**: A blunt, rounded nose stable against varying angles of attack. | **Failed**: The nose is not a clean, rounded leading edge but rather a jagged protrusion. | The high negative edginess combined with the angular offset (-0.05) created a "beak" rather than a smooth circular arc. |
+| **CP4 (Trailing Edge)** | **r=1.0, e=1.0**: A sharp, elongated trailing edge to eliminate the circular wake. | **Failed**: The rear of the shape is blunt and bulbous, not sharp. | Despite the high edginess (0.97), the surrounding control points (CP3 and CP5) have radii and angles that "choke" the trailing edge, preventing it from extending into a point. |
+| **CP2 (Top Surface)** | **r=0.28, a=0.15**: Thin the upper surface and move the crest forward. | **Partial Success**: The top is thinner than the baseline circle, but it has a localized "hump." | The radius was low, but the angular offset (0.15) shifted the point too far, creating a localized peak rather than a smooth curve. |
+| **CP6 (Bottom Surface)** | **r=0.16, a=0.15**: Create a nearly flat lower surface for camber. | **Failed**: Created a deep concave "bite" or notch in the bottom of the airfoil. | A radius of 0.13 is too close to the origin. Combined with the edginess and angle, it pulled the surface inward, creating a high-drag cavity. |
+| **CP1, 3, 5, 7 (Intermediate)**| Smooth, monotonic transition from nose to tail. | **Failed**: The shape is "lumpy" and non-monotonic. | The rapid changes in radius and edginess between adjacent points (e.g., CP1 e=-0.3 to CP2 e=-0.02 to CP3 e=0.42) caused the spline to oscillate, creating the visible bumps. |
+
+### Key Learnings
+
+1.  **The "Camber Trap":** Your attempt to create camber by drastically reducing the radius of CP6 (0.13) relative to CP2 (0.33) backfired. In this coordinate system, a very low radius doesn't just "flatten" the surface; it pulls the perimeter toward the center, creating a concave indentation that increases drag and destroys lift.
+2.  **Spline Sensitivity (Lumpiness):** The "edginess" parameter ($e$) has a massive impact on the curvature continuity. By mixing high negative values (CP0) with high positive values (CP4) and neutral values (CP2/CP6) in close proximity, you created a "wavy" profile. Future iterations should aim for more gradual transitions in edginess.
+3.  **Angular Offset Distortion:** Using significant angular offsets ($a \approx 0.15$ to $0.21$) on the mid-section points (CP2 and CP6) shifted the thickness distribution, but also contributed to the "pinched" look near the trailing edge. These offsets need to be used more conservatively to maintain a streamlined chord.
+4.  **Scaling and Orientation:** The resulting shape is much smaller than the baseline circle and appears "tilted." This suggests that the interaction between the radial distances and the angular offsets is rotating the principal axis of the airfoil away from the horizontal flow.
+5.  **Trailing Edge Geometry:** A sharp trailing edge (Kutta condition) requires not just high edginess at CP4, but also "support" from CP3 and CP5. If CP3 and CP5 have radii that are too large or angles that are too wide, they will "blunt" the effect of CP4's sharpness.
+
+## Task
+Synthesize the new evidence into the reference card. 
+Include an overall rules section and an entry for each individual degree of freedom.
+Cite [iter N]. Be terse.

@@ -1,0 +1,7 @@
+The provided images for Design 1 (which matches Designs 4 and 6) reveal a significant aerodynamic mismatch for an airfoil:
+- **Geometry**: The shape is a perfect circle, representing a 100% thickness-to-chord ratio. The control points are distributed equidistantly at a maximum radius of 1.0 with 0.0 edginess, creating a perfectly smooth, blunt, and symmetric cylinder.
+- **Flow Fields**: The pressure plot shows a high-pressure stagnation point at the leading edge and two low-pressure "shoulders" at the top and bottom. The velocity field shows the flow accelerating over these shoulders and then immediately separating. The wake is massive, symmetric, and characterized by large recirculation zones, which indicates extreme pressure drag.
+- **Problematic Mapping**: The action vector `[1.0, 0.0, 0.0, ...]` across all 8 points directly creates this circular profile. While it avoids the "failure" reward of -5.0 (likely due to self-intersection in other designs), it fails to generate lift or minimize drag. Key changes needed:
+    1.  **Axial Elongation**: Increase the distance between CP0 and CP4 while reducing vertical radii (CP2, CP6) to transform the circle into a streamlined shape.
+    2.  **Trailing Edge Definition**: Set CP4 edginess to 1.0 to create a sharp point, enforcing the Kutta condition.
+    3.  **Camber Introduction**: Differentiate the radii of CP2 and CP6 to create asymmetry for lift generation.

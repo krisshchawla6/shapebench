@@ -1,0 +1,16 @@
+- **Exploitation Strategy**: I am taking the baseline circular shape (the only "successful" geometry in the current population that didn't fail with a -5.0 reward) and applying the established Aerodynamic Design Rules to transform it into a high-performance lifting body.
+- **Kutta Condition Enforcement**: By setting CP4 to maximum radius and maximum edginess, I predict the flow will be forced to leave the trailing edge smoothly, eliminating the bluff-body wake seen in the images.
+- **Chord Elongation**: Reducing the thickness-to-chord ratio is essential. By pulling the mid-section control points (CP2, CP3, CP5, CP6) toward the center (lower radius), I create a streamlined shape that reduces pressure drag.
+- **Camber Introduction**: Differentiating the radii of CP2 (top) and CP6 (bottom) will create a pressure differential. A slightly smaller radius on the bottom (CP6) creates a flatter pressure side, inducing lift.
+- **Transition Smoothing**: I will use CP1 and CP7 as transition points with moderate radii and slightly negative edginess to ensure the flow accelerates smoothly from the nose to the suction side without "shoulder" separation.
+- **Separation Prevention**: Following "Iter 5" evidence, I will avoid "pinching" the rear too much (keeping CP3/CP5 radius > 0.25) to prevent concave surfaces that cause boundary layer separation.
+
+## Per-Parameter Predictions
+- **CP0 [0.95, 0.0, -0.5]**: I am setting radius to 0.95 and edginess to -0.5 to create a blunt, circular leading edge that avoids the "flat-face" drag seen in aggressive designs.
+- **CP1 [0.55, 0.0, -0.2]**: I am setting radius to 0.55 to provide a smooth ramp from the nose to the thickest part of the wing.
+- **CP2 [0.32, 0.05, 0.0]**: I am setting radius to 0.32 and angle to 0.05 to define the max thickness/suction peak slightly forward of center.
+- **CP3 [0.38, 0.0, 0.3]**: I am setting radius to 0.38 and edginess to 0.3 to begin a gradual, convex taper towards the tail.
+- **CP4 [1.0, 0.0, 1.0]**: I am setting radius and edginess to 1.0 to create a perfectly sharp trailing edge at the maximum possible chord length.
+- **CP5 [0.38, 0.0, 0.3]**: I am mirroring CP3's radius to ensure a symmetric closure toward the trailing edge, preventing a blunt base.
+- **CP6 [0.24, 0.05, 0.0]**: I am setting a lower radius (0.24) than CP2 to create positive camber and a flatter lower surface.
+- **CP7 [0.55, 0.0, -0.2]**: I am setting radius to 0.55 to mirror the upper transition for a clean flow path to the lower surface.

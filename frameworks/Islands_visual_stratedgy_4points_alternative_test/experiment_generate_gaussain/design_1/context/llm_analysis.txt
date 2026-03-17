@@ -1,0 +1,18 @@
+The images reveal a design that is fundamentally non-aerodynamic for lift generation:
+
+- **Geometry**:
+    - The shape is a perfect circle (cylinder), created by uniform radial parameters ($r_n = 1.0$).
+    - It is perfectly symmetric and smooth, with a thickness-to-chord ratio of 1.0.
+    - There is no distinct leading or trailing edge; the geometry is a bluff body.
+- **Flow Field / Simulation**:
+    - The pressure plot shows high-pressure stagnation at the front and low-pressure acceleration at the top and bottom, but it is entirely symmetric, resulting in zero lift.
+    - The velocity field shows massive flow separation immediately after the mid-point, creating a wide, turbulent wake.
+    - The third plot indicates the onset of periodic vortex shedding (Von Karman vortex street), which causes high pressure drag and structural vibration.
+
+**Mapping to Parameters**:
+Design 1's action vector [1.0, 0.0, 0.0...] confirms that setting all radii to 1.0 and all edgy/angle params to 0.0 creates a unit circle. This shape is the worst-case scenario for lift-to-drag ratio. 
+
+**Key Changes Needed**:
+1.  **Extreme Aspect Ratio Increase**: Stretch the chord by maximizing $r_0$ and $r_4$ while significantly reducing $r_2$ and $r_6$ to transition from a bluff body to a streamlined body.
+2.  **Kutta Condition Enforcement**: Set a high $e_0$ value to sharpen the trailing edge, forcing the flow to leave smoothly and establishing circulation.
+3.  **Camber Introduction**: Differentiate $r_2$ (suction side) and $r_6$ (pressure side) to create an asymmetric pressure distribution.

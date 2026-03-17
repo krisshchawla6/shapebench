@@ -1,0 +1,117 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 7)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0, r \approx 1.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0, r \approx 1.0$ [iter 3-7].
+*   **Fineness Ratio (The Volume Trap)**: High-performance airfoils require a low thickness-to-chord ratio (6–15%). Pushing mid-body radii too high ($r > 0.45$) creates a "bloated blob" or "square" with massive drag [iter 5, 7].
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound**: $r < 0.3$ for intermediate points can cause **radial collapse** (wasp-waist) [iter 4, 6].
+    *   **Upper Bound**: $r > 0.8$ for all points causes **chord compression** or a "bluff body" [iter 5, 7].
+    *   **Optimal**: LE/TE at $r \approx 1.0$; mid-body points (CP1, 2, 4, 5, 6) must "ramp down" to $r \approx 0.1–0.3$ to stretch the profile into a thin wing [iter 6, 7].
+*   **Kutta Condition**: A geometric singularity ($e \approx 1.0$) at the Trailing Edge (CP0/7) is mandatory. It requires a radius "taper" from neighboring points to prevent a "thorn-on-a-rock" geometry [iter 2-7].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values (~0.9+) are required at the LE and TE poles to establish primary length [iter 1-7].
+*   **Relative Radius**: The "thickness" is defined by mid-body radii. If CP2 and CP4 radii are nearly equal to the LE pole (CP3), the nose flattens into a vertical "flat face" [iter 7].
+*   **The Shard vs. The Bloat**: Extreme gradients ($r < 0.3$) create "shards" [iter 6], while insufficient gradients ($r > 0.5$ mid-body) create a "bloated" rectangle [iter 7].
+*   **Camber & Lift**: Asymmetric radii between upper (CP4-6) and lower (CP1-2) surfaces create camber. Higher upper radii create high-speed lofting [iter 4-7].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3-7].
+*   **Parabolic Entry (Clustering)**: Neighboring angles must cluster near the LE pole (e.g., $a \approx \pm 0.05$) to avoid a "beak." **Crucial**: These clustered points must have lower radii than the LE pole to prevent a "flat face" [iter 5, 6, 7].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create self-intersecting loops [iter 2, 5, 6].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 1.0$) at the Trailing Edge create the "stinger" for flow separation. This effect is neutralized if the radius transition from $r_{mid}$ to $r_{TE}$ is too abrupt [iter 2-7].
+*   **Surface Healing**: Extreme negative values ($e \approx -1.0$) at mid-body and LE are the most effective way to "heal" a polygon into a smooth silhouette. However, smoothing cannot fix "bloat" caused by poor $r$ values; it merely turns a rectangle into a "rounded blob" [iter 1, 4-7].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE ensures smooth flow acceleration, provided the $r$ and $a$ values allow for a parabolic taper [iter 5, 6, 7].
+
+## New Evidence (Iteration 8)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.985,
+      1.0,
+      1.0
+    ],
+    [
+      0.22,
+      0.65,
+      -1.0
+    ],
+    [
+      0.18,
+      0.15,
+      -1.0
+    ],
+    [
+      1.0,
+      0.0,
+      -1.0
+    ],
+    [
+      0.2,
+      -0.15,
+      -1.0
+    ],
+    [
+      0.28,
+      -0.65,
+      -1.0
+    ],
+    [
+      0.35,
+      -0.92,
+      -1.0
+    ],
+    [
+      0.985,
+      -1.0,
+      1.0
+    ]
+  ],
+  "name": "streamlined_thin_camber_v1"
+}
+```
+
+Observations:
+This design represents a significant departure from the "bloated block" of Design 1, but it has overcorrected into a "pinched wedge" or "arrowhead" geometry. While the thickness was reduced, the structural distribution failed to create a traditional airfoil chord.
+
+### Parameter Comparison: Prediction vs. Outcome
+
+| Parameter Group | Prediction | Actual Outcome | Analysis |
+| :--- | :--- | :--- | :--- |
+| **LE Tip (CP3)** | $r=1.0$ will maximize chord length and create a sharp nose. | Created a sharp, beak-like protrusion at the leading edge. | **Accurate.** The $r=1.0$ value successfully pushed the LE to the boundary, but the surrounding points were too "deep" to support a rounded nose. |
+| **Nose Radii (CP2, CP4)** | $r \approx 0.2$ will "sharpen" the nose into a streamlined wedge. | Created a severe "pinch" or concave transition behind the LE tip. | **Inaccurate.** Setting $r$ to $\sim 0.2$ while the LE is at $1.0$ caused the spline to collapse toward the origin immediately after the nose, creating a "neck" rather than a streamlined taper. |
+| **Mid-Body Radii (CP1, 5, 6)** | $r \in [0.15, 0.28]$ will create a thin, high-aspect-ratio wing. | Created a very short, triangular body with a "starfish" profile. | **Inaccurate.** The "Goldilocks Zone" was based on a misunderstanding of the radial coordinate system. Low radii pull the surface *inward* toward the center. To make a long wing, body points need $r$ values closer to $1.0$ with angles that spread them along the chord. |
+| **Smoothing (edgy=-1.0)** | Will prevent the "faceted" look and ensure smoothness. | The surface is perfectly smooth and organic, with no sharp corners. | **Successful.** The $e=-1.0$ strategy effectively neutralized the "blockiness" seen in previous iterations. |
+| **Camber (CP5 vs CP1)** | $r_{CP5} > r_{CP1}$ will create positive camber. | The shape is asymmetrical, but the "camber" is more of a structural skew. | **Partial Success.** There is a clear top/bottom difference, but the lack of a proper chord makes the aerodynamic benefit of this camber negligible. |
+| **TE Sharpness (CP0, 7)** | $e=1.0$ and $r=0.98$ will create a clean Kutta-condition tail. | Created a long, needle-like "stinger" at the trailing edge. | **Accurate.** This successfully enforced a sharp trailing edge, but it is disproportionately long compared to the collapsed mid-body. |
+
+### Key Learnings
+
+1.  **The "Radial Collapse" Trap**: Setting mid-body points to very low radii ($r < 0.3$) while the LE and TE are at $r \approx 1.0$ does not make the airfoil "thin"; it makes it "hollow" or "pinched." To achieve a high-aspect-ratio wing, the mid-body points must have radii that maintain the "stretch" between the two poles (likely $r > 0.6$).
+2.  **Angular Distribution is Chord Length**: The "beak" at the front occurred because CP2 and CP4 had angles ($a \approx \pm 0.15$) very close to the LE ($a=0$). This clustered the points at the nose. To create a blunt, efficient LE, these points need to be spread further apart in angular space.
+3.  **The "Stinger" Effect**: High $e$ values (1.0) combined with high $r$ values (0.98) at the poles (CP0, CP7) create very effective, sharp trailing edges. However, if the rest of the body is collapsed, this results in a "tadpole" shape which has poor lift-to-drag characteristics.
+4.  **Concavity vs. Convexity**: The current design is concave (bowed inward). High-performance subsonic airfoils are almost exclusively convex. To fix this, the mid-body $r$ values must be increased significantly to "push" the skin back out.
+
+## Task
+Update the reference card. Do NOT rewrite from scratch -- MERGE new evidence into existing entries.
+- If new evidence CONFIRMS an existing bullet, strengthen it by adding the new iter citation
+- If new evidence CONTRADICTS an existing bullet, replace it only if the new evidence is clearly stronger (more iterations supporting it)
+- If an entry has no new evidence this iteration, KEEP IT UNCHANGED
+
+Include:
+- A brief overall rules section
+- An entry for each individual degree of freedom with 3-4 bullet points based on accumulated evidence
+
+Keep it terse. Cite [iter N] and specific values. Preserve hard-won knowledge from earlier iterations.

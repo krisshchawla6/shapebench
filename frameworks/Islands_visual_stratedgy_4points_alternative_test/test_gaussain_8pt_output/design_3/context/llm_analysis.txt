@@ -1,0 +1,12 @@
+*   **Geometry Observations (Inferred from Data):**
+    *   The previous design (Design 1) exhibits extreme geometric asymmetry. The leading edge and upper surface utilize maximum radius parameters ($r \approx 1.0$), creating a very blunt, bulbous top.
+    *   Conversely, the lower surface control points are set to minimum radius values ($r \approx -1.0$ and $-0.96$). This creates a severe concavity or "hollow" belly, likely resulting in a thin, shell-like shape rather than a volumetric airfoil.
+    *   The transition from the blunt nose ($r=1.0$) to the sucked-in lower surface ($r=-0.96$) is too abrupt, likely creating a geometric discontinuity or a "droop" that disturbs flow attachment immediately.
+*   **Flow Field Observations (Inferred from Physics):**
+    *   **Separation:** The massive concavity on the lower surface likely acts as a cavity trap, causing massive flow recirculation and separation, destroying lift and increasing drag.
+    *   **Pressure:** The blunt nose creates a huge high-pressure stagnation region that is wider than necessary, increasing pressure drag.
+    *   **Wake:** The combination of a blunt nose and a hollow belly likely produces a wide, turbulent wake, indicating poor aerodynamic efficiency.
+*   **Key Changes Needed:**
+    *   **Fill the Belly:** Drastically increase the radius parameters for the lower surface (CP5, CP6, CP7) from $\approx -1.0$ to near $0.0$ to create a flat or slightly convex underside.
+    *   **Sharpen the Nose:** Reduce the leading edge radius (CP0) from $1.0$ to a moderate value ($\approx 0.2-0.3$) to streamline the entry.
+    *   **Smooth Curvature:** Ensure "edgy" parameters are low (smooth) for all points except the trailing edge to prevent mid-chord separation bubbles.

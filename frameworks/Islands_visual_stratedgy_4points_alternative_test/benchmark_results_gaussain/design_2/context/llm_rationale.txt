@@ -1,0 +1,14 @@
+- **Exploitation Focus:** I am exploiting the heuristic that "reducing CP1 and CP3 radii" flattens the profile and improves aerodynamic aspect ratio. By setting these values low, I aim to minimize pressure drag.
+- **Leading Edge Continuity:** I will use a moderate radius and a highly negative Edgy parameter for CP0 to ensure a smooth, C-infinity continuous nose, which is critical for preventing early transition to turbulence or separation at the stagnation point.
+- **Forward-Shifted Thickness:** I will shift the CP1 (upper peak) angle negatively (~ -0.28). This moves the maximum thickness forward, allowing for a gentler pressure recovery toward the trailing edge, which helps maintain flow attachment.
+- **Trailing Edge Sharpening:** To address the "Base Drag Trap," I will set the CP2 radius to a near-minimum value while maximizing the Edgy parameter. This should create a clean, sharp termination point rather than a blunt "cliff."
+- **Camber Generation:** By keeping CP3 (lower) radius smaller than CP1 (upper) and slightly shifting its angle, I will introduce a subtle camber intended to maximize lift while maintaining a thin, low-drag profile.
+
+## Per-Parameter Predictions
+- **CP0 Radius [0.5231]:** I predict this will create a sufficiently robust nose to handle small variations in angle of attack without leading-edge stalling.
+- **CP0 Edgy [-0.9822]:** I predict this will ensure the leading edge is perfectly smooth, avoiding the "pinched" flaws noted in the heuristics.
+- **CP1 Radius [0.3145]:** I predict this low value will significantly thin the upper surface, reducing the "hump" fullness and lowering peak velocity.
+- **CP1 Angle [-0.2812]:** I predict this will shift max thickness to approximately 30-35% chord, providing a long, gradual recovery ramp for the flow.
+- **CP2 Radius [0.1256]:** I predict this will solve the "Stretch Paradox" by preventing the trailing edge from bloating into a wedge.
+- **CP2 Edgy [0.9912]:** I predict this will enforce a sharp, knife-like trailing edge to satisfy the Kutta condition and minimize wake thickness.
+- **CP3 Radius [0.2189]:** I predict this will create a slightly concave/flat lower surface, increasing the pressure differential (lift) relative to the upper surface.

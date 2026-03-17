@@ -1,0 +1,64 @@
+# Airfoil Design Context
+
+## Parameter Space
+Each airfoil is defined by N control points, where each point has 3 parameters:
+- radius_param: Controls radial distance from center. Range: [-1.0, 1.0]
+- angle_param: Controls angular offset from default position. Range: [-1.0, 1.0]  
+- edgy_param: Controls corner sharpness (0=smooth, 1=sharp). Range: [-1.0, 1.0]
+
+Action vector format: [r0, a0, e0, r1, a1, e1, ..., rN, aN, eN] (flat array of 3*N values)
+
+## Parameter-Geometry Knowledge (from previous reflections)
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **Chord-Thickness Ratio:** Small horizontal distance between CP0 (LE) and CP2 (TE) relative to CP1/CP3 height results in "stubby/pebble" shapes [iter 1]. High-performance targets ~10:1 ratio [iter 4].
+*   **The Chord Illusion:** High LE Radius (CP0) does not guarantee chord length; it merely increases local roundness. Without longitudinal "stretch," it results in stubby profiles [iter 5].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius + forward CP1 Angle) trigger massive flow separation [iter 1].
+*   **The Triangular Collapse:** High CP0 Radius + Low CP2 Radius + Conservative Angles = Wedge/Triangle shape with high pressure drag and low fineness ratio [iter 5].
+*   **Asymmetry Effects:** Extreme radius disparity between CP1 (Upper) and CP3 (Lower) produces "comma" or "hooked" profiles [iter 1].
+*   **The Stretch Paradox:** Radius does **not** equal Cartesian extension. Increasing CP2 Radius bloats the trailing sector into a blunt wedge rather than lengthening the chord [iter 2]. 
+*   **The Scale Trap:** If all CP radii are low (<0.4), the airfoil becomes a "miniature" or "seed" with insufficient chord length to resolve flow [iter 4].
+*   **Thinning Strategy:** To achieve aerodynamic aspect ratios, *reduce* CP1 and CP3 radii to flatten the profile [iter 2].
+*   **Singularity Stability:** Extreme Edgy values (-1.0 to 1.0) are computationally stable; the generator handles the transition from perfectly smooth to perfectly sharp without artifacts [iter 5].
+*   **Base Drag Trap:** High TE Edgy + High TE Radius creates a flat/concave "cliff" face instead of a sharp Kutta-compliant point [iter 2].
+*   **The Beak Effect:** High TE Edgy (>0.9) combined with very low TE Radius (<0.1) creates a geometric "beak" lacking surface area for pressure differential [iter 4].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** High values (>0.9) create bulbous noses but do not "pull" the chord forward [iter 1, 5]. Low values (<0.4) contribute to chord-length deficiency [iter 4].
+*   **Angle [0][1]:** Controls vertical centering of the nose [iter 4].
+*   **Edgy [0][2]:** -1.0 ensures a perfectly circular, C-infinity continuous stagnation point [iter 2, 5].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" fullness. High values create steep forward ramps [iter 2].
+*   **Angle [1][1]:** Lower values (~ -0.35) shift peak forward to ~30% chord, but require sufficient total chord to avoid steep, separating gradients [iter 1, 5].
+*   **Edgy [1][2]:** Low values ensure smooth transition over the peak [iter 4].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Controls "weight" of the rear. Values <0.15 combined with high LE radius lead to "wedge" morphology [iter 5]. High values (>0.8) bloat the base [iter 2].
+*   **Angle [2][1]:** Aligns tail point; must be near 0.0 for horizontal chord alignment [iter 4].
+*   **Edgy [2][2]:** 1.0 effectively enforces a sharp geometric singularity for the Kutta condition [iter 2, 5].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Low values (~0.25) fail to develop meaningful camber if the total chord is insufficient [iter 5]. Too high creates a symmetric "seed" [iter 4].
+*   **Angle [3][1]:** Positive values (~0.2) tuck the lower-rear inward, contributing to bluntness if the chord is short [iter 2, 4].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain smooth lower surface continuity [iter 4].
+
+## Objective
+Maximize the reward.
+
+## Previous Designs
+Design 1:
+  - Action: [0.588185, -0.010965, -0.944606, 0.929078, 0.155051, -0.284376, 0.677763, 0.102481, 0.975571, 0.237875, -0.119872, -0.404244]
+  - Reward: -0.0959
+  - Rank: 1
+
+Design 2:
+  - Action: [0.395874, -0.03137, -1.0, 0.28597, -0.360442, -0.802039, 0.088729, 0.020588, 0.986959, 0.228404, 0.260258, -0.913626]
+  - Reward: -5.0000
+  - Rank: 2
+
+
+Note: If images are provided, they show a representative design sampled from the current population (listed as Design 1 for reference). Use these images to understand the mapping between action parameters and resulting geometry/aerodynamics, but generate a NEW design to advance the population, not a modification of this one.

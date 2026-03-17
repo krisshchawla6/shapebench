@@ -1,0 +1,97 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+*   **Visual Intuition Strategy**: I am moving away from the "blob" geometry by strictly enforcing a high-aspect-ratio horizontal chord. Looking at the simulation, the flow needs a "track" to follow; by thinning the middle and sharpening the end, I create a path for the air to stay attached.
+*   **Kutta Condition Enforcement**: I will set both the first and last control points (which meet at the trailing edge) to maximum sharpness and maximum radial distance at the same angular position to create a singular, needle-like exit.
+*   **Leading Edge Sculpting**: To address the pressure spike at the nose, I will use a very negative `edgy_param` at the LE ($a \approx 1.0$) to force a perfectly circular, smooth transition.
+*   **Thickness Reduction**: I will set intermediate radii to near-minimum values. This transforms the "slug" into a "blade," reducing the frontal area and the massive wake seen in the previous design.
+*   **Camber Introduction**: By making the upper surface radii slightly larger than the lower surface radii (asymmetry), I will attempt to generate lift by creating a path length difference between the two sides.
+
+## Per-Parameter Predictions
+
+*   **params[0][0] (0.9850)**: I am setting the TE radius to near-max to stretch the airfoil to its full possible length.
+*   **params[0][1] (-0.9950)**: I am setting the TE angle to the extreme limit to define the start of the chord.
+*   **params[0][2] (0.9500)**: I am setting the TE to be extremely sharp to fix the flow separation seen in the image.
+*   **params[3][0] (0.9200)**: I am setting the LE radius high to complete the longitudinal stretch.
+*   **params[3][1] (0.9800)**: I am setting the LE angle to the opposite extreme of the TE.
+*   **params[3][2] (-0.9500)**: I am setting the LE to be perfectly smooth to allow for a clean stagnation point.
+*   **params[1][0] (0.2200) & params[2][0] (0.2500)**: I am reducing these upper-surface radii to drastically thin the profile and eliminate the "slug" shape.
+*   **params[5][0] (0.1500) & params[6][0] (0.1800)**: I am setting these even lower than the upper surface to create a flat or slightly concave bottom, inducing positive camber.
+
+*   **Geometry Observation**:
+    *   The shape in the image is a "blob" or "slug" profile with extremely high thickness-to-chord ratio ($t/c$), looking more like a rounded pebble than an airfoil.
+    *   The trailing edge (right side) is completely blunt and rounded, which is a catastrophic aerodynamic flaw as it prevents the Kutta condition (flow reattachment).
+    *   The leading edge is indistinct and lacks a clear radius of curvature, leading to a blunt-body impact rather than smooth flow splitting.
+    *   There is no discernible camber; the shape is nearly symmetric but in a bulky, non-streamlined way.
+
+*   **Flow Field / Simulation Results Observation**:
+    *   The velocity field shows a massive wake region (dark blue area) extending far behind the shape, indicating total flow separation.
+    *   The pressure field shows a high-pressure stagnation point at the nose, but because the flow cannot stay attached to the rounded rear, there is no pressure recovery, resulting in massive pressure drag.
+    *   The streamlines do not follow the contour of the body; they diverge immediately at the "shoulders" of the shape.
+    *   The reward of 0.0000 is directly caused by the lack of a sharp trailing edge and the excessive thickness, which makes the shape a bluff body rather than an aerodynamic surface.
+
+*   **Action Vector Mapping & Fixes**:
+    *   **Bluntness**: Design 1 has high radii (e.g., $r_0=1.0, r_4=0.95$) at disparate angles, but the intermediate radii ($r_1, r_2, r_3$) are also quite high (0.4-0.5), which causes the "slug" thickness. 
+    *   **Inconsistent TE**: While $e_0$ is 0.87 (sharp), the surrounding points are very smooth ($e_1=-0.72, e_7=-0.81$), which "heals" the sharp point back into a curve.
+    *   **Key Changes**: 1) Force $r$ to be very low (e.g., < 0.25) for all points except the absolute Leading Edge (LE) and Trailing Edge (TE). 2) Use extreme $a$ values (-0.99 and 0.98) to stretch the chord. 3) Set $e$ to maximum at the TE and minimum at the LE.
+
+## Parameters Used
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9854,
+      -0.9982,
+      0.9821
+    ],
+    [
+      0.2845,
+      -0.6542,
+      -0.8541
+    ],
+    [
+      0.2123,
+      0.1245,
+      -0.9214
+    ],
+    [
+      0.9215,
+      0.9876,
+      -0.9542
+    ],
+    [
+      0.2456,
+      0.6241,
+      -0.8845
+    ],
+    [
+      0.1452,
+      0.0124,
+      -0.9124
+    ],
+    [
+      0.2245,
+      -0.5542,
+      -0.7542
+    ],
+    [
+      0.9785,
+      -0.9854,
+      0.9754
+    ]
+  ],
+  "name": "sharpened_thin_camber_blade"
+}
+```
+
+Sampled action vector:
+['0.9486', '-1.0000', '0.9817', '0.3070', '-0.6463', '-0.9187', '0.1993', '0.1166', '-0.9771', '0.9108', '1.0000', '-0.9870', '0.2929', '0.6009', '-0.9016', '0.1417', '-0.0142', '-0.9167', '0.2472', '-0.6037', '-0.8200', '1.0000', '-1.0000', '1.0000']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

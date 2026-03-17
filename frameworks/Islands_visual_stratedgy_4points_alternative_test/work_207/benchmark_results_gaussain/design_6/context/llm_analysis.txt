@@ -1,0 +1,22 @@
+The images provided represent **Design 1**, which acts as the baseline for this population.
+
+**Geometry Observations:**
+*   The shape is a primitive circle, indicating that all `radius_param` values are likely set to a uniform high value (1.0) with zero angular offsets and zero edginess.
+*   The control points (black dots) are perfectly equidistant and follow a circular path, confirming a lack of any streamlining or airfoil-specific features.
+*   The surface is perfectly smooth and symmetric, with no discernible leading or trailing edge.
+*   The primary geometric flaw is the lack of a Trailing Edge (TE); as a bluff body, it cannot satisfy the Kutta condition and will suffer from high pressure drag.
+
+**Flow Field Observations:**
+*   The pressure field shows a classic stagnation point at the front, but the pressure does not recover at the rear; instead, there is a large, low-pressure wake.
+*   The velocity field reveals massive flow separation starting early on the upper and lower "shoulders" of the circle (near CP2 and CP6).
+*   The third plot shows an oscillatory wake pattern, characteristic of Von Kármán vortex shedding, which creates significant unsteady drag.
+*   The wake is wide and extends far downstream, representing a massive energy loss.
+
+**Mapping and Improvements:**
+*   **Design 1 Vector:** All `[1.0, 0.0, 0.0]`. This "zero-knowledge" state produces a cylinder.
+*   **Visible Flaws vs. Parameters:** The high drag is caused by the uniform `r=1.0` at the rear (CP3, CP4, CP5), which prevents the flow from closing smoothly. The separation at the shoulders is caused by the high curvature resulting from a circular profile.
+*   **Key Changes Needed:**
+    1.  **Enforce TE Sharpness**: Set CP4 to `r=1.0, e=1.0` to create a point where flow can depart cleanly.
+    2.  **Streamline the Body**: Reduce the radii of CP2, CP3, CP5, and CP6 to pull the "shoulders" in and create a tapering tail.
+    3.  **Introduce Camber**: Set the upper radius (CP2) higher than the lower radius (CP6) to generate lift.
+    4.  **Round the Nose**: Use a moderate negative edginess at CP0 (e.g., -0.5) to maintain a blunt but not "flat-faced" LE.

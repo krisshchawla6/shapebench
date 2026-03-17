@@ -1,0 +1,33 @@
+# Airfoil Optimization Reference Card
+
+## Global Heuristics
+*   **Chord-Thickness Ratio:** Small horizontal distance between CP0 (LE) and CP2 (TE) relative to CP1/CP3 height results in "stubby/pebble" shapes [iter 1]. High-performance targets ~10:1 ratio [iter 4].
+*   **Flow Attachment:** Steep recovery slopes (high CP1 Radius + forward CP1 Angle) trigger massive flow separation [iter 1].
+*   **Asymmetry Effects:** Extreme radius disparity between CP1 (Upper) and CP3 (Lower) produces "comma" or "hooked" profiles [iter 1].
+*   **The Stretch Paradox:** Radius does **not** equal Cartesian extension. Increasing CP2 Radius bloats the trailing sector into a blunt wedge rather than lengthening the chord [iter 2]. 
+*   **The Scale Trap:** If all CP radii are low (<0.4), the airfoil becomes a "miniature" or "seed" with insufficient chord length to resolve flow, regardless of shape [iter 4].
+*   **Thinning Strategy:** To achieve aerodynamic aspect ratios, *reduce* CP1 and CP3 radii to flatten the profile, rather than attempting to "pull" the TE [iter 2].
+*   **Base Drag Trap:** High TE Edgy + High TE Radius creates a flat/concave "cliff" face instead of a sharp Kutta-compliant point [iter 2].
+*   **The Beak Effect:** High TE Edgy (>0.9) combined with very low TE Radius (<0.1) creates a geometric "beak" that lacks the surface area to establish a pressure differential [iter 4].
+
+## Degree of Freedom Mapping
+
+### CP0: Leading Edge (LE)
+*   **Radius [0][0]:** High values (>0.6) create bulbous noses [iter 1]. Low values (<0.4) contribute to chord-length deficiency ("pebble" look) [iter 4].
+*   **Angle [0][1]:** Controls vertical centering of the nose [iter 4].
+*   **Edgy [0][2]:** Low values (-0.95 to -1.0) ensure smooth, C-infinity continuous entry [iter 2, 4].
+
+### CP1: Upper Surface / Peak
+*   **Radius [1][0]:** Controls "hump" fullness. High values create steep forward ramps [iter 2]. Values too close to CP3 Radius eliminate camber [iter 4].
+*   **Angle [1][1]:** Lower values (~ -0.2) shift maximum thickness forward (~35% chord), increasing slope severity toward the TE [iter 1, 2].
+*   **Edgy [1][2]:** Low values ensure smooth transition over the peak [iter 4].
+
+### CP2: Trailing Edge (TE)
+*   **Radius [2][0]:** Controls the "weight" of the rear sector. High values (>0.8) bloat the base [iter 2]. Low values (<0.1) fail to extend the chord, creating "squat" profiles [iter 4].
+*   **Angle [2][1]:** Aligns the tail point; must be near 0.0 for horizontal chord alignment [iter 4].
+*   **Edgy [2][2]:** High values (~0.98) enforce sharp transitions. Requires sufficient Radius to function as a Kutta-compliant TE rather than a "beak" [iter 2, 4].
+
+### CP3: Lower Surface
+*   **Radius [3][0]:** Low values (~0.22) create "pinched" concavity [iter 1]. If too high, it creates a symmetric elliptical "seed" [iter 4].
+*   **Angle [3][1]:** Positive values (~0.2) tuck the lower-rear section inward, contributing to bluntness if the chord is short [iter 2, 4].
+*   **Edgy [3][2]:** High negative values (-0.9) maintain smooth lower surface continuity [iter 4].

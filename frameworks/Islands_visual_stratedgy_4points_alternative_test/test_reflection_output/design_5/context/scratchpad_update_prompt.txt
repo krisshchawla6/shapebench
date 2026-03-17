@@ -1,0 +1,130 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Current Reference Card
+## Reference Card: Airfoil Degree of Freedom (DoF) Mapping (Updated Iter 5)
+
+### Global Design Rules
+*   **Aspect Ratio & Chord**: Maximized by placing the LE (CP3) at $a \approx 0.0$ and the TE (CP0/7) at the polar limits $a \approx \pm 1.0$. Spanning the origin is necessary to create volume [iter 3, 4, 5].
+*   **Structural Priority**: `angle_param` (chord) > `radius_param` (thickness/aspect ratio) > `edgy_param` (flow regulation/smoothing) [iter 1, 2, 4].
+*   **The "Goldilocks" Radius Zone**: 
+    *   **Lower Bound**: $r < 0.4$ for intermediate points causes **radial collapse** (wasp-waist/bone shape) [iter 4].
+    *   **Upper Bound**: $r > 0.8$ for all points causes **chord compression** (slug/pebble shape), destroying the aspect ratio [iter 5].
+    *   **Optimal**: LE/TE at $r \approx 1.0$, mid-body points at $r \approx 0.4–0.6$ to "stretch" the chord [iter 5].
+*   **Kutta Condition**: A geometric singularity (high `edgy_param` $\approx 1.0$) at the Trailing Edge is mandatory to define flow reattachment [iter 2, 3, 4, 5].
+
+---
+
+### DoF 1: `radius_param` (Distance from Centroid)
+*   **Chord Stretching**: High values (~0.9+) are required at the LE and TE poles to establish the primary length of the wing [iter 1, 2, 3, 4, 5].
+*   **Body Establishment**: To avoid a "slug" (aspect ratio 1:1), intermediate points must have significantly lower radii than the LE/TE. Setting all $r \approx 1.0$ creates a blunt cylinder rather than a streamlined foil [iter 5].
+*   **Camber & Lift**: Asymmetric radii between upper and lower surfaces create camber. However, if the chord is compressed (due to high mid-radii), this curvature becomes too aggressive, causing flow separation [iter 4, 5].
+
+### DoF 2: `angle_param` (Angular Position)
+*   **Polar Wrap-around**: $a=-1.0$ and $a=1.0$ are the same point (TE). The LE must be at $a \approx 0.0$ to maximize chord length [iter 3, 4, 5].
+*   **Monotonic Sequencing**: Angles must progress smoothly (TE $\to$ LE $\to$ TE). Non-monotonic jumps create "hooks" or self-intersecting loops [iter 2, 5].
+*   **Bluntness Control**: Strategic clustering of angles near the LE/TE determines the "sharpness" of the profile. Uniform distribution with high radii leads to blunt, blocky faces [iter 5].
+
+### DoF 3: `edgy_param` (Local Curvature/Sharpness)
+*   **TE Flow Regulation**: High positive values ($e \approx 0.85$ to $1.0$) at the Trailing Edge create the "stinger" necessary for flow separation [iter 2, 3, 4, 5].
+*   **Surface Healing**: Extreme negative values ($e \approx -1.0$) at mid-body points (CP1-2, CP4-6) and the LE (CP3) are the most effective way to "heal" a polygon into a smooth, continuous aerodynamic surface [iter 1, 4, 5].
+*   **Leading Edge Nose**: $e \approx -1.0$ at the LE ensures smooth flow acceleration; however, if $r$ is too high at the LE, the nose becomes a flat "face" despite the smoothing [iter 5].
+
+## New Evidence (Iteration 6)
+Parameters used:
+```json
+{
+  "n_cp": 8,
+  "n_sp": 20,
+  "params": [
+    [
+      1.0,
+      -1.0,
+      1.0
+    ],
+    [
+      0.2512,
+      -0.7543,
+      -1.0
+    ],
+    [
+      0.1856,
+      -0.221,
+      -1.0
+    ],
+    [
+      0.9654,
+      0.0,
+      -1.0
+    ],
+    [
+      0.3842,
+      0.2815,
+      -1.0
+    ],
+    [
+      0.4418,
+      0.7231,
+      -1.0
+    ],
+    [
+      0.3205,
+      0.9244,
+      -1.0
+    ],
+    [
+      1.0,
+      1.0,
+      1.0
+    ]
+  ],
+  "name": "asymmetric_needle_v1"
+}
+```
+
+Observations:
+This analysis examines the transition from the "slug" (Design 1) to the "asymmetric needle" (Design 2) by evaluating the impact of aggressive radial thinning and angular clustering.
+
+### Per-Parameter Analysis
+
+| Parameter | Prediction | Outcome | Correspondence |
+| :--- | :--- | :--- | :--- |
+| **CP0 [r=1.0, e=1.0]** | Sharp, max-extent Trailing Edge (TE). | The rightmost point of the airfoil is a perfectly sharp, singular vertex. | **High** |
+| **CP1 [r=0.25, e=-1.0]** | Aggressively thin the lower-rear to prevent "slug" shape. | The lower-rear boundary is pulled significantly inward, creating a concave-style taper toward the TE. | **High** |
+| **CP2 [r=0.18, e=-1.0]** | Deeply recessed lower-front to encourage flow attachment. | This created a sharp "cut-back" under the nose. Instead of a smooth underside, it created a jagged, wedge-like profile. | **Medium** |
+| **CP3 [r=0.96, e=-1.0]** | Long, smooth leading edge "nose." | Because CP2 and CP4 were so thin (r < 0.4), CP3 became a sharp "beak." It is the furthest point left, but the transition is too abrupt to be a "nose." | **Low** |
+| **CP4 [r=0.38, e=-1.0]** | Asymmetric upper bulge for camber. | Successfully created a higher shoulder than the lower surface (CP2), giving the airfoil a distinct "top" and "bottom." | **High** |
+| **CP5 [r=0.44, e=-1.0]** | Max thickness at 30-40% chord. | The "thickness" is deceptive. Because CP3 is so far out and CP4/5 are so far in, the thickest part is actually the vertical span of the leading "beak." | **Low** |
+| **CP6 [r=0.32, e=-1.0]** | Taper upper surface smoothly to TE. | Created a very straight, clean line from the mid-body to the sharp trailing edge. | **High** |
+| **CP7 [r=1.0, e=1.0]** | Close the shape at the TE pole. | Successfully merged with CP0 to create a definitive, sharp termination point. | **High** |
+
+---
+
+### Key Learnings
+
+#### 1. The "Shard" Effect (Radial Discontinuity)
+The "Needle" strategy was partially successful in increasing the aspect ratio, but it revealed a new flaw: **Radial Gradient Extremity.** By setting the poles (CP3, CP0/7) to ~1.0 and the immediate neighbors to ~0.2, the designer created a "shard" or "wedge" rather than a streamlined airfoil. The flow will likely still see the front as a blunt obstruction because the transition from the tip (CP3) to the body (CP2/CP4) is too steep.
+
+#### 2. Camber vs. Thickness
+The attempt at asymmetry (CP4 > CP2) successfully broke the "block" symmetry of Design 1. The resulting shape has a flat-bottomed, sloped-top profile resembling a high-speed wedge. While this is better than a circle, the "waist" of the airfoil is now perhaps *too* thin, which may lead to structural instability or flow separation immediately behind the leading edge.
+
+#### 3. Angular Clustering is the "Chord Multiplier"
+The clustering of CP3 at $a=0$ and CP0/7 at $a=1.0$ effectively stretched the design. However, the "flatness" of the leading edge is determined by the angular distance to the next points (CP2 and CP4). Because $a=0.28$ and $a=-0.22$ are relatively far from the pole at $a=0$, the "nose" is not a point but a broad triangle. To get a "needle," the neighboring angles need to be much closer to 0 (e.g., $\pm 0.05$).
+
+#### 4. Edgy Param Logic
+Setting `edgy_param` to -1.0 for the body successfully eliminated the "corners" seen in Design 1. The resulting silhouette is composed of clean, mathematical curves (or lines, given the high tension), proving that the "blockiness" of the previous iteration was a result of neutral or positive `edgy_param` values.
+
+### Summary for Next Iteration
+The design has moved from a **Volume-Maximized Block** to a **Surface-Area-Minimized Shard**. The next step is to "smooth the transition" by raising the mid-body radii slightly (0.4-0.6) and tightening the angular spread around the nose to create a parabolic entry rather than a triangular one.
+
+## Task
+Update the reference card. Do NOT rewrite from scratch -- MERGE new evidence into existing entries.
+- If new evidence CONFIRMS an existing bullet, strengthen it by adding the new iter citation
+- If new evidence CONTRADICTS an existing bullet, replace it only if the new evidence is clearly stronger (more iterations supporting it)
+- If an entry has no new evidence this iteration, KEEP IT UNCHANGED
+
+Include:
+- A brief overall rules section
+- An entry for each individual degree of freedom with 3-4 bullet points based on accumulated evidence
+
+Keep it terse. Cite [iter N] and specific values. Preserve hard-won knowledge from earlier iterations.

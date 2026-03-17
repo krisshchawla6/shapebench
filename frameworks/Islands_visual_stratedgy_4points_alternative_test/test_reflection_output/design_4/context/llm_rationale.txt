@@ -1,0 +1,13 @@
+* **Strategy Focus (Exploration):** This design explores the **"High-Volume / High-Camber Boundary."** By pushing almost all `radius_param` values to their positive limits ($0.8$ to $1.0$), I am testing if a "maximized" geometry can yield a stable reward before refining for drag.
+* **Counteracting Radial Collapse:** To avoid the 0.0000 reward of Design 1, I am strictly avoiding any `radius_param` below 0.65. This ensures the "waist" is replaced by a robust aerodynamic body.
+* **Asymmetric Surface Mapping:** I will use a radius delta between the lower surface (CP1, CP2) and upper surface (CP4, CP5, CP6). Specifically, I'll set the upper radii to $\approx 0.95$ and lower radii to $\approx 0.70$ to explore high-lift camber configurations.
+* **Angular Monotonicity:** I will enforce a strict progression of `angle_param` (-0.99 $\to$ -0.6 $\to$ -0.3 $\to$ 0.0 $\to$ 0.3 $\to$ 0.6 $\to$ 0.9 $\to$ 0.99) to ensure the shape unfolds correctly without "hooks."
+* **Hybrid Edginess Strategy:** I am using extreme negative edginess ($e = -1.0$) for the entire front half of the airfoil to force the smoothest possible transition, while keeping $e = 1.0$ at the TE to satisfy the Kutta condition.
+
+## Per-Parameter Predictions
+
+* **CP0 [0.98, -0.99, 1.0]:** I predict $r=0.98$ and $e=1.0$ will create a definitive, sharp start point for the Trailing Edge.
+* **CP3 [1.0, 0.0, -1.0]:** I predict $r=1.0$ and $e=-1.0$ will create a perfectly rounded, blunt Leading Edge at the furthest forward point.
+* **CP1, CP2 [r ~0.7]:** I predict these moderate radii will form a slightly concave or flatter lower surface.
+* **CP4, CP5, CP6 [r ~0.95]:** I predict these high radii will create a highly convex upper surface, maximizing the pressure differential for lift.
+* **CP7 [0.98, 0.99, 1.0]:** I predict this will close the geometry at the TE with a sharp "stinger" to regulate flow separation.

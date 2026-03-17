@@ -1,0 +1,72 @@
+## Objective
+Optimize an airfoil shape to maximize aerodynamic performance (reward).
+
+## Designer's Predictions
+- **Exploitation Strategy**: I am refining the parameters of Design 2, the current population leader, by applying small, targeted adjustments to the high-performing configuration.
+- **LE Alignment**: I will reduce CP0 angle ($a_0$) from 0.035 to 0.024. This aligns the chord line more effectively with the horizontal flow, potentially reducing the leading-edge pressure drag seen in the simulations.
+- **Thickness Reduction**: By lowering CP1 radius ($r_1$) from 0.40 to 0.394, I am slimming the upper surface to minimize the frontal area and pressure drag without sacrificing the forward-shifted peak that provides lift.
+- **Lower Surface Smoothing**: Adjusting $a_3$ from 0.189 to 0.178 will slightly flatten the belly of the airfoil, which helps in maintaining laminar flow on the pressure side and prevents "waisting" near the trailing edge.
+- **TE Stability**: CP2 parameters (Radius 1.0, Edgy 1.0) are kept at their limits to maximize chord length and ensure a sharp trailing edge, which is essential for the 2.9+ rewards observed.
+
+## Per-Parameter Predictions
+- **r0 (0.9525)**: I am setting this to 0.9525 because I predict it will maximize chord length while maintaining the successful "beaked" leading edge profile from the top-ranked designs.
+- **a0 (0.0245)**: I am setting this to 0.0245 because I predict it will lower the incidence of the stagnation point, reducing drag compared to Design 2.
+- **r1 (0.3942)**: I am setting this to 0.3942 because I predict it will thin the airfoil slightly, reducing volume and drag.
+- **a1 (-0.4268)**: I am setting this to -0.4268 because I predict it will maintain the optimal forward-shifted lift distribution.
+- **r3 (0.4895)**: I am setting this to 0.4895 because I predict it will provide enough thickness to avoid the "waisted trap" while keeping the lower surface smooth.
+- **a3 (0.1782)**: I am setting this to 0.1782 because I predict it will prevent the "fang" formation while maintaining a gentle camber.
+
+- **Geometry Observation**: 
+    - The airfoil in the images (Design 1) is a high-aspect-ratio, slender profile with a significantly elongated chord.
+    - The leading edge is relatively sharp but smooth, and the trailing edge is perfectly sharp, indicating a well-enforced Kutta condition.
+    - The upper surface has a peak thickness shifted forward (approximately 30-35% of the chord), while the lower surface is nearly flat or slightly convex, creating a classic lifting shape.
+    - There are no visible discontinuities or "fangs," though the leading edge radius is high enough to approach a wedge-like appearance.
+- **Flow Field Observation**:
+    - The pressure field (p) shows a high-pressure stagnation point at the nose and a wide low-pressure suction zone across the first 50% of the upper surface.
+    - The velocity magnitude (u) confirms acceleration over the top surface, with maximum velocity occurring near the upper peak.
+    - The vertical velocity (v) shows consistent downwash behind the trailing edge, which is a strong indicator of lift production.
+    - The flow appears fully attached across the entire chord length, with a thin, symmetric wake downstream.
+- **Mapping & Refinement**:
+    - Design 1 (Reward 2.42) uses CP0 Radius 0.946 and CP1 Angle -0.42. Design 2 (Reward 2.92) improves this by slightly increasing CP0 Radius to 0.949 and reducing CP0 Angle.
+    - The primary flaw to address is the fine-tuning of the lift-to-drag ratio by thinning the profile slightly ($r_1$) and optimizing the leading edge incidence ($a_0$) to reduce the stagnation spike.
+    - Key changes: 1. Slightly reduce $r_1$ to decrease thickness and drag. 2. Decrease $a_0$ closer to 0.0 for better alignment. 3. Smooth the lower surface transition by slightly reducing $a_3$.
+
+## Parameters Used
+```json
+{
+  "n_cp": 4,
+  "n_sp": 20,
+  "params": [
+    [
+      0.9525,
+      0.0245,
+      -1.0
+    ],
+    [
+      0.3942,
+      -0.4268,
+      -0.925
+    ],
+    [
+      1.0,
+      -0.0125,
+      1.0
+    ],
+    [
+      0.4895,
+      0.1782,
+      -0.95
+    ]
+  ],
+  "name": "Slender_Laminar_Refinement_V1"
+}
+```
+
+Sampled action vector:
+['0.9862', '0.0074', '-0.9882', '0.3930', '-0.4280', '-0.8797', '0.9862', '-0.0432', '1.0000', '0.4768', '0.1997', '-0.9660']
+
+## Result (attached image)
+
+## Task
+For each individual parameter value, compare prediction vs outcome.
+Then summarize key learnings.

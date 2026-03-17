@@ -1,0 +1,13 @@
+The population database shows that designs with negative radius parameters (e.g., Design 3) result in the maximum penalty (-5.0), likely due to the geometry "folding" across the center point and self-intersecting. Conversely, the "safe" circular design (Design 1) has a low but non-failing reward. 
+
+Following the **Exploration Strategy**, I will push the design into the "Thin Airfoil" region of the parameter space, which remains underexplored by non-failing designs. My approach:
+- **Pushing Boundaries**: I will use maximum edginess values (-1.0 for LE, 1.0 for TE) to establish a clear primary axis, a combination that hasn't been successfully utilized in the non-failing designs.
+- **Diversity through Camber**: I will set the pressure-side radius (CP6) significantly lower than the suction-side (CP2) to test the limits of camber-induced lift in this environment.
+- **Volume Shifting**: I will use positive angle offsets for the front-half control points to shift the maximum thickness toward the leading edge (approx. 25-30% chord), exploring a more traditional subsonic aerodynamic profile compared to the centered circle.
+
+## Per-Parameter Predictions
+- **param[0][0] to 0.9250 & param[0][2] to -0.9500**: I predict this will CAUSE a broad, blunt leading edge that maintains a stable stagnation point across small angles of attack.
+- **param[4][0] to 1.0000 & param[4][2] to 1.0000**: I predict this will CAUSE a sharp, elongated trailing edge, forcing flow recombination and minimizing the pressure wake seen in the circle design.
+- **param[2][0] to 0.2800 & param[6][0] to 0.1400**: I predict this will CAUSE a significant reduction in thickness-to-chord ratio and create a cambered profile to generate positive lift.
+- **param[1][1] & param[2][1] to 0.1200**: I predict this will CAUSE the upper surface volume to shift forward, delaying flow separation on the suction side.
+- **param[3][2] & param[5][2] to 0.4000**: I predict this will CAUSE a semi-sharp transition toward the tail, helping the flow navigate the adverse pressure gradient at the rear of the airfoil.

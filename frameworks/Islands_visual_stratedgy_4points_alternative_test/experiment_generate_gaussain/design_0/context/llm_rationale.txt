@@ -1,0 +1,15 @@
+*   **Strategy Focus (Hybrid Strategy)**: Since the current database consists only of identical circles, I am hybridizing the "stable circular footprint" (to maintain structural integrity) with a "theoretical high-performance airfoil" profile. I will keep the leading edge robust but radically thin the rest of the body.
+*   **Thinning Strategy**: I will set the radial parameters for the top (Point 2) and bottom (Point 6) to very low values (near 0.1) while keeping the leading (Point 4) and trailing (Point 0) edges near 1.0 to maximize chord length relative to thickness.
+*   **Trailing Edge Sharpness**: Point 0 will be assigned a high `edgy_param` (0.95) to force a Kutta condition, which is essential for reducing the wake size seen in the current simulation.
+*   **Camber Introduction**: By shifting the `angle_param` of the upper points forward and the lower points slightly backward/inward, I will create an asymmetric curvature (camber) to generate a pressure differential between the surfaces.
+*   **Evolutionary Jump**: Rather than incremental changes, I am moving from a 1:1 thickness-to-chord ratio to approximately 1:5, which should significantly boost the reward by reducing drag and potentially generating the first bit of positive lift.
+
+## Per-Parameter Predictions
+
+*   **param[0][0] (r0) to 0.9850**: I predict this will extend the trailing edge to the maximum possible chord length.
+*   **param[0][2] (e0) to 0.9500**: I predict this will create a sharp point at the trailing edge, significantly reducing the wake size observed in the circular design.
+*   **param[2][0] (r2) to 0.1840**: I predict this will "crush" the top of the circle, creating a thin upper surface.
+*   **param[6][0] (r6) to 0.0820**: I predict this will bring the bottom surface very close to the center, creating an overall thin, cambered profile when combined with the low r2.
+*   **param[4][0] (r4) to 0.9250**: I predict this will maintain a strong leading edge position for a long chord.
+*   **param[4][2] (e4) to -0.8500**: I predict this will ensure the leading edge remains very rounded and smooth to prevent early flow separation.
+*   **param[2][1] (a2) to 0.3200**: I predict this will shift the maximum thickness point forward on the upper surface, mimicking modern laminar flow airfoils.

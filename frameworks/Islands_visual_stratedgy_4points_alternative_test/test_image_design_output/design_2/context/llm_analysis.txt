@@ -1,0 +1,7 @@
+Based on the provided Design 1 parameters (since no visual images were provided, the analysis is derived from the control point values):
+*   **Geometry Inference**: The upper surface radius parameters oscillate (LE `1.0` $\to$ CP1 `0.83` $\to$ CP2 `0.88` $\to$ CP3 `1.0`), suggesting a **wavy upper surface** with a dip near the front and a hump at the rear. The lower surface is consistently "tucked" (negative parameters), creating a highly cambered, thin profile, possibly resembling an undercambered wing or a bird-like airfoil.
+*   **Flow Inference**: The "dip" at CP1 likely creates a suction spike followed immediately by an adverse pressure gradient, potentially causing laminar separation bubbles or early transition. The large "hump" at CP3 (radius 1.0) creates a steep closure angle to the trailing edge, likely inducing flow separation (drag) at the rear.
+*   **Visible Flaws**: 
+    1.  **Non-monotonic curvature**: The radius oscillation on the upper surface is the primary geometric flaw.
+    2.  **Excessive Aft Thickness**: CP3 at `1.0` creates a blunt aft section that forces severe flow turning.
+    3.  **Surface Roughness**: Several control points (e.g., CP1, CP6) have non-zero 'edgy' parameters on the main surfaces, which should be smooth for aerodynamic efficiency.

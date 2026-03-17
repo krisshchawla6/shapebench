@@ -1,0 +1,18 @@
+*   **Geometry Observation**: 
+    *   The observed shape in the images is a perfect circle (a 2D cylinder). 
+    *   The eight control points (black dots) are distributed equidistantly at a radius of 1.0 from the center, creating a completely symmetric, smooth "nugget" or bluff body. 
+    *   There is no streamlining, no distinct leading or trailing edge, and no chord-wise elongation beyond the base diameter.
+
+*   **Flow Field Observation**:
+    *   **Pressure**: There is a clear stagnation point at the leading face (high pressure, yellow) and high-velocity acceleration zones at the top and bottom apexes (low pressure, dark purple).
+    *   **Velocity/Wake**: A massive, steady wake is visible behind the cylinder. The flow separates almost immediately after the 90-degree and 270-degree points, leading to a large region of recirculating or low-energy flow.
+    *   **Drag**: The lack of pressure recovery at the rear (due to the blunt trailing side) suggests high pressure drag. The symmetry indicates zero lift.
+
+*   **Design 1 Mapping**:
+    *   Action vector `[1.0, 0.0, 0.0, ...]` maps to a circle of radius 1.0. The reward of -0.0036 is the baseline for a non-aerodynamic bluff body.
+    *   **Key Problems**: 1) Total absence of a tapered trailing edge causes massive separation. 2) The thickness-to-chord ratio is 100%, whereas aerodynamic wings typically range from 8% to 18%. 3) The lack of a sharp trailing edge prevents the Kutta condition from being satisfied.
+
+*   **Key Improvements Needed**:
+    *   Introduce **chord-wise extension** by maintaining max $r_0$ and $r_4$ while significantly reducing $r_2$ and $r_6$.
+    *   Apply the **Pinch Technique** to sharpen the aft section ($r_1, r_7 < r_0$) and set $e_0$ to a negative value for a Kutta cusp.
+    *   Round the leading edge using $e_4$ to improve stagnation behavior.

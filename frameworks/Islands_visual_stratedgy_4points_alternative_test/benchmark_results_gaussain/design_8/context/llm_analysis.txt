@@ -1,0 +1,18 @@
+The images show a highly optimized, high-performance airfoil (Design 1) that has successfully broken out of the "blunt pebble" regime seen in earlier iterations.
+
+**Geometry Observations:**
+*   **Extreme Slenderness:** The airfoil exhibits a very high chord-to-thickness ratio, driven by maximized LE and TE radii.
+*   **Concave "Under-Camber":** The lower surface features a distinct concave "hook" or "chin" near the leading edge, resulting in a shape resembling a thin, high-lift sail or supercritical section.
+*   **Leading Edge:** The nose is perfectly circular and smooth, providing a clean stagnation point.
+*   **Trailing Edge:** The tail is exceptionally sharp and long, which is ideal for satisfying the Kutta condition and minimizing pressure drag.
+
+**Flow Field Observations:**
+*   **Suction Peak:** The pressure plot ($p$) shows a strong, localized suction region (dark blue) on the upper surface, concentrated very far forward (approx. 10-15% chord).
+*   **Attached Flow:** The velocity plots ($u, v$) show clean streamlines following the contours without visible separation, even over the concave lower section.
+*   **Downwash:** The $v$-velocity plot shows a significant downward flow deflection behind the trailing edge, confirming high lift generation.
+*   **Wake Profile:** The wake is very thin and horizontal, indicating low momentum thickness and low profile drag.
+
+**Mapping and Flaws:**
+*   **Parameter Mapping:** The concave lower surface is a direct result of `r3 = 0.0615` (Radius below the 0.15 "concavity floor"). The forward peak is caused by `a1 = -0.406`.
+*   **Potential Flaw:** While high-performing, the "concave hook" (low `r3`) creates a very thin structural section near the front and might be prone to separation at different angles of attack.
+*   **Key Changes Needed:** To advance the population, we need to explore if a **convex** lower surface (higher `r3`) combined with a **posterior (rearward) peak** (positive `a1`) can achieve similar or better efficiency with improved structural volume.

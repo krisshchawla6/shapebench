@@ -1,0 +1,14 @@
+==========================================
+Job ID: 208
+Node: compute-dy-hpc-128vcpu-1
+Date: Sat Feb 14 01:28:41 UTC 2026
+Action: gaussain (with reflection)
+Iterations: 80
+Max Inspirations: 5
+Initialize N Sample: 6 (first 6 designs generated without context)
+Islands: 3 (migration every 10 iters, rate 0.1)
+Working Directory: /scratch/Higher_dims/Islands_visual_stratedgy/work_208
+Output: /scratch/Higher_dims/Islands_visual_stratedgy/experiment_generate_gaussain
+==========================================
+Setting up isolated workspace...
+Starting benchmark run with reflection...
