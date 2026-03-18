@@ -21,7 +21,7 @@ def powerlaw_sample_parent_and_inspiration(database, n_inspiration, alpha=3.0):
 
 def powerlaw_sample_parent_from_island(database, island_idx, alpha=3.0):
     """Sample a single parent from an island using powerlaw rank-based selection."""
-    mask = np.array([int(entry[4]) == island_idx for entry in database])
+    mask = np.array([int(entry[4]) == island_idx for entry in database], dtype=bool)
     island_db = database[mask]
     if len(island_db) == 0:
         return None
@@ -40,7 +40,7 @@ def sample_inspirations_from_island(database, island_idx, parent_csv, n_inspirat
     All excluding parent."""
     if n_inspiration <= 0:
         return []
-    mask = np.array([int(entry[4]) == island_idx for entry in database])
+    mask = np.array([int(entry[4]) == island_idx for entry in database], dtype=bool)
     island_db = database[mask]
     if len(island_db) == 0:
         return []

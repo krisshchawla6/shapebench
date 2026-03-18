@@ -7,3 +7,4 @@ environments/DrivAer_Star/test_case/
 
 # Environment variable files (may contain API keys)
 **/.env
+venv/

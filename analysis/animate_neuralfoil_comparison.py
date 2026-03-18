@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """
-Animated comparison for two NeuralFoil runs.
+Animated comparison for any number of NeuralFoil runs.
 
-- Left: overlaid objective curves where objective = -reward (lower is better), log y-scale.
-- Right: current shape image from each run (stacked).
+- Left: overlaid objective curves. Maximisation rewards (e.g. ld_ratio) plotted directly on linear scale;
+         minimisation rewards (e.g. -Cd) plotted as -reward on log scale.
+- Right: best shape image from each run (stacked vertically).
+
+Usage:
+    python animate_neuralfoil_comparison.py dir_a dir_b [dir_c ...] \\
+        --labels "islands" "PSO" "v2_batch" \\
+        --max-iter 200 --step 2
 """
 
 import os
@@ -35,6 +41,9 @@ STYLE = {
     "figure.dpi": 200,
 }
 
+# Colours assigned per run in order.
+COLORS = ["#1f77b4", "#d62728", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b"]
+
 
 def load_csv(results_dir):
     csv_path = os.path.join(results_dir, "results.csv")
@@ -52,7 +61,12 @@ def load_csv(results_dir):
                     design = f"iter_{it:04d}_p{int(float(particle)):03d}"
                 else:
                     design = f"design_{i}"
-            rows.append({"iteration": it, "reward": reward, "design": design})
+            # Read running-best column written by each framework:
+            #   islands/v2/v2_batch write "best_reward"; GA/PSO writes "gbest_reward".
+            br = row.get("gbest_reward") or row.get("best_reward")
+            best_reward = float(br) if br else None
+            rows.append({"iteration": it, "reward": reward, "design": design,
+                         "best_reward": best_reward})
     return rows
 
 
@@ -75,16 +89,27 @@ def compute_plot_x(rows):
     for i, v in enumerate(iters):
         idx = seen.get(v, 0)
         seen[v] = idx + 1
-        denom = counts[v]
-        x[i] = float(v) if denom <= 1 else float(v) + idx / float(denom)
+        x[i] = float(v) if counts[v] <= 1 else float(v) + idx / float(counts[v])
     return x
 
 
 def objective_from_rewards(rows):
     r = np.array([row["reward"] for row in rows], dtype=float)
-    obj = np.maximum(-r, 1e-9)
-    best = np.minimum.accumulate(obj) if len(obj) else obj
-    return obj, best
+    # Detect maximisation (positive rewards like ld_ratio) vs minimisation (negative like -Cd).
+    valid = r[r > -9.0]  # exclude -10.0 failure sentinel
+    maximizing = len(valid) > 0 and np.median(valid) > 0
+    if maximizing:
+        obj = r.copy()
+    else:
+        obj = np.maximum(-r, 1e-9)
+    # Use explicit running-best from CSV when available (required for PSO where
+    # np.maximum.accumulate over all particles gives wrong per-iteration best).
+    if rows[0]["best_reward"] is not None:
+        br = np.array([row["best_reward"] for row in rows], dtype=float)
+        best = br.copy() if maximizing else np.maximum(-br, 1e-9)
+    else:
+        best = np.maximum.accumulate(obj) if maximizing else np.minimum.accumulate(obj)
+    return obj, best, maximizing
 
 
 def get_shape_image(results_dir, design_ref):
@@ -94,103 +119,115 @@ def get_shape_image(results_dir, design_ref):
     return None
 
 
-def make_comparison(dir_a, dir_b, label_a=None, label_b=None, max_iter=80, step=1, output_dir=None):
-    rows_a = cap_rows(load_csv(dir_a), max_iter)
-    rows_b = cap_rows(load_csv(dir_b), max_iter)
-    label_a = label_a or os.path.basename(dir_a)
-    label_b = label_b or os.path.basename(dir_b)
+def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None):
+    assert len(dirs) >= 2, "Pass at least 2 result directories."
+    labels = labels or [os.path.basename(d) for d in dirs]
+    colors = (COLORS * ((len(dirs) // len(COLORS)) + 1))[:len(dirs)]
 
-    n = max(len(rows_a), len(rows_b))
-    if n == 0:
+    all_rows  = [cap_rows(load_csv(d), max_iter) for d in dirs]
+
+    if not any(all_rows):
         print("No rows to render.")
         return
 
-    x_a = compute_plot_x(rows_a)
-    x_b = compute_plot_x(rows_b)
-    obj_a, best_a = objective_from_rewards(rows_a)
-    obj_b, best_b = objective_from_rewards(rows_b)
+    all_x     = [compute_plot_x(rows) for rows in all_rows]
+    all_objs  = []
+    all_bests = []
+    maximizing = False
+    for rows in all_rows:
+        if rows:
+            obj, best, mx = objective_from_rewards(rows)
+            maximizing = maximizing or mx
+        else:
+            obj, best = np.array([]), np.array([])
+        all_objs.append(obj)
+        all_bests.append(best)
 
-    all_obj = np.concatenate([obj_a, obj_b]) if len(obj_a) and len(obj_b) else (obj_a if len(obj_a) else obj_b)
-    p5, p95 = np.percentile(all_obj, 5), np.percentile(all_obj, 95)
-    y_lo = max(min(np.min(all_obj) * 0.8, p5 * 0.8), 1e-9)
-    y_hi = max(np.max(all_obj) * 1.2, p95 * 1.2)
+    combined = np.concatenate([o for o in all_objs if len(o)])
+    p5, p95 = np.percentile(combined, 5), np.percentile(combined, 95)
+    if maximizing:
+        y_lo = min(np.min(combined) * 0.9, p5 * 0.9)
+        y_hi = np.max(combined) * 1.1
+    else:
+        y_lo = max(min(np.min(combined) * 0.8, p5 * 0.8), 1e-9)
+        y_hi = max(np.max(combined) * 1.2, p95 * 1.2)
     x_min = -0.1
-    x_max = max(float(np.max(x_a)) if len(x_a) else 0.0, float(np.max(x_b)) if len(x_b) else 0.0) + 0.1
+    x_max = max((float(np.max(x)) if len(x) else 0.0) for x in all_x) + 0.1
 
-    output_dir = output_dir or os.path.dirname(dir_a)
+    output_dir = output_dir or os.path.dirname(dirs[0])
     os.makedirs(output_dir, exist_ok=True)
 
+    # Animate by iteration so that multi-particle frameworks (PSO: 30 rows/iter)
+    # produce the same number of frames as single-evaluation frameworks.
+    all_iters = sorted(set(
+        r["iteration"] for rows in all_rows for r in rows
+    ))
+    frame_iters = all_iters[::max(1, step)]
+    if frame_iters and frame_iters[-1] != all_iters[-1]:
+        frame_iters.append(all_iters[-1])
+
+    n_runs = len(dirs)
     plt.rcParams.update(STYLE)
-    frame_indices = list(range(0, n, max(1, step)))
-    if frame_indices[-1] != n - 1:
-        frame_indices.append(n - 1)
-
     frames = []
-    print(f"[comparison] Rendering {len(frame_indices)} frames ...")
-    for fi, up_to in enumerate(frame_indices):
-        k_a = min(up_to + 1, len(rows_a))
-        k_b = min(up_to + 1, len(rows_b))
+    print(f"[comparison] Rendering {len(frame_iters)} frames ({n_runs} runs) ...")
 
-        fig = plt.figure(figsize=(14, 7), facecolor="white")
+    for fi, iter_k in enumerate(frame_iters):
+        k_list = [sum(1 for r in rows if r["iteration"] <= iter_k) for rows in all_rows]
+
+        fig = plt.figure(figsize=(14, max(5, 3 * n_runs)), facecolor="white")
         gs = fig.add_gridspec(1, 2, width_ratios=[1.45, 1], wspace=0.06)
-        gs_right = gs[1].subgridspec(2, 1, hspace=0.12)
+        gs_right = gs[1].subgridspec(n_runs, 1, hspace=0.12)
 
-        # Left: one overlaid objective plot
+        # Left: overlaid objective plot.
         ax = fig.add_subplot(gs[0])
-        if k_a > 0:
-            ax.scatter(x_a[:k_a], np.clip(obj_a[:k_a], y_lo, y_hi), s=12, alpha=0.5, color="#1f77b4",
-                       edgecolors="k", linewidths=0.1, zorder=2)
-            ax.plot(x_a[:k_a], np.clip(best_a[:k_a], y_lo, y_hi), color="#1f77b4", lw=1.5, zorder=3,
-                    label=f"{label_a} best")
-            ax.scatter([x_a[k_a - 1]], [np.clip(obj_a[k_a - 1], y_lo, y_hi)], s=80,
-                       facecolors="none", edgecolors="#1f77b4", linewidths=1.8, zorder=5,
-                       label=f"{label_a} current")
-        if k_b > 0:
-            ax.scatter(x_b[:k_b], np.clip(obj_b[:k_b], y_lo, y_hi), s=12, alpha=0.5, color="#d62728",
-                       edgecolors="k", linewidths=0.1, zorder=2)
-            ax.plot(x_b[:k_b], np.clip(best_b[:k_b], y_lo, y_hi), color="#d62728", lw=1.5, zorder=3,
-                    label=f"{label_b} best")
-            ax.scatter([x_b[k_b - 1]], [np.clip(obj_b[k_b - 1], y_lo, y_hi)], s=80,
-                       facecolors="none", edgecolors="#d62728", linewidths=1.8, zorder=5,
-                       label=f"{label_b} current")
+        best_vals = []
+        for ri in range(n_runs):
+            rows, x, obj, best = all_rows[ri], all_x[ri], all_objs[ri], all_bests[ri]
+            color, label = colors[ri], labels[ri]
+            k = k_list[ri]
+            if k == 0:
+                best_vals.append(np.nan)
+                continue
+            ax.scatter(x[:k], np.clip(obj[:k], y_lo, y_hi), s=12, alpha=0.5,
+                       color=color, edgecolors="k", linewidths=0.1, zorder=2)
+            ax.plot(x[:k], np.clip(best[:k], y_lo, y_hi), color=color, lw=1.5,
+                    zorder=3, label=f"{label} best")
+            ax.scatter([x[k - 1]], [np.clip(obj[k - 1], y_lo, y_hi)], s=80,
+                       facecolors="none", edgecolors=color, linewidths=1.8,
+                       zorder=5, label=f"{label} current")
+            best_vals.append(float(best[k - 1]))
 
         ax.set_xlim(x_min, x_max)
         ax.set_ylim(y_lo, y_hi)
-        ax.set_yscale("log")
-        ax.set_xlabel("LLM calls")
-        ax.set_ylabel("Objective (-reward, lower is better)")
+        if not maximizing:
+            ax.set_yscale("log")
+        ax.set_xlabel("Evaluations")
+        ax.set_ylabel("Reward (higher is better)" if maximizing else "Objective (-reward, lower is better)")
         ax.legend(loc="upper right", fontsize=8.5, framealpha=0.95, ncol=2)
         for sp in ["top", "right"]:
             ax.spines[sp].set_visible(False)
-        b_a = best_a[k_a - 1] if k_a > 0 else np.nan
-        b_b = best_b[k_b - 1] if k_b > 0 else np.nan
-        ax.set_title(f"Up to frame {up_to}: best={b_a:.4f} vs {b_b:.4f}", fontweight="medium", pad=8)
+        best_str = "  vs  ".join(
+            f"{l}={v:.4f}" for l, v in zip(labels, best_vals) if not np.isnan(v)
+        )
+        best_label = "best" if maximizing else "best obj"
+        ax.set_title(f"Iteration {iter_k} — {best_label}: {best_str}", fontweight="medium", pad=8)
 
-        # Right top: current design from A
-        ax_img_a = fig.add_subplot(gs_right[0])
-        ax_img_a.axis("off")
-        if k_a > 0:
-            dref_a = rows_a[k_a - 1]["design"]
-            img_a = get_shape_image(dir_a, dref_a)
-            if img_a is not None:
-                ax_img_a.imshow(img_a)
-                ax_img_a.set_title(f"{label_a} ({dref_a})", fontsize=9, fontweight="medium", pad=4)
-            else:
-                ax_img_a.text(0.5, 0.5, "(no shape.png)", ha="center", va="center",
-                              fontsize=10, transform=ax_img_a.transAxes, color="#888")
-
-        # Right bottom: current design from B
-        ax_img_b = fig.add_subplot(gs_right[1])
-        ax_img_b.axis("off")
-        if k_b > 0:
-            dref_b = rows_b[k_b - 1]["design"]
-            img_b = get_shape_image(dir_b, dref_b)
-            if img_b is not None:
-                ax_img_b.imshow(img_b)
-                ax_img_b.set_title(f"{label_b} ({dref_b})", fontsize=9, fontweight="medium", pad=4)
-            else:
-                ax_img_b.text(0.5, 0.5, "(no shape.png)", ha="center", va="center",
-                              fontsize=10, transform=ax_img_b.transAxes, color="#888")
+        # Right: one image panel per run, stacked vertically.
+        for ri in range(n_runs):
+            ax_img = fig.add_subplot(gs_right[ri])
+            ax_img.axis("off")
+            k = k_list[ri]
+            if k > 0:
+                best_row = max(all_rows[ri][:k], key=lambda r: r["reward"])
+                img = get_shape_image(dirs[ri], best_row["design"])
+                if img is not None:
+                    ax_img.imshow(img)
+                    ax_img.set_title(f"{labels[ri]} best ({best_row['design']})",
+                                     fontsize=9, fontweight="medium", pad=4,
+                                     color=colors[ri])
+                else:
+                    ax_img.text(0.5, 0.5, "(no shape.png)", ha="center", va="center",
+                                fontsize=10, transform=ax_img.transAxes, color="#888")
 
         fig.subplots_adjust(left=0.06, right=0.98, top=0.93, bottom=0.08)
         fig.canvas.draw()
@@ -198,7 +235,7 @@ def make_comparison(dir_a, dir_b, label_a=None, label_b=None, max_iter=80, step=
         plt.close(fig)
 
         if (fi + 1) % 20 == 0:
-            print(f"  {fi + 1}/{len(frame_indices)} frames")
+            print(f"  {fi + 1}/{len(frame_iters)} frames")
 
     for _ in range(8):
         frames.append(frames[-1])
@@ -208,21 +245,22 @@ def make_comparison(dir_a, dir_b, label_a=None, label_b=None, max_iter=80, step=
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("dir_a")
-    parser.add_argument("dir_b")
-    parser.add_argument("--label-a", default=None)
-    parser.add_argument("--label-b", default=None)
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("dirs", nargs="+", help="Result directories (2 or more)")
+    parser.add_argument("--labels", nargs="+", default=None,
+                        help="Display labels, one per directory")
     parser.add_argument("--max-iter", type=int, default=80)
     parser.add_argument("--step", type=int, default=1)
     parser.add_argument("--output-dir", default=None)
     args = parser.parse_args()
 
+    if args.labels and len(args.labels) != len(args.dirs):
+        parser.error(f"--labels count ({len(args.labels)}) must match dirs count ({len(args.dirs)})")
+
     make_comparison(
-        args.dir_a,
-        args.dir_b,
-        label_a=args.label_a,
-        label_b=args.label_b,
+        args.dirs,
+        labels=args.labels,
         max_iter=args.max_iter,
         step=args.step,
         output_dir=args.output_dir,

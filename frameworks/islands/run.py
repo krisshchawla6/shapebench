@@ -81,7 +81,7 @@ def _run_iteration(database, iteration_nb, output_dir, n_inspirations, action,
                    environment, alpha=3.0, num_islands=1, debug=False):
     if num_islands > 1:
         occupied = list(set(int(entry[4]) for entry in database))
-        island_idx = np.random.choice(occupied)
+        island_idx = np.random.choice(occupied) if occupied else np.random.randint(0, num_islands)
         parent = powerlaw_sample_parent_from_island(database, island_idx, alpha=alpha)
         parent_path = parent[0] if parent is not None else None
         inspirations = (

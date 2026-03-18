@@ -204,7 +204,7 @@ def _run_batch_iteration(database, iteration_nb, output_dir, n_inspirations, act
     """One LLM call + batch_size Gaussian samples, all evaluated and added to database."""
     if num_islands > 1:
         occupied = list(set(int(e[4]) for e in database))
-        island_idx = np.random.choice(occupied)
+        island_idx = np.random.choice(occupied) if occupied else np.random.randint(0, num_islands)
         parent = powerlaw_sample_parent_from_island(database, island_idx, alpha=alpha)
         inspirations = (
             sample_inspirations_from_island(
