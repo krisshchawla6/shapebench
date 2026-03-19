@@ -225,6 +225,15 @@ class NeuralFoilEnvironment(BaseEnvironment):
                       + [LE_BOUNDS[1], TE_BOUNDS[1]])
         return lb, ub
 
+    def get_named_param_bounds(self):
+        from .design_actions import UPPER_BOUNDS, LOWER_BOUNDS, LE_BOUNDS, TE_BOUNDS
+        return {
+            'upper_weights':       UPPER_BOUNDS,
+            'lower_weights':       LOWER_BOUNDS,
+            'leading_edge_weight': LE_BOUNDS,
+            'TE_thickness':        TE_BOUNDS,
+        }
+
     def write_design(self, x, output_dir: str, name: str) -> str:
         from .design_actions import save_design_json, N_CST
         os.makedirs(output_dir, exist_ok=True)

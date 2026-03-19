@@ -133,6 +133,17 @@ class BaseEnvironment(ABC):
             f"{self.__class__.__name__} does not implement get_param_bounds(). "
             "Override to enable gradient-free optimizers such as PSO.")
 
+    def get_named_param_bounds(self) -> dict:
+        """Return bounds keyed by parameter name for the dynamic sampler agent.
+
+        Returns:
+            dict mapping parameter name -> (lo, hi).
+            For array-valued parameters, lo/hi apply element-wise.
+        """
+        raise NotImplementedError(
+            f"{self.__class__.__name__} does not implement get_named_param_bounds(). "
+            "Override to pass real bounds to the sampler agent.")
+
     def write_design(self, x, output_dir: str, name: str) -> str:
         """Write a design file from parameter vector x and return its path.
 

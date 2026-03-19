@@ -11,6 +11,7 @@ import aerosandbox.numpy as np
 import aerosandbox.tools.pretty_plots as p
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+import matplotlib.patheffects as pe
 
 
 def run_optimization() -> tuple[asb.KulfanAirfoil, asb.KulfanAirfoil, float]:
@@ -147,6 +148,22 @@ def load_best_reward_airfoil_pso(results_dir: Path) -> tuple[str, float, asb.Kul
     return design_id, best_reward, best_airfoil
 
 
+def load_adjoint_airfoil(result_json_path: Path) -> tuple[str, float, asb.KulfanAirfoil]:
+    if not result_json_path.exists():
+        raise FileNotFoundError(f"Missing adjoint results JSON: {result_json_path}")
+    payload = json.loads(result_json_path.read_text(encoding="utf-8"))
+    name = payload.get("name", result_json_path.parent.parent.name)
+    weighted_cd = float(payload["weighted_cd"])
+    airfoil = asb.KulfanAirfoil(
+        name=name,
+        upper_weights=np.array(payload["upper_weights"]),
+        lower_weights=np.array(payload["lower_weights"]),
+        leading_edge_weight=float(payload["leading_edge_weight"]),
+        TE_thickness=float(payload["TE_thickness"]),
+    )
+    return name, weighted_cd, airfoil
+
+
 def make_figure(
     initial_guess_airfoil: asb.KulfanAirfoil,
     optimized_airfoil: asb.KulfanAirfoil,
@@ -156,6 +173,12 @@ def make_figure(
     pso_best_design_id: str,
     pso_best_reward: float,
     pso_best_airfoil: asb.KulfanAirfoil,
+    adjoint_pso_name: str,
+    adjoint_pso_weighted_cd: float,
+    adjoint_pso_airfoil: asb.KulfanAirfoil,
+    adjoint_geo_name: str,
+    adjoint_geo_weighted_cd: float,
+    adjoint_geo_airfoil: asb.KulfanAirfoil,
     mach: float,
     xfoil_airfoil_path: Path,
     output_path: Path,
@@ -163,33 +186,50 @@ def make_figure(
 ):
     re_plot = 500e3
     fig, ax = plt.subplots(2, 1, figsize=(7, 8))
+    focus_name = f"Adjoint-{adjoint_geo_name}"
 
     airfoils_and_colors = {
         "Initial Guess": (initial_guess_airfoil, "dimgray"),
         "NeuralFoil-Optimized": (optimized_airfoil, "blue"),
-        "XFoil-Optimized": (
-            asb.Airfoil(coordinates=str(xfoil_airfoil_path)).to_kulfan_airfoil(),
-            "darkgreen",
-        ),
         "Expert-Designed (DAE-11)": (asb.Airfoil("dae11"), "red"),
         "ShapeEvolve": (run_best_airfoil, "purple"),
         "PSO": (pso_best_airfoil, "black"),
+        f"Adjoint-{adjoint_pso_name}": (adjoint_pso_airfoil, "teal"),
+        f"Adjoint-{adjoint_geo_name}": (adjoint_geo_airfoil, "green"),
     }
 
     for i, (name, (af, color)) in enumerate(airfoils_and_colors.items()):
         color = p.adjust_lightness(color, 1)
-        is_overlay = name in {"ShapeEvolve", "PSO"}
-        overlay_line = (0, (4, 2)) if name == "ShapeEvolve" else (0, (1, 2))
-        ax[0].fill(
+        is_expert = name == "Expert-Designed (DAE-11)"
+        is_focus = name in {"ShapeEvolve", focus_name, "NeuralFoil-Optimized"}
+        is_overlay = name in {"ShapeEvolve", "PSO"} or name.startswith("Adjoint-")
+        overlay_line = (0, (4, 2))
+        if name == "PSO":
+            overlay_line = (0, (1, 2))
+        elif name.startswith("Adjoint-"):
+            overlay_line = (0, (2, 2))
+        if name == "NeuralFoil-Optimized":
+            overlay_line = (0, (1, 1))
+        edge_alpha = 1.0 if (is_expert or is_focus) else (0.95 if is_overlay else 0.35)
+        face_alpha = 0.12 if is_expert else (0.0 if is_overlay else 0.05)
+        line_width = 0.8 if is_expert else (0.9 if is_focus else (0.8 if is_overlay else 0.6))
+        line_style = "-" if is_expert else ((0, (5, 1)) if is_focus else (overlay_line if is_overlay else (3 * i, (7, 2))))
+        if name == "NeuralFoil-Optimized":
+            line_style = (0, (1, 1))
+        z_order = 9 if is_focus else (8 if is_expert else (6 if is_overlay else (4 if "NeuralFoil" in name else 3)))
+        patch = ax[0].fill(
             af.x(),
             af.y(),
-            facecolor=(*color, 0.0 if is_overlay else 0.09),
-            edgecolor=(*color, 0.95 if is_overlay else 0.6),
-            linewidth=2.0 if is_overlay else 1.0,
+            facecolor=(*color, face_alpha),
+            edgecolor=(*color, edge_alpha),
+            linewidth=line_width,
             label=name,
-            linestyle=overlay_line if is_overlay else (3 * i, (7, 2)),
-            zorder=6 if is_overlay else (4 if "NeuralFoil" in name else 3),
+            linestyle=line_style,
+            zorder=z_order,
         )
+        if name == "NeuralFoil-Optimized":
+            # White halo keeps NeuralFoil visible even under overlaps.
+            patch[0].set_path_effects([pe.Stroke(linewidth=2.2, foreground="white"), pe.Normal()])
 
         alpha_sweep = np.linspace(0, 15, 41)
         if polar_solver == "xfoil":
@@ -214,14 +254,21 @@ def make_figure(
         else:
             raise ValueError(f"Unsupported polar solver: {polar_solver}")
 
-        ax[1].plot(
+        line = ax[1].plot(
             aero["CD"],
             aero["CL"],
             color=color,
-            alpha=0.7,
+            alpha=1.0 if (is_expert or is_focus) else 0.45,
+            linewidth=0.9 if is_focus else (0.8 if is_expert else 0.6),
+            linestyle=(0, (1, 1)) if name == "NeuralFoil-Optimized" else "-",
             label=name,
-            zorder=4 if "NeuralFoil" in name else 3,
-        )
+            zorder=9 if is_focus else (8 if is_expert else (4 if "NeuralFoil" in name else 3)),
+        )[0]
+        if name == "NeuralFoil-Optimized":
+            line.set_alpha(1.0)
+            line.set_linewidth(1.2)
+            line.set_zorder(10)
+            line.set_path_effects([pe.Stroke(linewidth=2.4, foreground="white"), pe.Normal()])
 
     shape_legend = ax[0].legend(
         fontsize=11, loc="lower right", ncol=max(1, len(airfoils_and_colors) // 2)
@@ -234,19 +281,31 @@ def make_figure(
             [],
             [],
             linestyle="none",
-            label="NeuralFoil: -0.0793",
+            label="NeuralFoil: 0.0793",
         ),
         Line2D(
             [],
             [],
             linestyle="none",
-            label=f"ShapeEvolve: {run_best_reward:.4f}",
+            label=f"ShapeEvolve: {abs(run_best_reward):.4f}",
         ),
         Line2D(
             [],
             [],
             linestyle="none",
-            label=f"PSO: {pso_best_reward:.4f}",
+            label=f"PSO: {abs(pso_best_reward):.4f}",
+        ),
+        Line2D(
+            [],
+            [],
+            linestyle="none",
+            label=f"Adjoint-{adjoint_pso_name} weighted_cd: {adjoint_pso_weighted_cd:.4f}",
+        ),
+        Line2D(
+            [],
+            [],
+            linestyle="none",
+            label=f"Adjoint-{adjoint_geo_name} weighted_cd: {adjoint_geo_weighted_cd:.4f}",
         ),
     ]
     ax[0].legend(
@@ -258,7 +317,9 @@ def make_figure(
         borderpad=0.5,
         fontsize=9,
     )
-    ax[0].set_title("Airfoil Shapes")
+    ax[0].set_title(
+        f"Airfoil Shapes (highlight: NeuralFoil + ShapeEvolve + {focus_name} vs Expert)"
+    )
     ax[0].set_xlabel("$x/c$")
     ax[0].set_ylabel("$y/c$")
     ax[0].axis("equal")
@@ -271,8 +332,8 @@ def make_figure(
     ax[1].set_ylim(0, 1.8)
 
     plot_title = (
-        "Comparison of NeuralFoil-Optimized-, XFoil-Optimized-,\n"
-        "ShapeEvolve-, PSO-, and Expert-Designed-Airfoils"
+        "Comparison of NeuralFoil-Optimized-, ShapeEvolve-,\n"
+        "PSO-, Adjoint-, and Expert-Designed-Airfoils"
     )
     p.show_plot(
         plot_title,
@@ -312,6 +373,24 @@ def main():
         help="PSO run directory that contains results.csv and iter_XXXX_pXXX design subfolders.",
     )
     parser.add_argument(
+        "--llm-results-dir",
+        type=Path,
+        default=Path("/scratch/ShapeEvolve/environments/NeuralFoil/results/resume/v3_stagnation_escape"),
+        help="LLM_sampling run directory that contains results.csv and design subfolders.",
+    )
+    parser.add_argument(
+        "--adjoint-pso-json",
+        type=Path,
+        default=Path("/scratch/ShapeEvolve/environments/NeuralFoil/results/adjoint/from_pso_best/save/results.json"),
+        help="Adjoint result JSON for pso-best initialized run.",
+    )
+    parser.add_argument(
+        "--adjoint-geo-json",
+        type=Path,
+        default=Path("/scratch/ShapeEvolve/environments/NeuralFoil/results/adjoint/from_geo_b30_best/save/results.json"),
+        help="Adjoint result JSON for geo-best initialized run.",
+    )
+    parser.add_argument(
         "--polar-solver",
         choices=["xfoil", "neuralfoil"],
         default="neuralfoil",
@@ -326,6 +405,12 @@ def main():
     pso_best_design_id, pso_best_reward, pso_best_airfoil = load_best_reward_airfoil_pso(
         args.pso_results_dir
     )
+    adjoint_pso_name, adjoint_pso_weighted_cd, adjoint_pso_airfoil = load_adjoint_airfoil(
+        args.adjoint_pso_json
+    )
+    adjoint_geo_name, adjoint_geo_weighted_cd, adjoint_geo_airfoil = load_adjoint_airfoil(
+        args.adjoint_geo_json
+    )
     make_figure(
         initial_guess_airfoil=initial_guess_airfoil,
         optimized_airfoil=optimized_airfoil,
@@ -335,6 +420,12 @@ def main():
         pso_best_design_id=pso_best_design_id,
         pso_best_reward=pso_best_reward,
         pso_best_airfoil=pso_best_airfoil,
+        adjoint_pso_name=adjoint_pso_name,
+        adjoint_pso_weighted_cd=adjoint_pso_weighted_cd,
+        adjoint_pso_airfoil=adjoint_pso_airfoil,
+        adjoint_geo_name=adjoint_geo_name,
+        adjoint_geo_weighted_cd=adjoint_geo_weighted_cd,
+        adjoint_geo_airfoil=adjoint_geo_airfoil,
         mach=mach,
         xfoil_airfoil_path=args.xfoil_airfoil,
         output_path=args.output,
