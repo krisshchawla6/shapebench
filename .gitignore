@@ -1,3 +1,11 @@
+# CFD_solver/ contains large Docker .tar images — excluded from git entirely.
+# Note: sbatch/CFD_solver/ is also covered by this rule (no leading slash = matches anywhere in tree).
+# This matters because sbatch/ was historically managed as a nested git repo (sbatch/.git) pointing
+# to the same remote as the parent repo (KrisshChawla6/Shape_Evolve.git). That created a dual-tracking
+# problem: the 53 files in sbatch/ were tracked by both repos simultaneously, meaning commits made
+# from inside sbatch/ and commits made from the parent could silently diverge until a push/pull synced
+# them via the shared remote. As of March 2026 the two histories were confirmed identical (14 commits,
+# same HEAD 4dee020) and sbatch/.git was removed — sbatch/ is now managed solely from the parent repo.
 CFD_solver/
 
 # Large simulation outputs / datasets (not code)
