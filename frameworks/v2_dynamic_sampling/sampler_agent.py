@@ -135,7 +135,7 @@ def _choose_strategy(top_codes: list, iteration: int) -> str:
 class SamplerAgent:
     """LLM-driven sampling agent. Generates one Python function per iteration."""
 
-    def __init__(self, output_dir: str, model: str = 'gemini-2.5-flash',
+    def __init__(self, output_dir: str, model: str = 'gemini-3-flash-preview',
                  max_retries: int = 3, hybrid: bool = False):
         self.model_name   = model
         self.max_retries  = max_retries

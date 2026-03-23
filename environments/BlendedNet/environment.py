@@ -241,6 +241,10 @@ class BlendedNetEnvironment(BaseEnvironment):
         ub = np.array([BOUNDS[k][1] for k in CONTINUOUS_KEYS])
         return lb, ub
 
+    def get_named_param_bounds(self):
+        from .design_actions import BOUNDS
+        return dict(BOUNDS)
+
     def write_design(self, x, output_dir: str, name: str) -> str:
         from .design_actions import CONTINUOUS_KEYS, save_design_json
         os.makedirs(output_dir, exist_ok=True)

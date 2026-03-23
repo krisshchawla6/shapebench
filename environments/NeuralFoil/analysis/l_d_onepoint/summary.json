@@ -1,0 +1,28 @@
+{
+  "source_batch": "/scratch/ShapeEvolve/environments/NeuralFoil/results/adjoint/ld_from_lhs10_constrained_m02_re1e7",
+  "best_case": "lhs_idx_0012",
+  "operating_point": {
+    "alpha": 5.0,
+    "Re": 10000000.0,
+    "mach": 0.2,
+    "model_size": "large",
+    "n_crit": 9.0
+  },
+  "n_samples": 10,
+  "n_solver_success": 10,
+  "n_feasible": 0,
+  "best_L_D": 365.7264837792947,
+  "best_CL": 1.3495589063747009,
+  "best_CD": 0.003690077055478215,
+  "best_CM": -0.1330000099924345,
+  "best_confidence": 0.8999999900117935,
+  "mean_L_D": 316.8710014996861,
+  "mean_iters": 53.5,
+  "alpha5_best_design_eval": {
+    "L_D": 365.726483779294,
+    "CL": 1.3495589063747009,
+    "CD": 0.0036900770554782213,
+    "CM": -0.13300000999243458,
+    "analysis_confidence": 0.8999999900117915
+  }
+}

@@ -58,7 +58,7 @@ def add_args(parser):
                         help='Geometrically decay Gaussian std in --hybrid mode')
     parser.add_argument('--gaussian_final_scale', type=float, default=0.1,
                         help='Final std scale at last iteration (hybrid only)')
-    parser.add_argument('--sampler_model', type=str, default='gemini-2.5-flash',
+    parser.add_argument('--sampler_model', type=str, default='gemini-3-flash-preview',
                         help='Gemini model for the sampler agent')
     parser.add_argument('--sampler_max_retries', type=int, default=3,
                         help='Max LLM retry attempts per iteration if code fails')

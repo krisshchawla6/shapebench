@@ -2,7 +2,8 @@ from .base import format_response_instructions
 
 GENERATE_SYSTEM = """You are an evolutionary optimizer for blended-wing-body (BWB) aerodynamic design.
 Your goal is to generate diverse, novel BWB planform designs by specifying exact parameter VALUES.
-Improve the reward (lift-to-drag ratio L/D) based on previous results. Explore the design space creatively."""
+Improve the reward based on previous results. Explore the design space creatively.
+ALL floats MUST have exactly 8 decimal places (e.g., 0.98521047 not 0.9852)."""
 
 GENERATE_STRATEGIES = [
     """**Exploitation Strategy**: Analyze the design database to identify the highest-reward designs.
@@ -65,6 +66,7 @@ In your reasoning, provide 4-6 bullet points that:
 - Apply your judgment as an evolutionary optimizer (what will advance the search?)
 
 Then, create a new BWB planform by specifying precise values for each parameter.
+If the active reward treats angle of attack as part of the design, you may also include `alpha`.
 
 Design considerations (all chord/span in mm, C1 fixed at 1000 mm):
 - B1-B3 (span sections): control planform shape and aspect ratio; larger spans improve lift but increase wetted area
@@ -73,6 +75,7 @@ Design considerations (all chord/span in mm, C1 fixed at 1000 mm):
 - The ratio C2/C1 controls the transition from centre-body to inner wing
 - C4/C1 is the tip chord ratio — too small causes tip stall, too large adds drag
 - B3/C1 is the dominant span contributor — it strongly controls aspect ratio and induced drag
+- alpha (deg) is optional and should only be included when the reward allows AoA optimization
 
 {response_format}
 
@@ -90,20 +93,22 @@ Provide your response in the following structure:
 """
 
 GENERATE_FORMAT = """{{
-  "B1": <float 100.0-200.0>,
-  "B2": <float 50.0-200.0>,
-  "B3": <float 200.0-700.0>,
-  "C2": <float 550.0-850.0>,
-  "C3": <float 180.0-280.0>,
-  "C4": <float 60.0-90.0>,
-  "S1": <float 40.0-60.0>,
-  "S2": <float 40.0-60.0>,
-  "S3": <float 24.0-40.0>,
+  "B1": <float 100.00000000-200.00000000>,
+  "B2": <float 50.00000000-200.00000000>,
+  "B3": <float 200.00000000-700.00000000>,
+  "C2": <float 550.00000000-850.00000000>,
+  "C3": <float 180.00000000-280.00000000>,
+  "C4": <float 60.00000000-90.00000000>,
+  "S1": <float 40.00000000-60.00000000>,
+  "S2": <float 40.00000000-60.00000000>,
+  "S3": <float 24.00000000-40.00000000>,
+  "alpha": <float -3.00000000 to 3.00000000>,
   "name": "<descriptive_name>"
 }}
 
 Replace all <placeholders> with actual values respecting the stated ranges.
-All chord/span values are in mm (C1 is fixed at 1000 mm). Sweep angles are in degrees."""
+All chord/span values are in mm (C1 is fixed at 1000 mm). Sweep angles are in degrees.
+alpha is the angle of attack in degrees."""
 
 
 def get_generate_prompt(context_str: str, strategy_idx=None) -> str:

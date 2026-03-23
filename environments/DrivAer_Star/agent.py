@@ -80,7 +80,7 @@ def extract_structured_response(text: str) -> Tuple[Optional[str], Optional[str]
 def get_gemini_response(system_prompt, user_prompt, images=None,
                          temperature=1.0, return_full=False):
     try:
-        model = genai.GenerativeModel('gemini-2.5-flash',
+        model = genai.GenerativeModel('gemini-3-flash-preview',
                                        system_instruction=system_prompt)
         content = [user_prompt] + (list(images) if images else [])
         cfg = genai.types.GenerationConfig(temperature=temperature)

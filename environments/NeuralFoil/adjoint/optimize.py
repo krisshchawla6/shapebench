@@ -179,12 +179,10 @@ def run_adjoint_optimization(
         opts.update(solver_options)
 
     solver_success = True
-    try:
-        sol = opti.solve(behavior_on_failure="return_last", options=opts)
-    except Exception as e:
-        print(f"[adjoint] solver raised: {e}")
-        solver_success = False
-        sol = opti.solve(behavior_on_failure="return_last", options=opts)
+    sol = opti.solve(behavior_on_failure="return_last", options=opts)
+    stats = sol._sol.stats()
+    solver_success = bool(stats.get("success", False))
+    n_iters = int(stats.get("iter_count", -1))
 
     optimized_airfoil = sol(optimized_airfoil)
     aero_sol = sol(aero)
@@ -221,6 +219,7 @@ def run_adjoint_optimization(
         "weighted_cd": weighted_cd,
         "solver_success": solver_success,
         "feasible": feasible,
+        "n_iters": n_iters,
     }
 
     if output_dir is not None:

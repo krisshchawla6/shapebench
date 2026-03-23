@@ -95,7 +95,7 @@ def get_gemini_response(
     _init_genai()
     try:
         model = genai.GenerativeModel(
-            'gemini-2.5-flash',
+            'gemini-3-flash-preview',
             system_instruction=system_prompt,
         )
         content = [user_prompt] + (list(images) if images else [])

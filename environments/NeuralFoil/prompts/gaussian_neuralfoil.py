@@ -4,7 +4,8 @@ GENERATE_SYSTEM = """You are an evolutionary optimizer for 2D airfoil aerodynami
 Your goal is to generate diverse, high-performing airfoil shapes by specifying Kulfan (CST) parameter values.
 Optimize toward the objective (e.g., maximize L/D, maximize CL, minimize CD) based on previous results.
 Each airfoil is defined by 18 parameters: 8 upper-surface CST weights, 8 lower-surface CST weights,
-one leading-edge weight, and trailing-edge thickness."""
+one leading-edge weight, and trailing-edge thickness.
+ALL floats MUST have exactly 8 decimal places (e.g., 0.98521047 not 0.9852)."""
 
 GENERATE_STRATEGIES = [
     """**Exploitation Strategy**: Identify the highest-reward designs in the database.
@@ -85,10 +86,10 @@ Identify aerodynamic issues (suction peak, pressure recovery, separation risk) a
 """
 
 GENERATE_FORMAT = """{
-  "upper_weights": [<float -0.30 to 0.60>, <float -0.30 to 0.60>, <float -0.30 to 0.60>, <float -0.30 to 0.60>, <float -0.30 to 0.60>, <float -0.30 to 0.60>, <float -0.30 to 0.60>, <float -0.30 to 0.60>],
-  "lower_weights": [<float -0.30 to 0.30>, <float -0.30 to 0.30>, <float -0.30 to 0.30>, <float -0.30 to 0.30>, <float -0.30 to 0.30>, <float -0.30 to 0.30>, <float -0.30 to 0.30>, <float -0.30 to 0.30>],
-  "leading_edge_weight": <float -0.50 to 0.50>,
-  "TE_thickness": <float 0.000 to 0.010>,
+  "upper_weights": [<float -0.30000000 to 0.60000000>, <float -0.30000000 to 0.60000000>, <float -0.30000000 to 0.60000000>, <float -0.30000000 to 0.60000000>, <float -0.30000000 to 0.60000000>, <float -0.30000000 to 0.60000000>, <float -0.30000000 to 0.60000000>, <float -0.30000000 to 0.60000000>],
+  "lower_weights": [<float -0.30000000 to 0.30000000>, <float -0.30000000 to 0.30000000>, <float -0.30000000 to 0.30000000>, <float -0.30000000 to 0.30000000>, <float -0.30000000 to 0.30000000>, <float -0.30000000 to 0.30000000>, <float -0.30000000 to 0.30000000>, <float -0.30000000 to 0.30000000>],
+  "leading_edge_weight": <float -0.50000000 to 0.50000000>,
+  "TE_thickness": <float 0.00000000 to 0.01000000>,
   "name": "<descriptive_name>"
 }
 

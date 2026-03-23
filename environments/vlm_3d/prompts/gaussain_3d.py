@@ -2,7 +2,8 @@ from .base import format_response_instructions
 
 GENERATE_SYSTEM = """You are an evolutionary optimizer for delta wing aerodynamic design.
 Your goal is to generate diverse, novel designs by specifying exact parameter VALUES.
-Improve the reward based on previous results. Explore the design space creatively."""
+Improve the reward based on previous results. Explore the design space creatively.
+ALL floats MUST have exactly 8 decimal places (e.g., 0.98521047 not 0.9852)."""
 
 GENERATE_STRATEGIES = [
     """**Exploitation Strategy**: Analyze the design database to identify the highest-reward designs.
@@ -89,11 +90,11 @@ Provide your response in the following structure:
 """
 
 GENERATE_FORMAT = """{
-  "le_sweep": <float 45.0-80.0>,
-  "root_chord_in": <float 10.0-50.0>,
-  "twist_root": <float -10.0 to 10.0>,
-  "twist_tip": <float -10.0 to 10.0>,
-  "dihedral": <float -15.0 to 15.0>,
+  "le_sweep": <float 45.00000000-80.00000000>,
+  "root_chord_in": <float 10.00000000-50.00000000>,
+  "twist_root": <float -10.00000000 to 10.00000000>,
+  "twist_tip": <float -10.00000000 to 10.00000000>,
+  "dihedral": <float -15.00000000 to 15.00000000>,
   "naca_m": <int: 0, 2, or 4>,
   "naca_p": <int: 0 or 4 (must be 0 when naca_m=0)>,
   "naca_t": <int 6-24>,

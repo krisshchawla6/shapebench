@@ -57,7 +57,7 @@ def add_args(parser):
                         help='Geometrically decay Gaussian std in --hybrid mode')
     parser.add_argument('--gaussian_final_scale', type=float, default=0.1,
                         help='Final std scale at last iteration (hybrid only)')
-    parser.add_argument('--sampler_model', type=str, default='gemini-2.5-flash',
+    parser.add_argument('--sampler_model', type=str, default='gemini-3-flash-preview',
                         help='Gemini model for the optimizer agent')
     parser.add_argument('--sampler_max_retries', type=int, default=3,
                         help='Max LLM retry attempts per iteration if code fails')
@@ -419,8 +419,19 @@ def run(environment, args, output_dir, _start_iter=0, _initial_database=None):
                     alpha=alpha, num_islands=num_islands,
                     scratchpad=scratchpad, debug=debug)
 
-                # CSV: s0 is index 0, oracle slots 1..n_oracle_used, Gaussian after
+                # Update running best before CSV so best_reward is monotonically non-decreasing
+                if current_best > best_reward:
+                    best_reward = current_best
+
+                # Deduplicate batch_results by design path (keeps last occurrence = best data)
+                seen: dict[str, int] = {}
                 for j, (x, case_dir, r, res) in enumerate(batch_results):
+                    key = str(case_dir)
+                    seen[key] = j
+                deduped = [batch_results[j] for j in sorted(seen.values())]
+
+                # CSV: s0 is index 0, oracle slots 1..n_oracle_used, Gaussian after
+                for j, (x, case_dir, r, res) in enumerate(deduped):
                     if j == 0:
                         stype = 'llm_center'
                     elif j <= n_oracle_used:
@@ -431,7 +442,7 @@ def run(environment, args, output_dir, _start_iter=0, _initial_database=None):
                     metrics      = res.get('metrics', {}) if isinstance(res, dict) else {}
                     extra_values = environment.get_results_csv_row(metrics)
                     _append_results_csv(csv_path, i, j, design_name,
-                                        r, current_best, stype, extra_values, parent_island)
+                                        r, best_reward, stype, extra_values, parent_island)
 
                 if x0:
                     case_dir_0 = os.path.join(output_dir, f'iter_{i}_s0')
@@ -454,9 +465,9 @@ def run(environment, args, output_dir, _start_iter=0, _initial_database=None):
             if len(database) > 0:
                 best_idx = np.argmax(database[:, 2].astype(float))
                 cached.append(database[best_idx].copy())
-                if current_best > best_reward:
-                    best_reward = current_best
-                    best_x      = database[best_idx, 0]
+                # best_reward already updated before CSV writing; update best_x here
+                if current_best >= best_reward:
+                    best_x = database[best_idx, 0]
 
             reward_trajectory = (reward_trajectory + [float(current_best)])[-8:]
             param_trajectory_window = _update_param_trajectory(

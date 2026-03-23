@@ -186,7 +186,7 @@ def make_figure(
 ):
     re_plot = 500e3
     fig, ax = plt.subplots(2, 1, figsize=(7, 8))
-    focus_name = f"Adjoint-{adjoint_geo_name}"
+    focus_name = "Adjoint-ShapeEvolve"
 
     airfoils_and_colors = {
         "Initial Guess": (initial_guess_airfoil, "dimgray"),
@@ -195,7 +195,7 @@ def make_figure(
         "ShapeEvolve": (run_best_airfoil, "purple"),
         "PSO": (pso_best_airfoil, "black"),
         f"Adjoint-{adjoint_pso_name}": (adjoint_pso_airfoil, "teal"),
-        f"Adjoint-{adjoint_geo_name}": (adjoint_geo_airfoil, "green"),
+        focus_name: (adjoint_geo_airfoil, "green"),
     }
 
     for i, (name, (af, color)) in enumerate(airfoils_and_colors.items()):
@@ -305,7 +305,7 @@ def make_figure(
             [],
             [],
             linestyle="none",
-            label=f"Adjoint-{adjoint_geo_name} weighted_cd: {adjoint_geo_weighted_cd:.4f}",
+            label=f"{focus_name} weighted_cd: {adjoint_geo_weighted_cd:.4f}",
         ),
     ]
     ax[0].legend(
@@ -317,31 +317,23 @@ def make_figure(
         borderpad=0.5,
         fontsize=9,
     )
-    ax[0].set_title(
-        f"Airfoil Shapes (highlight: NeuralFoil + ShapeEvolve + {focus_name} vs Expert)"
-    )
     ax[0].set_xlabel("$x/c$")
     ax[0].set_ylabel("$y/c$")
     ax[0].axis("equal")
 
     ax[1].legend(fontsize=11, loc="lower right", ncol=max(1, len(airfoils_and_colors) // 2))
-    ax[1].set_title("Aerodynamic Polars (analyzed with XFoil, $\\mathrm{Re}=500\\mathrm{k}$)")
     ax[1].set_xlabel("Drag Coefficient $C_D$")
     ax[1].set_ylabel("Lift\nCoefficient\n$C_L$")
     ax[1].set_xlim(0, 0.04)
     ax[1].set_ylim(0, 1.8)
 
-    plot_title = (
-        "Comparison of NeuralFoil-Optimized-, ShapeEvolve-,\n"
-        "PSO-, Adjoint-, and Expert-Designed-Airfoils"
-    )
     p.show_plot(
-        plot_title,
+        "",
         legend=False,
         show=False,
     )
     if fig._suptitle is not None:
-        fig._suptitle.set_fontsize(12)
+        fig._suptitle.set_text("")
     fig.savefig(output_path, dpi=300, bbox_inches="tight")
 
 

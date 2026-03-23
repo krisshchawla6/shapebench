@@ -3,7 +3,8 @@ from .base import format_response_instructions
 GENERATE_SYSTEM = """You are an evolutionary optimizer for DrivAerStar vehicle aerodynamic design.
 Your goal is to generate diverse, novel vehicle body configurations by specifying exact FFD parameter values.
 Minimize drag coefficient (Cd) based on previous results. Explore the design space creatively.
-The vehicle is a DrivAer-class sedan with 20 Free-Form Deformation parameters controlling body shape."""
+The vehicle is a DrivAer-class sedan with 20 Free-Form Deformation parameters controlling body shape.
+ALL floats MUST have exactly 8 decimal places (e.g., 0.98521047 not 0.9852)."""
 
 GENERATE_STRATEGIES = [
     """**Exploitation Strategy**: Analyze the design database to identify the lowest-drag designs.
@@ -81,26 +82,26 @@ Provide your response in the following structure:
 """
 
 GENERATE_FORMAT = """{{
-  "car_size": <float 0.80-1.20>,
-  "car_width": <float -0.10 to 0.10>,
-  "car_len": <float -0.10 to 0.10>,
-  "ramp_angle": <float -8.0 to 8.0>,
-  "front_bumper_length": <float -0.10 to 0.10>,
-  "wind_screen_x": <float -0.05 to 0.05>,
-  "wind_screen_z": <float -0.05 to 0.05>,
-  "side_mirrors_x": <float -0.05 to 0.05>,
-  "side_mirrors_z": <float -0.05 to 0.05>,
-  "rear_window_x": <float -0.05 to 0.05>,
-  "rear_window_z": <float -0.05 to 0.05>,
-  "trunklid_angle": <float -8.0 to 8.0>,
-  "trunklid_x": <float -0.05 to 0.05>,
-  "trunklid_z": <float -0.05 to 0.05>,
-  "diffusor_angle": <float -8.0 to 8.0>,
-  "car_green_house_angle": <float -8.0 to 8.0>,
-  "car_front_hood_angle": <float -8.0 to 8.0>,
-  "car_air_intake_angle": <float -8.0 to 8.0>,
-  "tires_diameter": <float -0.013 to 0.013>,
-  "tires_width": <float -0.015 to 0.015>,
+  "car_size": <float 0.80000000-1.20000000>,
+  "car_width": <float -0.10000000 to 0.10000000>,
+  "car_len": <float -0.10000000 to 0.10000000>,
+  "ramp_angle": <float -8.00000000 to 8.00000000>,
+  "front_bumper_length": <float -0.10000000 to 0.10000000>,
+  "wind_screen_x": <float -0.05000000 to 0.05000000>,
+  "wind_screen_z": <float -0.05000000 to 0.05000000>,
+  "side_mirrors_x": <float -0.05000000 to 0.05000000>,
+  "side_mirrors_z": <float -0.05000000 to 0.05000000>,
+  "rear_window_x": <float -0.05000000 to 0.05000000>,
+  "rear_window_z": <float -0.05000000 to 0.05000000>,
+  "trunklid_angle": <float -8.00000000 to 8.00000000>,
+  "trunklid_x": <float -0.05000000 to 0.05000000>,
+  "trunklid_z": <float -0.05000000 to 0.05000000>,
+  "diffusor_angle": <float -8.00000000 to 8.00000000>,
+  "car_green_house_angle": <float -8.00000000 to 8.00000000>,
+  "car_front_hood_angle": <float -8.00000000 to 8.00000000>,
+  "car_air_intake_angle": <float -8.00000000 to 8.00000000>,
+  "tires_diameter": <float -0.01300000 to 0.01300000>,
+  "tires_width": <float -0.01500000 to 0.01500000>,
   "name": "<descriptive_name>"
 }}
 

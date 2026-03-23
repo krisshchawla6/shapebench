@@ -4,7 +4,8 @@ from .base import format_response_instructions
 
 GENERATE_SYSTEM = """You are an evolutionary optimizer for aerodynamic shape optimization.
 Your goal is to generate diverse, novel designs by specifying parameter RANGES for sampling.
-Improve the reward based on previous results. Explore the design space creatively."""
+Improve the reward based on previous results. Explore the design space creatively.
+ALL floats MUST have exactly 8 decimal places (e.g., 0.98521047 not 0.9852)."""
 
 # =============================================================================
 # STRATEGY VARIANTS (placeholder for multiple exploration strategies)

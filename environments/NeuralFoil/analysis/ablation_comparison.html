@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ShapeEvolve Ablation — Best |Reward| vs Simulations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@700;800&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #08080e;
+    color: #e0e0ec;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 36px 20px 40px;
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+  .sub {
+    font-size: 10.5px;
+    color: #555;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+  }
+  .wrap {
+    background: #0c0c16;
+    border: 1px solid #181828;
+    border-radius: 3px;
+    padding: 18px 20px 16px 8px;
+    width: 100%;
+    max-width: 1020px;
+  }
+  canvas { display: block; }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px 18px;
+    margin-top: 22px;
+    max-width: 1020px;
+    justify-content: center;
+    padding: 0 4px;
+  }
+  .leg {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: #bbb;
+    cursor: pointer;
+    transition: opacity 0.12s;
+    user-select: none;
+  }
+  .leg:hover { opacity: 1 !important; }
+  .leg.off { opacity: 0.28; }
+  .swatch {
+    width: 26px;
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+  .note {
+    margin-top: 18px;
+    font-size: 9.5px;
+    color: #444;
+    letter-spacing: 0.04em;
+    text-align: center;
+    max-width: 700px;
+  }
+</style>
+</head>
+<body>
+
+<h1>ShapeEvolve · Best |Reward| vs Simulations</h1>
+<div class="sub">Log–Log · NeuralFoil Lift-to-Drag · All Ablation Runs + v3 Oracle + PSO</div>
+
+<div class="wrap">
+  <canvas id="c"></canvas>
+</div>
+<div class="legend" id="leg"></div>
+<div class="note">Click any legend entry to toggle. Bold orange = v3_oracle (LLM mini-optimizer). Lower |reward| is better. Infeasible evals (reward &lt; −9.9) excluded from x-axis count.</div>
+
+<script>
+const DATA = {"adaptive_b20_default":[[1,1.823532],[6,1.5966],[11,1.332248],[17,0.585897],[81,0.527824],[88,0.422094],[252,0.40381],[324,0.309245],[393,0.175278],[729,0.175278]],"dynamic_sampling_50_30":[[1,5.587009],[12,2.107408],[45,1.822916],[56,1.312729],[71,1.103053],[78,0.62751],[142,0.184534],[186,0.164765],[192,0.115254],[265,0.107818],[377,0.105681],[861,0.105681]],"dynamic_sampling_50_30_hybrid":[[1,8.978629],[7,3.447208],[20,3.021208],[22,2.392268],[36,1.405285],[50,1.259461],[67,0.703492],[74,0.592325],[82,0.374813],[107,0.150863],[112,0.12809],[122,0.121313],[135,0.118651],[173,0.113936],[258,0.113647],[265,0.112099],[342,0.111293],[362,0.110795],[382,0.110189],[413,0.108961],[468,0.10878],[532,0.107138],[649,0.107049],[688,0.105471],[1016,0.103082],[1088,0.103082]],"dynamic_sampling_50_30_hybrid_v2":[[1,5.704345],[18,1.275392],[25,0.9492],[72,0.946718],[78,0.875812],[91,0.734991],[98,0.564034],[103,0.491867],[114,0.481422],[229,0.206981],[234,0.206981],[241,0.142778],[248,0.134928],[281,0.116581],[288,0.115094],[350,0.114633],[527,0.112148],[534,0.111041],[554,0.107105],[560,0.106481],[659,0.106391],[665,0.106197],[781,0.106197]],"dynamic_sampling_50_30_v2":[[1,1.542239],[12,1.422275],[21,0.836009],[27,0.508515],[31,0.450131],[42,0.378251],[47,0.205657],[71,0.172256],[83,0.16427],[103,0.162389],[121,0.149974],[130,0.1404],[139,0.137882],[154,0.137603],[156,0.136549],[181,0.132801],[193,0.129149],[213,0.127101],[223,0.126038],[344,0.121384],[469,0.115761],[512,0.113385],[522,0.112989],[532,0.111337],[560,0.105327],[573,0.105164],[614,0.103782],[665,0.103322],[676,0.101825],[710,0.101825]],"geo_b20_f001":[[1,8.315722],[2,3.115046],[8,1.446375],[15,1.016983],[22,0.984506],[80,0.82118],[218,0.815959],[226,0.815959],[233,0.800047],[241,0.723776],[380,0.722144],[410,0.722079],[425,0.719507],[429,0.698092],[437,0.677195],[452,0.473479],[460,0.470386],[505,0.458375],[513,0.458375],[520,0.454062]],"geo_b20_f003":[[1,2.579992],[4,2.53819],[15,2.097093],[18,1.696296],[25,1.005396],[38,0.635086],[126,0.147607],[266,0.127671],[273,0.127671],[279,0.121674],[287,0.113433],[346,0.1126],[465,0.111982],[510,0.11035],[587,0.106991],[649,0.106574],[657,0.105094],[664,0.103416],[672,0.102609],[688,0.102337],[696,0.101342],[751,0.10073],[758,0.100156],[829,0.099649],[882,0.099501],[890,0.098463],[959,0.098404],[967,0.097846],[1061,0.097091],[1340,0.097091]],"geo_b30_f0003":[[2,4.328743],[3,3.825974],[8,2.980098],[52,1.303264],[159,1.1333],[182,0.969877],[252,0.442804],[299,0.377996],[335,0.236645],[395,0.151914],[407,0.135745],[466,0.122674],[524,0.119441],[536,0.108545],[572,0.106822],[584,0.106572],[619,0.100795],[773,0.100549],[950,0.097562],[1022,0.096915],[1082,0.096712],[1187,0.095384],[1222,0.094731],[1234,0.094617],[1246,0.094337],[1258,0.094126],[1341,0.093715],[1364,0.093572],[1376,0.093114],[1399,0.092922],[1529,0.092747],[1753,0.092681],[2108,0.092429],[2132,0.092356],[2144,0.092324],[2214,0.092324]],"geo_b30_f001":[[1,6.113723],[2,1.624655],[62,1.489987],[76,1.32949],[90,0.752257],[112,0.287286],[152,0.135047],[227,0.133373],[453,0.128116],[510,0.126357],[540,0.125401],[570,0.123842],[730,0.120627],[1145,0.120573],[1203,0.117886],[1262,0.116881],[1305,0.116601],[1704,0.116192],[1982,0.116159],[2602,0.116159]],"v3_oracle_80_30_i10":[[12,8.358217],[23,0.782808],[32,0.610375],[49,0.429381],[58,0.428938],[70,0.357168],[100,0.123308],[150,0.118817],[159,0.112339],[168,0.109053],[280,0.108632],[338,0.108604],[347,0.1086],[411,0.10804],[423,0.107996],[440,0.107895],[458,0.107859],[470,0.107815],[486,0.107771],[513,0.107727],[519,0.107715],[530,0.106929],[550,0.106587],[562,0.106529],[579,0.106472],[596,0.106182],[608,0.106126],[614,0.105939],[624,0.104905],[640,0.104207],[652,0.104146],[668,0.10404],[696,0.10398],[702,0.101371],[741,0.101258],[758,0.101202],[784,0.101147],[801,0.101092],[829,0.101038],[841,0.100984],[855,0.100076],[865,0.099341],[907,0.098977],[916,0.098647],[951,0.098636],[960,0.098233],[971,0.098076],[1006,0.097945],[1027,0.09794],[1051,0.09787],[1063,0.097829],[1073,0.097732],[1080,0.097705],[1084,0.097569],[1096,0.097566],[1109,0.097546],[1130,0.097423],[1153,0.097402],[1179,0.097381],[1208,0.097377],[1228,0.097368],[1247,0.09736],[1265,0.097351],[1288,0.097348],[1306,0.097345],[1317,0.097344],[1335,0.097342],[1356,0.09734],[1389,0.097338],[1409,0.097336],[1442,0.097334],[1458,0.097331],[1488,0.097329],[1508,0.097327],[1539,0.097325],[1548,0.096232],[1557,0.096227],[1573,0.096221],[1585,0.096221],[1598,0.096215],[1611,0.09621],[1637,0.096204],[1648,0.096175],[1652,0.096175]],"PSO (particle_swarm)":[[1,5.160349],[7,4.59656],[10,4.376682],[16,4.265964],[22,2.809564],[30,2.799483],[34,2.743297],[41,2.381507],[43,2.037548],[47,1.714886],[58,1.655728],[65,1.634454],[68,1.551992],[71,1.488425],[76,1.387054],[78,1.369126],[81,1.254868],[92,1.209202],[99,1.061526],[127,1.009753],[137,0.997213],[147,0.986485],[153,0.968356],[164,0.949749],[176,0.90392],[181,0.799752],[188,0.694353],[202,0.635799],[215,0.62748],[222,0.555101],[236,0.512656],[268,0.445513],[293,0.435624],[303,0.409772],[333,0.405316],[356,0.38788],[380,0.326086],[389,0.130654],[409,0.125755],[429,0.120507],[451,0.117307],[460,0.115108],[467,0.111483],[507,0.111169],[518,0.109866],[539,0.107543],[548,0.105994],[591,0.10541],[611,0.105244],[633,0.104045],[699,0.103565],[724,0.103211],[764,0.10196],[790,0.101834],[861,0.101615],[887,0.101595],[925,0.101019],[1011,0.100814],[1035,0.100673],[1047,0.10061],[1060,0.100508],[1102,0.100363],[1115,0.099832],[1243,0.099787],[1258,0.099642],[1328,0.099585]]};
+
+const SERIES = [
+  {key:'v3_oracle_80_30_i10',         label:'v3_oracle_80_30_i10 ★',  color:'#ff6b35', w:3.0,  dash:null,    bold:true},
+  {key:'geo_b30_f0003',               label:'geo_b30_f0003',           color:'#4fc3f7', w:2.0,  dash:null},
+  {key:'geo_b20_f003',                label:'geo_b20_f003',            color:'#66bb6a', w:2.0,  dash:null},
+  {key:'PSO (particle_swarm)',        label:'PSO particle_swarm',      color:'#ffd54f', w:2.0,  dash:null},
+  {key:'dynamic_sampling_50_30',      label:'dynamic_50_30',           color:'#ce93d8', w:1.7,  dash:null},
+  {key:'dynamic_sampling_50_30_v2',   label:'dynamic_50_30_v2',        color:'#80cbc4', w:1.5,  dash:[5,4]},
+  {key:'dynamic_sampling_50_30_hybrid',label:'dynamic_50_30_hybrid',  color:'#f48fb1', w:1.5,  dash:[5,4]},
+  {key:'dynamic_sampling_50_30_hybrid_v2',label:'dynamic_50_30_hybrid_v2',color:'#90caf9',w:1.5,dash:[5,4]},
+  {key:'geo_b30_f001',                label:'geo_b30_f001',            color:'#a5d6a7', w:1.5,  dash:[5,4]},
+  {key:'adaptive_b20_default',        label:'adaptive_b20_default',    color:'#bcaaa4', w:1.5,  dash:[5,4]},
+  {key:'geo_b20_f001',                label:'geo_b20_f001',            color:'#ef9a9a', w:1.5,  dash:[5,4]},
+];
+
+// Canvas setup — size dynamically
+const canvas = document.getElementById('c');
+const DPR = window.devicePixelRatio || 1;
+const W_CSS = Math.min(980, window.innerWidth - 48);
+const H_CSS = Math.round(W_CSS * 0.58);
+canvas.style.width  = W_CSS + 'px';
+canvas.style.height = H_CSS + 'px';
+canvas.width  = W_CSS * DPR;
+canvas.height = H_CSS * DPR;
+const ctx = canvas.getContext('2d');
+ctx.scale(DPR, DPR);
+const W = W_CSS, H = H_CSS;
+
+const PAD = {top:22, right:28, bot:52, left:68};
+const PW = W - PAD.left - PAD.right;
+const PH = H - PAD.top  - PAD.bot;
+
+// Log scale helpers
+const LX0 = Math.log10(1), LX1 = Math.log10(3000);
+const LY0 = Math.log10(0.085), LY1 = Math.log10(12);
+
+function sx(s) { return PAD.left + (Math.log10(Math.max(s,1)) - LX0) / (LX1 - LX0) * PW; }
+function sy(v) { return PAD.top  + PH - (Math.log10(Math.max(v,0.001)) - LY0) / (LY1 - LY0) * PH; }
+
+const hidden = new Set();
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#0c0c16'; ctx.fillRect(0, 0, W, H);
+
+  // ── Grid ──────────────────────────────────────────────────────────
+  ctx.save();
+  ctx.strokeStyle = '#14142a'; ctx.lineWidth = 1;
+  [1,2,5,10,20,50,100,200,500,1000,2000,3000].forEach(v => {
+    const x = sx(v);
+    ctx.beginPath(); ctx.moveTo(x, PAD.top); ctx.lineTo(x, PAD.top+PH); ctx.stroke();
+  });
+  [0.09,0.1,0.11,0.12,0.15,0.2,0.3,0.5,1,2,5,10].forEach(v => {
+    const y = sy(v);
+    ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left+PW, y); ctx.stroke();
+  });
+  ctx.restore();
+
+  // ── Axes ──────────────────────────────────────────────────────────
+  ctx.save();
+  ctx.strokeStyle = '#2a2a40'; ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(PAD.left, PAD.top); ctx.lineTo(PAD.left, PAD.top+PH);
+  ctx.moveTo(PAD.left, PAD.top+PH); ctx.lineTo(PAD.left+PW, PAD.top+PH);
+  ctx.stroke();
+  ctx.restore();
+
+  // ── Tick labels ───────────────────────────────────────────────────
+  ctx.save();
+  ctx.font = `${Math.round(10*DPR)/DPR}px JetBrains Mono, monospace`;
+  ctx.fillStyle = '#555';
+
+  ctx.textAlign = 'center';
+  [1,2,5,10,20,50,100,200,500,1000,2000,3000].forEach(v => {
+    ctx.fillText(v >= 1000 ? (v/1000)+'k' : String(v), sx(v), PAD.top+PH+15);
+  });
+  ctx.textAlign = 'right';
+  [0.09,0.1,0.12,0.15,0.2,0.3,0.5,1,2,5,10].forEach(v => {
+    const lbl = v < 1 ? v.toFixed(2) : String(v);
+    ctx.fillText(lbl, PAD.left-7, sy(v)+3.5);
+  });
+  ctx.restore();
+
+  // ── Axis labels ───────────────────────────────────────────────────
+  ctx.save();
+  ctx.fillStyle = '#666'; ctx.font = '11px JetBrains Mono, monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Valid Simulations (log scale)', PAD.left + PW/2, H - 6);
+  ctx.translate(13, PAD.top + PH/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillText('|Reward|  (log scale, lower = better)', 0, 0);
+  ctx.restore();
+
+  // ── Reference line ────────────────────────────────────────────────
+  const BEST = 0.0923; // geo_b30_f0003 final
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1; ctx.setLineDash([3,7]);
+  ctx.beginPath(); ctx.moveTo(PAD.left, sy(BEST)); ctx.lineTo(PAD.left+PW, sy(BEST)); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = 'rgba(255,255,255,0.22)';
+  ctx.font = '9px JetBrains Mono, monospace'; ctx.textAlign = 'right';
+  ctx.fillText('best: 0.0923', PAD.left+PW-4, sy(BEST)-5);
+  ctx.restore();
+
+  // ── Lines ─────────────────────────────────────────────────────────
+  SERIES.forEach(({key, color, w, dash, bold}) => {
+    if (hidden.has(key)) return;
+    const pts = DATA[key]; if (!pts || pts.length < 2) return;
+
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth   = w;
+    ctx.globalAlpha = bold ? 1 : 0.72;
+    ctx.lineJoin    = 'round';
+    if (dash) ctx.setLineDash(dash);
+
+    ctx.beginPath();
+    pts.forEach(([s, v], i) => {
+      const x = sx(s), y = sy(v);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // endpoint dot
+    const [ls, lv] = pts[pts.length - 1];
+    ctx.setLineDash([]);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(sx(ls), sy(lv), bold ? 4.5 : 2.8, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  });
+}
+
+// ── Legend ─────────────────────────────────────────────────────────
+const legEl = document.getElementById('leg');
+SERIES.forEach(({key, label, color, dash, bold}) => {
+  if (!DATA[key]) return;
+  const el = document.createElement('div');
+  el.className = 'leg';
+
+  const sw = document.createElement('canvas');
+  sw.className = 'swatch';
+  sw.width = 26; sw.height = bold ? 4 : 3;
+  sw.style.width = '26px'; sw.style.height = (bold ? 4 : 3) + 'px';
+  const sc = sw.getContext('2d');
+  sc.strokeStyle = color; sc.lineWidth = bold ? 4 : 3;
+  if (dash) sc.setLineDash(dash);
+  sc.beginPath(); sc.moveTo(0, sw.height/2); sc.lineTo(26, sw.height/2); sc.stroke();
+
+  const txt = document.createElement('span');
+  txt.textContent = label;
+  if (bold) { txt.style.color = '#ff8c5a'; txt.style.fontWeight = '700'; }
+
+  el.appendChild(sw); el.appendChild(txt);
+  el.addEventListener('click', () => {
+    if (hidden.has(key)) hidden.delete(key); else hidden.add(key);
+    el.classList.toggle('off'); draw();
+  });
+  legEl.appendChild(el);
+});
+
+draw();
+</script>
+</body>
+</html>

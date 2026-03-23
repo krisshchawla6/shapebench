@@ -23,9 +23,11 @@ BOUNDS = {
     'S1': (40.0, 60.0),
     'S2': (40.0, 60.0),
     'S3': (24.0, 40.0),
+    'alpha': (-3.0, 3.0),
 }
 
 CONTINUOUS_KEYS = list(BOUNDS.keys())
+FLIGHT_KEYS = ['Re', 'Mach']
 
 STD_FRACTIONS = {
     'B1': 0.10,
@@ -37,6 +39,7 @@ STD_FRACTIONS = {
     'S1': 0.10,
     'S2': 0.10,
     'S3': 0.12,
+    'alpha': 0.15,
 }
 
 
@@ -53,6 +56,9 @@ def gaussian_sampling_bwb(mean_params: dict, std_scale: float = 1.0) -> dict:
 
 def save_design_json(path: str, params: dict) -> str:
     design = {k: params[k] for k in CONTINUOUS_KEYS}
+    for key in FLIGHT_KEYS:
+        if key in params:
+            design[key] = params[key]
     design['name'] = params.get('name', 'design')
     with open(path, 'w') as f:
         json.dump(design, f, indent=2)
