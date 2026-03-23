@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
 """
-Animated comparison for any number of NeuralFoil runs.
+Animated comparison for any number of NeuralFoil runs — x-axis in cumulative
+model evaluations (one unit = one NeuralFoil call) rather than iteration number.
 
-- Left: overlaid objective curves. Maximisation rewards (e.g. ld_ratio) plotted directly on linear scale;
-         minimisation rewards (e.g. -Cd) plotted as -reward on log scale.
-         Optional dashed horizontal reference line from an adjoint/IPOPT result.
-- Right: best shape image from each run (stacked vertically).
+Each framework maps differently:
+  islands / v2 / v2_batch : 1 eval per iteration  (1 LLM call / eval)
+  v3_dynamic_optimizer    : ~30 evals per iteration (1 LLM call / ~30 evals)
+  GA / PSO                : 30 evals per iteration (0 LLM calls)
+
+LLM usage is auto-detected from CSV columns and shown in the legend.
+
+Optional dashed horizontal reference line from an adjoint/IPOPT result.
 
 Usage:
-    python animate_neuralfoil_comparison.py dir_a dir_b [dir_c ...] \\
-        --labels "islands" "PSO" "v2_batch" \\
-        --max-iter 200 --step 2 \\
+    python animate_neuralfoil_comparison_evals.py dir_a dir_b [dir_c ...] \\
+        --labels "islands" "v3" "PSO" \\
+        --max-iter 600 --step 2 \\
         --adjoint environments/NeuralFoil/results/adjoint_run \\
         --adjoint-label "Adjoint (IPOPT)"
 """
@@ -45,7 +50,6 @@ STYLE = {
     "figure.dpi": 200,
 }
 
-# Colours assigned per run in order.
 COLORS = ["#1f77b4", "#d62728", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b"]
 
 
@@ -57,7 +61,6 @@ def load_csv(results_dir):
         for i, row in enumerate(reader):
             it = int(row["iteration"])
             reward = float(row["reward"])
-            # Prefer explicit design id if present, otherwise synthesize for PSO.
             design = row.get("design", "")
             if not design:
                 particle = row.get("particle", "")
@@ -65,12 +68,10 @@ def load_csv(results_dir):
                     design = f"iter_{it:04d}_p{int(float(particle)):03d}"
                 else:
                     design = f"design_{i}"
-            # Read running-best column written by each framework:
-            #   islands/v2/v2_batch write "best_reward"; GA/PSO writes "gbest_reward".
             br = row.get("gbest_reward") or row.get("best_reward")
             best_reward = float(br) if br else None
             rows.append({"iteration": it, "reward": reward, "design": design,
-                         "best_reward": best_reward})
+                         "best_reward": best_reward, "_cols": set(row.keys())})
     return rows
 
 
@@ -80,34 +81,34 @@ def cap_rows(rows, max_iter):
     return [r for r in rows if r["iteration"] <= max_iter]
 
 
-def compute_plot_x(rows):
-    """Fractional x: iteration + within-iteration index/total."""
-    iters = np.array([r["iteration"] for r in rows], dtype=int)
-    if len(iters) == 0:
-        return np.array([], dtype=float)
-    counts = {}
-    for v in iters:
-        counts[v] = counts.get(v, 0) + 1
-    seen = {}
-    x = np.zeros(len(iters), dtype=float)
-    for i, v in enumerate(iters):
-        idx = seen.get(v, 0)
-        seen[v] = idx + 1
-        x[i] = float(v) if counts[v] <= 1 else float(v) + idx / float(counts[v])
-    return x
+def detect_llm_annotation(rows):
+    """Infer LLM-calls-per-eval from CSV columns.
+
+    - PSO/GA:     has 'particle' column   → 0 LLM calls
+    - v3:         has 'sample_type' col   → 1 LLM call per iteration (batch of N evals)
+    - islands/v2: neither                 → 1 LLM call per eval
+    """
+    if not rows:
+        return ""
+    cols = rows[0]["_cols"]
+    if "particle" in cols:
+        return "0 LLM calls"
+    elif "sample_type" in cols:
+        n_iters = len(set(r["iteration"] for r in rows))
+        batch = round(len(rows) / n_iters) if n_iters else 1
+        return f"1 LLM / {batch} evals"
+    else:
+        return "1 LLM / eval"
 
 
 def objective_from_rewards(rows):
     r = np.array([row["reward"] for row in rows], dtype=float)
-    # Detect maximisation (positive rewards like ld_ratio) vs minimisation (negative like -Cd).
-    valid = r[r > -9.0]  # exclude -10.0 failure sentinel
+    valid = r[r > -9.0]
     maximizing = len(valid) > 0 and np.median(valid) > 0
     if maximizing:
         obj = r.copy()
     else:
         obj = np.maximum(-r, 1e-9)
-    # Use explicit running-best from CSV when available (required for PSO where
-    # np.maximum.accumulate over all particles gives wrong per-iteration best).
     if rows[0]["best_reward"] is not None:
         br = np.array([row["best_reward"] for row in rows], dtype=float)
         best = br.copy() if maximizing else np.maximum(-br, 1e-9)
@@ -124,11 +125,6 @@ def get_shape_image(results_dir, design_ref):
 
 
 def load_adjoint_reference(adjoint_dir):
-    """Read weighted_cd from an adjoint result directory.
-
-    Looks for <adjoint_dir>/save/results.json (written by optimize.py).
-    Returns (weighted_cd, feasible) or (None, None) if not found.
-    """
     path = os.path.join(adjoint_dir, "save", "results.json")
     if not os.path.exists(path):
         print(f"[adjoint] results.json not found at {path}")
@@ -149,14 +145,22 @@ def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None,
     labels = labels or [os.path.basename(d) for d in dirs]
     colors = (COLORS * ((len(dirs) // len(COLORS)) + 1))[:len(dirs)]
 
-    all_rows  = [cap_rows(load_csv(d), max_iter) for d in dirs]
+    all_rows = [cap_rows(load_csv(d), max_iter) for d in dirs]
 
     if not any(all_rows):
         print("No rows to render.")
         return
 
-    all_x     = [compute_plot_x(rows) for rows in all_rows]
-    all_objs  = []
+    # x-axis: cumulative model evaluation index (row position in each CSV)
+    all_x = [np.arange(len(rows), dtype=float) for rows in all_rows]
+
+    # Auto-detect LLM usage and annotate labels for legend
+    annotated_labels = []
+    for rows, label in zip(all_rows, labels):
+        ann = detect_llm_annotation(rows)
+        annotated_labels.append(f"{label} ({ann})" if ann else label)
+
+    all_objs = []
     all_bests = []
     maximizing = False
     for rows in all_rows:
@@ -168,13 +172,10 @@ def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None,
         all_objs.append(obj)
         all_bests.append(best)
 
-    # Load adjoint reference value if provided.
-    adjoint_ref = None   # value in plot coordinates
+    adjoint_ref = None
     if adjoint_dir is not None:
         weighted_cd, adj_feasible = load_adjoint_reference(adjoint_dir)
         if weighted_cd is not None:
-            # Plot coordinate: maximising → reward = -weighted_cd (higher is better)
-            #                  minimising → objective = -reward = weighted_cd (lower is better)
             adjoint_ref = -weighted_cd if maximizing else weighted_cd
             feas_str = " (feasible)" if adj_feasible else " (infeasible)"
             print(f"[adjoint] reference={adjoint_ref:.6f}{feas_str}")
@@ -191,39 +192,51 @@ def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None,
         y_hi = max(np.max(combined) * 1.2, p95 * 1.2)
         if adjoint_ref is not None:
             y_lo = min(y_lo, adjoint_ref * 0.95)
-    x_min = -0.1
-    x_max = max((float(np.max(x)) if len(x) else 0.0) for x in all_x) + 0.1
+
+    x_min = -5
+    x_max = max((float(np.max(x)) if len(x) else 0.0) for x in all_x) * 1.02
 
     output_dir = output_dir or os.path.dirname(dirs[0])
     os.makedirs(output_dir, exist_ok=True)
 
-    # Animate by iteration so that multi-particle frameworks (PSO: 30 rows/iter)
-    # produce the same number of frames as single-evaluation frameworks.
-    all_iters = sorted(set(
-        r["iteration"] for rows in all_rows for r in rows
-    ))
-    frame_iters = all_iters[::max(1, step)]
-    if frame_iters and frame_iters[-1] != all_iters[-1]:
-        frame_iters.append(all_iters[-1])
+    # Per-run frame sequences: resample each run's iteration list to the same
+    # number of frames so all runs start and finish at the same frame,
+    # each advancing at a pace proportional to its own iteration count.
+    per_run_iters = [
+        sorted(set(r["iteration"] for r in rows)) for rows in all_rows
+    ]
+    # Total frames driven by the run with the most unique iterations.
+    total_frames = max(len(iters) for iters in per_run_iters) // max(1, step)
+    total_frames = max(total_frames, 2)
+
+    # For each run resample its iteration list to total_frames points, always
+    # including the last iteration so the final state is shown.
+    per_run_frame_iters = []
+    for iters in per_run_iters:
+        indices = np.linspace(0, len(iters) - 1, total_frames, dtype=int)
+        per_run_frame_iters.append([iters[i] for i in indices])
 
     n_runs = len(dirs)
     plt.rcParams.update(STYLE)
     frames = []
-    print(f"[comparison] Rendering {len(frame_iters)} frames ({n_runs} runs) ...")
+    print(f"[comparison] Rendering {total_frames} frames ({n_runs} runs, per-run steps) ...")
 
-    for fi, iter_k in enumerate(frame_iters):
-        k_list = [sum(1 for r in rows if r["iteration"] <= iter_k) for rows in all_rows]
+    for fi in range(total_frames):
+        iter_k_list = [per_run_frame_iters[ri][fi] for ri in range(n_runs)]
+        # k = number of rows (evals) up to and including each run's current iter
+        k_list = [sum(1 for r in rows if r["iteration"] <= iter_k_list[ri])
+                  for ri, rows in enumerate(all_rows)]
 
         fig = plt.figure(figsize=(14, max(5, 3 * n_runs)), facecolor="white")
         gs = fig.add_gridspec(1, 2, width_ratios=[1.45, 1], wspace=0.06)
         gs_right = gs[1].subgridspec(n_runs, 1, hspace=0.12)
 
-        # Left: overlaid objective plot.
         ax = fig.add_subplot(gs[0])
         best_vals = []
         for ri in range(n_runs):
             rows, x, obj, best = all_rows[ri], all_x[ri], all_objs[ri], all_bests[ri]
-            color, label = colors[ri], labels[ri]
+            color = colors[ri]
+            alabel = annotated_labels[ri]
             k = k_list[ri]
             if k == 0:
                 best_vals.append(np.nan)
@@ -231,20 +244,20 @@ def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None,
             ax.scatter(x[:k], np.clip(obj[:k], y_lo, y_hi), s=12, alpha=0.5,
                        color=color, edgecolors="k", linewidths=0.1, zorder=2)
             ax.plot(x[:k], np.clip(best[:k], y_lo, y_hi), color=color, lw=1.5,
-                    zorder=3, label=f"{label} best")
+                    zorder=3, label=f"{alabel} best")
             ax.scatter([x[k - 1]], [np.clip(obj[k - 1], y_lo, y_hi)], s=80,
                        facecolors="none", edgecolors=color, linewidths=1.8,
-                       zorder=5, label=f"{label} current")
+                       zorder=5, label=f"{labels[ri]} current")
             best_vals.append(float(best[k - 1]))
 
         ax.set_xlim(x_min, x_max)
         ax.set_ylim(y_lo, y_hi)
         if not maximizing:
             ax.set_yscale("log")
-        ax.set_xlabel("Evaluations")
-        ax.set_ylabel("Reward (higher is better)" if maximizing else "Objective (-reward, lower is better)")
+        ax.set_xlabel("Model Evaluations (NeuralFoil calls)")
+        ax.set_ylabel("Reward (higher is better)" if maximizing
+                      else "Objective (−reward, lower is better)")
 
-        # Adjoint reference line (drawn before legend so it appears in it).
         if adjoint_ref is not None:
             ax.axhline(adjoint_ref, color="#333333", lw=1.2, ls="--", zorder=4,
                        label=f"{adjoint_label} ({adjoint_ref:.4f})")
@@ -252,13 +265,22 @@ def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None,
         ax.legend(loc="upper right", fontsize=8.5, framealpha=0.95, ncol=2)
         for sp in ["top", "right"]:
             ax.spines[sp].set_visible(False)
+
+        evals_str = "  |  ".join(
+            f"{labels[ri]}={k_list[ri]} evals" for ri in range(n_runs)
+        )
         best_str = "  vs  ".join(
-            f"{l}={v:.4f}" for l, v in zip(labels, best_vals) if not np.isnan(v)
+            f"{labels[ri]}={v:.4f}" for ri, v in enumerate(best_vals) if not np.isnan(v)
         )
         best_label = "best" if maximizing else "best obj"
-        ax.set_title(f"Iteration {iter_k} — {best_label}: {best_str}", fontweight="medium", pad=8)
+        iters_str = "  |  ".join(
+            f"{labels[ri]} iter {iter_k_list[ri]}" for ri in range(n_runs)
+        )
+        ax.set_title(
+            f"[{iters_str}]\n{best_label}: {best_str}",
+            fontweight="medium", pad=8, fontsize=9,
+        )
 
-        # Right: one image panel per run, stacked vertically.
         for ri in range(n_runs):
             ax_img = fig.add_subplot(gs_right[ri])
             ax_img.axis("off")
@@ -275,17 +297,17 @@ def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None,
                     ax_img.text(0.5, 0.5, "(no shape.png)", ha="center", va="center",
                                 fontsize=10, transform=ax_img.transAxes, color="#888")
 
-        fig.subplots_adjust(left=0.06, right=0.98, top=0.93, bottom=0.08)
+        fig.subplots_adjust(left=0.06, right=0.98, top=0.90, bottom=0.08)
         fig.canvas.draw()
         frames.append(Image.fromarray(np.asarray(fig.canvas.buffer_rgba())[..., :3].copy()))
         plt.close(fig)
 
         if (fi + 1) % 20 == 0:
-            print(f"  {fi + 1}/{len(frame_iters)} frames")
+            print(f"  {fi + 1}/{total_frames} frames")
 
     for _ in range(8):
         frames.append(frames[-1])
-    out = os.path.join(output_dir, "comparison_evolution.gif")
+    out = os.path.join(output_dir, "comparison_evolution_evals.gif")
     frames[0].save(out, save_all=True, append_images=frames[1:], duration=150, loop=0, optimize=True)
     print(f"  -> {out}  ({len(frames)} frames, {os.path.getsize(out)/1e6:.1f} MB)")
 
