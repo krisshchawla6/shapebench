@@ -58,7 +58,9 @@ def add_args(parser):
     parser.add_argument('--gaussian_final_scale', type=float, default=0.1,
                         help='Final std scale at last iteration (hybrid only)')
     parser.add_argument('--sampler_model', type=str, default='gemini-3-flash-preview',
-                        help='Gemini model for the optimizer agent')
+                        help='LLM model for the optimizer agent (SamplerAgent)')
+    parser.add_argument('--designer_model', type=str, default=None,
+                        help='LLM model for the s0 designer agent; defaults to --sampler_model if not set')
     parser.add_argument('--sampler_max_retries', type=int, default=3,
                         help='Max LLM retry attempts per iteration if code fails')
     parser.add_argument('--hybrid', action='store_true',
@@ -310,6 +312,10 @@ def run(environment, args, output_dir, _start_iter=0, _initial_database=None):
         max_retries = args.sampler_max_retries,
         hybrid      = hybrid,
     )
+
+    if hasattr(environment, 'set_designer_model'):
+        designer_model = args.designer_model or args.sampler_model
+        environment.set_designer_model(designer_model)
 
     scratchpad      = ""
     scratchpad_path = os.path.join(output_dir, 'scratchpad.txt')

@@ -4,7 +4,6 @@ import json
 import shutil
 from typing import List, Dict, Any, Optional, Tuple
 
-import google.generativeai as genai
 from dotenv import load_dotenv
 
 from .design_actions import run_action_neuralfoil, N_CST
@@ -20,15 +19,22 @@ for _p in _DOTENV_PATHS:
         load_dotenv(_p, override=True)
         break
 
-api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_KEY")
-if api_key:
-    genai.configure(api_key=api_key)
-else:
-    print("Warning: Google API Key not found.")
+# Configure Gemini if key is available (used when designer model is gemini-*)
+try:
+    import google.generativeai as genai
+    _gemini_key = (os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+                   or os.getenv("GEMINI_KEY"))
+    if _gemini_key:
+        genai.configure(api_key=_gemini_key)
+    else:
+        print("Warning: Google API Key not found.")
+except ImportError:
+    genai = None
 
 _env_format_context = None
 _llm_backend = None
 _image_analyzer = None
+_designer_model = 'gemini-3-flash-preview'
 
 
 def set_env_format_context(fn):
@@ -40,6 +46,11 @@ def set_llm_backend(backend, image_analyzer=None):
     global _llm_backend, _image_analyzer
     _llm_backend = backend
     _image_analyzer = image_analyzer
+
+
+def set_designer_model(name: str):
+    global _designer_model
+    _designer_model = name
 
 
 def extract_structured_response(text: str) -> Tuple[Optional[str], Optional[str], Optional[str]]:
@@ -79,39 +90,73 @@ def extract_structured_response(text: str) -> Tuple[Optional[str], Optional[str]
     return analysis, rationale, json_str
 
 
-def get_gemini_response(system_prompt, user_prompt, images=None,
-                        temperature=1.0, return_full=False):
+def get_llm_response(system_prompt, user_prompt, images=None,
+                     temperature=1.0, return_full=False):
     try:
-        model = genai.GenerativeModel('gemini-3-flash-preview',
-                                      system_instruction=system_prompt)
-        content = [user_prompt]
-        if images:
-            try:
-                from PIL import Image
-                for img_path in images:
-                    if isinstance(img_path, str) and os.path.exists(img_path):
-                        content.append(Image.open(img_path))
-                    else:
-                        # Fallback: keep textual item if it's not a local file path.
-                        content.append(img_path)
-            except Exception:
-                # If PIL loading fails for any reason, keep original behavior.
-                content.extend(list(images))
-        cfg = genai.types.GenerationConfig(temperature=temperature)
-        response = model.generate_content(content, generation_config=cfg)
-        text = response.text
+        if _designer_model.startswith('gemini'):
+            content = [user_prompt]
+            if images:
+                try:
+                    from PIL import Image
+                    for img_path in images:
+                        if isinstance(img_path, str) and os.path.exists(img_path):
+                            content.append(Image.open(img_path))
+                        else:
+                            content.append(img_path)
+                except Exception:
+                    content.extend(list(images))
+            cfg = genai.types.GenerationConfig(temperature=temperature)
+            response = genai.GenerativeModel(_designer_model,
+                                             system_instruction=system_prompt
+                                             ).generate_content(content, generation_config=cfg)
+            text = response.text
+
+        elif _designer_model.startswith('claude'):
+            import anthropic
+            client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
+            msg = client.messages.create(
+                model=_designer_model,
+                max_tokens=4096,
+                temperature=temperature,
+                system=system_prompt,
+                messages=[{'role': 'user', 'content': user_prompt}],
+            )
+            text = msg.content[0].text
+
+        else:
+            # OpenAI or OpenAI-compatible (Ollama, vLLM, OpenRouter)
+            import openai
+            base_url = os.getenv('OPENAI_BASE_URL')
+            api_key  = os.getenv('OPENAI_API_KEY', 'ollama')
+            client   = openai.OpenAI(api_key=api_key,
+                                     **({"base_url": base_url} if base_url else {}))
+            resp = client.chat.completions.create(
+                model=_designer_model,
+                temperature=temperature,
+                messages=[
+                    {'role': 'system', 'content': system_prompt},
+                    {'role': 'user',   'content': user_prompt},
+                ],
+            )
+            text = resp.choices[0].message.content
+
         analysis, rationale, json_str = extract_structured_response(text)
         if json_str is None:
             print(f"No JSON found in response: {text[:500]}")
             return ({}, analysis, rationale) if return_full else {}
         params = json.loads(json_str)
         return (params, analysis, rationale) if return_full else params
+
     except json.JSONDecodeError as e:
         print(f"JSON Parse Error: {e}")
         return ({}, None, None) if return_full else {}
     except Exception as e:
-        print(f"Gemini Error: {e}")
+        print(f"LLM Error ({_designer_model}): {e}")
         return ({}, None, None) if return_full else {}
+
+
+# Keep old name as alias so any external callers aren't broken
+get_gemini_response = get_llm_response
 
 
 REQUIRED_KEYS = ["upper_weights", "lower_weights", "leading_edge_weight", "TE_thickness"]

@@ -251,6 +251,10 @@ class NeuralFoilEnvironment(BaseEnvironment):
         from . import agent
         agent.set_llm_backend(backend, image_analyzer)
 
+    def set_designer_model(self, name: str):
+        from . import agent
+        agent.set_designer_model(name)
+
     def get_results_csv_columns(self):
         return [
             'CL',

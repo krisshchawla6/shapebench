@@ -1,0 +1,155 @@
+Bayesian Optimization (GP + EI) Implementation Plan for NeuralFoil
+====================================================================
+Date: March 24, 2026
+
+
+OVERVIEW
+--------
+BO-GP fits into the framework as a new frameworks/BO/ module, following the
+same pattern as frameworks/GA/ (PSO). The key interface points are:
+  - environment.get_param_bounds()          -> lb, ub numpy arrays (18-dim)
+  - environment.write_design(x, dir, name)  -> writes JSON, returns path
+  - environment.simulate(design_path, dir)  -> returns (reward, results)
+  - environment.get_results_csv_columns() / get_results_csv_row(metrics)
+
+
+LIBRARY CHOICE: scikit-optimize vs BoTorch
+------------------------------------------
+                   scikit-optimize (skopt)     BoTorch
+                   -----------------------     -------
+Ease               Simple, sklearn-style API   More complex, PyTorch-based
+Maturity           Stable, widely used         Actively developed by Meta
+18-dim perf        Adequate                    Better (better acq. optimizer)
+Dependencies       scipy + sklearn only        PyTorch + gpytorch
+Recommended for    Quick implementation        More serious research use
+
+Recommendation: Start with scikit-optimize — it is ~30 lines of loop code.
+If BoTorch is needed for the paper, migrate later. skopt is already
+well-cited in the literature.
+
+
+EXISTING IMPLEMENTATIONS TO REFERENCE
+--------------------------------------
+scikit-optimize:
+  - Docs: skopt.gp_minimize or manual Optimizer loop (manual loop needed
+    to log each eval individually).
+  - Key class: skopt.Optimizer with base_estimator='GP' and acq_func='EI'.
+  - Well-known usage: Hyperparameter tuning papers, AutoML benchmarks.
+
+BoTorch:
+  - Meta's official tutorial "BO with BoTorch" covers exactly this setup
+    (SingleTaskGP + ExpectedImprovement).
+  - Ax platform (built on BoTorch) is widely used in industry.
+
+Other notable aerodynamics BO implementations:
+  - SUMO toolbox (academic, MATLAB-based, not relevant here).
+  - OpenMDAO/pyOptSparse + SMT (Surrogate Modeling Toolbox) — used in
+    some CFD papers.
+  - None integrate cleanly with this framework; a thin wrapper is needed.
+
+
+IMPLEMENTATION STEPS
+--------------------
+
+Step 1 — Install
+  pip install scikit-optimize
+  # or for botorch:
+  pip install botorch gpytorch
+
+Step 2 — Create frameworks/BO/ structure
+  frameworks/BO/
+      __init__.py      (empty)
+      run.py           (the framework entry point)
+
+Step 3 — Write run.py
+  The core structure mirrors frameworks/GA/run.py. The key difference is
+  that instead of a PSO swarm, a skopt.Optimizer is maintained that
+  suggests the next point based on all previous observations.
+
+  Pseudocode outline:
+
+    from skopt import Optimizer
+
+    def add_args(parser):
+        parser.add_argument('--n_initial', type=int, default=30,
+                            help='Random initial samples before GP kicks in')
+        parser.add_argument('--n_calls', type=int, default=500,
+                            help='Total evaluations (initial + BO)')
+        parser.add_argument('--acq_func', type=str, default='EI',
+                            choices=['EI', 'PI', 'LCB'])
+
+    def run(environment, args, output_dir):
+        lb, ub = environment.get_param_bounds()
+        dimensions = list(zip(lb.tolist(), ub.tolist()))  # skopt format
+
+        opt = Optimizer(
+            dimensions=dimensions,
+            base_estimator='GP',
+            acq_func=args.acq_func,
+            n_initial_points=args.n_initial,
+            random_state=42,
+        )
+
+        # Evaluation loop:
+        # 1. x = opt.ask()                              -> next suggested point
+        # 2. environment.write_design(x, case_dir, ...) -> design_path
+        # 3. reward, results = environment.simulate(...)
+        # 4. opt.tell(x, -reward)                       -> skopt minimizes, negate reward
+        # 5. log to CSV
+
+Step 4 — Wire into run_benchmark.py
+  Nothing to change. run_benchmark.py auto-discovers frameworks by scanning
+  frameworks/*/. As long as frameworks/BO/__init__.py and
+  frameworks/BO/run.py exist with add_args and run defined, the framework
+  appears automatically.
+
+Step 5 — Run it
+  python run_benchmark.py \
+    --framework BO \
+    --environment NeuralFoil \
+    --reward reward_exact_notebook \
+    --n_initial 30 \
+    --n_calls 500 \
+    --model_size large
+
+Step 6 — Plotting
+  animate_neuralfoil_comparison_eval_axis.py reads results.csv with columns
+  [iteration, reward, best_reward, ...]. The BO run.py just needs to write
+  the same CSV format. BO produces 1 eval per iteration, which maps cleanly
+  onto the eval-axis comparison plot.
+
+
+KEY DESIGN DECISIONS
+--------------------
+1. n_initial
+   30 is reasonable for 18 dims (roughly 1-2x n_dims). Too few and the GP
+   fits noise; too many and it degenerates into random search.
+
+2. Kernel
+   skopt defaults to Matern 5/2, which is standard. No change needed.
+
+3. Normalization
+   skopt handles input normalization internally. Consider normalizing the
+   reward if it has a wide range.
+
+4. GP scaling at 500+ evals
+   GP training is O(n^3) — at ~500 points it starts getting slow (seconds
+   per iteration). BoTorch handles this better via approximate GPs. For the
+   paper, this scaling cost is an interesting result to report, as it
+   highlights a structural weakness of GP-BO vs LLM-guided methods at
+   higher evaluation budgets.
+
+5. Random seeds
+   Run 3-5 seeds and report mean +/- std to match how other baselines are
+   evaluated.
+
+
+SCIENTIFIC FRAMING NOTE
+-----------------------
+GP-BO is the most direct analog to the LLM-guided approach: both are
+surrogate-assisted and sample-efficient methods. If the LLM method
+outperforms BO, that is a meaningful result for the paper.
+
+Key tension: 18 dimensions is right at the upper edge where GP starts to
+struggle. With NeuralFoil being cheap, enough samples can be run to expose
+this scaling weakness, which strengthens the argument for LLM-guided methods.

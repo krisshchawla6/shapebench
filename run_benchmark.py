@@ -92,6 +92,8 @@ def _config_to_argv(config: dict) -> list:
         if isinstance(value, bool):
             if value:
                 argv.append(arg_name)
+        elif value is None:
+            pass  # skip null config values; don't pass --baseline None etc.
         else:
             argv.append(arg_name)
             argv.append(str(value))

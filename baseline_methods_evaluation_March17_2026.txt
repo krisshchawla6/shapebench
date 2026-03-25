@@ -1,0 +1,136 @@
+Baseline Methods Evaluation for NeuralFoil
+==========================================
+Date: March 17, 2026
+
+Context: NeuralFoil characteristics relevant to baseline selection:
+  - 18 continuous Kulfan CST parameters
+  - Fast in-process evaluation (microseconds per call, NN surrogate)
+  - CasADi autodiff available (true adjoints possible)
+  - Bounds-only constraints for ld_ratio/max_cl; soft constraints for constrained_ld
+  - Medium-dimensional continuous design space
+
+
+TIER 1 — IMPLEMENT THESE (high value, low effort)
+--------------------------------------------------
+
+L-BFGS-B
+  Library:     scipy.optimize.minimize(method='L-BFGS-B')
+  Effort:      Already fully discussed (see lbfgsb_gradient_descent_discussion_March17_2026.txt)
+  Value:       Sets the upper bound on gradient-based local convergence speed.
+               True adjoint available via CasADi at no extra implementation cost.
+               Essential inclusion for any aerodynamic shape optimization benchmark.
+  Notes:       Use jac='3-point' for finite-difference gradient as default.
+               Swap in CasADi adjoint for ld_ratio/constrained_ld/max_cl rewards.
+
+Differential Evolution (DE)
+  Library:     scipy.optimize.differential_evolution  (zero extra dependencies)
+  Effort:      Single function call using the same reward_fn interface already
+               built for L-BFGS-B. ~2 hours to wire into a run.py.
+  Value:       Genuinely strong global optimizer. Widely used in antenna and
+               structural design. Easy to implement and hard to argue against
+               as a baseline. Probably the highest value-to-effort ratio in
+               the entire list.
+
+CMA-ES (Covariance Matrix Adaptation Evolution Strategy)
+  Library:     pip install cma  (~10 lines of loop code)
+  Effort:      ~2 hours.
+  Value:       Arguably the strongest gradient-free baseline for continuous
+               medium-dimensional problems (5-50 variables). Widely cited.
+               If the LLM method does not beat CMA-ES, that is a significant
+               finding. Must include for the paper to be credible.
+
+Latin Hypercube Sampling (LHS)
+  Library:     scipy.stats.qmc.LatinHypercube  (trivial)
+  Effort:      ~1 hour.
+  Value:       Establishes the no-optimization lower bar. Demonstrates that
+               the evolutionary loop adds value over space-filling sampling alone.
+
+
+TIER 2 — IMPLEMENT IF TIME ALLOWS
+-----------------------------------
+
+Bayesian Optimization — GP + Expected Improvement
+  Library:     scikit-optimize or botorch
+  Effort:      ~1 day setup.
+  Value:       The most scientifically meaningful comparison. GP-BO is also
+               surrogate-assisted and sample-efficient, making it the most
+               direct analog to the LLM-guided approach. If the LLM method
+               outperforms BO, that is a meaningful result.
+               Key tension: 18 dimensions is right at the upper edge where GP
+               starts to struggle (O(n^3) training cost, acquisition function
+               optimization becomes hard). With NeuralFoil being cheap, you
+               can afford enough samples to expose this scaling weakness, which
+               strengthens the paper's argument for LLM-guided methods.
+
+SQP (Sequential Quadratic Programming)
+  Library:     scipy.optimize.minimize(method='SLSQP')
+  Effort:      ~half day.
+  Value:       Industry standard for constrained aerodynamic design. Most
+               relevant for the constrained_ld reward, where SLSQP handles
+               inequality constraints (CM penalty) natively. For unconstrained
+               rewards (ld_ratio, max_cl), L-BFGS-B is preferable and there
+               is no need to add SQP separately.
+
+
+TIER 3 — PROBABLY NOT WORTH IT FOR NEURALFOIL
+----------------------------------------------
+
+Adjoint gradient descent (standalone)
+  Reason:      Superseded entirely by L-BFGS-B + adjoint. Plain gradient
+               descent with a fixed learning rate is strictly worse: no
+               curvature scaling, no line search, requires lr tuning.
+               No reason to implement it as a separate baseline.
+
+NSGA-II / multi-objective methods
+  Reason:      NeuralFoil rewards are scalar. Only relevant if the experiment
+               is reformulated as a Pareto problem (e.g. CL vs CD
+               simultaneously), which is a different experiment entirely.
+
+Multi-fidelity methods (co-Kriging, MF-BO)
+  Reason:      NeuralFoil does have model size tiers (xxsmall through xxxlarge)
+               that could serve as fidelity levels, making co-Kriging
+               technically feasible. However, this is substantial
+               implementation effort and is only worth pursuing if the paper
+               is already making a multi-fidelity claim.
+
+PSO
+  Status:      Already implemented in frameworks/GA/PSO/. Keep as-is.
+
+Random search / grid search
+  Reason:      LHS is a strictly better space-filling baseline than either.
+               Grid search is only feasible for very low-dimensional cases.
+
+
+RECOMMENDED IMPLEMENTATION ORDER
+---------------------------------
+Priority  Method                      Est. effort   Dependencies
+--------  --------------------------  ------------  -------------------------
+1         LHS (random baseline)       1 hour        scipy only
+2         DE                          2 hours       scipy only
+3         CMA-ES                      2 hours       pip install cma
+4         L-BFGS-B (finite diff)      3 hours       scipy only (see lbfgsb txt)
+5         GP-BO                       1 day         botorch or scikit-optimize
+6         L-BFGS-B (true adjoint)     1 day         CasADi (see lbfgsb txt)
+7         SQP for constrained_ld      half day      scipy only
+
+Items 1-4 together give a solid baseline suite covering all three comparison
+angles:
+  - Lower bar:            LHS
+  - Strong global:        DE, CMA-ES, PSO (existing)
+  - Local gradient-based: L-BFGS-B
+
+
+SCIENTIFIC FRAMING NOTE
+-----------------------
+NeuralFoil evaluations are cheap, so evaluation budget is not the bottleneck.
+The comparison should therefore emphasize:
+  - Quality of final solution (global optimum found vs local)
+  - Robustness across random seeds / restarts
+  - Behavior on multi-modal reward landscapes
+  - Interpretability of the search trajectory (LLM provides reasoning; PSO/DE do not)
+
+The LLM-guided method is unlikely to beat L-BFGS-B on pure gradient efficiency
+or CMA-ES on raw black-box optimization. The interesting comparison is whether
+the LLM's structured search (design intuition, contextual proposals) offers
+advantages that compensate for its higher per-call cost (LLM inference vs
+function evaluation).

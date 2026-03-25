@@ -34,7 +34,8 @@ SYSTEM_PROMPT = (
     "Write exactly:\n\n"
     "    def optimize(center, evaluate, budget, bounds, rng, history):\n\n"
     "Parameters:\n"
-    "  center   — dict of parameter arrays/scalars. The designer's proposed starting point.\n"
+    "  center   — dict of parameter arrays/scalars. The designer LLM's proposed params for this\n"
+    "             iteration (i.e. the s0 design). Use this as your starting point for optimization.\n"
     "  evaluate — callable(params_dict) -> float. Runs the real simulator (expensive).\n"
     "             Raises an exception when the budget is exhausted — let it propagate, do not catch it.\n"
     "  budget   — int. Total evaluate() calls available this iteration.\n"
@@ -44,7 +45,9 @@ SYSTEM_PROMPT = (
     "      'best_designs':      [{'params': {...}, 'reward': float}, ...],  # top-K, best-first\n"
     "      'reward_trajectory': [float, ...],                               # best-so-far per iter\n"
     "      'param_trajectory':  [{'params': {...}, 'reward': float}, ...]   # best design per iter\n"
-    "    }\n\n"
+    "    }\n"
+    "    WARNING: all history lists may be empty early in the run. Always guard before indexing,\n"
+    "    e.g. use `center` as fallback: x0 = params_to_vec(history['best_designs'][0]['params'] if history['best_designs'] else center)\n\n"
     "Pre-built helpers already in scope (do not redefine):\n"
     "  params_to_vec(p)   — dict → flat np.ndarray  (key order matches center)\n"
     "  vec_to_params(v)   — flat np.ndarray → dict  (auto-clipped to bounds)\n"
@@ -157,22 +160,67 @@ class SamplerAgent:
         self._configure_llm()
 
     def _configure_llm(self):
-        try:
-            import google.generativeai as genai
-            key = (os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY')
-                   or os.getenv('GEMINI_KEY'))
-            if key:
-                genai.configure(api_key=key)
-        except Exception as exc:
-            print(f"  SamplerAgent: genai config failed: {exc}")
+        if self.model_name.startswith('gemini'):
+            try:
+                import google.generativeai as genai
+                key = (os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY')
+                       or os.getenv('GEMINI_KEY'))
+                if key:
+                    genai.configure(api_key=key)
+            except Exception as exc:
+                print(f"  SamplerAgent: genai config failed: {exc}")
+        elif self.model_name.startswith('claude'):
+            try:
+                import anthropic  # noqa: F401 — just verify it's installed
+            except ImportError:
+                print("  SamplerAgent: 'anthropic' package not installed. "
+                      "Run: pip install anthropic")
+        else:
+            # OpenAI or OpenAI-compatible (Ollama, vLLM, OpenRouter, etc.)
+            try:
+                import openai  # noqa: F401
+            except ImportError:
+                print("  SamplerAgent: 'openai' package not installed. "
+                      "Run: pip install openai")
 
     def _call_llm(self, user_prompt: str) -> str:
-        import google.generativeai as genai
-        model = genai.GenerativeModel(self.model_name,
-                                      system_instruction=SYSTEM_PROMPT)
-        cfg   = genai.types.GenerationConfig(temperature=0.9)
-        resp  = model.generate_content(user_prompt, generation_config=cfg)
-        return resp.text.strip()
+        if self.model_name.startswith('gemini'):
+            import google.generativeai as genai
+            model = genai.GenerativeModel(self.model_name,
+                                          system_instruction=SYSTEM_PROMPT)
+            cfg  = genai.types.GenerationConfig(temperature=0.9)
+            resp = model.generate_content(user_prompt, generation_config=cfg)
+            return resp.text.strip()
+
+        elif self.model_name.startswith('claude'):
+            import anthropic
+            key    = os.getenv('ANTHROPIC_API_KEY')
+            client = anthropic.Anthropic(api_key=key)
+            msg    = client.messages.create(
+                model=self.model_name,
+                max_tokens=4096,
+                temperature=0.9,
+                system=SYSTEM_PROMPT,
+                messages=[{'role': 'user', 'content': user_prompt}],
+            )
+            return msg.content[0].text.strip()
+
+        else:
+            # OpenAI or OpenAI-compatible endpoint (Ollama, vLLM, OpenRouter)
+            import openai
+            base_url = os.getenv('OPENAI_BASE_URL')  # set for Ollama/vLLM/OpenRouter
+            api_key  = os.getenv('OPENAI_API_KEY', 'ollama')
+            client   = openai.OpenAI(api_key=api_key,
+                                     **({"base_url": base_url} if base_url else {}))
+            resp = client.chat.completions.create(
+                model=self.model_name,
+                temperature=0.9,
+                messages=[
+                    {'role': 'system', 'content': SYSTEM_PROMPT},
+                    {'role': 'user',   'content': user_prompt},
+                ],
+            )
+            return resp.choices[0].message.content.strip()
 
     def run_optimizer(
         self,
@@ -307,11 +355,16 @@ def _build_sandbox_helpers(center: dict, bounds: dict):
     keys = [k for k, v in center.items() if not isinstance(v, str)]
 
     slices: dict[str, tuple[int, int]] = {}
+    flat_keys: list[str] = []
     idx = 0
     for k in keys:
         n = np.asarray(center[k]).size
         slices[k] = (idx, idx + n)
         idx += n
+        if n == 1:
+            flat_keys.append(k)
+        else:
+            flat_keys.extend(f'{k}[{j}]' for j in range(n))
     n_dims = idx
 
     def params_to_vec(p: dict) -> np.ndarray:
@@ -342,7 +395,7 @@ def _build_sandbox_helpers(center: dict, bounds: dict):
         'params_to_vec': params_to_vec,
         'vec_to_params': vec_to_params,
         'n_dims':        n_dims,
-        'param_keys':    keys,
+        'param_keys':    flat_keys,
     }
 
 
@@ -364,6 +417,17 @@ def _exec_sandbox(code: str, center: dict, evaluate_fn, budget: int,
         calls[0] += 1
         return evaluate_fn(params_dict)
 
+    # Ensure history lists are never empty so LLM code can safely index into them.
+    # best_designs and param_trajectory fall back to a center-based entry; reward_trajectory
+    # falls back to [0.0] so trajectory arithmetic always has at least one element.
+    safe_history = dict(history)
+    if not safe_history.get('best_designs'):
+        safe_history['best_designs'] = [{'params': center, 'reward': float('-inf')}]
+    if not safe_history.get('param_trajectory'):
+        safe_history['param_trajectory'] = [{'params': center, 'reward': float('-inf')}]
+    if not safe_history.get('reward_trajectory'):
+        safe_history['reward_trajectory'] = [0.0]
+
     namespace: dict = {'np': np, 'math': math, 'evaluate': _budgeted_evaluate, **helpers}
 
     exec(code, namespace)  # noqa: S102
@@ -372,7 +436,7 @@ def _exec_sandbox(code: str, center: dict, evaluate_fn, budget: int,
         raise ValueError("Code did not define optimize()")
 
     try:
-        fn(center, _budgeted_evaluate, budget, bounds, rng, history)
+        fn(center, _budgeted_evaluate, budget, bounds, rng, safe_history)
     except _BudgetExhausted:
         pass  # normal termination — budget consumed
 
@@ -422,7 +486,7 @@ def _build_user_prompt(
                 "Random perturbation will NOT escape this plateau.",
                 "Recommended: use evaluate() to compute an exact finite-difference gradient.",
                 "Example (costs n_dims calls, leaves budget-n_dims for line search):",
-                "  best = history['best_designs'][0]['params']",
+                "  best = history['best_designs'][0]['params'] if history['best_designs'] else center",
                 "  x0 = params_to_vec(best)",
                 "  f0 = evaluate(vec_to_params(x0))",
                 "  grad = np.zeros(n_dims)",
