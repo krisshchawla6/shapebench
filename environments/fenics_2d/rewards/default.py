@@ -10,6 +10,9 @@ class DefaultReward(BaseReward):
     This reward simply forwards the solver's value.
     """
 
+    def __init__(self, **kwargs):
+        pass
+
     def evaluate(self, run_sim, design_path: str, case_dir: str) -> tuple:
         try:
             r = run_sim(design_path, case_dir)
