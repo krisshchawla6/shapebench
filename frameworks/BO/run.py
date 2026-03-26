@@ -26,6 +26,9 @@ def add_args(parser):
                         help='Acquisition function (default: EI)')
     parser.add_argument('--random_state', type=int, default=42,
                         help='Random seed (default: 42)')
+    parser.add_argument('--gradient_infeasible', action='store_true', default=True,
+                        help='Return actual penalty value for infeasible samples so the GP '
+                             'surrogate has gradient signal toward the feasible region (default: True)')
 
 
 def run(environment, args, output_dir):

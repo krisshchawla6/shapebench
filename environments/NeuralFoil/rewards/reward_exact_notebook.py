@@ -54,10 +54,12 @@ class RewardExactNotebook(BaseReward):
         lambda_conf=1.0,
         lambda_alpha_mono=1.0,
         lambda_unreach=1.0,
+        gradient_infeasible=False,
         **kwargs,
     ):
         self.model_size = model_size
         self.n_crit = n_crit
+        self.gradient_infeasible = gradient_infeasible
         self.penalty_weights = {
             "local_thickness_all": float(lambda_thick_all),
             "t033": float(lambda_t033),
@@ -243,10 +245,12 @@ class RewardExactNotebook(BaseReward):
             reward_value = float(fitness_total)
             feasible = len(violations) == 0
         else:
-            # Infeasible: use actual fitness_total so BO has gradient signal.
             fitness_objective = 0.0
             fitness_total = float(fitness_objective + fitness_penalty)
-            reward_value = float(fitness_total)
+            # gradient_infeasible: return actual penalty value so the surrogate
+            # has gradient signal toward the feasible region (used by BO).
+            # Default (False): hard-clip to FAIL_REWARD for other frameworks.
+            reward_value = float(fitness_total) if self.gradient_infeasible else float(FAIL_REWARD)
             feasible = False
             feedback_bits.append("strict fail: not all CL targets solved")
 
