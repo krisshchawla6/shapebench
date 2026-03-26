@@ -1,0 +1,47 @@
+#!/bin/bash
+#SBATCH --job-name=BO_torch_seed{SEED}
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --time=24:00:00
+#SBATCH --output=/scratch/ShapeEvolve/logs/%u/BO_torch_seed{SEED}_%j.out
+#SBATCH --error=/scratch/ShapeEvolve/logs/%u/BO_torch_seed{SEED}_%j.err
+
+set -e
+
+REPO_DIR="/scratch/ShapeEvolve"
+OUTPUT_DIR="$REPO_DIR/environments/NeuralFoil/results/run_BO_torch_seed{SEED}"
+
+mkdir -p "$OUTPUT_DIR"
+mkdir -p "/scratch/ShapeEvolve/logs/$USER"
+
+echo "=========================================="
+echo "Job ID:       $SLURM_JOB_ID"
+echo "Node:         $SLURMD_NODENAME"
+echo "Date:         $(date)"
+echo "Framework:    BO_torch"
+echo "Environment:  NeuralFoil"
+echo "Reward:       reward_exact_notebook"
+echo "n_calls:      {N_CALLS}"
+echo "n_initial:    {N_INITIAL}"
+echo "random_state: {SEED}"
+echo "Output:       $OUTPUT_DIR"
+echo "=========================================="
+
+source "$REPO_DIR/venv/bin/activate"
+
+cd "$REPO_DIR"
+
+python run_benchmark.py \
+    --framework BO_torch \
+    --environment NeuralFoil \
+    --reward reward_exact_notebook \
+    --n_initial {N_INITIAL} \
+    --n_calls {N_CALLS} \
+    --random_state {SEED} \
+    --output-dir "$OUTPUT_DIR"
+
+echo "=========================================="
+echo "Job completed successfully"
+echo "End time: $(date)"
+echo "=========================================="

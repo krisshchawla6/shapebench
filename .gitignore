@@ -10,6 +10,7 @@ CFD_solver/
 
 # Large simulation outputs / datasets (not code)
 **/results/
+**/save/
 environments/DrivAer_Star/data/
 environments/DrivAer_Star/test_case/
 
