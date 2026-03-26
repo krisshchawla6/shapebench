@@ -243,10 +243,10 @@ class RewardExactNotebook(BaseReward):
             reward_value = float(fitness_total)
             feasible = len(violations) == 0
         else:
-            # Strict mode: unsolved target(s) immediately fail reward.
+            # Infeasible: use actual fitness_total so BO has gradient signal.
             fitness_objective = 0.0
             fitness_total = float(fitness_objective + fitness_penalty)
-            reward_value = float(FAIL_REWARD)
+            reward_value = float(fitness_total)
             feasible = False
             feedback_bits.append("strict fail: not all CL targets solved")
 
