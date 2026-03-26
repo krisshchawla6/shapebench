@@ -77,7 +77,7 @@ def run(environment, args, output_dir):
         extra_values = environment.get_results_csv_row(metrics)
         with open(csv_path, 'a', newline='') as f:
             csv.writer(f).writerow(
-                [i, 0, design_name, f'{reward:.6f}', f'{best_reward:.6f}']
+                [i, 0, design_name, design_name, f'{reward:.6f}', f'{best_reward:.6f}']
                 + extra_values
             )
 
