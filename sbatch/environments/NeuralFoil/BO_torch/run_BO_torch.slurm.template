@@ -2,7 +2,11 @@
 #SBATCH --job-name=BO_torch_seed{SEED}
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
+#SBATCH --exclusive
+# --cpus-per-task is intentionally omitted. With --exclusive the job owns the
+# entire node, so specifying it is redundant and would misleadingly cap
+# SLURM_CPUS_PER_TASK. PyTorch calls os.cpu_count() at startup and sets its
+# thread pool to match all available cores automatically.
 #SBATCH --time=24:00:00
 #SBATCH --output=/scratch/ShapeEvolve/logs/%u/BO_torch_seed{SEED}_%j.out
 #SBATCH --error=/scratch/ShapeEvolve/logs/%u/BO_torch_seed{SEED}_%j.err
