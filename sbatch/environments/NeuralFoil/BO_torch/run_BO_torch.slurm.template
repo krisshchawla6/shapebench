@@ -10,6 +10,11 @@
 #SBATCH --time=24:00:00
 #SBATCH --output=/scratch/ShapeEvolve/logs/%u/BO_torch_seed{SEED}_%j.out
 #SBATCH --error=/scratch/ShapeEvolve/logs/%u/BO_torch_seed{SEED}_%j.err
+# NOTE: Slurm opens the log file before the script runs, so the logs/%u/
+# directory must exist before submission or the job will fail silently with
+# signal 53. Run once per new user:
+#   sudo mkdir -p /scratch/ShapeEvolve/logs/$USER
+#   sudo chown $USER:$USER /scratch/ShapeEvolve/logs/$USER
 
 set -e
 

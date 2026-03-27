@@ -153,3 +153,96 @@ outperforms BO, that is a meaningful result for the paper.
 Key tension: 18 dimensions is right at the upper edge where GP starts to
 struggle. With NeuralFoil being cheap, enough samples can be run to expose
 this scaling weakness, which strengthens the argument for LLM-guided methods.
+
+
+RUNNING HIGH EVAL-COUNT CASES: STRATEGY (March 2026)
+-----------------------------------------------------
+Recommendation: run n=5000 with the existing exact GP (BO_torch /
+SingleTaskGP) first, before implementing approximate GP.
+
+Rationale:
+  - BO_torch uses CG solvers (not Cholesky), so it scales as roughly n^1.35
+    rather than n^3. Measured on a 128-CPU exclusive node, projected wall
+    time for n=5000 is ~35-45 hours — practical on the cluster.
+  - Running exact GP to n=5000 first gives a clean, defensible baseline for
+    the paper. If approximate GP is introduced later, the two can be directly
+    compared on reward quality.
+  - The exact GP result also tells you whether n=5000 is actually buying
+    meaningful reward improvement over n=1000, before investing further
+    engineering effort in approximate GP.
+
+Trigger for approximate GP: if n=5000 exact GP shows continued improvement
+and you want to push to n=10000+, or if per-iter wall time degrades past
+~60-90s at high n. At n=10000, exact GP is projected at ~180s/iter (~200+
+hours total), which is not practical.
+
+Per-iteration wall time projections (exclusive node, 128 CPUs):
+  n=1000  end:  ~5-8 s/iter    total: ~1.5-2 hrs
+  n=5000  end:  ~70 s/iter     total: ~35-45 hrs
+  n=10000 end:  ~180 s/iter    total: ~200-250 hrs  (needs approx GP)
+
+Note: all three n=1000 seeds ran on the same node (no --exclusive), which
+caused CPU contention and slower per-iter times. Future runs use --exclusive
+so each job gets a full 128-CPU node with no contention.
+
+
+APPROXIMATE GP IMPLEMENTATION (SVGP WITH INDUCING POINTS)
+----------------------------------------------------------
+If exact GP becomes too slow past n=5000, the upgrade path is to replace
+SingleTaskGP with SingleTaskVariationalGP (BoTorch's SVGP wrapper). This
+changes complexity from O(n^3) to O(m^2 * n) where m is the number of
+inducing points (m << n), breaking the scaling wall.
+
+Expected per-iter time with approx GP (m~300-500): ~5-10s regardless of n,
+making n=10000+ runs practical (~15-30 hours).
+
+Performance impact on reward:
+  - In theory: slightly worse, since the surrogate is an approximation.
+  - In practice: usually negligible for optimisation (as opposed to
+    prediction). The GP only needs to be good enough to guide search toward
+    better regions — it doesn't need to be a perfect model.
+  - With m=300-500 inducing points for 18D: very close to exact GP quality.
+  - At n=5000+, exact GP can develop numerical conditioning issues with
+    large covariance matrices; approx GP can actually be more robust.
+  - Verdict: do not expect meaningfully worse final reward with well-chosen m.
+
+Code changes vs frameworks/BO_torch/run.py (changes are localised):
+
+  1. Different imports and model class:
+       # replace:
+       from botorch.models import SingleTaskGP
+       from gpytorch.mlls import ExactMarginalLogLikelihood
+       model = SingleTaskGP(train_X, train_Y_std)
+       mll = ExactMarginalLogLikelihood(model.likelihood, model)
+
+       # with:
+       from botorch.models import SingleTaskVariationalGP
+       from gpytorch.mlls import VariationalELBO
+       model = SingleTaskVariationalGP(train_X, num_inducing=args.num_inducing)
+       mll = VariationalELBO(model.likelihood, model.model, num_data=len(train_X))
+
+  2. Different training loop (Adam over epochs, not L-BFGS-B on MLL):
+       optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+       for _ in range(100):   # epochs; tune as needed
+           optimizer.zero_grad()
+           output = model(train_X)
+           loss = -mll(output, train_Y_std.squeeze())
+           loss.backward()
+           optimizer.step()
+
+  3. New argument in add_args():
+       parser.add_argument('--num_inducing', type=int, default=300,
+                           help='Inducing points for approximate GP (default: 300)')
+
+  4. Inducing point initialisation: SingleTaskVariationalGP picks a random
+     subset of train_X by default. K-means initialisation is better but the
+     default is usually sufficient.
+
+Implementation approach: create frameworks/BO_torch_approx/ as a separate
+framework (do not modify BO_torch). This keeps the exact GP baseline intact
+for comparison, and both frameworks produce identical CSV formats so results
+are directly comparable in animate_neuralfoil_comparison_eval_axis.py.
+
+Key tuning parameter: num_inducing. Start with 300. If reward quality is
+noticeably worse than exact GP on the same budget, increase toward 500.
+Diminishing returns past ~500 for an 18D problem.
