@@ -144,6 +144,134 @@ KEY DESIGN DECISIONS
    evaluated.
 
 
+SKOPT VS BOTORCH: FUNDAMENTAL DIFFERENCES
+------------------------------------------
+
+Both use the same mathematical model (exact GP + EI) but differ in how
+they solve it.
+
+1. How the GP linear system is solved (the main scalability difference)
+   skopt: exact Cholesky decomposition — computes the full n×n triangular
+     factor, O(n^3) time and O(n^2) memory. Non-negotiable cost per fit.
+   BoTorch/GPyTorch: conjugate gradient (CG) iterative solver — never
+     forms the full Cholesky, solves K·v=b iteratively. Convergence is
+     ~O(n) CG steps × O(n^2) per step = O(n^3) asymptotically but with
+     much better constants (early stopping, preconditioning). At n=800
+     this is ~3–5× faster; the gap widens with n.
+   BoTorch can additionally switch to sparse/approximate GPs (SVGP with
+     m inducing points) which changes complexity to O(m^2 * n), breaking
+     the O(n^3) wall entirely.
+
+2. How the acquisition function is optimised
+   skopt: random sampling + simple local search in the original parameter
+     space. In 18D this is unreliable — the EI landscape has many local
+     optima and random sampling misses most of them.
+   BoTorch: gradient-based optimisation via autograd through the GP
+     predictive distribution, with num_restarts random starting points.
+     More restarts = better chance of finding the global EI maximum.
+     This is a meaningful quality difference at 18D — BoTorch's suggested
+     next point is genuinely better, not just computed faster.
+
+3. GP hyperparameter fitting
+   skopt: scipy L-BFGS-B on the marginal log-likelihood — adequate but
+     sometimes gets stuck in local optima.
+   BoTorch: PyTorch L-BFGS-B through the same MLL, better numerical
+     conditioning via GPyTorch's structured kernel approximations.
+
+4. Normalisation
+   skopt: transparent, handled internally.
+   BoTorch: manual (written explicitly), which is more code but gives
+     full control — useful for debugging unexpected GP behaviour.
+
+
+WALL-TIME SCALING: SKOPT VS BOTORCH AT HIGH EVAL COUNTS
+---------------------------------------------------------
+Observed from actual runs (18D, NeuralFoil large model):
+  Average ~60s/iter at n~400 (midpoint of 800-iter runs).
+  Breakdown: ~10–15s NeuralFoil evaluation (constant) + ~45s GP fitting
+  (grows as O(n^3)).
+
+Projected skopt cost per iteration:
+  n=400  (observed midpoint): ~60s
+  n=800:                      ~375s  (~6 min/iter)
+  n=1000:                     ~715s  (~12 min/iter)
+  n=2000:                     ~1.5 hrs/iter
+  n=5000:                     ~24 hrs/iter  — completely infeasible
+
+Skopt becomes unusable past ~1200–1500 evals for this problem.
+
+BoTorch with approximate GP (inducing points, m~300), O(m^2 * n):
+  GP fit stays ~5–10s/iter regardless of n.
+  Total per iter dominated by NeuralFoil: ~20–25s.
+  5000-eval run: ~28–35 hours wall time — practical on a cluster.
+
+Trigger for switching: skopt is fine up to ~1000 evals. Use BoTorch if
+a 3000–6000 eval run is needed for an eval-equivalent comparison with v3.
+
+
+BOTORCH SETUP (IF NEEDED AFTER SKOPT)
+--------------------------------------
+BoTorch is the upgrade path if skopt becomes too slow at high eval counts
+(typically past ~1,000–2,000 points where exact GP training bogs down).
+
+Installation:
+  pip install botorch gpytorch torch
+
+Implementation changes vs skopt (~80–100 lines vs ~30):
+  - Replace skopt.Optimizer with botorch.models.SingleTaskGP
+  - Fit GP with botorch.fit.fit_gpytorch_mll
+  - Optimise acquisition with botorch.acquisition.ExpectedImprovement
+    + botorch.optim.optimize_acqf
+  - Manually normalise inputs to [0,1] and standardise outputs (skopt
+    does this internally; BoTorch requires explicit handling)
+
+Why BoTorch scales better:
+  BoTorch uses GPyTorch's approximate GPs (inducing points, CG solvers)
+  which scale to tens of thousands of points. skopt uses exact GP
+  training which is O(n^3) and degrades past ~1,000-2,000 evals.
+
+Time to implement: ~2-3 hours (mostly normalisation and acq. boilerplate).
+Time to run at 6,000 evals: seconds per iteration vs potentially hours for skopt.
+
+Trigger for switching: if skopt runs take too long past ~1,000 evals, or
+if a 6,000-eval BO run is needed for an eval-equivalent comparison with v3.
+The skopt scaling slowdown is itself a reportable result for the paper.
+
+Reference: Meta's official BoTorch tutorial — SingleTaskGP + ExpectedImprovement.
+Ax platform (built on BoTorch) is also widely used in industry.
+
+
+BUGS FOUND AND FIXED DURING INITIAL RUNS
+-----------------------------------------
+
+1. Reward flat-landscape bug (fixed March 2026)
+   Symptom: reward never improved beyond -10 across all BO iterations.
+   Cause: infeasible samples returned FAIL_REWARD = -10.0 (hard clip),
+     making the GP surrogate see a flat plateau with no gradient signal.
+   Fix: added gradient_infeasible flag to RewardExactNotebook.__init__
+     (default False). frameworks/BO/run.py sets --gradient_infeasible
+     default=True, so BO passes actual fitness_total for infeasible
+     samples, giving the GP meaningful gradient toward the feasible region.
+     Other frameworks (v3, islands, PSO, adjoint) are unaffected.
+   Commits: a90a8934, d5b3f8d0
+
+2. CSV column shift bug (fixed March 26, 2026)
+   Symptom: animate_neuralfoil_comparison_eval_axis.py would read wrong
+     columns for reward, best_reward, and design (image lookup broken).
+   Cause: the row writer in frameworks/BO/run.py wrote 5 values for 6
+     base column headers (iteration, particle, sample, design, reward,
+     best_reward), omitting the design field. Every column after sample
+     was shifted left by 1 in the data.
+   Fix: added design_name as the 4th element in the written row so both
+     sample and design columns are filled (same value, iter_XXXX).
+   Commit: cc9024e3
+   Existing runs patched: fix_bo_csv_columns.py was used on 2026-03-26
+     to post-process the 3 in-progress CSVs
+     (run_BO_reward_exact_notebook, ..._seed0, ..._seed1) by inserting
+     the design name at column position 3 in each data row. The script
+     was then deleted as a one-off utility.
+
+
 SCIENTIFIC FRAMING NOTE
 -----------------------
 GP-BO is the most direct analog to the LLM-guided approach: both are

@@ -254,7 +254,7 @@ def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None,
         ax.set_ylim(y_lo, y_hi)
         if not maximizing:
             ax.set_yscale("log")
-        ax.set_xlabel("Model Evaluations (NeuralFoil calls)")
+        ax.set_xlabel("Model (Airfoil Design) Evaluations")
         ax.set_ylabel("Reward (higher is better)" if maximizing
                       else "Objective (−reward, lower is better)")
 
