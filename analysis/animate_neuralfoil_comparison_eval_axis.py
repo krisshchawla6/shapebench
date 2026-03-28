@@ -50,7 +50,8 @@ STYLE = {
     "figure.dpi": 200,
 }
 
-COLORS = ["#1f77b4", "#d62728", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b"]
+COLORS = ["#1f77b4", "#d62728", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b",
+          "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
 
 
 def load_csv(results_dir):
@@ -227,9 +228,12 @@ def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None,
         k_list = [sum(1 for r in rows if r["iteration"] <= iter_k_list[ri])
                   for ri, rows in enumerate(all_rows)]
 
-        fig = plt.figure(figsize=(14, max(5, 3 * n_runs)), facecolor="white")
+        import math
+        n_img_cols = 2 if n_runs > 4 else 1
+        n_img_rows = math.ceil(n_runs / n_img_cols)
+        fig = plt.figure(figsize=(14, max(5, 3 * n_img_rows)), facecolor="white")
         gs = fig.add_gridspec(1, 2, width_ratios=[1.45, 1], wspace=0.06)
-        gs_right = gs[1].subgridspec(n_runs, 1, hspace=0.12)
+        gs_right = gs[1].subgridspec(n_img_rows, n_img_cols, hspace=0.12, wspace=0.05)
 
         ax = fig.add_subplot(gs[0])
         best_vals = []
@@ -282,7 +286,7 @@ def make_comparison(dirs, labels=None, max_iter=80, step=1, output_dir=None,
         )
 
         for ri in range(n_runs):
-            ax_img = fig.add_subplot(gs_right[ri])
+            ax_img = fig.add_subplot(gs_right[ri // n_img_cols, ri % n_img_cols])
             ax_img.axis("off")
             k = k_list[ri]
             if k > 0:
