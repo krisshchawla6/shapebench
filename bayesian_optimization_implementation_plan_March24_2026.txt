@@ -241,6 +241,45 @@ Reference: Meta's official BoTorch tutorial — SingleTaskGP + ExpectedImproveme
 Ax platform (built on BoTorch) is also widely used in industry.
 
 
+HOW --gradient_infeasible WORKS (MECHANISM AND DESIGN)
+-------------------------------------------------------
+The flag is declared in each BO framework's add_args() and piped into the
+reward constructor automatically — the framework run() function never reads
+it directly.
+
+Mechanism (run_benchmark.py):
+  All parsed CLI args are collected into shared_kwargs and passed as **kwargs
+  to both reward_class(**shared_kwargs) and env_class(..., **shared_kwargs).
+  So --gradient_infeasible, registered by the BO framework, ends up as a
+  constructor argument to RewardExactNotebook, which accepts it explicitly.
+  The framework run() itself never touches the flag.
+
+Why it is needed for BO but not GA/PSO/v3:
+  When NeuralFoil fails to converge on a sample (e.g. degenerate geometry
+  that cannot solve all CL targets), the reward is either:
+
+    gradient_infeasible=False (default):
+      reward = FAIL_REWARD = -10.0  — a hard constant clip.
+      Every infeasible sample looks identical to the GP: flat plateau at -10.
+      The GP surrogate has zero gradient signal toward the feasible region.
+      BO gets stuck — EI cannot distinguish good-infeasible from bad-infeasible.
+
+    gradient_infeasible=True (BO default):
+      reward = fitness_total  — the actual penalty score, which varies with
+      how infeasible the design is (e.g. how badly it violates thickness
+      constraints). The GP learns that some infeasible regions are "less bad"
+      and EI steers toward the feasible boundary rather than wandering.
+
+  GA/PSO/v3 don't build a surrogate model, so a flat landscape in infeasible
+  space is harmless — they just treat it as "this design failed" and move on.
+  Only BO frameworks need the gradient signal, hence the per-framework default.
+
+Generalisability note:
+  For a new environment where all points in parameter space are feasible,
+  this flag is irrelevant. It only matters when there is a non-trivial
+  infeasible region and the reward hard-clips infeasible samples to a constant.
+
+
 BUGS FOUND AND FIXED DURING INITIAL RUNS
 -----------------------------------------
 
