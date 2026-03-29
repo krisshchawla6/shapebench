@@ -7,7 +7,6 @@
 # entire node, so specifying it is redundant and would misleadingly cap
 # SLURM_CPUS_PER_TASK. PyTorch calls os.cpu_count() at startup and sets its
 # thread pool to match all available cores automatically.
-#SBATCH --time=24:00:00
 #SBATCH --output=/scratch/ShapeEvolve/logs/%u/BO_torch_seed{SEED}_%j.out
 #SBATCH --error=/scratch/ShapeEvolve/logs/%u/BO_torch_seed{SEED}_%j.err
 # NOTE: Slurm opens the log file before the script runs, so the logs/%u/
