@@ -1,0 +1,55 @@
+#!/bin/bash
+#SBATCH --job-name=BO_torch_approx_seed{SEED}
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --exclusive
+# --cpus-per-task is intentionally omitted. With --exclusive the job owns the
+# entire node, so specifying it is redundant and would misleadingly cap
+# SLURM_CPUS_PER_TASK. PyTorch calls os.cpu_count() at startup and sets its
+# thread pool to match all available cores automatically.
+#SBATCH --output=/scratch/ShapeEvolve/logs/%u/BO_torch_approx_seed{SEED}_%j.out
+#SBATCH --error=/scratch/ShapeEvolve/logs/%u/BO_torch_approx_seed{SEED}_%j.err
+# NOTE: Slurm opens the log file before the script runs, so the logs/%u/
+# directory must exist before submission or the job will fail silently with
+# signal 53. Run once per new user:
+#   sudo mkdir -p /scratch/ShapeEvolve/logs/$USER
+#   sudo chown $USER:$USER /scratch/ShapeEvolve/logs/$USER
+
+set -e
+
+REPO_DIR="/scratch/ShapeEvolve"
+OUTPUT_DIR="$REPO_DIR/environments/NeuralFoil/results/run_BO_torch_approx_seed{SEED}"
+
+mkdir -p "$OUTPUT_DIR"
+mkdir -p "/scratch/ShapeEvolve/logs/$USER"
+
+echo "=========================================="
+echo "Job ID:       $SLURM_JOB_ID"
+echo "Node:         $SLURMD_NODENAME"
+echo "Date:         $(date)"
+echo "Framework:    BO_torch_approx"
+echo "Environment:  NeuralFoil"
+echo "Reward:       reward_exact_notebook"
+echo "n_calls:      {N_CALLS}"
+echo "n_initial:    {N_INITIAL}"
+echo "random_state: {SEED}"
+echo "Output:       $OUTPUT_DIR"
+echo "=========================================="
+
+source "$REPO_DIR/venv/bin/activate"
+
+cd "$REPO_DIR"
+
+python run_benchmark.py \
+    --framework BO_torch_approx \
+    --environment NeuralFoil \
+    --reward reward_exact_notebook \
+    --n_initial {N_INITIAL} \
+    --n_calls {N_CALLS} \
+    --random_state {SEED} \
+    --output-dir "$OUTPUT_DIR"
+
+echo "=========================================="
+echo "Job completed successfully"
+echo "End time: $(date)"
+echo "=========================================="
