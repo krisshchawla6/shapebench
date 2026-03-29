@@ -413,3 +413,38 @@ are directly comparable in animate_neuralfoil_comparison_eval_axis.py.
 Key tuning parameter: num_inducing. Start with 300. If reward quality is
 noticeably worse than exact GP on the same budget, increase toward 500.
 Diminishing returns past ~500 for an 18D problem.
+
+HOW TO PICK m=300 FOR AN 18D PROBLEM
+--------------------------------------
+There is no exact formula — it is a rule of thumb built from several
+considerations.
+
+1. Coverage of input space
+   The inducing points need to be dense enough that no region the GP cares
+   about is unseen by any inducing point. In practice BO functions are often
+   low effective rank even in high nominal dimension, so m does not need to
+   scale with 2^18.
+
+2. Standard heuristic: m ~ 10-20x d
+   For d=18: 10x18=180 to 20x18=360. m=300 sits in the middle.
+   This range comes from empirical SVGP studies — below ~10d the ELBO
+   diverges meaningfully from the exact MLL; above ~20d marginal gain per
+   extra inducing point diminishes rapidly.
+
+3. Empirical check: compare against exact GP at the same n
+   Run exact and approximate GP on the same ~300-point dataset and check:
+     - Do they suggest a similar next point (similar EI landscape)?
+     - Is the approximate GP's predicted mean close to the exact GP's at
+       held-out points?
+   If yes, m is sufficient. If uncertainty estimates are badly off, increase m.
+
+4. Diminishing returns past ~500 for 18D
+   Each inducing point adds a row/column to the variational covariance
+   S_u in R^(mxm), so cost grows as m^2. Going from m=300 to m=500 roughly
+   doubles fit cost but typically buys negligible reward improvement.
+   Dropping below m=100 for 18D would likely hurt quality noticeably.
+
+5. Practical wall-time check
+   If per-iter GP fit time is already dominated by the NeuralFoil evaluation
+   (~10-15s), there is no reason to reduce m. Only reduce m if GP fit time
+   starts approaching evaluation time — unlikely at m=300 for 18D.
