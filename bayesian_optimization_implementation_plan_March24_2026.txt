@@ -448,3 +448,304 @@ considerations.
    If per-iter GP fit time is already dominated by the NeuralFoil evaluation
    (~10-15s), there is no reason to reduce m. Only reduce m if GP fit time
    starts approaching evaluation time — unlikely at m=300 for 18D.
+
+
+SVGP PERFORMANCE DIAGNOSIS (March 29, 2026)
+--------------------------------------------
+After ~4000 evaluations across seeds 0, 1, 3, BO_torch_approx has found
+zero feasible solutions. BO_torch (exact GP) achieves 32–61% feasibility
+over 2000–2500 evals with best rewards around -0.10 to -0.12. This is a
+serious divergence that points to surrogate quality failure, not just
+inducing point count.
+
+Root cause: cold-start every iteration
+  run.py line 100 rebuilds SingleTaskVariationalGP from scratch on every BO
+  iteration — randomly initialised kernel hyperparameters, randomly
+  initialised variational parameters, trained for exactly 100 Adam steps at
+  lr=0.01. At n=4000 this is severely under-trained. The ELBO landscape for
+  SVGP is harder to optimise than exact MLL; 100 steps is unlikely to
+  converge even at n=300, let alone n=4000.
+
+  The exact GP (BO_torch) uses L-BFGS-B on the exact MLL, which converges
+  reliably to a good hyperparameter estimate each iteration. The approximate
+  GP has no such guarantee with fixed-epoch Adam.
+
+  A poorly-converged surrogate gives a noisy EI surface. optimize_acqf then
+  finds a spurious EI maximum, effectively exploring near-randomly. This
+  explains why the approx runs show barely better than random behaviour
+  despite gradient_infeasible=True — the flag only helps if the surrogate
+  is actually learning the reward landscape.
+
+Secondary cause: inducing points concentrated in the infeasible region
+  When inducing_points=300 is passed as an integer, SingleTaskVariationalGP
+  selects a random subset of train_X. Since 0% of evaluations are feasible,
+  all 300 inducing points live in the infeasible region. The SVGP has no
+  coverage of the feasible region and cannot extrapolate toward it reliably.
+  This compounds the cold-start problem.
+
+Key lesson: increasing m does not fix this
+  Going from m=300 to m=500 adds more parameters to fit in the same 100
+  epochs. It would make convergence worse, not better. The bottleneck is
+  training convergence, not surrogate expressiveness.
+
+Recommended fixes in order of impact:
+
+  1. Warm-start the model across iterations
+     Carry over kernel hyperparameters and variational parameters from the
+     previous iteration's fitted model rather than reinitialising from
+     scratch. Each iteration then only needs to update incrementally (new
+     observations since last fit). This is the standard trick for
+     online/streaming SVGP and can reduce required epochs per iteration
+     from ~500 down to ~50 once warm.
+
+  2. Scale n_epochs with n
+     100 epochs is insufficient as n grows. A reasonable schedule:
+       n_epochs = min(500, 50 + n // 20)
+     This keeps early iterations fast and gives later iterations enough
+     steps to converge. Combined with warm-starting, even fewer are needed.
+
+  3. K-means inducing point initialisation
+     Replace the random subset with k-means cluster centres over train_X.
+     This spreads inducing points more evenly across the observed
+     distribution. Not sufficient alone (still all infeasible if train_X
+     is all infeasible), but better than a random subset.
+
+  4. Learnable inducing point locations
+     Pass a coordinate tensor (not an integer) to SingleTaskVariationalGP
+     so that inducing point positions are free parameters optimised by the
+     ELBO. They can then migrate toward high-information or high-reward
+     regions, including the feasible boundary. This is the theoretically
+     correct full-SVGP setup.
+
+  5. m=300 is probably fine — fix convergence first
+     Do not increase m until warm-starting and epoch scaling are in place.
+     Expressiveness headroom is not the current bottleneck.
+
+
+FIX 1 IMPLEMENTED: WARM-STARTING (March 29, 2026)
+---------------------------------------------------
+Fix 1 was implemented in frameworks/BO_torch_approx/run.py. Three changes:
+
+  1. Before the loop, initialise prev_state = None.
+
+  2. After building the model each iteration, attempt to load the previous
+     state before training:
+
+       if prev_state is not None:
+           try:
+               model.load_state_dict(prev_state)
+           except RuntimeError:
+               pass  # shape mismatch while n_inducing is still growing
+
+  3. After model.eval(), save named parameters for the next iteration:
+
+       prev_state = {name: param.detach().clone()
+                     for name, param in model.named_parameters()}
+
+How it works:
+  named_parameters() snapshots every learnable parameter — kernel
+  lengthscales, outputscale, noise, and all variational parameters (means
+  and covariances of the variational distribution over inducing outputs).
+  On the next iteration, a new model is instantiated (same architecture),
+  then each parameter is directly overwritten with its previous value via
+  param.data.copy_(). The Adam steps then only need to adjust incrementally
+  for the one new observation, rather than converge from random.
+
+  Note: state_dict/load_state_dict was tried first but raised AttributeError
+  because SingleTaskVariationalGP's state dict includes training data buffers
+  (train_inputs, train_targets) that grow by one entry each iteration.
+  Loading them onto a newly constructed model with a different-sized dataset
+  caused a shape mismatch inside BoTorch's model internals. Using
+  named_parameters() avoids buffers entirely — training data is always set
+  correctly by the model constructor and does not need to be warm-started.
+
+Shape guard during inducing point growth phase:
+  During the first 300 iterations, n_inducing = len(train_X) (grows from
+  31 to 300). Each size change produces differently shaped inducing point
+  parameters. The shape check (prev[name].shape == param.shape) silently
+  skips mismatched parameters, falling back to cold-start for those. Once
+  n >= 300 all shapes are fixed and warm-starting is fully active.
+
+Why BO_torch (exact GP) does not need this:
+  BO_torch also cold-starts every iteration (model = SingleTaskGP(...) is
+  rebuilt each time), but uses fit_gpytorch_mll which calls L-BFGS-B on the
+  exact MLL. L-BFGS-B converges reliably to the MLL optimum in tens of steps
+  regardless of initialisation — the exact MLL is a well-conditioned,
+  near-convex problem. The ELBO (SVGP objective) is harder and non-convex,
+  so Adam from random initialisation cannot converge in 100 steps at large n.
+
+Seeds rerun after fix: 0, 1, 3, 42 (jobs 509–512, submitted March 29 2026).
+Jobs crashed immediately with AttributeError on train_targets; state_dict
+approach replaced with named_parameters. Resubmitted as jobs 513–516, then
+513–516 also crashed for the same reason (cached results from prior run caused
+jobs to skip to iter 31 where warm-start was first attempted). Results cleared,
+resubmitted as 517–520.
+
+
+FIX 3 IMPLEMENTED: K-MEANS INDUCING POINT INITIALISATION (March 30, 2026)
+---------------------------------------------------------------------------
+Observation that motivated Fix 3:
+  With Fix 1 (warm-starting) in place, incumbent improved rapidly during
+  the random phase and early BO (n < 300), then stalled completely at n=300.
+  This is the exact point where n_inducing hits its cap of 300 and the model
+  switches from using all training points as inducing points (effectively
+  exact GP) to a true approximation with a fixed subset. The random subset
+  (default) placed all 300 inducing points in the infeasible region, giving
+  no surrogate coverage of the feasibility boundary.
+
+Implementation:
+  Replaced the integer inducing_points=n_inducing argument with a k-means
+  coordinate tensor. When n > n_inducing, MiniBatchKMeans clusters train_X
+  into n_inducing centres; when n <= n_inducing all training points are used
+  (k-means would be one cluster per point, so we skip it and use train_X
+  directly).
+
+    if n_inducing >= len(train_X):
+        inducing_pts = train_X.clone()
+    else:
+        from sklearn.cluster import MiniBatchKMeans
+        km = MiniBatchKMeans(n_clusters=n_inducing, n_init=3,
+                             random_state=args.random_state)
+        km.fit(train_X.numpy())
+        inducing_pts = torch.tensor(km.cluster_centers_, dtype=torch.float64)
+
+    model = SingleTaskVariationalGP(
+        train_X, train_Y=train_Y_std, inducing_points=inducing_pts,
+    )
+
+  When a coordinate tensor is passed, GPyTorch's VariationalStrategy
+  registers inducing_points as nn.Parameter, so Adam optimises their
+  locations during training (Fix 4 comes for free).
+
+Result:
+  Incumbent improved to -3.4 (seed0) and -5.3 (seed1) by n=300 — better
+  than the Fix-1-only runs at the same point. However, both seeds stalled
+  completely from n=300 to n=1100+, just as with Fix 1 alone. The stall at
+  n=300 is robust across both random-subset and k-means initialisation,
+  pointing to epoch count (Fix 2) rather than placement as the bottleneck
+  once the model is truly approximate.
+
+Seeds rerun after fix: 0, 1, 3, 42 (jobs 523–526, submitted March 30 2026).
+
+
+FIX 2 IMPLEMENTED: EPOCH SCALING WITH DATASET SIZE (March 30, 2026)
+---------------------------------------------------------------------
+Motivation:
+  Both Fix 1 and Fix 1+3 showed a sharp stall at exactly n=300 — the point
+  where n_inducing hits its cap. Before n=300, n_inducing = n (all points
+  as inducing points, effectively exact GP), and 100 epochs is sufficient.
+  Once n > 300 and the model is a true SVGP approximation, the ELBO
+  landscape grows more complex with each new observation, and 100 epochs
+  with warm-starting is no longer enough to converge the variational
+  parameters.
+
+Implementation:
+  Replaced the fixed args.n_epochs with a dynamic schedule computed each
+  iteration. args.n_epochs (default 100) acts as a floor; the schedule
+  scales above it as n grows, capped at 500.
+
+    n_epochs = min(500, max(args.n_epochs, len(train_X) // 3))
+
+  Schedule values:
+    n=300:   max(100, 100) = 100 epochs  (same as before, at transition point)
+    n=400:   max(100, 133) = 133 epochs  (scaling kicks in immediately after)
+    n=600:   max(100, 200) = 200 epochs
+    n=1000:  max(100, 333) = 333 epochs
+    n=1500:  max(100, 500) = 500 epochs  (cap reached)
+    n=10000: min(500, ...)  = 500 epochs
+
+  The original formula (50 + n // 20) was found to not kick in until n=1000
+  since it only exceeds args.n_epochs=100 when n > 1000. The stall occurs at
+  n=300, so the scaling needed to activate immediately after that point.
+  n // 3 achieves this — it equals 100 at n=300 and grows from there.
+
+  The floor at args.n_epochs means the default behaviour is unchanged at
+  small n, and the user can still raise the minimum via --n_epochs if needed.
+  The cap at 500 bounds wall-time cost; with warm-starting, 500 epochs for
+  incremental updates is acceptable even at large n.
+
+Result (fixes 1+2+3 combined, jobs 561–564 then 566–569, March 30 2026):
+  Seeds 0, 1, 3 all stalled at n=300 or shortly after. Seed0 completely
+  flat at -3.356 from n=301 to n=700+. Seed1 made one small jump then
+  stalled. Seed3 improved slowly to -5.1 but plateaued. Zero feasible
+  solutions across all seeds even with all three fixes active.
+  Conclusion: the stall is not primarily a coverage or convergence issue —
+  it is a fundamental SVGP approximation quality problem on this specific
+  problem type. Fixes were stopped at this point.
+
+
+REMAINING SVGP FIXES NOT IMPLEMENTED (decision: treat as negative result)
+--------------------------------------------------------------------------
+Three further fixes were identified but not implemented after fixes 1-3
+failed to break the n=300 stall. Recorded here for completeness.
+
+Fix 4 — Reward clipping
+  Infeasible rewards range from -30 to -100. After standardisation, these
+  extreme values dominate and the surrogate spends capacity modelling deep
+  infeasibility rather than the region near the feasibility boundary.
+  Clipping to a floor (e.g. -15) before standardisation would compress the
+  infeasible landscape and give the surrogate more resolution near where it
+  matters. One-line change: train_Y_clipped = train_Y.clamp(min=-15.0).
+
+Fix 5 — Natural gradient descent (NGD)
+  Adam treats all parameters equally, but variational parameters have a
+  different geometric structure — NGD accounts for this via the Fisher
+  information metric and is the theoretically correct optimiser for
+  NaturalVariationalDistribution. In practice NGD often converges in 10-20
+  steps where Adam needs hundreds. Implementation requires replacing
+  SingleTaskVariationalGP with a custom _NaturalSVGP class (GPyTorchModel +
+  ApproximateGP multiple inheritance), using NaturalVariationalDistribution,
+  and two separate optimisers: NGD(model.variational_parameters(), lr=0.1)
+  and Adam(model.hyperparameters(), lr=0.003).
+
+Fix 6 — Lower Adam learning rate
+  lr=0.01 may overshoot with warm-starting since the model is already near
+  convergence each iteration. Dropping to lr=0.003 for incremental updates
+  is a common SVGP tuning recommendation.
+
+Why these were not pursued:
+  After fixes 1-3, seed0 was flat for 400+ iterations despite warm-starting,
+  k-means coverage, and scaled epochs. The remaining fixes are increasingly
+  speculative and each requires another debugging cycle (the NGD rewrite in
+  particular introduces new failure modes). The exact GP at n=3000-5000 is
+  already producing strong, defensible results (-0.096 best reward, 33-65%
+  feasibility). The SVGP failure is itself a reportable negative result.
+
+
+SVGP: WHEN IT WOULD WORK BETTER
+---------------------------------
+The NeuralFoil problem is close to a worst case for SVGP-BO. For reference,
+the conditions under which SVGP-BO tends to work well:
+
+1. Smooth, continuous reward landscape
+   This problem has a sharp feasibility boundary — designs jump from deeply
+   infeasible (reward -10 to -100) to feasible (reward -0.1 to -0.3) with
+   no gradient signal in between (before gradient_infeasible is applied).
+   SVGP works much better when the reward varies smoothly everywhere and
+   there is no discontinuous boundary to locate.
+
+2. Large feasible region
+   The feasible region here is a small island in 18D space requiring 7
+   simultaneous constraints to be satisfied. Random search finds ~0% feasible
+   designs, so the SVGP trains entirely on infeasible data for hundreds of
+   iterations. SVGP works better when random search finds 20-50% feasible
+   designs immediately — the surrogate has a mixed training set from the
+   start and can model the landscape on both sides of the boundary.
+
+3. Lower effective dimensionality (d < 10)
+   m=300 inducing points covers 18D space poorly — the ratio m/d=17 is at
+   the lower end of the recommended 10-20x heuristic, and coverage degrades
+   exponentially with dimension. The same SVGP on a 5-8D problem would have
+   far better relative coverage and would almost certainly outperform the
+   exact GP at high n.
+
+4. Large n genuinely needed (n >> 5000)
+   SVGP earns its keep when you need n=10000+ and the exact GP is the
+   computational bottleneck. If the exact GP at n=3000-5000 already
+   saturates reward improvement — as appears to be the case here — there
+   is no motivation for SVGP in the first place.
+
+5. High feasibility from random search
+   Corollary to point 2: problems where the constraint landscape is weak
+   or absent (unconstrained optimisation, or soft constraints only) are
+   ideal. SVGP does not need to locate a feasibility boundary at all.

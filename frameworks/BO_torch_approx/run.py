@@ -79,6 +79,7 @@ def run(environment, args, output_dir):
     # Accumulate observations as plain lists; convert to tensors each iteration
     obs_X = []   # normalised, shape (n, dim)
     obs_Y = []   # raw reward, shape (n,)
+    prev_state = None   # warm-start: carry model state across iterations
 
     for i in range(args.n_calls):
         if i < args.n_initial:
@@ -97,17 +98,45 @@ def run(environment, args, output_dir):
             # Cap inducing points at number of observations (early iterations)
             n_inducing = min(args.num_inducing, len(train_X))
 
+            # K-means inducing point initialisation — spreads points across the
+            # full observed distribution rather than a random subset, giving
+            # coverage near the feasibility boundary rather than clustering in
+            # the infeasible region. When n <= n_inducing all points are used.
+            if n_inducing >= len(train_X):
+                inducing_pts = train_X.clone()
+            else:
+                from sklearn.cluster import MiniBatchKMeans
+                km = MiniBatchKMeans(n_clusters=n_inducing, n_init=3,
+                                     random_state=args.random_state)
+                km.fit(train_X.numpy())
+                inducing_pts = torch.tensor(km.cluster_centers_, dtype=torch.float64)
+
             model = SingleTaskVariationalGP(
                 train_X,
                 train_Y=train_Y_std,
-                inducing_points=n_inducing,
+                inducing_points=inducing_pts,
             )
+            if prev_state is not None:
+                # Warm-start: copy learned parameters from previous iteration.
+                # Bypasses state_dict/load_state_dict to avoid BoTorch's
+                # internal buffer handling (train_inputs, train_targets).
+                for name, param in model.named_parameters():
+                    if name in prev_state and prev_state[name].shape == param.shape:
+                        param.data.copy_(prev_state[name])
+
             mll = VariationalELBO(model.likelihood, model.model, num_data=len(train_X))
+
+            # Scale epochs with dataset size. Fixed 100 epochs is insufficient
+            # once n exceeds the inducing point cap and the ELBO landscape grows
+            # more complex. With warm-starting, each iteration only needs
+            # incremental updates, so the cost stays manageable.
+            # args.n_epochs acts as a floor; scaling kicks in above it.
+            n_epochs = min(500, max(args.n_epochs, len(train_X) // 3))
 
             # Train with Adam — SVGP uses ELBO, not exact MLL
             model.train()
             optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-            for _ in range(args.n_epochs):
+            for _ in range(n_epochs):
                 optimizer.zero_grad()
                 output = model(train_X)
                 loss   = -mll(output, train_Y_std.squeeze())
@@ -115,6 +144,10 @@ def run(environment, args, output_dir):
                 optimizer.step()
 
             model.eval()
+            # Save named parameters only (not buffers like train_inputs/train_targets
+            # which grow each iteration and would cause shape mismatches on load).
+            prev_state = {name: param.detach().clone()
+                          for name, param in model.named_parameters()}
 
             best_f = train_Y_std.max()
             ei = LogExpectedImprovement(model=model, best_f=best_f)
