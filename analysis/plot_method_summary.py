@@ -219,7 +219,7 @@ def plot_best_airfoil(ax, dirs, all_rows, minimizing):
 def make_summary(dirs, method_label="method", output_dir=None,
                  adjoint_dir=None, adjoint_label="Adjoint (IPOPT)",
                  max_evals=None, n_eval_points=500, color="#1f77b4",
-                 output_name="summary"):
+                 output_name="summary", failed_dirs=None):
 
     output_dir = output_dir or os.path.join(os.path.dirname(dirs[0]), "summary")
     os.makedirs(output_dir, exist_ok=True)
@@ -233,10 +233,11 @@ def make_summary(dirs, method_label="method", output_dir=None,
 
     minimizing = is_minimizing(all_rows[0])
 
-    # Build a common eval grid up to the minimum run length so all runs
-    # are represented at every grid point (no extrapolation needed).
-    min_len = min(len(rows) for rows in all_rows)
-    eval_grid = np.linspace(0, min_len - 1, n_eval_points)
+    # Build a common eval grid up to the longest run. Shorter runs (including
+    # failed/partial runs) are forward-filled at their final best value by
+    # np.interp, which clamps to the last data point beyond the run's end.
+    max_len = max(len(rows) for rows in all_rows)
+    eval_grid = np.linspace(0, max_len - 1, n_eval_points)
 
     # Interpolate each run's best trajectory onto the common grid.
     interp_bests = []
@@ -248,10 +249,42 @@ def make_summary(dirs, method_label="method", output_dir=None,
         interp_bests.append(interp)
 
     interp_bests = np.array(interp_bests)  # shape: (n_runs, n_eval_points)
-    mean_best   = np.mean(interp_bests, axis=0)
-    median_best = np.median(interp_bests, axis=0)
-    min_best    = np.min(interp_bests, axis=0)
-    max_best    = np.max(interp_bests, axis=0)
+    run_lengths  = np.array([len(rows) for rows in all_rows])
+
+    # Compute statistics using only runs with real data at each eval point.
+    # Runs that have ended are excluded (not forward-filled) from the stats.
+    n_points    = len(eval_grid)
+    mean_best   = np.full(n_points, np.nan)
+    median_best = np.full(n_points, np.nan)
+    min_best    = np.full(n_points, np.nan)
+    max_best    = np.full(n_points, np.nan)
+    n_active    = np.zeros(n_points, dtype=int)
+
+    for i, ev in enumerate(eval_grid):
+        active = interp_bests[run_lengths - 1 >= ev, i]
+        if len(active) > 0:
+            mean_best[i]   = np.mean(active)
+            median_best[i] = np.median(active)
+            min_best[i]    = np.min(active)
+            max_best[i]    = np.max(active)
+            n_active[i]    = len(active)
+
+    # Identify failed runs by explicit --failed-dirs list (matched by abspath).
+    # Only these runs get the dashed-line / × marker treatment.
+    failed_set = set(os.path.abspath(d) for d in (failed_dirs or []))
+    is_failed  = [os.path.abspath(d) in failed_set for d in dirs]
+
+    failed_lengths = [int(run_lengths[i]) for i, f in enumerate(is_failed) if f]
+    short_ends     = sorted([l - 1 for l in failed_lengths])
+    n_short        = len(short_ends)
+    n_complete     = len(all_rows) - n_short
+
+    # Split index: first grid point where a failed run ends
+    if short_ends:
+        split_idx = int(np.searchsorted(eval_grid, short_ends[0]))
+        split_idx = max(1, min(split_idx, n_points - 1))
+    else:
+        split_idx = n_points
 
     # Adjoint reference
     adjoint_ref = None
@@ -263,19 +296,19 @@ def make_summary(dirs, method_label="method", output_dir=None,
             print(f"[adjoint] reference={adjoint_ref:.6f}{feas_str}")
 
     # -----------------------------------------------------------------------
-    # Save trajectory CSV
+    # Save trajectory CSV (only real data — NaN where all runs ended)
     # -----------------------------------------------------------------------
     csv_out = os.path.join(output_dir, f"{output_name}_trajectory.csv")
     with open(csv_out, "w", newline="") as f:
         writer = csv_mod.writer(f)
-        writer.writerow(["eval", "mean_best", "median_best", "min_best", "max_best"])
+        writer.writerow(["eval", "n_active", "mean_best", "median_best", "min_best", "max_best"])
         for i, ev in enumerate(eval_grid):
+            def fmt(v):
+                return f"{v:.8f}" if not np.isnan(v) else ""
             writer.writerow([
-                f"{ev:.1f}",
-                f"{mean_best[i]:.8f}",
-                f"{median_best[i]:.8f}",
-                f"{min_best[i]:.8f}",
-                f"{max_best[i]:.8f}",
+                f"{ev:.1f}", n_active[i],
+                fmt(mean_best[i]), fmt(median_best[i]),
+                fmt(min_best[i]),  fmt(max_best[i]),
             ])
     print(f"[summary] Trajectory CSV -> {csv_out}")
 
@@ -290,13 +323,15 @@ def make_summary(dirs, method_label="method", output_dir=None,
     ylabel = ("Objective (−reward, lower is better)" if minimizing
               else "Reward (higher is better)")
 
-    # Clip to 1e-9 to keep log scale valid
-    mean_plot = np.maximum(median_best, 1e-9)
-    min_plot  = np.maximum(min_best,  1e-9)
-    max_plot  = np.maximum(max_best,  1e-9)
+    # Clip to 1e-9 to keep log scale valid; mask NaN grid points
+    valid   = ~np.isnan(median_best)
+    ev_v    = eval_grid[valid]
+    med_v   = np.maximum(median_best[valid], 1e-9)
+    min_v   = np.maximum(min_best[valid],    1e-9)
+    max_v   = np.maximum(max_best[valid],    1e-9)
 
-    # Y-limits matching animate_neuralfoil_comparison_eval_axis.py convention
-    all_vals = np.concatenate([mean_plot, min_plot, max_plot])
+    # Y-limits
+    all_vals = np.concatenate([med_v, min_v, max_v])
     if minimizing:
         y_lo = max(np.min(all_vals) * 0.8, 1e-9)
         y_hi = np.max(all_vals) * 1.2
@@ -308,14 +343,52 @@ def make_summary(dirs, method_label="method", output_dir=None,
         if adjoint_ref is not None:
             y_hi = max(y_hi, adjoint_ref * 1.05)
 
-    ax.fill_between(eval_grid, min_plot, max_plot,
-                    color=color, alpha=0.2, label="Min–max range")
-    ax.plot(eval_grid, mean_plot, color=color, lw=2.0,
-            label=f"Median best ({len(all_rows)} runs)")
+    # Solid region — all runs active
+    ax.fill_between(ev_v[ev_v <= eval_grid[split_idx - 1]],
+                    min_v[ev_v <= eval_grid[split_idx - 1]],
+                    max_v[ev_v <= eval_grid[split_idx - 1]],
+                    color=color, alpha=0.2)
+    ax.plot(ev_v[ev_v <= eval_grid[split_idx - 1]],
+            med_v[ev_v <= eval_grid[split_idx - 1]],
+            color=color, lw=2.0)
 
+    # Dashed region — some runs have ended (fewer active)
+    if split_idx < n_points:
+        mask_dash = ev_v >= eval_grid[split_idx - 1]
+        ax.fill_between(ev_v[mask_dash], min_v[mask_dash], max_v[mask_dash],
+                        color=color, alpha=0.10)
+        ax.plot(ev_v[mask_dash], med_v[mask_dash],
+                color=color, lw=2.0, linestyle="--")
+
+    # × markers at each short run's end point on the median line
+    for end_eval in short_ends:
+        med_at_end = float(np.interp(end_eval, ev_v, med_v))
+        ax.plot(end_eval, med_at_end, marker="x", color="#333333",
+                markersize=8, markeredgewidth=1.5, zorder=5)
+
+    # Legend
+    from matplotlib.lines import Line2D
+    from matplotlib.patches import Patch
+    legend_entries = [
+        Patch(facecolor=color, alpha=0.2,
+              label=f"Min–max range ({n_complete} complete runs)"),
+        Line2D([0], [0], color=color, lw=2.0,
+               label=f"Median best ({len(all_rows)} runs)"),
+    ]
+    if n_short > 0:
+        legend_entries += [
+            Line2D([0], [0], color=color, lw=2.0, linestyle="--",
+                   label=f"Fewer active runs ({n_short} stopped early)"),
+            Line2D([0], [0], marker="x", color="#333333", lw=0,
+                   markersize=8, markeredgewidth=1.5, label="Run stopped"),
+        ]
     if adjoint_ref is not None:
-        ax.axhline(adjoint_ref, color="#333333", lw=1.2, ls="--", zorder=4,
+        ax.axhline(adjoint_ref, color="#333333", lw=1.2, ls="--", zorder=4)
+        legend_entries.append(
+            Line2D([0], [0], color="#333333", lw=1.2, linestyle="--",
                    label=f"{adjoint_label} (reward = {-adjoint_ref:.4f})")
+        )
+    ax.legend(handles=legend_entries, loc="upper right", framealpha=0.95)
 
     if minimizing:
         ax.set_yscale("log")
@@ -326,7 +399,6 @@ def make_summary(dirs, method_label="method", output_dir=None,
     ax.set_title(f"{method_label}  —  {len(all_rows)} runs,  "
                  f"up to {int(eval_grid[-1])} evals each",
                  fontweight="medium", pad=8)
-    ax.legend(loc="upper right", framealpha=0.95)
     for sp in ["top", "right"]:
         ax.spines[sp].set_visible(False)
 
@@ -362,6 +434,8 @@ if __name__ == "__main__":
                         help="Line/fill colour for this method (hex, default: blue)")
     parser.add_argument("--output-name", default="summary",
                         help="Base filename for outputs (default: summary → summary.png, summary_trajectory.csv)")
+    parser.add_argument("--failed-dirs", nargs="*", default=[],
+                        help="Subset of dirs that are failed/crashed runs (get dashed line + × marker)")
     args = parser.parse_args()
 
     make_summary(
@@ -374,4 +448,5 @@ if __name__ == "__main__":
         n_eval_points=args.n_eval_points,
         color=args.color,
         output_name=args.output_name,
+        failed_dirs=args.failed_dirs,
     )
