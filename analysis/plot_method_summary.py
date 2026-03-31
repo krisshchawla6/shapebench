@@ -65,7 +65,7 @@ def load_csv(results_dir, max_evals=None):
         for i, row in enumerate(reader):
             if max_evals is not None and i >= max_evals:
                 break
-            it = int(row["iteration"])
+            it = int(row.get("iteration") or row.get("call") or i)
             reward = float(row["reward"])
             design = row.get("design", "")
             if not design:
