@@ -33,6 +33,9 @@ def add_args(parser):
                         help='Random restarts for acquisition function optimisation (default: 10)')
     parser.add_argument('--raw_samples', type=int, default=256,
                         help='Raw samples for initialising acquisition optimisation (default: 256)')
+    parser.add_argument('--train_cap', type=int, default=0,
+                        help='Maximum number of most-recent observations used to fit the GP '
+                             'each iteration; 0 means no cap (default: 0)')
     parser.add_argument('--random_state', type=int, default=42,
                         help='Random seed (default: 42)')
     parser.add_argument('--gradient_infeasible', action='store_true', default=True,
@@ -78,9 +81,10 @@ def run(environment, args, output_dir):
             # Random phase: uniform sample in [0,1]^dim, then denormalise
             x_norm = torch.rand(dim, dtype=torch.float64)
         else:
-            # BO phase: fit GP on all observations, optimise EI
-            train_X = torch.stack(obs_X)                          # (n, dim)
-            train_Y = torch.tensor(obs_Y, dtype=torch.float64).unsqueeze(-1)  # (n, 1)
+            # BO phase: fit GP on observations, optimise EI
+            cap = args.train_cap if args.train_cap > 0 else len(obs_X)
+            train_X = torch.stack(obs_X[-cap:])                          # (n, dim)
+            train_Y = torch.tensor(obs_Y[-cap:], dtype=torch.float64).unsqueeze(-1)  # (n, 1)
 
             # Standardise outputs for numerical stability
             Y_mean = train_Y.mean()

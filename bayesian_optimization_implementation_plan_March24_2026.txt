@@ -749,3 +749,63 @@ the conditions under which SVGP-BO tends to work well:
    Corollary to point 2: problems where the constraint landscape is weak
    or absent (unconstrained optimisation, or soft constraints only) are
    ideal. SVGP does not need to locate a feasibility boundary at all.
+
+
+BO_TORCH TUNING: nr25_rs512_cap2k (March 31, 2026)
+====================================================
+
+MOTIVATION
+----------
+After running 4 seeds (0, 2, 3, 42) of BO_torch at n=5000, seeds 2 and 3
+plateaued early (~iter 1500-2500) and made no further progress for 1000+
+iterations before being cancelled. Two root causes were identified:
+
+1. Acquisition function under-optimised in 18D
+   The default num_restarts=10 / raw_samples=256 is insufficient coverage
+   for an 18-dimensional acquisition surface. scipy.optimize.minimize
+   repeatedly returned ABNORMAL status (botorch retries with new initial
+   conditions, so non-fatal, but indicates poor optimisation). Once the GP
+   becomes confident around a local optimum, a poorly-optimised EI surface
+   collapses onto that region with no escape.
+
+2. GP conditioning degrades at large n
+   The GP is refit on all observations every iteration. At n=3000-4000
+   the Cholesky solve becomes increasingly ill-conditioned, and old samples
+   from the random initial phase (many deeply infeasible, reward -10 to -100)
+   continue to pollute the training set, distorting the surrogate in the
+   feasible region.
+
+FIXES APPLIED
+-------------
+Fix 1 — Increase acquisition optimisation budget
+  --num_restarts 25  (was 10)
+  --raw_samples  512 (was 256)
+  Passed explicitly in the new slurm files; run.py defaults unchanged so
+  previous results remain directly comparable.
+
+Fix 2 — Cap GP training data to most recent 2000 observations
+  --train_cap 2000 (new argument; default=0 meaning no cap)
+  Implementation in frameworks/BO_torch/run.py: obs_X[-cap:] and
+  obs_Y[-cap:] are passed to SingleTaskGP instead of the full history.
+  This keeps per-iteration GP fitting cost roughly constant throughout
+  the run (vs. O(n^3) growth with no cap) and prevents early infeasible
+  samples from distorting the surrogate at late iterations.
+  Previous runs implicitly used train_cap=0 (no cap).
+
+METHODOLOGICAL NOTE
+-------------------
+Both fixes are standard BO practice. Fix 1 is straightforward hyperparameter
+tuning of the inner optimiser. Fix 2 is a sliding-window / local-BO variant
+widely used for large-n regimes (cf. TuRBO, Eriksson et al. 2019). The GP
+models the recent landscape rather than the full global history; this is a
+minor but defensible deviation from pure global BO.
+
+RERUNS
+------
+Seeds 2 and 3 were cancelled at iters 3763 and 3727 respectively (results
+preserved in run_BO_torch_seed2_n3763_COMPLETE and
+run_BO_torch_seed3_n3727_COMPLETE). Fresh runs from iter 0 were submitted
+with the new settings, writing to:
+  run_BO_torch_seed2_nr25_rs512_cap2k
+  run_BO_torch_seed3_nr25_rs512_cap2k
+Seeds 0 and 42 were left running with original settings (no cap, nr=10, rs=256).
