@@ -419,3 +419,113 @@ Summary:
   - The adjoint approach requires stepping outside the write_design/simulate
     interface, so it would not plug into run.py as-is. It would need its own
     run.py that calls the solver directly rather than through the environment.
+
+
+N_RESTARTS: HOW MANY IS ENOUGH?
+---------------------------------
+The suggested default of n_restarts=3 is not a principled limit — it is a
+starting point. The correct guidance (also stated in the design notes above)
+is: run enough restarts that global_best stabilizes across different random
+seeds. If global_best keeps improving with each additional restart, more are
+needed.
+
+Since NeuralFoil evaluations are cheap (microseconds per call), wall time is
+not a bottleneck. Each restart costs ~200 L-BFGS-B iterations × 36 calls =
+~7,200 NeuralFoil evaluations. Running 10-20 restarts is feasible for the
+same wall time that BO uses for a few hundred iterations.
+
+One constraint on restart count: for a fair comparison against other
+frameworks in results.csv, total call budget should be held fixed. More
+restarts means either fewer iterations per restart or a larger total budget
+agreed upon in advance.
+
+Practical guidance: start with a small number of restarts, observe whether
+global_best is still improving at the last restart, and increase until it
+stabilizes.
+
+
+ANALYTICAL GRADIENT FOR L-BFGS-B (TRUE ADJOINT)
+-------------------------------------------------
+For rewards where the full pipeline from x to reward is CasADi-traceable,
+the finite-difference gradient (jac='3-point', 36 calls per step) can be
+replaced with a true CasADi adjoint (O(1) calls per step). This does not
+change the L-BFGS-B optimizer at all — it only changes how the gradient
+vector is computed.
+
+Reward compatibility:
+
+  ld_ratio, constrained_ld, max_cl:
+    True adjoint is straightforward — pure arithmetic on CL/CD, fully
+    CasADi-traceable. Replace jac='3-point' with a callable:
+
+      grad_fn = ca.Function('grad', [x], [ca.gradient(reward_expr, x)])
+
+      result = minimize(objective, x0, method='L-BFGS-B',
+                        jac=lambda x: np.array(grad_fn(x)).flatten(),
+                        bounds=bounds)
+
+  reward_exact_notebook (multipoint HPA):
+    Not directly traceable. _find_alpha uses Brentq bisection to solve for
+    alpha at each CL target, which is iterative and breaks the CasADi trace.
+    Options:
+      (a) Use finite differences (pragmatic, works as-is).
+      (b) Reformulate: make alpha optimisation variables with CL == CL_target
+          as equality constraints — but L-BFGS-B cannot handle equality
+          constraints (see section below).
+      (c) Use SLSQP instead of L-BFGS-B for the constrained formulation.
+
+For NeuralFoil specifically, the simulator is fast enough that the 36-call
+finite-difference gradient is not a wall-time bottleneck. The true adjoint
+is mainly valuable for higher-dimensional problems or expensive simulators.
+
+
+REPLICATING THE IPOPT FORMULATION IN L-BFGS-B
+----------------------------------------------
+The existing IPOPT adjoint (environments/NeuralFoil/adjoint/optimize.py)
+uses the following problem structure for the multipoint HPA reward:
+
+  Variables:   18 Kulfan params + 6 alpha values (one per CL target)
+  Equality:    CL(alpha_i, x) == CL_targets[i]   for each i
+  Inequality:  thickness, CM, TE angle, confidence, wiggliness
+  Objective:   minimise mean(CD_i * CL_weights_i)
+
+L-BFGS-B cannot replicate this formulation directly because it only
+supports bound constraints — no equality or general inequality constraints.
+
+To fit this into L-BFGS-B, all constraints must be softened into penalty
+terms in the objective:
+
+  loss = mean(CD * weights)
+       + lambda_cl  * sum((CL_i - CL_target_i)**2)   # equality → L2 penalty
+       + lambda_cm  * sum(max(0, -0.133 - CM_i)**2)   # inequality → hinge
+       + ...
+
+This changes the problem in three fundamental ways:
+
+  1. No guaranteed feasibility.
+     IPOPT's interior-point method enforces all constraints exactly at the
+     solution. With penalty softening, constraint satisfaction depends on
+     lambda magnitude: too small → constraints violated; too large → ill-
+     conditioned landscape that L-BFGS-B steps overshoot.
+
+  2. Worse constraint handling at boundaries.
+     IPOPT's barrier method is designed for constraint boundary navigation.
+     L-BFGS-B's quasi-Newton steps and line search have no awareness of
+     constraint geometry and can overshoot penalty walls.
+
+  3. Alpha coupling is weaker.
+     In IPOPT, CL(alpha_i, x) == CL_target_i anchors each alpha throughout
+     the solve. As a squared penalty, alpha and Kulfan params are jointly
+     optimised against a soft target — a less well-conditioned problem.
+
+The scipy solver that can genuinely replicate the IPOPT formulation is
+SLSQP (scipy.optimize.minimize(method='SLSQP')), not L-BFGS-B. SLSQP
+handles equality and inequality constraints natively, uses a similar
+quasi-Newton Hessian approximation, and would accept the same CasADi
+adjoint gradient. See baseline_methods_evaluation_March17_2026.txt for
+notes on SQP as a Tier 2 baseline.
+
+Summary: attempting to replicate the IPOPT formulation in L-BFGS-B produces
+a degraded version — constraints become soft, feasibility is not guaranteed,
+and the solver is mismatched to the problem structure. Use SLSQP if the
+constrained NLP formulation is needed with a scipy solver.
