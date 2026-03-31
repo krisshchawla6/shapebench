@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=lbfgsb_seed{SEED}_nr{N_RESTARTS}
+#SBATCH --job-name=lbfgsb_seed{SEED}_nr{N_RESTARTS}_mi{MAXITER}
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --output=/scratch/ShapeEvolve/logs/%u/lbfgsb_seed{SEED}_nr{N_RESTARTS}_%j.out
-#SBATCH --error=/scratch/ShapeEvolve/logs/%u/lbfgsb_seed{SEED}_nr{N_RESTARTS}_%j.err
+#SBATCH --output=/scratch/ShapeEvolve/logs/%u/lbfgsb_seed{SEED}_nr{N_RESTARTS}_mi{MAXITER}_%j.out
+#SBATCH --error=/scratch/ShapeEvolve/logs/%u/lbfgsb_seed{SEED}_nr{N_RESTARTS}_mi{MAXITER}_%j.err
 # NOTE: Slurm opens the log file before the script runs, so the logs/%u/
 # directory must exist before submission or the job will fail silently with
 # signal 53. Run once per new user:
@@ -13,7 +13,7 @@
 set -e
 
 REPO_DIR="/scratch/ShapeEvolve"
-OUTPUT_DIR="$REPO_DIR/environments/NeuralFoil/results/run_lbfgsb_seed{SEED}_nr{N_RESTARTS}"
+OUTPUT_DIR="$REPO_DIR/environments/NeuralFoil/results/run_lbfgsb_seed{SEED}_nr{N_RESTARTS}_mi{MAXITER}"
 
 mkdir -p "$OUTPUT_DIR"
 mkdir -p "/scratch/ShapeEvolve/logs/$USER"
