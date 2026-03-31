@@ -529,3 +529,30 @@ Summary: attempting to replicate the IPOPT formulation in L-BFGS-B produces
 a degraded version — constraints become soft, feasibility is not guaranteed,
 and the solver is mismatched to the problem structure. Use SLSQP if the
 constrained NLP formulation is needed with a scipy solver.
+
+
+REWARD CAPPING AND GRADIENT SIGNAL (March 31, 2026)
+----------------------------------------------------
+The NeuralFoil reward function caps infeasible rewards at -10 before
+returning them. This is appropriate for population-based methods (BO, PSO)
+where the cap prevents infeasible samples from distorting the surrogate or
+swarm dynamics. However, it is harmful for L-BFGS-B:
+
+When every evaluation in a finite-difference neighbourhood returns -10, the
+numerical gradient is zero. L-BFGS-B interprets this as convergence
+(NORM OF PROJECTED GRADIENT <= PGTOL) and stops immediately — having made
+no progress toward the feasible region. All 3 initial attempts (nr3,
+attempt1/2/3) failed exactly this way: 111 calls each, every evaluation
+infeasible, global best stuck at -10.
+
+Fix: pass the raw uncapped penalized objective (f_total, e.g. -50, -41,
+-71) to L-BFGS-B instead of the capped reward. The penalty grows as designs
+move away from feasibility, so the gradient now points meaningfully toward
+the feasible region.
+
+Methodological note: this is standard penalty-method practice for
+constrained optimisation with gradient-based solvers. It does not change
+the L-BFGS-B algorithm itself — only the objective function it sees. In a
+paper, one sentence should clarify that L-BFGS-B uses the uncapped penalized
+objective, whereas BO uses the capped reward externally but the uncapped
+value internally for GP training (via --gradient_infeasible).

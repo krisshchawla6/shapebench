@@ -16,6 +16,12 @@ def add_args(parser):
                         help='Finite-difference step size (default: 1e-4)')
     parser.add_argument('--n_restarts', type=int, default=1,
                         help='Number of random restarts (default: 1)')
+    parser.add_argument('--random_state', type=int, default=None,
+                        help='Random seed for reproducible restart starting points (default: None)')
+    parser.add_argument('--gradient_infeasible', action='store_true', default=True,
+                        help='Return raw uncapped penalty for infeasible designs so '
+                             'L-BFGS-B has gradient signal toward the feasible region '
+                             '(default: True)')
 
 
 def run(environment, args, output_dir):
@@ -26,6 +32,9 @@ def run(environment, args, output_dir):
     env_cols = environment.get_results_csv_columns()
     with open(csv_path, 'w', newline='') as f:
         csv.writer(f).writerow(base_cols + env_cols)
+
+    if args.random_state is not None:
+        np.random.seed(args.random_state)
 
     database = empty_database()
     global_best = -np.inf

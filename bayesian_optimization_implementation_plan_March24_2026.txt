@@ -809,3 +809,22 @@ with the new settings, writing to:
   run_BO_torch_seed2_nr25_rs512_cap2k
   run_BO_torch_seed3_nr25_rs512_cap2k
 Seeds 0 and 42 were left running with original settings (no cap, nr=10, rs=256).
+
+
+REWARD CAPPING AND GRADIENT SIGNAL (March 31, 2026)
+----------------------------------------------------
+The reward function caps infeasible rewards at -10 before returning them.
+BO_torch uses --gradient_infeasible (default True) which passes the raw
+uncapped penalized value (f_total) to the GP surrogate instead of the cap.
+This gives the GP a meaningful slope pointing toward the feasible region,
+rather than a flat -10 plateau everywhere in infeasible space.
+
+This is not needed for the acquisition function optimisation (which operates
+in the GP's predicted space), but is critical for the GP to model the
+landscape well enough that EI can locate the feasibility boundary.
+
+Methodological note: passing the raw penalty to the surrogate is standard
+practice in constrained BO. It does not change the BO algorithm itself.
+In a paper, one sentence should clarify this: L-BFGS-B uses the uncapped
+penalized objective directly, while BO_torch uses the uncapped value for GP
+training but the capped reward for reporting and comparison purposes.
