@@ -74,12 +74,16 @@ def load_csv(results_dir, max_evals=None):
                           if particle != "" else f"design_{i}")
             br = row.get("gbest_reward") or row.get("best_reward")
             best_reward = float(br) if br else None
+            fp = row.get("fitness_penalty", "")
+            ft = row.get("fitness_total", "")
             rows.append({
                 "eval": i,
                 "iteration": it,
                 "reward": reward,
                 "design": design,
                 "best_reward": best_reward,
+                "fitness_penalty": float(fp) if fp != "" else None,
+                "fitness_total":   float(ft) if ft != "" else None,
             })
     return rows
 
@@ -96,6 +100,21 @@ def best_trajectory(rows):
     else:
         rewards = np.array([r["reward"] for r in rows], dtype=float)
         best = np.maximum.accumulate(rewards)
+    return evals, best
+
+
+def best_fitness_total_trajectory(rows):
+    """Return (eval_indices, best_fitness_total_so_far) arrays using fitness_total column.
+
+    fitness_total = fitness_objective + fitness_penalty; running max gives the
+    best combined objective+penalty seen so far.  Returns (None, None) if absent.
+    """
+    if rows[0]["fitness_total"] is None:
+        return None, None
+    evals = np.array([r["eval"] for r in rows], dtype=float)
+    totals = np.array([r["fitness_total"] if r["fitness_total"] is not None else -np.inf
+                       for r in rows], dtype=float)
+    best = np.maximum.accumulate(totals)
     return evals, best
 
 
@@ -311,6 +330,47 @@ def make_summary(dirs, method_label="method", output_dir=None,
                 fmt(min_best[i]),  fmt(max_best[i]),
             ])
     print(f"[summary] Trajectory CSV -> {csv_out}")
+
+    # -----------------------------------------------------------------------
+    # Save fitness_total CSV (objective space = -fitness_total, apples-to-apples
+    # with BO/L-BFGS-B reward).  Only written if fitness_total column is present.
+    # -----------------------------------------------------------------------
+    ft_trajs = []
+    for rows in all_rows:
+        et, bt = best_fitness_total_trajectory(rows)
+        if et is not None:
+            # Convert to objective space (positive, lower is better)
+            ft_trajs.append(np.interp(eval_grid, et, -bt))
+
+    if ft_trajs:
+        ft_arr      = np.array(ft_trajs)   # (n_runs, n_points)
+        ft_mean     = np.full(n_points, np.nan)
+        ft_median   = np.full(n_points, np.nan)
+        ft_min      = np.full(n_points, np.nan)
+        ft_max      = np.full(n_points, np.nan)
+        ft_n_active = np.zeros(n_points, dtype=int)
+        for i, ev in enumerate(eval_grid):
+            active = ft_arr[run_lengths - 1 >= ev, i]
+            if len(active) > 0:
+                ft_mean[i]     = np.mean(active)
+                ft_median[i]   = np.median(active)
+                ft_min[i]      = np.min(active)
+                ft_max[i]      = np.max(active)
+                ft_n_active[i] = len(active)
+
+        ft_csv_out = os.path.join(output_dir, f"{output_name}_trajectory_fitness_total.csv")
+        with open(ft_csv_out, "w", newline="") as f:
+            writer = csv_mod.writer(f)
+            writer.writerow(["eval", "n_active", "mean_best", "median_best", "min_best", "max_best"])
+            for i, ev in enumerate(eval_grid):
+                def fmt(v):
+                    return f"{v:.8f}" if not np.isnan(v) else ""
+                writer.writerow([
+                    f"{ev:.1f}", ft_n_active[i],
+                    fmt(ft_mean[i]), fmt(ft_median[i]),
+                    fmt(ft_min[i]),  fmt(ft_max[i]),
+                ])
+        print(f"[summary] Fitness-total CSV -> {ft_csv_out}")
 
     # -----------------------------------------------------------------------
     # Plot

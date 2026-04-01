@@ -121,15 +121,32 @@ def load_adjoint_reference(adjoint_dir):
 # Main
 # ---------------------------------------------------------------------------
 
+def _draw_methods(ax, trajs, adjoint_ref=None, lw=1.8):
+    """Draw all method trajectories (and optional adjoint line) onto ax."""
+    for color, ev, med, mn, mx, solid_mask, dash_mask in trajs:
+        ax.fill_between(ev[solid_mask], mn[solid_mask], mx[solid_mask],
+                        color=color, alpha=0.18)
+        ax.plot(ev[solid_mask], med[solid_mask], color=color, lw=lw)
+        if dash_mask.any():
+            ax.fill_between(ev[dash_mask], mn[dash_mask], mx[dash_mask],
+                            color=color, alpha=0.07)
+            ax.plot(ev[dash_mask], med[dash_mask],
+                    color=color, lw=lw, linestyle="--")
+    if adjoint_ref is not None:
+        ax.axhline(adjoint_ref, color="#333333", lw=1.2, ls=":", zorder=4)
+
+
 def plot_combined(labels, csv_paths, colors, adjoint_dir=None,
                   adjoint_label="Adjoint (IPOPT)", max_evals=None,
-                  x_max=25000, output_path="combined.png", title=None):
+                  x_max=25000, y_min=None, y_max=None,
+                  output_path="combined.png", title=None):
 
     plt.rcParams.update(STYLE)
     fig, ax = plt.subplots(figsize=(9, 5), facecolor="white")
 
     all_vals = []
-    method_legend = []  # one entry per method
+    method_legend = []
+    trajs = []  # (color, ev, med, mn, mx, solid_mask, dash_mask)
 
     for label, csv_path, color in zip(labels, csv_paths, colors):
         traj = load_trajectory(csv_path, max_evals)
@@ -143,6 +160,10 @@ def plot_combined(labels, csv_paths, colors, adjoint_dir=None,
             print(f"[warn] No data in {csv_path}, skipping.")
             continue
 
+        # Shift all evals by +1 so the first point lands at x=1 on log scale
+        # (log(0) is undefined and would be silently dropped by matplotlib).
+        ev = ev + 1
+
         all_vals.extend(med.tolist())
         all_vals.extend(mn.tolist())
         all_vals.extend(mx.tolist())
@@ -155,75 +176,66 @@ def plot_combined(labels, csv_paths, colors, adjoint_dir=None,
             if len(drop):
                 split_ev = ev[drop[0]]
 
-        if split_ev is not None:
-            solid_mask = ev <= split_ev
-            dash_mask  = ev >= split_ev
-        else:
-            solid_mask = np.ones(len(ev), dtype=bool)
-            dash_mask  = np.zeros(len(ev), dtype=bool)
+        solid_mask = ev <= split_ev if split_ev is not None else np.ones(len(ev), dtype=bool)
+        dash_mask  = ev >= split_ev if split_ev is not None else np.zeros(len(ev), dtype=bool)
 
-        # Solid region
-        ax.fill_between(ev[solid_mask], mn[solid_mask], mx[solid_mask],
-                        color=color, alpha=0.18)
-        ax.plot(ev[solid_mask], med[solid_mask], color=color, lw=1.8)
-
-        # Dashed region (fewer active runs)
-        if dash_mask.any():
-            ax.fill_between(ev[dash_mask], mn[dash_mask], mx[dash_mask],
-                            color=color, alpha=0.07)
-            ax.plot(ev[dash_mask], med[dash_mask],
-                    color=color, lw=1.8, linestyle="--")
-
-        method_legend.append(
-            Line2D([0], [0], color=color, lw=2.0, label=label)
-        )
+        trajs.append((color, ev, med, mn, mx, solid_mask, dash_mask))
+        method_legend.append(Line2D([0], [0], color=color, lw=2.0, label=label))
 
     # Adjoint reference
     adjoint_ref = None
     if adjoint_dir is not None:
         weighted_cd, adj_feasible = load_adjoint_reference(adjoint_dir)
         if weighted_cd is not None:
-            adjoint_ref = weighted_cd  # already in objective space (positive CD)
+            adjoint_ref = weighted_cd
             feas_str = " (feasible)" if adj_feasible else " (infeasible)"
             print(f"[adjoint] reference={adjoint_ref:.6f}{feas_str}")
-            ax.axhline(adjoint_ref, color="#333333", lw=1.2, ls=":", zorder=4)
             method_legend.append(
                 Line2D([0], [0], color="#333333", lw=1.2, linestyle=":",
                        label=f"{adjoint_label}  (reward = −{adjoint_ref:.4f})")
             )
 
-    # Style legend: shared visual notation entries
+    # Draw main axes
+    _draw_methods(ax, trajs, adjoint_ref=adjoint_ref)
+
+    # Y limits (dynamic from data, overridden by --y-min/--y-max if provided)
+    if all_vals:
+        y_lo = max(min(all_vals) * 0.8, 1e-9)
+        y_hi = max(all_vals) * 1.2
+        if adjoint_ref is not None:
+            y_lo = min(y_lo, adjoint_ref * 0.90)
+    else:
+        y_lo, y_hi = 1e-9, 1.0
+    if y_min is not None:
+        y_lo = y_min
+    if y_max is not None:
+        y_hi = y_max
+
+    # Main axes: log x and log y
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    ax.set_xlim(1, x_max * 1.02)
+    ax.set_ylim(y_lo, y_hi)
+    ax.set_xlabel("Model (Airfoil Design) Evaluations")
+    ax.set_ylabel("Penalized Objective  (−reward, lower is better)")
+    ax.set_title(title or "NeuralFoil Optimisation — Method Comparison",
+                 fontweight="medium", pad=8)
+    for sp in ["top", "right"]:
+        ax.spines[sp].set_visible(False)
+
+    # Legends
     style_legend = [
         Patch(facecolor="grey", alpha=0.25, label="Min–max range"),
         Line2D([0], [0], color="grey", lw=1.8, label="Median best"),
         Line2D([0], [0], color="grey", lw=1.8, linestyle="--",
                label="Failed/partial runs begin"),
     ]
-
-    # Two-section legend: methods first, then style key
     leg1 = ax.legend(handles=method_legend, loc="upper right",
                      framealpha=0.95, title="Method")
     ax.add_artist(leg1)
-    ax.legend(handles=style_legend, loc="center right",
+    ax.legend(handles=style_legend, loc="lower left",
               framealpha=0.95, title="Style key",
-              bbox_to_anchor=(1.0, 0.35))
-
-    # Axes
-    ax.set_yscale("log")
-    if all_vals:
-        y_lo = max(min(all_vals) * 0.8, 1e-9)
-        y_hi = max(all_vals) * 1.2
-        if adjoint_ref is not None:
-            y_lo = min(y_lo, adjoint_ref * 0.90)
-        ax.set_ylim(y_lo, y_hi)
-    ax.set_xlim(-5, x_max * 1.02)
-
-    ax.set_xlabel("Model (Airfoil Design) Evaluations")
-    ax.set_ylabel("Objective  (−reward, lower is better)")
-    ax.set_title(title or "NeuralFoil Optimisation — Method Comparison",
-                 fontweight="medium", pad=8)
-    for sp in ["top", "right"]:
-        ax.spines[sp].set_visible(False)
+              bbox_to_anchor=(0.0, 0.1))
 
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
     fig.savefig(output_path, dpi=200, bbox_inches="tight")
@@ -253,6 +265,10 @@ if __name__ == "__main__":
                         help="Truncate all trajectories at this eval count")
     parser.add_argument("--x-max", type=int, default=25000,
                         help="X-axis upper limit in evals (default: 25000)")
+    parser.add_argument("--y-min", type=float, default=None,
+                        help="Y-axis lower limit override (default: dynamic from data)")
+    parser.add_argument("--y-max", type=float, default=None,
+                        help="Y-axis upper limit override (default: dynamic from data)")
     parser.add_argument("--output", default="combined.png",
                         help="Output PNG path")
     parser.add_argument("--title", default=None,
@@ -276,6 +292,8 @@ if __name__ == "__main__":
         adjoint_label=args.adjoint_label,
         max_evals=args.max_evals,
         x_max=args.x_max,
+        y_min=args.y_min,
+        y_max=args.y_max,
         output_path=args.output,
         title=args.title,
     )
