@@ -1,0 +1,110 @@
+LBFGSB FAILURE ANALYSIS — NEURALFOIL ENVIRONMENT
+April 2026
+==========================================================
+
+CONTEXT
+-------
+Optimizer: L-BFGS-B (scipy), gradient-based
+Environment: NeuralFoil (18D Kulfan parameterization, reward = negative
+  weighted drag across 6 CL targets, adjoint reference = -0.0787)
+Configuration: nr3 (3 restarts per seed), 40 seeds total (seed0-seed39)
+Results location: environments/NeuralFoil/results/SAVED_DIRS_run_lbfgsb_reward_exact_notebook/
+
+OVERALL RESULTS
+---------------
+22 failed seeds  (55%): no feasible design found across all 3 restarts
+18 successful seeds (45%): found at least one feasible design
+
+Failed seeds: 0, 1, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 21, 22,
+              25, 26, 30, 31, 32, 33, 37 (labelled _FAILED in saved dir)
+Best successful result: seed23, best_reward = -0.09370
+
+FAILED CASE SUMMARY
+-------------------
+seed  | evals  | restarts | feasible | best_reward
+------+--------+----------+----------+------------
+0     |  1406  |    3     |    0     | -1.000
+1     |  3663  |    3     |    0     | -2.113
+7     |  4218  |    3     |    0     | -1.949
+8     |  1517  |    3     |    0     | -1.000
+9     |  9916  |    3     |    0     | -1.000
+10    |  1369  |    3     |    0     | -1.000
+11    |  4699  |    3     |    0     | -2.000
+14    |  3367  |    3     |    0     | -1.000
+15    |  5291  |    3     |    0     | -1.398
+16    |  2294  |    3     |    0     | -1.000
+17    |  8399  |    3     |    0     | -2.000
+18    |  1073  |    3     |    0     | -1.000
+19    |  4995  |    3     |    0     | -2.000
+21    |  4625  |    3     |    0     | -1.000
+22    |  8140  |    3     |    0     | -1.128
+25    |  1776  |    3     |    0     | -2.000
+26    |  1406  |    3     |    0     | -1.000
+30    |  5402  |    3     |    0     | -1.000
+31    |  5476  |    3     |    0     | -3.000
+32    |  6549  |    3     |    0     | -1.000
+33    |  2183  |    3     |    0     | -1.000
+37    |  6475  |    3     |    0     | -1.000
+
+WHY THESE ARE TRUE FAILURES (unlike v3 premature cancellations)
+---------------------------------------------------------------
+The key distinction from v3 dynamic optimizer failures is that L-BFGS-B is
+a gradient-based, deterministic optimizer. This has important consequences:
+
+1. ALL 3 RESTARTS COMPLETED
+   Every failed case ran all 3 restarts to convergence (gradient ≈ 0).
+   These were not early cancellations — the optimizer ran its full budget
+   and converged. Compare to v3 flash2_5 "failures" where attempts 11, 17,
+   19 were cancelled before their budget expired.
+
+2. DETERMINISTIC CONVERGENCE TO LOCAL MINIMA
+   Each restart follows the gradient from its random starting point and
+   converges to a local minimum. Once converged, the optimizer stops —
+   it has no mechanism to escape. Running additional iterations from an
+   already-converged point would do nothing.
+
+3. NO STOCHASTIC ESCAPE MECHANISM
+   In v3, the LLM generates new candidate designs at every iteration,
+   creating the possibility of a random jump to a feasible region at any
+   time. L-BFGS-B has no equivalent — it is purely gradient-driven. A
+   run that converges to an infeasible local minimum cannot recover without
+   a new restart from a different starting point.
+
+4. FAILURE IS SEED-DETERMINED
+   Given the same seed and same environment, a failed restart will always
+   produce the same result. There is no scenario where "running longer"
+   would help — the outcome is fixed by the starting point and the local
+   landscape.
+
+WHAT THE best_reward VALUES INDICATE
+-------------------------------------
+Most failed cases show best_reward = -1.000 or similar round negative values
+(e.g. -2.000, -3.000). These correspond to the optimizer converging to designs
+where a fixed number of CL targets are unreachable — the reward reflects the
+penalty structure, not a near-miss on feasibility. There is no gradient signal
+pointing toward feasibility from those local minima.
+
+COULD MORE RESTARTS HELP?
+--------------------------
+Yes — the failed seeds failed because all 3 of their random starting points
+landed in infeasible basins of attraction. Running the same seeds with nr > 3
+(e.g. nr10) would give each seed more chances to start in a feasible basin.
+However, this is a different experiment (more compute budget), not a question
+of whether the existing runs were cut short. Within the defined nr3 budget,
+these are unambiguous failures.
+
+COMPARISON TO V3 FLASH2_5 FAILURES
+------------------------------------
+                    | L-BFGS-B (_FAILED)      | v3 flash2_5 (cancelled)
+--------------------+-------------------------+---------------------------
+Optimizer type      | Gradient-based, det.    | LLM-based, stochastic
+Restarts completed? | Yes, all 3              | N/A (no restart concept)
+Budget exhausted?   | Yes (converged)         | No (cancelled early)
+Could run longer?   | No benefit              | Possibly yes (stochastic)
+True failure?       | Yes — confirmed         | Ambiguous (see flash2_5
+                    |                         | analysis file)
+Failure mechanism   | Infeasible local min    | Cold-start: all initial
+                    | in all restart basins   | designs infeasible →
+                    |                         | no positive signal
+
+See also: v3_flash2_5_infeasibility_analysis_April2026.txt
