@@ -118,8 +118,17 @@ def best_fitness_total_trajectory(rows):
     if rows[0]["fitness_total"] is None:
         return None, None
     evals = np.array([r["eval"] for r in rows], dtype=float)
-    totals = np.array([r["fitness_total"] if r["fitness_total"] is not None else -np.inf
-                       for r in rows], dtype=float)
+    # Treat rows with fitness_total==0 and reward==-10 as total evaluation
+    # failures (n_solved=0, n_unreachable=0): the aero solver returned nothing,
+    # so both fitness_objective and fitness_penalty are 0 by default, giving a
+    # spuriously high fitness_total=0 that would permanently dominate the
+    # running max over all real designs (which have fitness_total < 0).
+    totals = np.array(
+        [(-np.inf if (r["fitness_total"] == 0.0 and r["reward"] == -10.0) else r["fitness_total"])
+         if r["fitness_total"] is not None else -np.inf
+         for r in rows],
+        dtype=float,
+    )
     best = np.maximum.accumulate(totals)
     return evals, best
 
@@ -155,7 +164,7 @@ def load_adjoint_reference(adjoint_dir):
 # Airfoil plotting helper
 # ---------------------------------------------------------------------------
 
-def plot_best_airfoil(ax, dirs, all_rows, minimizing):
+def plot_best_airfoil(ax, dirs, all_rows, minimizing, output_dir=None):
     """Find the best design across all runs and plot its airfoil outline.
 
     Reward is always higher=better by framework convention, regardless of
@@ -196,10 +205,22 @@ def plot_best_airfoil(ax, dirs, all_rows, minimizing):
         with open(results_json) as f:
             params = json.load(f)["design"]
     else:
-        ax.text(0.5, 0.5, "(design params not found)", ha="center", va="center",
-                transform=ax.transAxes, fontsize=9, color="#888")
-        ax.axis("off")
-        return
+        # Fall back to any pre-saved best_*.json in the output directory whose
+        # filename contains the design name (e.g. best_flash2_5_attempt22_iter182_o13.json).
+        params = None
+        if output_dir is not None:
+            for fname in sorted(os.listdir(output_dir)):
+                if fname.endswith(".json"):
+                    with open(os.path.join(output_dir, fname)) as f:
+                        d = json.load(f)
+                    if "design" in d:
+                        params = d["design"]
+                        break
+        if params is None:
+            ax.text(0.5, 0.5, "(design params not found)", ha="center", va="center",
+                    transform=ax.transAxes, fontsize=9, color="#888")
+            ax.axis("off")
+            return
 
     airfoil = asb.KulfanAirfoil(
         upper_weights=np.array(params["upper_weights"], dtype=float),
@@ -469,7 +490,7 @@ def make_summary(dirs, method_label="method", output_dir=None,
         ax.spines[sp].set_visible(False)
 
     # Airfoil panel
-    plot_best_airfoil(axes[1], dirs, all_rows, minimizing)
+    plot_best_airfoil(axes[1], dirs, all_rows, minimizing, output_dir=output_dir)
 
     fig.subplots_adjust(left=0.07, right=0.98, top=0.88, bottom=0.12)
     plot_out = os.path.join(output_dir, f"{output_name}.png")
