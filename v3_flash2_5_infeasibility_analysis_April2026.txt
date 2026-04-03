@@ -150,12 +150,95 @@ OVERALL FLASH2_5 RESULTS (for reference)
 
 4 failed runs (22% failure rate): attempts 8, 11, 17, 19
 
-POTENTIAL MITIGATIONS (not yet implemented)
---------------------------------------------
-1. Increase required camber explicitly in LLM cold-start prompts
-2. Add smoothness constraints to Kulfan weight sequences in sampling strategy
-3. Provide exemplar feasible geometries (known good Kulfan parameters) as
-   initialization anchors for cold-start iterations
-4. Implement auto-kill: cancel runs with zero feasibility by eval 300 (flash2_5)
-   or eval 2500 (pro2_5) and relaunch with new random seed
-5. Increase initialize_n_sample to give more chances for a feasible cold start
+POTENTIAL MITIGATIONS — FRAMEWORK-LEVEL (April 2026 brainstorm)
+-----------------------------------------------------------------
+The following are general fixes for the v3_dynamic_optimizer framework, not
+specific to NeuralFoil or reward_exact_notebook. Ordered roughly by
+implementation effort. Cost/impact assessed relative to a 6000-eval budget.
+
+FIX 1: Auto-restart on stuck runs  [Effort: Low | Impact: High]
+  If no feasible design is found by eval N (tunable --feasibility_timeout_evals),
+  automatically cancel and relaunch with a new random seed. Purely orchestration-
+  level — no framework code changes needed. Most practical near-term fix.
+  Eliminates wasted compute on runs that will never recover.
+
+FIX 2: Increase initialize_n_sample  [Effort: Trivial | Impact: Medium]
+  More context-free cold-start iterations give more independent chances to land
+  in the feasible region before power-law selection locks onto infeasible parents.
+  Currently 6 (180 evals); could try 15–30 (450–900 evals).
+
+  Cost scaling: linear — each extra cold-start iteration = 1 batch (batch_size
+  evals + 1 LLM call). Out of 6000 total evals, going from 6 to 15 cold-start
+  iterations adds only ~270 evals (~4.5% of budget). However, if the LLM has a
+  systematic bias toward infeasible designs (as suggested by 99.8% cl_target_
+  unreachable rate), more independent cold-start attempts may not help much.
+  Fixes #3, #4, #6 are likely more impactful per unit cost.
+
+FIX 3: Pass uncapped penalty magnitude to LLM context  [Effort: Low-Med | Impact: High]
+  The reward cap flattens all infeasible designs to the same value (-10), so the
+  LLM sees no gradient — "completely infeasible" and "almost feasible" look
+  identical. Passing fitness_total (uncapped) as context lets the LLM identify
+  which parent was *least* infeasible and attempt to improve from it. This is the
+  gradient_infeasible idea already implemented for L-BFGS-B, applied here to the
+  LLM's context window.
+
+FIX 4: Per-constraint feedback in LLM prompt  [Effort: Medium | Impact: High]
+  Rather than just showing the scalar reward, explicitly tell the LLM which
+  constraints were violated and by how much for each parent/inspiration design.
+  The reflection agent partially does this, but it could be made more prominent
+  in the main designer prompt. Fully general — requires constraint_violations
+  dict to be surfaced in context, which is already in results.json for any
+  environment that supports it.
+
+FIX 5: Feasibility-aware island management  [Effort: Medium | Impact: Med-High]
+  Two targeted changes to the island/migration logic:
+  a) Migration filter: only migrate feasible designs. If no feasible design
+     exists, skip migration entirely (don't spread infeasible solutions).
+  b) Island reset: if one island has zero feasibility after N iterations, reset
+     it with fresh context-free LLM proposals rather than parent-based ones.
+  Currently all 3 islands can simultaneously converge to infeasible regions and
+  cross-pollinate each other with bad designs via migration.
+
+FIX 6: Adaptive feasibility-mode prompting  [Effort: Medium | Impact: High]
+  Add a "feasibility mode" strategy that activates when the database has zero
+  feasible designs. In this mode, the LLM is prompted to focus only on satisfying
+  constraints (not optimizing the objective). Once a feasible design is found,
+  switch back to normal objective-optimization mode. Environment-agnostic — only
+  requires adding a strategy branch based on feasibility count in the database.
+
+FIX 7: Feasibility-first seeding from a baseline  [Effort: Low | Impact: High]
+  Allow an optional --baseline design (a known feasible point) to be injected
+  into the database at iteration 0 before any LLM proposals. The framework
+  already has a --baseline argument but it may not be wired to seed the database.
+  Guarantees the power-law sampler always has a feasible parent, eliminating the
+  cold-start failure mode — at the cost of reduced exploration diversity from
+  a potentially narrow starting region.
+
+FIX 8: Progressive constraint tightening  [Effort: High | Impact: Medium]
+  Start with relaxed constraint penalty weights and tighten them over iterations
+  as the optimizer finds feasible regions. Requires constraint weights to be
+  schedulable over iterations — a more significant framework change but fully
+  general. Analogous to continuation methods in numerical optimization.
+
+FIX 9: Hybrid LLM + gradient feasibility repair  [Effort: High | Impact: High]
+  After generating an infeasible design, run a short L-BFGS-B feasibility-seeking
+  step (minimizing penalty only, no objective) to "repair" it before adding to
+  the database. Combines the two methods' strengths: L-BFGS-B is effective at
+  local constraint satisfaction once it has a gradient signal; the LLM provides
+  global exploration.
+
+SUMMARY TABLE
+-------------
+Fix  Description                          Effort   Impact
+---  -----------------------------------  -------  ------
+1    Auto-restart on stuck runs           Low      High
+2    Increase initialize_n_sample         Trivial  Medium
+3    Uncapped penalty in LLM context      Low-Med  High
+4    Per-constraint feedback in prompt    Medium   High
+5    Feasibility-aware island management  Medium   Med-High
+6    Adaptive feasibility-mode prompting  Medium   High
+7    Baseline seeding                     Low      High*
+8    Progressive constraint tightening   High     Medium
+9    Hybrid LLM + gradient repair         High     High
+
+* Fix 7 reduces exploration diversity — best combined with Fix 6.
