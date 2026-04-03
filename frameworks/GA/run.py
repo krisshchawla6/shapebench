@@ -41,7 +41,16 @@ def run(environment, args, output_dir):
             all_results[i] = results
             database = update_database(database, design_path, reward, results)
 
-        swarm.update_bests(rewards)
+        # Use fitness_total for PSO selection to avoid reward-cap deadlock:
+        # when all designs are infeasible, capped rewards are identical (-10)
+        # and pbest/gbest updates carry no information. fitness_total preserves
+        # the penalty magnitude so PSO can rank infeasible designs and drift
+        # toward the feasible boundary. Falls back to reward if unavailable.
+        selection_fitness = np.array([
+            all_results[i].get('metrics', {}).get('fitness_total', rewards[i])
+            for i in range(swarm.n)
+        ])
+        swarm.update_bests(selection_fitness)
 
         with open(csv_path, 'a', newline='') as f:
             writer = csv.writer(f)

@@ -1,0 +1,191 @@
+PSO (GA) FAILURE ANALYSIS — APRIL 2026
+=======================================
+
+CONTEXT
+-------
+Framework: GA (PSO)
+Environment: NeuralFoil (18D Kulfan parameterization)
+Reward: reward_exact_notebook (negative weighted drag, feasible designs only)
+Config: 120 particles, 500 iterations max
+Budget: 60,000 evaluations total (120 * 500)
+
+Runs labeled FAILED:
+  - run_GA_reward_exact_notebook_120particles_500iterations_attempt_6_FAILED
+  - run_GA_reward_exact_notebook_120particles_500iterations_attempt_7_FAILED
+  - run_GA_reward_exact_notebook_120particles_500iterations_attempt_10_FAILED
+  - run_GA_reward_exact_notebook_120particles_500iterations_attempt_11_FAILED
+
+SUMMARY TABLE
+-------------
+Run         Max iter  Evals   Feasible  gbest final  % of budget
+----------  --------  ------  --------  -----------  -----------
+attempt_6      51      6,120      0      -10.0000       10%
+attempt_7      56      6,840     51       -4.3817       11%
+attempt_10     52      6,240      0      -10.0000       10%
+attempt_11     67      8,040      0      -10.0000       13%
+
+All 4 runs were cancelled at 10-13% of the 500-iteration budget.
+
+For reference, complete runs found first feasibility at:
+  attempt_9: iter 5    attempt_8: iter 10   attempt_4: iter 25
+  attempt_5: iter 20   attempt_3: iter 47   attempt_2: iter 50
+
+ATTEMPT 7: PREMATURE CANCELLATION
+----------------------------------
+At iter 56, attempt_7 had gbest = -4.38 — nearly identical to attempt_3's
+gbest of -4.28 at the same iteration. Attempt_3 ran to completion and
+reached -0.0796. Attempt_7 had 51 feasible designs and a normal improvement
+trajectory. It was cancelled at 11% of budget with no evidence of stagnation.
+
+Verdict: premature cancellation. This run was progressing normally.
+
+ATTEMPTS 6, 10, 11: 0 FEASIBLE DESIGNS
+----------------------------------------
+All three had gbest_reward stuck at exactly -10.0 throughout their runs and
+produced zero feasible designs.
+
+WHY PSO FAILURE IS MORE DEFINITIVE THAN V3/LLM FAILURE
+-------------------------------------------------------
+PSO uses the capped reward (-10.0) for gbest tracking and particle selection,
+confirmed by gbest_reward staying exactly -10.0 across all iterations. When
+all 120 particles return the same reward every iteration, there is literally
+zero selective pressure — the velocity update carries no useful information
+and particles execute an undirected random walk.
+
+This is structurally different from v3_flash2_5 failure (see
+v3_flash2_5_infeasibility_analysis_April2026.txt): the LLM can reason about
+constraint violations and propose structurally novel designs even with an
+all-infeasible history. PSO cannot — it is mechanistically stuck.
+
+The fitness_total column (uncapped penalty magnitude) is logged in results.csv
+but is NOT used by PSO for selection. The fitness_total minimum per iteration
+in the 0-feasible runs shows no systematic improvement trend — oscillating
+in the -80 to -170 range with no convergence toward zero:
+
+  attempt_6  fitness_total min: iter0=-122.0, iter20=-93.6, iter50=-89.9  (no trend)
+  attempt_10 fitness_total min: iter0=-125.7, iter20=-88.6, iter50=-87.6  (no trend)
+  attempt_11 fitness_total min: iter0=-167.1, iter20=-138.9, iter67=-109.6 (no trend)
+
+This confirms no exploitable gradient even in the uncapped signal.
+
+TIMING CONTEXT
+--------------
+Complete runs found first feasibility between iter 5 and iter 50. Attempts 6
+and 10 ran to iter 51-52, one or two iterations past the latest success point.
+Attempt_11 ran to iter 67. Without any feasibility signal by iteration 67, and
+with PSO mechanistically unable to recover from a flat reward landscape, the
+probability of late recovery is very low — unlike the LLM case where a slow
+start (e.g. attempt23 in flash2_5, first feasible at eval 2348) is possible
+because the LLM can generate novel designs regardless of database content.
+
+HOW TO IDENTIFY A TRUE PSO FAILURE
+------------------------------------
+A run is a confirmed true failure when ALL THREE hold:
+
+  1. gbest_reward == -10.0 for all iterations past iter ~50 (where other
+     runs typically find feasibility)
+  2. 0 feasible designs across the entire run
+  3. No systematic downward trend in fitness_total minimum per iteration
+     (oscillation without convergence toward zero)
+
+A run is likely a premature cancellation when:
+  - Feasible designs exist and gbest_reward is improving (attempt_7 pattern)
+  - OR: 0 feasible at iter 50-70 but cancelled before iter ~100, with no
+    opportunity to confirm stagnation over a longer window
+
+Clean decision boundary: if 0 feasible at iter 100+ with gbest stuck at
+-10.0 and no fitness_total trend, the run is a confirmed failure. PSO is a
+deterministic algorithm with no recovery mechanism from a flat reward landscape.
+
+FINAL VERDICTS
+--------------
+attempt_7:   PREMATURE CANCELLATION — normal trajectory, gbest matched
+             successful runs at the same iteration count
+attempt_6:   AMBIGUOUS — cancelled at iter 51 (one iteration past the latest
+             success point); likely true failure but inconclusive
+attempt_10:  AMBIGUOUS — same reasoning as attempt_6
+attempt_11:  LIKELY TRUE FAILURE — iter 67, well past the typical feasibility
+             window, with zero gradient signal throughout
+
+FAILURE MECHANISM: REWARD-CAP DEADLOCK
+---------------------------------------
+The PSO failure mode is a reward-cap deadlock: once all particles are
+infeasible, the capped reward (-10.0) eliminates all selection signal
+permanently. PSO velocity updates become uninformative, and the swarm
+devolves to a bounded random walk. There is no recovery mechanism — PSO
+cannot "decide" to explore differently when reward gradients are flat.
+
+This is the PSO analogue of the v3 cold-start failure, but harder to escape:
+  - v3/LLM cold-start: LLM can receive explicit constraint feedback and
+    propose novel designs outside its infeasible history
+  - PSO deadlock: no such escape mechanism; the algorithm is structurally
+    unable to act on any signal when all rewards are identical
+
+POTENTIAL MITIGATIONS
+---------------------
+1. Use fitness_total (uncapped) for PSO selection instead of capped reward.
+   PSO works by fitness comparisons (pbest/gbest tracking), not gradients.
+   With all rewards capped at -10.0, every particle has identical fitness and
+   pbest/gbest updates carry no useful information. Using fitness_total
+   restores meaningful ranking of infeasible designs — particles can identify
+   and drift toward the least-infeasible region without any change to the
+   velocity update equations. Likely the highest-impact fix for this failure
+   mode, and likely a one-line change in the fitness evaluation.
+
+2. Inject a known feasible baseline design at initialization (iter 0). Ensures
+   at least one particle starts in the feasible region, preventing deadlock.
+   Reduces exploration diversity from a narrow starting point.
+
+3. Auto-restart on stuck runs: if gbest == -10.0 for N consecutive iterations
+   past iter 50, cancel and relaunch with a new random seed. Purely
+   orchestration-level, no framework code changes needed.
+
+RECOMMENDATION: HOW TO PROCEED
+--------------------------------
+Running more cases to better characterize the failure rate is NOT the primary
+recommendation. The failure mechanism is already understood — reward-cap
+deadlock is deterministic, not stochastic. More runs would tell you the
+frequency but nothing new about the cause or how to fix it.
+
+Current failure rate estimate: between 1/14 (~7%) and 3/14 (~21%), with high
+uncertainty due to small sample and ambiguous cancellations. This range is
+wide but the mechanism driving it is clear.
+
+Recommended actions, in priority order:
+
+  1. Fix PSO selection to use fitness_total instead of capped reward.
+     PSO does not use gradients — it works by fitness comparisons: "is this
+     position better than my personal best / the global best?" When all
+     rewards are capped at -10.0, every particle has identical fitness, so
+     pbest and gbest never update meaningfully and the attraction terms
+     (c1*(pbest - x), c2*(gbest - x)) become uninformative random pulls.
+     Substituting fitness_total (uncapped penalty magnitude) restores
+     meaningful ranking: a design with total_violation=-50 is ranked better
+     than one with -150, so pbest and gbest track the least-infeasible
+     designs seen, and particles drift toward the feasible boundary.
+     Likely a one-line change in the fitness evaluation. Then run 5-10 cases
+     with the fix to confirm it works.
+
+  2. If the unmodified baseline failure rate is needed (e.g., for a paper
+     comparison table): re-run attempts 6 and 10 to full completion rather
+     than launching fresh cases. Both stopped at iter 51-52 with 90% of their
+     budget unused — the cheapest path to resolving the ambiguity.
+
+  3. Running entirely new fresh cases is only warranted if a statistically
+     robust baseline failure rate is required for the unmodified PSO. In that
+     context, ~10 more runs (bringing total to ~25) would give a 95% CI
+     narrow enough to be meaningful.
+
+Bottom line: fix first (fitness_total selection), confirm with a handful of
+new runs, then report the fixed failure rate. The failure rate of the broken
+version has limited value unless specifically needed as a comparison baseline.
+
+COMPARISON TO V3/LLM FAILURES
+-------------------------------
+See v3_flash2_5_infeasibility_analysis_April2026.txt for the parallel analysis
+of flash2_5 cold-start failures. Key differences:
+
+  PSO deadlock:       mechanistic, no recovery possible once all-infeasible
+  LLM cold-start:     probabilistic, slow starters can recover up to ~2400 evals
+  Kill threshold:     PSO ~iter 100 is safe; LLM needs ~2400 evals to be sure
+  Uncapped signal:    PSO ignores fitness_total; LLM can use it if surfaced
