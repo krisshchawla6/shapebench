@@ -9,13 +9,14 @@ Environment: NeuralFoil (18D Kulfan parameterization)
 Reward: reward_exact_notebook (negative weighted drag, feasible designs only)
 Config: 200 iterations, batch_size=30, initialize_n_sample=6, num_islands=3
 
-Failed runs (moved to OLD_OR_OVERWRITTEN_OR_INCOMPLETE/):
+Runs moved to OLD_OR_OVERWRITTEN_OR_INCOMPLETE/ as _FAILED:
   - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_8_flash2_5_FAILED
   - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_11_flash2_5_FAILED
   - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_17_flash2_5_FAILED
   - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_19_flash2_5_FAILED
 
-Out of 18 total flash2_5 attempts run: 4 failed completely (22% failure rate).
+Out of 18 total flash2_5 attempts run: 1 confirmed failure (attempt8, 22% was
+a miscount — see EARLY DETECTION THRESHOLD section for revised analysis).
 
 SUMMARY OF FAILURE MODE
 ------------------------
@@ -118,25 +119,64 @@ The LLM varied parameters but could not escape the infeasible basin:
 
 EARLY DETECTION THRESHOLD
 --------------------------
-By eval ~300 (iteration ~10), all 4 failed runs had zero feasible designs.
-By contrast, successful flash2_5 runs found first feasibility between eval 26-1151.
-The reliable kill threshold for flash2_5 is: no feasible design by eval 300.
+** REVISED APRIL 2026 — original eval 300 threshold was incorrect **
+
+Original analysis (based only on the 4 failed runs) stated: "no feasible design
+by eval 300 → kill the run." This was wrong.
+
+Full dataset of 14 successful flash2_5 runs shows first-feasibility evals:
+  attempt25: eval 27     attempt12: eval 34     attempt9:  eval 58
+  attempt22: eval 198    attempt20: eval 148    attempt16: eval 297
+  attempt14: eval 331    attempt15: eval 376    attempt18: eval 564
+  attempt13: eval 640    attempt10: eval 1177   attempt24: eval 1518
+  attempt21: eval 1594   attempt23: eval 2348
+
+8 of 14 successful runs found first feasibility AFTER eval 300. The slowest
+success (attempt23) found feasibility at eval 2348 — comparable to the slowest
+pro2_5 success (~eval 2369).
+
+REVISED CONCLUSION: flash2_5 can legitimately take up to ~2400 evals to find
+feasibility. The eval 300 kill threshold is far too aggressive.
+
+IMPLICATION FOR THE 4 "FAILED" RUNS:
+  - attempt8  (cancelled at eval 4378): likely a true failure — ran well past
+    eval 2348 with no feasible design and best fitness_total of only -2.50
+  - attempt11 (cancelled at eval 686):  likely premature — cancelled at <30% of
+    the eval budget where attempt23 found feasibility
+  - attempt17 (cancelled at eval 642):  likely premature — same reasoning
+  - attempt19 (cancelled at eval 597):  likely premature — same reasoning
+
+fitness_total comparison at cancellation vs. attempt23 before eval 600:
+  attempt23 (SUCCESS): fitness_total ranging -16 to -24 before eval 600;
+    only converged to feasibility near eval 2000-2348
+  attempt11: best fitness_total -5.15 (better signal than attempt23 at same point)
+  attempt17: best fitness_total -6.04
+  attempt19: best fitness_total -4.56
+
+Attempts 11, 17, 19 showed comparable or better uncapped penalty signals than
+attempt23 did at the same eval count. They were cancelled on faulty threshold logic.
 
 Note: pro2_5 runs are slower to find feasibility (slowest success: eval 2369,
 iteration 83), so the threshold for pro2_5 is much later (~eval 2500-3000).
+This is now consistent with the revised flash2_5 understanding.
 
 COMPARISON: SUCCESSFUL VS FAILED RUNS
 --------------------------------------
 Successful flash2_5 runs showed:
-  - First feasible design between eval 26 (iter 6) and eval 1151 (iter 38)
+  - First feasible design between eval 27 (attempt25) and eval 2348 (attempt23)
   - Steady improvement in median reward after feasibility found
   - Diversity in Kulfan weight distributions
 
-Failed runs showed:
-  - Zero feasible designs at any point
+Confirmed failed run (attempt8) showed:
+  - Zero feasible designs across 4378 evals (well past slowest success at 2348)
   - Identical reward (-10.0) across all evaluations
   - Boundary-hitting behavior in later iterations (LE weight → 0.5, TE → 0)
   - No diversity improvement — LLM stuck in same infeasible region
+
+Likely premature cancellations (attempts 11, 17, 19):
+  - Zero feasible designs at cancellation (eval 597-686), but cancelled far
+    before the point where slow starters (e.g. attempt23) found feasibility
+  - Cannot be classified as confirmed failures retroactively
 
 OVERALL FLASH2_5 RESULTS (for reference)
 -----------------------------------------
@@ -148,7 +188,11 @@ OVERALL FLASH2_5 RESULTS (for reference)
   attempt21: -0.0797
   [others in -0.082 to -0.097 range]
 
-4 failed runs (22% failure rate): attempts 8, 11, 17, 19
+1 confirmed failed run: attempt 8 (true cold-start failure, 4378 evals, never feasible)
+3 likely premature cancellations: attempts 11, 17, 19 (cancelled at 597-686 evals,
+  before the ~2400-eval window where slow starters can find feasibility)
+Revised failure rate: 1/18 confirmed (5.6%), up to 4/18 (22%) if premature
+  cancellations are counted — but the latter is likely an overcount.
 
 POTENTIAL MITIGATIONS — FRAMEWORK-LEVEL (April 2026 brainstorm)
 -----------------------------------------------------------------
