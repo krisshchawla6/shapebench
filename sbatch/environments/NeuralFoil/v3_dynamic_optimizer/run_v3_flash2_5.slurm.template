@@ -1,0 +1,44 @@
+#!/bin/bash
+#SBATCH --job-name=v3_flash2_5_attempt{ATTEMPT}
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --output=/scratch/ShapeEvolve/logs/%u/v3_flash2_5_attempt{ATTEMPT}_%j.out
+#SBATCH --error=/scratch/ShapeEvolve/logs/%u/v3_flash2_5_attempt{ATTEMPT}_%j.err
+# NOTE: Slurm opens the log file before the script runs, so the logs/%u/
+# directory must exist before submission or the job will fail silently with
+# signal 53. Run once per new user:
+#   sudo mkdir -p /scratch/ShapeEvolve/logs/$USER
+#   sudo chown $USER:$USER /scratch/ShapeEvolve/logs/$USER
+
+set -e
+
+REPO_DIR="/scratch/ShapeEvolve"
+OUTPUT_DIR="$REPO_DIR/environments/NeuralFoil/results/run_v3_dynamic_optimizer_reward_exact_notebook_attempt_{ATTEMPT}_flash2_5"
+
+mkdir -p "$OUTPUT_DIR"
+mkdir -p "/scratch/ShapeEvolve/logs/$USER"
+
+echo "=========================================="
+echo "Job ID:       $SLURM_JOB_ID"
+echo "Node:         $SLURMD_NODENAME"
+echo "Date:         $(date)"
+echo "Framework:    v3_dynamic_optimizer"
+echo "Environment:  NeuralFoil"
+echo "Reward:       reward_exact_notebook"
+echo "Model:        gemini-2.5-flash"
+echo "Attempt:      {ATTEMPT}"
+echo "Output:       $OUTPUT_DIR"
+echo "=========================================="
+
+source "$REPO_DIR/venv/bin/activate"
+
+cd "$REPO_DIR"
+
+python run_benchmark.py \
+    --config "$REPO_DIR/sbatch/environments/NeuralFoil/v3_dynamic_optimizer/v3_flash2_5.config.json" \
+    --output-dir "$OUTPUT_DIR"
+
+echo "=========================================="
+echo "Job completed successfully"
+echo "End time: $(date)"
+echo "=========================================="

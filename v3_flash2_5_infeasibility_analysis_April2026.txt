@@ -1,0 +1,161 @@
+V3 FLASH2_5 INFEASIBILITY ANALYSIS — APRIL 2026
+================================================
+
+CONTEXT
+-------
+Framework: v3_dynamic_optimizer
+Model: gemini-2.5-flash
+Environment: NeuralFoil (18D Kulfan parameterization)
+Reward: reward_exact_notebook (negative weighted drag, feasible designs only)
+Config: 200 iterations, batch_size=30, initialize_n_sample=6, num_islands=3
+
+Failed runs (moved to OLD_OR_OVERWRITTEN_OR_INCOMPLETE/):
+  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_8_flash2_5_FAILED
+  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_11_flash2_5_FAILED
+  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_17_flash2_5_FAILED
+  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_19_flash2_5_FAILED
+
+Out of 18 total flash2_5 attempts run: 4 failed completely (22% failure rate).
+
+SUMMARY OF FAILURE MODE
+------------------------
+All 4 runs exhibited complete and persistent design infeasibility — not a single
+feasible design was generated across their entire execution (4378, 703, 642, 597
+evaluations respectively). Every evaluation returned reward = -10.0 (capped penalty).
+
+This is a "cold-start failure" that never recovers: once the first 6 LLM-generated
+designs (initialize_n_sample=6) all land in infeasible territory, the power-law
+parent selection has no positive signal to work with. Every subsequent design is
+generated from an all-infeasible database, giving the LLM no gradient toward
+the feasible region.
+
+KEY FILES FOR DIAGNOSIS
+-----------------------
+- iter_0_s0/ through iter_5_s0/save/results.json  — cold-start designs, all
+  showing feasible=false with large total_violation values
+- results.csv  — all rewards = -10.0, no improvement in any window
+- run_config.json  — confirms initialize_n_sample=6, sampler_model=gemini-2.5-flash
+
+CONSTRAINT VIOLATIONS (cold-start iterations 0-5)
+--------------------------------------------------
+Ranked by frequency across all 4 failed runs:
+
+1. cl_target_unreachable (~99.8% of all designs)
+   - LLM consistently proposed airfoils with insufficient camber to reach CL
+     targets (0.8-1.6 range)
+   - PRIMARY BLOCKER: without sufficient lift, the design cannot be feasible
+   - Upper weights [0] too small (0.1-0.4 range; high-lift airfoils need ~0.3-0.6)
+
+2. wiggliness (65-99% of designs)
+   - Non-smooth Kulfan weight sequences with abrupt transitions between adjacent
+     weights, causing wavy surfaces
+   - LLM did not self-constrain smoothness of weight progressions
+
+3. analysis_confidence (~91%)
+   - Proposed geometries were outside NeuralFoil's training distribution
+   - Surrogate could not evaluate them reliably
+   - Indicates extreme or invalid shapes being proposed
+
+4. te_angle (~90%) and t090 (~87%)
+   - Trailing edge angle and thickness-at-90%-chord violations
+   - Coupled to the camber problem: attempts to increase lift worsen these
+
+FULL CONSTRAINT VIOLATION BREAKDOWN (all 4 failed runs, 6320 designs total)
+-----------------------------------------------------------------------------
+Computed from all save/results.json files across the 4 failed runs:
+
+  Constraint                       % of designs
+  -----------------------------------------------
+  cl_target_unreachable               99.8%
+  te_angle                            94.0%
+  t090                                91.9%
+  analysis_confidence                 87.8%
+  wiggliness                          76.7%
+  CM (pitching moment)                57.0%
+  local_thickness_all                 46.9%
+  upper_weights_0 (param bounds)       7.7%
+  t033 (thickness at 33% chord)        6.6%
+  lower_weights_0 (param bounds)       2.5%
+
+Discussion:
+- CM at 57%: the LLM was also frequently failing pitch moment constraints,
+  indicating that the camber distributions it proposed created excessive
+  nose-down moments even when lift was close to sufficient.
+- local_thickness_all at 47%: structural thickness requirements violated
+  at nearly half of designs, coupled to the insufficient camber problem
+  (thin airfoils with insufficient camber can't reach high CL targets).
+- upper_weights_0 and lower_weights_0 at 7.7% and 2.5%: the LLM occasionally
+  proposed Kulfan weights outside the parameter bounds entirely, indicating
+  the sampler was not always respecting box constraints on the design space.
+- t033 at 6.6%: mid-chord thickness (33%) was less frequently violated than
+  aft-chord (t090 at 91.9%), suggesting the geometry was more problematic
+  near the trailing edge than the mid-section.
+
+KULFAN PARAMETER PATTERNS IN FAILED DESIGNS
+--------------------------------------------
+Upper weights [0] means (leading-edge camber):
+  Attempt 8:  0.129  (too weak)
+  Attempt 11: 0.386  (closer but still failed on secondary constraints)
+  Attempt 17: 0.108  (too weak; also produced negative LE weight in iter 4)
+  Attempt 19: 0.186  (too weak)
+
+Lower weights [0] means (lower surface curvature):
+  All runs: -0.15 to -0.28 range — insufficient curvature for high-lift
+
+Leading edge weight:
+  Attempts 17, 19: pushed toward maximum 0.5 (desperation boundary-hitting)
+  Attempts 8, 11:  moderate 0.38-0.39
+
+TE thickness: near-zero in all runs (hitting lower bound)
+
+NO LEARNING OVER TIME
+---------------------
+Reward stayed at exactly -10.0 from iteration 0 to cancellation with no trend.
+The LLM varied parameters but could not escape the infeasible basin:
+  - Attempt 17 pushed LE weight to maximum → still infeasible
+  - Attempt 8 varied upper_weights[0] from 0.018 to 0.342 → all infeasible
+  - Attempt 19 tried varied lower surface curvatures → all infeasible
+
+EARLY DETECTION THRESHOLD
+--------------------------
+By eval ~300 (iteration ~10), all 4 failed runs had zero feasible designs.
+By contrast, successful flash2_5 runs found first feasibility between eval 26-1151.
+The reliable kill threshold for flash2_5 is: no feasible design by eval 300.
+
+Note: pro2_5 runs are slower to find feasibility (slowest success: eval 2369,
+iteration 83), so the threshold for pro2_5 is much later (~eval 2500-3000).
+
+COMPARISON: SUCCESSFUL VS FAILED RUNS
+--------------------------------------
+Successful flash2_5 runs showed:
+  - First feasible design between eval 26 (iter 6) and eval 1151 (iter 38)
+  - Steady improvement in median reward after feasibility found
+  - Diversity in Kulfan weight distributions
+
+Failed runs showed:
+  - Zero feasible designs at any point
+  - Identical reward (-10.0) across all evaluations
+  - Boundary-hitting behavior in later iterations (LE weight → 0.5, TE → 0)
+  - No diversity improvement — LLM stuck in same infeasible region
+
+OVERALL FLASH2_5 RESULTS (for reference)
+-----------------------------------------
+14 successful runs, best rewards:
+  attempt22: -0.0790  (closest to adjoint reference of -0.0787)
+  attempt9:  -0.0797
+  attempt10: -0.0794
+  attempt13: -0.0796
+  attempt21: -0.0797
+  [others in -0.082 to -0.097 range]
+
+4 failed runs (22% failure rate): attempts 8, 11, 17, 19
+
+POTENTIAL MITIGATIONS (not yet implemented)
+--------------------------------------------
+1. Increase required camber explicitly in LLM cold-start prompts
+2. Add smoothness constraints to Kulfan weight sequences in sampling strategy
+3. Provide exemplar feasible geometries (known good Kulfan parameters) as
+   initialization anchors for cold-start iterations
+4. Implement auto-kill: cancel runs with zero feasibility by eval 300 (flash2_5)
+   or eval 2500 (pro2_5) and relaunch with new random seed
+5. Increase initialize_n_sample to give more chances for a feasible cold start

@@ -70,8 +70,14 @@ def load_csv(results_dir, max_evals=None):
             design = row.get("design", "")
             if not design:
                 particle = row.get("particle", "")
-                design = (f"iter_{it:04d}_p{int(float(particle)):03d}"
-                          if particle != "" else f"design_{i}")
+                restart  = row.get("restart", "")
+                call_col = row.get("call", "")
+                if particle != "":
+                    design = f"iter_{it:04d}_p{int(float(particle)):03d}"
+                elif call_col != "" and restart != "":
+                    design = f"call_{int(float(call_col)):05d}_r{int(float(restart))}"
+                else:
+                    design = f"design_{i}"
             br = row.get("gbest_reward") or row.get("best_reward")
             best_reward = float(br) if br else None
             fp = row.get("fitness_penalty", "")
