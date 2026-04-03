@@ -1,0 +1,41 @@
+#!/bin/bash
+#SBATCH --job-name=GA_120p_500i_attempt{ATTEMPT}
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --output=/scratch/ShapeEvolve/logs/%u/GA_120p_500i_attempt{ATTEMPT}_%j.out
+#SBATCH --error=/scratch/ShapeEvolve/logs/%u/GA_120p_500i_attempt{ATTEMPT}_%j.err
+
+set -e
+
+REPO_DIR="/scratch/ShapeEvolve"
+OUTPUT_DIR="$REPO_DIR/environments/NeuralFoil/results/run_GA_reward_exact_notebook_120particles_500iterations_attempt_{ATTEMPT}_AWS"
+CONFIG="$REPO_DIR/sbatch/environments/NeuralFoil/GA/ga_120p_500i.config.json"
+
+mkdir -p "$OUTPUT_DIR"
+mkdir -p "/scratch/ShapeEvolve/logs/$USER"
+
+echo "=========================================="
+echo "Job ID:       $SLURM_JOB_ID"
+echo "Node:         $SLURMD_NODENAME"
+echo "Date:         $(date)"
+echo "Framework:    GA (PSO)"
+echo "Environment:  NeuralFoil"
+echo "Reward:       reward_exact_notebook"
+echo "n_particles:  120"
+echo "n_iterations: 500"
+echo "Attempt:      {ATTEMPT}"
+echo "Output:       $OUTPUT_DIR"
+echo "=========================================="
+
+source "$REPO_DIR/venv/bin/activate"
+
+cd "$REPO_DIR"
+
+python run_benchmark.py \
+    --config "$CONFIG" \
+    --output-dir "$OUTPUT_DIR"
+
+echo "=========================================="
+echo "Job completed successfully"
+echo "End time: $(date)"
+echo "=========================================="

@@ -9,6 +9,9 @@ class BaseReward(ABC):
     with what parameters — from the environment's simulation primitive.
     """
 
+    def __init__(self, **kwargs):
+        pass
+
     @abstractmethod
     def evaluate(self, run_sim: Callable, design_path: str, case_dir: str) -> tuple:
         """Evaluate fitness for a given design.
