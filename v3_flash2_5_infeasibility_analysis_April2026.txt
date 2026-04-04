@@ -176,26 +176,81 @@ Successful flash2_5 runs showed:
   - Steady improvement in median reward after feasibility found
   - Diversity in Kulfan weight distributions
 
-Confirmed failed run (attempt8) showed:
-  - Zero feasible designs across 4378 evals (well past slowest success at 2348)
-  - Identical reward (-10.0) across all evaluations
-  - Boundary-hitting behavior in later iterations (LE weight → 0.5, TE → 0)
-  - No diversity improvement — LLM stuck in same infeasible region
+Confirmed failed run (attempt8) — three diagnostic reasons:
+
+  1. RAN PAST MAXIMUM FEASIBILITY WINDOW
+     4378 evals / 131 iterations — well past the latest first-feasibility point
+     across all 14 successes (attempt23: eval 2348). No precedent for flash2_5
+     finding feasibility this late.
+
+  2. COMPLETE STAGNATION IN FITNESS_TOTAL
+     Rolling best fitness_total hit -2.50 at eval ~1000 and never improved
+     across the remaining 3,378 evals:
+       eval  500: -4.757    eval 2000: -2.502 (frozen)
+       eval 1000: -2.502    eval 2500: -2.502 (frozen)
+       eval 1500: -2.502    eval 3000–4378: -2.502 (frozen)
+     Contrast with attempt23: rolling best also plateaued (~-2.27 from eval 500)
+     but broke out at eval 2348. Attempt8's plateau lasted 3378 evals — 2.25×
+     longer — with zero movement.
+
+  3. REWARD SIGNAL SHOWS NO APPROACH TO FEASIBILITY
+     Unique reward values include -10.06, -11.38, -13.84, -25.29, -33.44 etc.
+     — worse than the -10 cap, meaning large constraint penalties throughout.
+     Zero feasible designs. The LLM never approached the feasibility boundary.
+
+  Why attempt8 is different from inconclusives (11/17/19):
+     Attempts 11/17/19 were cancelled at 597–686 evals with fitness_total
+     signals of -4.56 to -5.15 — actually better than attempt23 at the same
+     eval count. Attempt8's plateau at -2.50 was comparable to attempt23's
+     (-2.27) in magnitude but lasted far longer with no sign of breaking out.
 
 Likely premature cancellations (attempts 11, 17, 19):
   - Zero feasible designs at cancellation (eval 597-686), but cancelled far
     before the point where slow starters (e.g. attempt23) found feasibility
   - Cannot be classified as confirmed failures retroactively
+  - RETRY runs (fresh runs, same config) all found feasibility — consistent
+    with originals being premature, but not proof (v3 is non-deterministic;
+    RETRYs are independent runs, not resumes of the originals)
 
 OVERALL FLASH2_5 RESULTS (for reference)
 -----------------------------------------
-14 successful runs, best rewards:
+Total runs: 18 original + 3 RETRY (attempts 11/17/19 fresh runs)
+Status breakdown:
+  14 confirmed successes (original, _COMPLETE_FOR_PLOT)
+   1 confirmed failure  (attempt8: 4378 evals, never feasible)
+   3 inconclusive       (attempts 11/17/19: _INCONCLUSIVE_FAILED, cancelled early)
+   3 RETRY successes    (attempts 11/17/19 fresh runs — all finding feasibility)
+
+Failure rate: 1/18 confirmed (5.6%); worst-case 4/18 (22%) if inconclusives
+  counted as failures — increasingly unlikely given RETRY evidence.
+
+Best rewards (original successful runs):
   attempt22: -0.0790  (closest to adjoint reference of -0.0787)
   attempt9:  -0.0797
   attempt10: -0.0794
   attempt13: -0.0796
   attempt21: -0.0797
   [others in -0.082 to -0.097 range]
+
+IS IT WORTH RUNNING MORE CASES?
+---------------------------------
+Probably not at the current (unmodified) config. Reasons:
+
+  1. Failure rate already well-estimated: 1/18 (~5.6%) with RETRY evidence
+     supporting the lower bound. More runs narrow the CI but don't change
+     the strategic picture.
+  2. Failure mechanism fully understood: systematic LLM cold-start bias
+     (99.8% cl_target_unreachable), not random noise. More runs characterize
+     frequency but teach nothing new about cause.
+  3. Best result (-0.0790) doesn't beat the adjoint (-0.0787). Additional
+     runs are unlikely to break through this ceiling without a config change.
+  4. Higher-value path: implement Fix 3 or Fix 6, re-characterize failure
+     rate under the improved config. Running more cases at a config you
+     intend to improve has limited value.
+
+  Exception: if a larger n is needed for a statistical comparison in a paper,
+  additional runs could be justified — but ~18 runs with well-understood
+  failure classification is defensible for most purposes.
 
 1 confirmed failed run: attempt 8 (true cold-start failure, 4378 evals, never feasible)
 3 likely premature cancellations: attempts 11, 17, 19 (cancelled at 597-686 evals,
