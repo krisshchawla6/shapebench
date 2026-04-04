@@ -9,11 +9,20 @@ Environment: NeuralFoil (18D Kulfan parameterization)
 Reward: reward_exact_notebook (negative weighted drag, feasible designs only)
 Config: 200 iterations, batch_size=30, initialize_n_sample=6, num_islands=3
 
-Runs moved to OLD_OR_OVERWRITTEN_OR_INCOMPLETE/ as _FAILED:
-  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_8_flash2_5_FAILED
-  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_11_flash2_5_FAILED
-  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_17_flash2_5_FAILED
-  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_19_flash2_5_FAILED
+Runs moved to OLD_OR_OVERWRITTEN_OR_INCOMPLETE/ as _FAILED (later renamed):
+  - attempt_8_flash2_5_FAILED         (confirmed true failure)
+  - attempt_11_flash2_5_INCONCLUSIVE_FAILED  (premature cancellation, renamed)
+  - attempt_17_flash2_5_INCONCLUSIVE_FAILED  (premature cancellation, renamed)
+  - attempt_19_flash2_5_INCONCLUSIVE_FAILED  (premature cancellation, renamed)
+
+RETRY runs submitted April 2026 to resolve ambiguity (full 200-iter budget):
+  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_11_flash2_5_RETRY
+  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_17_flash2_5_RETRY
+  - run_v3_dynamic_optimizer_reward_exact_notebook_attempt_19_flash2_5_RETRY
+  Config: identical to original (v3_flash2_5.config.json, sampler_model=gemini-
+  2.5-flash, 200 iterations, batch_size=30, initialize_n_sample=6, num_islands=3)
+  Note: designer_model field (added March 25 2026, commit bfe11fa) defaults to
+  sampler_model when not set — no effective difference from originals.
 
 Out of 18 total flash2_5 attempts run: 1 confirmed failure (attempt8, 22% was
 a miscount — see EARLY DETECTION THRESHOLD section for revised analysis).
@@ -286,3 +295,78 @@ Fix  Description                          Effort   Impact
 9    Hybrid LLM + gradient repair         High     High
 
 * Fix 7 reduces exploration diversity — best combined with Fix 6.
+
+CHARACTERIZING THE FAILURE RATE — STATISTICAL PICTURE
+-------------------------------------------------------
+The naive count of 4/18 failures (22%) is an overcount. Revised breakdown:
+
+  1 confirmed failure:          attempt8 (4378 evals, never feasible, true cold-start)
+  3 premature cancellations:    attempts 11, 17, 19 (cancelled on faulty eval-300
+                                threshold — too early to call)
+
+True failure rate: 1/18 = 5.6%, with 3 ambiguous cases being resolved by RETRY
+runs (see above). The 95% CI on failure rate is very wide with n=18:
+  - If true rate is 1/18 (5.6%): CI ≈ [0.1%, 27%]
+  - If true rate is 4/18 (22%): CI ≈ [6%, 45%]
+
+To definitively distinguish "~5%" from "~20%" statistically would require ~60–80
+runs — not cost-effective. The cheapest path to resolving the ambiguity is the
+3 RETRY runs (attempts 11, 17, 19), totaling ~7200 evals.
+
+HOW TO CONFIRM A RUN HAS FAILED (REVISED KILL CRITERION)
+---------------------------------------------------------
+A flash2_5 run can only be confidently killed when ALL THREE conditions hold:
+
+  1. Eval count > 2400 — the maximum first-feasibility window across all 14
+     successful runs (attempt23: eval 2348). Before this point, even a run that
+     looks stuck may eventually find feasibility.
+
+  2. No improvement in rolling-best fitness_total over a long window — attempt8's
+     best fitness_total was frozen at -2.50 from eval ~1000 to 4378 (3378-eval
+     plateau). Successful slow starters (attempt23) showed gradual drift toward
+     zero even before finding feasibility.
+
+  3. Boundary-hitting behavior (qualitative) — confirmed failure showed LE weight
+     pinned to 0.5 and TE → 0, indicating the LLM was thrashing at parameter
+     bounds rather than exploring the interior of the design space.
+
+Composite kill criterion: no feasible design AND no improvement in fitness_total
+rolling-best over 1000+ evals AND eval > 2400.
+
+IS INCREASING ROBUSTNESS THE BETTER PATH?
+------------------------------------------
+Yes — robustness improvements are preferable to simply running more cases.
+
+The failure is systematic, not random: the 99.8% cl_target_unreachable rate
+across all failed runs reflects a structural LLM bias toward low-camber airfoils
+that can't reach the CL targets (0.8–1.6). This is a cold-start problem where
+the LLM receives no positive signal and iterates in the wrong region indefinitely.
+More runs at the same configuration repeat this failure mode with ~6% probability
+per run, rather than fixing the underlying issue.
+
+Priority fixes for robustness (from the 9-fix brainstorm above):
+
+  Attack the cold-start directly (highest impact, fix root cause):
+    Fix 7 (Baseline seeding): inject a known feasible design at iter 0 —
+      eliminates cold-start failure by construction
+    Fix 6 (Feasibility-mode prompting): switch to constraint-satisfaction-only
+      mode when no feasible designs exist yet
+
+  Improve the gradient signal to LLM (medium effort, high impact):
+    Fix 3 (Uncapped penalty in LLM context): pass fitness_total instead of
+      capped reward — gives the LLM a real gradient to work with
+    Fix 4 (Per-constraint feedback): tell the LLM which constraints were
+      violated and by how much (currently partial)
+
+  Recommended path (lowest effort / highest combined impact):
+    Fix 3 + Fix 6 together address both root causes (no signal + no targeted
+    constraint-satisfying behavior). Fix 7 additionally eliminates cold-start
+    entirely. Fix 1 (auto-restart) is a cheap safety net regardless.
+
+  At the current ~5.6% confirmed failure rate with 200-iteration budgets:
+    - Running many more baseline cases is low value — the number is likely to
+      stay near 5-10% without a fix
+    - Implementing Fix 3 or Fix 6 and re-characterizing is the better use of
+      compute: could drive failure rate to near zero and simultaneously improve
+      the quality of successful runs
+

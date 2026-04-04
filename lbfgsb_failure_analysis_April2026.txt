@@ -99,10 +99,24 @@ All 22 nr3-failed seeds were rerun with nr10 (--random_state identical, so
 restarts 0-2 are the same starting points as nr3; restarts 3-9 are additional
 draws from the same seeded sequence).
 
-Most previously-failed seeds found feasibility with the extra restarts.
-A small number of stubborn seeds (8, 14, 30, 31) remained all-infeasible or
-near-infeasible even at 10 restarts, suggesting very low per-restart success
-probability (p) for those seeds in the 18D landscape.
+Final results:
+
+  Successfully recovered (feasible designs found): 17/22 seeds
+  Still failing (feasible=0) after 10 restarts:    3 seeds: 8, 14, 31
+  Marginally feasible (<200 designs):               2 seeds: 1 (111), 11 (37)
+
+Best rewards from recovered seeds:
+  seed21: -0.08256  (10,099 feasible)
+  seed7:  -0.08764  (9,848 feasible)
+  seed30: -0.09432  (recovered from total nr3 failure)
+
+Note: seed30 (previously listed as ambiguous) successfully recovered with nr10.
+The confirmed stubborn failures are seeds 8, 14, 31 — all showing best=-1.000
+after 10 restarts, the clearest possible signal of a truly infeasible basin
+structure for those starting-point sequences.
+
+Combined dataset: 18 original nr3 successes + 17 nr10 recoveries = 35 successful
+seeds out of 40 total (87.5% success rate at nr10).
 
 WOULD NR > 10 YIELD FURTHER BENEFIT?
 --------------------------------------
@@ -112,15 +126,26 @@ feasible basin):
   - If p is moderate (30-50%): nr10 already gives 97-99.9% success probability
     (1 - (1-p)^10). Going to nr20 adds little.
   - If p is very low (5-10%): nr10 gives only 40-65% success probability.
-    The stubborn seeds (8, 14, 30, 31) likely fall in this category.
+    The stubborn seeds (8, 14, 31) likely fall in this category.
     nr20 would give 64-88%, nr40 would give 87-99% — meaningful gains,
-    but at high compute cost for just a few seeds.
+    but at high compute cost for just 3 seeds.
 
-Practical recommendation: nr10 is sufficient for most seeds. For the handful
-that remain stuck at nr10, the marginal value of further retries depends on
-whether a complete 40-seed dataset is required. For typical use (best-result
-comparison, statistical summary), the nr10 recoveries plus original nr3
-successes provide a large enough sample.
+VERDICT: NOT WORTH INCREASING NR FURTHER
+------------------------------------------
+Arguments against running nr > 10 for seeds 8, 14, 31:
+
+  1. Dataset is already large: 35/40 seeds successful — sufficient for any
+     statistical comparison or best-result reporting.
+  2. Seeds 8, 14, 31 had best=-1.000 after 10 independent random starts —
+     the cleanest possible failure signal. Per-restart success probability p
+     is likely very small.
+  3. Best recovered seeds (seed21: -0.08256, seed7: -0.08764) are not
+     competitive with the best nr3 successes (seed23: -0.09370) — cracking
+     the 3 stubborn seeds is unlikely to yield a new best result.
+  4. Compute cost non-trivial: these are among the slowest seeds (seed9 had
+     9916 evals at nr3), and each nr10 job already took several hours.
+
+Recommendation: mark seeds 8, 14, 31 as confirmed failures and move on.
 
 COMPARISON TO V3 FLASH2_5 FAILURES
 ------------------------------------

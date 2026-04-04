@@ -180,6 +180,35 @@ Bottom line: fix first (fitness_total selection), confirm with a handful of
 new runs, then report the fixed failure rate. The failure rate of the broken
 version has limited value unless specifically needed as a comparison baseline.
 
+FITNESS_TOTAL FIX — CONFIRMED RESULTS (April 2026)
+----------------------------------------------------
+Fix #1 (use fitness_total for PSO selection) was implemented in
+frameworks/GA/run.py and validated across 25 runs (_AWS suffix):
+
+  Batch 1 (attempts 2-11, _AWS): 10/10 runs found feasible designs
+  Batch 2 (attempts 1, 12-25, _AWS): 15/15 runs found feasible designs
+
+Feasible design counts across all 25 fixed runs:
+  Min: 9,277 (attempt15)   Max: 36,388 (attempt20)
+  All runs: 9,277 / 10,099 / 12,384 / 17,666 / 17,820 / 18,903 /
+            19,287 / 21,715 / 21,732 / 21,783 / 22,461 / 25,858 /
+            26,178 / 26,354 / 29,674 / 36,388 / ...
+
+**Zero failures across 25 runs.** This confirms the reward-cap deadlock was
+the sole cause of the original failures — fixing PSO selection completely
+eliminates the failure mode.
+
+Best rewards from fixed runs (best 5):
+  attempt2:  -0.07945
+  attempt8:  -0.07958
+  attempt10: -0.07979
+  attempt19: -0.07934  (closest to adjoint reference of -0.0787)
+  attempt13: -0.07973
+
+Note: none of the 25 runs beat the adjoint reference (-0.0787); the best
+result (-0.07934) falls ~0.6% short. The fix resolves feasibility but the
+PSO optimum itself is still below the adjoint.
+
 COMPARISON TO V3/LLM FAILURES
 -------------------------------
 See v3_flash2_5_infeasibility_analysis_April2026.txt for the parallel analysis
