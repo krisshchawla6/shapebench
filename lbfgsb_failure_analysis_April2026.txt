@@ -93,6 +93,35 @@ However, this is a different experiment (more compute budget), not a question
 of whether the existing runs were cut short. Within the defined nr3 budget,
 these are unambiguous failures.
 
+NR10 RETRY RESULTS (April 2026)
+---------------------------------
+All 22 nr3-failed seeds were rerun with nr10 (--random_state identical, so
+restarts 0-2 are the same starting points as nr3; restarts 3-9 are additional
+draws from the same seeded sequence).
+
+Most previously-failed seeds found feasibility with the extra restarts.
+A small number of stubborn seeds (8, 14, 30, 31) remained all-infeasible or
+near-infeasible even at 10 restarts, suggesting very low per-restart success
+probability (p) for those seeds in the 18D landscape.
+
+WOULD NR > 10 YIELD FURTHER BENEFIT?
+--------------------------------------
+Diminishing returns — depends on p (per-restart probability of landing in a
+feasible basin):
+
+  - If p is moderate (30-50%): nr10 already gives 97-99.9% success probability
+    (1 - (1-p)^10). Going to nr20 adds little.
+  - If p is very low (5-10%): nr10 gives only 40-65% success probability.
+    The stubborn seeds (8, 14, 30, 31) likely fall in this category.
+    nr20 would give 64-88%, nr40 would give 87-99% — meaningful gains,
+    but at high compute cost for just a few seeds.
+
+Practical recommendation: nr10 is sufficient for most seeds. For the handful
+that remain stuck at nr10, the marginal value of further retries depends on
+whether a complete 40-seed dataset is required. For typical use (best-result
+comparison, statistical summary), the nr10 recoveries plus original nr3
+successes provide a large enough sample.
+
 COMPARISON TO V3 FLASH2_5 FAILURES
 ------------------------------------
                     | L-BFGS-B (_FAILED)      | v3 flash2_5 (cancelled)

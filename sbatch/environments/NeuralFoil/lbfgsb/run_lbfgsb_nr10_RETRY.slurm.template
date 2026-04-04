@@ -1,0 +1,46 @@
+#!/bin/bash
+#SBATCH --job-name=lbfgsb_seed{SEED}_nr10_RETRY
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --output=/scratch/ShapeEvolve/logs/%u/lbfgsb_seed{SEED}_nr10_RETRY_%j.out
+#SBATCH --error=/scratch/ShapeEvolve/logs/%u/lbfgsb_seed{SEED}_nr10_RETRY_%j.err
+
+set -e
+
+REPO_DIR="/scratch/ShapeEvolve"
+OUTPUT_DIR="$REPO_DIR/environments/NeuralFoil/results/run_lbfgsb_seed{SEED}_nr10_RETRY"
+
+mkdir -p "$OUTPUT_DIR"
+mkdir -p "/scratch/ShapeEvolve/logs/$USER"
+
+echo "=========================================="
+echo "Job ID:       $SLURM_JOB_ID"
+echo "Node:         $SLURMD_NODENAME"
+echo "Date:         $(date)"
+echo "Framework:    lbfgsb"
+echo "Environment:  NeuralFoil"
+echo "Reward:       reward_exact_notebook"
+echo "n_restarts:   10"
+echo "maxiter:      200"
+echo "random_state: {SEED}"
+echo "Output:       $OUTPUT_DIR"
+echo "Note:         RETRY of nr3 failed seed — 10 restarts"
+echo "=========================================="
+
+source "$REPO_DIR/venv/bin/activate"
+
+cd "$REPO_DIR"
+
+python run_benchmark.py \
+    --framework lbfgsb \
+    --environment NeuralFoil \
+    --reward reward_exact_notebook \
+    --n_restarts 10 \
+    --maxiter 200 \
+    --random_state {SEED} \
+    --output-dir "$OUTPUT_DIR"
+
+echo "=========================================="
+echo "Job completed successfully"
+echo "End time: $(date)"
+echo "=========================================="
