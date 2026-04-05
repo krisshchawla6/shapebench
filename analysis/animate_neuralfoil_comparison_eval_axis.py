@@ -60,7 +60,13 @@ def load_csv(results_dir):
     with open(csv_path) as f:
         reader = csv_mod.DictReader(f)
         for i, row in enumerate(reader):
-            it = int(row["iteration"])
+            # lbfgsb uses 'call' instead of 'iteration'
+            if "iteration" in row:
+                it = int(row["iteration"])
+            elif "call" in row:
+                it = int(row["call"])
+            else:
+                it = i
             reward = float(row["reward"])
             design = row.get("design", "")
             if not design:

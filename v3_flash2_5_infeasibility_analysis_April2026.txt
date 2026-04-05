@@ -24,8 +24,9 @@ RETRY runs submitted April 2026 to resolve ambiguity (full 200-iter budget):
   Note: designer_model field (added March 25 2026, commit bfe11fa) defaults to
   sampler_model when not set — no effective difference from originals.
 
-Out of 18 total flash2_5 attempts run: 1 confirmed failure (attempt8, 22% was
-a miscount — see EARLY DETECTION THRESHOLD section for revised analysis).
+Out of 25 total valid flash2_5 runs: 1 confirmed failure (attempt8).
+(7 local + 14 AWS original + 3 AWS RETRY successes; 3 premature cancellations excluded.
+See OVERALL FLASH2_5 RESULTS and EARLY DETECTION THRESHOLD sections for full breakdown.)
 
 SUMMARY OF FAILURE MODE
 ------------------------
@@ -214,15 +215,36 @@ Likely premature cancellations (attempts 11, 17, 19):
 
 OVERALL FLASH2_5 RESULTS (for reference)
 -----------------------------------------
-Total runs: 18 original + 3 RETRY (attempts 11/17/19 fresh runs)
+Total valid runs: 25
 Status breakdown:
-  14 confirmed successes (original, _COMPLETE_FOR_PLOT)
-   1 confirmed failure  (attempt8: 4378 evals, never feasible)
-   3 inconclusive       (attempts 11/17/19: _INCONCLUSIVE_FAILED, cancelled early)
+   7 local successes    (run before AWS deployment)
+  14 AWS successes      (original, _COMPLETE_FOR_PLOT)
    3 RETRY successes    (attempts 11/17/19 fresh runs — all finding feasibility)
+   1 confirmed failure  (attempt8: 4378 evals, never feasible)
+  [3 inconclusive originals (attempts 11/17/19: _INCONCLUSIVE_FAILED) excluded —
+   cancelled prematurely, replaced by RETRY runs]
 
-Failure rate: 1/18 confirmed (5.6%); worst-case 4/18 (22%) if inconclusives
-  counted as failures — increasingly unlikely given RETRY evidence.
+RETRY RESULTS (April 2026) — CONFIRMED
+  attempt_11_RETRY: 2,398 feasible designs, best_reward=-0.08122, first feasible at iter 8
+  attempt_17_RETRY: 2,081 feasible designs, best_reward=-0.08055, first feasible at iter 9
+  attempt_19_RETRY: 2,983 feasible designs, best_reward=-0.08307, first feasible at iter 43
+
+  All 3 RETRY runs succeeded — found feasibility early (iters 8, 9, 43) and
+  accumulated thousands of feasible designs. This confirms the original cancellations
+  of attempts 11, 17, 19 were premature: these are healthy runs, not failures.
+
+CONFIRMED FAILURE RATE: 1/25 = 4.0%
+  Valid runs:
+    7  local successes (run before AWS deployment)
+   14  AWS original successes (_COMPLETE_FOR_PLOT)
+    3  AWS RETRY successes (attempts 11/17/19)
+    1  AWS confirmed failure (attempt8)
+   --
+   25  total valid runs
+  The 3 _INCONCLUSIVE_FAILED originals are excluded — cancelled prematurely and
+  replaced by the RETRY runs.
+  Worst-case with inconclusives counted as failures: 4/25 (16%) — ruled out by
+  RETRY evidence.
 
 Best rewards (original successful runs):
   attempt22: -0.0790  (closest to adjoint reference of -0.0787)
@@ -236,9 +258,9 @@ IS IT WORTH RUNNING MORE CASES?
 ---------------------------------
 Probably not at the current (unmodified) config. Reasons:
 
-  1. Failure rate already well-estimated: 1/18 (~5.6%) with RETRY evidence
-     supporting the lower bound. More runs narrow the CI but don't change
-     the strategic picture.
+  1. Failure rate already well-estimated: 1/25 (~4.0%) with all 3 RETRY runs
+     confirmed successful. More runs narrow the CI but don't change the
+     strategic picture.
   2. Failure mechanism fully understood: systematic LLM cold-start bias
      (99.8% cl_target_unreachable), not random noise. More runs characterize
      frequency but teach nothing new about cause.
@@ -253,10 +275,9 @@ Probably not at the current (unmodified) config. Reasons:
   failure classification is defensible for most purposes.
 
 1 confirmed failed run: attempt 8 (true cold-start failure, 4378 evals, never feasible)
-3 likely premature cancellations: attempts 11, 17, 19 (cancelled at 597-686 evals,
-  before the ~2400-eval window where slow starters can find feasibility)
-Revised failure rate: 1/18 confirmed (5.6%), up to 4/18 (22%) if premature
-  cancellations are counted — but the latter is likely an overcount.
+3 confirmed premature cancellations: attempts 11, 17, 19 (RETRY runs all succeeded,
+  finding feasibility at iters 8, 9, 43 respectively — excluded from failure count)
+Confirmed failure rate: 1/25 (4.0%)  [7 local + 14 AWS original + 3 RETRY = 25 valid runs]
 
 POTENTIAL MITIGATIONS — FRAMEWORK-LEVEL (April 2026 brainstorm)
 -----------------------------------------------------------------
@@ -359,14 +380,14 @@ The naive count of 4/18 failures (22%) is an overcount. Revised breakdown:
   3 premature cancellations:    attempts 11, 17, 19 (cancelled on faulty eval-300
                                 threshold — too early to call)
 
-True failure rate: 1/18 = 5.6%, with 3 ambiguous cases being resolved by RETRY
-runs (see above). The 95% CI on failure rate is very wide with n=18:
-  - If true rate is 1/18 (5.6%): CI ≈ [0.1%, 27%]
-  - If true rate is 4/18 (22%): CI ≈ [6%, 45%]
+True failure rate: 1/25 = 4.0%, with the 3 ambiguous cases resolved by RETRY
+runs (all 3 succeeded — see RETRY RESULTS above). The 95% CI on failure rate
+with n=25:
+  - 1/25 (4.0%): CI ≈ [0.1%, 20%]
 
-To definitively distinguish "~5%" from "~20%" statistically would require ~60–80
-runs — not cost-effective. The cheapest path to resolving the ambiguity is the
-3 RETRY runs (attempts 11, 17, 19), totaling ~7200 evals.
+To definitively distinguish "~4%" from "~20%" statistically would require ~60–80
+runs — not cost-effective. The RETRY runs (attempts 11, 17, 19) were the cheapest
+path to resolving the ambiguity, and they did so conclusively.
 
 HOW TO CONFIRM A RUN HAS FAILED (REVISED KILL CRITERION)
 ---------------------------------------------------------
@@ -418,7 +439,7 @@ Priority fixes for robustness (from the 9-fix brainstorm above):
     constraint-satisfying behavior). Fix 7 additionally eliminates cold-start
     entirely. Fix 1 (auto-restart) is a cheap safety net regardless.
 
-  At the current ~5.6% confirmed failure rate with 200-iteration budgets:
+  At the current ~4.0% confirmed failure rate with 200-iteration budgets:
     - Running many more baseline cases is low value — the number is likely to
       stay near 5-10% without a fix
     - Implementing Fix 3 or Fix 6 and re-characterizing is the better use of
