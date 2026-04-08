@@ -9,9 +9,9 @@ Each airfoil is defined by 17 Kulfan (CST) parameters. TE_thickness is fixed at 
 
 | Parameter            | Type       | Bounds            | Aerodynamic Meaning                                     |
 |----------------------|------------|-------------------|---------------------------------------------------------|
-| upper_weights[0..7]  | continuous | -0.25 – 0.50      | Upper surface shape (LE → TE); controls camber and thickness |
-| lower_weights[0..7]  | continuous | -0.50 – 0.25      | Lower surface shape; negative = concave (typical for lift) |
-| leading_edge_weight  | continuous | -1.00 – 1.00      | Leading edge radius; larger = rounder nose              |
+| upper_weights[0..7]  | continuous | -0.30 – 0.60      | Upper surface shape (LE → TE); controls camber and thickness |
+| lower_weights[0..7]  | continuous | -0.30 – 0.30      | Lower surface shape; negative = concave (typical for lift) |
+| leading_edge_weight  | continuous | -0.50 – 0.50      | Leading edge radius; larger = rounder nose              |
 
 ## Geometric Constraints (penalized in fitness)
   - local_thickness > 0 everywhere  (no self-intersecting shapes)
