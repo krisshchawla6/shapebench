@@ -473,20 +473,151 @@ Both results are saved:
   environments/NeuralFoil/results/adjoint_run_fwbounds_naca0012/  (framework bounds, NACA0012)
 
 
+SCALE-UP RESULTS AND BASIN ANALYSIS (April 8, 2026)
+----------------------------------------------------
+20 additional GA runs (att6-25) and 35 additional L-BFGS-B runs (seed5-39)
+were completed with the normalized reward (conf90, CM>=-0.133, lambda=500).
+
+Best NF L/D by method across all runs (att1-25, seed0-39):
+  lbfgsb seed20: NF L/D = 355.4  (new highest NF)
+  GA att13:      NF L/D = 354.1
+  GA att19:      NF L/D = 353.6
+  GA att5:       NF L/D = 351.9  (previous best)
+
+All 55 new designs were validated with XFOIL. Top results:
+
+  Label         NF L/D   XF L/D   XF CM    CM ok?
+  GA_att20       316.1    320.6   -0.1372    NO
+  lbfgsb_s26     337.3    318.3   -0.1343    NO
+  lbfgsb_s25     324.6    317.6   -0.1346    NO
+  GA_att19       353.6    314.4   -0.1360    NO
+  lbfgsb_s7      332.9    312.5   -0.1216    YES  <-- best CM-feasible new design
+  lbfgsb_s20     355.4    310.1   -0.1323    YES
+
+Key observation: the highest NF L/D designs (~350+) still fail CM under XFOIL
+(same pattern as before). The new highest XFOIL L/D is GA_att20 at 320.6, but
+CM=-0.137, so not feasible. Best CM-feasible new design is lbfgsb_s7 at
+XFOIL L/D=312.5 with CM=-0.122 (well inside limit — suggesting a different shape).
+
+IPOPT (CM>=-0.130, orig bounds) was warm-started from 5 top candidates in
+parallel:
+
+  Warm-start    IPOPT NF L/D   CM        conf    Notes
+  lbfgsb_s7      351.276       -0.130   0.900   converged to dominant basin
+  GA_att20       347.299       -0.130   0.900   slightly lower — marginal difference
+  lbfgsb_s26     351.275       -0.130   0.900   same basin
+  lbfgsb_s25     351.277       -0.130   0.900   same basin
+  lbfgsb_s20     351.147       -0.130   0.900   same basin
+
+All 5 converged to CM=-0.130 and conf=0.900 — the same active constraint
+boundaries as before. Four converged to NF L/D~351.3, indistinguishable from
+the existing best (GA att5 -> 351.6 -> XFOIL 320.5). The scale-up did not
+find a new NeuralFoil basin.
+
+Conclusion: NF L/D~351, XFOIL L/D~320.5 appears to be the dominant optimum
+in this constrained design space. XFOIL L/D=320.5 (from the original GA att5
+IPOPT run) remains the best validated result.
+
+
+BIG PICTURE SUMMARY (April 8, 2026)
+-------------------------------------
+Original goal: benchmark 4 optimization methods (GA/PSO, L-BFGS-B, BO_torch,
+v3 LLM) on a constrained airfoil L/D maximization problem using NeuralFoil as
+the surrogate (alpha=5 deg, Re=1e7, Mach=0.2), and compare their performance.
+
+The path to get here:
+
+1. Original reward broken (lambda=1): all 4 methods returned infeasible designs.
+   Optimizers exploited the weak penalty to reach NF L/D=400-700 by violating
+   constraints.
+
+2. Fixed with normalized penalty (lambda=500): all methods now return
+   constraint-feasible designs in NF L/D range 250-352.
+
+3. Surrogate exploitation at conf=0.90 boundary: NF predicted L/D=352 but
+   XFOIL gave only ~315. CM violated in XFOIL by ~0.003 (systematic NF bias).
+
+4. IPOPT adjoint (CM>=-0.130) warm-started from best GA design: best result
+   is XFOIL L/D=320.5, CM=-0.1325 (feasible). The adjoint from NACA0012 alone
+   only found XFOIL L/D=149.
+
+5. Scale-up (25 GA + 40 lbfgsb) confirmed the dominant basin: all IPOPT runs
+   converge to NF L/D~351, XFOIL L/D~320. No better basin found.
+
+Status of the 4-method benchmark:
+  GA/PSO:    DONE — best XFOIL L/D = 320.5 (via IPOPT post-processing)
+  L-BFGS-B:  DONE — best XFOIL L/D ~ 312-320 (via IPOPT post-processing)
+  BO_torch:  NOT YET RUN with normalized reward
+  v3 LLM:    NOT YET RUN with normalized reward
+
+The two remaining methods (BO_torch, v3) still need to be run with the fixed
+normalized reward before the benchmark comparison is complete.
+
+
+V3 AND BO_TORCH SUBMITTED (April 8, 2026)
+------------------------------------------
+With GA/PSO and L-BFGS-B complete, the remaining two benchmark methods were
+set up and submitted with the normalized reward:
+
+  v3 flash-2.5: 20 attempts (jobs 1209-1228)
+    Config: v3_flash2_5_ld_ratio_constrained_m02_re1e7_normalized.config.json
+    Settings: 200 iterations, batch_size=30, 3 islands, gemini-2.5-flash
+    lambda_penalty=500.0 (replaces the old per-constraint lambda=1 formulation)
+
+  BO_torch: 4 seeds (0,1,2,3) (jobs 1229-1232)
+    Settings: n_calls=5000, n_initial=30, --exclusive node (PyTorch uses all cores)
+    lambda_penalty=500.0
+
+Completed GA/PSO (att1-25) and L-BFGS-B (seed0-39) results archived to:
+  environments/NeuralFoil/results/SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_normalized_LAM500/
+
+
+REWARD_EXACT_NOTEBOOK FEASIBILITY CHECK (April 8, 2026)
+---------------------------------------------------------
+The existing reward_exact_notebook results (multipoint HPA problem) were run
+with the original per-constraint lambda=1 formulation — the same structure as
+the broken L/D reward. The question was whether those results are similarly
+suspect.
+
+Feasibility check across all existing reward_exact_notebook runs:
+
+  Method      Runs   Evals    Feasible    Best fitness   Best feasible
+  GA/PSO       25    1,500k   42.5%        -0.079         -0.079
+  L-BFGS-B     42     304k   22.6%        -0.094         -0.094
+  BO_torch      9      30k   52.5%        -0.094         -0.094
+  v3           38     209k   52.0%         0.000*        -0.079
+
+  (* v3 best=0.000 is a degenerate/failed evaluation; best_feasible=-0.079)
+
+  Note: fitness_total = -weighted_cd - penalty, so -0.079 ≈ weighted_cd=0.079.
+  Lower (more negative) fitness_total = better objective for feasible designs.
+
+Conclusion: the reward_exact_notebook results are NOT suspect in the same way
+as the L/D case. For all methods, best_all ≈ best_feasible, meaning the
+optimizer found feasible designs competitive with any infeasible ones — lambda=1
+was sufficient here. This is because:
+  1. Objective is minimizing CD (not maximizing L/D) — less extreme infeasible
+     attractor to exploit.
+  2. HPA operating conditions (Mach=0.03, Re=200-500k) are well within
+     NeuralFoil's training distribution; conf scores stay high (~0.96-0.98),
+     so surrogate exploitation at the conf=0.90 boundary is much weaker.
+  3. 22-52% of evaluations across all methods are feasible, confirming the
+     penalty was adequate to guide search toward feasible regions.
+
+The NeuralFoil→XFOIL accuracy gap still applies in principle, but is smaller
+at these benign operating conditions. The reward_exact_notebook results are
+usable for comparison purposes as-is.
+
+
 RECOMMENDED NEXT STEPS (updated April 8, 2026)
 -----------------------------------------------
 In order of priority:
 
-1. [DONE] Run IPOPT adjoint warm-started from GA att5 with tightened CM >= -0.130
-   Result: XFOIL L/D = 320.5, CM = -0.1325 (feasible). Best result to date.
-   Use original adjoint bounds (not framework bounds) for IPOPT post-processing.
+1. [DONE] Fix reward and run GA/lbfgsb scale-up.
+   Best result: XFOIL L/D = 320.5, CM = -0.1325 (feasible).
 
-2. [IN PROGRESS] Scale up full runs
-   Run 25 GA + 40 L-BFGS-B with the normalized reward (conf90, CM >= -0.133).
-   Take the top 5-10 distinct designs and apply orig-bounds IPOPT + CM >= -0.130
-   adjoint to each. Goal: find a different NeuralFoil basin that validates better
-   in XFOIL. If all adjoint runs converge to the same basin (~L/D=351, XFOIL~320),
-   report XFOIL L/D=320.5 as the best result.
+2. [IN PROGRESS] Run v3 flash-2.5 (20 attempts) and BO_torch (4 seeds) with
+   normalized reward. Apply IPOPT (CM>=-0.130) post-processing to top designs.
 
 3. Fix the feasibility flag
    Add a small tolerance (1e-8) to the strict boundary checks so that designs
@@ -551,9 +682,14 @@ FILES
     sbatch/environments/NeuralFoil/GA/ga_120p_500i_ld_ratio_constrained_m02_re1e7_normalized.config.json
     sbatch/environments/NeuralFoil/lbfgsb/lbfgsb_ld_ratio_constrained_m02_re1e7_normalized.config.json
 
-  Results (in progress, April 7-8 2026):
-    environments/NeuralFoil/results/run_GA_ld_ratio_constrained_m02_re1e7_normalized_120particles_500iterations_attempt_[1-5]_AWS/
-    environments/NeuralFoil/results/run_lbfgsb_ld_ratio_constrained_m02_re1e7_normalized_seed[0-4]_nr3/
+  Completed GA/lbfgsb results (April 8, 2026):
+    environments/NeuralFoil/results/SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_normalized_LAM500/
+      run_GA_ld_ratio_constrained_m02_re1e7_normalized_120particles_500iterations_attempt_[1-25]_AWS/
+      run_lbfgsb_ld_ratio_constrained_m02_re1e7_normalized_seed[0-39]_nr3/
+
+  In-progress (April 8, 2026):
+    environments/NeuralFoil/results/run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized_attempt_[1-20]_flash_2_5/
+    environments/NeuralFoil/results/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[0-3]_n5000/
 
   Archived prior experiments:
     SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_INITIAL_LAMBDA/  (lambda=1 runs)
