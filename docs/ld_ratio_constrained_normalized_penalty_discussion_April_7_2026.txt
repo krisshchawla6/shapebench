@@ -379,15 +379,19 @@ The tightened CM approach worked as intended. The NeuralFoil→XFOIL CM bias
 of ~0.003 is now accounted for in the optimizer, and the result is both
 CM-feasible under XFOIL and slightly better in L/D.
 
-Updated full XFOIL comparison table:
+Updated full XFOIL comparison table (April 8, 2026):
 
-  Design                                    NF L/D   XFOIL L/D   XFOIL CM   CM ok?
-  NACA0012 (baseline)                        94.1      94.3       -0.0003    YES
-  Adjoint IPOPT from NACA0012               163.3     148.9       -0.1167    YES
-  GA att5 normalized λ=500                  351.9     314.9       -0.1363    NO
-  L-BFGS-B s3 normalized λ=500             306.3     284.4       -0.1355    NO
-  L-BFGS-B s0 normalized λ=500             351.9     312.3       -0.1358    NO
-  IPOPT CM>=-0.130 from GA att5 [BEST]      351.6     320.5       -0.1325    YES ✓
+  Design                                        NF L/D   XFOIL L/D   XFOIL CM   CM ok?
+  NACA0012 (baseline)                            94.1      94.3       -0.0003    YES
+  Adjoint IPOPT from NACA0012                   163.3     148.9       -0.1167    YES
+  GA att5 normalized λ=500                      351.9     314.9       -0.1363    NO
+  L-BFGS-B s3 normalized λ=500                 306.3     284.4       -0.1355    NO
+  L-BFGS-B s0 normalized λ=500                 351.9     312.3       -0.1358    NO
+  IPOPT CM>=-0.130 from GA att5 [BEST]          351.6     320.5       -0.1325    YES ✓
+  GA conf95 att5                                314.4     295.6       -0.1266    YES
+  lbfgsb conf95 s4                              303.4     250.7       -0.1308    YES
+  IPOPT CM>=-0.130 from GA conf95 att5          351.3     318.9       -0.1332    YES
+  IPOPT framework bounds from GA att5           365.9     313.9       -0.1333    NO (barely)
 
 Technical note: XFOIL validation was initially only runnable on the login node
 because xfoil was not installed on compute nodes. Fixed by:
@@ -397,26 +401,145 @@ because xfoil was not installed on compute nodes. Fixed by:
   - evaluate_xfoil.py now references REPO_DIR/bin/xfoil explicitly
 
 
+ADDITIONAL EXPERIMENTS AND FINDINGS (April 8, 2026)
+-----------------------------------------------------
+conf95 variant (sigma_conf > 0.95, CM >= -0.130):
+  - All 5 GA and 5 lbfgsb conf95 runs completed.
+  - Best NF L/D ~303-314 (lower than conf90 ~352 by design — less exploitation).
+  - NeuralFoil→XFOIL gap reduced from ~10-15% to ~6% for GA conf95 att5.
+  - However, IPOPT warm-started from GA conf95 att5 still converges to the
+    same NeuralFoil optimum (~L/D=351, conf=0.900, CM=-0.130) as from GA att5
+    conf90. Conf95 does not open a new basin.
+  - Conclusion: conf95 is not needed for the main suite. The NF→XFOIL gap
+    reduction is real but the adjoint always overrides it by converging to the
+    conf=0.90 boundary regardless of warm-start.
+
+Framework bounds adjoint (bounds matching GA/lbfgsb design_actions.py):
+  All prior adjoint variants used non-framework bounds inherited from optimize.py:
+    upper_weights:  [-0.25, 0.50]  vs framework [-0.30, 0.60]
+    lower_weights:  [-0.50, 0.25]  vs framework [-0.30, 0.30]
+    leading_edge_weight: [-1.0, 1.0]  vs framework [-0.50, 0.50]
+    TE_thickness: fixed 0.0  vs framework [0.000, 0.010]
+
+  Running IPOPT with framework bounds from GA att5 warm-start:
+    NF L/D = 365.9 (higher — wider upper bound allows higher camber)
+    XFOIL L/D = 313.9 (LOWER than orig-bounds result of 320.5)
+    XFOIL CM = -0.1333 (barely violates -0.133 limit)
+    NF→XFOIL gap = ~14% (worse than ~9% with orig bounds)
+
+  The wider upper_weights bound lets IPOPT find a higher-camber solution in
+  NeuralFoil's surrogate landscape, but in a region where NeuralFoil is less
+  accurate. The tighter original adjoint bounds accidentally constrained the
+  optimizer to a region with better NF→XFOIL correlation.
+
+  Recommendation: keep original adjoint bounds for IPOPT post-processing.
+  The framework bounds are correct for GA/lbfgsb (confirmed from design_actions.py),
+  but the adjoint is a separate tool with different bounds for good practical reasons.
+
+
+MULTIPOINT HPA ADJOINT BOUNDS COMPARISON (April 8, 2026)
+----------------------------------------------------------
+The bounds discrepancy between the adjoint optimizer and the GA/lbfgsb framework
+also exists in the separate multipoint HPA problem (reward_exact_notebook).
+The multipoint problem minimizes weighted mean CD over 6 CL targets (instead of
+maximizing single-point L/D) using the same NeuralFoil surrogate, with the same
+CM >= -0.133 and conf > 0.90 constraints.
+
+The base adjoint for the multipoint problem (optimize.py / adjoint_run) uses:
+    upper_weights:       [-0.25, 0.50]
+    lower_weights:       [-0.50, 0.25]
+    leading_edge_weight: [-1.00, 1.00]
+    TE_thickness:        fixed 0.0
+
+A framework-bounds variant (optimize_multipoint_framework_bounds.py) was created
+and run from NACA0012 (same warm-start as adjoint_run). Results:
+
+  Run                            weighted_cd   feasible   solver_ok   n_iters   TE_thickness
+  adjoint_run (orig bounds)       0.07872        True       True         34       0.0 (fixed)
+  adjoint_run_fwbounds (fw bounds) 0.07851       True       True         47       0.00176
+
+The framework-bounds run achieves a marginally better NeuralFoil score (0.07851
+vs 0.07872, ~0.3% improvement). The freed TE_thickness variable settles at
+~0.00176 instead of the fixed 0.0.
+
+However, given the L/D experience (framework bounds gave better NeuralFoil score
+but worse XFOIL result), the same caution applies here: the marginal NeuralFoil
+improvement from wider upper_weights and free TE_thickness is likely not
+meaningful or may reverse under XFOIL validation. The original bounds are the
+safer choice for reliable NF→XFOIL correlation.
+
+Both results are saved:
+  environments/NeuralFoil/results/adjoint_run/           (original bounds, NACA0012)
+  environments/NeuralFoil/results/adjoint_run_fwbounds_naca0012/  (framework bounds, NACA0012)
+
+
 RECOMMENDED NEXT STEPS (updated April 8, 2026)
 -----------------------------------------------
 In order of priority:
 
 1. [DONE] Run IPOPT adjoint warm-started from GA att5 with tightened CM >= -0.130
    Result: XFOIL L/D = 320.5, CM = -0.1325 (feasible). Best result to date.
+   Use original adjoint bounds (not framework bounds) for IPOPT post-processing.
 
-2. Increase confidence threshold to 0.95
-   Create a reward variant with conf_threshold=0.95 to reduce surrogate
-   exploitation. This should also reduce the NeuralFoil→XFOIL L/D discrepancy
-   (currently ~10-15%) by keeping designs in NeuralFoil's well-trained region.
+2. [IN PROGRESS] Scale up full runs
+   Run 25 GA + 40 L-BFGS-B with the normalized reward (conf90, CM >= -0.133).
+   Take the top 5-10 distinct designs and apply orig-bounds IPOPT + CM >= -0.130
+   adjoint to each. Goal: find a different NeuralFoil basin that validates better
+   in XFOIL. If all adjoint runs converge to the same basin (~L/D=351, XFOIL~320),
+   report XFOIL L/D=320.5 as the best result.
 
 3. Fix the feasibility flag
    Add a small tolerance (1e-8) to the strict boundary checks so that designs
    at the constraint boundary are correctly identified as feasible.
 
-4. Scale up full runs
-   Once steps 2-3 are done, run the full suite:
-   25 GA, 40 L-BFGS-B, 4 BO_torch, 20 v3 flash-2.5 with the normalized reward
-   and tightened CM constraint (CM >= -0.130).
+4. Drop conf95 from further runs
+   Conf95 does not improve on conf90 after adjoint post-processing. Use conf90
+   (ld_ratio_constrained_m02_re1e7_normalized) as the standard reward.
+
+
+RELATIONSHIP TO THE FORMAL PROBLEM STATEMENT
+--------------------------------------------
+The formal optimization problem is:
+
+  maximize  CL(p) / CD(p)
+  subject to:
+    t(x/c) > 0  for all x/c in [0,1]
+    t(0.33) >= 0.128
+    t(0.90) >= 0.014
+    TE wedge angle >= 6.03 deg
+    Wiggliness <= 2 * W_NACA0012
+    CM >= -0.133
+    sigma_conf > 0.90
+
+The ld_ratio_constrained_m02_re1e7_normalized reward (conf90, CM>=-0.133)
+matches this formulation exactly.
+
+The conf95 variant and the CM>=-0.130 adjoint both solve a DIFFERENT, more
+constrained problem. Strictly speaking, they are not solving the problem as
+stated above: conf95 uses sigma_conf > 0.95 and CM >= -0.130, excluding
+designs feasible under the original formulation but with CM in (-0.133, -0.130)
+or conf in (0.90, 0.95).
+
+These tighter bounds are surrogate-compensation heuristics, not part of the
+problem definition. The correct framing for a paper is:
+
+  - The PROBLEM is as stated above (CM >= -0.133, sigma_conf > 0.90).
+  - The REWARD used during optimization applies tightened internal bounds
+    (CM >= -0.130, sigma_conf > 0.95) to compensate for known systematic
+    biases in the NeuralFoil surrogate:
+      * NeuralFoil predicts CM ~0.003 higher than XFOIL at the boundary,
+        so CM >= -0.130 in NeuralFoil corresponds to CM >= -0.133 in XFOIL.
+      * NeuralFoil overpredicts L/D by 10-15% at conf=0.90; raising to 0.95
+        keeps designs in NeuralFoil's well-trained region.
+  - FEASIBILITY of a final design is always evaluated against the original
+    constraints (CM >= -0.133, sigma_conf > 0.90), using XFOIL as the
+    ground-truth evaluator.
+
+This is analogous to constraint tightening / back-off in robust optimization,
+which is standard practice when the surrogate model has known systematic bias.
+The objective and feasibility criterion being optimized toward remain the same
+as the formal problem statement; only the internal optimization procedure
+differs.
 
 
 FILES

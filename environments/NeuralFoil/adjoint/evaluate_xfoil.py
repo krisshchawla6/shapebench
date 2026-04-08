@@ -125,6 +125,14 @@ DESIGNS = {
     "L-BFGS-B s0 normalized λ=500 (NeuralFoil L/D=351.9→IPOPT 300.7)":
         os.path.join(REPO_DIR, "environments/NeuralFoil/adjoint/best_lbfgsb_s0.json"),
     "IPOPT CM≥−0.130 from GA att5 (NeuralFoil L/D=351.6)":
+        os.path.join(REPO_DIR, "environments/NeuralFoil/results/ld_adjoint_cm130_from_GA_att5_orig_bounds/ld_adjoint_cm130_GA_att5.json"),
+    "GA conf95 att5 (NeuralFoil L/D=314.4)":
+        os.path.join(REPO_DIR, "environments/NeuralFoil/adjoint/best_GA_conf95_att5.json"),
+    "lbfgsb conf95 s4 (NeuralFoil L/D=303.4)":
+        os.path.join(REPO_DIR, "environments/NeuralFoil/adjoint/best_lbfgsb_conf95_s4.json"),
+    "IPOPT CM≥−0.130 from GA conf95 att5 (NeuralFoil L/D=351.3)":
+        os.path.join(REPO_DIR, "environments/NeuralFoil/results/ld_adjoint_cm130_from_GA_conf95_att5_orig_bounds/ld_adjoint_cm130_GA_conf95_att5.json"),
+    "IPOPT framework bounds from GA att5 (NeuralFoil L/D=365.9)":
         os.path.join(REPO_DIR, "environments/NeuralFoil/results/ld_adjoint_cm130_from_GA_att5/ld_adjoint_cm130_GA_att5.json"),
 }
 
