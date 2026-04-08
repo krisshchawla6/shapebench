@@ -155,6 +155,12 @@ def load_adjoint_reference(adjoint_dir):
     weighted_cd = d.get("weighted_cd") or d.get("weighted_CD_mean")
     feasible = d.get("feasible", None)
     if weighted_cd is None:
+        # For maximizing rewards (e.g. L/D), store negated so that
+        # adjoint_ref = -weighted_cd = reward (positive) at line 340.
+        ld = d.get("L_D") or d.get("reward")
+        if ld is not None:
+            weighted_cd = -float(ld)
+    if weighted_cd is None:
         print(f"[adjoint] weighted_cd not found in {path}")
         return None, None
     return float(weighted_cd), feasible
@@ -473,7 +479,7 @@ def make_summary(dirs, method_label="method", output_dir=None,
         ax.axhline(adjoint_ref, color="#333333", lw=1.2, ls="--", zorder=4)
         legend_entries.append(
             Line2D([0], [0], color="#333333", lw=1.2, linestyle="--",
-                   label=f"{adjoint_label} (reward = {-adjoint_ref:.4f})")
+                   label=f"{adjoint_label} (reward = {(-adjoint_ref if minimizing else adjoint_ref):.4f})")
         )
     ax.legend(handles=legend_entries, loc="upper right", framealpha=0.95)
 

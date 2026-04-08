@@ -1,0 +1,437 @@
+Normalized Penalty Reward: ld_ratio_constrained_m02_re1e7_normalized
+Discussion of Design, Motivation, and Challenges
+April 7, 2026
+================================================================================
+
+OVERVIEW
+--------
+Goal: find an airfoil that maximizes L/D (lift-to-drag ratio) at alpha=5 deg,
+Re=1e7, Mach=0.2, subject to structural and aerodynamic constraints (minimum
+thickness, pitching moment CM >= -0.133, etc.).
+
+Surrogate: NeuralFoil --- a neural network trained on airfoil data --- is used
+as a fast approximation of XFOIL (the physics-based panel solver). All
+optimization runs against NeuralFoil because it is differentiable and fast.
+XFOIL is the ground truth we validate against at the end.
+
+Why the reward function was changed:
+The original reward penalized constraint violations with 9 separate penalty
+weights (lambda=1 each). These were far too weak --- the optimizer could
+achieve L/D=700 by violating constraints, easily outweighing a total penalty
+of ~10. Every optimizer returned infeasible designs.
+
+We fixed this by replacing all 9 weights with a single lambda_penalty=500,
+chosen so that a complete constraint failure (violation=1.0) costs 500 reward
+units --- enough to outweigh any infeasible L/D gain. This is the
+ld_ratio_constrained_m02_re1e7_normalized reward. It worked: all 10 initial
+runs returned designs with L/D ~ 250-352 and negligible constraint violations.
+
+Why two further modifications were made:
+
+1. CM >= -0.130 (tightened from -0.133):
+   XFOIL validation revealed NeuralFoil has a systematic CM bias of ~0.003 ---
+   it predicts CM=-0.133 (right at the limit) for designs that XFOIL evaluates
+   at CM=-0.136 (violating the limit). Tightening the NeuralFoil constraint to
+   -0.130 builds in 0.003 of margin so the final design satisfies CM >= -0.133
+   when XFOIL re-evaluates it.
+
+2. conf >= 0.95 (tightened from 0.90):
+   NeuralFoil reports an analysis_confidence score measuring how reliable its
+   prediction is for a given airfoil shape. With the 0.90 threshold, every
+   optimizer drove designs to exactly conf=0.900 --- the edge of NeuralFoil's
+   reliable range. This is surrogate exploitation: the optimizer found that the
+   highest-L/D predictions occur where NeuralFoil starts becoming unreliable.
+   NeuralFoil L/D ~ 352 at conf=0.90 turned out to be ~10-15% higher than
+   XFOIL gives (~315). Raising the threshold to 0.95 forces the optimizer to
+   stay in the region where NeuralFoil is more trustworthy, reducing the gap
+   between NeuralFoil and XFOIL predictions. The tradeoff is that NeuralFoil
+   L/D will likely be lower (less surrogate exploitation), but closer to the
+   true XFOIL value.
+
+Current best result (April 8, 2026):
+   IPOPT adjoint, CM >= -0.130, warm-started from best GA design:
+   NeuralFoil L/D = 351.6, XFOIL L/D = 320.5, XFOIL CM = -0.1325 (feasible).
+   This is the first design that satisfies all constraints under XFOIL.
+
+
+BACKGROUND
+----------
+The reward function ld_ratio_constrained_m02_re1e7 was developed to match the
+operating conditions of the IPOPT/AeroSandbox adjoint optimizer (alpha=5 deg,
+Re=1e7, Mach=0.2, N_crit=9.0) and enforce the same geometric and aerodynamic
+constraints via soft penalties. The constraints are:
+
+  - Local thickness > 0 everywhere (no self-intersection)
+  - t(x/c=0.33) >= 0.128 (minimum spar thickness)
+  - t(x/c=0.90) >= 0.014 (minimum trailing-edge thickness)
+  - Trailing-edge angle >= 6.03 deg
+  - upper_weights[0] > 0.05 (leading-edge camber shape)
+  - lower_weights[0] < -0.05 (leading-edge camber shape)
+  - Wiggliness <= 2 x NACA0012 wiggliness
+  - CM >= -0.133 (pitching moment)
+  - analysis_confidence > 0.90 (NeuralFoil reliability)
+
+The adjoint result at these conditions is L/D = 191.85 (marked as infeasible by
+its own feasibility check, likely due to a boundary-touching constraint).
+
+
+PROBLEM WITH THE ORIGINAL PER-CONSTRAINT LAMBDA FORMULATION
+------------------------------------------------------------
+The original reward used per-constraint penalty weights (lambda_thick_all,
+lambda_t033, lambda_t090, lambda_te_angle, lambda_uw0, lambda_lw0,
+lambda_wiggliness, lambda_cm, lambda_conf), each defaulting to 1.0. The reward
+was:
+
+  reward = L/D - sum_i(lambda_i * violation_i)
+
+where each violation_i is already normalized by its constraint scale (e.g.,
+CM violation = max(0, -0.133 - CM) / 0.133), so violations are dimensionless
+fractions.
+
+With all lambdas = 1.0, the penalties were far too weak. Infeasible designs
+routinely achieved L/D = 400-720 in NeuralFoil's surrogate landscape, making
+even a total fractional violation of 10 (penalty = 10) trivial compared to the
+200-500 unit L/D gain from entering infeasible space. All four optimization
+methods (GA/PSO, L-BFGS-B, BO_torch, v3 flash-2.5) returned infeasible best
+designs.
+
+An experiment with lambda_cm = lambda_conf = 50 (lambda_lam50) improved things
+marginally: L-BFGS-B seeds 2-4 found designs with CM near -0.133 and conf
+near 0.79-0.91, but still infeasible. The rogue seed 1 found L/D = 783 with
+conf = 0.000 --- the lambda_conf = 50 penalty of 50 units was no match for a
+590-unit L/D gain. GA attempts remained at conf = 0.000 throughout.
+
+The core problem: there are 9 independent lambda parameters, each requiring
+manual tuning, and the appropriate values differ by orders of magnitude across
+constraints (geometric constraints are easier to satisfy than CM and conf).
+
+
+NORMALIZED PENALTY DESIGN
+--------------------------
+The new reward ld_ratio_constrained_m02_re1e7_normalized replaces all 9
+per-constraint lambdas with a single scalar lambda_penalty (default = 500):
+
+  reward = L/D - lambda_penalty * sum_i(violation_i)
+
+where all violation_i are already normalized fractional values in [0, inf).
+A single tunable parameter now controls constraint enforcement for all
+constraints simultaneously.
+
+Lambda = 500 was chosen based on the following reasoning:
+  - The adjoint feasible optimum is ~192 L/D
+  - The worst infeasible L/D gain observed is ~500 above the feasible baseline
+    (some designs reached L/D ~ 700 with NeuralFoil)
+  - A single complete constraint failure (violation_i = 1.0) costs 500 reward
+    units, sufficient to cancel even extreme infeasible L/D gains
+  - Multiple simultaneous violations cost proportionally more, making badly
+    infeasible designs decisively unprofitable
+  - Mild violations (e.g., violation_i = 0.01) cost only 5 units, preserving
+    gradient signal near the constraint boundary without creating a cliff
+
+
+EARLY RESULTS (April 7-8, 2026)
+--------------------------------
+5 GA/PSO and 5 L-BFGS-B runs were completed with lambda_penalty = 500.
+
+GA/PSO results (120 particles, 500 iterations):
+  att1: L/D=253.6, CM=-0.1285, conf=0.900, viol={}
+  att2: L/D=303.9, CM=-0.1320, conf=0.908, viol={}
+  att3: L/D=327.4, CM=-0.1330, conf=0.926, viol~0 (wiggliness, CM at boundary)
+  att4: L/D=275.6, CM=-0.1329, conf=0.954, viol={wiggliness: 0.0017}
+  att5: L/D=351.9, CM=-0.1330, conf=0.903, viol~0 (wiggliness, CM at boundary)
+
+L-BFGS-B results (3 restarts, maxiter=200):
+  seed0: L/D=351.9, CM=-0.13301, conf=0.899, viol={CM: 7e-5, conf: 0.001}
+  seed1: L/D=289.7, CM=-0.1316, conf=0.910, viol={wiggliness: 3e-4}
+  seed2: L/D=249.6, CM=-0.1122, conf=0.960, viol={}
+  seed3: L/D=306.3, CM=-0.1312, conf=0.902, viol={}
+  seed4: L/D=247.2, CM=-0.1328, conf=0.978, viol={}
+
+All designs have negligible or zero violations --- a qualitative improvement
+over the lam50 results where CM was typically off by ~37% of its limit and
+conf was typically 0.79-0.91. The designs are now sitting at or within
+numerical precision of the constraint boundary.
+
+Note: seeds 2, 3, 4 and GA att1, att2 show feasible=False despite viol={}
+(empty violation dict). This is a floating-point boundary issue: the penalty
+code uses `if v > 0.0` before adding to the violations dict, while the
+feasibility check uses strict inequalities (e.g., `uw0 > 0.05`). When a
+design lands exactly on the boundary, the violation is below Python's floating
+point threshold for `v > 0.0` but the strict feasibility check still fails.
+These designs are effectively feasible.
+
+
+REMAINING CHALLENGES
+--------------------
+1. Surrogate vs. high-fidelity discrepancy
+   NeuralFoil predicts L/D ~ 250-352 for the best designs, while the adjoint
+   (AeroSandbox IPOPT, XFOIL-based) gives 191.85. If the best NeuralFoil design
+   is re-evaluated with the adjoint solver, the true L/D will very likely be
+   substantially lower. The conf > 0.90 constraint guards against unreliable
+   NeuralFoil predictions, but even at conf = 0.90, the surrogate may
+   disagree with higher-fidelity analysis by 50-100% on L/D.
+
+   The fundamental tension: NeuralFoil's confidence score measures internal
+   model uncertainty, not agreement with XFOIL for a specific airfoil geometry.
+   Extreme high-L/D designs may be in sparse regions of the NeuralFoil training
+   distribution even at conf = 0.90.
+
+2. Surrogate exploitation at the confidence boundary
+   Designs consistently converge to conf ~ 0.90, the exact lower bound of the
+   confidence constraint. This is a classic sign of surrogate exploitation: the
+   optimizer has learned that the most "rewarding" region of NeuralFoil's
+   landscape is near the edge of its reliable training domain. Increasing the
+   confidence threshold to 0.95 would shrink the exploitable region and push
+   designs toward geometries NeuralFoil is more confident about, reducing the
+   surrogate-vs-XFOIL discrepancy.
+
+3. Adjoint is a local optimum
+   The adjoint L/D = 191.85 is a gradient-based local optimum from a single
+   starting point (likely near NACA0012). The true global optimum under hard
+   constraints at these conditions may be higher. L-BFGS-B with random restarts
+   explores the design space more broadly and may be identifying better basins,
+   but this cannot be confirmed without re-evaluation with the high-fidelity
+   solver. Using the best NeuralFoil design as a warm-start for the adjoint is
+   a practical way to probe whether better local optima exist.
+
+4. Lambda sensitivity
+   While lambda_penalty = 500 is a principled default, it still requires
+   verification across methods. GA/PSO and v3 (LLM-guided) may behave
+   differently from L-BFGS-B because their search strategies interact differently
+   with the penalty landscape. The GA uses population-based stochastic search
+   that may need even stronger penalties to guide the swarm away from infeasible
+   attractors, especially early in the run when the swarm is initialized randomly.
+
+5. Feasibility flag bug
+   The `feasible` flag uses strict inequalities in the feasibility check
+   (e.g., `uw0 > 0.05`) while the penalty code uses `if v > 0.0` before
+   recording a violation. Designs that land exactly on the constraint boundary
+   can have viol={} (no recorded violations) but still be marked feasible=False.
+   A tolerance of ~1e-8 should be added to the boundary checks, or the
+   feasibility definition should use `>= 0.05 - tol` to be consistent with the
+   penalty formulation.
+
+6. Barrier/log penalty alternative
+   A log-barrier approach (-log(-g(x)) for g(x) < 0) would provide automatic
+   infinite resistance at the constraint boundary, eliminating lambda entirely.
+   However, log-barriers require the optimizer to start inside the feasible
+   region, which conflicts with random initialization. An augmented Lagrangian
+   method (self-updating multipliers) is the theoretically preferred approach
+   for constrained optimization with infeasible starting points, but would
+   require more significant framework changes.
+
+
+ADJOINT WARM-START VALIDATION (April 8, 2026)
+----------------------------------------------
+The three best designs (GA att5, lbfgsb s0, lbfgsb s3) were used as warm-start
+initial conditions for the IPOPT adjoint optimizer (same NeuralFoil model,
+alpha=5 deg, Re=1e7, Mach=0.2). Results:
+
+  Design               NeuralFoil L/D   IPOPT L/D   CM       conf   solver_ok
+  best_GA_att5              351.9          352.4    -0.1330   0.900   True
+  best_lbfgsb_s0            351.9          300.7    -0.1330   0.900   True
+  best_lbfgsb_s3            306.3          351.9    -0.1330   0.900   True
+
+Key findings:
+  - GA att5 and lbfgsb s3 both converge to L/D ~ 352 under IPOPT, confirming
+    they are true NeuralFoil local optima --- the gradient-free methods already
+    found the basin.
+  - lbfgsb s0 settled to L/D = 301 under IPOPT, likely because it started
+    slightly infeasible (conf = 0.899) and IPOPT found a different descent path.
+  - All three IPOPT solutions converge to exactly CM = -0.133 and conf = 0.900,
+    sitting on both active constraint boundaries simultaneously.
+  - The original adjoint result (L/D = 191.85, starting from NACA0012) is a
+    much poorer local optimum. The normalized-penalty runs identified a
+    substantially better basin.
+
+AIRFOIL SHAPE COMPARISON
+-------------------------
+The best normalized-penalty designs are highly similar to each other but
+differ substantially from the original adjoint (NACA0012-initialized) design:
+
+  - Much higher camber throughout the chord, producing CL ~ 1.37-1.41
+    (vs the adjoint's lower CL) at alpha = 5 deg, which drives the higher L/D.
+  - Thinner mid-chord and aft sections, with thickness concentrated further
+    forward compared to the adjoint design.
+  - Sharper, more cambered leading edge.
+  - All three GA/lbfgsb designs converge to essentially the same shape,
+    confirming they found the same NeuralFoil local optimum basin.
+
+The shape comparison plot is saved at:
+  environments/NeuralFoil/results/ld_adjoint_warmstart_validation/airfoil_shape_comparison.png
+
+
+ARE THE DESIGNS FEASIBLE?
+--------------------------
+This question has a layered answer:
+
+1. Geometrically: YES. All thickness, TE angle, wiggliness, and leading-edge
+   weight constraints are satisfied. Violation dicts are empty or negligible.
+
+2. By the code's feasible flag: NO --- but this is a code artifact. The designs
+   land at exactly conf = 0.900 and CM = -0.1330. The strict inequality
+   `conf > 0.90` evaluates to False at the floating-point boundary even though
+   the value rounds to exactly 0.900. This is the feasibility flag bug described
+   in challenge 5 above.
+
+3. Aerodynamically (NeuralFoil): BORDERLINE. The designs are at the conf = 0.90
+   boundary by design --- the optimizer drove them there because that is where
+   NeuralFoil predicts the highest L/D. At conf = 0.90, NeuralFoil is operating
+   at the edge of its stated reliability range. The L/D = 352 prediction is not
+   necessarily wrong, but it carries significant uncertainty for unusual
+   high-camber geometries.
+
+4. Under higher-fidelity analysis (XFOIL directly): CONFIRMED BETTER, but CM
+   constraint violated. See XFOIL Validation section below.
+
+Bottom line: the designs satisfy all hard geometric constraints and are
+aerodynamically feasible to within NeuralFoil's stated confidence threshold.
+The CM constraint is satisfied per NeuralFoil but violated per XFOIL due to a
+systematic bias at the CM boundary.
+
+
+XFOIL DIRECT VALIDATION (April 8, 2026)
+-----------------------------------------
+The best designs and two baselines were evaluated directly with XFOIL 6.99 at
+alpha=5 deg, Re=1e7, Mach=0.2, N_crit=9.0 (same conditions as optimization).
+
+  Design                                    NF L/D   XFOIL L/D   XFOIL CM   xtr_upper
+  NACA0012 (baseline)                        94.1      94.3       -0.0003    0.052
+  Adjoint IPOPT from NACA0012               163.3     148.9       -0.1167    0.234
+  GA att5 normalized λ=500                  351.9     314.9       -0.1363    0.498
+  L-BFGS-B s3 normalized λ=500             306.3     284.4       -0.1355    0.416
+  L-BFGS-B s0 normalized λ=500             351.9     312.3       -0.1358    0.479
+
+Key findings:
+
+1. NeuralFoil overpredicts L/D by ~10-15% for the high-camber designs
+   (NF: 352 → XFOIL: 315), versus near-exact agreement for NACA0012 (94.1
+   vs 94.3). The surrogate becomes less accurate at high CL / high camber.
+
+2. The normalized-penalty designs are genuinely better than the NACA0012-
+   initialized adjoint under XFOIL: L/D ≈ 285-315 (XFOIL) vs 149 (XFOIL).
+   The adjoint was stuck in a much worse local optimum.
+
+3. The CM constraint is violated in XFOIL for all three best designs:
+   XFOIL gives CM ≈ -0.136, below the -0.133 limit. NeuralFoil was predicting
+   CM = -0.133 (exactly at the limit), but XFOIL shows a systematic offset of
+   ~0.003. This means the designs are not truly CM-feasible under XFOIL.
+
+4. Laminar flow is maintained to ~42-50% chord on the upper surface
+   (xtr_u ≈ 0.42-0.50), confirming these are genuine laminar-flow designs.
+   The lower surface is fully laminar (xtr_l = 1.0) for two of the three cases.
+
+5. The CM bias (~0.003 between NeuralFoil and XFOIL at the boundary) suggests
+   that a tighter CM constraint in the reward function (e.g., CM >= -0.130
+   instead of -0.133) would produce designs that satisfy CM in XFOIL.
+
+Results saved at:
+  environments/NeuralFoil/results/xfoil_validation/xfoil_validation_summary.json
+
+
+FEASIBILITY CONCLUSION (updated April 8, 2026)
+------------------------------------------------
+The normalized-penalty designs are:
+  - Geometrically feasible: YES
+  - CM feasible per NeuralFoil: YES (at boundary, ~0.003 slack from true limit)
+  - CM feasible per XFOIL: NO (CM ≈ -0.136 vs limit -0.133, violated by 0.003)
+  - conf feasible: BORDERLINE (at exactly 0.900, floating-point boundary issue)
+  - Aerodynamically meaningful: YES — XFOIL L/D ≈ 285-315 is well above the
+    NACA0012-initialized adjoint (XFOIL L/D = 149)
+
+The designs represent a substantial improvement in the NeuralFoil landscape and
+confirm that the normalized-penalty approach successfully steered optimization
+away from infeasible high-L/D attractors. However, true XFOIL feasibility
+requires tightening the CM constraint by ~0.003 (to CM >= -0.130).
+
+
+CM-TIGHTENED ADJOINT RUN (April 8, 2026)
+-----------------------------------------
+A variant optimizer (optimize_ld_cm130.py) was created identical to
+optimize_ld.py except with CM >= -0.130 (tightened from -0.133 to compensate
+for the ~0.003 NeuralFoil→XFOIL CM bias). IPOPT was warm-started from
+best_GA_att5.json (NeuralFoil L/D = 351.9). Result (job 1115):
+
+  L/D   = 351.6  (NeuralFoil, essentially unchanged from starting point)
+  CM    = -0.1300 (exactly at the tightened -0.130 bound)
+  conf  = 0.9000 (exactly at the 0.90 bound)
+  n_iters = 15, solver_ok = True
+
+The optimizer converged quickly (15 iterations) because it was already near
+the optimum. As before, it parks at both active bounds simultaneously
+(CM = -0.130, conf = 0.900). The feasible flag is False due to the known
+strict-inequality boundary bug, but the design is geometrically and
+aerodynamically clean.
+
+XFOIL validation of this design (job 1117, confirmed working on compute node
+via Xvfb virtual framebuffer):
+
+  Design                              NF L/D   XFOIL L/D   XFOIL CM   xtr_upper
+  IPOPT CM>=-0.130 from GA att5       351.6     320.5       -0.1325    0.480
+
+This is the best XFOIL-validated result so far:
+  - XFOIL L/D = 320.5, up from 314.9 for the untightened GA att5 design
+  - CM = -0.1325, above the -0.133 limit — XFOIL CM constraint satisfied
+  - Laminar upper-surface transition at x/c = 0.480 (nearly 50% laminar)
+  - Lower surface fully laminar (xtr_l = 1.000)
+
+The tightened CM approach worked as intended. The NeuralFoil→XFOIL CM bias
+of ~0.003 is now accounted for in the optimizer, and the result is both
+CM-feasible under XFOIL and slightly better in L/D.
+
+Updated full XFOIL comparison table:
+
+  Design                                    NF L/D   XFOIL L/D   XFOIL CM   CM ok?
+  NACA0012 (baseline)                        94.1      94.3       -0.0003    YES
+  Adjoint IPOPT from NACA0012               163.3     148.9       -0.1167    YES
+  GA att5 normalized λ=500                  351.9     314.9       -0.1363    NO
+  L-BFGS-B s3 normalized λ=500             306.3     284.4       -0.1355    NO
+  L-BFGS-B s0 normalized λ=500             351.9     312.3       -0.1358    NO
+  IPOPT CM>=-0.130 from GA att5 [BEST]      351.6     320.5       -0.1325    YES ✓
+
+Technical note: XFOIL validation was initially only runnable on the login node
+because xfoil was not installed on compute nodes. Fixed by:
+  - Copying /usr/bin/xfoil to /scratch/ShapeEvolve/bin/xfoil (shared filesystem)
+  - Starting a virtual framebuffer (Xvfb :99) in the SLURM script before calling
+    XFOIL, since XFOIL links against libX11 even in batch mode
+  - evaluate_xfoil.py now references REPO_DIR/bin/xfoil explicitly
+
+
+RECOMMENDED NEXT STEPS (updated April 8, 2026)
+-----------------------------------------------
+In order of priority:
+
+1. [DONE] Run IPOPT adjoint warm-started from GA att5 with tightened CM >= -0.130
+   Result: XFOIL L/D = 320.5, CM = -0.1325 (feasible). Best result to date.
+
+2. Increase confidence threshold to 0.95
+   Create a reward variant with conf_threshold=0.95 to reduce surrogate
+   exploitation. This should also reduce the NeuralFoil→XFOIL L/D discrepancy
+   (currently ~10-15%) by keeping designs in NeuralFoil's well-trained region.
+
+3. Fix the feasibility flag
+   Add a small tolerance (1e-8) to the strict boundary checks so that designs
+   at the constraint boundary are correctly identified as feasible.
+
+4. Scale up full runs
+   Once steps 2-3 are done, run the full suite:
+   25 GA, 40 L-BFGS-B, 4 BO_torch, 20 v3 flash-2.5 with the normalized reward
+   and tightened CM constraint (CM >= -0.130).
+
+
+FILES
+-----
+  Reward implementation:
+    environments/NeuralFoil/rewards/ld_ratio_constrained_m02_re1e7_normalized.py
+
+  Configs:
+    sbatch/environments/NeuralFoil/GA/ga_120p_500i_ld_ratio_constrained_m02_re1e7_normalized.config.json
+    sbatch/environments/NeuralFoil/lbfgsb/lbfgsb_ld_ratio_constrained_m02_re1e7_normalized.config.json
+
+  Results (in progress, April 7-8 2026):
+    environments/NeuralFoil/results/run_GA_ld_ratio_constrained_m02_re1e7_normalized_120particles_500iterations_attempt_[1-5]_AWS/
+    environments/NeuralFoil/results/run_lbfgsb_ld_ratio_constrained_m02_re1e7_normalized_seed[0-4]_nr3/
+
+  Archived prior experiments:
+    SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_INITIAL_LAMBDA/  (lambda=1 runs)
+    SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_LAM50/           (lambda_cm=lambda_conf=50 runs)

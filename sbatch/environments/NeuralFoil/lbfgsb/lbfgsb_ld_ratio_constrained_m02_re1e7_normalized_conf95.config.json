@@ -1,0 +1,9 @@
+{
+  "framework": "lbfgsb",
+  "environment": "NeuralFoil",
+  "reward": "ld_ratio_constrained_m02_re1e7_normalized_conf95",
+  "n_restarts": 3,
+  "maxiter": 200,
+  "model_size": "large",
+  "lambda_penalty": 500.0
+}
