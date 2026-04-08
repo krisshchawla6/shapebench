@@ -1,0 +1,9 @@
+{
+  "framework": "GA",
+  "environment": "NeuralFoil",
+  "reward": "ld_ratio",
+  "n_particles": 120,
+  "n_iterations": 500,
+  "model_size": "large",
+  "n_crit": 9.0
+}

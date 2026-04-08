@@ -1,0 +1,17 @@
+{
+  "framework": "GA",
+  "environment": "NeuralFoil",
+  "reward": "ld_ratio_constrained_m02_re1e7",
+  "n_particles": 120,
+  "n_iterations": 500,
+  "model_size": "large",
+  "lambda_thick_all": 1.0,
+  "lambda_t033": 1.0,
+  "lambda_t090": 1.0,
+  "lambda_te_angle": 1.0,
+  "lambda_uw0": 1.0,
+  "lambda_lw0": 1.0,
+  "lambda_wiggliness": 1.0,
+  "lambda_cm": 1.0,
+  "lambda_conf": 1.0
+}

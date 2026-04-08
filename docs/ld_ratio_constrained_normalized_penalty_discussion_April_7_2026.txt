@@ -694,3 +694,6 @@ FILES
   Archived prior experiments:
     SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_INITIAL_LAMBDA/  (lambda=1 runs)
     SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_LAM50/           (lambda_cm=lambda_conf=50 runs)
+    SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_normalized_conf95/  (conf95 variant, 5 GA + 5 lbfgsb)
+      run_GA_ld_ratio_constrained_m02_re1e7_normalized_conf95_120particles_500iterations_attempt_[1-5]_AWS/
+      run_lbfgsb_ld_ratio_constrained_m02_re1e7_normalized_conf95_seed[0-4]_nr3/

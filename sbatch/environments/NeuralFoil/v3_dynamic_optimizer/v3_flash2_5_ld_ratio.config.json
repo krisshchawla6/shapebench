@@ -1,0 +1,23 @@
+{
+  "framework": "v3_dynamic_optimizer",
+  "environment": "NeuralFoil",
+  "reward": "ld_ratio",
+  "action": "gaussain",
+  "iterations": 200,
+  "batch_size": 30,
+  "gaussian_decay": false,
+  "gaussian_final_scale": 0.1,
+  "sampler_model": "gemini-2.5-flash",
+  "sampler_max_retries": 3,
+  "hybrid": false,
+  "inspirations": 2,
+  "initialize_n_sample": 6,
+  "pw_alpha": 3.0,
+  "num_islands": 3,
+  "migration_interval": 10,
+  "migration_rate": 0.1,
+  "baseline": null,
+  "debug": false,
+  "model_size": "large",
+  "n_crit": 9.0
+}

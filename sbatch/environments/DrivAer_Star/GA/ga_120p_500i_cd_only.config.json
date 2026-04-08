@@ -1,0 +1,7 @@
+{
+  "framework": "GA",
+  "environment": "DrivAer_Star",
+  "reward": "cd_only",
+  "n_particles": 120,
+  "n_iterations": 500
+}
