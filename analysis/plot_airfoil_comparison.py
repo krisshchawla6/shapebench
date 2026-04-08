@@ -64,7 +64,7 @@ DEFAULT_COLORS = {
 }
 
 DEFAULT_LABELS = {
-    "v3":     "v3 (LLM)",
+    "v3":     "ShapeEvolve",
     "adjoint": "Adjoint (IPOPT)",
     "ga":     "GA",
     "pso":    "PSO",
@@ -100,7 +100,7 @@ def build_airfoil(kulfan):
     )
 
 
-def plot_airfoils(entries, output_path):
+def plot_airfoils(entries, output_path, title=None):
     """entries: list of (label, color, path)"""
     plt.rcParams.update(STYLE)
     fig, ax = plt.subplots(figsize=(8, 3.5), facecolor="white")
@@ -115,7 +115,7 @@ def plot_airfoils(entries, output_path):
     ax.set_aspect("equal")
     ax.set_xlabel("x/c")
     ax.set_ylabel("y/c")
-    ax.set_title("Best Airfoil Design — Method Comparison", fontweight="medium", pad=8)
+    ax.set_title(title or "Best Airfoil Design — Method Comparison", fontweight="medium", pad=8)
     ax.legend(loc="upper right", framealpha=0.95)
     for sp in ["top", "right"]:
         ax.spines[sp].set_visible(False)
@@ -138,9 +138,12 @@ def plot_airfoils(entries, output_path):
         ax.set_ylim(y_lo, y_hi + (y_hi - y_lo) * 0.2)
 
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
-    fig.savefig(output_path, dpi=200, bbox_inches="tight")
+    base, _ = os.path.splitext(output_path)
+    for ext in (".png", ".pdf"):
+        path = base + ext
+        fig.savefig(path, dpi=200, bbox_inches="tight")
+        print(f"[airfoil_comparison] Plot -> {path}")
     plt.close(fig)
-    print(f"[airfoil_comparison] Plot -> {output_path}")
 
 
 if __name__ == "__main__":
@@ -185,6 +188,8 @@ if __name__ == "__main__":
 
     parser.add_argument("--output", default="airfoil_comparison.png",
                         help="Output PNG path")
+    parser.add_argument("--title", default=None,
+                        help="Plot title override")
 
     args = parser.parse_args()
 
@@ -192,11 +197,11 @@ if __name__ == "__main__":
 
     # Named methods in a fixed display order (adjoint last so it's on top)
     named = [
-        ("ga",     args.ga),
-        ("pso",    args.pso),
-        ("bo",     args.bo),
         ("lbfgsb", args.lbfgsb),
+        ("bo",     args.bo),
+        ("pso",    args.pso),
         ("v3",     args.v3),
+        ("ga",     args.ga),
     ]
     for key, path in named:
         if path is None:
@@ -225,4 +230,4 @@ if __name__ == "__main__":
     if not entries:
         parser.error("No methods specified. Provide at least --v3 or --adjoint.")
 
-    plot_airfoils(entries, args.output)
+    plot_airfoils(entries, args.output, title=args.title)

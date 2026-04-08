@@ -238,9 +238,12 @@ def plot_combined(labels, csv_paths, colors, adjoint_dir=None,
               bbox_to_anchor=(0.0, 0.1))
 
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
-    fig.savefig(output_path, dpi=200, bbox_inches="tight")
+    base, _ = os.path.splitext(output_path)
+    for ext in (".png", ".pdf"):
+        path = base + ext
+        fig.savefig(path, dpi=200, bbox_inches="tight")
+        print(f"[combined] Plot -> {path}")
     plt.close(fig)
-    print(f"[combined] Plot -> {output_path}")
 
 
 # ---------------------------------------------------------------------------
