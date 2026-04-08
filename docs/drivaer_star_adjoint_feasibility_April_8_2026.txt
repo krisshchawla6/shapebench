@@ -1,0 +1,265 @@
+DrivAer_Star Adjoint Optimization Feasibility
+April 8, 2026
+===============================================
+
+QUESTION: Is an adjoint available or possible to set up for DrivAer_Star?
+
+SHORT ANSWER
+------------
+Not directly — but it is feasible with a targeted rewrite of the mesh pipeline.
+
+
+SUMMARY
+-------
+The Transolver surrogate model used by DrivAer_Star is fully differentiable in
+PyTorch, and so is the drag integration step. However, the intermediate mesh
+geometry pipeline (FFD deformation → cell centers, areas, normals via
+PyVista/VTK) is non-differentiable, because VTK is a C++ library with no
+gradient flow. This breaks the end-to-end gradient path needed for a true
+adjoint. The NeuralFoil adjoint works because its geometry is purely analytical
+(Kulfan/CST parameterization), so the entire pipeline can be expressed through
+CasADi's automatic differentiation via AeroSandbox. DrivAer_Star lacks this
+property due to its reliance on an unstructured 3D mesh.
+
+Finite-difference gradients are already available today (the existing L-BFGS-B
+framework uses jac='3-point'). A true adjoint would require rewriting the mesh
+geometry in pure PyTorch — estimated at roughly 1-2 weeks of developer time for
+someone familiar with the codebase (see Option B in the Discussion for a
+breakdown of the concrete tasks). All the required operations — FFD deformation,
+cell center computation, area and normal computation — are just linear algebra
+and cross products; the time is dominated by validation and debugging rather
+than algorithmic complexity.
+
+
+DISCUSSION
+----------
+
+Why NeuralFoil's Adjoint Works
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NeuralFoil's adjoint (environments/NeuralFoil/adjoint/optimize.py) uses
+AeroSandbox + CasADi, which provides a fully differentiable pipeline:
+
+    Kulfan params (18)
+      → asb.numpy CST geometry        [analytical closed-form, differentiable]
+      → NeuralFoil NN (asb.numpy)     [differentiable through CasADi]
+      → Cd
+      → IPOPT                         [receives analytical gradients]
+
+The key is that Kulfan/CST parameterization is a pure closed-form formula
+(basis functions applied to the 18 coefficients), so there is no non-
+differentiable geometry step. The entire chain from design parameters to
+objective can be expressed symbolically, and CasADi computes Jacobians and
+Hessians automatically. IPOPT then uses these to make Newton-like steps.
+
+Example from optimize.py:
+
+    import aerosandbox as asb
+    import aerosandbox.numpy as anp
+
+    opti = asb.Opti()
+    optimized_airfoil = asb.KulfanAirfoil(...)
+    aero = optimized_airfoil.get_aero_from_neuralfoil(
+        alpha=alpha, Re=Re, mach=MACH, model_size=model_size
+    )
+    opti.minimize(anp.mean(aero["CD"] * CL_WEIGHTS))
+    sol = opti.solve(behavior_on_failure="return_last", options=IPOPT_OPTIONS)
+
+
+Why DrivAer_Star Breaks This
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+DrivAer_Star's pipeline has a non-differentiable bottleneck in the mesh
+geometry step:
+
+    FFD params (20)
+      → apply_ffd()           [NumPy arithmetic — portable to torch]
+      → deform_vtk()          [PyVista/VTK C++ — gradient wall]
+      → cell centers/normals  [VTK geometry queries — gradient wall]
+      → Transolver             [fully differentiable PyTorch nn.Module]
+      → Cd
+
+The Transolver model itself IS fully differentiable. It is a pure PyTorch
+nn.Module with 4 transformer blocks, MLP preprocessing, multi-head attention,
+LayerNorm, and GELU activations — all operations support torch.autograd.
+You can backpropagate through Transolver to get dCd/d(mesh_features).
+
+However, by the time data reaches Transolver, the connection to the 20 FFD
+parameters has been severed by the VTK operations. The gradient of cell
+centers, areas, and normals with respect to FFD deformation parameters is
+never computed.
+
+Differentiability of each pipeline step:
+
+    Step                         Implementation       Differentiable?
+    ------------------------------------------------------------------
+    apply_ffd()                  NumPy arithmetic     ~ (portable to torch)
+    deform_vtk() — mesh load     pv.read() / VTK      NO
+    deform_vtk() — mesh.points   PyVista assignment   NO
+    compute_cell_sizes()         VTK geometric op     NO (C++ black box)
+    compute_normals()            VTK geometric op     NO (C++ black box)
+    extract_model_input()        PyVista queries      NO
+    NumPy → torch.Tensor         Conversion           NO (gradients already lost)
+    Transolver inference         PyTorch nn.Module    YES
+    Drag integration             PyTorch arithmetic   YES
+
+
+Options for DrivAer_Star Adjoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Option A: Finite Differences (already available, zero effort)
+    - Use existing frameworks/lbfgsb/ which already uses jac='3-point'
+    - scipy.optimize.minimize computes numerical gradients
+    - Cost: ~40-60 extra forward evaluations per gradient step (20D space,
+      2 evals per dimension for 3-point differences)
+    - Not a true adjoint, but provides gradient information for L-BFGS-B
+    - Already production-ready; no changes needed
+
+Option B: Differentiable Mesh in PyTorch (recommended for true adjoint)
+    - Rewrite apply_ffd() using torch operations
+    - Rewrite mesh geometry queries analytically:
+        cell centers  = mean of face vertex coordinates (differentiable)
+        face areas    = 0.5 * ||v1 × v2|| via torch.cross (differentiable)
+        face normals  = v1 × v2 / ||v1 × v2|| (differentiable)
+    - Load base mesh once offline (VTK → torch.Tensor of vertices and faces)
+    - Chain: params → torch_apply_ffd → torch_extract_features → Transolver → Cd
+    - Use torch.autograd.grad(Cd, params) for analytical gradients
+    - Feed gradients to scipy L-BFGS-B or IPOPT
+    - Effort: the "1-2 weeks" estimate refers to developer time for one person
+      familiar with the codebase. The concrete tasks are:
+        (1) parse the base VTK mesh once into vertex coordinates and face
+            connectivity tensors and save them (a few hours);
+        (2) rewrite apply_ffd() from NumPy to PyTorch — the logic is already
+            there, it is mostly a find-and-replace of np. calls with torch.
+            equivalents plus verifying numerical agreement (~1 day);
+        (3) write torch_extract_features() — compute cell centers, areas,
+            and normals from vertex/face tensors using cross products, verify
+            it matches the existing PyVista output on a few test designs (~1-2
+            days);
+        (4) wire the differentiable pipeline into an adjoint/optimize.py
+            script analogous to NeuralFoil's, with gradient verification via
+            finite differences and an L-BFGS-B or IPOPT solve (~2-3 days);
+        (5) debug numerical issues (e.g. degenerate faces, gradient clipping,
+            step size tuning) and run end-to-end tests (~2-3 days).
+      The bulk of the time is in steps 3 and 5 — correctly handling the
+      unstructured mesh topology and validating that gradients are accurate.
+    - Example structure:
+
+        class DifferentiableDrivAerMesh:
+            def __init__(self, base_vertices, faces):
+                self.vertices_base = torch.tensor(base_vertices)
+                self.faces = torch.tensor(faces)
+
+            def forward(self, ffd_params):
+                verts = torch_apply_ffd(self.vertices_base, ffd_params)
+                features = torch_extract_features(verts, self.faces)  # [N, 7]
+                return features  # centers(3) + area(1) + normals(3)
+
+        params = torch.tensor(ffd_values, requires_grad=True)
+        features = mesh_model.forward(params)
+        cd = transolver(features)
+        cd.backward()
+        gradients = params.grad  # dCd/d(ffd_params), all 20
+
+Option C: PyTorch3D or libigl (most robust, highest effort)
+    - Use an existing differentiable mesh library
+    - More robust handling of mesh connectivity and degenerate cases
+    - Effort: the "3-4 weeks" estimate reflects the additional overhead of
+      learning and integrating a third-party differentiable mesh library on
+      top of the tasks in Option B. PyTorch3D and libigl both have their own
+      mesh data structures and APIs that differ from the current PyVista/VTK
+      conventions; bridging these, verifying correctness, and handling edge
+      cases (non-manifold geometry, mixed face types in the DrivAer mesh) adds
+      significant time. Option B is preferred unless mesh robustness issues
+      actually surface during implementation.
+
+
+Summary Table
+~~~~~~~~~~~~~
+    Question                                    Answer
+    -----------------------------------------------------------------------
+    Is Transolver differentiable?               YES — fully in PyTorch
+    Is the mesh/FFD pipeline differentiable?    NO — VTK is the bottleneck
+    Can we use IPOPT like NeuralFoil?           NOT without mesh rewrite
+    Can we compute gradients at all?            Partially — through Transolver
+                                                only, not w.r.t. FFD params
+    Easiest path to finite-difference grads?    Already built (lbfgsb framework)
+    Path to true analytical adjoint?            Option B above (1-2 weeks)
+    Is it feasible?                             YES, but requires mesh refactor
+
+
+Runtime Estimate: Finite-Difference L-BFGS-B on DrivAer_Star
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Note: pyvista is not installed in the local development environment so this
+estimate is derived from code inspection rather than direct measurement. It
+should be treated as a reasonable order-of-magnitude estimate, not a precise
+benchmark.
+
+Per-evaluation cost breakdown:
+
+    The benchmark LightningModule sets example_input_array = [1, 10086, 7]
+    and uses downsample=5, which implies the full surface mesh has roughly
+    50,000 cells. The deployed environment (environment.py) does not
+    downsample, so Transolver processes all ~50,000 cells per call.
+
+    Step                              Estimated time (CPU)
+    ---------------------------------------------------------
+    pv.read() — load VTK from disk    1-3 s   (re-read every call; no cache)
+    apply_ffd() — NumPy deformation   0.1-0.5 s
+    compute_cell_sizes/normals        1-3 s   (VTK C++ on 50K cells)
+    cell_centers() query              0.2-0.5 s
+    Transolver inference              0.5-3 s  (n_hidden=64, ~100K params, 50K cells)
+    _save_sol_images() — 6 renders    20-60 s  (off-screen PyVista, 1920x1080)
+    ---------------------------------------------------------
+    TOTAL with image rendering        ~23-70 s per eval
+    TOTAL without image rendering     ~3-10 s per eval
+
+    Image rendering dominates. For L-BFGS-B runs it is the main practical
+    bottleneck, since images are only needed for LLM context — not for
+    gradient-free optimizers.
+
+    On GPU (Transolver only — VTK and rendering remain on CPU):
+    Transolver drops to ~0.1-0.5 s; total without images ~2-7 s.
+
+Eval budget for L-BFGS-B (20D, jac='3-point', maxiter=200):
+
+    - 3-point FD gradient:   2 × 20 = 40 extra evals per gradient step
+    - Line search:           ~5-10 evals per L-BFGS-B iteration
+    - Total per iteration:   ~45-50 evals
+    - Practical convergence: ~50-100 iterations before plateau
+      (the NeuralFoil lbfgsb run reached ~875 evals/seed before plateauing,
+      suggesting convergence well before maxiter=200)
+    - Realistic total evals: ~2,500-5,000 for a single restart
+
+    Timeline estimates:
+
+        With image rendering (as-is):
+            2,500 evals × 23-70 s = ~16-49 hours per restart
+
+        Without image rendering (recommended for optimizer runs):
+            2,500 evals × 3-10 s = ~2-7 hours per restart
+
+    The easy fix before running any optimizer is to make image rendering
+    optional — e.g., pass render_images=False to _run_sim() for all calls
+    during optimization, and only render for the best final design. This
+    brings a single-restart run within a few hours on CPU, or under an hour
+    on GPU.
+
+    A second easy win: load the base VTK once at environment startup and
+    cache the points array in memory, rather than calling pv.read() on every
+    eval. This saves 1-3 s per call (saves 0.7-4 hours over 2,500 evals).
+
+
+Recommendation
+~~~~~~~~~~~~~~
+Short term: use the existing BO_torch and L-BFGS-B frameworks (already
+production-ready for DrivAer_Star with finite-difference gradients for
+L-BFGS-B). These give gradient-informed local search without any adjoint setup.
+Before running, disable image rendering during optimization and cache the base
+VTK load at startup — together these changes would bring a single L-BFGS-B
+restart to roughly 2-7 hours on CPU.
+
+Medium term: implement Option B to unlock true analytical gradients. The
+geometry operations are all straightforward linear algebra; the main engineering
+task is correctly handling the unstructured mesh connectivity (face index
+tensors) to ensure center/area/normal computations are correctly vectorized.
+Once done, this enables a proper adjoint comparison against the other methods,
+analogous to what was done for NeuralFoil.
