@@ -144,8 +144,17 @@ def _save_sol_images(mesh, result, sol_dir):
 class BlendedNetEnvironment(BaseEnvironment):
     """Transolver surrogate for BlendedNet blended-wing-body aerodynamics."""
 
-    def __init__(self, reward: BaseReward, **kwargs):
+    def __init__(self, reward: BaseReward, save_fields=False, render_images=False, **kwargs):
         self.reward = reward
+        self.save_fields = save_fields
+        self.render_images = render_images
+
+    @staticmethod
+    def add_args(parser):
+        parser.add_argument('--save_fields', action='store_true', default=False,
+                            help='Save fields.npz per evaluation (large; off by default)')
+        parser.add_argument('--render_images', action='store_true', default=False,
+                            help='Render solution images per evaluation (slow; off by default)')
 
     def _run_sim(self, design_path: str, case_dir: str,
                  mach=0.3, re=1.0e7, alpha=5.0) -> dict:
@@ -166,11 +175,12 @@ class BlendedNetEnvironment(BaseEnvironment):
         mesh = generate_mesh(params)
         result = _run_surrogate(mesh, geom_vals, flight_vals)
 
-        np.savez(os.path.join(save_dir, "fields.npz"),
-                 pos=result["pos"], Cp=result["Cp"],
-                 Cfx=result["Cfx"], Cfz=result["Cfz"])
+        if self.save_fields:
+            np.savez(os.path.join(save_dir, "fields.npz"),
+                     pos=result["pos"], Cp=result["Cp"],
+                     Cfx=result["Cfx"], Cfz=result["Cfz"])
 
-        images = _save_sol_images(mesh, result, sol_dir)
+        images = _save_sol_images(mesh, result, sol_dir) if self.render_images else []
 
         return {
             "params": params,

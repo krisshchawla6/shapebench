@@ -263,3 +263,101 @@ task is correctly handling the unstructured mesh connectivity (face index
 tensors) to ensure center/area/normal computations are correctly vectorized.
 Once done, this enables a proper adjoint comparison against the other methods,
 analogous to what was done for NeuralFoil.
+
+
+APRIL 8 2026 UPDATE: CASES SUBMITTED AND CLARIFICATIONS
+========================================================
+
+Option A is L-BFGS-B, not an adjoint
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Option A (L-BFGS-B with jac='3-point') is what was submitted and is running.
+It is gradient-informed but NOT a true adjoint. The distinction:
+
+  - NeuralFoil adjoint: IPOPT + CasADi analytical gradients, exact Jacobians
+  - DrivAer_Star Option A: L-BFGS-B + 3-point finite differences, ~40 extra
+    forward evaluations per gradient step to approximate the gradient numerically
+
+A true adjoint reference for DrivAer_Star is not feasible without the mesh
+rewrite described in Option B or C above.
+
+Option A IS equivalent to the L-BFGS-B method run in NeuralFoil
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The L-BFGS-B runs submitted for DrivAer_Star are directly equivalent to the
+L-BFGS-B method in the NeuralFoil benchmark — same framework (frameworks/lbfgsb/),
+same scipy.optimize.minimize with jac='3-point', same 3 restarts per seed, same
+20 seeds for statistical coverage. The only difference is what is being evaluated:
+NeuralFoil uses an analytical AeroSandbox call (~ms/eval), DrivAer_Star uses the
+Transolver surrogate + VTK mesh pipeline (~3-10 s/eval without rendering).
+
+Benchmark coverage for DrivAer_Star (April 8 2026)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Method          NeuralFoil status    DrivAer_Star status
+    ----------------------------------------------------------
+    GA/PSO          done                 running (jobs 1433-1452)
+    L-BFGS-B        done                 running (jobs 1453-1472)
+    ShapeEvolve(v3) done                 not yet set up
+    BO_torch        early result done    not yet set up
+    Adjoint         done (IPOPT)         not feasible w/o mesh rewrite
+
+Performance optimizations applied before submission
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Two changes were made to DrivAer_Star before submitting the jobs:
+
+  1. Image rendering disabled by default (render_images=False in
+     DrivAerStarEnvironment.__init__). _save_sol_images() is skipped
+     during optimization, eliminating the dominant ~20-60 s/eval overhead.
+     Rendering can be re-enabled via --render_images for final visualization.
+
+  2. Base VTK mesh cached in memory (mesh_generator._BASE_MESH_CACHE dict).
+     pv.read() is called once per process and the result stored; subsequent
+     deform_vtk() calls use .copy() on the cached mesh instead of disk I/O,
+     saving ~1-3 s/eval.
+
+  Together these bring the per-eval cost from ~23-70 s to ~3-10 s (CPU),
+  making 20-seed L-BFGS-B runs practical within a few hours per seed.
+
+
+APRIL 9 2026 UPDATE: PROGRESS STATUS
+======================================
+
+GA/PSO (jobs 1433-1452, 20 attempts, 120 particles x 500 iterations)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+All 20 attempts at iter 15-17 / 499 (~3% complete) as of April 9, 2026.
+Too early for meaningful Cd results. Expected runtime: long (each attempt
+processes 60,000 particle-evaluations total).
+
+L-BFGS-B (jobs 1453-1472, 20 seeds, 3 restarts, maxiter=200)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+All 20 seeds at ~1600-1630 evals as of April 9, 2026 (seed19 furthest at
+3484 evals). Jobs still running. Best Cd values per seed so far:
+
+  Seed   Evals   Best Cd
+  -----  -----   -------
+  seed17  1628   0.0719   <- best so far
+  seed13  1613   0.0767
+  seed11  1608   0.0787
+  seed18  1628   0.0795
+  seed15  1632   0.0835
+  seed10  1623   0.0868
+  seed12  1607   0.0920
+  seed7   1604   0.0923
+  seed9   1628   0.0938
+  seed5   1616   0.0938
+  seed19  3484   0.0944
+  seed3   1621   0.1094
+  seed14  1632   0.1204
+  seed4   1623   0.1273
+  seed16  1627   0.1428
+  seed6   1618   0.1762
+  seed2   1616   0.2084
+  seed1   1616   0.2293
+  seed8   1605   0.2341
+
+Spread is large (0.072 to 0.234): gradient search from different random
+starts finds very different local optima in this 20D design space.
+Seeds 1, 2, 8 appear stuck in poor local minima (Cd > 0.20).
+
+Next steps (when jobs complete):
+  - Identify best Cd design(s) across all seeds
+  - Decide on any post-processing or further refinement
+  - Submit v3 LLM and BO_torch runs for DrivAer_Star to complete the benchmark

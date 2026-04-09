@@ -146,15 +146,22 @@ def _save_sol_images(mesh, result, sol_dir):
 class DrivAerStarEnvironment(BaseEnvironment):
     """Transolver surrogate for DrivAerStar vehicle aerodynamics."""
 
-    def __init__(self, reward: BaseReward, base_vtk=None, **kwargs):
+    def __init__(self, reward: BaseReward, base_vtk=None, render_images=False,
+                 save_fields=False, **kwargs):
         self.reward = reward
         self.base_vtk = base_vtk
+        self.render_images = render_images
+        self.save_fields = save_fields
 
     @staticmethod
     def add_args(parser):
         default_vtk = os.path.join(ENV_DIR, "data", "vtk_E", "00000.vtk")
         parser.add_argument('--base_vtk', type=str, default=default_vtk,
                             help='Path to base VTK mesh for FFD deformation')
+        parser.add_argument('--render_images', action='store_true', default=False,
+                            help='Render solution images per evaluation (slow; off by default)')
+        parser.add_argument('--save_fields', action='store_true', default=False,
+                            help='Save fields.npz per evaluation (large; off by default)')
 
     def _run_sim(self, design_path: str, case_dir: str) -> dict:
         """Run surrogate on design; return raw forces and field outputs."""
@@ -175,14 +182,15 @@ class DrivAerStarEnvironment(BaseEnvironment):
         drag, drag_p, drag_w = _compute_drag(result["x"], result)
         lift, lift_p, lift_w = _compute_lift(result["x"], result)
 
-        np.savez(os.path.join(save_dir, "fields.npz"),
-                 x=result["x"],
-                 pressure=result["pressure"],
-                 wss_i=result["wss_i"],
-                 wss_j=result["wss_j"],
-                 wss_k=result["wss_k"])
+        if self.save_fields:
+            np.savez(os.path.join(save_dir, "fields.npz"),
+                     x=result["x"],
+                     pressure=result["pressure"],
+                     wss_i=result["wss_i"],
+                     wss_j=result["wss_j"],
+                     wss_k=result["wss_k"])
 
-        images = _save_sol_images(mesh, result, sol_dir)
+        images = _save_sol_images(mesh, result, sol_dir) if self.render_images else []
 
         return {
             "params": params,

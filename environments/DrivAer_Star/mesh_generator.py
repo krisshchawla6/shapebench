@@ -13,6 +13,11 @@ import os
 import numpy as np
 import pyvista as pv
 
+# Cache base mesh objects (topology + original points) keyed by absolute path.
+# Avoids repeated pv.read() disk I/O — the mesh is read once per process and
+# reused for all subsequent deform_vtk() calls with the same base file.
+_BASE_MESH_CACHE = {}
+
 PARAM_KEYS = [
     "car_size", "car_width", "car_len", "ramp_angle",
     "front_bumper_length", "wind_screen_x", "wind_screen_z",
@@ -249,7 +254,10 @@ def deform_vtk(base_vtk_path, params, cache_dir=None):
 
     Returns a PyVista mesh with updated cell_centers, Area, Normals.
     """
-    mesh = pv.read(base_vtk_path)
+    abs_path = os.path.abspath(base_vtk_path)
+    if abs_path not in _BASE_MESH_CACHE:
+        _BASE_MESH_CACHE[abs_path] = pv.read(abs_path)
+    mesh = _BASE_MESH_CACHE[abs_path].copy()
     original_points = np.array(mesh.points, dtype=np.float64)
     deformed_points = apply_ffd(original_points, params)
     mesh.points = deformed_points
