@@ -55,21 +55,19 @@ STYLE = {
 
 # Default colors per named method
 DEFAULT_COLORS = {
-    "v3":     "#2ca02c",
+    "v3":      "#2ca02c",
     "adjoint": "#333333",
-    "ga":     "#1f77b4",
-    "pso":    "#ff7f0e",
-    "bo":     "#9467bd",
-    "lbfgsb": "#e377c2",
+    "pso":     "#ff7f0e",
+    "bo":      "#9467bd",
+    "lbfgsb":  "#e377c2",
 }
 
 DEFAULT_LABELS = {
-    "v3":     "ShapeEvolve",
+    "v3":      "ShapeEvolve",
     "adjoint": "Adjoint (IPOPT)",
-    "ga":     "GA",
-    "pso":    "PSO",
-    "bo":     "Bayesian Opt.",
-    "lbfgsb": "L-BFGS-B",
+    "pso":     "PSO",
+    "bo":      "Bayesian Opt.",
+    "lbfgsb":  "L-BFGS-B",
 }
 
 
@@ -157,10 +155,8 @@ if __name__ == "__main__":
                         help="v3 LLM best design (save/results.json)")
     parser.add_argument("--adjoint", default=None, metavar="DIR",
                         help="Adjoint result directory (loads save/results.json)")
-    parser.add_argument("--ga",      default=None, metavar="PATH",
-                        help="GA best design (design.json or save/results.json)")
-    parser.add_argument("--pso",     default=None, metavar="PATH",
-                        help="PSO best design (design.json or save/results.json)")
+    parser.add_argument("--pso", "--ga", dest="pso", default=None, metavar="PATH",
+                        help="PSO/GA best design (design.json or save/results.json)")
     parser.add_argument("--bo",      default=None, metavar="PATH",
                         help="Bayesian Opt. best design")
     parser.add_argument("--lbfgsb",  default=None, metavar="PATH",
@@ -169,15 +165,13 @@ if __name__ == "__main__":
     # Color/label overrides for named methods
     parser.add_argument("--v3-label",      default=None)
     parser.add_argument("--adjoint-label", default=None)
-    parser.add_argument("--ga-label",      default=None)
-    parser.add_argument("--pso-label",     default=None)
+    parser.add_argument("--pso-label", "--ga-label", dest="pso_label", default=None)
     parser.add_argument("--bo-label",      default=None)
     parser.add_argument("--lbfgsb-label",  default=None)
 
     parser.add_argument("--v3-color",      default=None)
     parser.add_argument("--adjoint-color", default=None)
-    parser.add_argument("--ga-color",      default=None)
-    parser.add_argument("--pso-color",     default=None)
+    parser.add_argument("--pso-color", "--ga-color", dest="pso_color", default=None)
     parser.add_argument("--bo-color",      default=None)
     parser.add_argument("--lbfgsb-color",  default=None)
 
@@ -201,7 +195,6 @@ if __name__ == "__main__":
         ("bo",     args.bo),
         ("pso",    args.pso),
         ("v3",     args.v3),
-        ("ga",     args.ga),
     ]
     for key, path in named:
         if path is None:

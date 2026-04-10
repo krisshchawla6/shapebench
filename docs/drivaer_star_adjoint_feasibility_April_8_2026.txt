@@ -317,47 +317,8 @@ Two changes were made to DrivAer_Star before submitting the jobs:
   making 20-seed L-BFGS-B runs practical within a few hours per seed.
 
 
-APRIL 9 2026 UPDATE: PROGRESS STATUS
-======================================
-
-GA/PSO (jobs 1433-1452, 20 attempts, 120 particles x 500 iterations)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-All 20 attempts at iter 15-17 / 499 (~3% complete) as of April 9, 2026.
-Too early for meaningful Cd results. Expected runtime: long (each attempt
-processes 60,000 particle-evaluations total).
-
-L-BFGS-B (jobs 1453-1472, 20 seeds, 3 restarts, maxiter=200)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-All 20 seeds at ~1600-1630 evals as of April 9, 2026 (seed19 furthest at
-3484 evals). Jobs still running. Best Cd values per seed so far:
-
-  Seed   Evals   Best Cd
-  -----  -----   -------
-  seed17  1628   0.0719   <- best so far
-  seed13  1613   0.0767
-  seed11  1608   0.0787
-  seed18  1628   0.0795
-  seed15  1632   0.0835
-  seed10  1623   0.0868
-  seed12  1607   0.0920
-  seed7   1604   0.0923
-  seed9   1628   0.0938
-  seed5   1616   0.0938
-  seed19  3484   0.0944
-  seed3   1621   0.1094
-  seed14  1632   0.1204
-  seed4   1623   0.1273
-  seed16  1627   0.1428
-  seed6   1618   0.1762
-  seed2   1616   0.2084
-  seed1   1616   0.2293
-  seed8   1605   0.2341
-
-Spread is large (0.072 to 0.234): gradient search from different random
-starts finds very different local optima in this 20D design space.
-Seeds 1, 2, 8 appear stuck in poor local minima (Cd > 0.20).
-
-Next steps (when jobs complete):
-  - Identify best Cd design(s) across all seeds
-  - Decide on any post-processing or further refinement
-  - Submit v3 LLM and BO_torch runs for DrivAer_Star to complete the benchmark
+APRIL 9 2026 UPDATE
+===================
+Benchmark runs submitted and progress tracked. See:
+  docs/drivaer_star_benchmark_discussion_April_9_2026.txt
+for all per-method results, status tables, and ongoing progress updates.

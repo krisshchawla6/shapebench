@@ -1,0 +1,184 @@
+DrivAer_Star Benchmark Discussion
+April 9, 2026
+================================================================================
+
+OVERVIEW
+--------
+Goal: Benchmark four optimization methods (GA/PSO, L-BFGS-B, BO_torch, v3 LLM)
+on a 3D aerodynamic shape optimization problem: minimize drag coefficient (Cd) of
+a car body (DrivAer geometry) parameterized by 20 FFD (Free-Form Deformation)
+parameters. No constraint on lift — objective is Cd only.
+
+Operating conditions: rho=1.25 kg/m^3, U=40 m/s, area_ref=2.37 m^2.
+Reward: reward = -Cd  (maximize reward = minimize drag).
+
+SURROGATE: Transolver — a transformer-based neural network surrogate that predicts
+drag and lift from the deformed surface mesh. Input: ~50,000 surface cells with
+cell centers, areas, and normals (7 features per cell). Output: Cd, Cl.
+
+Unlike NeuralFoil, Transolver has no analysis_confidence metric and the pipeline
+involves a non-differentiable VTK mesh geometry step — so no adjoint/IPOPT
+post-processing is possible. Raw optimizer results are the final benchmark outputs.
+(See drivaer_star_adjoint_feasibility_April_8_2026.txt for detailed analysis.)
+
+DESIGN SPACE (20 FFD parameters)
+----------------------------------
+  car_size:              (0.8,   1.2)
+  car_width:             (-0.1,  0.1)
+  car_len:               (-0.1,  0.1)
+  ramp_angle:            (-8.0,  8.0)  deg
+  front_bumper_length:   (-0.1,  0.1)
+  wind_screen_x/z:       (-0.05, 0.05) each
+  side_mirrors_x/z:      (-0.05, 0.05) each
+  rear_window_x/z:       (-0.05, 0.05) each
+  trunklid_angle:        (-8.0,  8.0)  deg
+  trunklid_x/z:          (-0.05, 0.05) each
+  diffusor_angle:        (-8.0,  8.0)  deg
+  car_green_house_angle: (-8.0,  8.0)  deg
+  car_front_hood_angle:  (-8.0,  8.0)  deg
+  car_air_intake_angle:  (-8.0,  8.0)  deg
+  tires_diameter:        (-0.013, 0.013)
+  tires_width:           (-0.015, 0.015)
+
+PERFORMANCE OPTIMIZATIONS APPLIED (April 8, 2026)
+--------------------------------------------------
+Two changes made to DrivAer_Star environment before submitting jobs:
+
+  1. Image rendering disabled (render_images=False default). Eliminated the
+     dominant ~20-60 s/eval overhead from off-screen PyVista rendering.
+
+  2. Base VTK mesh cached in memory (_BASE_MESH_CACHE dict). pv.read() called
+     once per process; subsequent calls use .copy() on the cached mesh.
+     Saves ~1-3 s/eval.
+
+Together: per-eval cost from ~23-70 s → ~3-10 s (CPU). Measured on running
+L-BFGS-B jobs: 4.94 s/eval (seed19, 13120 evals over ~18h).
+
+
+WHY L-BFGS-B IS SLOW
+---------------------
+The bottleneck is 3-point finite-difference gradients in 20 dimensions:
+  - Each gradient step: 2 × 20 = 40 extra forward evaluations
+  - At ~5 s/eval: ~3.3 min per gradient, ~3.75 min per L-BFGS-B iteration
+  - maxiter=200 × 3 restarts → ~37h total per seed (theoretical max)
+
+Compare to NeuralFoil L-BFGS-B: microseconds per eval → full 3-restart run
+in minutes. The eval cost, not the algorithm, is the bottleneck here.
+
+
+BENCHMARK COVERAGE (April 9, 2026)
+------------------------------------
+  Method          Jobs           n_calls/budget     Status
+  ---------------------------------------------------------------
+  GA/PSO          1433-1452      120p × 500i × 20   RUNNING (~12%)
+  L-BFGS-B        1453-1472      maxiter=200 × 3 × 20  RUNNING (~70%)
+  v3 LLM          (completed)    80 iters × 10      COMPLETE
+  BO_torch        1498-1501      1000 calls × 4     RUNNING (just submitted)
+  Adjoint         —              not feasible        N/A (no differentiable mesh)
+
+
+V3 LLM RESULTS — COMPLETE
+---------------------------
+80 iterations, batch_size=10, sampler=gemini-2.5-flash.
+Results: environments/DrivAer_Star/results/v3/
+
+Best design: iter_78_o6 (llm_optimizer)
+  Cd   = 0.06994
+  Drag = 165.76 N
+  Lift = -157.06 N
+  L/D  = -0.947  (downforce)
+
+Top 5 designs:
+  iter_78_o6:  Cd=0.06994  L/D=-0.947
+  iter_78_o5:  Cd=0.06995  L/D=-0.945
+  iter_78_o8:  Cd=0.06995  L/D=-0.945
+  iter_78_o4:  Cd=0.06995  L/D=-0.946
+  iter_78_o3:  Cd=0.06995  L/D=-0.946
+
+v3 converged tightly — top 5 designs within Cd < 0.0001 of each other.
+
+
+L-BFGS-B RESULTS — IN PROGRESS (as of April 9, 2026, ~7100 evals/seed)
+------------------------------------------------------------------------
+20 seeds, 3 restarts, maxiter=200. Best Cd and L/D at best-Cd design per seed:
+
+  Seed    Evals   Best Cd    L/D at best
+  ------  -----   -------    -----------
+  seed17   7166   0.07187   -0.896
+  seed11   7072   0.07297   -1.023
+  seed6    7111   0.07308   -1.215
+  seed13   7123   0.07672   -1.579  <- best downforce
+  seed4    7136   0.08288   -1.306
+  seed16   7155   0.07900   -0.460
+  seed7    7053   0.07743   -1.181
+  seed18   7167   0.07952   -0.545
+  seed15   7181   0.08308   -0.812
+  seed10   7142   0.08677   -0.577
+  seed12   7070   0.09199   -0.755
+  seed5    7105   0.09338   -1.085
+  seed9    7159   0.09376   -0.102
+  seed14   7173   0.09073   -0.362
+  seed3    7131   0.09551   -0.541
+  seed19  13120   0.09239   -0.472  (3 restarts complete)
+  seed4    7136   0.12727   -1.306
+  seed2    7100   0.14442   -0.159
+  seed8    7056   0.12561   +7.691  ⚠ net lift
+  seed1    7105   0.22925   +0.728  ⚠ net lift, stuck in poor basin
+
+Large spread (Cd 0.072–0.234) typical of gradient-based search with multiple
+local optima in 20D. Seeds 1 and 8 stuck in poor basins (net lift, high Cd).
+Best so far: seed17 Cd=0.0719 — slightly above v3 best of 0.0699.
+Results largely converged; seeds will finish as jobs complete.
+
+
+GA/PSO RESULTS — IN PROGRESS (as of April 9, 2026, ~iter 58/499)
+-----------------------------------------------------------------
+20 attempts, 120 particles, 500 iterations. At ~12% completion.
+Too early for meaningful Cd results. Results dir:
+  environments/DrivAer_Star/results/run_GA_cd_only_120particles_500iterations_attempt_[1-20]/
+
+
+BO_TORCH RESULTS — JUST SUBMITTED (April 9, 2026)
+--------------------------------------------------
+4 seeds (0-3), n_calls=1000, n_initial=50. Jobs 1498-1501.
+Results dirs: environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[0-3]_n1000/
+Expected runtime: ~3-5h per seed.
+n_calls=1000 chosen (vs 5000 for NeuralFoil) because eval cost ~5s dominates;
+1000 × 5s = ~1.4h eval time + GP fitting overhead ≈ 3-5h total.
+
+
+INTERIM BENCHMARK TABLE (April 9, 2026)
+-----------------------------------------
+  Method      Best Cd    L/D at best   Status
+  ---------   -------    -----------   ------
+  v3 LLM      0.06994    -0.947        COMPLETE ← best so far
+  L-BFGS-B    0.07187    -0.896        running (seed17, ~70% done)
+  GA/PSO      TBD        TBD           running (~12%)
+  BO_torch    TBD        TBD           just submitted
+
+Note: unlike NeuralFoil, no IPOPT post-processing is applied — Transolver outputs
+are the final results. Cd values are directly comparable across methods.
+
+
+FILES
+-----
+  Environment:
+    environments/DrivAer_Star/environment.py
+    environments/DrivAer_Star/mesh_generator.py
+    environments/DrivAer_Star/design_actions.py
+    environments/DrivAer_Star/rewards/cd_only.py
+
+  Slurm configs:
+    sbatch/environments/DrivAer_Star/GA/run_GA_cd_only_attempt[1-20].slurm
+    sbatch/environments/DrivAer_Star/lbfgsb/run_lbfgsb_cd_only_seed[0-19]_nr3.slurm
+    sbatch/environments/DrivAer_Star/BO_torch/run_BO_torch_cd_only_seed[0-3]_n1000.slurm
+
+  Results:
+    environments/DrivAer_Star/results/v3/                                  (complete)
+    environments/DrivAer_Star/results/run_GA_cd_only_120particles_500iterations_attempt_[1-20]/
+    environments/DrivAer_Star/results/run_lbfgsb_cd_only_seed[0-19]_nr3/
+    environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[0-3]_n1000/
+
+  Related docs:
+    docs/drivaer_star_adjoint_feasibility_April_8_2026.txt  (adjoint feasibility
+      analysis and performance optimization details)

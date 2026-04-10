@@ -3,20 +3,37 @@ Discussion of Design, Motivation, and Challenges
 April 7, 2026
 ================================================================================
 
-OVERVIEW (updated April 9, 2026)
----------------------------------
-GOAL: Benchmark four optimization methods (GA/PSO, L-BFGS-B, BO_torch, v3 LLM)
-on a constrained aerodynamic shape optimization problem: maximize L/D of a 2D
-airfoil (18-parameter Kulfan/CST) at alpha=5 deg, Re=1e7, Mach=0.2, subject to
-pitching moment CM >= -0.133 and geometric feasibility constraints.
+OVERVIEW (updated April 10, 2026)
+----------------------------------
+
+PROBLEM STATEMENT:
+Optimize a 2D airfoil shape to maximize lift-to-drag ratio (L/D) subject to a
+pitching moment constraint (C_M >= -0.133) and geometric feasibility constraints.
+The pitching moment constraint matters physically: a highly cambered, high-L/D
+airfoil tends to have a strongly nose-down pitching moment, which requires a
+proportionally larger horizontal tail to trim the aircraft --- so bounding C_M is
+equivalent to bounding the induced trim drag. The airfoil is parameterized with
+18 Kulfan/CST coefficients at alpha=5 deg, Re=1e7, Mach=0.2. Geometric
+constraints include minimum local thickness, spar thickness at 33% chord,
+trailing-edge thickness, trailing-edge angle, leading-edge camber shape, and
+shape smoothness (wiggliness).
+
+BENCHMARK: Four optimization methods are compared:
+  GA/PSO       120 particles x 500 iterations, 20+ attempts
+  L-BFGS-B     gradient-based with finite-difference gradients, 26 seeds
+  BO_torch     Bayesian optimization with exact GP, 4 seeds (cancelled early)
+  ShapeEvolve  LLM-guided optimizer (v3, Gemini 2.5 Flash), 20 attempts
 
 GROUND TRUTH: XFOIL (panel solver). All final results are XFOIL-validated.
 
 WHY A SURROGATE IS NEEDED:
 Direct XFOIL optimization at 60,000 evaluations (GA: 120 particles x 500 iters)
 would take weeks. NeuralFoil --- a neural network trained on XFOIL data ---
-evaluates in microseconds, making population-based search tractable. All optimizer
+evaluates in microseconds, making population-based search tractable. All Stage 1
 reward functions run against NeuralFoil; XFOIL is used only for final validation.
+The trade-off: NeuralFoil overpredicts L/D by ~9% relative to XFOIL, and its
+predictions become unreliable for shapes outside its training distribution. It
+provides an analysis_confidence score to quantify this reliability.
 
 THE TWO-STAGE PIPELINE (key design decision):
 Optimizing against a surrogate introduces two systematic problems that prevent
@@ -39,33 +56,118 @@ naive hand-off of raw optimizer outputs to XFOIL:
 
 To address both problems, a two-stage pipeline was adopted:
 
-  Stage 1 (exploration): Run optimizer against NeuralFoil with penalized reward
-  (lambda=500) to identify promising design regions.
+  Stage 1 (exploration): Run each optimizer against NeuralFoil with a penalized
+  reward function:
+    reward = NF L/D - 500 * sum(normalized_violations)
+  where both C_M >= -0.133 and conf >= 0.90 are explicit penalty terms, each
+  violation expressed as a dimensionless fraction of its bound (lambda=500 chosen
+  so a single complete constraint failure costs more reward than any infeasible
+  L/D gain). The four methods reach different Stage 1 NF L/D plateaus:
+    GA/PSO ~354,  ShapeEvolve ~344,  L-BFGS-B ~325,  BO_torch ~264 (cancelled)
+  These differences reflect how each method interacts with the conf and CM
+  constraint boundaries, and are not predictive of final XFOIL performance.
 
-  Stage 2 (refinement): Post-process the best design(s) with IPOPT adjoint
-  (CasADi autodiff through NeuralFoil, ~30 iterations) using tightened constraints:
-    - CM >= -0.125  (0.008 buffer over -0.133, covering worst-case 0.005 NF->XF bias)
+  Stage 2 (refinement): Post-process the best design(s) from each method with
+  IPOPT adjoint (CasADi autodiff through NeuralFoil, ~30 iterations) using
+  tightened constraints:
+    - CM >= -0.125  (tightened from -0.133; 0.008 buffer covers worst-case
+                     NF->XF CM bias of ~0.003-0.005)
     - conf >= 0.85  (relaxed from 0.90 but still in-distribution)
-  Then XFOIL-validate the IPOPT output as the final answer for each method.
+  Regardless of Stage 1 differences, IPOPT converges all four methods to NF L/D
+  ~357-362. The design space has one dominant optimum in this CM/conf-constrained
+  region, and IPOPT finds it from any reasonable starting point.
+
+  Stage 2 sensitivity study (CM threshold): for L-BFGS-B and ShapeEvolve only,
+  a second IPOPT sweep was run with the looser bound CM >= -0.130. This yielded
+  slightly higher NF L/D (~364-371), but XFOIL validation showed true C_M ~
+  -0.133 to -0.135 for most of these designs --- violating even the relaxed bound.
+  NeuralFoil's CM model has ~3-5 count of error at the boundary, confirming that
+  the 0.008 buffer in CM >= -0.125 is necessary.
+
+  Stage 3 (XFOIL validation): each Stage 2 design evaluated once with XFOIL.
+  The ~9% NF->XF L/D gap is consistent across all methods for CM >= -0.125
+  designs (all converge to the same design region). CM >= -0.130 designs show
+  highly variable XFOIL results, confirming CM >= -0.125 as the reliable
+  operating point.
 
 This is analogous to surrogate-based optimization with constraint back-off, standard
 in robust/reliability-based design but rarely demonstrated explicitly in benchmarks.
 
-CURRENT RESULTS (April 9, 2026) --- all XFOIL-validated:
+FINAL RESULTS (April 9, 2026) --- all XFOIL-validated, benchmark COMPLETE:
 
-  Method      Best warm-start     NF L/D   XF L/D   XF CM    CM ok?
-  GA/PSO      att13_raw           357.0    325.6    -0.1282   YES ✓
-  L-BFGS-B    s25 (2-step)        361.2    329.5    -0.1290   YES ✓  <- best
-  v3 LLM      att15               362.2    329.0    -0.1291   YES ✓
-  BO_torch    seed1 (~32% budget) 356.4    324.9    -0.1280   YES ✓
+  Method       Budget                  Best warm-start   NF L/D  XF L/D  XF CM    xtr_u
+  -----------  ----------------------  ----------------  ------  ------  -------  -----
+  L-BFGS-B     26 seeds, 3 restarts    s25 (2-step)      361.2   329.5   -0.1290  0.488  <- best
+  ShapeEvolve  20 attempts             att15             362.2   329.0   -0.1291  0.487
+  GA/PSO       20 att, 120p x 500i     att13_raw         357.0   325.6   -0.1282  0.484
+  BO_torch     4 seeds, ~1600/5000     seed1             356.4   324.9   -0.1280  0.484
+
+  Baselines (XFOIL, no post-processing):
+    NACA 0012:                          XF L/D =  94.3   CM = -0.0003
+    Adjoint from NACA0012 (CM>=-0.133): XF L/D = 148.9  CM = -0.1167
 
 All four methods converge to the same design region (XF L/D 324.9-329.5, ~1.4%
-spread). L-BFGS-B leads marginally but the difference is within warm-start noise.
-BO_torch result is preliminary (32% of 5000-call budget); final result pending.
+spread). L-BFGS-B leads marginally; the difference is within warm-start variability.
+The benchmark is complete. BO_torch was cancelled after convergence stagnation at
+~32% of budget (seed1 no improvement for 1488 consecutive iterations).
 
-Baselines:
-  NACA0012 (XFOIL):                    XF L/D = 94.3,  CM = -0.0003
-  Adjoint from NACA0012 (CM>=-0.133):  XF L/D = 148.9, CM = -0.1167
+Key finding: despite large Stage 1 differences, optimizer choice has almost no
+effect on the final XFOIL result --- IPOPT post-processing dominates. The
+differentiator is efficiency: ShapeEvolve achieves competitive Stage 1 results
+with ~10x fewer NeuralFoil evaluations (~100k vs ~1M for GA and L-BFGS-B).
+
+
+COMPUTE COST
+------------
+NeuralFoil (Stage 1) evaluation counts, IPOPT post-processing runs, and NF→XF
+surrogate accuracy gap per method:
+
+  Method     NF evals (Stage 1)   IPOPT runs     NF→XF gap   Cost bottleneck
+  ---------  -------------------  -------------  ----------  -----------------------------------------
+  GA/PSO     ~1.20M (20×60k)      5 attempts     -8.8%       Eval volume: 120p×500i; NF <1 ms/call
+  L-BFGS-B   ~992k  (26×~38k)     4 seeds (×2)   -8.8%       3-pt FD in 18D: 36 extra evals/grad step
+  v3 LLM     ~100k  (20×~5k)      20 attempts    -9.2%       LLM API latency: ~1600 calls at ~2-5 s each
+  BO_torch   ~10.9k (4 seeds)     4 seeds        -8.8%       GP fitting: O(n³) refit, ~28 s/call at n=2700
+
+  NF→XF gap = (XF L/D - NF L/D) / NF L/D, computed on the IPOPT-refined best design per method.
+
+Notes:
+  - The NF→XF gap is consistent across all methods (~8.8-9.2%). This is not a
+    coincidence: all four optimizers converge to designs in the same region of
+    design space (saturating the CM≥-0.125 IPOPT constraint and the conf≥0.85
+    bound), so the same systematic NF→XF bias applies uniformly.
+
+  - GA/PSO is the most expensive by NF eval count (~1.2M). Each attempt runs
+    120 particles × 500 iterations = 60,000 NF calls; 20 attempts ran in parallel
+    on AWS instances. Despite the large eval budget, NeuralFoil's sub-millisecond
+    throughput makes GA wall time a few minutes per attempt.
+
+  - L-BFGS-B also accumulates ~1M NF calls, spread over 26 seeds × 3 restarts.
+    The high count comes from 3-point finite differences: each gradient step
+    requires 2×18=36 extra forward evals (18-parameter space). Despite this cost,
+    L-BFGS-B achieves the best XF L/D, suggesting gradient information is useful
+    even when approximated numerically.
+
+  - v3 (LLM-guided) is the most NF-eval-efficient: ~100k calls total vs ~1M for
+    GA and L-BFGS-B. The bottleneck is LLM API latency (~1600 Gemini 2.5 Flash
+    calls, ~2-5 s each), not NeuralFoil throughput. v3 matches the performance
+    of the more eval-intensive methods.
+
+  - BO_torch has the smallest NF eval count (~10.9k, cancelled at ~32% of the
+    5000-call budget per seed) but the highest GP compute overhead. By mid-run
+    (~2700 accumulated points), each BO iteration requires an O(n³) GP
+    hyperparameter refit taking ~28 s, making 4-seed parallel runs take ~24 h
+    of wall time before cancellation due to stagnation.
+
+  - Stage 2 (IPOPT post-processing) adds negligible compute: each IPOPT run is
+    ~30 CasADi iterations, taking ~1-5 s on CPU. The IPOPT step is cheap relative
+    to any Stage 1 method.
+
+  - "IPOPT runs (×2)" for L-BFGS-B: four seed candidates (s7, s20, s25, s26)
+    each ran through IPOPT twice — once with CM≥-0.130 threshold and once with
+    CM≥-0.125 — to find the tighter-constraint optimum. Seed 25 ("2-step" in the
+    results table) required two sequential IPOPT warm-starts to converge.
+
 
 The rest of this document records the experimental history: reward function
 design iterations, early results, failure modes encountered, IPOPT post-processing
@@ -691,8 +793,10 @@ V3 FLASH-2.5 RESULTS AND IPOPT POST-PROCESSING (April 9, 2026)
 lambda=500) completed. All 20 attempts converged to designs with conf~0.900 and
 CM~-0.133 — exactly at both active constraint boundaries, same surrogate exploitation
 pattern as GA/lbfgsb. Best NF L/D values: att16=360, att12=358, att2=356 (range 299-360).
-Note: att3 (job 1211) ran for 8+ hours and reached 4771 evaluations — still running
-at time of writing due to a slow/stalled state not related to feasibility issues.
+Note: att3 (job 1211) ran for 8+ hours and completed at 5834 evaluations (iter 199).
+Best NF L/D=351.9 (iter_199_o4) — below att15 (362.2) and att6 (360.9), so no
+CM>=-0.125 IPOPT treatment was applied. The v3 benchmark result (XF=329.0, att15)
+is unaffected. All 20 v3 attempts are now complete.
 
 IPOPT POST-PROCESSING OF V3 DESIGNS (April 9, 2026)
 -----------------------------------------------------
@@ -899,8 +1003,15 @@ All methods post-processed with IPOPT CM>=-0.125, conf>=0.85 and XFOIL-validated
 
 All four methods yield CM-feasible designs with XFOIL L/D in the range 324.9–329.5.
 L-BFGS-B and v3 are effectively tied (329.5 vs 329.0, within warm-start variability).
-GA and BO_torch trail by ~4-5 XF L/D units. The BO_torch result uses the best design
-from ~1600/5000 evaluations (seed1, iter_1336); the full run may improve further.
+GA and BO_torch trail by ~4-5 XF L/D units.
+
+NOTE on BO_torch: The IPOPT+XFOIL pipeline was run at ~32% of the BO_torch budget
+(seed1, iter_1336, raw NF L/D=263.8 → XF=324.9). Jobs 1304-1307 were subsequently
+cancelled after confirming convergence stagnation: seeds 0, 1, 3 showed no improvement
+for 893, 1488, and 995 consecutive iterations respectively (seed1 last improved at
+iter 1336 and was cancelled at iter ~2824 with zero progress since). The IPOPT+XFOIL
+result from iter_1336 is the definitive BO_torch benchmark result; additional evals
+would not have changed it.
 
 NOTE on BO_torch seed spread: IPOPT from seed1 (best raw NF L/D=263.8) gives XF=324.9.
 Seeds 2 and 3 (raw NF L/D=214.6, 144.5) also converge to NF L/D~358-359 after IPOPT
@@ -917,12 +1028,16 @@ STATUS (April 9, 2026)
 -----------------------
   GA/PSO:   COMPLETE — XFOIL best 325.6 (IPOPT CM>=-0.125, att13_raw warm-start)
   L-BFGS-B: COMPLETE — XFOIL best 329.5 (IPOPT CM>=-0.125, s25 2-step)
-  v3 LLM:   COMPLETE (19/20; att3 still running) — XFOIL best 329.0 (att15)
-  BO_torch: EARLY RESULT 324.9 (seed1, ~32% budget) — jobs 1304-1307 still running.
-            When complete: re-run IPOPT+XFOIL on final best per seed.
+  v3 LLM:   COMPLETE (20/20) — XFOIL best 329.0 (att15). att3 finished at 5834
+            evals (NF L/D=351.9), below att15/att6; no further processing needed.
+  BO_torch: COMPLETE — XFOIL best 324.9 (seed1, iter_1336). Jobs 1304-1307 cancelled
+            after stagnation confirmed (seed1 no improvement for 1488/5000 iters).
+            Result is final; no further runs needed.
 
-  DrivAer_Star (separate benchmark): GA (jobs 1433-1452) and L-BFGS-B
-  (jobs 1453-1472) running in parallel; ~3% and ~26% complete respectively.
+  NeuralFoil benchmark: COMPLETE across all 4 methods.
+
+  DrivAer_Star (separate benchmark): see
+    docs/drivaer_star_benchmark_discussion_April_9_2026.txt
 
 This is analogous to constraint tightening / back-off in robust optimization,
 which is standard practice when the surrogate model has known systematic bias.
