@@ -20,3 +20,24 @@ venv/
 
 # Python
 __pycache__/
+# Bulk run/output artifacts
+SAVED_DIRS*/
+run_*/
+**/run_*/
+**/runs/
+**/checkpoints/
+**/artifacts/
+**/wandb/
+**/mlruns/
+**/tensorboard/
+**/events.out.tfevents*
+**/*.npy
+**/*.npz
+**/*.h5
+**/*.pkl
+
+# Known heavy paths on this cluster
+SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_LAM50/
+archive/
+logs/
+environments/solver_configs/
