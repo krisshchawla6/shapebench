@@ -70,13 +70,14 @@ BENCHMARK COVERAGE (updated April 12, 2026)
 --------------------------------------------
   Method           Jobs           n_calls/budget           Status
   -------------------------------------------------------------------
-  GA/PSO           1433-1452      120p × 500i × 20         CANCELLING (stopping at iter 250; 19/20 flat, att16 kept running)
+  GA/PSO           1433-1452      120p × 500i × 20         CANCELLING (cron job running; ~8 jobs left as of Apr 12 05:14 UTC)
   L-BFGS-B         1453-1472      maxiter=200 × 3 × 20     COMPLETE (Apr 12; all 20 seeds)
   v3 LLM (old)     (Mar 20)       80 iters × 10 × 1        COMPLETE (single run, baseline)
   v3 LLM (n800)    1622-1641      80 iters × 10 × 20       COMPLETE (Apr 10; results archived)
   v3 LLM (n2400)   1715-1734      240 iters × 10 × 20      COMPLETE (Apr 12; results archived)
   v3 LLM (n10000)  1784-1803      1000 iters × 10 × 20     RUNNING  (submitted Apr 12; est. ~4.4 days)
-  BO_torch         1498-1501      1000 calls × 4            COMPLETE (Apr 10, 09:52-13:16 UTC)
+  BO_torch (s0-3)  1498-1501      1000 calls × 4            COMPLETE (Apr 10)
+  BO_torch (s4-19) 1804-1819      1000 calls × 16           RUNNING  (submitted Apr 12; est. ~7h)
   Adjoint          —              not feasible              N/A (no differentiable mesh)
 
 Note on GA/PSO and L-BFGS-B job history: both methods were submitted in multiple
@@ -159,10 +160,26 @@ found their local optima, and seed1's trajectory is a consequence of poor
 initialization that restarts could not overcome.
 
 
-GA/PSO RESULTS — CANCELLED AT ITER 250 (April 12, 2026)
----------------------------------------------------------
+GA/PSO RESULTS — CANCELLING AT ITER 250 (April 12, 2026, in progress)
+-----------------------------------------------------------------------
 20 attempts, 120 particles, intended 500 iterations. Jobs 1433-1452, started ~Apr 9.
 Rate: ~18.8 min/iter (120 particles × ~9.7 s/eval + overhead).
+
+CANCELLATION STATUS (as of Apr 12 05:14 UTC):
+Cancelled so far: att3, att6, att11, att17, att18, att20 (6/19).
+Also left queue (caught by earlier loop): att4, att5, att8, att10, att19 (11/19 done).
+Still running at iter 246-249: att1, att2, att7, att9, att12, att13, att14, att15 (8 remain).
+att16 (job 1448) kept running indefinitely — still improving, not subject to cancellation.
+
+A cron job handles remaining cancellations automatically (every 20 min):
+  Script: /scratch/ShapeEvolve/bin/cancel_ga_drivaer_at_250.sh
+  Log:    /home/jack/logs/cancel_ga_drivaer_at_250.log
+  Self-removes from crontab once all 14 monitored jobs are gone.
+
+TODO (next session): check log to confirm all 19 jobs cancelled; read final
+best Cd values from results.csv for any attempts not yet in the table below;
+update att16 final result; update BENCHMARK COVERAGE and FINAL TABLE to
+GA/PSO COMPLETE; create SAVED_DIRS for GA results.
 
 CONVERGENCE ANALYSIS (Apr 12, at ~234-296 iters):
 19/20 attempts fully flat — PSO swarm converged to local minimum well before
@@ -201,11 +218,10 @@ iteration budget is not needed; ~200-250 iters is sufficient for PSO on this
 design space.
 
 
-BO_TORCH RESULTS — COMPLETE (April 10, 2026, 09:52-13:16 UTC)
---------------------------------------------------------------
-4 seeds, n_calls=1000, n_initial=50. 1000 evals/seed at ~38 s/eval.
-Runtime: ~7h per seed (simulation-bound, not GP-bound — GP fit ~1.5s vs
-~36s per CFD eval at n≈650, confirming simulation dominates throughout).
+BO_TORCH RESULTS — seeds 0–3 COMPLETE (April 10, 2026)
+-------------------------------------------------------
+4 seeds, n_calls=1000, n_initial=50. 1 task, shared node. ~7h per seed
+(simulation-bound — GP fit ~1.5s vs ~36s per CFD eval at n≈650).
 
   Seed    Evals   Best Cd
   ------  -----   -------
@@ -214,14 +230,24 @@ Runtime: ~7h per seed (simulation-bound, not GP-bound — GP fit ~1.5s vs
   seed0   1,000   0.06537
   seed2   1,000   0.06574
 
-Best: seed1 Cd=0.06523. Remarkably tight spread across seeds (0.0652–0.0657,
-~0.8%) — much better than L-BFGS-B. BO achieves the best result overall with
-only 4,000 total evals vs ~305,000 for GA/PSO and ~270,000 for L-BFGS-B.
+Best: seed1 Cd=0.06523. Tight spread (0.0652–0.0657, ~0.8%). BO achieves the
+best result overall with only 4,000 total evals vs ~305,000 for GA/PSO and
+~270,000 for L-BFGS-B.
 
 Note on GP scaling: unlike the NeuralFoil benchmark where GP fitting was the
 bottleneck at n=2700 (~28s/call), here the CFD eval dominates (~36s) at all
 n. The GP fit grows from ~1.5s at n=650 to ~1.6s at n=1000 — negligible. No
 approximate GP or early cancellation was needed.
+
+BO_TORCH EXTENDED RUN — seeds 4–19 RUNNING (April 12, 2026)
+------------------------------------------------------------
+16 additional seeds (jobs 1804–1819), same config: n_calls=1000, n_initial=50,
+1 task, shared node. random_state = seed index (4–19). Est. ~7h per seed.
+Motivation: increase statistical coverage from 4 to 20 seeds to match GA/PSO
+and L-BFGS-B sample sizes.
+
+Results dirs:
+  environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[4-19]_n1000/
 
 
 V3 LLM NEW BENCHMARK — COMPLETE (April 10, 2026)
@@ -286,32 +312,32 @@ Slurm scripts:
   sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/run_v3_flash2_5_cd_only_drivaer_star_n2400_attempt[1-20].slurm
 
 
-FINAL BENCHMARK TABLE (updated April 11, 2026)
+FINAL BENCHMARK TABLE (updated April 12, 2026)
 ----------------------------------------------
   Method        n_runs   Best Cd    Budget (total evals)   Status
   ---------     ------   -------    --------------------   ------
-  BO_torch            4     0.06523    ~4,000   (4×1000)        COMPLETE (Apr 10)
-  GA/PSO             20     0.06526*   ~400,000 est.           RUNNING  (~33% done; est. Apr 15-16)
-  L-BFGS-B           20     0.06618    ~320,000 est.           PARTIAL  (15/20 done; est. Apr 12)
-  v3 LLM (n800)      20     0.08037    ~16,000  (20×800)       COMPLETE (Apr 10)
-  v3 LLM (n2400)     20     TBD        ~48,000  (20×2400)      RUNNING  (submitted Apr 11; est. ~25h)
-  v3 LLM (old)        1     0.06994    ~800     (1×800)        COMPLETE (Mar 20, baseline)
+  BO_torch (s0-3)      4     0.06523    ~4,000   (4×1000)        COMPLETE (Apr 10)
+  BO_torch (s4-19)    16     TBD        ~16,000  (16×1000)       RUNNING  (Apr 12; est. ~7h)
+  GA/PSO              20     0.06526*   ~300,000 est.            CANCELLING (iter 250; 19/20 flat)
+  L-BFGS-B            20     0.06618    ~320,000 est.            COMPLETE (Apr 12)
+  v3 LLM (n800)       20     0.08037    ~16,000  (20×800)        COMPLETE (Apr 10)
+  v3 LLM (n2400)      20     0.07139    ~48,000  (20×2400)       COMPLETE (Apr 12; archived)
+  v3 LLM (n10000)     20     TBD        ~200,000 (20×10000)      RUNNING  (Apr 12; est. ~4.4 days)
+  v3 LLM (old)         1     0.06994    ~800     (1×800)         COMPLETE (Mar 20, baseline)
 
-  * GA best Cd=0.06526 is intermediate; final may improve slightly.
+  * GA best Cd=0.06526 at cancellation; att16 still running.
 
 Key findings so far:
-  - BO_torch leads with Cd=0.06523 at only 4,000 total evals — ~70× more
-    eval-efficient than GA/PSO for equivalent best-design quality.
-  - GA/PSO and BO_torch are essentially tied (0.0652-0.0653, <0.05%
-    difference) despite an 80× eval budget difference.
+  - BO_torch (s0-3) leads with Cd=0.06523 at only 4,000 total evals — highly
+    eval-efficient. Seeds 4-19 running to bring sample size to 20.
+  - GA/PSO and BO_torch essentially tied (0.0652-0.0653, <0.05% difference)
+    despite an 80× eval budget difference for GA.
   - L-BFGS-B best (seed5, Cd=0.06618) is ~1.4% worse than GA/BO best,
-    and has high variance across seeds (0.066–0.185).
-  - v3 LLM (n800, 20 attempts): best Cd=0.08037 — significantly worse than
-    the other three methods on this 20D problem at 800 evals/attempt.
-  - Old v3 single run (Cd=0.06994) also below other methods, consistent
-    with the 20-attempt benchmark result.
-  - v3 LLM (n2400, 20 attempts): running — tripled budget to test whether
-    more iterations close the gap to GA/BO levels.
+    with high variance across seeds (0.066–0.093); all 20 seeds converged.
+  - v3 LLM (n800): best Cd=0.08037 — significantly below other methods.
+  - v3 LLM (n2400): best Cd=0.07139 — 11% improvement over n800, still
+    below GA/BO/L-BFGS-B; not yet converged at end of run.
+  - v3 LLM (n10000): running — testing whether larger budget closes gap.
   - Unlike NeuralFoil, there is no IPOPT post-processing stage — surrogate
     outputs are final. All Cd values directly comparable.
 
@@ -328,6 +354,7 @@ FILES
     sbatch/environments/DrivAer_Star/GA/run_GA_cd_only_attempt[1-20].slurm
     sbatch/environments/DrivAer_Star/lbfgsb/run_lbfgsb_cd_only_seed[0-19]_nr3.slurm
     sbatch/environments/DrivAer_Star/BO_torch/run_BO_torch_cd_only_seed[0-3]_n1000.slurm
+    sbatch/environments/DrivAer_Star/BO_torch/run_BO_torch_cd_only_seed[4-19]_n1000.slurm
     sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/run_v3_flash2_5_cd_only_drivaer_star_attempt[1-20].slurm
     sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/v3_flash2_5_cd_only_drivaer_star.config.json
     sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/run_v3_flash2_5_cd_only_drivaer_star_n2400_attempt[1-20].slurm
@@ -338,6 +365,7 @@ FILES
     environments/DrivAer_Star/results/run_GA_cd_only_120particles_500iterations_attempt_[1-20]/  (RUNNING ~33%)
     environments/DrivAer_Star/results/SAVED_DIRS_run_lbfgsb_cd_only_drivaer_star_nr3/run_lbfgsb_cd_only_seed[0-19]_nr3/  (complete, Apr 12)
     environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[0-3]_n1000/       (complete, Apr 10)
+    environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[4-19]_n1000/      (running, Apr 12)
     environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-20]_flash_2_5/        (complete, Apr 10, n800)
     environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-20]_flash_2_5_n2400/  (RUNNING, submitted Apr 11, n2400)
 
