@@ -66,17 +66,18 @@ Compare to NeuralFoil L-BFGS-B: microseconds per eval → full 3-restart run
 in minutes. The eval cost, not the algorithm, is the bottleneck here.
 
 
-BENCHMARK COVERAGE (updated April 11, 2026)
+BENCHMARK COVERAGE (updated April 12, 2026)
 --------------------------------------------
-  Method          Jobs           n_calls/budget           Status
-  ------------------------------------------------------------------
-  GA/PSO          1433-1452      120p × 500i × 20         RUNNING  (~162-210/500 iters as of Apr 11; est. ~4.5 more days)
-  L-BFGS-B        1453-1472      maxiter=200 × 3 × 20     PARTIAL  (15/20 complete; seeds 1,2,4,7,8 still running; est. ~8-13h)
-  v3 LLM (old)    (Mar 20)       80 iters × 10 × 1        COMPLETE (single run, baseline)
-  v3 LLM (n800)   1622-1641      80 iters × 10 × 20       COMPLETE (Apr 10)
-  v3 LLM (n2400)  1715-1734      240 iters × 10 × 20      RUNNING  (submitted Apr 11; est. ~25h)
-  BO_torch        1498-1501      1000 calls × 4            COMPLETE (Apr 10, 09:52-13:16 UTC)
-  Adjoint         —              not feasible              N/A (no differentiable mesh)
+  Method           Jobs           n_calls/budget           Status
+  -------------------------------------------------------------------
+  GA/PSO           1433-1452      120p × 500i × 20         CANCELLING (stopping at iter 250; 19/20 flat, att16 kept running)
+  L-BFGS-B         1453-1472      maxiter=200 × 3 × 20     COMPLETE (Apr 12; all 20 seeds)
+  v3 LLM (old)     (Mar 20)       80 iters × 10 × 1        COMPLETE (single run, baseline)
+  v3 LLM (n800)    1622-1641      80 iters × 10 × 20       COMPLETE (Apr 10; results archived)
+  v3 LLM (n2400)   1715-1734      240 iters × 10 × 20      COMPLETE (Apr 12; results archived)
+  v3 LLM (n10000)  1784-1803      1000 iters × 10 × 20     RUNNING  (submitted Apr 12; est. ~4.4 days)
+  BO_torch         1498-1501      1000 calls × 4            COMPLETE (Apr 10, 09:52-13:16 UTC)
+  Adjoint          —              not feasible              N/A (no differentiable mesh)
 
 Note on GA/PSO and L-BFGS-B job history: both methods were submitted in multiple
 batches due to disk-space failures and re-runs. A batch of L-BFGS-B jobs
@@ -106,74 +107,98 @@ were submitted April 10 (jobs 1622-1641) with debug=False to match other methods
 See V3 LLM NEW BENCHMARK section below.
 
 
-L-BFGS-B RESULTS — 15/20 COMPLETE, 5 RUNNING (as of April 11, 2026)
----------------------------------------------------------------------
-20 seeds, 3 restarts, maxiter=200. Seeds 1,2,4,7,8 still running (~8-13h est.).
-Results below reflect current batch (jobs 1453-1472); evals vary by convergence.
+L-BFGS-B RESULTS — COMPLETE (April 12, 2026)
+---------------------------------------------
+20 seeds, 3 restarts, maxiter=200. All 20 complete (jobs 1453-1472).
+Evals vary by convergence; multiple prior batches ran (batch 3 failed disk-full).
 
-  Seed    Evals    Best Cd       Status
-  ------  ------   -------       ------
-  seed5   19,721   0.06618  <- best   complete
-  seed6   14,514   0.06679            complete
-  seed7   19,326   0.07080            RUNNING
-  seed10  19,434   0.07107            complete
-  seed17  15,170   0.07187            complete
-  seed11  12,628   0.07297            complete
-  seed13  11,029   0.07638            complete
-  seed14  14,965   0.07641            complete
-  seed16  14,432   0.07900            complete
-  seed0    8,569   0.07950            complete
-  seed18   9,922   0.07952            complete
-  seed4   21,400   0.08280            RUNNING
-  seed15  16,441   0.08308            complete
-  seed8   19,333   0.08577  ⚠        RUNNING  (improved from earlier ~0.113)
-  seed9   17,548   0.08738            complete
-  seed2   19,461   0.08932            RUNNING
-  seed3   14,268   0.08979            complete
-  seed12  14,145   0.09199            complete
-  seed19  13,120   0.09239            complete
-  seed1   19,479   0.18547  ⚠        RUNNING  (net lift, poor basin)
+  Seed    Evals    Best Cd
+  ------  ------   -------
+  seed5   19,721   0.06618  <- best
+  seed6   14,514   0.06679
+  seed7   25,379   0.07080
+  seed10  19,434   0.07107
+  seed17  15,170   0.07187
+  seed11  12,628   0.07297
+  seed13  11,029   0.07638
+  seed14  14,965   0.07641
+  seed16  14,432   0.07900
+  seed0    8,569   0.07950
+  seed18   9,922   0.07952
+  seed4   28,044   0.08280
+  seed15  16,441   0.08308
+  seed8   27,224   0.08557
+  seed9   17,548   0.08738
+  seed2   20,377   0.08932
+  seed3   14,268   0.08979
+  seed12  14,145   0.09199
+  seed19  13,120   0.09239
+  seed1   26,281   0.09342  ⚠ (net lift; improved from ~0.185 interim via additional restarts)
 
-Best so far: seed5 Cd=0.06618. Large spread (0.066–0.185) typical of
-gradient-based search in 20D with multiple local optima. Seed1 stuck in a
-very poor basin (net lift). Seed8 improved significantly in the current
-batch (~0.113 → 0.086), suggesting it escaped the poor basin from earlier runs.
+Best: seed5 Cd=0.06618. Large spread (0.066–0.093) typical of gradient-based
+search in 20D with multiple local optima. Seed1 escaped the very poor basin
+(0.185 → 0.093) through additional restarts but remains well above best seeds.
+
+CONVERGENCE ANALYSIS:
+18/20 seeds fully converged — all completed all 3 restarts and best Cd flatlined
+well before the end of the run (many as early as 25% through). Several seeds
+(e.g. 11, 12, 13, 17) found their local minimum and never improved again after
+the first quarter of evaluations. The Cd variance across seeds (0.066–0.093)
+reflects the distribution of local minima in the 20D landscape, not insufficient
+iterations — it is purely initialization-dependent.
+
+2 exceptions:
+  seed1:  Δ=0.00327 in last 10% — still improving at termination. Started in an
+          extremely poor basin (Cd~0.23) and spent the entire run climbing out
+          (0.229 → 0.185 → 0.093). Even with more iterations it is unlikely to
+          reach the quality of well-initialized seeds.
+  seed3:  Δ=0.00011 in last 10% — marginal, effectively converged.
+
+Running L-BFGS-B longer would not help: the 18 converged seeds have genuinely
+found their local optima, and seed1's trajectory is a consequence of poor
+initialization that restarts could not overcome.
 
 
-GA/PSO RESULTS — RUNNING (as of April 11, 2026)
-------------------------------------------------
-20 attempts, 120 particles, 500 iterations. Jobs 1433-1452, started ~Apr 9.
-Progress: ~161-210/500 iterations (~32-42%). Est. ~4.5 more days to complete.
-Rate: ~19.3 min/iter (120 particles × ~9.7 s/eval + overhead).
+GA/PSO RESULTS — CANCELLED AT ITER 250 (April 12, 2026)
+---------------------------------------------------------
+20 attempts, 120 particles, intended 500 iterations. Jobs 1433-1452, started ~Apr 9.
+Rate: ~18.8 min/iter (120 particles × ~9.7 s/eval + overhead).
 
-Intermediate results (current batch, current CSV state):
+CONVERGENCE ANALYSIS (Apr 12, at ~234-296 iters):
+19/20 attempts fully flat — PSO swarm converged to local minimum well before
+iter 200 in nearly all cases, many by iter 100-150. Running to 500 iterations
+would produce no improvement. Jobs cancelled at iter 250 to avoid wasted compute.
+Exception: att16 still improving (Δ=0.00212 in iters 200-237); kept running.
 
-  Attempt    Iter/500   Evals    Best Cd
-  -------    --------   ------   -------
-  att20        188      22,560   0.06526  <- best so far
-  att3         210      25,200   0.06560
-  att18        165      19,800   0.06557
-  att11        165      19,800   0.06567
-  att7         163      19,560   0.06633
-  att10        164      19,680   0.06636
-  att8         164      19,680   0.06843
-  att9         163      19,560   0.07003
-  att6         164      19,680   0.07141
-  att15        163      19,560   0.07216
-  att16        164      19,680   0.07342
-  att1         161      19,320   0.07596
-  att19        164      19,680   0.07596
-  att17        163      19,560   0.07632
-  att4         164      19,680   0.07737
-  att5         164      19,680   0.07736
-  att12        162      19,440   0.07741
-  att14        162      19,440   0.07864
-  att2         162      19,440   0.07914
-  att13        161      19,320   0.08278
+  Attempt   Iter@cancel   Evals    Best Cd       Convergence
+  -------   -----------   ------   -------       -----------
+  att20        273        32,760   0.06526  <- best   flat since iter ~150
+  att3         296        35,520   0.06560            flat since iter ~200
+  att18        ~250       30,000   0.06557            flat since iter ~150
+  att11        ~250       30,000   0.06567            flat since iter ~150
+  att7         ~250       30,000   0.06633            flat since iter ~100
+  att10        ~250       30,000   0.06636            flat since iter ~100
+  att8         ~250       30,000   0.06843            flat since iter ~100
+  att9         ~250       30,000   0.07002            flat since iter ~150
+  att6         ~250       30,000   0.07141            flat since iter ~150
+  att15        ~250       30,000   0.07216            flat since iter ~150
+  att16        running    —        0.07064*           still improving at cancel
+  att1         ~250       30,000   0.07596            flat since iter ~100
+  att19        ~250       30,000   0.07596            flat since iter ~150
+  att17        ~250       30,000   0.07632            flat since iter ~100
+  att4         ~250       30,000   0.07732            flat since iter ~150
+  att5         ~250       30,000   0.07736            flat since iter ~150
+  att12        ~250       30,000   0.07741            flat since iter ~150
+  att14        ~250       30,000   0.07864            flat since iter ~150
+  att2         ~250       30,000   0.07914            flat since iter ~150
+  att13        ~250       30,000   0.08278            flat since iter ~100
 
-Best so far: att20 Cd=0.06526. Top 6 attempts already below Cd=0.0684 at
-~33% of iterations — consistent with the population converging early and
-spending the remaining iterations refining. Final values may improve slightly.
+  * att16 best Cd as of iter 237; final value pending.
+
+Best: att20 Cd=0.06526. The PSO population converges very early in this 20D
+problem — effectively final by iter 150-200 for most attempts. The full 500-
+iteration budget is not needed; ~200-250 iters is sufficient for PSO on this
+design space.
 
 
 BO_TORCH RESULTS — COMPLETE (April 10, 2026, 09:52-13:16 UTC)
@@ -311,7 +336,7 @@ FILES
   Results:
     environments/DrivAer_Star/results/v3/                                         (old, complete)
     environments/DrivAer_Star/results/run_GA_cd_only_120particles_500iterations_attempt_[1-20]/  (RUNNING ~33%)
-    environments/DrivAer_Star/results/run_lbfgsb_cd_only_seed[0-19]_nr3/          (15/20 complete, 5 running)
+    environments/DrivAer_Star/results/SAVED_DIRS_run_lbfgsb_cd_only_drivaer_star_nr3/run_lbfgsb_cd_only_seed[0-19]_nr3/  (complete, Apr 12)
     environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[0-3]_n1000/       (complete, Apr 10)
     environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-20]_flash_2_5/        (complete, Apr 10, n800)
     environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-20]_flash_2_5_n2400/  (RUNNING, submitted Apr 11, n2400)

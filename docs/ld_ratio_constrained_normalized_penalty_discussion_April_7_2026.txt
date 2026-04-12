@@ -1024,20 +1024,58 @@ Baseline references (XFOIL-validated, not post-processed):
   NACA0012:                         XF L/D=94.3,   CM=-0.0003  YES
   Adjoint from NACA0012 (CM>=-0.133): XF L/D=148.9, CM=-0.1167  YES
 
-STATUS (April 9, 2026)
------------------------
+STATUS (updated April 12, 2026)
+--------------------------------
   GA/PSO:   COMPLETE — XFOIL best 325.6 (IPOPT CM>=-0.125, att13_raw warm-start)
   L-BFGS-B: COMPLETE — XFOIL best 329.5 (IPOPT CM>=-0.125, s25 2-step)
   v3 LLM:   COMPLETE (20/20) — XFOIL best 329.0 (att15). att3 finished at 5834
             evals (NF L/D=351.9), below att15/att6; no further processing needed.
-  BO_torch: COMPLETE — XFOIL best 324.9 (seed1, iter_1336). Jobs 1304-1307 cancelled
-            after stagnation confirmed (seed1 no improvement for 1488/5000 iters).
-            Result is final; no further runs needed.
+  BO_torch: COMPLETE (benchmark) — XFOIL best 324.9 (seed1, iter_1336). Jobs
+            1304-1307 cancelled after stagnation confirmed. Result is final.
+            Extended re-run (seeds 5-9, n=6000, jobs 1697-1701) RUNNING for
+            additional statistical coverage — see BO_TORCH EXTENDED RUNS below.
 
-  NeuralFoil benchmark: COMPLETE across all 4 methods.
+  NeuralFoil benchmark: COMPLETE across all 4 methods (benchmark result unchanged).
 
   DrivAer_Star (separate benchmark): see
     docs/drivaer_star_benchmark_discussion_April_9_2026.txt
+
+
+BO_TORCH EXTENDED RUNS — seeds 5–9 (April 12, 2026)
+-----------------------------------------------------
+Background: the original seeds 0–3 (jobs 1304-1307) were cancelled at ~32–57%
+of their 5000-call budget after convergence stagnation was confirmed. Seeds 5–9
+were submitted (jobs 1697–1701) for additional statistical coverage at a larger
+budget (n=6000), using n_initial=30 and lambda_penalty=500.0 (same reward as
+the benchmark runs). Each seed runs --exclusive on one node (128-core BLAS
+acceleration for GP fitting).
+
+Previous seeds 0–3 final bests (cut off at 2582–2851 evals):
+  seed0: NF best L/D=223.2 | seed1: 263.8 (best) | seed2: 217.9 | seed3: 145.0
+
+Current status (April 12, seeds 5–8 at ~26.7h, seed9 at ~10h):
+  seed5  (job 1697): 2610/6000 evals, best NF L/D=155.0  — CONVERGED (flat n>2000)
+  seed6  (job 1698): 2705/6000 evals, best NF L/D=210.5  — CONVERGED (flat n>2000)
+  seed7  (job 1699): 2672/6000 evals, best NF L/D=207.6  — nearly flat (Δ0.8 last 500)
+  seed8  (job 1700): 2791/6000 evals, best NF L/D=130.7  — CONVERGED (flat n>1500)
+  seed9  (job 1701): 1770/6000 evals, best NF L/D=139.0  — still improving
+
+Convergence trajectory (best NF L/D by eval count):
+  Seed   n=500   n=1000  n=1500  n=2000  n=2500  n=2700
+  5      10.4    64.6    154.3   155.0   155.0   (flat)
+  6      165.4   200.7   207.7   210.5   210.5   (flat)
+  7      191.7   197.1   206.6   206.8   207.6   ~flat
+  8      121.8   125.2   130.7   130.7   130.7   (flat)
+  9      126.5   128.6   138.7   —       —       running
+
+Note: seeds 5–9 best range 130–211, below seeds 0–3 range 145–264 — normal
+seed-to-seed variability; BO finds different local optima depending on random
+initialization. The benchmark result (seed1, XF L/D=324.9 after IPOPT) is
+unaffected.
+
+Estimated time to completion: ~35–45h for seeds 5–8, ~40–50h for seed9
+(rate currently ~100 evals/h for seeds 5–8 and declining as GP grows; seed9
+at ~178 evals/h but will slow similarly).
 
 This is analogous to constraint tightening / back-off in robust optimization,
 which is standard practice when the surrogate model has known systematic bias.
@@ -1060,9 +1098,15 @@ FILES
       run_GA_ld_ratio_constrained_m02_re1e7_normalized_120particles_500iterations_attempt_[1-25]_AWS/
       run_lbfgsb_ld_ratio_constrained_m02_re1e7_normalized_seed[0-39]_nr3/
 
-  In-progress (April 8, 2026):
-    environments/NeuralFoil/results/run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized_attempt_[1-20]_flash_2_5/
+  Completed (benchmark) BO_torch seeds 0–3 (cut off at ~2600–2851 evals):
     environments/NeuralFoil/results/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[0-3]_n5000/
+
+  Running BO_torch extended seeds 5–9 (April 12, 2026, jobs 1697–1701):
+    environments/NeuralFoil/results/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[5-9]_n6000/
+    sbatch/environments/NeuralFoil/BO_torch/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[5-9]_n6000.slurm
+
+  Completed v3 (April 8, 2026):
+    environments/NeuralFoil/results/run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized_attempt_[1-20]_flash_2_5/
 
   Archived prior experiments:
     SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_INITIAL_LAMBDA/  (lambda=1 runs)
