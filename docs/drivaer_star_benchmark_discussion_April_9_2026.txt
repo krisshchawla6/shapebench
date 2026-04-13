@@ -66,18 +66,18 @@ Compare to NeuralFoil L-BFGS-B: microseconds per eval → full 3-restart run
 in minutes. The eval cost, not the algorithm, is the bottleneck here.
 
 
-BENCHMARK COVERAGE (updated April 12, 2026)
+BENCHMARK COVERAGE (updated April 13, 2026)
 --------------------------------------------
   Method           Jobs           n_calls/budget           Status
   -------------------------------------------------------------------
-  GA/PSO           1433-1452      120p × 500i × 20         CANCELLING (cron job running; ~8 jobs left as of Apr 12 05:14 UTC)
+  GA/PSO           1433-1452      120p × 500i × 20         COMPLETE (Apr 12; all 20 cancelled at iter 250 or convergence)
   L-BFGS-B         1453-1472      maxiter=200 × 3 × 20     COMPLETE (Apr 12; all 20 seeds)
   v3 LLM (old)     (Mar 20)       80 iters × 10 × 1        COMPLETE (single run, baseline)
   v3 LLM (n800)    1622-1641      80 iters × 10 × 20       COMPLETE (Apr 10; results archived)
   v3 LLM (n2400)   1715-1734      240 iters × 10 × 20      COMPLETE (Apr 12; results archived)
-  v3 LLM (n10000)  1784-1803      1000 iters × 10 × 20     RUNNING  (submitted Apr 12; est. ~4.4 days)
+  v3 LLM (n10000)  1784-1803      1000 iters × 10 × 20     RUNNING  (~85–95% done as of Apr 13; 1d 15h elapsed)
   BO_torch (s0-3)  1498-1501      1000 calls × 4            COMPLETE (Apr 10)
-  BO_torch (s4-19) 1804-1819      1000 calls × 16           RUNNING  (submitted Apr 12; est. ~7h)
+  BO_torch (s4-19) 1804-1819      1000 calls × 16           COMPLETE (Apr 13; all 16 seeds at n=1000)
   Adjoint          —              not feasible              N/A (no differentiable mesh)
 
 Note on GA/PSO and L-BFGS-B job history: both methods were submitted in multiple
@@ -160,38 +160,24 @@ found their local optima, and seed1's trajectory is a consequence of poor
 initialization that restarts could not overcome.
 
 
-GA/PSO RESULTS — CANCELLING AT ITER 250 (April 12, 2026, in progress)
------------------------------------------------------------------------
+GA/PSO RESULTS — COMPLETE (April 12, 2026)
+------------------------------------------
 20 attempts, 120 particles, intended 500 iterations. Jobs 1433-1452, started ~Apr 9.
 Rate: ~18.8 min/iter (120 particles × ~9.7 s/eval + overhead).
 
-CANCELLATION STATUS (as of Apr 12 05:14 UTC):
-Cancelled so far: att3, att6, att11, att17, att18, att20 (6/19).
-Also left queue (caught by earlier loop): att4, att5, att8, att10, att19 (11/19 done).
-Still running at iter 246-249: att1, att2, att7, att9, att12, att13, att14, att15 (8 remain).
-att16 (job 1448) kept running indefinitely — still improving, not subject to cancellation.
+All 20 attempts cancelled — 19 at iter ~250 (cron job), att16 at iter 307 after
+convergence confirmed (flat for 48 consecutive iterations since iter ~259).
 
-A cron job handles remaining cancellations automatically (every 20 min):
-  Script: /scratch/ShapeEvolve/bin/cancel_ga_drivaer_at_250.sh
-  Log:    /home/jack/logs/cancel_ga_drivaer_at_250.log
-  Self-removes from crontab once all 14 monitored jobs are gone.
-
-TODO (next session): check log to confirm all 19 jobs cancelled; read final
-best Cd values from results.csv for any attempts not yet in the table below;
-update att16 final result; update BENCHMARK COVERAGE and FINAL TABLE to
-GA/PSO COMPLETE; create SAVED_DIRS for GA results.
-
-CONVERGENCE ANALYSIS (Apr 12, at ~234-296 iters):
-19/20 attempts fully flat — PSO swarm converged to local minimum well before
-iter 200 in nearly all cases, many by iter 100-150. Running to 500 iterations
-would produce no improvement. Jobs cancelled at iter 250 to avoid wasted compute.
-Exception: att16 still improving (Δ=0.00212 in iters 200-237); kept running.
+CONVERGENCE ANALYSIS:
+19/20 attempts fully flat by iter 150–200. att16 was the exception: showed a
+notable second improvement phase (iter 140–260, 0.078→0.070) before plateauing.
+Cancelled at iter 307 with best_Cd=0.07031 — 7.7% worse than att20 best.
 
   Attempt   Iter@cancel   Evals    Best Cd       Convergence
   -------   -----------   ------   -------       -----------
   att20        273        32,760   0.06526  <- best   flat since iter ~150
-  att3         296        35,520   0.06560            flat since iter ~200
   att18        ~250       30,000   0.06557            flat since iter ~150
+  att3         296        35,520   0.06560            flat since iter ~200
   att11        ~250       30,000   0.06567            flat since iter ~150
   att7         ~250       30,000   0.06633            flat since iter ~100
   att10        ~250       30,000   0.06636            flat since iter ~100
@@ -199,7 +185,7 @@ Exception: att16 still improving (Δ=0.00212 in iters 200-237); kept running.
   att9         ~250       30,000   0.07002            flat since iter ~150
   att6         ~250       30,000   0.07141            flat since iter ~150
   att15        ~250       30,000   0.07216            flat since iter ~150
-  att16        running    —        0.07064*           still improving at cancel
+  att16        307        36,840   0.07031            flat since iter ~259 (2nd phase)
   att1         ~250       30,000   0.07596            flat since iter ~100
   att19        ~250       30,000   0.07596            flat since iter ~150
   att17        ~250       30,000   0.07632            flat since iter ~100
@@ -210,12 +196,14 @@ Exception: att16 still improving (Δ=0.00212 in iters 200-237); kept running.
   att2         ~250       30,000   0.07914            flat since iter ~150
   att13        ~250       30,000   0.08278            flat since iter ~100
 
-  * att16 best Cd as of iter 237; final value pending.
-
 Best: att20 Cd=0.06526. The PSO population converges very early in this 20D
-problem — effectively final by iter 150-200 for most attempts. The full 500-
-iteration budget is not needed; ~200-250 iters is sufficient for PSO on this
+problem — effectively final by iter 150–200 for most attempts. The full 500-
+iteration budget is not needed; ~200–250 iters is sufficient for PSO on this
 design space.
+
+Results archived:
+  environments/DrivAer_Star/results/SAVED_DIRS_run_GA_cd_only_drivaer_star_120p_250i/
+    run_GA_cd_only_120particles_500iterations_attempt_[1-20]/
 
 
 BO_TORCH RESULTS — seeds 0–3 COMPLETE (April 10, 2026)
@@ -239,12 +227,23 @@ bottleneck at n=2700 (~28s/call), here the CFD eval dominates (~36s) at all
 n. The GP fit grows from ~1.5s at n=650 to ~1.6s at n=1000 — negligible. No
 approximate GP or early cancellation was needed.
 
-BO_TORCH EXTENDED RUN — seeds 4–19 RUNNING (April 12, 2026)
-------------------------------------------------------------
-16 additional seeds (jobs 1804–1819), same config: n_calls=1000, n_initial=50,
-1 task, shared node. random_state = seed index (4–19). Est. ~7h per seed.
-Motivation: increase statistical coverage from 4 to 20 seeds to match GA/PSO
-and L-BFGS-B sample sizes.
+BO_TORCH EXTENDED RUN — seeds 4–19 COMPLETE (April 13, 2026)
+-------------------------------------------------------------
+All 16 seeds (jobs 1804–1819) completed at n=1000. Combined with seeds 0–3,
+all 20 seeds are now complete. Results confirm the seeds 0–3 picture exactly:
+extremely tight convergence across all seeds.
+
+  Seed   Best Cd  |  Seed   Best Cd  |  Seed   Best Cd  |  Seed   Best Cd
+  -----  -------  |  -----  -------  |  -----  -------  |  -----  -------
+  s0     0.06537  |  s5     0.06533  |  s10    0.06562  |  s15    0.06552
+  s1     0.06523  |  s6     0.06583  |  s11    0.06550  |  s16    0.06556
+  s2     0.06574  |  s7     0.06548  |  s12    0.06532  |  s17    0.06551
+  s3     0.06530  |  s8     0.06544  |  s13    0.06534  |  s18    0.06558
+  s4     0.06518  |  s9     0.06509  |  s14    0.06535  |  s19    0.06547
+
+All 20 seeds complete: best=0.06509 (seed9), median=0.06545, range 0.0651–0.0658
+(~1.1% spread). The tight clustering across all 20 seeds strongly confirms that
+GP acquisition reliably finds the same optimum region regardless of random state.
 
 Results dirs:
   environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[4-19]_n1000/
@@ -312,34 +311,232 @@ Slurm scripts:
   sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/run_v3_flash2_5_cd_only_drivaer_star_n2400_attempt[1-20].slurm
 
 
-FINAL BENCHMARK TABLE (updated April 12, 2026)
+V3 LLM (n10000) — RUNNING (status April 13, 2026)
+--------------------------------------------------
+20 attempts (jobs 1784–1803), 1000 iters × 10 batch = 10,000 evals/attempt.
+Runtime: 1d 15h elapsed. Most attempts at 860–950 of 1000 iters (~85–95% done).
+
+  Att   Evals   Iters   Best Cd
+  ---   -----   -----   -------
+  13    9,202     926   0.06516  <- best (in GA/BO range)
+  3     8,789     887   0.06995
+  15    8,683     861   0.07583
+  9     8,369     998   0.07583
+  8     9,239     919   0.07658
+  20    8,859     880   0.07674
+  18    8,626     878   0.07772
+  6     9,460     946   0.07866
+  12    8,578     876   0.08168
+  1     8,542     861   0.08168
+  2     8,848     885   0.08177
+  16    9,306     929   0.08182
+  14    8,163     828   0.08200
+  17    9,434     941   0.08254
+  19    3,180     320   0.08259  ⚠ stalled (see below)
+  4     9,169     913   0.08294
+  7     8,536     845   0.08294
+  10    7,139     918   0.08331
+  5     3,010   1,000   0.08449  ⚠ anomaly (see below)
+  11    9,301     923   0.08550
+
+Mid-run snapshot: best=0.06516, median=0.08172, mean=0.07949.
+
+Key observations:
+  - att13 is the sole run that found the good region (Cd=0.06516, approaching
+    BO/GA range). All other 19 attempts remain above 0.069. Very high variance
+    — consistent with the n800/n2400 pattern where only 1–2 runs in 20 find
+    the low-drag basin.
+  - att5 anomaly: shows iter=1000 (completed) but only 3,010 evals vs the
+    expected ~10,000. Likely ran with a smaller batch_size or had eval failures
+    early; functional but under-sampled.
+  - att19 anomaly: only 320 iters / 3,180 evals — appears stalled or hit an
+    error. Results are valid but represent a much smaller budget than intended.
+  - att10 has 7,139 evals at iter=918 — slightly lower throughput than others,
+    likely a slower node.
+
+V3 LLM — NaN PARAMETER BUG (discovered April 12, 2026)
+--------------------------------------------------------
+During analysis of the n10000 runs, design JSON files were found containing
+literal `NaN` values for FFD parameters (e.g. `"side_mirrors_z": NaN`).
+NaN is not valid per the JSON spec but Python's json module reads it silently,
+so the framework accepted and saved these corrupted files.
+
+Scale of the problem (across 20 n10000 runs):
+  side_mirrors_z:       672 NaN occurrences  (anomalously high — ~5× others)
+  All other 19 params:  ~117–131 each
+  Total corrupted evaluations: ~2,540 / ~200,000 total (~1.3% of budget)
+
+Consequences:
+  - Most NaN-param designs → reward=NaN, Cd=NaN in results.csv. The surrogate
+    evaluated them, produced invalid geometry, and recorded NaN. Those budget
+    slots are wasted.
+  - A minority were silently evaluated with NaN treated as 0 by the surrogate
+    (e.g. iter_260_o3: NaN in side_mirrors_z but Cd=0.223 recorded). Those
+    evaluations ran on a different design than intended.
+  - The best designs from v3 are all clean (no NaN) — best Cd is unaffected.
+    The n10000 best Cd (0.06516 mid-run) is from a clean design.
+
+Root cause: the LLM uses `NaN` as an implicit "no strong opinion / keep default"
+signal for parameters it is uncertain about, instead of a concrete float. The
+`side_mirrors_z` parameter is particularly susceptible — the model likely has poor
+calibration on its narrow ±0.05 m range relative to the ±8° angular parameters.
+
+Fix: v3 framework should validate all design parameters before calling the
+environment (clamp to bounds or resample if NaN/Inf). This is a known failure
+mode of structured LLM output: when forced to produce JSON with numeric values,
+models occasionally emit NaN rather than a plausible number.
+
+Impact on analysis: NaN-param designs are excluded from all analysis scripts
+(convergence curve uses best_reward column which is NaN for failed evals and
+thus ignored by the running-max logic; PCA/radar scripts explicitly filter them).
+
+
+FINAL BENCHMARK TABLE (updated April 13, 2026)
 ----------------------------------------------
-  Method        n_runs   Best Cd    Budget (total evals)   Status
-  ---------     ------   -------    --------------------   ------
-  BO_torch (s0-3)      4     0.06523    ~4,000   (4×1000)        COMPLETE (Apr 10)
-  BO_torch (s4-19)    16     TBD        ~16,000  (16×1000)       RUNNING  (Apr 12; est. ~7h)
-  GA/PSO              20     0.06526*   ~300,000 est.            CANCELLING (iter 250; 19/20 flat)
-  L-BFGS-B            20     0.06618    ~320,000 est.            COMPLETE (Apr 12)
-  v3 LLM (n800)       20     0.08037    ~16,000  (20×800)        COMPLETE (Apr 10)
-  v3 LLM (n2400)      20     0.07139    ~48,000  (20×2400)       COMPLETE (Apr 12; archived)
-  v3 LLM (n10000)     20     TBD        ~200,000 (20×10000)      RUNNING  (Apr 12; est. ~4.4 days)
-  v3 LLM (old)         1     0.06994    ~800     (1×800)         COMPLETE (Mar 20, baseline)
+  Method           n_runs   Best Cd    median   Budget (total evals)   Status
+  ----------       ------   -------    ------   --------------------   ------
+  BO_torch            20    0.06509   0.06545   ~20,000  (20×1000)     COMPLETE (Apr 13)
+  GA/PSO              20    0.06526   0.07179   ~310,000 est.          COMPLETE (Apr 12; archived)
+  L-BFGS-B            20    0.06618   0.07951   ~320,000 est.          COMPLETE (Apr 12)
+  v3 LLM (n10000)     20    0.06516*  0.08172   ~200,000 (20×10000)   RUNNING  (~90% done, Apr 13)
+  v3 LLM (n2400)      20    0.07139   0.08283   ~48,000  (20×2400)    COMPLETE (Apr 12; archived)
+  v3 LLM (n800)       20    0.08037   0.08491   ~16,000  (20×800)     COMPLETE (Apr 10)
+  v3 LLM (old)         1    0.06994   —         ~800     (1×800)      COMPLETE (Mar 20, baseline)
 
-  * GA best Cd=0.06526 at cancellation; att16 still running.
+  * v3 n10000 best Cd=0.06516 is mid-run snapshot (attempt_13); final value pending.
 
-Key findings so far:
-  - BO_torch (s0-3) leads with Cd=0.06523 at only 4,000 total evals — highly
-    eval-efficient. Seeds 4-19 running to bring sample size to 20.
-  - GA/PSO and BO_torch essentially tied (0.0652-0.0653, <0.05% difference)
-    despite an 80× eval budget difference for GA.
-  - L-BFGS-B best (seed5, Cd=0.06618) is ~1.4% worse than GA/BO best,
-    with high variance across seeds (0.066–0.093); all 20 seeds converged.
-  - v3 LLM (n800): best Cd=0.08037 — significantly below other methods.
-  - v3 LLM (n2400): best Cd=0.07139 — 11% improvement over n800, still
-    below GA/BO/L-BFGS-B; not yet converged at end of run.
-  - v3 LLM (n10000): running — testing whether larger budget closes gap.
-  - Unlike NeuralFoil, there is no IPOPT post-processing stage — surrogate
-    outputs are final. All Cd values directly comparable.
+Key findings (April 13, 2026):
+  - BO_torch (20 seeds complete): best=0.06509, median=0.06545, range ~1.1%.
+    Tightest cluster of any method — GP acquisition reliably finds the same
+    optimum region regardless of random state.
+  - GA/PSO best (0.06526) and BO best (0.06509) are essentially tied (<0.3%),
+    but BO median (0.06545) is far better than GA median (0.07179) — GA wastes
+    most of its ~310k evals on a wide population that stalls in mediocre basins.
+  - L-BFGS-B best (seed5, Cd=0.06618) is ~1.7% worse than BO best; median
+    (0.07951) reflects high sensitivity to initialization in 20D.
+  - v3 LLM (n10000): mid-run best=0.06516 (att13) reaches GA/BO range, but
+    only 1/20 attempts found the good region. Median (0.08172) shows most runs
+    still stuck above 0.08. Budget alone is insufficient — the LLM needs to
+    consistently explore the low-drag region, not just occasionally stumble on it.
+  - v3 LLM scaling: n800→n2400→n10000 best Cd: 0.080→0.071→0.065. Each 4×
+    budget increase yields ~10–12% improvement in best Cd.
+  - Unlike NeuralFoil, there is no IPOPT post-processing — surrogate outputs
+    are final. All Cd values directly comparable.
+
+BOUNDS CONVERGENCE (discovered April 12, 2026):
+  All four methods independently converged to the same two parameter bounds:
+    car_size   = 0.800 (lower bound)   for every best design
+    ramp_angle ≈ +8.0° (upper bound)   for every best design
+  This indicates both parameters are strongly reward-relevant and that the
+  true optimum likely lies outside the current design space bounds. The
+  remaining 18 parameters drive the within-bounds variation between methods.
+  This is worth revisiting with wider bounds in a future benchmark.
+
+
+ANALYSIS SCRIPTS (written April 12, 2026)
+------------------------------------------
+Five scripts in analysis/DrivAer_Star/ produce plots from all benchmark results.
+All outputs go to:
+  environments/DrivAer_Star/results/analysis_plots_cd_only/
+
+Scripts and their outputs:
+
+  plot_drivaer_convergence.py → convergence_cd_vs_evals.png
+    Best Cd vs function evaluations for all methods. Revised April 13:
+      - Median across runs shown as solid line; min/max range as shaded band.
+      - v3 shows n10000 only (n800/n2400 removed for clarity).
+      - Log x-axis (geomspace grid for dense coverage at low eval counts).
+      - Baseline Cd = 0.22334 shown as dashed reference line.
+      - v3 grid clipped to actual run length (extend=False, in-progress).
+
+    Summary from April 13 run (BO_torch all 20 seeds, v3 ~90% done):
+      Method            n_runs  best_Cd  median_final  mean_final
+      GA/PSO                20  0.06526       0.07179      0.07240
+      L-BFGS-B              20  0.06618       0.07951      0.08031
+      BO_torch              20  0.06509       0.06545      0.06544
+      v3 n10000             20  0.06516       0.08172      0.07949
+
+    Key observations:
+      - BO_torch tightest cluster (median=0.06545, range ~1.1%) — GP
+        acquisition reliably finds the same optimum region across all 20 seeds.
+      - v3 n10000 best (0.06516) matches GA/BO range; median (0.08172)
+        far worse — only 1/20 attempts found the low-drag basin.
+      - GA/PSO mean (0.07240) vs BO mean (0.06544): ~10% worse despite
+        ~15× more evaluations per run.
+
+  plot_drivaer_radar.py → radar_best_designs.png
+    Polar/spider chart of 20 FFD parameters (normalized to [-1, 1] using BOUNDS)
+    for the single best design from each method. Four overlaid curves:
+      GA/PSO (Cd=0.06526), L-BFGS-B (Cd=0.06618), BO_torch (Cd=0.06509),
+      v3 flash-2.5 (Cd=0.06516, mid-run snapshot from att13).
+    Shows which parameter directions the best designs share vs diverge on.
+
+  plot_drivaer_3d_panel.py → 3d_panel_best_designs.png
+    PyVista off-screen surface renders arranged in a 2×3 grid:
+      Baseline (all params=0) + best design from each of the 4 methods.
+    Uses apply_ffd() from mesh_generator.py on the base VTK
+    (environments/DrivAer_Star/data/vtk_E/00000.vtk). Cell titles show Cd.
+    Note: PyVista emits a "bad X server connection" warning on headless nodes
+    but falls back to OSMesa/EGL rendering successfully.
+
+  plot_drivaer_param_evolution.py → param_evolution_best_run.png
+    4×5 grid of 20 parameter panels. For the single best run per method, tracks
+    how the running-best design's parameters change as evaluations accumulate.
+    Only design-file updates (i.e. when a new best is found) are shown —
+    flat segments = no improvement. Large GA runs (30k+ rows) are downsampled
+    to 500 points for rendering speed. Y-axis is normalized [-1, 1].
+
+  plot_drivaer_pca_scatter.py → pca_scatter_cd.png + pca_scatter_method.png
+    PCA of all design vectors (≤300 sampled per run, 35,941 total after NaN
+    filter). 20 FFD params → 2 PCs (PC1=16.4%, PC2=13.1% explained variance).
+    - pca_scatter_cd.png: all designs coloured by Cd (plasma_r colormap);
+      best design per method marked with a star.
+    - pca_scatter_method.png: coloured by method to show how each optimizer
+      covers the design space differently.
+    NaN-param designs (v3 n10000 only) are excluded before PCA fitting.
+    PCA uses scipy.linalg.eigh on the 20×20 covariance matrix for numerical
+    stability (numpy SVD on 36k×20 failed to converge).
+
+  PCA INTERPRETATION (April 13, 2026):
+    The 20-parameter variance is fairly spread: PC1+PC2 together explain only
+    29.5%, meaning no single dominant axis captures the design space. This is
+    expected — all 20 FFD params have comparable bound ranges.
+
+    Colour-by-Cd (pca_scatter_cd.png) key findings:
+      - Low-Cd designs (dark purple in plasma_r = low drag) cluster tightly in
+        a specific region, confirming the design space has a well-defined
+        low-drag basin. All four method "best" stars land in essentially the
+        same region.
+      - The low-Cd cluster aligns with the bounds-convergence finding: all
+        best designs share car_size=0.800 and ramp_angle≈+8°. PC1 likely
+        loads heavily on these two params — it is effectively the "good
+        direction" axis.
+      - High-Cd designs (yellow) are spread broadly across the rest of the
+        space, consistent with drag being sensitive to these key parameters.
+
+    Colour-by-method (pca_scatter_method.png) key findings:
+      - v3 (purple): wide, diffuse spread across the entire design space,
+        including many high-Cd regions. The LLM explores broadly but
+        inefficiently — many evaluations wasted far from the good-Cd basin.
+        Despite covering a large area, only 1/20 runs (att13) landed in the
+        low-drag cluster.
+      - BO_torch (blue): tight, concentrated cluster landing directly in the
+        low-Cd region. GP acquisition rapidly narrows the search to the
+        promising area. Most evaluations are in or near the good basin — very
+        sample-efficient.
+      - GA/PSO (orange): broad initial scatter (population initialization
+        explores randomly) that converges toward the good region. The spread
+        is wider than BO but still reaches the low-Cd cluster for best runs.
+      - L-BFGS-B (green): narrow gradient-path traces from multiple starting
+        points. Each seed is a thin thread in PCA space — confirms that
+        gradient descent takes focused but locally-trapped paths. The starting
+        point distribution shows some seeds landing far from the good basin.
+
+    Overall: the PCA confirms that BO_torch's sample efficiency advantage is
+    real — it finds and stays in the low-drag basin with ~15–20× fewer evals
+    than GA/PSO and L-BFGS-B. The v3 LLM's broad exploration is a double-edged
+    sword: it visits more of the space but lacks the acquisition targeting to
+    exploit the good region consistently.
 
 
 FILES
@@ -362,7 +559,7 @@ FILES
 
   Results:
     environments/DrivAer_Star/results/v3/                                         (old, complete)
-    environments/DrivAer_Star/results/run_GA_cd_only_120particles_500iterations_attempt_[1-20]/  (RUNNING ~33%)
+    environments/DrivAer_Star/results/SAVED_DIRS_run_GA_cd_only_drivaer_star_120p_250i/run_GA_cd_only_120particles_500iterations_attempt_[1-20]/  (complete, Apr 12)
     environments/DrivAer_Star/results/SAVED_DIRS_run_lbfgsb_cd_only_drivaer_star_nr3/run_lbfgsb_cd_only_seed[0-19]_nr3/  (complete, Apr 12)
     environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[0-3]_n1000/       (complete, Apr 10)
     environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[4-19]_n1000/      (running, Apr 12)
