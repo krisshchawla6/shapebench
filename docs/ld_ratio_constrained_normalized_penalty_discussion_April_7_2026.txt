@@ -1114,3 +1114,75 @@ FILES
     SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_normalized_conf95/  (conf95 variant, 5 GA + 5 lbfgsb)
       run_GA_ld_ratio_constrained_m02_re1e7_normalized_conf95_120particles_500iterations_attempt_[1-5]_AWS/
       run_lbfgsb_ld_ratio_constrained_m02_re1e7_normalized_conf95_seed[0-4]_nr3/
+
+
+WHY XFOIL WAS NOT USED IN STAGE 2 INSTEAD OF NEURALFOIL+IPOPT
+==============================================================
+
+Question: given that XFOIL is the ground-truth evaluator used for Stage 3
+validation, why was NeuralFoil (with IPOPT adjoint) used for Stage 2
+refinement instead of XFOIL directly?
+
+SHORT ANSWER
+------------
+XFOIL is not differentiable and cannot be embedded in a gradient-based
+optimization loop. IPOPT requires exact analytical gradients (Jacobians and
+Hessians), which are only available because NeuralFoil is expressed through
+CasADi's symbolic backend via asb.numpy. XFOIL is a Fortran panel solver with
+no gradient flow — there is no way to differentiate through it.
+
+DETAILED REASONING
+------------------
+
+1. Differentiability requirement
+   IPOPT uses an interior-point method that requires:
+     - First-order derivatives (Jacobians) of the objective and constraints
+       with respect to all design variables
+     - Second-order derivatives (Hessians of the Lagrangian)
+   These are computed by CasADi's automatic differentiation, which builds a
+   symbolic computation graph of the entire pipeline:
+     Kulfan params → CST geometry (closed-form) → NeuralFoil (asb.numpy) → L/D
+   Every step in this chain is expressed symbolically, so CasADi can
+   differentiate through the entire pipeline in one backward pass.
+
+   XFOIL cannot be placed in this chain. It is a compiled Fortran executable
+   called as a subprocess; there is no CasADi-compatible implementation and no
+   gradient flow through it. CasADi has no way to compute dL/D / d(Kulfan) via
+   XFOIL.
+
+2. Finite-difference XFOIL adjoint is impractical
+   An alternative would be to approximate XFOIL gradients numerically, as
+   L-BFGS-B does with NeuralFoil (jac='3-point', 2d=36 extra evals per gradient
+   step). However:
+     - NeuralFoil evaluates in microseconds; XFOIL takes ~0.1-1 s per call.
+     - A finite-difference XFOIL gradient step costs ~36 XFOIL calls.
+     - IPOPT typically requires O(100) gradient steps to converge.
+     - Total: ~3,600 XFOIL calls per IPOPT run, at ~0.1-1 s each = ~6-60 minutes
+       per restart, vs ~1-5 s for CasADi-based IPOPT through NeuralFoil.
+   This would be 100-1000x slower than the NeuralFoil-based approach, making
+   multi-seed, multi-method post-processing impractical.
+
+3. XFOIL is reserved for one-shot validation (Stage 3)
+   The minimum use of XFOIL needed to obtain ground-truth aerodynamic
+   coefficients is a single evaluation per final design. Running XFOIL only at
+   Stage 3 achieves this at negligible cost. The NeuralFoil→XFOIL systematic
+   biases (L/D overprediction ~9%, CM underprediction ~0.003-0.005) are handled
+   in Stage 2 via constraint tightening (CM >= -0.125 in Stage 2 corresponds to
+   CM >= -0.133 in XFOIL), rather than by switching the Stage 2 solver to XFOIL.
+
+4. Why this approach is valid
+   The constraint tightening strategy works because the NeuralFoil→XFOIL biases
+   are systematic and approximately constant across designs in the same region
+   of design space. Once the bias is characterized (from Stage 3 results on a
+   subset of designs), the Stage 2 constraints can be tightened by the bias
+   amount to ensure XFOIL feasibility. This is standard practice in
+   surrogate-based optimization with constraint back-off.
+
+SUMMARY
+-------
+  Question                                          Answer
+  ---------------------------------------------------------------
+  Can XFOIL be used in IPOPT?                       NO — not differentiable
+  Can XFOIL gradients be finite-differenced?        YES, but 100-1000x slower
+  Is one-shot XFOIL validation sufficient?          YES — bias is systematic
+  How is NeuralFoil→XFOIL bias handled?            Constraint tightening in Stage 2
