@@ -92,9 +92,9 @@ print(f"L-BFGS-B: {len(lbfgsb_curves)} seeds, max evals = {max(len(c) for c in l
 
 # ── Load BO_torch ─────────────────────────────────────────────────────────────
 bo_curves = []
-for s in range(4):
+for s in [5, 6, 7, 8, 9]:  # seeds 5-9 (n6000, still running)
     f = (f"{BASE_RES}/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_"
-         f"seed{s}_n5000/results.csv")
+         f"seed{s}_n6000/results.csv")
     if os.path.exists(f):
         bo_curves.append(load_curve(f))
 print(f"BO_torch: {len(bo_curves)} seeds, max evals = {max(len(c) for c in bo_curves)}")
@@ -127,8 +127,8 @@ ax.fill_between(x_grid, lo, hi, color=C["LBFGSB"], alpha=0.18)
 ax.plot(x_grid, med, color=C["LBFGSB"], lw=2.0,
         label="L-BFGS-B")
 
-# BO_torch — band only (cancelled, do NOT extend)
-x_max_bo = max(len(c) for c in bo_curves)
+# BO_torch — clip to shortest run (all 5 seeds have data up to this point)
+x_max_bo = min(len(c) for c in bo_curves)
 x_grid_bo = x_grid[x_grid <= x_max_bo + 1]
 med_bo, lo_bo, hi_bo = compute_band(bo_curves, x_grid_bo, extend=False)
 ax.fill_between(x_grid_bo, lo_bo, hi_bo, color=C["BO"], alpha=0.18)

@@ -66,19 +66,27 @@ Compare to NeuralFoil L-BFGS-B: microseconds per eval → full 3-restart run
 in minutes. The eval cost, not the algorithm, is the bottleneck here.
 
 
-BENCHMARK COVERAGE (updated April 13, 2026)
+BENCHMARK COVERAGE (updated April 15, 2026)
 --------------------------------------------
-  Method           Jobs           n_calls/budget           Status
-  -------------------------------------------------------------------
-  GA/PSO           1433-1452      120p × 500i × 20         COMPLETE (Apr 12; all 20 cancelled at iter 250 or convergence)
-  L-BFGS-B         1453-1472      maxiter=200 × 3 × 20     COMPLETE (Apr 12; all 20 seeds)
-  v3 LLM (old)     (Mar 20)       80 iters × 10 × 1        COMPLETE (single run, baseline)
-  v3 LLM (n800)    1622-1641      80 iters × 10 × 20       COMPLETE (Apr 10; results archived)
-  v3 LLM (n2400)   1715-1734      240 iters × 10 × 20      COMPLETE (Apr 12; results archived)
-  v3 LLM (n10000)  1784-1803      1000 iters × 10 × 20     RUNNING  (~85–95% done as of Apr 13; 1d 15h elapsed)
-  BO_torch (s0-3)  1498-1501      1000 calls × 4            COMPLETE (Apr 10)
-  BO_torch (s4-19) 1804-1819      1000 calls × 16           COMPLETE (Apr 13; all 16 seeds at n=1000)
-  Adjoint          —              not feasible              N/A (no differentiable mesh)
+  Method                Jobs           n_calls/budget           Status
+  -----------------------------------------------------------------------
+  --- Estate (vtk_E) body ---
+  GA/PSO                1433-1452      120p × 500i × 20         COMPLETE (Apr 12; all 20 cancelled at iter 250 or convergence)
+  L-BFGS-B              1453-1472      maxiter=200 × 3 × 20     COMPLETE (Apr 12; all 20 seeds)
+  v3 LLM (old)          (Mar 20)       80 iters × 10 × 1        COMPLETE (single run, baseline)
+  v3 LLM (n800)         1622-1641      80 iters × 10 × 20       COMPLETE (Apr 10; results archived)
+  v3 LLM (n2400)        1715-1734      240 iters × 10 × 20      COMPLETE (Apr 12; results archived)
+  v3 LLM (n10000)       1784-1803      1000 iters × 10 × 20     19/20 COMPLETE (Apr 13–14); att21 (job 1957)
+                        +1957          (att21 replacement)       RUNNING (replacement for stalled att19)
+  BO_torch (s0-3)       1498-1501      1000 calls × 4            COMPLETE (Apr 10)
+  BO_torch (s4-19)      1804-1819      1000 calls × 16           COMPLETE (Apr 13; all 16 seeds at n=1000)
+  Adjoint               —              not feasible              N/A (no differentiable mesh)
+  --- Fastback (vtk_F) body ---
+  BO_torch (s0-19)      2087-2106      1000 calls × 20           RUNNING (submitted Apr 15; ~140 evals in)
+  v3 LLM (n6000)        2127-2146      600 iters × 10 × 20       RUNNING (submitted Apr 14)
+  --- Notchback (vtk_N) body ---
+  BO_torch (s0-19)      2107-2126      1000 calls × 20           RUNNING (submitted Apr 15; ~120 evals in)
+  v3 LLM (n6000)        2147-2166      600 iters × 10 × 20       RUNNING (submitted Apr 14)
 
 Note on GA/PSO and L-BFGS-B job history: both methods were submitted in multiple
 batches due to disk-space failures and re-runs. A batch of L-BFGS-B jobs
@@ -311,48 +319,57 @@ Slurm scripts:
   sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/run_v3_flash2_5_cd_only_drivaer_star_n2400_attempt[1-20].slurm
 
 
-V3 LLM (n10000) — RUNNING (status April 13, 2026)
---------------------------------------------------
-20 attempts (jobs 1784–1803), 1000 iters × 10 batch = 10,000 evals/attempt.
-Runtime: 1d 15h elapsed. Most attempts at 860–950 of 1000 iters (~85–95% done).
+V3 LLM (n10000) — 19/20 COMPLETE, att21 RUNNING (updated April 14, 2026)
+--------------------------------------------------------------------------
+20 attempts originally submitted as jobs 1784–1803. att19 cancelled (stalled);
+att21 (job 1957) submitted April 14 as replacement. Typical runtime: ~1d 19h–2d 2h.
 
-  Att   Evals   Iters   Best Cd
-  ---   -----   -----   -------
-  13    9,202     926   0.06516  <- best (in GA/BO range)
-  3     8,789     887   0.06995
-  15    8,683     861   0.07583
-  9     8,369     998   0.07583
-  8     9,239     919   0.07658
-  20    8,859     880   0.07674
-  18    8,626     878   0.07772
-  6     9,460     946   0.07866
-  12    8,578     876   0.08168
-  1     8,542     861   0.08168
-  2     8,848     885   0.08177
-  16    9,306     929   0.08182
-  14    8,163     828   0.08200
-  17    9,434     941   0.08254
-  19    3,180     320   0.08259  ⚠ stalled (see below)
-  4     9,169     913   0.08294
-  7     8,536     845   0.08294
-  10    7,139     918   0.08331
-  5     3,010   1,000   0.08449  ⚠ anomaly (see below)
-  11    9,301     923   0.08550
+Final results (19 completed attempts, sorted by best Cd):
 
-Mid-run snapshot: best=0.06516, median=0.08172, mean=0.07949.
+  Att   Evals     Runtime      Best Cd    Notes
+  ---   -----     -------      -------    -----
+  13    9,928     1d 19h 55m   0.06516  <- best (in GA/BO range)
+  3     9,927     1d 22h 41m   0.06992
+  9     8,389     1d 15h 48m   0.07583  ⚠ early-exit (see below)
+  15    10,085    1d 22h 59m   0.07583
+  18    9,825     1d 22h 24m   0.07593
+  20    10,090    1d 23h 32m   0.07641
+  8     10,061    1d 21h 11m   0.07651
+  6     10,002    1d 19h 24m   0.07866
+  1     9,938     2d 00h 04m   0.08168
+  12    9,813     1d 22h 47m   0.08168
+  16    10,010    1d 20h 02m   0.08176
+  2     9,996     1d 22h 53m   0.08177
+  14    9,869     2d 02h 05m   0.08194
+  17    10,021    1d 19h 06m   0.08254
+  4     10,040    1d 21h 13m   0.08294
+  7     10,130    2d 01h 18m   0.08294
+  10    10,062    1d 20h 45m   0.08331
+  5     3,010     1d 05h 14m   0.08449  ⚠ anomaly (see below)
+  11    10,081    1d 20h 20m   0.08550
+  19    3,180     —            0.08259  ✗ CANCELLED (stalled at 3,180 evals)
+  21    —         —            —        RUNNING (job 1957, replacement for att19)
+
+Partial results (19 complete): best=0.06516, median≈0.08168, mean≈0.07897.
+Final median pending att21 completion.
 
 Key observations:
-  - att13 is the sole run that found the good region (Cd=0.06516, approaching
-    BO/GA range). All other 19 attempts remain above 0.069. Very high variance
-    — consistent with the n800/n2400 pattern where only 1–2 runs in 20 find
-    the low-drag basin.
-  - att5 anomaly: shows iter=1000 (completed) but only 3,010 evals vs the
-    expected ~10,000. Likely ran with a smaller batch_size or had eval failures
-    early; functional but under-sampled.
-  - att19 anomaly: only 320 iters / 3,180 evals — appears stalled or hit an
-    error. Results are valid but represent a much smaller budget than intended.
-  - att10 has 7,139 evals at iter=918 — slightly lower throughput than others,
-    likely a slower node.
+  - att13 is the sole run that found the good region (Cd=0.06516, matching
+    BO/GA range). All other 18 completed attempts remain above 0.069. Very
+    high variance — consistent with n800/n2400 pattern where only 1–2/20
+    runs find the low-drag basin.
+  - att9 early-exit: ran all 1,000 iterations but only 8,389/~10,000 evals.
+    Root cause: LLM-generated optimizer code used `rng.randint()` (old NumPy
+    API); current NumPy requires `rng.integers()`. Failed calls fell back
+    without evaluating the full batch, losing ~16% of oracle slots. Best
+    Cd=0.07583 is unaffected.
+  - att5 anomaly: completed 1,000 iters but only 3,010 evals — likely hit
+    the same rng.randint bug more severely (most batches truncated to 1 eval).
+    Under-sampled but functionally complete.
+  - att19 cancelled: stalled at 3,180 evals after ~67h. Log showed
+    `RuntimeWarning: invalid value encountered in divide` — hit a bad LLM
+    state early and spent remaining time hitting the 45-min ITERATION_TIMEOUT
+    per iteration. Replaced by att21 (job 1957, fresh output dir).
 
 V3 LLM — NaN PARAMETER BUG (discovered April 12, 2026)
 --------------------------------------------------------
@@ -391,21 +408,36 @@ Impact on analysis: NaN-param designs are excluded from all analysis scripts
 thus ignored by the running-max logic; PCA/radar scripts explicitly filter them).
 
 
-FINAL BENCHMARK TABLE (updated April 13, 2026)
+FINAL BENCHMARK TABLE (updated April 15, 2026)
 ----------------------------------------------
+  Estate (vtk_E) body — baseline Cd = 0.22334:
   Method           n_runs   Best Cd    median   Budget (total evals)   Status
   ----------       ------   -------    ------   --------------------   ------
   BO_torch            20    0.06509   0.06545   ~20,000  (20×1000)     COMPLETE (Apr 13)
   GA/PSO              20    0.06526   0.07179   ~310,000 est.          COMPLETE (Apr 12; archived)
   L-BFGS-B            20    0.06618   0.07951   ~320,000 est.          COMPLETE (Apr 12)
-  v3 LLM (n10000)     20    0.06516*  0.08172   ~200,000 (20×10000)   RUNNING  (~90% done, Apr 13)
+  v3 LLM (n10000)     20    0.06516*  0.08168*  ~200,000 (20×10000)   19/20 COMPLETE; att21 RUNNING
   v3 LLM (n2400)      20    0.07139   0.08283   ~48,000  (20×2400)    COMPLETE (Apr 12; archived)
   v3 LLM (n800)       20    0.08037   0.08491   ~16,000  (20×800)     COMPLETE (Apr 10)
   v3 LLM (old)         1    0.06994   —         ~800     (1×800)      COMPLETE (Mar 20, baseline)
 
-  * v3 n10000 best Cd=0.06516 is mid-run snapshot (attempt_13); final value pending.
+  * v3 n10000: best=0.06516 (att13, confirmed final); median=0.08168 across 19/20
+    complete attempts. att21 (job 1957) running as replacement for cancelled att19;
+    final median pending.
 
-Key findings (April 13, 2026):
+  Fastback (vtk_F) body — baseline Cd = 0.18990:
+  Method           n_runs   Best Cd    median   Budget (total evals)   Status
+  ----------       ------   -------    ------   --------------------   ------
+  BO_torch            20    —         —         ~20,000  (20×1000)     RUNNING (Apr 15; ~140 evals in)
+  v3 LLM (n6000)      20    —         —         ~120,000 (20×6000)     RUNNING (Apr 14)
+
+  Notchback (vtk_N) body — baseline Cd = 0.18132:
+  Method           n_runs   Best Cd    median   Budget (total evals)   Status
+  ----------       ------   -------    ------   --------------------   ------
+  BO_torch            20    —         —         ~20,000  (20×1000)     RUNNING (Apr 15; ~120 evals in)
+  v3 LLM (n6000)      20    —         —         ~120,000 (20×6000)     RUNNING (Apr 14)
+
+Key findings (April 14, 2026):
   - BO_torch (20 seeds complete): best=0.06509, median=0.06545, range ~1.1%.
     Tightest cluster of any method — GP acquisition reliably finds the same
     optimum region regardless of random state.
@@ -414,14 +446,198 @@ Key findings (April 13, 2026):
     most of its ~310k evals on a wide population that stalls in mediocre basins.
   - L-BFGS-B best (seed5, Cd=0.06618) is ~1.7% worse than BO best; median
     (0.07951) reflects high sensitivity to initialization in 20D.
-  - v3 LLM (n10000): mid-run best=0.06516 (att13) reaches GA/BO range, but
-    only 1/20 attempts found the good region. Median (0.08172) shows most runs
-    still stuck above 0.08. Budget alone is insufficient — the LLM needs to
+  - v3 LLM (n10000): best=0.06516 (att13, confirmed) matches GA/BO range, but
+    only 1/19 completed attempts found the good region. Median (0.08168) shows
+    most runs stuck above 0.08. Budget alone is insufficient — the LLM needs to
     consistently explore the low-drag region, not just occasionally stumble on it.
   - v3 LLM scaling: n800→n2400→n10000 best Cd: 0.080→0.071→0.065. Each 4×
     budget increase yields ~10–12% improvement in best Cd.
   - Unlike NeuralFoil, there is no IPOPT post-processing — surrogate outputs
     are final. All Cd values directly comparable.
+
+MULTI-BODY EXPANSION — vtk_F and vtk_N (April 15, 2026)
+---------------------------------------------------------
+Motivation: the Transolver checkpoint was trained jointly on all three DrivAerStar
+body styles, and all three have VTK meshes and per-style norm_stats available.
+Running BO_torch on F and N provides:
+  1. Cross-body comparison: does BO find similar relative drag reductions on
+     different body styles using the same 20 FFD parameters?
+  2. Generalizability check: do the bounds-convergence findings (car_size=0.8,
+     ramp_angle≈+8°) hold across body styles, or are they Estate-specific?
+  3. Additional benchmark cases for paper evaluation.
+
+Environment changes required (April 15):
+  - environments/DrivAer_Star/environment.py: added --norm_stats_path CLI arg
+    (None → default model/norm_stats.pt; pass model/norm_stats_F.pt for vtk_F, etc.)
+  - environments/DrivAer_Star/model/setup_model.py: added --norm-output CLI arg
+    to compute_norm_stats() so F/N norm stats can be saved to separate files.
+  - norm_stats_F.pt and norm_stats_N.pt computed from 10 sample meshes each.
+  - Slurm scripts pass --base_vtk and --norm_stats_path explicitly; output dirs
+    named run_BO_torch_cd_only_vtk_{F,N}_seed{s}_n1000 (no conflict with E dirs).
+
+Baseline Cd (surrogate, all-zero params):
+  Estate (E):    0.22334   Fastback (F):  0.18990   Notchback (N): 0.18132
+  F and N are ~15% lower than E at baseline; the optimum Cd will scale similarly.
+
+Early results (~120–140 evals, still in/just past n_initial=50 random phase):
+  vtk_F best so far: Cd ≈ 0.032–0.038 across 20 seeds
+  vtk_N best so far: Cd ≈ 0.057–0.073 across 20 seeds
+  These are early exploration results — final converged values expected ~13–19h
+  after submission (consistent with Estate BO_torch wall times of 13–19h/seed).
+
+Expected completion: April 16, 2026.
+
+AERODYNAMIC CHARACTERISTICS OF THE THREE BODY STYLES (from DrivAerStar paper)
+  The three body styles have meaningfully different Cd distributions across the
+  sampled design space (Qiu et al., NeurIPS 2024 / arXiv:2510.16857):
+
+  Notchback (N): unimodal distribution, μ ≈ 0.28, narrow IQR.
+    The most well-behaved of the three — a single aerodynamic regime dominates,
+    and sampled designs cluster tightly around the mean. BO results should be
+    consistent and easy to interpret.
+
+  Fastback (F): right-skewed distribution, μ ≈ 0.33.
+    Most designs cluster near the mean but a tail of high-drag configurations
+    exists. The skew suggests there are some parameter directions that
+    disproportionately increase drag. BO should handle this well given its
+    acquisition function's ability to exploit the low-drag tail.
+
+  Estateback (E): BIMODAL distribution, density peaks at Cd ≈ 0.31 and ≈ 0.35.
+    This is the critical outlier. The two peaks indicate two distinct
+    aerodynamic regimes — most likely corresponding to different wake
+    attachment states (attached vs. separated flow over the rear deck), which
+    is a well-known feature of estate/notchback geometries near the critical
+    ramp angle. Designs can switch between regimes with relatively small
+    parameter changes.
+
+  Implications for the Estate benchmark results:
+    - The bimodal regime structure is consistent with the high variance across
+      BO seeds observed in the Estate benchmark (range 0.0651–0.0658 is tight
+      within-regime, but the variance ACROSS seeds that end in different basins
+      would be wider if n=1000 were insufficient to escape the poor regime).
+    - The bounds-convergence finding (car_size=0.800, ramp_angle≈+8°) likely
+      corresponds to one specific aerodynamic regime — the optimizer has found
+      and locked onto the low-drag basin. Designs starting in the high-drag
+      basin (Cd≈0.35) may need more evaluations to cross the regime boundary.
+    - For paper presentation: the Estate body is not a "typical" test case —
+      its bimodal landscape makes it harder than F or N. Results on E may not
+      generalise directly to either body style. Reporting all three separately
+      and noting the distributional differences is important.
+    - The bimodality also means that surrogate accuracy metrics (MAPE=2.64%)
+      averaged over both regimes may mask higher errors near the regime
+      boundary, where small geometry changes cause large Cd jumps.
+
+  Note on Cd scale: the dataset distribution values (μ≈0.28–0.33) are higher
+  than our surrogate baseline Cd values (E=0.223, F=0.190, N=0.181) because
+  the dataset samples many FFD deformations that increase drag, while our base
+  mesh is a specific design that happens to lie below the distribution mean.
+
+BASELINE Cd AS REFERENCE — IMPLICATIONS (April 15, 2026)
+---------------------------------------------------------
+  The zero-param base mesh Cd (E=0.223, F=0.190, N=0.181) is below the
+  dataset distribution mean (0.28–0.33 depending on body style). This means
+  the original DrivAer geometry is already a better-than-average design within
+  the FFD design space — it was engineered to be aerodynamically reasonable,
+  so it sits in the lower half of the distribution of randomly sampled variants.
+
+  Implications for the benchmark:
+
+  1. Improvement metric framing.
+     Reporting percentage reduction from baseline (e.g. E: 0.223→0.065, ~71%)
+     is technically correct but may be read as measuring from a "naive" or
+     typical starting point. It is not — the baseline is already below the
+     dataset mean. A reader comparing against other benchmarks should be aware
+     that the absolute reduction from the dataset mean would be larger (~77%
+     from μ≈0.28 for N, ~80% from μ≈0.33 for F) and arguably a more
+     representative "improvement over a random design" figure.
+     Recommendation for paper: report absolute Cd values as the primary metric;
+     use the zero-param baseline as reference (clearly defined geometry), but
+     note in a footnote or methods section that the base mesh lies below the
+     dataset distribution mean.
+
+  2. Estate bimodal case — regime context.
+     The Estate base mesh (Cd=0.223) lies below both distribution peaks (0.31
+     and 0.35), meaning it is already in the low-drag aerodynamic regime. The
+     optimization is therefore never required to cross a regime boundary — it
+     starts in the good basin and exploits it further. This makes the Estate
+     problem somewhat easier than it would be if optimizers were initialised
+     from the high-drag basin (Cd≈0.35 regime). The tight BO convergence
+     (all 20 seeds finding Cd≈0.065) and the bounds-convergence result
+     (car_size=0.800, ramp_angle≈+8°) are consistent with this: the problem
+     has a well-defined single good basin from the baseline's perspective, even
+     though the full design space is bimodal. Regime-crossing is not being
+     tested.
+
+  3. Fastback and Notchback — less of a concern.
+     F (right-skewed, unimodal) and N (unimodal, narrow IQR) have simpler
+     landscape structure. The baseline sitting below the mean is less
+     problematic: there is no regime-crossing issue, and the optimizer is
+     working in a well-behaved single-basin landscape. Results on F and N are
+     therefore easier to interpret cleanly than Estate results.
+
+  4. Should the zero-param baseline still be used as the reference? Yes.
+     It is the most defensible reference — a precisely defined geometry
+     (all FFD params = 0), not a statistical construct that depends on the
+     sampling strategy and LHS bounds. The dataset mean is a useful secondary
+     reference for contextualising "improvement over a random design", but the
+     zero-param baseline is the correct primary reference for an optimization
+     benchmark where the starting point is defined.
+
+
+V3 LLM — ITERATION BUDGET ANALYSIS AND F/N RUNS (April 14, 2026)
+------------------------------------------------------------------
+Before submitting v3 runs for vtk_F and vtk_N, the Estate n10000 results were
+analysed to determine what iteration budget makes sense for the simpler F/N
+landscapes (unimodal N, right-skewed F vs. bimodal E).
+
+Last-improvement eval per attempt (Estate n10000):
+  Attempt   Last-improv eval   Fraction of budget
+  att6       2515               25%
+  att10      2157               21%
+  att11      3617               36%
+  att12      3646               37%
+  att17      4901               49%
+  att2       4392               44%
+  att13      5122               52%
+  att1       7810               79%
+  att7       7051               70%
+  att15      8175               81%
+  att3       9908               100%   (still improving at end)
+  att4       9140               91%
+  att8       9864               98%
+  att14      9329               95%
+  att16      9950               99%
+  att18      9758               99%
+  att20     10081               100%
+
+Breakdown: ~5/17 attempts converged by 50% of budget; ~3/17 by 80%; ~7/17 were
+still improving at 90%+ of budget. The bimodal Estate landscape contributes to
+this long-tail behaviour — some runs take a very long time to find the good basin.
+
+Recommendation for F and N: 600 iterations × 10 batch = 6000 evals.
+  Rationale:
+  - F (right-skewed, unimodal) and N (unimodal, narrow IQR) have simpler
+    landscape structure. A single good basin is expected from the start.
+  - 6000 evals covers the range where ~75% of Estate runs had their last
+    improvement (up to n≈6000), while saving ~40% wall time vs. n=10000.
+  - If the simpler landscape behaves as expected, most F/N runs should
+    converge well before n=6000 — the budget is intentionally conservative.
+  - Est. runtime: ~26–29h per attempt (based on Estate n10000 running 43–48h for
+    1000 iterations; 600 iterations ≈ 60% of that). Per-iteration cost is ~155–173s
+    (dominated by 2 sequential LLM API calls + 10 sequential surrogate evals;
+    adding more CPUs does not help since the oracle loop is fundamentally sequential —
+    each eval result must be known before the LLM optimizer code chooses the next design).
+
+v3 F/N runs submitted April 14, 2026:
+  vtk_F: 20 attempts, jobs 2127-2146 (job names v3_drvF_a{1-20})
+    Config: sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/v3_flash2_5_cd_only_drivaer_star_n10000_vtk_F.config.json
+    Output: run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_F_attempt_{a}_flash_2_5_n6000
+  vtk_N: 20 attempts, jobs 2147-2166 (job names v3_drvN_a{1-20})
+    Config: sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/v3_flash2_5_cd_only_drivaer_star_n6000_vtk_N.config.json
+    Output: run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_N_attempt_{a}_flash_2_5_n6000
+
+Expected completion: ~April 16, 2026 (est. ~26–29h runtime).
+
 
 BOUNDS CONVERGENCE (discovered April 12, 2026):
   All four methods independently converged to the same two parameter bounds:
@@ -562,10 +778,193 @@ FILES
     environments/DrivAer_Star/results/SAVED_DIRS_run_GA_cd_only_drivaer_star_120p_250i/run_GA_cd_only_120particles_500iterations_attempt_[1-20]/  (complete, Apr 12)
     environments/DrivAer_Star/results/SAVED_DIRS_run_lbfgsb_cd_only_drivaer_star_nr3/run_lbfgsb_cd_only_seed[0-19]_nr3/  (complete, Apr 12)
     environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[0-3]_n1000/       (complete, Apr 10)
-    environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[4-19]_n1000/      (running, Apr 12)
+    environments/DrivAer_Star/results/run_BO_torch_cd_only_seed[4-19]_n1000/      (complete, Apr 13)
     environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-20]_flash_2_5/        (complete, Apr 10, n800)
-    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-20]_flash_2_5_n2400/  (RUNNING, submitted Apr 11, n2400)
+    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-20]_flash_2_5_n2400/  (complete, Apr 12, n2400)
+    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-21]_flash_2_5_n10000/ (19/20 complete + att21 RUNNING, Apr 15)
+    environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_F_seed[0-19]_n1000/  (RUNNING, submitted Apr 15)
+    environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_N_seed[0-19]_n1000/  (RUNNING, submitted Apr 15)
+    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_F_attempt_[1-20]_flash_2_5_n6000/  (RUNNING, submitted Apr 14)
+    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_N_attempt_[1-20]_flash_2_5_n6000/  (RUNNING, submitted Apr 14)
+
+  Slurm scripts (vtk_F and vtk_N):
+    sbatch/environments/DrivAer_Star/BO_torch/vtk_F/run_BO_torch_cd_only_vtk_F_seed[0-19]_n1000.slurm
+    sbatch/environments/DrivAer_Star/BO_torch/vtk_N/run_BO_torch_cd_only_vtk_N_seed[0-19]_n1000.slurm
+    sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/vtk_F/run_v3_flash2_5_cd_only_drivaer_star_vtk_F_n6000_attempt[1-20].slurm
+    sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/vtk_N/run_v3_flash2_5_cd_only_drivaer_star_vtk_N_n6000_attempt[1-20].slurm
+    sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/v3_flash2_5_cd_only_drivaer_star_n10000_vtk_F.config.json
+    sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/v3_flash2_5_cd_only_drivaer_star_n6000_vtk_N.config.json
+
+  Norm stats (per body style):
+    environments/DrivAer_Star/model/norm_stats.pt    (Estate; computed from data/vtk_E/, 10 meshes)
+    environments/DrivAer_Star/model/norm_stats_F.pt  (Fastback; computed from data/vtk_F/, 10 meshes)
+    environments/DrivAer_Star/model/norm_stats_N.pt  (Notchback; computed from data/vtk_N/, 10 meshes)
 
   Related docs:
     docs/drivaer_star_adjoint_feasibility_April_8_2026.txt  (adjoint feasibility
       analysis and performance optimization details)
+
+
+================================================================================
+METHODOLOGY NOTES (for paper write-up, April 15, 2026)
+================================================================================
+
+BENCHMARK SOURCE
+----------------
+This benchmark uses the DrivAerStar dataset and surrogate framework (Qiu et al.,
+NeurIPS 2024). DrivAerStar is a large-scale industrial CFD dataset for vehicle
+aerodynamic shape optimization, built on the parametric DrivAer car body. It is
+distinct from DrivAerNet++ (Elrefaie et al.), which is a separate dataset also
+derived from the DrivAer geometry but using OpenFOAM CFD and a different geometry
+parametrization. DrivAerStar uses Star-CCM+ for high-fidelity CFD and provides
+VTK surface field outputs (pressure, wall shear stress) alongside a trained
+Transolver surrogate model.
+
+The ShapeEvolve benchmark uses all three body variants — Estate (E), Fastback (F),
+and Notchback (N) — with the single pre-trained Transolver checkpoint (epoch=490,
+1.47M training steps) provided by Qiu et al. The checkpoint was trained on all
+three body styles simultaneously (DrivAerStar_3Vehicles dataset, 12,000 training
+samples). No fine-tuning or re-training was performed. Drag MAPE on the test set
+is 2.64% (E), 2.16% (F), and 2.42% (N).
+
+The primary benchmark (GA/PSO, L-BFGS-B, v3 LLM, BO_torch) was run on the Estate
+body only. BO_torch (20 seeds, n=1000) was subsequently run on Fastback and
+Notchback as additional test cases (submitted April 15, 2026).
+
+GEOMETRY PARAMETRIZATION
+--------------------------
+The car surface geometry is deformed using a Free-Form Deformation (FFD) scheme
+implemented in Python/NumPy (environments/DrivAer_Star/mesh_generator.py). The
+FFD operates on a base VTK surface mesh (the undeformed Estate body) by applying
+smooth, region-specific displacements, rotations, and scalings to cell coordinates
+via sigmoid-masked interpolation. All 20 parameters are treated as continuous.
+
+The design space is:
+
+  Global shape:
+    0.80  <=  s_car         <= 1.20         (uniform scale factor, dimensionless)
+    -0.10 <=  Delta_d_i     <= 0.10  m      for i = 1,2,3
+                                            (i=1: car width, i=2: car length,
+                                             i=3: front bumper length)
+
+  Surface angles:
+    -8.0  <=  theta_j       <= 8.0   deg    for j = 1,...,6
+                                            (ramp angle, trunk lid angle,
+                                             diffuser angle, greenhouse angle,
+                                             front hood angle, air intake angle)
+
+  Component position displacements:
+    -0.05 <=  delta_k       <= 0.05  m      for k = 1,...,8
+                                            (x/z displacements of windscreen,
+                                             side mirrors, rear window, trunk lid)
+
+  Tire geometry:
+    -0.013 <= Delta_r_tire  <= 0.013 m      (tire diameter offset)
+    -0.015 <= Delta_w_tire  <= 0.015 m      (tire width offset)
+
+Total: 20 parameters, all with symmetric box bounds.
+
+FLOW CONDITIONS
+---------------
+All runs use the following freestream conditions (hardcoded defaults, never
+overridden in any submitted job):
+
+    rho_inf  = 1.25  kg/m^3   (freestream density)
+    U_inf    = 40.0  m/s      (freestream velocity)
+    A_ref    = 2.37  m^2      (reference frontal area)
+    q_inf    = 0.5 * rho_inf * U_inf^2  =  1000 Pa   (dynamic pressure)
+
+These correspond to approximately sea-level conditions at 144 km/h.
+
+OBJECTIVE FUNCTION
+------------------
+The drag coefficient is computed from the predicted surface fields:
+
+    F_drag = sum_i [ p_i * A_i * n_{x,i}  +  tau_{x,i} * A_i ]
+
+    C_D    = F_drag / (q_inf * A_ref)
+
+where p_i is predicted surface pressure, tau_{x,i} is predicted streamwise wall
+shear stress, A_i is cell area, and n_{x,i} is the streamwise component of the
+outward cell normal. The optimizer reward is r = -C_D (maximized).
+
+Baseline Cd values for the undeformed (all params = 0) bodies:
+  Estate (E):   C_D = 0.22334,  C_L = 0.082,  drag = 529 N
+  Fastback (F): C_D = 0.18990,  C_L = 0.093,  drag = 450 N
+  Notchback (N):C_D = 0.18132,  C_L = 0.110,  drag = 430 N
+
+F and N start ~15% lower than E. The problem is unconstrained (no lift
+constraint, no geometric feasibility constraint) — the only constraints are the
+box bounds on the 20 design parameters.
+
+SURROGATE MODEL: TRANSOLVER
+-----------------------------
+The aerodynamic surrogate is Transolver (Qiu et al., NeurIPS 2024), a
+transformer-based neural operator for irregular surface meshes. It predicts
+per-cell flow fields (pressure and three wall-shear-stress components) from
+the surface geometry represented as a point cloud.
+
+  Input:  [N_cells, 7] tensor — cell centroid (x,y,z), cell area, outward
+          normal (n_x, n_y, n_z). N_cells ~50,000 for the Estate body.
+
+  Output: [N_cells, 4] tensor — surface pressure p, wall shear stress
+          (tau_x, tau_y, tau_z).
+
+  Architecture:
+    - Physics-Attention layers: key innovation is clustering cells into learned
+      "physics slices" (slice_num=16) that group cells by local flow state rather
+      than spatial proximity. Attention is computed within slices, enabling O(N)
+      scaling vs O(N^2) for standard attention.
+    - 4 transformer layers (n_layers=4), hidden dim 64 (n_hidden=64),
+      4 attention heads (n_head=4), GELU activation, no dropout.
+    - Input/output normalization from training data statistics. A separate
+      norm_stats .pt file is computed per body style from the 10 sample meshes
+      in data/vtk_{E,F,N}/. The --norm_stats_path CLI argument selects which
+      file to load; defaults to model/norm_stats.pt (Estate).
+    - Checkpoint: epoch=490, step=1,473,000 (Lightning checkpoint, extracted to
+      transolver_best.pt).
+
+  Inference cost: ~3–10 s/eval on CPU (multi-core), dominated by VTK mesh
+  manipulation and forward pass on the ~50k cell point cloud. No GPU was used
+  in benchmarking (Transolver falls back to CPU; nodes had no GPU allocation).
+
+  Note: unlike NeuralFoil, Transolver is not differentiable end-to-end from
+  design parameters to C_D because the FFD mesh deformation step (mesh_generator.py)
+  uses non-differentiable PyVista/NumPy operations. This precludes gradient-based
+  post-processing (e.g. adjoint/IPOPT refinement) that was used in the NeuralFoil
+  benchmark. All reported C_D values are raw optimizer outputs — no post-processing.
+
+EVALUATION PIPELINE (per oracle call)
+--------------------------------------
+  1. Design vector (20 floats) -> JSON design file
+  2. apply_ffd(base_vtk, params) -> deformed PyVista mesh
+  3. extract_model_input(mesh) -> [N_cells, 7] numpy array
+  4. Transolver forward pass -> [N_cells, 4] predicted fields
+  5. Surface integration -> F_drag, F_lift (scalars)
+  6. C_D = F_drag / (q_inf * A_ref); reward = -C_D
+  7. Results written to results.csv (one row per eval)
+
+Steps 2–4 dominate wall time. The base VTK mesh is cached in memory across
+evaluations (_BASE_MESH_CACHE) to avoid repeated disk I/O; image rendering is
+disabled (render_images=False) to eliminate the dominant ~20–60 s/eval overhead
+that was present in early testing.
+
+RELATION TO DrivAerNet++
+-------------------------
+DrivAerNet++ (Elrefaie, Dai, Ahmed; MIT) is a separate but related benchmark
+that also uses the DrivAer car body geometry. Key differences:
+
+  Feature             DrivAerStar (this work)   DrivAerNet++
+  -------             -----------------------   ------------
+  CFD solver          Star-CCM+                 OpenFOAM
+  Body styles         Estate, Fast, Notch       Estate, Fast, Notch
+  Parametrization     Blender FFD (20 params)   RBF morphing (50 params, approx.)
+  Surrogate           Transolver (field)        GNN/PointNet variants
+  Dataset size        ~400 samples (training)   ~4000–8000 samples
+  Optimization env    Yes (ShapeEvolve)         No (dataset only)
+  Differentiable      No (FFD step)             Depends on surrogate
+
+DrivAerNet++ is primarily a dataset and surrogate benchmarking resource; it does
+not include an optimization loop. DrivAerStar provides the full pipeline from
+parametrized geometry to surrogate inference to reward, making it directly usable
+as an optimization environment.

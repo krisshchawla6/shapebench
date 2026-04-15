@@ -101,11 +101,15 @@ if __name__ == "__main__":
     parser.add_argument("--ckpt", default=CKPT_PATH)
     parser.add_argument("--vtk-dir", default=None,
                         help="Directory of VTK files for computing normalization stats")
+    parser.add_argument("--norm-output", default=None,
+                        help="Output path for norm_stats .pt file "
+                             "(default: model/norm_stats.pt). "
+                             "Use e.g. model/norm_stats_F.pt for non-Estate body styles.")
     args = parser.parse_args()
 
     extract_model_weights(args.ckpt)
     if args.vtk_dir:
-        compute_norm_stats(args.vtk_dir)
+        compute_norm_stats(args.vtk_dir, output_path=args.norm_output)
     else:
         print("\nNote: Run with --vtk-dir <path> to compute normalization stats.")
         print("Without norm_stats.pt, the environment will not function correctly.")

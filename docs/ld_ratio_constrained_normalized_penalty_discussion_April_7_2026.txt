@@ -1024,7 +1024,7 @@ Baseline references (XFOIL-validated, not post-processed):
   NACA0012:                         XF L/D=94.3,   CM=-0.0003  YES
   Adjoint from NACA0012 (CM>=-0.133): XF L/D=148.9, CM=-0.1167  YES
 
-STATUS (updated April 12, 2026)
+STATUS (updated April 15, 2026)
 --------------------------------
   GA/PSO:   COMPLETE — XFOIL best 325.6 (IPOPT CM>=-0.125, att13_raw warm-start)
   L-BFGS-B: COMPLETE — XFOIL best 329.5 (IPOPT CM>=-0.125, s25 2-step)
@@ -1032,8 +1032,14 @@ STATUS (updated April 12, 2026)
             evals (NF L/D=351.9), below att15/att6; no further processing needed.
   BO_torch: COMPLETE (benchmark) — XFOIL best 324.9 (seed1, iter_1336). Jobs
             1304-1307 cancelled after stagnation confirmed. Result is final.
-            Extended re-run (seeds 5-9, n=6000, jobs 1697-1701) RUNNING for
-            additional statistical coverage — see BO_TORCH EXTENDED RUNS below.
+            Extended re-run (seeds 5-9, n=6000, jobs 1697-1701):
+              s8 (job 1700): CANCELLED by cron at 4201 evals (Apr 15)
+              s5 (job 1697): 3747 evals, approaching 4200 cancel threshold
+              s6 (job 1698): 4170 evals, approaching 4200 cancel threshold
+              s9 (job 1701): 3644 evals, approaching 4200 cancel threshold
+              s7 (job 1699): 3905 evals, converged at NF L/D=244.7, RUNNING
+                             (exempt from cron cancel; to be manually cancelled)
+            See BO_TORCH EXTENDED RUNS below for full details.
 
   NeuralFoil benchmark: COMPLETE across all 4 methods (benchmark result unchanged).
 
@@ -1041,8 +1047,8 @@ STATUS (updated April 12, 2026)
     docs/drivaer_star_benchmark_discussion_April_9_2026.txt
 
 
-BO_TORCH EXTENDED RUNS — seeds 5–9 (April 12, 2026)
------------------------------------------------------
+BO_TORCH EXTENDED RUNS — seeds 5–9 (updated April 15, 2026)
+-------------------------------------------------------------
 Background: the original seeds 0–3 (jobs 1304-1307) were cancelled at ~32–57%
 of their 5000-call budget after convergence stagnation was confirmed. Seeds 5–9
 were submitted (jobs 1697–1701) for additional statistical coverage at a larger
@@ -1053,35 +1059,61 @@ acceleration for GP fitting).
 Previous seeds 0–3 final bests (cut off at 2582–2851 evals):
   seed0: NF best L/D=223.2 | seed1: 263.8 (best) | seed2: 217.9 | seed3: 145.0
 
-Current status (April 12, seeds 5–8 at ~26.7h, seed9 at ~10h):
-  seed5  (job 1697): 2610/6000 evals, best NF L/D=155.0  — CONVERGED (flat n>2000)
-  seed6  (job 1698): 2705/6000 evals, best NF L/D=210.5  — CONVERGED (flat n>2000)
-  seed7  (job 1699): 2672/6000 evals, best NF L/D=207.6  — nearly flat (Δ0.8 last 500)
-  seed8  (job 1700): 2791/6000 evals, best NF L/D=130.7  — CONVERGED (flat n>1500)
-  seed9  (job 1701): 1770/6000 evals, best NF L/D=139.0  — still improving
+AUTOMATED STOP AT 4200 EVALS (April 14–15, 2026)
+  Seeds 5, 6, 8, 9 were identified as flatlined (no improvement since
+  n≈1500–2000) but still consuming exclusive 128-core nodes. A cron-based
+  monitoring script was installed to cancel these jobs once each reached
+  4200 evals:
+    bin/cancel_bo_ldcn_at_4200.sh  (runs every 10 min via crontab)
+  The script reads each seed's results.csv eval count, runs scancel when
+  the threshold is met, and self-removes from crontab once all four are done.
+  Seed 7 was intentionally excluded from the cancel list (see below).
+
+  s8 (job 1700): CANCELLED at 4201 evals (Apr 15, cron confirmed working).
+  s5 (job 1697): 3747 evals at last check — approaching 4200, cron pending.
+  s6 (job 1698): 4170 evals at last check — within ~30 of threshold, imminent.
+  s9 (job 1701): 3644 evals at last check — approaching 4200, cron pending.
+
+Current status (April 15):
+  seed5  (job 1697): 3747 evals, best NF L/D=155.0 — flat since n≈2000. Cron cancel pending at 4200.
+  seed6  (job 1698): 4170 evals, best NF L/D=210.5 — flat since n≈2000. Cron cancel imminent.
+  seed7  (job 1699): 3905 evals, best NF L/D=244.7 — actively improving; exempt from cron cancel.
+  seed8  (job 1700): 4201 evals, best NF L/D=130.7 — CANCELLED (cron, Apr 15).
+  seed9  (job 1701): 3644 evals, best NF L/D=144.6 — flat since n≈1500. Cron cancel pending at 4200.
 
 Convergence trajectory (best NF L/D by eval count):
-  Seed   n=500   n=1000  n=1500  n=2000  n=2500  n=2700
-  5      10.4    64.6    154.3   155.0   155.0   (flat)
-  6      165.4   200.7   207.7   210.5   210.5   (flat)
-  7      191.7   197.1   206.6   206.8   207.6   ~flat
-  8      121.8   125.2   130.7   130.7   130.7   (flat)
-  9      126.5   128.6   138.7   —       —       running
+  Seed   n=500   n=1000  n=1500  n=2000  n=2500  n=3000  n=3500  n=3820  current
+  5      10.4    64.6    154.3   155.0   155.0   155.0   155.0   155.0   155.0  (flat)
+  6      165.4   200.7   207.7   210.5   210.5   210.5   210.5   210.5   210.5  (flat)
+  7      191.7   197.1   206.6   206.8   207.6   208.4   222.8   244.7   244.7  (improving)
+  8      121.8   125.2   130.7   130.7   130.7   130.7   130.7   130.7   CANCELLED
+  9      126.5   128.6   138.7   139.0   139.0   144.6   144.6   144.6   144.6  (flat)
 
-Note: seeds 5–9 best range 130–211, below seeds 0–3 range 145–264 — normal
+SEED 7 IMPROVEMENT HISTORY AND OUTLOOK (April 15, 2026)
+  Seed7 has been the standout run. Full improvement record:
+    n=139:  17.6  |  n=158:  159.5  |  n=169: 187.4  |  n=176: 191.7
+    n=956–1286: 192.6 → 203.6  (slow climb, increments ~0.05–3.0)
+    n=1394–1438: 204.1 → 206.6
+    n=1667–2753: 206.6 → 208.4  (very slow, gap of 698 evals at n=2015→2713)
+    n=3022:  +10.0 jump to 218.4  (after 269-eval dry spell, largest single gain)
+    n=3235–3252: 218.4 → 222.7
+    n=3511–3820: 222.8 → 244.7  (active phase: 22 L/D gained in 309 evals,
+                                  improvements every 10–80 evals)
+    n=3820 (last improvement): 244.676047
+    n=3905 (current): still 244.676047 — 85 evals since last improvement
+
+  The 85-eval dry spell is NOT evidence of convergence. Historical gap sizes
+  for this seed include 229, 269, and 698 evals between improvements, each
+  followed by further gains. The +10 jump at n=3022 came after a 269-eval gap.
+  The recent active phase (n=3511–3820) was genuinely productive and ended
+  only recently. Seed7 remains exempt from the automated cancel and will be
+  manually cancelled when convergence is more firmly established or budget is
+  exhausted.
+
+Note: seeds 5–9 best range 131–245, below seeds 0–3 range 145–264 — normal
 seed-to-seed variability; BO finds different local optima depending on random
 initialization. The benchmark result (seed1, XF L/D=324.9 after IPOPT) is
 unaffected.
-
-Estimated time to completion: ~35–45h for seeds 5–8, ~40–50h for seed9
-(rate currently ~100 evals/h for seeds 5–8 and declining as GP grows; seed9
-at ~178 evals/h but will slow similarly).
-
-This is analogous to constraint tightening / back-off in robust optimization,
-which is standard practice when the surrogate model has known systematic bias.
-The objective and feasibility criterion being optimized toward remain the same
-as the formal problem statement; only the internal optimization procedure
-differs.
 
 
 FILES
@@ -1101,9 +1133,15 @@ FILES
   Completed (benchmark) BO_torch seeds 0–3 (cut off at ~2600–2851 evals):
     environments/NeuralFoil/results/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[0-3]_n5000/
 
-  Running BO_torch extended seeds 5–9 (April 12, 2026, jobs 1697–1701):
+  BO_torch extended seeds 5–9 (submitted April 12, jobs 1697–1701):
     environments/NeuralFoil/results/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[5-9]_n6000/
     sbatch/environments/NeuralFoil/BO_torch/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[5-9]_n6000.slurm
+    Status (April 15): s8 CANCELLED (4201 evals); s5/s6/s9 pending cron cancel at 4200;
+                       s7 RUNNING (3905 evals, best=244.7, still potentially improving).
+
+  Automated cancel script (seeds 5,6,8,9 at 4200 evals):
+    bin/cancel_bo_ldcn_at_4200.sh  (cron: */10 * * * *; self-removes when all done)
+    Log: ~/logs/cancel_bo_ldcn_at_4200.log
 
   Completed v3 (April 8, 2026):
     environments/NeuralFoil/results/run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized_attempt_[1-20]_flash_2_5/

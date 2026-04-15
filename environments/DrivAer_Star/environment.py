@@ -16,21 +16,25 @@ sys.path.insert(0, MODEL_DIR)
 _model = None
 _norm = None
 _device = None
+_norm_stats_path_loaded = None
 
 
-def _load_model():
-    global _model, _norm, _device
-    if _model is not None:
+def _load_model(norm_stats_path=None):
+    global _model, _norm, _device, _norm_stats_path_loaded
+    if norm_stats_path is None:
+        norm_stats_path = os.path.join(MODEL_DIR, "norm_stats.pt")
+    # Re-load if a different norm_stats file is requested (e.g. switching body style).
+    if _model is not None and _norm_stats_path_loaded == norm_stats_path:
         return
 
     import torch
     _device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    norm_path = os.path.join(MODEL_DIR, "norm_stats.pt")
-    if not os.path.exists(norm_path):
+    if not os.path.exists(norm_stats_path):
         raise FileNotFoundError(
-            f"{norm_path} not found. Run: python model/setup_model.py --vtk-dir <path>")
-    _norm = torch.load(norm_path, map_location=_device, weights_only=True)
+            f"{norm_stats_path} not found. Run: "
+            f"python model/setup_model.py --vtk-dir <path> --norm-output {norm_stats_path}")
+    _norm = torch.load(norm_stats_path, map_location=_device, weights_only=True)
 
     from Transolver import Model
     _model = Model(
@@ -43,12 +47,13 @@ def _load_model():
     _model.load_state_dict(ckpt)
     _model.to(_device)
     _model.eval()
+    _norm_stats_path_loaded = norm_stats_path
 
 
-def _run_surrogate(mesh):
+def _run_surrogate(mesh, norm_stats_path=None):
     """Run Transolver inference on a VTK mesh, return predicted fields."""
     import torch
-    _load_model()
+    _load_model(norm_stats_path)
     x_np = extract_model_input(mesh)
     x_t = torch.from_numpy(x_np).unsqueeze(0).to(_device)
 
@@ -147,17 +152,22 @@ class DrivAerStarEnvironment(BaseEnvironment):
     """Transolver surrogate for DrivAerStar vehicle aerodynamics."""
 
     def __init__(self, reward: BaseReward, base_vtk=None, render_images=False,
-                 save_fields=False, **kwargs):
+                 save_fields=False, norm_stats_path=None, **kwargs):
         self.reward = reward
         self.base_vtk = base_vtk
         self.render_images = render_images
         self.save_fields = save_fields
+        self.norm_stats_path = norm_stats_path  # None → default model/norm_stats.pt
 
     @staticmethod
     def add_args(parser):
         default_vtk = os.path.join(ENV_DIR, "data", "vtk_E", "00000.vtk")
         parser.add_argument('--base_vtk', type=str, default=default_vtk,
                             help='Path to base VTK mesh for FFD deformation')
+        parser.add_argument('--norm_stats_path', type=str, default=None,
+                            help='Path to norm_stats.pt for Transolver normalisation '
+                                 '(default: model/norm_stats.pt, computed from vtk_E). '
+                                 'Use model/norm_stats_F.pt or norm_stats_N.pt for other body styles.')
         parser.add_argument('--render_images', action='store_true', default=False,
                             help='Render solution images per evaluation (slow; off by default)')
         parser.add_argument('--save_fields', action='store_true', default=False,
@@ -178,7 +188,7 @@ class DrivAerStarEnvironment(BaseEnvironment):
                 "No base VTK mesh. Set --base_vtk or include 'vtk_path' in design JSON.")
 
         mesh = deform_vtk(vtk_path, params)
-        result = _run_surrogate(mesh)
+        result = _run_surrogate(mesh, self.norm_stats_path)
         drag, drag_p, drag_w = _compute_drag(result["x"], result)
         lift, lift_p, lift_w = _compute_lift(result["x"], result)
 
