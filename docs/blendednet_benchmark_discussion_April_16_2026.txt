@@ -78,8 +78,19 @@ differentiate methods.
 
 BENCHMARK RUNS (April 16, 2026)
 ---------------------------------
-Goal: systematic multi-seed benchmark across 3 frameworks to enable statistical
-comparison. Using 10 seeds/attempts per framework.
+Goal: systematic multi-attempt benchmark across 3 frameworks to enable statistical
+comparison. Using 10 attempts per framework.
+
+Note on initial failures (April 16, 2026): the first submission batch (jobs
+2319-2348) failed due to two issues that were fixed before resubmission:
+  1. GA scripts passed --random_state which is not a recognised run_benchmark.py
+     argument for the GA framework — scripts regenerated without it.
+  2. BlendedNet mesh generation requires ~/miniconda3/envs/openvsp310/bin/python
+     (mesh_generator.py hardcodes this path via os.path.expanduser). The env
+     did not exist under jack's home. Fixed by symlinking:
+       ~/miniconda3/envs/openvsp310 → /home/ubuntu/miniconda3/envs/openvsp310
+     Home is NFS-mounted so the symlink is visible on all compute nodes.
+     Only BlendedNet is affected (mesh_generator.py + _vsp_generate_stl.py).
 
 Node assignments:
   GA (PSO) and v3: node-3  (compute-dy-hpc-128vcpu-3)
@@ -87,66 +98,66 @@ Node assignments:
 
 --- GA / PSO ---
 Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
-  n_particles=20, n_iterations=200 → 4000 evals per seed
-  Seeds: 0-9 (job IDs 2319-2328)
-  Estimated runtime: ~7-8h per seed (4000 evals × ~7s/eval)
-  Output dirs: environments/BlendedNet/results/run_GA_shapebench_5_seed{N}_20p_200i/
+  n_particles=20, n_iterations=200 → 4000 evals per attempt
+  Attempts: 1-10 (job IDs 2349-2358)
+  Estimated runtime: ~7-8h per attempt (4000 evals × ~7s/eval)
+  Output dirs: environments/BlendedNet/results/run_GA_shapebench_5_attempt{N}_20p_200i/
 
-  SEED RESULTS (fill in as complete):
-  s0 (2319): [ ]
-  s1 (2320): [ ]
-  s2 (2321): [ ]
-  s3 (2322): [ ]
-  s4 (2323): [ ]
-  s5 (2324): [ ]
-  s6 (2325): [ ]
-  s7 (2326): [ ]
-  s8 (2327): [ ]
-  s9 (2328): [ ]
+  ATTEMPT RESULTS (fill in as complete):
+  att1  (2349): [ ]
+  att2  (2350): [ ]
+  att3  (2351): [ ]
+  att4  (2352): [ ]
+  att5  (2353): [ ]
+  att6  (2354): [ ]
+  att7  (2355): [ ]
+  att8  (2356): [ ]
+  att9  (2357): [ ]
+  att10 (2358): [ ]
 
 --- L-BFGS-B ---
   n_restarts=3, maxiter=200 → ~600 evals per seed
-  Seeds: 0-9 (job IDs 2329-2338)
+  Seeds: 0-9 (job IDs 2359-2368)
   Estimated runtime: ~1-2h per seed (600 evals × ~7s/eval)
   Output dirs: environments/BlendedNet/results/run_lbfgsb_shapebench_5_seed{N}_nr3/
 
   SEED RESULTS (fill in as complete):
-  s0 (2329): [ ]
-  s1 (2330): [ ]
-  s2 (2331): [ ]
-  s3 (2332): [ ]
-  s4 (2333): [ ]
-  s5 (2334): [ ]
-  s6 (2335): [ ]
-  s7 (2336): [ ]
-  s8 (2337): [ ]
-  s9 (2338): [ ]
+  s0 (2359): [ ]
+  s1 (2360): [ ]
+  s2 (2361): [ ]
+  s3 (2362): [ ]
+  s4 (2363): [ ]
+  s5 (2364): [ ]
+  s6 (2365): [ ]
+  s7 (2366): [ ]
+  s8 (2367): [ ]
+  s9 (2368): [ ]
 
 --- v3_dynamic_optimizer ---
 Config: sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_n2000.config.json
   Model: gemini-2.5-flash
   iterations=200, batch_size=10 → 2000 evals per attempt
-  Attempts: 1-10 (job IDs 2339-2348)
+  Attempts: 1-10 (job IDs 2369-2378)
   Estimated runtime: ~3-4h per attempt
   Output dirs: environments/BlendedNet/results/run_v3_flash2_5_shapebench_5_attempt_{N}_n2000/
 
   ATTEMPT RESULTS (fill in as complete):
-  att1  (2339): [ ]
-  att2  (2340): [ ]
-  att3  (2341): [ ]
-  att4  (2342): [ ]
-  att5  (2343): [ ]
-  att6  (2344): [ ]
-  att7  (2345): [ ]
-  att8  (2346): [ ]
-  att9  (2347): [ ]
-  att10 (2348): [ ]
+  att1  (2369): [ ]
+  att2  (2370): [ ]
+  att3  (2371): [ ]
+  att4  (2372): [ ]
+  att5  (2373): [ ]
+  att6  (2374): [ ]
+  att7  (2375): [ ]
+  att8  (2376): [ ]
+  att9  (2377): [ ]
+  att10 (2378): [ ]
 
 
 FILES
 -----
 Sbatch scripts:
-  sbatch/environments/BlendedNet/GA/run_GA_shapebench_5_seed{0-9}_20p_200i.slurm
+  sbatch/environments/BlendedNet/GA/run_GA_shapebench_5_attempt{1-10}_20p_200i.slurm
   sbatch/environments/BlendedNet/lbfgsb/run_lbfgsb_shapebench_5_seed{0-9}_nr3.slurm
   sbatch/environments/BlendedNet/v3/run_v3_flash2_5_shapebench_5_attempt{1-10}.slurm
 
