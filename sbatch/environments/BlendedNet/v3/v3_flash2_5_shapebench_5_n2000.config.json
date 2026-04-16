@@ -1,0 +1,23 @@
+{
+  "framework": "v3_dynamic_optimizer",
+  "environment": "BlendedNet",
+  "reward": "shapebench_5",
+  "action": "gaussain",
+  "iterations": 200,
+  "batch_size": 10,
+  "gaussian_decay": false,
+  "gaussian_final_scale": 0.1,
+  "sampler_model": "gemini-2.5-flash",
+  "sampler_max_retries": 3,
+  "hybrid": false,
+  "inspirations": 10,
+  "initialize_n_sample": 0,
+  "pw_alpha": 3.0,
+  "num_islands": 1,
+  "migration_interval": 10,
+  "migration_rate": 0.1,
+  "baseline": null,
+  "debug": false,
+  "mach": 0.3,
+  "re": 10000000.0
+}

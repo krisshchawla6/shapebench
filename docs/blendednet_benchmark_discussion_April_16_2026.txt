@@ -1,0 +1,186 @@
+BLENDEDNET BENCHMARK DISCUSSION
+Started: April 16, 2026
+================================================================================
+
+OVERVIEW
+--------
+BlendedNet is a Blended Wing Body (BWB) aircraft aerodynamic optimization
+environment. It uses a Transolver surrogate (same architecture as DrivAer_Star)
+to predict aerodynamic fields, with the shapebench_5 multi-point drag
+minimization reward.
+
+This file documents the benchmark runs of PSO (GA framework), L-BFGS-B, and
+v3_dynamic_optimizer on BlendedNet / shapebench_5.
+
+
+ENVIRONMENT
+-----------
+Environment:  BlendedNet
+Reward:       shapebench_5
+Surrogate:    Transolver (pre-trained, frozen inference)
+
+Design space: 10 continuous parameters
+  B1:    [100.0, 200.0]   — fuselage width param 1
+  B2:    [50.0,  200.0]   — fuselage width param 2
+  B3:    [200.0, 700.0]   — fuselage width param 3
+  C2:    [550.0, 850.0]   — wing chord param 2
+  C3:    [180.0, 280.0]   — wing chord param 3
+  C4:    [60.0,   90.0]   — wing chord param 4
+  S1:    [40.0,   60.0]   — surface param 1
+  S2:    [40.0,   60.0]   — surface param 2
+  S3:    [24.0,   40.0]   — surface param 3
+  alpha: [-3.0,    3.0]   — angle of attack (degrees)
+
+No discrete variables.
+
+Flight conditions: Mach=0.3, Re=1e7 (fixed for all runs)
+
+
+REWARD: shapebench_5
+--------------------
+Multi-point drag minimization across 5 CL operating points.
+  CL targets: [0.206, 0.206, 0.206, 0.185, 0.227]
+  (3 unique CL targets after deduplication)
+
+For each unique CL target, bisection search (8 iterations) finds the angle of
+attack alpha that achieves that CL. This makes each design evaluation invoke
+3 × 8 = 24 Transolver forward passes.
+
+Reward: R = -mean_CD  (mean drag coefficient across the 5 operating points)
+Fail reward: -5.0
+
+Approximate cost per design evaluation: ~5-10s (24 surrogate calls at ~0.1-0.5s
+each, including bisection overhead).
+
+
+PRIOR RUNS (before April 16, 2026)
+-----------------------------------
+Both runs used older/single-shot configs as exploratory runs, not systematic
+benchmarks.
+
+  PSO (GA framework):
+    n_particles=20, n_iterations=100 → 2000 evals
+    Best reward: -0.007022 (mean_CD = 0.007022)
+    Location: environments/BlendedNet/results/shapebench5/pso/
+
+  v3_dynamic_optimizer:
+    Model: gemini-3-flash-preview (deprecated)
+    iterations=100, batch_size=20 → ~2000 evals
+    Best reward: -0.006971 (mean_CD = 0.006971)
+    Location: environments/BlendedNet/results/shapebench5/v3/
+
+  L-BFGS-B: not previously run on BlendedNet/shapebench_5.
+
+Note: PSO and v3 results are nearly identical (0.007022 vs 0.006971), which may
+reflect convergence to the same local optimum or insufficient budget to
+differentiate methods.
+
+
+BENCHMARK RUNS (April 16, 2026)
+---------------------------------
+Goal: systematic multi-seed benchmark across 3 frameworks to enable statistical
+comparison. Using 10 seeds/attempts per framework.
+
+Node assignments:
+  GA (PSO) and v3: node-3  (compute-dy-hpc-128vcpu-3)
+  L-BFGS-B:        node-4  (compute-dy-hpc-128vcpu-4)
+
+--- GA / PSO ---
+Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
+  n_particles=20, n_iterations=200 → 4000 evals per seed
+  Seeds: 0-9 (job IDs 2319-2328)
+  Estimated runtime: ~7-8h per seed (4000 evals × ~7s/eval)
+  Output dirs: environments/BlendedNet/results/run_GA_shapebench_5_seed{N}_20p_200i/
+
+  SEED RESULTS (fill in as complete):
+  s0 (2319): [ ]
+  s1 (2320): [ ]
+  s2 (2321): [ ]
+  s3 (2322): [ ]
+  s4 (2323): [ ]
+  s5 (2324): [ ]
+  s6 (2325): [ ]
+  s7 (2326): [ ]
+  s8 (2327): [ ]
+  s9 (2328): [ ]
+
+--- L-BFGS-B ---
+  n_restarts=3, maxiter=200 → ~600 evals per seed
+  Seeds: 0-9 (job IDs 2329-2338)
+  Estimated runtime: ~1-2h per seed (600 evals × ~7s/eval)
+  Output dirs: environments/BlendedNet/results/run_lbfgsb_shapebench_5_seed{N}_nr3/
+
+  SEED RESULTS (fill in as complete):
+  s0 (2329): [ ]
+  s1 (2330): [ ]
+  s2 (2331): [ ]
+  s3 (2332): [ ]
+  s4 (2333): [ ]
+  s5 (2334): [ ]
+  s6 (2335): [ ]
+  s7 (2336): [ ]
+  s8 (2337): [ ]
+  s9 (2338): [ ]
+
+--- v3_dynamic_optimizer ---
+Config: sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_n2000.config.json
+  Model: gemini-2.5-flash
+  iterations=200, batch_size=10 → 2000 evals per attempt
+  Attempts: 1-10 (job IDs 2339-2348)
+  Estimated runtime: ~3-4h per attempt
+  Output dirs: environments/BlendedNet/results/run_v3_flash2_5_shapebench_5_attempt_{N}_n2000/
+
+  ATTEMPT RESULTS (fill in as complete):
+  att1  (2339): [ ]
+  att2  (2340): [ ]
+  att3  (2341): [ ]
+  att4  (2342): [ ]
+  att5  (2343): [ ]
+  att6  (2344): [ ]
+  att7  (2345): [ ]
+  att8  (2346): [ ]
+  att9  (2347): [ ]
+  att10 (2348): [ ]
+
+
+FILES
+-----
+Sbatch scripts:
+  sbatch/environments/BlendedNet/GA/run_GA_shapebench_5_seed{0-9}_20p_200i.slurm
+  sbatch/environments/BlendedNet/lbfgsb/run_lbfgsb_shapebench_5_seed{0-9}_nr3.slurm
+  sbatch/environments/BlendedNet/v3/run_v3_flash2_5_shapebench_5_attempt{1-10}.slurm
+
+Config files:
+  sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
+  sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_n2000.config.json
+
+Environment:
+  environments/BlendedNet/environment.py
+  environments/BlendedNet/design_actions.py
+  environments/BlendedNet/rewards/shapebench_5.py
+
+
+DESIGN OF EXPERIMENTS NOTES
+-----------------------------
+- L-BFGS-B has the smallest budget (~600 evals) because it uses finite-difference
+  gradients: each gradient step internally costs O(dim) = O(10) evaluations.
+  The optimizer is informed per step, so fewer raw evals are needed compared to
+  population-based methods. Expect fast initial convergence but sensitivity to
+  local optima.
+
+- PSO uses 4000 evals, the largest budget. As a population-based global search
+  method with no gradient information, it needs more evaluations to explore the
+  10D space. The prior 2000-eval run may have been too short to fully converge.
+
+- v3 uses 2000 evals (200 iter × 10 per iter). The LLM oracle provides
+  high-level reasoning about which regions to explore, which can offset the
+  smaller raw eval budget. Each iteration: 1 LLM-proposed s0 design + 9
+  sequential oracle-guided designs.
+
+- All 3 frameworks are compatible with BlendedNet (no discrete variables,
+  get_param_bounds() and write_design() implemented).
+
+- DrivAer_Star BO_torch runs are NOT being run here — BO_torch is already
+  running 20 seeds each for vtk_F and vtk_N on DrivAer_Star, and BlendedNet
+  does not have a vtk-based parameterization (uses FFD mesh deformation via VSP).
+  BO_torch for BlendedNet could be added in a future benchmark pass.

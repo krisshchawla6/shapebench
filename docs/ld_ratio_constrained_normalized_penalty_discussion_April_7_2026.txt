@@ -1033,12 +1033,15 @@ STATUS (updated April 15, 2026)
   BO_torch: COMPLETE (benchmark) — XFOIL best 324.9 (seed1, iter_1336). Jobs
             1304-1307 cancelled after stagnation confirmed. Result is final.
             Extended re-run (seeds 5-9, n=6000, jobs 1697-1701):
+              s6 (job 1698): CANCELLED by cron (exact eval count not recorded)
               s8 (job 1700): CANCELLED by cron at 4201 evals (Apr 15)
-              s5 (job 1697): 3747 evals, approaching 4200 cancel threshold
-              s6 (job 1698): 4170 evals, approaching 4200 cancel threshold
-              s9 (job 1701): 3644 evals, approaching 4200 cancel threshold
-              s7 (job 1699): 3905 evals, converged at NF L/D=244.7, RUNNING
-                             (exempt from cron cancel; to be manually cancelled)
+              s5 (job 1697): 3950 evals, best L/D=155.0, flat since n=1923
+                             (2027 evals ago) — cron will cancel at 4200
+              s9 (job 1701): 3859 evals, best L/D=144.6, flat since n=2978
+                             (881 evals ago) — cron will cancel at 4200
+              s7 (job 1699): 4091 evals, best L/D=249.9, last improvement at
+                             n=3990 (101 evals ago) — still active; exempt from
+                             cron cancel; to be manually cancelled
             See BO_TORCH EXTENDED RUNS below for full details.
 
   NeuralFoil benchmark: COMPLETE across all 4 methods (benchmark result unchanged).

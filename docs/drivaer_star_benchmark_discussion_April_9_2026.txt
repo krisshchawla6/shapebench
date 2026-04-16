@@ -77,16 +77,21 @@ BENCHMARK COVERAGE (updated April 15, 2026)
   v3 LLM (n800)         1622-1641      80 iters × 10 × 20       COMPLETE (Apr 10; results archived)
   v3 LLM (n2400)        1715-1734      240 iters × 10 × 20      COMPLETE (Apr 12; results archived)
   v3 LLM (n10000)       1784-1803      1000 iters × 10 × 20     19/20 COMPLETE (Apr 13–14); att21 (job 1957)
-                        +1957          (att21 replacement)       RUNNING (replacement for stalled att19)
+                        +1957          (att21 replacement)       RUNNING (iter 37/1000; restarted after node-8
+                                                                 preemption Apr 15 ~18:21 UTC)
   BO_torch (s0-3)       1498-1501      1000 calls × 4            COMPLETE (Apr 10)
   BO_torch (s4-19)      1804-1819      1000 calls × 16           COMPLETE (Apr 13; all 16 seeds at n=1000)
   Adjoint               —              not feasible              N/A (no differentiable mesh)
   --- Fastback (vtk_F) body ---
-  BO_torch (s0-19)      2087-2106      1000 calls × 20           RUNNING (submitted Apr 15; ~140 evals in)
-  v3 LLM (n6000)        2127-2146      600 iters × 10 × 20       RUNNING (submitted Apr 14)
+  BO_torch (s0-19)      2087-2106      1000 calls × 20           RUNNING (~350-465 evals; restarted after
+                                                                 node-8 preemption, no checkpoint)
+  v3 LLM (n6000)        2127-2146      600 iters × 10 × 20       RUNNING (iter ~37-87/600; early results
+                                                                 promising: att3=0.053, att13=0.070)
   --- Notchback (vtk_N) body ---
-  BO_torch (s0-19)      2107-2126      1000 calls × 20           RUNNING (submitted Apr 15; ~120 evals in)
-  v3 LLM (n6000)        2147-2166      600 iters × 10 × 20       RUNNING (submitted Apr 14)
+  BO_torch (s0-19)      2107-2126      1000 calls × 20           RUNNING (~274-375 evals; restarted after
+                                                                 node-8 preemption, no checkpoint)
+  v3 LLM (n6000)        2147-2166      600 iters × 10 × 20       RUNNING (iter ~45-69/600; early results
+                                                                 promising: att18=0.091, att1=0.110)
 
 Note on GA/PSO and L-BFGS-B job history: both methods were submitted in multiple
 batches due to disk-space failures and re-runs. A batch of L-BFGS-B jobs
@@ -319,10 +324,13 @@ Slurm scripts:
   sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/run_v3_flash2_5_cd_only_drivaer_star_n2400_attempt[1-20].slurm
 
 
-V3 LLM (n10000) — 19/20 COMPLETE, att21 RUNNING (updated April 14, 2026)
+V3 LLM (n10000) — 19/20 COMPLETE, att21 RUNNING (updated April 15, 2026)
 --------------------------------------------------------------------------
 20 attempts originally submitted as jobs 1784–1803. att19 cancelled (stalled);
 att21 (job 1957) submitted April 14 as replacement. Typical runtime: ~1d 19h–2d 2h.
+att21 was preempted by node-8 termination at Apr 15 ~18:21 UTC (lost ~28h of
+progress) and restarted from scratch. As of Apr 15 ~20:20 UTC: iter 37/1000,
+393 evals, best_cd=0.213 — very early stage.
 
 Final results (19 completed attempts, sorted by best Cd):
 
@@ -428,14 +436,21 @@ FINAL BENCHMARK TABLE (updated April 15, 2026)
   Fastback (vtk_F) body — baseline Cd = 0.18990:
   Method           n_runs   Best Cd    median   Budget (total evals)   Status
   ----------       ------   -------    ------   --------------------   ------
-  BO_torch            20    —         —         ~20,000  (20×1000)     RUNNING (Apr 15; ~140 evals in)
-  v3 LLM (n6000)      20    —         —         ~120,000 (20×6000)     RUNNING (Apr 14)
+  BO_torch            20    —         —         ~20,000  (20×1000)     RUNNING (~350–465 evals; restarted)
+  v3 LLM (n6000)      20    0.053†    —         ~120,000 (20×6000)     RUNNING (~37–87 iters)
+
+  † v3 vtk_F early results (2h in, not converged): att3=0.053, att13=0.070, att5=0.092.
+    att3=0.053 is already below Estate best (0.065) — notable but very early.
+    att4 and att11 showing anomalies (oracle failures / slow LLM calls).
 
   Notchback (vtk_N) body — baseline Cd = 0.18132:
   Method           n_runs   Best Cd    median   Budget (total evals)   Status
   ----------       ------   -------    ------   --------------------   ------
-  BO_torch            20    —         —         ~20,000  (20×1000)     RUNNING (Apr 15; ~120 evals in)
-  v3 LLM (n6000)      20    —         —         ~120,000 (20×6000)     RUNNING (Apr 14)
+  BO_torch            20    —         —         ~20,000  (20×1000)     RUNNING (~274–375 evals; restarted)
+  v3 LLM (n6000)      20    0.091‡    —         ~120,000 (20×6000)     RUNNING (~45–69 iters)
+
+  ‡ v3 vtk_N early results (2h in, not converged): att18=0.091, att1/att4=0.110, att3=0.114.
+    Most runs still in 0.14–0.18 range; att18 is an outlier so far.
 
 Key findings (April 14, 2026):
   - BO_torch (20 seeds complete): best=0.06509, median=0.06545, range ~1.1%.
@@ -637,6 +652,32 @@ v3 F/N runs submitted April 14, 2026:
     Output: run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_N_attempt_{a}_flash_2_5_n6000
 
 Expected completion: ~April 16, 2026 (est. ~26–29h runtime).
+
+
+NODE PREEMPTION INCIDENT (April 15, 2026, ~18:21 UTC)
+-------------------------------------------------------
+All 83 single-CPU jobs running on compute-dy-hpc-128vcpu-8 were killed
+simultaneously at 18:21:44 UTC when that AWS node was preempted (likely a
+spot-instance termination or scheduled replacement). The affected jobs were:
+  - att21 (job 1957): lost ~28h of progress from Apr 14 submission; restarted
+    from scratch, now at iter 37/1000
+  - BO_torch vtk_F s0-19 (2087-2106): lost ~12h of progress; no checkpoint
+    support (results.csv opened with 'w' on restart); now at ~350-465 evals
+  - BO_torch vtk_N s0-19 (2107-2126): same; now at ~274-375 evals
+  - v3 vtk_F att1-20 (2127-2146): minimal loss (submitted same session, started
+    at same time as preemption); now at iter ~37-87/600
+  - v3 vtk_N att1-20 (2147-2166): same; now at iter ~45-69/600
+
+Unaffected: NeuralFoil BO_torch s5/s7/s9 (jobs 1697/1699/1701) were on
+separate nodes (compute-dy-hpc-128vcpu-5, -7, -10) and continued uninterrupted.
+
+Root cause: Slurm bin-packed all single-CPU jobs onto one node (128 vCPUs,
+83 jobs × 1 CPU = 83 slots used). A single node failure kills all of them.
+v3 saves checkpoint.json + database.json each iteration, but run_benchmark.py
+has no auto-resume logic — jobs restart from iter 0 on re-queue.
+
+Note: all 83 jobs remain on node-8 after restart. Another preemption would
+reset them again.
 
 
 BOUNDS CONVERGENCE (discovered April 12, 2026):
