@@ -81,7 +81,7 @@ BENCHMARK RUNS (April 16, 2026)
 Goal: systematic multi-attempt benchmark across 3 frameworks to enable statistical
 comparison. Using 10 attempts per framework.
 
-Note on initial failures (April 16, 2026): three successive failure modes were
+Note on initial failures (April 16, 2026): four successive failure modes were
 encountered and fixed before the jobs finally ran correctly:
 
   1. GA scripts (jobs 2319-2328) passed --random_state which is not a recognised
@@ -104,69 +104,99 @@ encountered and fixed before the jobs finally ran correctly:
      a copy of libcminpack.so.1.3.6) then execs ubuntu's real Python 3.10.
      Verified working on compute node via srun before resubmission.
 
-  Only BlendedNet is affected by fixes 2/3 (mesh_generator.py +
-  _vsp_generate_stl.py are the only files using this path).
+  4. After fix 3, jobs 2382-2401 ran to completion but almost all evals returned
+     FAIL_REWARD (-5.0). Root cause: mesh_generator.py called tempfile.mkstemp()
+     for each design but never deleted the STL file after reading. With 20 concurrent
+     jobs all writing to /tmp on the same node, /tmp filled up after the first few
+     evals per job. SLURM logs confirmed: "[Errno 28] No space left on device:
+     '/tmp/tmpXXXXX.stl'". Only eval 0 (before /tmp was full) succeeded per run.
+     Fixed by wrapping the mesh read in try/finally and unlinking the temp file:
+       environments/BlendedNet/mesh_generator.py  (generate_mesh function)
+     This fix applies to all three frameworks (GA, lbfgsb, v3) since all call
+     generate_mesh. Re-run with new job IDs (2417-2446).
 
-Node assignments:
-  GA (PSO) and v3: node-3  (compute-dy-hpc-128vcpu-3)
-  L-BFGS-B:        node-4  (compute-dy-hpc-128vcpu-4)
+  Only BlendedNet is affected by fixes 2/3/4 (mesh_generator.py +
+  _vsp_generate_stl.py are the only files using the openvsp310 path, and
+  the temp file leak is specific to BlendedNet's mesh-based evaluation).
+
+Node assignments (re-run round, jobs 2417-2446):
+  All 30 jobs landed on node-6 (scheduler-assigned, no --nodelist constraint).
 
 --- GA / PSO ---
 Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
   n_particles=20, n_iterations=200 → 4000 evals per attempt
-  Attempts: 1-10 (job IDs 2382-2391)
   Estimated runtime: ~7-8h per attempt (4000 evals × ~7s/eval)
   Output dirs: environments/BlendedNet/results/run_GA_shapebench_5_attempt{N}_20p_200i/
 
+  Round 1 (jobs 2382-2391): ALL FAILED — /tmp full issue (fix 4 not yet applied).
+    9/10 attempts: gbest stuck at -5.0 (0 valid evals).
+    1/10 attempts (att9): 1 valid eval only (best=-0.007373, iter 0 particle 0).
+
+  Round 2 (jobs 2417-2426): fix 4 applied, running.
+  Attempts: 1-10 (job IDs 2417-2426)
   ATTEMPT RESULTS (fill in as complete):
-  att1  (2382): [ ]
-  att2  (2383): [ ]
-  att3  (2384): [ ]
-  att4  (2385): [ ]
-  att5  (2386): [ ]
-  att6  (2387): [ ]
-  att7  (2388): [ ]
-  att8  (2389): [ ]
-  att9  (2390): [ ]
-  att10 (2391): [ ]
+  att1  (2417): [ ]
+  att2  (2418): [ ]
+  att3  (2419): [ ]
+  att4  (2420): [ ]
+  att5  (2421): [ ]
+  att6  (2422): [ ]
+  att7  (2423): [ ]
+  att8  (2424): [ ]
+  att9  (2425): [ ]
+  att10 (2426): [ ]
 
 --- L-BFGS-B ---
   n_restarts=3, maxiter=200 → ~600 evals per seed
-  Seeds: 0-9 (job IDs 2392-2401)
   Estimated runtime: ~1-2h per seed (600 evals × ~7s/eval)
   Output dirs: environments/BlendedNet/results/run_lbfgsb_shapebench_5_seed{N}_nr3/
 
+  Round 1 (jobs 2392-2401): ALL FAILED — /tmp full issue (fix 4 not yet applied).
+    All 10 seeds: 63 evals total (1 valid + 62 fail). L-BFGS-B computed a
+    zero-gradient from the failed finite-difference perturbations and stopped.
+    Eval 0 best values (starting point only, not optimized):
+      s0=-0.006666, s1=-0.008011, s2=-0.007600, s3=-0.007947, s4=-0.008795,
+      s5=-0.007355, s6=-0.007273, s7=-0.007445, s8=-0.008182, s9=-0.006717
+
+  Round 2 (jobs 2427-2436): fix 4 applied, running.
+  Seeds: 0-9 (job IDs 2427-2436)
   SEED RESULTS (fill in as complete):
-  s0 (2392): [ ]
-  s1 (2393): [ ]
-  s2 (2394): [ ]
-  s3 (2395): [ ]
-  s4 (2396): [ ]
-  s5 (2397): [ ]
-  s6 (2398): [ ]
-  s7 (2399): [ ]
-  s8 (2400): [ ]
-  s9 (2401): [ ]
+  s0 (2427): [ ]
+  s1 (2428): [ ]
+  s2 (2429): [ ]
+  s3 (2430): [ ]
+  s4 (2431): [ ]
+  s5 (2432): [ ]
+  s6 (2433): [ ]
+  s7 (2434): [ ]
+  s8 (2435): [ ]
+  s9 (2436): [ ]
 
 --- v3_dynamic_optimizer ---
 Config: sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_n2000.config.json
   Model: gemini-2.5-flash
   iterations=200, batch_size=10 → 2000 evals per attempt
-  Attempts: 1-10 (job IDs 2369-2378)
   Estimated runtime: ~3-4h per attempt
   Output dirs: environments/BlendedNet/results/run_v3_flash2_5_shapebench_5_attempt_{N}_n2000/
 
+  Round 1 (jobs 2369-2378): MOSTLY FAILED — /tmp full issue (fix 4 not yet applied).
+    5/10 attempts: best_reward stuck at -5.0.
+    5/10 attempts: 1 valid eval, best values (starting point only):
+      att2=-0.008091, att4=-0.007626, att5=-0.006615, att6=-0.006769, att10=-0.007535
+
+  Round 2 (jobs 2437-2446): fix 4 applied, running.
+  Attempts: 1-10 (job IDs 2437-2446)
   ATTEMPT RESULTS (fill in as complete):
-  att1  (2369): [ ]
-  att2  (2370): [ ]
-  att3  (2371): [ ]
-  att4  (2372): [ ]
-  att5  (2373): [ ]
-  att6  (2374): [ ]
-  att7  (2375): [ ]
-  att8  (2376): [ ]
-  att9  (2377): [ ]
-  att10 (2378): [ ]
+  att1  (2437): [ ]
+  att2  (2438): [ ]
+  att3  (2439): [ ]
+  att4  (2440): [ ]
+  att5  (2441): [ ]
+  att6  (2442): [ ]
+  att7  (2443): [ ]
+  att8  (2444): [ ]
+  att9  (2445): [ ]
+  att10 (2446): [ ]
 
 
 FILES

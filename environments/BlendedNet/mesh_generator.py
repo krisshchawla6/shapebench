@@ -45,6 +45,7 @@ def generate_mesh(params: dict, cache_dir: str | None = None) -> pv.PolyData:
             raise ValueError(f"Missing geometry parameter: {k}")
         geom_args.append(f"{k}={float(v)}")
 
+    _temp_stl = None
     if cache_dir:
         os.makedirs(cache_dir, exist_ok=True)
         tag = "_".join(f"{k}{float(params[k]):.1f}" for k in GEOM_KEYS)
@@ -52,18 +53,26 @@ def generate_mesh(params: dict, cache_dir: str | None = None) -> pv.PolyData:
     else:
         fd, stl_path = tempfile.mkstemp(suffix=".stl")
         os.close(fd)
+        _temp_stl = stl_path
 
-    if not os.path.exists(stl_path) or os.path.getsize(stl_path) == 0:
-        cmd = [_PYTHON310, _GEN_SCRIPT, _VSP3_PATH, stl_path] + geom_args
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-        if result.returncode != 0:
-            raise RuntimeError(
-                f"OpenVSP mesh generation failed:\n{result.stderr}\n{result.stdout}"
-            )
-        info = json.loads(result.stdout.strip().split("\n")[-1])
-        if "error" in info:
-            raise RuntimeError(f"OpenVSP error: {info['error']}")
+    try:
+        if not os.path.exists(stl_path) or os.path.getsize(stl_path) == 0:
+            cmd = [_PYTHON310, _GEN_SCRIPT, _VSP3_PATH, stl_path] + geom_args
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+            if result.returncode != 0:
+                raise RuntimeError(
+                    f"OpenVSP mesh generation failed:\n{result.stderr}\n{result.stdout}"
+                )
+            info = json.loads(result.stdout.strip().split("\n")[-1])
+            if "error" in info:
+                raise RuntimeError(f"OpenVSP error: {info['error']}")
 
-    mesh = pv.read(stl_path)
-    mesh.points *= _MM_TO_M
-    return mesh
+        mesh = pv.read(stl_path)
+        mesh.points *= _MM_TO_M
+        return mesh
+    finally:
+        if _temp_stl is not None:
+            try:
+                os.unlink(_temp_stl)
+            except OSError:
+                pass
