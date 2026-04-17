@@ -22,6 +22,11 @@ _model = None
 _norm = None
 _device = None
 
+# In-process mesh cache: geometry key → pyvista.PolyData
+# Avoids regenerating the identical mesh for each of the 24 bisection calls
+# (only alpha changes within a design evaluation, not the geometry).
+_mesh_cache: dict = {}
+
 
 def _load_model():
     global _model, _norm, _device
@@ -172,7 +177,13 @@ class BlendedNetEnvironment(BaseEnvironment):
         alpha_val = float(params.get("alpha", alpha))
         flight_vals = [math.log10(re_val), mach_val, alpha_val]
 
-        mesh = generate_mesh(params)
+        # Cache mesh by geometry key: all 24 bisection calls within one design
+        # evaluation share identical geometry (only alpha changes), so generate
+        # the mesh once and reuse it. Cache lives for the process lifetime.
+        geom_key = tuple(geom_vals)
+        if geom_key not in _mesh_cache:
+            _mesh_cache[geom_key] = generate_mesh(params)
+        mesh = _mesh_cache[geom_key]
         result = _run_surrogate(mesh, geom_vals, flight_vals)
 
         if self.save_fields:

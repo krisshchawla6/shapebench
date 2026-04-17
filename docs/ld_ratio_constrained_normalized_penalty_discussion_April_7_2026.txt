@@ -1077,20 +1077,20 @@ AUTOMATED STOP AT 4200 EVALS (April 14–15, 2026)
   s6 (job 1698): 4170 evals at last check — within ~30 of threshold, imminent.
   s9 (job 1701): 3644 evals at last check — approaching 4200, cron pending.
 
-Current status (April 15):
-  seed5  (job 1697): 3747 evals, best NF L/D=155.0 — flat since n≈2000. Cron cancel pending at 4200.
-  seed6  (job 1698): 4170 evals, best NF L/D=210.5 — flat since n≈2000. Cron cancel imminent.
-  seed7  (job 1699): 3905 evals, best NF L/D=244.7 — actively improving; exempt from cron cancel.
-  seed8  (job 1700): 4201 evals, best NF L/D=130.7 — CANCELLED (cron, Apr 15).
-  seed9  (job 1701): 3644 evals, best NF L/D=144.6 — flat since n≈1500. Cron cancel pending at 4200.
+Current status (April 17):
+  seed5  (job 1697): 4200 evals, best NF L/D=155.0 — CANCELLED (cron, Apr 17). Final.
+  seed6  (job 1698): 4200 evals, best NF L/D=210.5 — CANCELLED (cron, Apr 17). Final.
+  seed7  (job 1699): 4402 evals, best NF L/D=260.6 — RUNNING (6d elapsed); still improving.
+  seed8  (job 1700): 4201 evals, best NF L/D=130.7 — CANCELLED (cron, Apr 15). Final.
+  seed9  (job 1701): 4191 evals, best NF L/D=144.6 — nohup script will cancel at 4200; imminent.
 
 Convergence trajectory (best NF L/D by eval count):
-  Seed   n=500   n=1000  n=1500  n=2000  n=2500  n=3000  n=3500  n=3820  current
-  5      10.4    64.6    154.3   155.0   155.0   155.0   155.0   155.0   155.0  (flat)
-  6      165.4   200.7   207.7   210.5   210.5   210.5   210.5   210.5   210.5  (flat)
-  7      191.7   197.1   206.6   206.8   207.6   208.4   222.8   244.7   244.7  (improving)
-  8      121.8   125.2   130.7   130.7   130.7   130.7   130.7   130.7   CANCELLED
-  9      126.5   128.6   138.7   139.0   139.0   144.6   144.6   144.6   144.6  (flat)
+  Seed   n=500   n=1000  n=1500  n=2000  n=2500  n=3000  n=3500  n=3820  n=4200  current
+  5      10.4    64.6    154.3   155.0   155.0   155.0   155.0   155.0   155.0   CANCELLED
+  6      165.4   200.7   207.7   210.5   210.5   210.5   210.5   210.5   210.5   CANCELLED
+  7      191.7   197.1   206.6   206.8   207.6   208.4   222.8   244.7     —     260.6 (improving)
+  8      121.8   125.2   130.7   130.7   130.7   130.7   130.7   130.7   CANCELLED  —
+  9      126.5   128.6   138.7   139.0   139.0   144.6   144.6   144.6   144.6   pending cancel
 
 SEED 7 IMPROVEMENT HISTORY AND OUTLOOK (April 15, 2026)
   Seed7 has been the standout run. Full improvement record:

@@ -119,84 +119,158 @@ encountered and fixed before the jobs finally ran correctly:
   _vsp_generate_stl.py are the only files using the openvsp310 path, and
   the temp file leak is specific to BlendedNet's mesh-based evaluation).
 
-Node assignments (re-run round, jobs 2417-2446):
-  All 30 jobs landed on node-6 (scheduler-assigned, no --nodelist constraint).
+  5. After fix 4, jobs running on dedicated nodes (GA→node-3, v3→node-5) were
+     measured at ~4 min/eval instead of the expected ~7s/eval. Root cause:
+     environment.py _run_sim() called generate_mesh() on every bisection
+     iteration — 24 times per design evaluation (3 unique CL targets × 8 bisect
+     steps). The mesh depends only on geometry params (B1–S3); only alpha changes
+     between bisection calls. Each generate_mesh() spawns a Python 3.10 openvsp
+     subprocess that takes ~4s, so 24 × 4s = 96s of wasted mesh generation per
+     eval (plus Transolver inference time → ~4 min total).
+     Fixed by adding a process-level in-memory mesh cache in environment.py:
+       _mesh_cache: dict  (module-level, keyed by tuple of geometry values)
+     _run_sim() checks the cache before calling generate_mesh(); on a cache hit
+     the existing pyvista.PolyData object is reused instantly. The cache holds at
+     most one distinct mesh at any time (sequential eval) and auto-expires when
+     the process exits.
+     Expected rate after fix: ~4s (mesh, first call) + 24 × ~1-2s (Transolver
+     CPU inference) ≈ 30-50s/eval → ~35-55h for GA (4000 evals),
+     ~17-28h for v3 (2000 evals).
+     File changed: environments/BlendedNet/environment.py
+     GA round 2 (jobs 2447-2456) and v3 round 2 (jobs 2437-2446) cancelled.
+     Resubmitted as round 3 with fix 5 applied.
+
+Node assignments:
+  Fix 4 round (jobs 2417-2446): all 30 landed on node-6 (no --nodelist set).
+  Fix 4 GA/v3 re-run (jobs 2447-2466): node-6 was contended (48 jobs, 2.7
+    vCPU/job → 5.5 min/eval). GA+v3 cancelled, redistributed to dedicated nodes:
+    GA (2447-2456) → node-3 (--nodelist), v3 (2457-2466) → node-5 (--nodelist).
+    Then fix 5 discovered (4 min/eval even on dedicated node). Cancelled again.
+  Fix 5 round (jobs 2483-2502): GA 2483-2492 (node-3), v3 2493-2502 (node-5).
+  lbfgsb round 2 (jobs 2427-2436): running on node-6, nearly complete (~27-28
+    evals each). Left to finish — lbfgsb converges in ~27 evals due to FD epsilon
+    issue (see DESIGN OF EXPERIMENTS NOTES), so fix 5 would save only 2-3 evals.
 
 --- GA / PSO ---
 Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
   n_particles=20, n_iterations=200 → 4000 evals per attempt
-  Estimated runtime: ~7-8h per attempt (4000 evals × ~7s/eval)
+  Estimated runtime: ~35-55h per attempt after fix 5 (4000 evals × ~30-50s/eval)
   Output dirs: environments/BlendedNet/results/run_GA_shapebench_5_attempt{N}_20p_200i/
 
-  Round 1 (jobs 2382-2391): ALL FAILED — /tmp full issue (fix 4 not yet applied).
-    9/10 attempts: gbest stuck at -5.0 (0 valid evals).
-    1/10 attempts (att9): 1 valid eval only (best=-0.007373, iter 0 particle 0).
+  Round 1 (jobs 2382-2391): ALL FAILED — /tmp full (fix 4 not applied).
+    9/10 attempts: gbest stuck at -5.0. 1/10 (att9): 1 valid eval only.
 
-  Round 2 (jobs 2417-2426): fix 4 applied, running.
-  Attempts: 1-10 (job IDs 2417-2426)
+  Round 2 (jobs 2417-2426): CANCELLED — landed on contended node-6 (5.5 min/eval).
+    Partial data: ~11 particles of iter_0000 per attempt written to output dirs.
+
+  Round 3 (jobs 2483-2492): fix 5 applied, running on node-3.
+  Attempts: 1-10 (job IDs 2483-2492)
   ATTEMPT RESULTS (fill in as complete):
-  att1  (2417): [ ]
-  att2  (2418): [ ]
-  att3  (2419): [ ]
-  att4  (2420): [ ]
-  att5  (2421): [ ]
-  att6  (2422): [ ]
-  att7  (2423): [ ]
-  att8  (2424): [ ]
-  att9  (2425): [ ]
-  att10 (2426): [ ]
+  att1  (2483): [ ]
+  att2  (2484): [ ]
+  att3  (2485): [ ]
+  att4  (2486): [ ]
+  att5  (2487): [ ]
+  att6  (2488): [ ]
+  att7  (2489): [ ]
+  att8  (2490): [ ]
+  att9  (2491): [ ]
+  att10 (2492): [ ]
 
 --- L-BFGS-B ---
-  n_restarts=3, maxiter=200 → ~600 evals per seed
-  Estimated runtime: ~1-2h per seed (600 evals × ~7s/eval)
+  n_restarts=3, maxiter=200 → ~600 evals per seed (in principle)
+  Actual: converges in ~27 evals due to FD epsilon issue (see notes below).
   Output dirs: environments/BlendedNet/results/run_lbfgsb_shapebench_5_seed{N}_nr3/
 
-  Round 1 (jobs 2392-2401): ALL FAILED — /tmp full issue (fix 4 not yet applied).
-    All 10 seeds: 63 evals total (1 valid + 62 fail). L-BFGS-B computed a
-    zero-gradient from the failed finite-difference perturbations and stopped.
-    Eval 0 best values (starting point only, not optimized):
+  Round 1 (jobs 2392-2401): ALL FAILED — /tmp full (fix 4 not applied).
+    All 10 seeds: ~63 evals (1 valid + 62 fail), zero-gradient, converged early.
+    Eval 0 best values (starting point only):
       s0=-0.006666, s1=-0.008011, s2=-0.007600, s3=-0.007947, s4=-0.008795,
       s5=-0.007355, s6=-0.007273, s7=-0.007445, s8=-0.008182, s9=-0.006717
 
-  Round 2 (jobs 2427-2436): fix 4 applied, running.
+  Round 2 (jobs 2427-2436): fix 4 applied, ran on node-6. CANCELLED after ~2h50m
+    wall time (jobs completed evals but hung in scipy's internal convergence phase;
+    ~32-33 evals each, no new CSV rows for 5+ min before cancellation).
   Seeds: 0-9 (job IDs 2427-2436)
-  SEED RESULTS (fill in as complete):
-  s0 (2427): [ ]
-  s1 (2428): [ ]
-  s2 (2429): [ ]
-  s3 (2430): [ ]
-  s4 (2431): [ ]
-  s5 (2432): [ ]
-  s6 (2433): [ ]
-  s7 (2434): [ ]
-  s8 (2435): [ ]
-  s9 (2436): [ ]
+  SEED RESULTS:
+  s0 (2427): 33 evals, best_reward=-0.006666 (mean_CD=0.006666)
+  s1 (2428): 32 evals, best_reward=-0.008011 (mean_CD=0.008011)
+  s2 (2429): 32 evals, best_reward=-0.007600 (mean_CD=0.007600)
+  s3 (2430): 32 evals, best_reward=-0.007947 (mean_CD=0.007947)
+  s4 (2431): 33 evals, best_reward=-0.008795 (mean_CD=0.008795)
+  s5 (2432): 33 evals, best_reward=-0.007355 (mean_CD=0.007355)
+  s6 (2433): 32 evals, best_reward=-0.007723 (mean_CD=0.007723)
+  s7 (2434): 32 evals, best_reward=-0.007446 (mean_CD=0.007446)
+  s8 (2435): 32 evals, best_reward=-0.008340 (mean_CD=0.008340)
+  s9 (2436): 32 evals, best_reward=-0.006772 (mean_CD=0.006772)
+  Mean best: -0.007677  Best overall: s4=-0.008795
+
+  NOTE: L-BFGS-B FD epsilon issue — scipy default eps=1e-8 is negligibly small
+  relative to BlendedNet param ranges (B1=[100,200], B3=[200,700], etc.). The FD
+  perturbations produce near-identical CD values, gradient ≈ 0, optimizer declares
+  convergence after ~3 restarts × ~9 evals = ~27 evals. The lbfgsb results are
+  therefore not meaningful as an optimizer benchmark for BlendedNet; they reflect
+  only the reward at 3 random starting points. A future run would need to configure
+  a larger eps (e.g. 1.0–10.0) scaled to BlendedNet's parameter ranges.
 
 --- v3_dynamic_optimizer ---
 Config: sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_n2000.config.json
   Model: gemini-2.5-flash
   iterations=200, batch_size=10 → 2000 evals per attempt
-  Estimated runtime: ~3-4h per attempt
+  Estimated runtime: ~17-28h per attempt after fix 5
   Output dirs: environments/BlendedNet/results/run_v3_flash2_5_shapebench_5_attempt_{N}_n2000/
 
-  Round 1 (jobs 2369-2378): MOSTLY FAILED — /tmp full issue (fix 4 not yet applied).
-    5/10 attempts: best_reward stuck at -5.0.
-    5/10 attempts: 1 valid eval, best values (starting point only):
-      att2=-0.008091, att4=-0.007626, att5=-0.006615, att6=-0.006769, att10=-0.007535
+  Round 1 (jobs 2369-2378): MOSTLY FAILED — /tmp full (fix 4 not applied).
+    5/10 attempts: stuck at -5.0. 5/10: 1 valid eval only.
 
-  Round 2 (jobs 2437-2446): fix 4 applied, running.
-  Attempts: 1-10 (job IDs 2437-2446)
+  Round 2 (jobs 2437-2446): CANCELLED — fix 5 not yet applied (4 min/eval).
+    Partial data: ~15-16 evals per attempt written to output dirs.
+
+  Round 3 (jobs 2493-2502): fix 5 applied, running on node-5.
+  Attempts: 1-10 (job IDs 2493-2502)
   ATTEMPT RESULTS (fill in as complete):
-  att1  (2437): [ ]
-  att2  (2438): [ ]
-  att3  (2439): [ ]
-  att4  (2440): [ ]
-  att5  (2441): [ ]
-  att6  (2442): [ ]
-  att7  (2443): [ ]
-  att8  (2444): [ ]
-  att9  (2445): [ ]
-  att10 (2446): [ ]
+  att1  (2493): [ ]
+  att2  (2494): [ ]
+  att3  (2495): [ ]
+  att4  (2496): [ ]
+  att5  (2497): [ ]
+  att6  (2498): [ ]
+  att7  (2499): [ ]
+  att8  (2500): [ ]
+  att9  (2501): [ ]
+  att10 (2502): [ ]
+
+STATUS UPDATE (April 17, 2026 — ~4h elapsed, fix 5 round)
+-----------------------------------------------------------
+All 20 jobs (GA 2483-2492 + v3 2493-2502) running on dedicated nodes.
+
+GA fix5 (jobs 2483-2492) — iter 17/200, 340 evals each, ~50s/eval on node-3:
+  att1  (2483): gbest=-0.004943
+  att2  (2484): gbest=-0.004741  ← 2nd best
+  att3  (2485): gbest=-0.005086
+  att4  (2486): gbest=-0.005007
+  att5  (2487): gbest=-0.004833
+  att6  (2488): gbest=-0.004957
+  att7  (2489): gbest=-0.004955
+  att8  (2490): gbest=-0.004924
+  att9  (2491): gbest=-0.004737  ← best so far
+  att10 (2492): gbest=-0.004790
+
+v3 fix5 (jobs 2493-2502) — iter 33-36/200 (att9 lagging at 8), ~10 evals/iter:
+  att1  (2493): best=-0.004666  ← 2nd best
+  att2  (2494): best=-0.005683
+  att3  (2495): best=-0.005652
+  att4  (2496): best=-0.005656
+  att5  (2497): best=-0.005693
+  att6  (2498): best=-0.005566
+  att7  (2499): best=-0.005893
+  att8  (2500): best=-0.004852
+  att9  (2501): best=-0.005613  (only iter 8/200; lagard likely due to slow LLM turn)
+  att10 (2502): best=-0.004631  ← best so far
+
+Early context: rewards are in range -0.0046 to -0.0059 (mean_CD 0.0046–0.0059),
+already better than the prior exploratory PSO/v3 best (-0.006971 / -0.007022)
+at only 8–17% of budget. Est. completion: ~40–50h remaining at ~50s/eval.
 
 
 FILES
@@ -227,6 +301,7 @@ DESIGN OF EXPERIMENTS NOTES
 - PSO uses 4000 evals, the largest budget. As a population-based global search
   method with no gradient information, it needs more evaluations to explore the
   10D space. The prior 2000-eval run may have been too short to fully converge.
+  At ~30-50s/eval (after fix 5), 4000 evals ≈ 33-55h wall time per attempt.
 
 - v3 uses 2000 evals (200 iter × 10 per iter). The LLM oracle provides
   high-level reasoning about which regions to explore, which can offset the

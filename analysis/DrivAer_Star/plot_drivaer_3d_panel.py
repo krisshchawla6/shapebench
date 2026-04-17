@@ -1,6 +1,6 @@
 """3D surface rendering panel: baseline vs best design per method.
 
-Produces two rows of renders for each of the 5 designs (baseline + 4 methods):
+Produces two rows of renders for each design (baseline + methods available):
   Row 1 — side profile view (x-z plane): reveals ramp_angle, hood angle,
            windscreen slope, trunklid, diffusor angle.
   Row 2 — rear three-quarter view: reveals trunklid, diffusor, rear window,
@@ -12,12 +12,13 @@ all rendered at comparable apparent scale.
 Usage:
     cd /scratch/ShapeEvolve
     source venv/bin/activate
-    python analysis/DrivAer_Star/plot_drivaer_3d_panel.py
+    python analysis/DrivAer_Star/plot_drivaer_3d_panel.py [--body {E,F,N}]
 
 Outputs:
-    environments/DrivAer_Star/results/analysis_plots_cd_only/3d_panel_best_designs.png
+    environments/DrivAer_Star/results/analysis_plots_cd_only/3d_panel_best_designs[_vtk_F|_vtk_N].png
 """
 
+import argparse
 import os
 import glob
 import json
@@ -31,7 +32,12 @@ import matplotlib.pyplot as plt
 REPO_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RESULTS_DIR = os.path.join(REPO_DIR, "environments", "DrivAer_Star", "results")
 OUT_DIR = os.path.join(RESULTS_DIR, "analysis_plots_cd_only")
-BASE_VTK = os.path.join(REPO_DIR, "environments", "DrivAer_Star", "data", "vtk_E", "00000.vtk")
+
+BASELINE_CD_BY_BODY = {
+    "E": 0.22334,
+    "F": 0.18990,
+    "N": 0.18132,
+}
 
 sys.path.insert(0, os.path.join(REPO_DIR, "environments", "DrivAer_Star"))
 from mesh_generator import PARAM_KEYS, BOUNDS, apply_ffd
@@ -51,10 +57,13 @@ METHOD_COLORS = {
     "v3 flash-2.5": "#9b59b6",
 }
 
+# Set by main() before _render() is called
+_BASE_VTK = None
+
 
 def _render(params, view):
     """Render design to RGB array for a given view ('side' or 'rear_quarter')."""
-    mesh = pv.read(BASE_VTK)
+    mesh = pv.read(_BASE_VTK)
     pts = np.array(mesh.points, dtype=np.float64)
     mesh.points = apply_ffd(pts, params)
 
@@ -154,11 +163,13 @@ def load_best_lbfgsb():
     return best_params, best_cd
 
 
-def load_best_bo():
+def load_best_bo(body="E"):
+    if body == "E":
+        pattern = os.path.join(RESULTS_DIR, "run_BO_torch_cd_only_seed*_n1000")
+    else:
+        pattern = os.path.join(RESULTS_DIR, f"run_BO_torch_cd_only_vtk_{body}_seed*_n1000")
     best_cd, best_params = np.inf, None
-    for run_dir in sorted(
-        glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_cd_only_seed*_n1000"))
-    ):
+    for run_dir in sorted(glob.glob(pattern)):
         csv = os.path.join(run_dir, "results.csv")
         if not os.path.exists(csv):
             continue
@@ -176,12 +187,21 @@ def load_best_bo():
     return best_params, best_cd
 
 
-def load_best_v3():
+def load_best_v3(body="E"):
+    if body == "E":
+        patterns = [
+            os.path.join(RESULTS_DIR, "SAVED_DIRS_run_v3_*", "run_v3_*"),
+            os.path.join(RESULTS_DIR, "run_v3_*_n10000"),
+        ]
+    else:
+        patterns = [
+            os.path.join(
+                RESULTS_DIR,
+                f"run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_{body}_attempt_*_flash_2_5_n6000",
+            )
+        ]
     best_cd, best_params = np.inf, None
-    for pattern in [
-        os.path.join(RESULTS_DIR, "SAVED_DIRS_run_v3_*", "run_v3_*"),
-        os.path.join(RESULTS_DIR, "run_v3_*_n10000"),
-    ]:
+    for pattern in patterns:
         for run_dir in sorted(glob.glob(pattern)):
             csv = os.path.join(run_dir, "results.csv")
             if not os.path.exists(csv):
@@ -201,39 +221,69 @@ def load_best_v3():
 
 
 def main():
+    global _BASE_VTK
+
+    parser = argparse.ArgumentParser(description="DrivAer 3D panel plot")
+    parser.add_argument("--body", choices=["E", "F", "N"], default="E",
+                        help="Body style: E=Estate, F=Fastback, N=Notchback (default: E)")
+    args = parser.parse_args()
+    body = args.body
+
     os.makedirs(OUT_DIR, exist_ok=True)
 
+    body_names = {"E": "Estate", "F": "Fastback", "N": "Notchback"}
+    body_label = body_names[body]
+    BASELINE_CD = BASELINE_CD_BY_BODY[body]
+
+    # Set module-level VTK path used by _render()
+    # vtk_N dataset was sampled without design index 0; 00001.vtk is its reference mesh
+    base_vtk_file = "00001.vtk" if body == "N" else "00000.vtk"
+    _BASE_VTK = os.path.join(
+        REPO_DIR, "environments", "DrivAer_Star", "data", f"vtk_{body}", base_vtk_file
+    )
+
     # car_size=1.0 is the no-deformation nominal; all other params at 0 = no change.
-    # Baseline Cd=0.22334 evaluated by running Transolver on the undeformed mesh.
     baseline_params = {k: 0.0 for k in PARAM_KEYS}
     baseline_params["car_size"] = 1.0
-    BASELINE_CD = 0.22334
 
     entries = [("Baseline", baseline_params, BASELINE_CD)]
-    for name, loader in [
-        ("GA/PSO",       load_best_ga),
-        ("L-BFGS-B",     load_best_lbfgsb),
-        ("BO_torch",     load_best_bo),
-        ("v3 flash-2.5", load_best_v3),
+
+    # GA/PSO and L-BFGS-B only available for Estate (E)
+    if body == "E":
+        for name, loader in [
+            ("GA/PSO",   load_best_ga),
+            ("L-BFGS-B", load_best_lbfgsb),
+        ]:
+            params, cd = loader()
+            if params is not None:
+                entries.append((name, params, cd))
+
+    for name, loader, kwargs in [
+        ("BO_torch",     load_best_bo,  {"body": body}),
+        ("v3 flash-2.5", load_best_v3,  {"body": body}),
     ]:
-        params, cd = loader()
+        params, cd = loader(**kwargs)
         if params is not None:
             entries.append((name, params, cd))
 
     views = [("side", "Side profile"), ("rear_quarter", "Rear quarter")]
-    ncols = len(entries)   # 5
-    nrows = len(views)     # 2
+    ncols = len(entries)
+    nrows = len(views)
 
     fig, axes = plt.subplots(
         nrows, ncols,
         figsize=(ncols * 4.5, nrows * 2.8),
         gridspec_kw={"hspace": 0.08, "wspace": 0.04},
     )
+    # Ensure axes is always 2D
+    if nrows == 1:
+        axes = [axes]
+    if ncols == 1:
+        axes = [[ax] for ax in axes]
 
     for row_idx, (view_key, view_label) in enumerate(views):
         for col_idx, (name, params, cd) in enumerate(entries):
             ax = axes[row_idx][col_idx]
-            label = f"  {view_label}  " if col_idx == 0 else ""
             print(f"Rendering {name} / {view_key}...")
             img = _render(params, view_key)
             ax.imshow(img)
@@ -256,14 +306,15 @@ def main():
                                      labelpad=4, va="center")
 
     fig.suptitle(
-        "DrivAer Star — Best Design Shapes\n"
+        f"DrivAer Star ({body_label}, vtk_{body}) — Best Design Shapes\n"
         "(side profile shows ramp/hood/trunklid/diffusor angles; "
         "rear quarter shows trunklid, diffusor, greenhouse)",
         fontsize=10, y=1.01,
     )
 
-    out_png = os.path.join(OUT_DIR, "3d_panel_best_designs.png")
-    out_pdf = os.path.join(OUT_DIR, "3d_panel_best_designs.pdf")
+    suffix = f"_vtk_{body}"
+    out_png = os.path.join(OUT_DIR, f"3d_panel_best_designs{suffix}.png")
+    out_pdf = os.path.join(OUT_DIR, f"3d_panel_best_designs{suffix}.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

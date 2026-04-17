@@ -1,20 +1,21 @@
 """Convergence curves (best Cd vs function evaluations) for all DrivAer benchmark methods.
 
 For each method: median best-Cd across runs (solid line) with min/max envelope
-(shaded band). v3 shows only n10000 runs (in-progress snapshot); other methods
+(shaded band). v3 shows only n10000/n6000 runs (in-progress snapshot); other methods
 show all completed runs.
 
-X-axis: log scale. Baseline Cd = 0.22334 shown as a reference dashed line.
+X-axis: log scale. Baseline Cd shown as a reference dashed line.
 
 Usage:
     cd /scratch/ShapeEvolve
     source venv/bin/activate
-    python analysis/DrivAer_Star/plot_drivaer_convergence.py
+    python analysis/DrivAer_Star/plot_drivaer_convergence.py [--body {E,F,N}]
 
 Outputs:
-    environments/DrivAer_Star/results/analysis_plots_cd_only/convergence_cd_vs_evals.png
+    environments/DrivAer_Star/results/analysis_plots_cd_only/convergence_cd_vs_evals[_vtk_F|_vtk_N].png
 """
 
+import argparse
 import os
 import glob
 import numpy as np
@@ -29,13 +30,18 @@ REPO_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 RESULTS_DIR = os.path.join(REPO_DIR, "environments", "DrivAer_Star", "results")
 OUT_DIR = os.path.join(RESULTS_DIR, "analysis_plots_cd_only")
 
-BASELINE_CD = 0.22334   # Transolver on undeformed mesh (car_size=1, all params=0)
+BASELINE_CD_BY_BODY = {
+    "E": 0.22334,
+    "F": 0.18990,
+    "N": 0.18132,
+}
 
 COLORS = {
     "GA/PSO":       "#e07b39",
     "L-BFGS-B":     "#7b9e87",
     "BO_torch":     "#4a90d9",
     "v3 n10000":    "#9b59b6",
+    "v3 n6000":     "#9b59b6",
 }
 
 
@@ -76,19 +82,25 @@ def load_lbfgsb():
     )
 
 
-def load_bo():
-    return _load_curves(
-        glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_cd_only_seed*_n1000", "results.csv")),
-        "best_reward",
-    )
+def load_bo(body="E"):
+    if body == "E":
+        pattern = os.path.join(RESULTS_DIR, "run_BO_torch_cd_only_seed*_n1000", "results.csv")
+    else:
+        pattern = os.path.join(RESULTS_DIR, f"run_BO_torch_cd_only_vtk_{body}_seed*_n1000", "results.csv")
+    return _load_curves(glob.glob(pattern), "best_reward")
 
 
-def load_v3_n10000():
-    """n10000 runs only — may be in-progress (do NOT extend past actual length)."""
-    return _load_curves(
-        glob.glob(os.path.join(RESULTS_DIR, "run_v3_*_n10000", "results.csv")),
-        "best_reward",
-    )
+def load_v3(body="E"):
+    """May be in-progress (do NOT extend past actual length)."""
+    if body == "E":
+        pattern = os.path.join(RESULTS_DIR, "run_v3_*_n10000", "results.csv")
+    else:
+        pattern = os.path.join(
+            RESULTS_DIR,
+            f"run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_{body}_attempt_*_flash_2_5_n6000",
+            "results.csv",
+        )
+    return _load_curves(glob.glob(pattern), "best_reward")
 
 
 # ── Interpolation onto common log-spaced grid ─────────────────────────────────
@@ -130,22 +142,39 @@ def plot_band(ax, curves, x_grid, color, label, extend=True):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="DrivAer convergence plot")
+    parser.add_argument("--body", choices=["E", "F", "N"], default="E",
+                        help="Body style: E=Estate, F=Fastback, N=Notchback (default: E)")
+    args = parser.parse_args()
+    body = args.body
+
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    ga_curves  = load_ga()
-    lb_curves  = load_lbfgsb()
-    bo_curves  = load_bo()
-    v3_curves  = load_v3_n10000()
+    BASELINE_CD = BASELINE_CD_BY_BODY[body]
+    body_names = {"E": "Estate", "F": "Fastback", "N": "Notchback"}
+    body_label = body_names[body]
 
-    print(f"GA/PSO:    {len(ga_curves)} runs,  max evals = {max(len(c) for c in ga_curves)}")
-    print(f"L-BFGS-B:  {len(lb_curves)} runs,  max evals = {max(len(c) for c in lb_curves)}")
-    print(f"BO_torch:  {len(bo_curves)} runs,  max evals = {max(len(c) for c in bo_curves)}")
-    print(f"v3 n10000: {len(v3_curves)} runs,  max evals = {max(len(c) for c in v3_curves)}")
+    # Load curves — GA/lbfgsb only exist for Estate (E)
+    ga_curves  = load_ga()       if body == "E" else []
+    lb_curves  = load_lbfgsb()   if body == "E" else []
+    bo_curves  = load_bo(body)
+    v3_curves  = load_v3(body)
+    v3_label   = "v3 n10000" if body == "E" else "v3 n6000"
 
-    x_max = max(
-        max(len(c) for c in ga_curves),
-        max(len(c) for c in lb_curves),
-    )
+    if ga_curves:
+        print(f"GA/PSO:    {len(ga_curves)} runs,  max evals = {max(len(c) for c in ga_curves)}")
+    if lb_curves:
+        print(f"L-BFGS-B:  {len(lb_curves)} runs,  max evals = {max(len(c) for c in lb_curves)}")
+    if bo_curves:
+        print(f"BO_torch:  {len(bo_curves)} runs,  max evals = {max(len(c) for c in bo_curves)}")
+    if v3_curves:
+        print(f"{v3_label}: {len(v3_curves)} runs,  max evals = {max(len(c) for c in v3_curves)}")
+
+    all_curves = [c for group in [ga_curves, lb_curves, bo_curves, v3_curves] for c in group]
+    if not all_curves:
+        print("No data found — exiting.")
+        return
+    x_max = max(len(c) for c in all_curves)
     x_grid = np.unique(
         np.concatenate([np.geomspace(1, x_max, 2000).astype(int), [x_max]])
     )
@@ -154,40 +183,45 @@ def main():
 
     # Baseline reference
     ax.axhline(BASELINE_CD, color="#999999", lw=1.2, ls="--", zorder=1)
-    ax.text(1.3, BASELINE_CD + 0.004, f"Baseline  Cd = {BASELINE_CD:.3f}",
+    ax.text(1.3, BASELINE_CD + 0.004, f"Baseline  Cd = {BASELINE_CD:.5f}",
             color="#666666", fontsize=8.5, va="bottom")
 
-    # v3 n10000 — in-progress, do NOT extend past actual run length
-    x_max_v3 = max(len(c) for c in v3_curves)
-    x_grid_v3 = x_grid[x_grid <= x_max_v3 + 1]
-    plot_band(ax, v3_curves, x_grid_v3, COLORS["v3 n10000"],
-              f"v3 flash-2.5 n10000  (n={len(v3_curves)}, in progress)", extend=False)
+    # v3 — in-progress, do NOT extend past actual run length
+    if v3_curves:
+        x_max_v3 = max(len(c) for c in v3_curves)
+        x_grid_v3 = x_grid[x_grid <= x_max_v3 + 1]
+        n_label = "10000" if body == "E" else "6000"
+        plot_band(ax, v3_curves, x_grid_v3, COLORS[v3_label],
+                  f"v3 flash-2.5 n{n_label}  (n={len(v3_curves)}, in progress)", extend=False)
 
     # BO_torch — complete at n=1000; clip grid to avoid flat extrapolation clutter
-    x_max_bo = max(len(c) for c in bo_curves)
-    x_grid_bo = x_grid[x_grid <= x_max_bo + 1]
-    plot_band(ax, bo_curves, x_grid_bo, COLORS["BO_torch"],
-              f"BO_torch  (n={len(bo_curves)} seeds)", extend=True)
+    if bo_curves:
+        x_max_bo = max(len(c) for c in bo_curves)
+        x_grid_bo = x_grid[x_grid <= x_max_bo + 1]
+        plot_band(ax, bo_curves, x_grid_bo, COLORS["BO_torch"],
+                  f"BO_torch  (n={len(bo_curves)} seeds)", extend=True)
 
-    # L-BFGS-B — complete, extend flat
-    plot_band(ax, lb_curves, x_grid, COLORS["L-BFGS-B"],
-              f"L-BFGS-B  (n={len(lb_curves)} seeds)", extend=True)
+    # L-BFGS-B — complete, extend flat (Estate only)
+    if lb_curves:
+        plot_band(ax, lb_curves, x_grid, COLORS["L-BFGS-B"],
+                  f"L-BFGS-B  (n={len(lb_curves)} seeds)", extend=True)
 
-    # GA/PSO — complete, extend flat
-    plot_band(ax, ga_curves, x_grid, COLORS["GA/PSO"],
-              f"GA/PSO  (n={len(ga_curves)} runs)", extend=True)
+    # GA/PSO — complete, extend flat (Estate only)
+    if ga_curves:
+        plot_band(ax, ga_curves, x_grid, COLORS["GA/PSO"],
+                  f"GA/PSO  (n={len(ga_curves)} runs)", extend=True)
 
     # Axes
     ax.set_xscale("log")
     ax.set_xlabel("Function evaluations (per run)", fontsize=11)
     ax.set_ylabel("Best Cd (drag coefficient)", fontsize=11)
     ax.set_title(
-        "DrivAer Star — Convergence: best Cd vs function evaluations\n"
+        f"DrivAer Star ({body_label}, vtk_{body}) — Convergence: best Cd vs function evaluations\n"
         "(solid = median across runs,  band = min–max range)",
         fontsize=11,
     )
     ax.set_xlim(1, x_max)
-    ax.set_ylim(0.05, BASELINE_CD * 1.08)
+    ax.set_ylim(0.02, BASELINE_CD * 1.08)
     ax.grid(True, which="both", alpha=0.25)
 
     # Two-part legend: method + style key
@@ -200,8 +234,9 @@ def main():
     ax.legend(handles=style_handles, loc="lower left", fontsize=9,
               framealpha=0.95, title="Style")
 
-    out_png = os.path.join(OUT_DIR, "convergence_cd_vs_evals.png")
-    out_pdf = os.path.join(OUT_DIR, "convergence_cd_vs_evals.pdf")
+    suffix = f"_vtk_{body}"
+    out_png = os.path.join(OUT_DIR, f"convergence_cd_vs_evals{suffix}.png")
+    out_pdf = os.path.join(OUT_DIR, f"convergence_cd_vs_evals{suffix}.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)
@@ -215,8 +250,10 @@ def main():
         ("GA/PSO",      ga_curves),
         ("L-BFGS-B",   lb_curves),
         ("BO_torch",   bo_curves),
-        ("v3 n10000",  v3_curves),
+        (v3_label,     v3_curves),
     ]:
+        if not curves:
+            continue
         finals = [c[-1] for c in curves]
         print(f"{name:<18} {len(curves):>5}  {min(finals):.5f}    "
               f"{np.median(finals):.5f}     {np.mean(finals):.5f}")
