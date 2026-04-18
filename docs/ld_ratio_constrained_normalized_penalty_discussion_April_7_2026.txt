@@ -1080,7 +1080,7 @@ AUTOMATED STOP AT 4200 EVALS (April 14–15, 2026)
 Current status (April 17):
   seed5  (job 1697): 4200 evals, best NF L/D=155.0 — CANCELLED (cron, Apr 17). Final.
   seed6  (job 1698): 4200 evals, best NF L/D=210.5 — CANCELLED (cron, Apr 17). Final.
-  seed7  (job 1699): 4402 evals, best NF L/D=260.6 — RUNNING (6d elapsed); still improving.
+  seed7  (job 1699): 4589 evals, best NF L/D=261.4 — RUNNING (6d20h elapsed); flat last ~170 evals.
   seed8  (job 1700): 4201 evals, best NF L/D=130.7 — CANCELLED (cron, Apr 15). Final.
   seed9  (job 1701): 4191 evals, best NF L/D=144.6 — nohup script will cancel at 4200; imminent.
 

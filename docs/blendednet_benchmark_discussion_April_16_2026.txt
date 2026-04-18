@@ -205,13 +205,98 @@ Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
   s9 (2436): 32 evals, best_reward=-0.006772 (mean_CD=0.006772)
   Mean best: -0.007677  Best overall: s4=-0.008795
 
-  NOTE: L-BFGS-B FD epsilon issue — scipy default eps=1e-8 is negligibly small
-  relative to BlendedNet param ranges (B1=[100,200], B3=[200,700], etc.). The FD
+  NOTE: L-BFGS-B FD epsilon issue — the framework default eps=1e-4 is negligibly
+  small relative to BlendedNet param ranges (B1=[100,200], B3=[200,700], etc.).
+  For B3, eps=1e-4 perturbs the parameter by only 2e-7 of its range; the FD
   perturbations produce near-identical CD values, gradient ≈ 0, optimizer declares
-  convergence after ~3 restarts × ~9 evals = ~27 evals. The lbfgsb results are
-  therefore not meaningful as an optimizer benchmark for BlendedNet; they reflect
-  only the reward at 3 random starting points. A future run would need to configure
-  a larger eps (e.g. 1.0–10.0) scaled to BlendedNet's parameter ranges.
+  convergence after ~3 restarts × ~9 evals = ~27 evals. The round-2 lbfgsb results
+  are therefore not meaningful as an optimizer benchmark for BlendedNet; they reflect
+  only the reward at 3 random starting points.
+
+  FIX (April 18, 2026): frameworks/lbfgsb/lbfgsb.py updated to normalize all
+  parameters to [0,1] internally before passing to scipy, making eps=1e-4 a
+  scale-invariant 0.01% perturbation for every parameter regardless of range.
+  Normalization is applied unconditionally for all environments; NeuralFoil and
+  DrivAer_Star lbfgsb results were NOT rerun (their parameter ranges ~0.2–1.1
+  meant the old behaviour was already adequate — benchmark results unaffected).
+  BlendedNet lbfgsb rerun submitted as round 3 (seeds 0–9, jobs 2592–2601).
+  Old broken results archived to:
+    environments/BlendedNet/results/SAVED_DIRS_blendednet_lbfgsb_shapebench_5_broken_fd_eps/
+  New output dirs: run_lbfgsb_shapebench_5_seed{0-9}_nr3_normfix/
+  New slurm scripts: sbatch/environments/BlendedNet/lbfgsb/run_lbfgsb_shapebench_5_seed{0-9}_nr3_normfix.slurm
+
+--- BO_torch ---
+  Config: direct args (no config file)
+  n_calls=500, n_initial=30, 10 seeds (0-9)
+  Estimated runtime: ~5.5h per seed (500 evals × ~40s/eval; GP refit negligible
+    at n≤500 in 10D)
+  Expected convergence: ~200-400 total evals (10D → ~20-40× dimensionality
+    rule of thumb); n=500 budget gives comfortable margin past plateau.
+  Note: BO_torch framework normalizes to [0,1] internally — no FD eps issue.
+  Adjoint not feasible: OpenVSP mesh generation (subprocess) is non-
+    differentiable; numerical FD (lbfgsb) is the practical gradient-based
+    alternative.
+  Output dirs: environments/BlendedNet/results/run_BO_torch_shapebench_5_seed{0-9}_n500/
+  Slurm scripts: sbatch/environments/BlendedNet/BO_torch/run_BO_torch_shapebench_5_seed{0-9}_n500.slurm
+  Jobs: 2602-2611 (seeds 0-9), submitted April 18 2026, all RUNNING on node-8.
+  SEED RESULTS (fill in as complete):
+  s0 (2602): [ ]
+  s1 (2603): [ ]
+  s2 (2604): [ ]
+  s3 (2605): [ ]
+  s4 (2606): [ ]
+  s5 (2607): [ ]
+  s6 (2608): [ ]
+  s7 (2609): [ ]
+  s8 (2610): [ ]
+  s9 (2611): [ ]
+
+--- CMA-ES ---
+  CMA-ES (Covariance Matrix Adaptation Evolution Strategy) is the standard
+  reference solver for continuous black-box optimization (used as baseline in
+  BBOB/COCO benchmarks). It adapts a full covariance matrix over the search
+  space, learning parameter correlations and curvature — making it both
+  rotation-invariant and scale-invariant. Unlike GA/PSO (axis-aligned) it
+  discovers correlated optima (e.g. joint B3/C2 wing loading effects) that
+  axis-aligned methods may miss. This makes it the strongest gradient-free
+  reference: if v3/GA/BO match CMA-ES, they've found the optimum; if CMA-ES
+  beats them, the gap is real and quantifies the cost of ignoring correlations.
+
+  Default population for d=10: λ = 4 + floor(3*ln(10)) = 10 individuals/gen.
+  Operates in normalized [0,1] space (sigma0=0.3 is standard for unit-cube).
+  n_calls=500 matches BO_torch budget; convergence expected at ~200-400 evals.
+
+  WHY CMA-ES HERE BUT NOT NEURALFOIL OR DRIVAER_STAR:
+    NeuralFoil: benchmark COMPLETE; all four methods collapse to the same
+      XFOIL L/D (~325-329) after IPOPT post-processing. Optimizer choice
+      barely matters — IPOPT dominates. CMA-ES would add no new information.
+      Eval cost is negligible (microseconds) but the question is already
+      answered.
+    DrivAer_Star: BO_torch (20 seeds) already fills the sample-efficient
+      reference role. With 20 BO seeds and 20 v3 attempts already run, a
+      fifth method adds benchmark bloat without a clear question to answer.
+      CMA-ES advantage is also diluted in 20D vs 10D.
+    BlendedNet: lbfgsb was broken until April 18; BO_torch just started;
+      no established reference for the global optimum exists. CMA-ES on a
+      10D smooth surrogate is close to its ideal regime and fills this gap.
+
+  Framework: frameworks/cmaes/run.py (new, April 18 2026)
+  n_calls=500, sigma0=0.3, 10 seeds (0-9)
+  Estimated runtime: ~5.5h per seed (500 evals × ~40s/eval)
+  Output dirs: environments/BlendedNet/results/run_cmaes_shapebench_5_seed{0-9}_n500/
+  Slurm scripts: sbatch/environments/BlendedNet/cmaes/run_cmaes_shapebench_5_seed{0-9}_n500.slurm
+  Jobs: 2612-2621 (seeds 0-9), submitted April 18 2026, all RUNNING on node-8.
+  SEED RESULTS (fill in as complete):
+  s0 (2612): [ ]
+  s1 (2613): [ ]
+  s2 (2614): [ ]
+  s3 (2615): [ ]
+  s4 (2616): [ ]
+  s5 (2617): [ ]
+  s6 (2618): [ ]
+  s7 (2619): [ ]
+  s8 (2620): [ ]
+  s9 (2621): [ ]
 
 --- v3_dynamic_optimizer ---
 Config: sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_n2000.config.json
@@ -271,6 +356,35 @@ v3 fix5 (jobs 2493-2502) — iter 33-36/200 (att9 lagging at 8), ~10 evals/iter:
 Early context: rewards are in range -0.0046 to -0.0059 (mean_CD 0.0046–0.0059),
 already better than the prior exploratory PSO/v3 best (-0.006971 / -0.007022)
 at only 8–17% of budget. Est. completion: ~40–50h remaining at ~50s/eval.
+
+STATUS UPDATE (April 17, 2026 — ~21h elapsed)
+----------------------------------------------
+GA fix5 (jobs 2483-2492) — iter 96-103/200 (~49%):
+  att1  (2483): gbest=-0.004774
+  att2  (2484): gbest=-0.004470  ← best
+  att3  (2485): gbest=-0.004589
+  att4  (2486): gbest=-0.004920
+  att5  (2487): gbest=-0.004538
+  att6  (2488): gbest=-0.004525
+  att7  (2489): gbest=-0.004775
+  att8  (2490): gbest=-0.004580
+  att9  (2491): gbest=-0.004559
+  att10 (2492): gbest=-0.004753
+  All 10 GA jobs still running at 21h51m.
+
+v3 fix5 (jobs 2493-2502) — 7/10 complete, 3 still running (~22h elapsed):
+  att1  (2493): iter=200/200  best=-0.004276  COMPLETE ← best overall
+  att2  (2494): iter=179/200  best=-0.005093  RUNNING
+  att3  (2495): iter=193/200  best=-0.005480  RUNNING
+  att4  (2496): iter=199/200  best=-0.005481  COMPLETE (exited at 199)
+  att5  (2497): iter=200/200  best=-0.004483  COMPLETE ← 2nd best
+  att6  (2498): iter=195/200  best=-0.005500  COMPLETE (exited at 195)
+  att7  (2499): iter=199/200  best=-0.005795  COMPLETE (exited at 199)
+  att8  (2500): iter=173/200  best=-0.004533  COMPLETE (early exit at 173 — likely LLM error)
+  att9  (2501): iter=177/200  best=-0.005521  RUNNING
+  att10 (2502): iter=199/200  best=-0.004574  COMPLETE (exited at 199)
+  3 jobs still in queue: 2494 (att2), 2495 (att3), 2501 (att9). Est. ~2-3h remaining.
+  Best: att1=-0.004276, att5=-0.004483, att8=-0.004533. All well below prior best (-0.006971).
 
 
 FILES
