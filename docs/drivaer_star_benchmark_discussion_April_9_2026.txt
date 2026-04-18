@@ -76,9 +76,8 @@ BENCHMARK COVERAGE (updated April 16, 2026)
   v3 LLM (old)          (Mar 20)       80 iters × 10 × 1        COMPLETE (single run, baseline)
   v3 LLM (n800)         1622-1641      80 iters × 10 × 20       COMPLETE (Apr 10; results archived)
   v3 LLM (n2400)        1715-1734      240 iters × 10 × 20      COMPLETE (Apr 12; results archived)
-  v3 LLM (n10000)       1784-1803      1000 iters × 10 × 20     19/20 COMPLETE (Apr 13–14); att21 (job 2238)
-                        +2238          (att21 replacement)       RUNNING (iter ~644/1000; 6590 evals;
-                                                                 best CD=0.082; ~64% done)
+  v3 LLM (n10000)       1784-1803      1000 iters × 10 × 20     COMPLETE (Apr 18); att21 (job 2238)
+                        +2238          (att21 replacement)       COMPLETE (Apr 18; iter=999, best CD=0.08203)
   BO_torch (s0-3)       1498-1501      1000 calls × 4            COMPLETE (Apr 10)
   BO_torch (s4-19)      1804-1819      1000 calls × 16           COMPLETE (Apr 13; all 16 seeds at n=1000)
   Adjoint               —              not feasible              N/A (no differentiable mesh)
@@ -93,27 +92,27 @@ BENCHMARK COVERAGE (updated April 16, 2026)
                                                                  att16 anomaly: CD=0.17952 (near-baseline).
                                                                  att4: only 1315 evals (LLM batch fallback).
   --- Notchback (vtk_N) body ---
-  BO_torch n=2000       2525-2529      2000 calls × 5            RUNNING (Apr 17; seeds s7,s8,s11,s15,s16
-  (extended, s7/8/11/15/16)                                      submitted to probe BO ceiling — vtk_N not
-                                                                 fully converged at n=1000)
-  BO_torch (s0-19)      2259-2278      1000 calls × 20           IN PROGRESS (Apr 17; 8/20 seeds at 1000
-                                                                 evals; 12/20 running at 926–984 evals,
-                                                                 ~1d elapsed, near-complete).
-                                                                 Best from completed seeds: s8=0.04956.
+  BO_torch n=2000       2525-2529      2000 calls × 5            RUNNING (Apr 18; seeds s7,s8,s11,s15,s16
+  (extended, s7/8/11/15/16)                                      ~60% done; s7=n1237/CD=0.05029,
+                                                                 s8=n1281/CD=0.04956, s11=n1190/CD=0.04985,
+                                                                 s15=n1230/CD=0.04968, s16=n1160/CD=0.04964)
+  BO_torch (s0-19)      2259-2278      1000 calls × 20           COMPLETE (Apr 18; all 20 seeds at n=999).
+                                                                 best=s8=0.04956, median=0.05166,
+                                                                 range 0.04956–0.05623 (~13% spread).
                                                                  NOTE: docs previously marked COMPLETE
                                                                  Apr 16 based on pre-preemption data;
-                                                                 current (post-preemption-2) run is jobs
-                                                                 2259-2278 and not yet fully done.
-  v3 LLM (n6000)        2299-2318      600 iters × 10 × 20       PARTIAL (Apr 17; 11/20 complete at
-                                                                 iters=599; 9/20 re-running, iter 216–323/600
-                                                                 (~36–54%), 11h elapsed).
-                                                                 11 done: best att11/att14=0.068082.
-                                                                 Re-run best so far: att17=0.06808 (matched),
-                                                                 att19=0.06835, att15=0.06876.
-                                                                 att5 stalled at iter 216 (slow LLM turn).
+                                                                 jobs 2259-2278 were the post-preemption
+                                                                 resubmission now fully done.
+  v3 LLM (n6000)        2299-2318      600 iters × 10 × 20       IN PROGRESS (Apr 18; 11/20 complete from
+                                                                 first run; 9/20 re-running at iter 293–339/600
+                                                                 (~50%), ~16h elapsed; est. ~17h remaining).
+                                                                 Re-run results: att2=0.07221,att4=0.07135,
+                                                                 att5=0.07128,att6=0.07372,att8=0.07157,
+                                                                 att15=0.07389,att17=0.04958,att18=0.07168,
+                                                                 att19=0.07158.
                                                                  NOTE: docs previously marked COMPLETE
                                                                  Apr 16 based on first run; 9 attempts
-                                                                 were preempted and need re-run.
+                                                                 were preempted and are re-running.
 
 Note on GA/PSO and L-BFGS-B job history: both methods were submitted in multiple
 batches due to disk-space failures and re-runs. A batch of L-BFGS-B jobs
@@ -352,8 +351,7 @@ V3 LLM (n10000) — 19/20 COMPLETE, att21 RUNNING (updated April 16, 2026)
 att21 (job 2238) submitted April 14 as replacement. Typical runtime: ~1d 19h–2d 2h.
 att21 was preempted by node-8 termination at Apr 15 ~18:21 UTC (lost ~28h of
 progress) and restarted from scratch. Job resubmitted as 2238 after node
-redistribution. As of Apr 17 ~18:00 UTC: iter ~936/1000, 9532 evals, best CD=0.08205
-(~94% through budget, essentially flat). Still running on node-8 (job 2238, wall ~1d18h).
+redistribution. COMPLETE (Apr 18): iter=999, 9532 evals, best CD=0.08203.
 
 Final results (19 completed attempts, sorted by best Cd):
 
@@ -379,11 +377,9 @@ Final results (19 completed attempts, sorted by best Cd):
   5     3,010     1d 05h 14m   0.08449  ⚠ anomaly (see below)
   11    10,081    1d 20h 20m   0.08550
   19    3,180     —            0.08259  ✗ CANCELLED (stalled at 3,180 evals)
-  21    9,532     —            0.08205  RUNNING (job 2238; iter ~936/1000, ~94% done;
-                                         flat — best unchanged since n≈6600)
+  21    9,532     —            0.08203  COMPLETE (job 2238; Apr 18; flat since n≈6600)
 
-Partial results (19 complete): best=0.06516, median≈0.08168, mean≈0.07897.
-Final median pending att21 completion.
+Final results (all 20 complete, Apr 18): best=0.06516 (att13), median=0.08177, mean≈0.07893.
 
 Key observations:
   - att13 is the sole run that found the good region (Cd=0.06516, matching
@@ -453,9 +449,8 @@ FINAL BENCHMARK TABLE (updated April 16, 2026)
   v3 LLM (n800)       20    0.08037   0.08491   ~16,000  (20×800)     COMPLETE (Apr 10)
   v3 LLM (old)         1    0.06994   —         ~800     (1×800)      COMPLETE (Mar 20, baseline)
 
-  * v3 n10000: best=0.06516 (att13, confirmed final); median=0.08168 across 19/20
-    complete attempts. att21 (job 2238) at iter ~507/1000 (50%), best CD=0.082.
-    Final median pending att21 completion.
+  * v3 n10000: best=0.06516 (att13, confirmed final); att21 COMPLETE (Apr 18, iter=999,
+    best CD=0.08203). Final median across all 20: 0.08177 (att21 ranked ~11th).
 
   Fastback (vtk_F) body — baseline Cd = 0.18990:
   Method           n_runs   Best Cd    median   Budget (total evals)   Status
@@ -490,11 +485,10 @@ FINAL BENCHMARK TABLE (updated April 16, 2026)
   Notchback (vtk_N) body — baseline Cd = 0.18132:
   Method           n_runs   Best Cd    median   Budget (total evals)   Status
   ----------       ------   -------    ------   --------------------   ------
-  BO_torch            20    0.04956*  0.05178*  ~19,000 (20×860–1000)  IN PROGRESS (Apr 17; 8/20 done,
-                                                                       12/20 at 926–984 evals, ~1d runtime)
-  v3 LLM (n6000)      20    0.06808†   —        ~109,000 (20×~5450)   PARTIAL (Apr 17; 11/20 done from
-                                                                       post-preemption run; 9/20 re-running
-                                                                       at iter 7–10/600)
+  BO_torch            20    0.04956   0.05166   ~20,000 (20×1000)      COMPLETE (Apr 18; all 20 seeds done)
+  v3 LLM (n6000)      20    0.06800†   —        ~109,000 (20×~5450)   PARTIAL (Apr 18; 11/20 done from
+                                                                       first run; 9/20 re-running at
+                                                                       iter 293-339/600, ~50%)
 
   ‡ vtk_N BO n=2000 extended runs (jobs 2525-2529): seeds selected from the n=1000 run as those
     with (a) best Cd < 0.051 (good basin) AND (b) still actively improving at n=1000 budget end.
@@ -507,8 +501,10 @@ FINAL BENCHMARK TABLE (updated April 16, 2026)
       s15 (job 2528): best Cd=0.04968 at n=1000 — 2nd best, selected for extended budget exploration
       s16 (job 2529): last improvement at eval 911/1000, best Cd=0.05010 — in good basin, still active
     Results go to run_BO_torch_cd_only_vtk_N_seed{s}_n2000/ (separate from n=1000 dirs).
-    Status (Apr 17 ~18:00 UTC, 17h elapsed): all 5 at n=852–1002, no improvement yet beyond n=1000
-    bests — GP still building fitted model from first 1000 evals; exploitation expected soon.
+    Status (Apr 18, ~40h elapsed): all 5 at n=1160–1281, slight improvements over n=1000 bests.
+      s7=n1237/CD=0.05029  s8=n1281/CD=0.04956  s11=n1190/CD=0.04985
+      s15=n1230/CD=0.04968  s16=n1160/CD=0.04964
+    Still running; est. completion ~12-16h.
 
   * vtk_N BO best/median from completed seeds only; all 20 seeds at 1000 evals expected soon.
     Seeds at 1000 evals (done): s1=0.04971, s2=0.05594, s3=0.05602, s8=0.04956, s9=0.05179,
@@ -516,22 +512,16 @@ FINAL BENCHMARK TABLE (updated April 16, 2026)
   † vtk_N v3 best from 11 completed post-preemption attempts (att1,3,7,9-14,16,20);
     9 attempts (att2,4-6,8,15,17-19) preempted and re-running. att11=att14=0.068082 tied best.
 
-  BO vtk_N results (IN PROGRESS Apr 17; 8/20 seeds done at 1000 evals, 12/20 near-complete):
-  Completed seeds (n=1000):
-    s8=0.04956   s15=0.04968  s1=0.04971   s9=0.05179   s18=0.05178  s14=0.05153
-    s2=0.05594   s3=0.05602
-  In-progress (n=926–984, ~1d elapsed, close to done):
-    s0=937   s4=951   s5=926   s6=984   s7=969   s10=941   s11=965
-    s12=954  s13=980  s16=947  s17=984  s19=941
-  Current best from done seeds: s8=0.04956. Final table pending completion.
-  NOTE: docs previously listed "COMPLETE (Apr 16)" and showed all-20-seed results
-  — that was from the pre-preemption run; jobs 2259-2278 are the post-preemption
-  resubmission and are still in progress.
-    ~73% drag reduction from baseline Cd=0.181.
-    NOTE: not fully converged — BO_torch vtk_N shows larger 2nd-half improvement
-    than 1st-half. Gains are concentrated late in the budget. More evaluations
-    would likely improve results further; the N landscape appears harder to
-    exploit than F. Seeds stopping short of 1000 evals are wall-time limited.
+  BO vtk_N results (COMPLETE Apr 18; all 20 seeds at n=999):
+    s8=0.04956   s15=0.04968  s1=0.04971   s16=0.04971  s17=0.04974  s11=0.04985
+    s13=0.05031  s7=0.05034   s19=0.05089  s14=0.05153  s18=0.05178  s9=0.05179
+    s12=0.05231  s4=0.05313   s2=0.05594   s0=0.05596   s6=0.05596   s3=0.05602
+    s5=0.05607   s10=0.05623
+  best=s8=0.04956, median=0.05166, range 0.04956-0.05623 (~13% spread).
+  ~73% drag reduction from baseline Cd=0.181.
+  NOTE: larger spread than vtk_F (13% vs 5%), reflecting harder N landscape.
+  BO still improving at end of budget for top seeds — the n=2000 extended runs
+  (jobs 2525-2529) are probing the ceiling for the 5 best seeds.
 
   v3 vtk_N results (all 20 attempts, sorted by best Cd):
     att8=0.06800  att11=0.06808  att14=0.06808  att19=0.06841  att7=0.07128

@@ -1033,14 +1033,16 @@ STATUS (updated April 15, 2026)
   BO_torch: COMPLETE (benchmark) — XFOIL best 324.9 (seed1, iter_1336). Jobs
             1304-1307 cancelled after stagnation confirmed. Result is final.
             Extended re-run (seeds 5-9, n=6000, jobs 1697-1701):
-              s6 (job 1698): CANCELLED by cron (exact eval count not recorded)
-              s8 (job 1700): CANCELLED by cron at 4201 evals (Apr 15)
-              s5 (job 1697): 3950 evals, best L/D=155.0, flat since n=1923
-                             (2027 evals ago) — cron will cancel at 4200
-              s9 (job 1701): 3859 evals, best L/D=144.6, flat since n=2978
-                             (881 evals ago) — cron will cancel at 4200
-              s7 (job 1699): 4091 evals, best L/D=249.9, last improvement at
-                             n=3990 (101 evals ago) — still active; exempt from
+              s5 (job 1697): CANCELLED (cron, Apr 17) at 4200 evals. Final best L/D=155.0.
+              s6 (job 1698): CANCELLED (cron, Apr 17) at 4200 evals. Final best L/D=210.5.
+              s7 (job 1699): RUNNING (Apr 18, 7d19h). 4662 evals, best L/D=261.6.
+                             Still improving but decelerating; exempt from cron cancel.
+              s8 (job 1700): CANCELLED (cron, Apr 15) at 4201 evals. Final best L/D=130.7.
+              s9 (job 1701): CANCELLED (cron, Apr 17) at ~4200 evals. Final best L/D=144.6.
+              s7 (job 1699): 4662 evals, best L/D=261.6 (Apr 18), still improving but
+                             decelerating. Last improvement at n=4653 (+0.16 gain); gaps
+                             between improvements now ~200 evals. Exempt from cron cancel;
+                             ~1340 evals remain to n=6000 budget. Still active; exempt from
                              cron cancel; to be manually cancelled
             See BO_TORCH EXTENDED RUNS below for full details.
 
@@ -1077,20 +1079,23 @@ AUTOMATED STOP AT 4200 EVALS (April 14–15, 2026)
   s6 (job 1698): 4170 evals at last check — within ~30 of threshold, imminent.
   s9 (job 1701): 3644 evals at last check — approaching 4200, cron pending.
 
-Current status (April 17):
+Current status (April 18):
   seed5  (job 1697): 4200 evals, best NF L/D=155.0 — CANCELLED (cron, Apr 17). Final.
   seed6  (job 1698): 4200 evals, best NF L/D=210.5 — CANCELLED (cron, Apr 17). Final.
-  seed7  (job 1699): 4589 evals, best NF L/D=261.4 — RUNNING (6d20h elapsed); flat last ~170 evals.
+  seed7  (job 1699): 4662 evals, best NF L/D=261.6 — RUNNING (7d19h elapsed); still improving but
+                     decelerating — last improvement at n=4653, gaps ~200 evals, +0.16 last gain.
+                     Trajectory: n=4200→4598: 249.9→261.4 (late surge); n=4598→4653: +0.16 (slowing).
+                     ~1340 evals remain to n=6000 budget.
   seed8  (job 1700): 4201 evals, best NF L/D=130.7 — CANCELLED (cron, Apr 15). Final.
-  seed9  (job 1701): 4191 evals, best NF L/D=144.6 — nohup script will cancel at 4200; imminent.
+  seed9  (job 1701): ~4200 evals, best NF L/D=144.6 — CANCELLED (cron, Apr 17). Final.
 
 Convergence trajectory (best NF L/D by eval count):
   Seed   n=500   n=1000  n=1500  n=2000  n=2500  n=3000  n=3500  n=3820  n=4200  current
-  5      10.4    64.6    154.3   155.0   155.0   155.0   155.0   155.0   155.0   CANCELLED
-  6      165.4   200.7   207.7   210.5   210.5   210.5   210.5   210.5   210.5   CANCELLED
-  7      191.7   197.1   206.6   206.8   207.6   208.4   222.8   244.7     —     260.6 (improving)
-  8      121.8   125.2   130.7   130.7   130.7   130.7   130.7   130.7   CANCELLED  —
-  9      126.5   128.6   138.7   139.0   139.0   144.6   144.6   144.6   144.6   pending cancel
+  5      10.4    64.6    154.3   155.0   155.0   155.0   155.0   155.0   155.0   CANCELLED (Apr 17)
+  6      165.4   200.7   207.7   210.5   210.5   210.5   210.5   210.5   210.5   CANCELLED (Apr 17)
+  7      191.7   197.1   206.6   206.8   207.6   208.4   222.8   244.7     —     261.6 @ n=4662 (Apr 18)
+  8      121.8   125.2   130.7   130.7   130.7   130.7   130.7   130.7   CANCELLED (Apr 15)  —
+  9      126.5   128.6   138.7   139.0   139.0   144.6   144.6   144.6   144.6   CANCELLED (Apr 17)
 
 SEED 7 IMPROVEMENT HISTORY AND OUTLOOK (April 15, 2026)
   Seed7 has been the standout run. Full improvement record:
@@ -1139,8 +1144,8 @@ FILES
   BO_torch extended seeds 5–9 (submitted April 12, jobs 1697–1701):
     environments/NeuralFoil/results/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[5-9]_n6000/
     sbatch/environments/NeuralFoil/BO_torch/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[5-9]_n6000.slurm
-    Status (April 15): s8 CANCELLED (4201 evals); s5/s6/s9 pending cron cancel at 4200;
-                       s7 RUNNING (3905 evals, best=244.7, still potentially improving).
+    Status (April 18): s5/s6/s8/s9 all CANCELLED (cron Apr 15-17). s7 RUNNING at
+                       4662 evals, best=261.6, still improving but decelerating.
 
   Automated cancel script (seeds 5,6,8,9 at 4200 evals):
     bin/cancel_bo_ldcn_at_4200.sh  (cron: */10 * * * *; self-removes when all done)

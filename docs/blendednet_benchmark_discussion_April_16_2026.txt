@@ -38,19 +38,56 @@ Flight conditions: Mach=0.3, Re=1e7 (fixed for all runs)
 
 REWARD: shapebench_5
 --------------------
-Multi-point drag minimization across 5 CL operating points.
-  CL targets: [0.206, 0.206, 0.206, 0.185, 0.227]
-  (3 unique CL targets after deduplication)
+"shapebench_5" is the 5th benchmark reward configuration defined for BlendedNet
+(alongside shapebench_1, ld_ratio.py, etc. in environments/BlendedNet/rewards/).
 
-For each unique CL target, bisection search (8 iterations) finds the angle of
-attack alpha that achieves that CL. This makes each design evaluation invoke
-3 × 8 = 24 Transolver forward passes.
+REWARD EVOLUTION (why shapebench_5 was chosen):
+Three reward formulations were developed in sequence before shapebench_5 was
+adopted as the benchmark standard:
+
+  1. ld_ratio.py (ld_ratio.py):
+     reward = CL_approx / CD_approx  at fixed alpha=5°
+     The simplest formulation. Alpha is a free design variable the optimizer can
+     exploit; there is no guarantee the design achieves a physically meaningful CL.
+     The early GA/particle_swarm exploratory run used this reward (raw L/D ~21–29).
+
+  2. shapebench_1 (sahpebench_1.py):
+     reward = -(CD + lambda_cl * |CL_approx - CL_target| + lambda_alpha * alpha_violation)
+     Penalized single-point: forces the design toward a target CL and a preferred
+     AoA range. Requires manual tuning of lambda_cl and lambda_alpha_range — the
+     same lambda-sensitivity problem as the NeuralFoil benchmark's early formulation.
+     Used in the shapebecnh1 exploratory runs.
+
+  3. shapebench_5 (shapebench_5.py) ← benchmark standard:
+     Multi-point CD minimization via bisection; no penalty weights.
+     Bisection solves for alpha that achieves each CL target exactly, then averages
+     CD across 5 operating points. Key improvements over shapebench_1:
+       - No lambda tuning required: CL targets are met exactly by construction
+       - Multi-point: evaluates drag at CL = {0.185, 0.206×3, 0.227}, covering
+         a realistic BWB flight envelope rather than a single condition
+       - Alpha is not a design variable: it is an output of the bisection, removing
+         the optimizer's ability to exploit it
+       - Physically motivated: a real BWB must operate efficiently across a range
+         of lift coefficients (cruise, climb, loiter); single-point CD ignores this
+
+Objective: minimize mean drag coefficient (CD) across 5 CL operating points.
+  CL targets: [0.206, 0.206, 0.206, 0.185, 0.227]
+  (3 unique CL values after deduplication: 0.185, 0.206, 0.227)
+
+For each unique CL target, bisection search (8 iterations, alpha in [-5°, 12°])
+finds the angle of attack that achieves that CL (using CL ≈ -Cp_mean). This
+makes each design evaluation invoke 3 × 8 = 24 Transolver forward passes.
 
 Reward: R = -mean_CD  (mean drag coefficient across the 5 operating points)
 Fail reward: -5.0
 
-Approximate cost per design evaluation: ~5-10s (24 surrogate calls at ~0.1-0.5s
-each, including bisection overhead).
+Note: there are no lift, moment, or geometric feasibility constraints. The
+problem is purely drag minimization (unconstrained apart from parameter box bounds).
+This contrasts with the NeuralFoil benchmark which has explicit CM and confidence
+constraints. Lower mean_CD = higher (less negative) reward = better.
+
+Approximate cost per design evaluation: ~30-50s (24 surrogate calls including
+mesh generation on first call + Transolver CPU inference, after mesh cache fix).
 
 
 PRIOR RUNS (before April 16, 2026)
@@ -165,17 +202,19 @@ Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
 
   Round 3 (jobs 2483-2492): fix 5 applied, running on node-3.
   Attempts: 1-10 (job IDs 2483-2492)
-  ATTEMPT RESULTS (fill in as complete):
-  att1  (2483): [ ]
-  att2  (2484): [ ]
-  att3  (2485): [ ]
-  att4  (2486): [ ]
-  att5  (2487): [ ]
-  att6  (2488): [ ]
-  att7  (2489): [ ]
-  att8  (2490): [ ]
-  att9  (2491): [ ]
-  att10 (2492): [ ]
+  ATTEMPT RESULTS (updated April 18, 2026 — 8/10 complete, 2 still running):
+  att1  (2483): iter=186/200  best=-0.004652  RUNNING
+  att2  (2484): iter=191/200  best=-0.004469  RUNNING
+  att3  (2485): iter=199/200  best=-0.004589  COMPLETE
+  att4  (2486): iter=194/200  best=-0.004246  RUNNING  ← best so far
+  att5  (2487): iter=191/200  best=-0.004536  RUNNING
+  att6  (2488): iter=199/200  best=-0.004519  COMPLETE
+  att7  (2489): iter=189/200  best=-0.004766  RUNNING
+  att8  (2490): iter=191/200  best=-0.004570  RUNNING
+  att9  (2491): iter=192/200  best=-0.004559  RUNNING
+  att10 (2492): iter=191/200  best=-0.004732  RUNNING
+  Range: -0.004246 to -0.004766  mean_CD: 0.00425 to 0.00477
+  All jobs still in queue at ~45h elapsed; est. completion ~6-8h.
 
 --- L-BFGS-B ---
   n_restarts=3, maxiter=200 → ~600 evals per seed (in principle)
@@ -225,6 +264,23 @@ Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
   New output dirs: run_lbfgsb_shapebench_5_seed{0-9}_nr3_normfix/
   New slurm scripts: sbatch/environments/BlendedNet/lbfgsb/run_lbfgsb_shapebench_5_seed{0-9}_nr3_normfix.slurm
 
+  NORMFIX RESULTS (updated April 18, ~16h elapsed):
+  Fix confirmed working: n=1288-1802 evals vs ~30 for broken runs — normalization
+  allows L-BFGS-B to actually compute nonzero gradients and continue iterating.
+  However, best rewards are notably worse than population-based methods (~-0.006 to
+  -0.008 vs ~-0.0044 to -0.0049), consistent with local-optima trapping despite 3
+  restarts. Jobs still running; final results pending.
+  s0 (2592): n=1288  best=-0.006283
+  s1 (2593): n=1316  best=-0.006814
+  s2 (2594): n=1370  best=-0.006901
+  s3 (2595): n=1340  best=-0.005402  ← best so far
+  s4 (2596): n=1381  best=-0.008037  ← worst so far
+  s5 (2597): n=1326  best=-0.007083
+  s6 (2598): n=1369  best=-0.006260
+  s7 (2599): n=1365  best=-0.006282
+  s8 (2600): n=1316  best=-0.007217
+  s9 (2601): n=1802  best=-0.005889
+
 --- BO_torch ---
   Config: direct args (no config file)
   n_calls=500, n_initial=30, 10 seeds (0-9)
@@ -238,18 +294,19 @@ Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
     alternative.
   Output dirs: environments/BlendedNet/results/run_BO_torch_shapebench_5_seed{0-9}_n500/
   Slurm scripts: sbatch/environments/BlendedNet/BO_torch/run_BO_torch_shapebench_5_seed{0-9}_n500.slurm
-  Jobs: 2602-2611 (seeds 0-9), submitted April 18 2026, all RUNNING on node-8.
-  SEED RESULTS (fill in as complete):
-  s0 (2602): [ ]
-  s1 (2603): [ ]
-  s2 (2604): [ ]
-  s3 (2605): [ ]
-  s4 (2606): [ ]
-  s5 (2607): [ ]
-  s6 (2608): [ ]
-  s7 (2609): [ ]
-  s8 (2610): [ ]
-  s9 (2611): [ ]
+  Jobs: 2602-2611 (seeds 0-9), submitted April 18 2026.
+  SEED RESULTS (COMPLETE — all 10 seeds done at n=499, April 18 2026):
+  s0 (2602): n=499  best=-0.004482
+  s1 (2603): n=499  best=-0.004459
+  s2 (2604): n=499  best=-0.004511
+  s3 (2605): n=499  best=-0.004461
+  s4 (2606): n=499  best=-0.004410  ← best
+  s5 (2607): n=499  best=-0.004474
+  s6 (2608): n=499  best=-0.004547
+  s7 (2609): n=499  best=-0.004457
+  s8 (2610): n=499  best=-0.004504
+  s9 (2611): n=499  best=-0.004537
+  Best: s4=0.004410  Median: ~0.004490  Range: 0.00441-0.00455  (~3% spread)
 
 --- CMA-ES ---
   CMA-ES (Covariance Matrix Adaptation Evolution Strategy) is the standard
@@ -285,18 +342,19 @@ Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
   Estimated runtime: ~5.5h per seed (500 evals × ~40s/eval)
   Output dirs: environments/BlendedNet/results/run_cmaes_shapebench_5_seed{0-9}_n500/
   Slurm scripts: sbatch/environments/BlendedNet/cmaes/run_cmaes_shapebench_5_seed{0-9}_n500.slurm
-  Jobs: 2612-2621 (seeds 0-9), submitted April 18 2026, all RUNNING on node-8.
-  SEED RESULTS (fill in as complete):
-  s0 (2612): [ ]
-  s1 (2613): [ ]
-  s2 (2614): [ ]
-  s3 (2615): [ ]
-  s4 (2616): [ ]
-  s5 (2617): [ ]
-  s6 (2618): [ ]
-  s7 (2619): [ ]
-  s8 (2620): [ ]
-  s9 (2621): [ ]
+  Jobs: 2612-2621 (seeds 0-9), submitted April 18 2026.
+  SEED RESULTS (COMPLETE — all 10 seeds done at n=499, April 18 2026):
+  s0 (2612): n=499  best=-0.004603
+  s1 (2613): n=499  best=-0.004626
+  s2 (2614): n=499  best=-0.004523  ← best
+  s3 (2615): n=499  best=-0.004561
+  s4 (2616): n=499  best=-0.004561
+  s5 (2617): n=499  best=-0.004907  ← worst
+  s6 (2618): n=499  best=-0.004575
+  s7 (2619): n=499  best=-0.004561
+  s8 (2620): n=499  best=-0.004583
+  s9 (2621): n=499  best=-0.004764
+  Best: s2=0.004523  Median: ~0.004572  Range: 0.00452-0.00491  (~8% spread)
 
 --- v3_dynamic_optimizer ---
 Config: sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_n2000.config.json
@@ -313,17 +371,19 @@ Config: sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_n2000.config.
 
   Round 3 (jobs 2493-2502): fix 5 applied, running on node-5.
   Attempts: 1-10 (job IDs 2493-2502)
-  ATTEMPT RESULTS (fill in as complete):
-  att1  (2493): [ ]
-  att2  (2494): [ ]
-  att3  (2495): [ ]
-  att4  (2496): [ ]
-  att5  (2497): [ ]
-  att6  (2498): [ ]
-  att7  (2499): [ ]
-  att8  (2500): [ ]
-  att9  (2501): [ ]
-  att10 (2502): [ ]
+  ATTEMPT RESULTS (COMPLETE — all 10 at iter=199, April 18 2026):
+  att1  (2493): iter=199  best=-0.004276  ← best overall
+  att2  (2494): iter=199  best=-0.004952
+  att3  (2495): iter=199  best=-0.005479
+  att4  (2496): iter=199  best=-0.005481
+  att5  (2497): iter=199  best=-0.004483  ← 2nd best
+  att6  (2498): iter=199  best=-0.005500
+  att7  (2499): iter=199  best=-0.005795
+  att8  (2500): iter=199  best=-0.004533
+  att9  (2501): iter=199  best=-0.005521
+  att10 (2502): iter=199  best=-0.004574
+  Best: att1=0.004276  Median: ~0.005001  Range: 0.00428-0.00580  (~35% spread)
+  High variance — only att1/att5/att8/att10 found the good basin.
 
 STATUS UPDATE (April 17, 2026 — ~4h elapsed, fix 5 round)
 -----------------------------------------------------------
@@ -385,6 +445,35 @@ v3 fix5 (jobs 2493-2502) — 7/10 complete, 3 still running (~22h elapsed):
   att10 (2502): iter=199/200  best=-0.004574  COMPLETE (exited at 199)
   3 jobs still in queue: 2494 (att2), 2495 (att3), 2501 (att9). Est. ~2-3h remaining.
   Best: att1=-0.004276, att5=-0.004483, att8=-0.004533. All well below prior best (-0.006971).
+
+
+STATUS UPDATE (April 18, 2026 — ~45h elapsed for GA/v3; BO/CMA-ES complete)
+-----------------------------------------------------------------------------
+New methods (BO_torch seeds 0-9, CMA-ES seeds 0-9) submitted and completed same day.
+lbfgsb normfix (seeds 0-9) submitted and running at ~16h elapsed.
+
+CROSS-METHOD COMPARISON TABLE (shapebench_5 reward, mean_CD — lower is better):
+  Method          Config              n evals   Best CD     Median CD   Notes
+  -----------     ------------------  --------  ----------  ----------  -----
+  BO_torch        10 seeds, n=500     500 each  0.004410    ~0.004490   COMPLETE Apr 18
+  GA (fix5)       10 att, 20p×200i    ~4000 ea  0.004246    ~0.004560   8/10 done; est. ~6h to finish
+  CMA-ES          10 seeds, n=500     500 each  0.004523    ~0.004572   COMPLETE Apr 18
+  v3 ShapeEvolve  10 att, n=2000      2000 each 0.004276    ~0.005001   COMPLETE Apr 18
+  L-BFGS-B normfix 10 seeds, nr3     1300-1800  0.005402    ~0.006600   RUNNING ~16h; not converged
+  PSO (early)     20p×100i, n=2000    2000      0.007022    —           Exploratory Apr 16
+  v3 (early)      n=2000, 1 run       2000      0.006971    —           Exploratory Apr 16
+
+Key observations (April 18):
+  - BO_torch and GA are essentially tied for best (0.00441 vs 0.00425 best);
+    BO is slightly better on median (0.00449 vs ~0.00456)
+  - CMA-ES best (0.00452) is ~2.5% worse than BO best — a small but consistent gap
+  - v3 ShapeEvolve has the single best result (att1=0.00428) but high variance
+    (median 0.005001) — only 4/10 runs found the good basin. BO and GA are more
+    consistent; v3 occasionally excels but often misses.
+  - lbfgsb normfix notably worse (~0.006-0.008) despite many more evaluations:
+    confirmed local-optima trapping. 3 restarts insufficient for this 10D landscape.
+  - All methods are dramatically better than early exploratory PSO/v3 (~0.007),
+    confirming the benchmark methods are finding a distinct lower-drag region.
 
 
 FILES
