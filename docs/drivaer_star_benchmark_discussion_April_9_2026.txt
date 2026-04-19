@@ -92,10 +92,10 @@ BENCHMARK COVERAGE (updated April 16, 2026)
                                                                  att16 anomaly: CD=0.17952 (near-baseline).
                                                                  att4: only 1315 evals (LLM batch fallback).
   --- Notchback (vtk_N) body ---
-  BO_torch n=2000       2525-2529      2000 calls × 5            RUNNING (Apr 18; seeds s7,s8,s11,s15,s16
-  (extended, s7/8/11/15/16)                                      ~60% done; s7=n1237/CD=0.05029,
-                                                                 s8=n1281/CD=0.04956, s11=n1190/CD=0.04985,
-                                                                 s15=n1230/CD=0.04968, s16=n1160/CD=0.04964)
+  BO_torch n=2000       2525-2529      2000 calls × 5            RUNNING (Apr 19; seeds s7,s8,s11,s15,s16
+  (extended, s7/8/11/15/16)                                      ~65% done; s7=n1303/CD=0.05029,
+                                                                 s8=n1376/CD=0.04956, s11=n1271/CD=0.04985,
+                                                                 s15=n1310/CD=0.04968, s16=n1276/CD=0.04964)
   BO_torch (s0-19)      2259-2278      1000 calls × 20           COMPLETE (Apr 18; all 20 seeds at n=999).
                                                                  best=s8=0.04956, median=0.05166,
                                                                  range 0.04956–0.05623 (~13% spread).
@@ -103,16 +103,17 @@ BENCHMARK COVERAGE (updated April 16, 2026)
                                                                  Apr 16 based on pre-preemption data;
                                                                  jobs 2259-2278 were the post-preemption
                                                                  resubmission now fully done.
-  v3 LLM (n6000)        2299-2318      600 iters × 10 × 20       IN PROGRESS (Apr 18; 11/20 complete from
-                                                                 first run; 9/20 re-running at iter 293–339/600
-                                                                 (~50%), ~16h elapsed; est. ~17h remaining).
-                                                                 Re-run results: att2=0.07221,att4=0.07135,
-                                                                 att5=0.07128,att6=0.07372,att8=0.07157,
-                                                                 att15=0.07389,att17=0.04958,att18=0.07168,
-                                                                 att19=0.07158.
-                                                                 NOTE: docs previously marked COMPLETE
-                                                                 Apr 16 based on first run; 9 attempts
-                                                                 were preempted and are re-running.
+  v3 LLM (n6000)        2299-2318      600 iters × 10 × 20       NODE FAILURE (Apr 19): 9/20 attempts
+                        +2712-2720     resubmit of 9 failed       (att2,4,5,6,8,15,17,18,19) were cancelled
+                                                                 at n~2700-3400 due to node failure on
+                                                                 compute-dy-hpc-128vcpu-2 at Apr 18
+                                                                 10:19 UTC. All 9 on same node; killed
+                                                                 simultaneously. Failed result dirs renamed
+                                                                 _FAILED. Resubmitted as jobs 2712-2720
+                                                                 (Apr 19). Est. ~22-24h to complete.
+                                                                 11/20 complete (att1,3,7,9-14,16,20):
+                                                                 best=att11=att14=0.06808, median=0.07145,
+                                                                 range 0.06808-0.07506.
 
 Note on GA/PSO and L-BFGS-B job history: both methods were submitted in multiple
 batches due to disk-space failures and re-runs. A batch of L-BFGS-B jobs
@@ -486,9 +487,10 @@ FINAL BENCHMARK TABLE (updated April 16, 2026)
   Method           n_runs   Best Cd    median   Budget (total evals)   Status
   ----------       ------   -------    ------   --------------------   ------
   BO_torch            20    0.04956   0.05166   ~20,000 (20×1000)      COMPLETE (Apr 18; all 20 seeds done)
-  v3 LLM (n6000)      20    0.06800†   —        ~109,000 (20×~5450)   PARTIAL (Apr 18; 11/20 done from
-                                                                       first run; 9/20 re-running at
-                                                                       iter 293-339/600, ~50%)
+  v3 LLM (n6000)      20    0.06808†   0.07145   ~109,000 (20×~5450)   PARTIAL (Apr 19; 11/20 complete;
+                                                                       9/20 failed (node crash Apr 18),
+                                                                       resubmitted jobs 2712-2720,
+                                                                       est. complete ~Apr 20)
 
   ‡ vtk_N BO n=2000 extended runs (jobs 2525-2529): seeds selected from the n=1000 run as those
     with (a) best Cd < 0.051 (good basin) AND (b) still actively improving at n=1000 budget end.
@@ -501,16 +503,18 @@ FINAL BENCHMARK TABLE (updated April 16, 2026)
       s15 (job 2528): best Cd=0.04968 at n=1000 — 2nd best, selected for extended budget exploration
       s16 (job 2529): last improvement at eval 911/1000, best Cd=0.05010 — in good basin, still active
     Results go to run_BO_torch_cd_only_vtk_N_seed{s}_n2000/ (separate from n=1000 dirs).
-    Status (Apr 18, ~40h elapsed): all 5 at n=1160–1281, slight improvements over n=1000 bests.
-      s7=n1237/CD=0.05029  s8=n1281/CD=0.04956  s11=n1190/CD=0.04985
-      s15=n1230/CD=0.04968  s16=n1160/CD=0.04964
-    Still running; est. completion ~12-16h.
+    Status (Apr 19, ~50h elapsed): all 5 at n=1271–1376, slight improvements over n=1000 bests.
+      s7=n1303/CD=0.05029  s8=n1376/CD=0.04956  s11=n1271/CD=0.04985
+      s15=n1310/CD=0.04968  s16=n1276/CD=0.04964
+    Still running; est. completion ~8-12h.
 
   * vtk_N BO best/median from completed seeds only; all 20 seeds at 1000 evals expected soon.
     Seeds at 1000 evals (done): s1=0.04971, s2=0.05594, s3=0.05602, s8=0.04956, s9=0.05179,
     s14=0.05153, s15=0.04968, s18=0.05178.
-  † vtk_N v3 best from 11 completed post-preemption attempts (att1,3,7,9-14,16,20);
-    9 attempts (att2,4-6,8,15,17-19) preempted and re-running. att11=att14=0.068082 tied best.
+  † vtk_N v3: 11 complete (att1,3,7,9-14,16,20); 9 failed due to node crash Apr 18,
+    resubmitted Apr 19 (jobs 2712-2720). att11=att14=0.06808 tied best of completed runs.
+    Performance summary (11 complete): best=0.06808, median=0.07145, range 0.06808-0.07506.
+    BO_torch best (0.04956) is 27% better than v3 best (0.06808) on vtk_N.
 
   BO vtk_N results (COMPLETE Apr 18; all 20 seeds at n=999):
     s8=0.04956   s15=0.04968  s1=0.04971   s16=0.04971  s17=0.04974  s11=0.04985
@@ -933,7 +937,7 @@ FILES
     environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_F_attempt_[1-20]_flash_2_5_n6000/  (19/20 COMPLETE Apr 16; att6 job 2284 still
                                                                                                                               running at n=5524/6000, best Cd=0.04545,
                                                                                                                               flat last 500 evals — mediocre basin)
-    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_N_attempt_[1-20]_flash_2_5_n6000/  (COMPLETE, Apr 16)
+    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_N_attempt_[1-20]_flash_2_5_n6000/  (11/20 COMPLETE; 9 dirs renamed _FAILED; resubmitted Apr 19 as jobs 2712-2720)
 
   Slurm scripts (vtk_F and vtk_N):
     sbatch/environments/DrivAer_Star/BO_torch/vtk_F/run_BO_torch_cd_only_vtk_F_seed[0-19]_n1000.slurm

@@ -202,19 +202,18 @@ Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
 
   Round 3 (jobs 2483-2492): fix 5 applied, running on node-3.
   Attempts: 1-10 (job IDs 2483-2492)
-  ATTEMPT RESULTS (updated April 18, 2026 — 8/10 complete, 2 still running):
-  att1  (2483): iter=186/200  best=-0.004652  RUNNING
-  att2  (2484): iter=191/200  best=-0.004469  RUNNING
-  att3  (2485): iter=199/200  best=-0.004589  COMPLETE
-  att4  (2486): iter=194/200  best=-0.004246  RUNNING  ← best so far
-  att5  (2487): iter=191/200  best=-0.004536  RUNNING
-  att6  (2488): iter=199/200  best=-0.004519  COMPLETE
-  att7  (2489): iter=189/200  best=-0.004766  RUNNING
-  att8  (2490): iter=191/200  best=-0.004570  RUNNING
-  att9  (2491): iter=192/200  best=-0.004559  RUNNING
-  att10 (2492): iter=191/200  best=-0.004732  RUNNING
-  Range: -0.004246 to -0.004766  mean_CD: 0.00425 to 0.00477
-  All jobs still in queue at ~45h elapsed; est. completion ~6-8h.
+  ATTEMPT RESULTS (COMPLETE — all 10 done, April 19, 2026):
+  att1  (2483): n=4000  best=-0.004652
+  att2  (2484): n=4000  best=-0.004469
+  att3  (2485): n=4000  best=-0.004589
+  att4  (2486): n=4000  best=-0.004246  ← best
+  att5  (2487): n=4000  best=-0.004536
+  att6  (2488): n=4000  best=-0.004519
+  att7  (2489): n=4000  best=-0.004766  ← worst
+  att8  (2490): n=4000  best=-0.004570
+  att9  (2491): n=4000  best=-0.004559
+  att10 (2492): n=4000  best=-0.004731
+  Best: att4=0.004246  Median: ~0.004554  Range: 0.00425-0.00477
 
 --- L-BFGS-B ---
   n_restarts=3, maxiter=200 → ~600 evals per seed (in principle)
@@ -264,22 +263,40 @@ Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
   New output dirs: run_lbfgsb_shapebench_5_seed{0-9}_nr3_normfix/
   New slurm scripts: sbatch/environments/BlendedNet/lbfgsb/run_lbfgsb_shapebench_5_seed{0-9}_nr3_normfix.slurm
 
-  NORMFIX RESULTS (updated April 18, ~16h elapsed):
-  Fix confirmed working: n=1288-1802 evals vs ~30 for broken runs — normalization
-  allows L-BFGS-B to actually compute nonzero gradients and continue iterating.
-  However, best rewards are notably worse than population-based methods (~-0.006 to
-  -0.008 vs ~-0.0044 to -0.0049), consistent with local-optima trapping despite 3
-  restarts. Jobs still running; final results pending.
-  s0 (2592): n=1288  best=-0.006283
-  s1 (2593): n=1316  best=-0.006814
-  s2 (2594): n=1370  best=-0.006901
-  s3 (2595): n=1340  best=-0.005402  ← best so far
-  s4 (2596): n=1381  best=-0.008037  ← worst so far
-  s5 (2597): n=1326  best=-0.007083
-  s6 (2598): n=1369  best=-0.006260
-  s7 (2599): n=1365  best=-0.006282
-  s8 (2600): n=1316  best=-0.007217
-  s9 (2601): n=1802  best=-0.005889
+  NORMFIX RESULTS (updated April 19, ~27h elapsed):
+  Fix confirmed working: n=1701-2666 evals vs ~30 for broken runs. Best rewards
+  notably worse than population-based methods (~-0.005 to -0.008 vs ~-0.0042 to
+  -0.0049), consistent with local-optima trapping with only 3 restarts in 10D.
+  s0 (2592): n=2006  best=-0.006283  RUNNING
+  s1 (2593): n=2388  best=-0.006814  RUNNING
+  s2 (2594): n=1701  best=-0.006901  COMPLETE
+  s3 (2595): n=2149  best=-0.005402  RUNNING  ← best
+  s4 (2596): n=2188  best=-0.007410  RUNNING  ← worst
+  s5 (2597): n=2118  best=-0.006500  RUNNING
+  s6 (2598): n=2159  best=-0.006260  RUNNING
+  s7 (2599): n=2171  best=-0.006282  RUNNING
+  s8 (2600): n=2079  best=-0.007217  COMPLETE
+  s9 (2601): n=2666  best=-0.005857  RUNNING
+
+  NR10 FOLLOW-UP (submitted April 19, 2026):
+  Due to lbfgsb nr3 being notably worse than other methods (best ~0.0054 vs BO
+  best 0.0044), 10 new seeds submitted with n_restarts=10 to improve basin
+  coverage. No warm start — all restarts use random x0 in [lb, ub].
+  Jobs: 2656-2665 (seeds 0-9), submitted April 19 2026.
+  Slurm scripts: sbatch/environments/BlendedNet/lbfgsb/run_lbfgsb_shapebench_5_seed{0-9}_nr10.slurm
+  Output dirs: environments/BlendedNet/results/run_lbfgsb_shapebench_5_seed{i}_nr10/
+  Est. runtime: ~60h (~18h × 10/3 restarts, based on nr3 observed rate of ~78 evals/h).
+  Early progress (9h elapsed):
+  s0 (2656): n=687  best=-0.006288
+  s1 (2657): n=652  best=-0.007289
+  s2 (2658): n=686  best=-0.007185
+  s3 (2659): n=643  best=-0.005402  ← best so far
+  s4 (2660): n=661  best=-0.008578
+  s5 (2661): n=651  best=-0.007083
+  s6 (2662): n=687  best=-0.006668
+  s7 (2663): n=659  best=-0.006282
+  s8 (2664): n=666  best=-0.007662
+  s9 (2665): n=1073 best=-0.005936
 
 --- BO_torch ---
   Config: direct args (no config file)
@@ -455,11 +472,12 @@ lbfgsb normfix (seeds 0-9) submitted and running at ~16h elapsed.
 CROSS-METHOD COMPARISON TABLE (shapebench_5 reward, mean_CD — lower is better):
   Method          Config              n evals   Best CD     Median CD   Notes
   -----------     ------------------  --------  ----------  ----------  -----
-  BO_torch        10 seeds, n=500     500 each  0.004410    ~0.004490   COMPLETE Apr 18
-  GA (fix5)       10 att, 20p×200i    ~4000 ea  0.004246    ~0.004560   8/10 done; est. ~6h to finish
-  CMA-ES          10 seeds, n=500     500 each  0.004523    ~0.004572   COMPLETE Apr 18
+  GA (fix5)       10 att, 20p×200i    4000 ea   0.004246    ~0.004554   COMPLETE Apr 19
   v3 ShapeEvolve  10 att, n=2000      2000 each 0.004276    ~0.005001   COMPLETE Apr 18
-  L-BFGS-B normfix 10 seeds, nr3     1300-1800  0.005402    ~0.006600   RUNNING ~16h; not converged
+  BO_torch        10 seeds, n=500     500 each  0.004410    ~0.004490   COMPLETE Apr 18
+  CMA-ES          10 seeds, n=500     500 each  0.004523    ~0.004572   COMPLETE Apr 18
+  L-BFGS-B nr10   10 seeds, nr10      ~22k ea   TBD         TBD         RUNNING ~9h (jobs 2656-2665)
+  L-BFGS-B nr3    10 seeds, nr3       ~2k ea    0.005402    ~0.006600   8/10 running; 2 done
   PSO (early)     20p×100i, n=2000    2000      0.007022    —           Exploratory Apr 16
   v3 (early)      n=2000, 1 run       2000      0.006971    —           Exploratory Apr 16
 
