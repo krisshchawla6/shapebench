@@ -47,7 +47,7 @@ def load_all(path):
 lbfgsb_cm125 = load_all(f"{BASE}/xfoil_validation_lbfgsb_cm125_conf85/summary.json")
 v3_cm125     = load_all(f"{BASE}/xfoil_validation_cm125_conf85_att15_att6/summary.json")
 ga_cm125     = load_all(f"{BASE}/xfoil_validation_GA_multi_cm125_conf85/summary.json")
-bo_cm125     = load_all(f"{BASE}/xfoil_validation_BO_torch_best_cm125_conf85/summary.json")
+bo_cm125 = load_all(f"{BASE}/xfoil_validation_BO_torch_best_cm125_conf85/summary.json")
 
 # cm130 (open markers): CM≥−0.130 IPOPT threshold
 lbfgsb_cm130 = load_all(f"{BASE}/xfoil_validation_lbfgsb_ipopt_cm130/summary.json")

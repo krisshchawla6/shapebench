@@ -92,10 +92,10 @@ BENCHMARK COVERAGE (updated April 16, 2026)
                                                                  att16 anomaly: CD=0.17952 (near-baseline).
                                                                  att4: only 1315 evals (LLM batch fallback).
   --- Notchback (vtk_N) body ---
-  BO_torch n=2000       2525-2529      2000 calls × 5            RUNNING (Apr 19; seeds s7,s8,s11,s15,s16
-  (extended, s7/8/11/15/16)                                      ~65% done; s7=n1303/CD=0.05029,
-                                                                 s8=n1376/CD=0.04956, s11=n1271/CD=0.04985,
-                                                                 s15=n1310/CD=0.04968, s16=n1276/CD=0.04964)
+  BO_torch n=2000       2525-2529      2000 calls × 5            RUNNING (Apr 20 04:32 UTC; seeds s7,s8,s11,s15,s16
+  (extended, s7/8/11/15/16)                                      ~45-48% done; s7=n906/CD=0.05049,
+                                                                 s8=n967/CD=0.04956, s11=n891/CD=0.05001,
+                                                                 s15=n955/CD=0.04968, s16=n892/CD=0.05026)
   BO_torch (s0-19)      2259-2278      1000 calls × 20           COMPLETE (Apr 18; all 20 seeds at n=999).
                                                                  best=s8=0.04956, median=0.05166,
                                                                  range 0.04956–0.05623 (~13% spread).
@@ -103,17 +103,18 @@ BENCHMARK COVERAGE (updated April 16, 2026)
                                                                  Apr 16 based on pre-preemption data;
                                                                  jobs 2259-2278 were the post-preemption
                                                                  resubmission now fully done.
-  v3 LLM (n6000)        2299-2318      600 iters × 10 × 20       NODE FAILURE (Apr 19): 9/20 attempts
+  v3 LLM (n6000)        2299-2318      600 iters × 10 × 20       NODE FAILURE (Apr 18): 9/20 attempts
                         +2712-2720     resubmit of 9 failed       (att2,4,5,6,8,15,17,18,19) were cancelled
                                                                  at n~2700-3400 due to node failure on
-                                                                 compute-dy-hpc-128vcpu-2 at Apr 18
-                                                                 10:19 UTC. All 9 on same node; killed
-                                                                 simultaneously. Failed result dirs renamed
-                                                                 _FAILED. Resubmitted as jobs 2712-2720
-                                                                 (Apr 19). Est. ~22-24h to complete.
-                                                                 11/20 complete (att1,3,7,9-14,16,20):
-                                                                 best=att11=att14=0.06808, median=0.07145,
-                                                                 range 0.06808-0.07506.
+                                                                 compute-dy-hpc-128vcpu-2. Failed result
+                                                                 dirs renamed _FAILED. Resubmitted as jobs
+                                                                 2712-2720 (Apr 19).
+                                                                 12/20 complete (att1,2,3,7,9-14,16,20):
+                                                                 att2 job 2712 done Apr 20 03:50 UTC.
+                                                                 8 reruns RUNNING (Apr 20 04:32 UTC) at
+                                                                 72-99%: att5/Cd=0.07115 best of in-progress.
+                                                                 11 completed: best=att11=att14=0.06808,
+                                                                 median=0.07145, range 0.06808-0.07506.
 
 Note on GA/PSO and L-BFGS-B job history: both methods were submitted in multiple
 batches due to disk-space failures and re-runs. A batch of L-BFGS-B jobs
@@ -571,6 +572,72 @@ Key findings (updated April 16, 2026):
   - Runtime: ~21h for all vtk_F and vtk_N jobs (both BO and v3). Consistent
     with the ~20h typical runtime for Estate BO_torch.
 
+
+COMPUTATION COST PER CASE (April 2026)
+---------------------------------------
+All jobs: 1 task / 1 core per job on compute-dy-hpc-128vcpu nodes (not exclusive).
+Surrogate: Transolver (transformer) + VTK mesh; ~5-25 s/eval for Estate (cached mesh,
+render_images=False); ~75 s/eval for vtk_F/N (heavier mesh; confirmed from runtimes).
+v3 LLM: surrogate eval is not the bottleneck — wall time dominated by serial LLM API
+calls (2 Gemini 2.5 Flash calls per iteration ~2-5 s each, 1,000-10,000 iters total).
+
+Table 1 — Evaluations per case (design-space: 20 FFD parameters):
+
+  Method              Body    Budget/case           Evals/case (actual)            Cases  Total evals
+  -------             -----   ------------------    ---------------------------    -----  -----------
+  GA/PSO (120p×250i)  Estate  30,000 (250 iter)     30,000–36,960 (~31,000 med)      20    ~619,000
+  L-BFGS-B nr3        Estate  var. (maxiter=200×3)   8,569–28,044 (~17,200 mean)     20    ~343,000
+  BO_torch n=1000     Estate  1,000                  1,000                           20      20,000
+  v3 LLM n=10000      Estate  ~10,000                8,389–10,130 (~9,860 mean)    20+1    ~197,000
+  BO_torch n=1000     vtk_F   1,000                  1,000                           20      20,000
+  v3 LLM n=6000       vtk_F   ~6,000                 5,720 mean                      20    ~114,000
+  BO_torch n=1000     vtk_N   1,000                  1,000                           20      20,000
+  BO_torch n=2000     vtk_N   2,000                  ~2,000 (est., RUNNING)           5     ~10,000
+  v3 LLM n=6000       vtk_N   ~6,000                 5,970 mean (12/20 done)         20    ~119,000
+  -------             -----   ------------------    ---------------------------    -----  -----------
+  All methods combined (estate complete + vtk_F complete + vtk_N partial)               ~1,462,000
+
+Table 2 — Wall-clock and CPU-hour cost per case (1 core each):
+
+  Method              Body    Wall time/case              CPU-h/case  Cases  Total CPU-h
+  -------             -----   --------------------------  ----------  -----  -----------
+  GA/PSO (120p×250i)  Estate  ~78h (250 iter × 18.8 min)     ~78        20     ~1,560
+  L-BFGS-B nr3        Estate  12–38h (~24h mean)               ~24       20      ~470
+  BO_torch n=1000     Estate  ~7h (seeds 0-3) / ~21h (4-19)  ~7–21      20    ~350–420
+  v3 LLM n=10000      Estate  43–50h (~44h mean)              ~44       20+1     ~924
+  BO_torch n=1000     vtk_F   ~21h                            ~21        20      ~420
+  v3 LLM n=6000       vtk_F   ~21h                            ~21        20      ~420
+  BO_torch n=1000     vtk_N   ~21h                            ~21        20      ~420
+  BO_torch n=2000     vtk_N   ~42h est. (~76 s/eval × 2000)  ~42         5      ~210
+  v3 LLM n=6000       vtk_N   ~20h (12/20 done)              ~20        20      ~400
+  -------             -----   --------------------------  ----------  -----  -----------
+  Total (all bodies, 1 core jobs)                                       ≥126   ~5,174
+
+Notes:
+  - GA/PSO: population converges by iter 150-200 for most attempts; final 50-100 iters
+    add cost without improvement. Rate: 120p × ~9.7 s/eval = ~18.8 min/iter on Estate.
+    PSO is the most expensive method by wall time per case (~78h) but also the most
+    eval-heavy (~30k evals/attempt).
+  - L-BFGS-B nr3: eval count varies by convergence; 20D FD gradient = 2×20=40 extra
+    evals per gradient step. Rate: ~5 s/eval on Estate. Large spread (8.6k-28k evals)
+    reflects different convergence depths across random seeds.
+  - BO_torch Estate: simulation-bound (CFD surrogate dominates over GP fit at n≤1000,
+    GP fit ~1.5 s vs surrogate ~25 s/eval). Seeds 0-3 on a fast node (~7h); seeds 4-19
+    measured as consistent with vtk_F/N timing (~21h) per cross-body doc note.
+  - BO_torch vtk_F/N: ~3× slower per eval than Estate (~75 s vs ~25 s/eval). Confirmed
+    from measured 21h/1000-eval runtimes. Likely heavier VTK mesh preprocessing overhead.
+  - BO_torch 1-core allocation is correct here (contrast with NeuralFoil BO): the
+    surrogate eval (~25-75 s) completely dominates the per-iteration cost; GP fitting
+    at n≤1000 is ~1.5 s and negligible. Giving 128 cores would not reduce wall time —
+    the bottleneck is the sequential VTK mesh call, not a BLAS matrix decomposition.
+    In the NeuralFoil benchmark (eval <1 ms), GP fitting dominated and 128-core
+    exclusive allocation was required to keep runs feasible; that situation does not
+    apply here. See ld_ratio_constrained doc for full BO scaling discussion.
+  - vtk_N BO n=2000 (RUNNING Apr 20): current rate ~76 s/eval (n≈950 after 19.7h),
+    consistent with n=1000 rate. Extrapolates to ~42h for full 2000-eval budget.
+  - v3 LLM: bottleneck is serial LLM API calls (Gemini 2.5 Flash), not surrogate eval.
+    Adding CPU cores does not reduce wall time (sequential LLM→eval→LLM loop).
+
 MULTI-BODY EXPANSION — vtk_F and vtk_N (April 15, 2026)
 ---------------------------------------------------------
 Motivation: the Transolver checkpoint was trained jointly on all three DrivAerStar
@@ -933,11 +1000,13 @@ FILES
     environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-21]_flash_2_5_n10000/ (19/20 complete + att21 RUNNING ~57%, Apr 16)
     environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_F_seed[0-19]_n1000/  (COMPLETE, Apr 16)
     environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_N_seed[0-19]_n1000/  (IN PROGRESS Apr 17; 8/20 done)
-    environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_N_seed{7,8,11,15,16}_n2000/  (RUNNING Apr 17; jobs 2525-2529)
-    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_F_attempt_[1-20]_flash_2_5_n6000/  (19/20 COMPLETE Apr 16; att6 job 2284 still
-                                                                                                                              running at n=5524/6000, best Cd=0.04545,
-                                                                                                                              flat last 500 evals — mediocre basin)
-    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_N_attempt_[1-20]_flash_2_5_n6000/  (11/20 COMPLETE; 9 dirs renamed _FAILED; resubmitted Apr 19 as jobs 2712-2720)
+    environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_N_seed{7,8,11,15,16}_n2000/  (RUNNING Apr 20 04:32 UTC; jobs 2525-2529; ~45-48%: s7=906, s8=967, s11=891, s15=955, s16=892 evals)
+    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_F_attempt_[1-20]_flash_2_5_n6000/  (COMPLETE — all 20 done Apr 20)
+    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_N_attempt_[1-20]_flash_2_5_n6000/  (12/20 COMPLETE; att2 job 2712 completed Apr 20 03:50 UTC ~19.2h;
+                                                                                                                              8 fresh reruns (jobs 2713-2720) at 72-99% of 600 iters as of
+                                                                                                                              Apr 20 04:32 UTC: att4=92%/Cd=0.07213, att5=91%/Cd=0.07115,
+                                                                                                                              att6=86%/Cd=0.07264, att8=96%/Cd=0.07130, att15=93%/Cd=0.07156,
+                                                                                                                              att17=96%/Cd=0.07156, att18=73%/Cd=0.07176, att19=99%/Cd=0.07921)
 
   Slurm scripts (vtk_F and vtk_N):
     sbatch/environments/DrivAer_Star/BO_torch/vtk_F/run_BO_torch_cd_only_vtk_F_seed[0-19]_n1000.slurm

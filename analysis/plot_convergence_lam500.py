@@ -92,17 +92,26 @@ print(f"L-BFGS-B: {len(lbfgsb_curves)} seeds, max evals = {max(len(c) for c in l
 
 # ── Load BO_torch ─────────────────────────────────────────────────────────────
 bo_curves = []
-for s in [5, 6, 7, 8, 9]:  # seeds 5-9 (n6000, still running)
-    f = (f"{BASE_RES}/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_"
-         f"seed{s}_n6000/results.csv")
+BO_SAVED = f"{BASE_RES}/SAVED_DIRS_run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized"
+for s in [0, 1, 2, 3]:  # seeds 0-3 (n5000, cancelled early at ~2600-2850 evals)
+    f = (f"{BO_SAVED}/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_"
+         f"seed{s}_n5000/results.csv")
+    if os.path.exists(f):
+        bo_curves.append(load_curve(f))
+for s in [5, 6, 7, 8, 9]:  # seeds 5-9 (n6000)
+    run_dir = (f"{BO_SAVED}/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_"
+               f"seed{s}_n6000")
+    f_recovered = f"{run_dir}/results_recovered.csv"
+    f = f_recovered if os.path.exists(f_recovered) else f"{run_dir}/results.csv"
     if os.path.exists(f):
         bo_curves.append(load_curve(f))
 print(f"BO_torch: {len(bo_curves)} seeds, max evals = {max(len(c) for c in bo_curves)}")
 
 # ── Load v3 LLM ──────────────────────────────────────────────────────────────
 v3_curves = []
+V3_SAVED = f"{BASE_RES}/SAVED_DIRS_run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized"
 for a in range(1, 25):
-    f = (f"{BASE_RES}/run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized_"
+    f = (f"{V3_SAVED}/run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized_"
          f"attempt_{a}_flash_2_5/results.csv")
     if os.path.exists(f):
         v3_curves.append(load_curve(f))
@@ -127,8 +136,8 @@ ax.fill_between(x_grid, lo, hi, color=C["LBFGSB"], alpha=0.18)
 ax.plot(x_grid, med, color=C["LBFGSB"], lw=2.0,
         label="L-BFGS-B")
 
-# BO_torch — clip to shortest run (all 5 seeds have data up to this point)
-x_max_bo = min(len(c) for c in bo_curves)
+# BO_torch — extend=False so seeds 0-3 (shorter) drop out naturally at their end
+x_max_bo = max(len(c) for c in bo_curves)
 x_grid_bo = x_grid[x_grid <= x_max_bo + 1]
 med_bo, lo_bo, hi_bo = compute_band(bo_curves, x_grid_bo, extend=False)
 ax.fill_between(x_grid_bo, lo_bo, hi_bo, color=C["BO"], alpha=0.18)

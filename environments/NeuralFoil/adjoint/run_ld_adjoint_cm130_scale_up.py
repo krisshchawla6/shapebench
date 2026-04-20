@@ -13,7 +13,7 @@ Candidates chosen for diversity in NF performance / CM profile:
   lbfgsb_s20 : NF=355.4, XF=310.1, CM_XF=-0.132  (highest NF from scale-up)
 
 Results saved to:
-  environments/NeuralFoil/results/ld_adjoint_cm130_scaleup_{label}/
+  environments/NeuralFoil/results/SAVED_DIRS_ld_adjoint_ld_ratio_constrained/ld_adjoint_cm130_scaleup_{label}/
 """
 
 import json
@@ -44,7 +44,8 @@ CANDIDATES = [
 
 def run_one(args):
     label, warm_start_path = args
-    output_dir = os.path.join(RESULTS_DIR, f"ld_adjoint_cm130_scaleup_{label}")
+    output_dir = os.path.join(RESULTS_DIR, "SAVED_DIRS_ld_adjoint_ld_ratio_constrained",
+                              f"ld_adjoint_cm130_scaleup_{label}")
     print(f"[{label}] starting...", flush=True)
 
     with open(warm_start_path) as f:

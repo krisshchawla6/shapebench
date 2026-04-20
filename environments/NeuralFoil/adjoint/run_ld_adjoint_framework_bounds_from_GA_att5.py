@@ -8,7 +8,7 @@ Bounds match environments/NeuralFoil/design_actions.py (same as GA/lbfgsb):
 CM bound: -0.130 (compensates for ~0.003 NeuralFoil->XFOIL CM bias).
 
 Results saved to:
-  environments/NeuralFoil/results/ld_adjoint_cm130_from_GA_att5/
+  environments/NeuralFoil/results/SAVED_DIRS_ld_adjoint_ld_ratio_constrained/ld_adjoint_cm130_from_GA_att5/
 """
 
 import json
@@ -29,6 +29,7 @@ ADJOINT_DIR = os.path.dirname(os.path.abspath(__file__))
 INITIAL_DESIGN = os.path.join(ADJOINT_DIR, "best_GA_att5.json")
 
 OUTPUT_DIR = os.path.join(REPO_DIR, "environments", "NeuralFoil", "results",
+                           "SAVED_DIRS_ld_adjoint_ld_ratio_constrained",
                            "ld_adjoint_cm130_from_GA_att5")
 
 

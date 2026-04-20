@@ -263,20 +263,20 @@ Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
   New output dirs: run_lbfgsb_shapebench_5_seed{0-9}_nr3_normfix/
   New slurm scripts: sbatch/environments/BlendedNet/lbfgsb/run_lbfgsb_shapebench_5_seed{0-9}_nr3_normfix.slurm
 
-  NORMFIX RESULTS (updated April 19, ~27h elapsed):
+  NORMFIX RESULTS (updated April 20 04:32 UTC, ~19.9h elapsed for seeds 0,5,6,9):
   Fix confirmed working: n=1701-2666 evals vs ~30 for broken runs. Best rewards
   notably worse than population-based methods (~-0.005 to -0.008 vs ~-0.0042 to
   -0.0049), consistent with local-optima trapping with only 3 restarts in 10D.
-  s0 (2592): n=2006  best=-0.006283  RUNNING
-  s1 (2593): n=2388  best=-0.006814  RUNNING
-  s2 (2594): n=1701  best=-0.006901  COMPLETE
-  s3 (2595): n=2149  best=-0.005402  RUNNING  ← best
-  s4 (2596): n=2188  best=-0.007410  RUNNING  ← worst
-  s5 (2597): n=2118  best=-0.006500  RUNNING
-  s6 (2598): n=2159  best=-0.006260  RUNNING
-  s7 (2599): n=2171  best=-0.006282  RUNNING
-  s8 (2600): n=2079  best=-0.007217  COMPLETE
-  s9 (2601): n=2666  best=-0.005857  RUNNING
+  s0 (2592): n=1617  best=-0.006283  RUNNING
+  s1 (2593): n=2388  best=-0.006814  COMPLETE (Apr 19)
+  s2 (2594): n=1701  best=-0.006901  COMPLETE (Apr 19)
+  s3 (2595): n=2149  best=-0.005402  COMPLETE (Apr 19)  ← best
+  s4 (2596): n=2188  best=-0.007410  COMPLETE (Apr 19)  ← worst
+  s5 (2597): n=1579  best=-0.007063  RUNNING
+  s6 (2598): n=1624  best=-0.006260  RUNNING
+  s7 (2599): n=2171  best=-0.006282  COMPLETE (Apr 19)
+  s8 (2600): n=2079  best=-0.007217  COMPLETE (Apr 19)
+  s9 (2601): n=1562  best=-0.005889  RUNNING
 
   NR10 FOLLOW-UP (submitted April 19, 2026):
   Due to lbfgsb nr3 being notably worse than other methods (best ~0.0054 vs BO
@@ -286,17 +286,17 @@ Config: sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5.config.json
   Slurm scripts: sbatch/environments/BlendedNet/lbfgsb/run_lbfgsb_shapebench_5_seed{0-9}_nr10.slurm
   Output dirs: environments/BlendedNet/results/run_lbfgsb_shapebench_5_seed{i}_nr10/
   Est. runtime: ~60h (~18h × 10/3 restarts, based on nr3 observed rate of ~78 evals/h).
-  Early progress (9h elapsed):
-  s0 (2656): n=687  best=-0.006288
-  s1 (2657): n=652  best=-0.007289
-  s2 (2658): n=686  best=-0.007185
-  s3 (2659): n=643  best=-0.005402  ← best so far
-  s4 (2660): n=661  best=-0.008578
-  s5 (2661): n=651  best=-0.007083
-  s6 (2662): n=687  best=-0.006668
-  s7 (2663): n=659  best=-0.006282
-  s8 (2664): n=666  best=-0.007662
-  s9 (2665): n=1073 best=-0.005936
+  Progress (April 20 04:32 UTC, ~19.9h elapsed):
+  s0 (2656): n=1631  best=-0.006283  RUNNING
+  s1 (2657): n=1590  best=-0.006814  RUNNING
+  s2 (2658): n=1618  best=-0.006901  RUNNING
+  s3 (2659): n=1596  best=-0.005402  RUNNING  ← best so far
+  s4 (2660): n=1656  best=-0.008037  RUNNING  ← worst
+  s5 (2661): n=1582  best=-0.007063  RUNNING
+  s6 (2662): n=1631  best=-0.006260  RUNNING
+  s7 (2663): n=1632  best=-0.006282  RUNNING
+  s8 (2664): n=1574  best=-0.007217  RUNNING
+  s9 (2665): n=2553  best=-0.005857  RUNNING  (ahead — ~1.5× others)
 
 --- BO_torch ---
   Config: direct args (no config file)
@@ -476,8 +476,8 @@ CROSS-METHOD COMPARISON TABLE (shapebench_5 reward, mean_CD — lower is better)
   v3 ShapeEvolve  10 att, n=2000      2000 each 0.004276    ~0.005001   COMPLETE Apr 18
   BO_torch        10 seeds, n=500     500 each  0.004410    ~0.004490   COMPLETE Apr 18
   CMA-ES          10 seeds, n=500     500 each  0.004523    ~0.004572   COMPLETE Apr 18
-  L-BFGS-B nr10   10 seeds, nr10      ~22k ea   TBD         TBD         RUNNING ~9h (jobs 2656-2665)
-  L-BFGS-B nr3    10 seeds, nr3       ~2k ea    0.005402    ~0.006600   8/10 running; 2 done
+  L-BFGS-B nr10   10 seeds, nr10      ~22k ea   TBD         TBD         RUNNING ~19.9h Apr 20 (jobs 2656-2665); best -0.005402 (s3), no improvement vs nr3
+  L-BFGS-B nr3    10 seeds, nr3       ~2k ea    0.005402    ~0.006600   4/10 running (s0,s5,s6,s9) ~19.9h; 6 complete
   PSO (early)     20p×100i, n=2000    2000      0.007022    —           Exploratory Apr 16
   v3 (early)      n=2000, 1 run       2000      0.006971    —           Exploratory Apr 16
 
@@ -492,6 +492,73 @@ Key observations (April 18):
     confirmed local-optima trapping. 3 restarts insufficient for this 10D landscape.
   - All methods are dramatically better than early exploratory PSO/v3 (~0.007),
     confirming the benchmark methods are finding a distinct lower-drag region.
+
+
+COMPUTATION COST PER CASE (April 2026)
+---------------------------------------
+All jobs: 1 task / 1 core on compute-dy-hpc-128vcpu nodes (not exclusive).
+Surrogate cost (shapebench_5): ~30-50 s/eval after fix 5 (OpenVSP mesh generation on
+first call + 24 Transolver inference calls per design evaluation). Observed ~50 s/eval
+for GA on node-3; ~40 s/eval for BO_torch/CMA-ES (doc estimates, consistent with 5.5h
+wall for 500-eval runs). L-BFGS-B observed rate ~78 evals/h (~46 s/eval including FD
+gradient overhead). v3 LLM: wall time dominated by serial LLM API calls, not surrogate.
+
+Design space: 10 parameters (BlendedWing FFD control points via OpenVSP).
+
+Table 1 — Evaluations per case:
+
+  Method          Config               Budget/case    Evals/case (actual)            Cases  Total evals
+  -----------     ------------------   -----------    ---------------------------    -----  -----------
+  GA (fix5)       20p × 200i           4,000          4,000                            10     40,000
+  v3 LLM n=2000   200 iter × 10/iter   ~2,000         1,974 mean                       10    ~19,740
+  BO_torch n=500  n_calls=500          500            500                              10      5,000
+  CMA-ES n=500    n_calls=500          500            500                              10      5,000
+  L-BFGS-B nr3    maxiter=200 × nr=3   ~2,000         1,603–2,646 (~2,011 mean)        10    ~20,115
+  L-BFGS-B nr10   maxiter=200 × nr=10  ~6,700 est.    RUNNING (~1,650/seed so far)     10   ~67,000†
+  -----------     ------------------   -----------    ---------------------------    -----  -----------
+  Complete methods only                                                                40    ~89,855
+  + nr10 projected total                                                               10   ~67,000†
+
+  † nr10 projected from nr3 mean (2,011 × 10/3 = 6,703 evals/seed); still RUNNING as of Apr 20.
+
+Table 2 — Wall-clock and CPU-hour cost per case (1 core each):
+
+  Method          Wall time/case                    CPU-h/case  Cases  Total CPU-h
+  -----------     --------------------------------  ----------  -----  -----------
+  GA (fix5)       ~56h  (4,000 × ~50 s/eval)           ~56       10      ~560
+  v3 LLM n=2000   ~22h  (1,974 × ~40 s/eval)           ~22       10      ~220
+  BO_torch n=500  ~5.5h (500 × ~40 s/eval)             ~5.5      10       ~55
+  CMA-ES n=500    ~5.5h (500 × ~40 s/eval)             ~5.5      10       ~55
+  L-BFGS-B nr3    ~26h  (2,011 evals / 78 evals/h)     ~26       10      ~260
+  L-BFGS-B nr10   ~86h est. (6,703 / 78 evals/h)†      ~86       10     ~860†
+  -----------     --------------------------------  ----------  -----  -----------
+  Complete methods total                                          40    ~1,150
+  + nr10 projected                                               10      ~860†
+
+Notes:
+  - GA (fix5): PSO converges for most attempts by iter ~150-170 (~3,000-3,400 evals);
+    remaining ~600-1,000 evals add no improvement. GA is the most expensive complete
+    method by wall time and total evals. Rate ~50 s/eval observed on node-3.
+  - BO_torch and CMA-ES: matched budget (500 evals each), same surrogate, same node.
+    Nearly identical cost. BO edges CMA-ES on best CD (0.00441 vs 0.00452).
+  - BO_torch 1-core allocation is correct here: surrogate eval (~40-50 s) dominates
+    the per-iteration cost; GP fitting at n≤500 is negligible (<<1 s). A 128-core
+    exclusive allocation (as used for NeuralFoil BO) would allocate ~127 idle cores
+    for no wall-time gain — the bottleneck is the sequential OpenVSP+Transolver call.
+    In NeuralFoil, eval cost is <1 ms so GP fitting dominates and requires BLAS
+    parallelism to be feasible; that condition does not hold here. See
+    ld_ratio_constrained doc for the full BO scaling regime discussion.
+  - v3 LLM: bottleneck is serial LLM API calls (Gemini 2.5 Flash), not surrogate eval.
+    Each iteration: 1 LLM-proposed design + 9 oracle designs (~10 surrogate evals total).
+    Adding CPU cores would not reduce wall time.
+  - L-BFGS-B nr3: 10D FD gradient = 2×10=20 extra evals per gradient step. Observed
+    rate ~78 evals/h (~46 s/eval), consistent with 40-50 s/eval surrogate range.
+    Results notably worse than population methods despite more evals: local-optima
+    trapping with only 3 restarts in 10D (best -0.005402 vs BO best -0.004410).
+  - L-BFGS-B nr10 (RUNNING): 10× restart budget; est. ~86h/seed, ~860 CPU-h total.
+    At ~19.9h (~23% elapsed), no improvement over nr3 best rewards yet. If nr10 fails
+    to surpass nr3 at completion, this confirms the landscape is not improved by
+    restart count alone.
 
 
 FILES

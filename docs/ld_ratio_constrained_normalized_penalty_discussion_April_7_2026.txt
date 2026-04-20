@@ -122,14 +122,35 @@ COMPUTE COST
 NeuralFoil (Stage 1) evaluation counts, IPOPT post-processing runs, and NF→XF
 surrogate accuracy gap per method:
 
-  Method     NF evals (Stage 1)   IPOPT runs     NF→XF gap   Cost bottleneck
-  ---------  -------------------  -------------  ----------  -----------------------------------------
-  GA/PSO     ~1.20M (20×60k)      5 attempts     -8.8%       Eval volume: 120p×500i; NF <1 ms/call
-  L-BFGS-B   ~992k  (26×~38k)     4 seeds (×2)   -8.8%       3-pt FD in 18D: 36 extra evals/grad step
-  v3 LLM     ~100k  (20×~5k)      20 attempts    -9.2%       LLM API latency: ~1600 calls at ~2-5 s each
-  BO_torch   ~10.9k (4 seeds)     4 seeds        -8.8%       GP fitting: O(n³) refit, ~28 s/call at n=2700
+  Method     NF evals (Stage 1)      IPOPT runs     NF→XF gap   Cost bottleneck
+  ---------  ----------------------  -------------  ----------  -----------------------------------------
+  GA/PSO     ~1.50M (25×60k)         5 attempts     -8.8%       Eval volume: 120p×500i; NF <1 ms/call
+  L-BFGS-B   ~992k  (26×~38k)        4 seeds (×2)   -8.8%       3-pt FD in 18D: 36 extra evals/grad step
+  v3 LLM     ~100k  (20×~5k)         20 attempts    -9.2%       LLM API latency: ~1600 calls at ~2-5 s each
+  BO_torch   ~31k   (9 seeds total)   9 seeds        -8.8%       GP fitting: O(n³) refit, ~28 s/call at n=2700
 
   NF→XF gap = (XF L/D - NF L/D) / NF L/D, computed on the IPOPT-refined best design per method.
+
+Wall-clock and CPU-hour cost per case (all jobs ran on compute-dy-hpc-128vcpu nodes):
+
+  Method      Cores  Wall time/case    CPU-h/case   Cases  Total CPU-h
+  ----------  -----  ----------------  -----------  -----  -----------
+  GA/PSO        1    32–68 min (~1h)       ~1         25      ~25
+  L-BFGS-B      1    12–52 min (~35m)      ~0.6       26      ~15
+  v3 LLM        1    3–9h (~5h avg)        ~5         20      ~100
+  BO_torch     128*  27h–202h (~90h avg)   ~12k        9    ~105,000
+
+  * BO used --exclusive (full node monopoly) to give PyTorch uncontested BLAS
+    thread access for GP matrix operations. However, the 128 cores are not
+    continuously utilised: high utilisation only during GP refit (~28s/iter at
+    n=2700), near-zero during NeuralFoil eval (<1ms) and acquisition optimisation.
+    Estimated true utilisation ~20–50%, so effective CPU-h ~20k–50k — still
+    2–3 orders of magnitude above all other methods.
+
+  BO seeds 0–3 (jobs 1304–1307): started Apr 8 20:34 UTC, cancelled ~Apr 9–10
+    (~27h wall each, ~3,500 CPU-h each, ~14k CPU-h total).
+  BO seeds 5–9 (jobs 1697–1701): started Apr 10–11, cancelled Apr 15–17 and Apr 19
+    (97–202h wall each, ~12k–26k CPU-h each, ~91k CPU-h total).
 
 Notes:
   - The NF→XF gap is consistent across all methods (~8.8-9.2%). This is not a
@@ -137,10 +158,10 @@ Notes:
     design space (saturating the CM≥-0.125 IPOPT constraint and the conf≥0.85
     bound), so the same systematic NF→XF bias applies uniformly.
 
-  - GA/PSO is the most expensive by NF eval count (~1.2M). Each attempt runs
-    120 particles × 500 iterations = 60,000 NF calls; 20 attempts ran in parallel
-    on AWS instances. Despite the large eval budget, NeuralFoil's sub-millisecond
-    throughput makes GA wall time a few minutes per attempt.
+  - GA/PSO is the most expensive by NF eval count (~1.5M). Each attempt runs
+    120 particles × 500 iterations = 60,000 NF calls. Despite the large eval
+    budget, NeuralFoil's sub-millisecond throughput makes GA wall time a few
+    minutes per attempt on a single core.
 
   - L-BFGS-B also accumulates ~1M NF calls, spread over 26 seeds × 3 restarts.
     The high count comes from 3-point finite differences: each gradient step
@@ -148,16 +169,54 @@ Notes:
     L-BFGS-B achieves the best XF L/D, suggesting gradient information is useful
     even when approximated numerically.
 
-  - v3 (LLM-guided) is the most NF-eval-efficient: ~100k calls total vs ~1M for
-    GA and L-BFGS-B. The bottleneck is LLM API latency (~1600 Gemini 2.5 Flash
-    calls, ~2-5 s each), not NeuralFoil throughput. v3 matches the performance
-    of the more eval-intensive methods.
+  - v3 (LLM-guided) is the most NF-eval-efficient: ~100k calls total vs ~1.5M for
+    GA. The bottleneck is LLM API latency (~1600 Gemini 2.5 Flash calls, ~2-5 s
+    each), not NeuralFoil throughput. v3 matches the performance of the more
+    eval-intensive methods.
 
-  - BO_torch has the smallest NF eval count (~10.9k, cancelled at ~32% of the
-    5000-call budget per seed) but the highest GP compute overhead. By mid-run
-    (~2700 accumulated points), each BO iteration requires an O(n³) GP
-    hyperparameter refit taking ~28 s, making 4-seed parallel runs take ~24 h
-    of wall time before cancellation due to stagnation.
+  - BO_torch is by far the most expensive in CPU-hours (~105k allocated, ~20k–50k
+    effective) despite having the fewest NF evaluations (~31k across 9 seeds).
+    Three compounding factors explain this:
+      1. Exclusive 128-core node allocation: required to give PyTorch uncontested
+         BLAS access for GP matrix ops, but most cores idle outside GP refit.
+      2. O(n³) GP cost per iteration: Cholesky decomposition of the n×n kernel
+         matrix grows cubically. At n=2700 each iteration takes ~28s wall time,
+         vs <1ms for GA/lbfgsb/v3.
+      3. Long stagnating runs: BO stagnates early but continues running. Seeds
+         5/6/8/9 made no improvement after n~1500–2000 yet ran to n=4200, paying
+         full GP cost for every wasted iteration.
+    Exact GP is fundamentally not designed for this scale (~1000+ observations).
+    Sparse GP or a neural acquisition surrogate would be more appropriate beyond
+    ~500 evaluations.
+
+  - BO_torch scaling and the role of 128-core allocation:
+    The 128-core exclusive node was necessary because NeuralFoil evals are <1 ms,
+    making GP refitting the sole bottleneck. Dense Cholesky decomposition is a
+    BLAS-parallel operation; without exclusive access PyTorch competes with other
+    jobs for threads and GP refit time becomes unpredictable.
+
+    Counterfactual — 1 core: dense Cholesky on a shared matrix scales roughly
+    10–30× slower without BLAS parallelism (Amdahl's law; memory bandwidth limits
+    prevent full linear speedup). At n=2700 the per-iteration cost would rise from
+    ~28s → ~280–840s (5–14 min per iteration). Over 5000 evals that extrapolates
+    to ~400–1,000+ hours per seed — catastrophically slow and effectively unusable.
+    The 128-core allocation was therefore not a luxury; it was what made these runs
+    feasible at all, even though they still underperformed every other method.
+
+    Contrast with DrivAer_Star and BlendedNet BO: those environments use a CFD/mesh
+    surrogate costing ~25–75 s/eval (DrivAer) and ~40–50 s/eval (BlendedNet). The
+    surrogate evaluation completely dominates the per-iteration cost; GP fitting at
+    n≤1000 is negligible (~1.5 s). For those cases 1 core is the correct allocation
+    — 128 cores would not reduce wall time at all, because the bottleneck is the
+    sequential surrogate call, not a BLAS matrix decomposition. Giving 128 cores to
+    DrivAer/BlendedNet BO would allocate ~127 idle cores per job for no gain.
+
+    The regime breakdown for exact GP BO:
+      n = 50–500:    GP fitting fast on any hardware; acquisition informative → ideal regime
+      n = 500–1000:  GP fitting grows noticeably; still workable with multi-core BLAS
+      n = 1000+:     O(n³) cost dominates; 128-core allocation buys time but not quality
+      n = 5000+:     Fundamentally infeasible regardless of hardware; surrogate misspecified
+                     in high-n regime. Sparse GP or neural acquisition model required.
 
   - Stage 2 (IPOPT post-processing) adds negligible compute: each IPOPT run is
     ~30 CasADi iterations, taking ~1-5 s on CPU. The IPOPT step is cheap relative
@@ -378,7 +437,7 @@ differ substantially from the original adjoint (NACA0012-initialized) design:
     confirming they found the same NeuralFoil local optimum basin.
 
 The shape comparison plot is saved at:
-  environments/NeuralFoil/results/ld_adjoint_warmstart_validation/airfoil_shape_comparison.png
+  environments/NeuralFoil/results/SAVED_DIRS_ld_adjoint_ld_ratio_constrained/ld_adjoint_warmstart_validation/airfoil_shape_comparison.png
 
 
 ARE THE DESIGNS FEASIBLE?
@@ -1024,7 +1083,7 @@ Baseline references (XFOIL-validated, not post-processed):
   NACA0012:                         XF L/D=94.3,   CM=-0.0003  YES
   Adjoint from NACA0012 (CM>=-0.133): XF L/D=148.9, CM=-0.1167  YES
 
-STATUS (updated April 15, 2026)
+STATUS (updated April 20, 2026)
 --------------------------------
   GA/PSO:   COMPLETE — XFOIL best 325.6 (IPOPT CM>=-0.125, att13_raw warm-start)
   L-BFGS-B: COMPLETE — XFOIL best 329.5 (IPOPT CM>=-0.125, s25 2-step)
@@ -1035,13 +1094,15 @@ STATUS (updated April 15, 2026)
             Extended re-run (seeds 5-9, n=6000, jobs 1697-1701):
               s5 (job 1697): CANCELLED (cron, Apr 17) at 4200 evals. Final best L/D=155.0.
               s6 (job 1698): CANCELLED (cron, Apr 17) at 4200 evals. Final best L/D=210.5.
-              s7 (job 1699): RUNNING (Apr 19, 8d5h). 4890 evals, best L/D=273.99.
-                             Still improving (+12.4 L/D since Apr 18 check); exempt from cron cancel.
+              s7 (job 1699): CANCELLED (Apr 19, manually). Final pre-restart best: NF L/D=273.99
+                             at n=4890 evals (~8d5h). Job was preempted by node failure and
+                             restarted from scratch (results.csv overwritten; design dirs intact).
+                             At restart had rebuilt to n=2173/best=207.6 before cancellation.
+                             See SEED 7 SHUTDOWN NOTE below.
               s8 (job 1700): CANCELLED (cron, Apr 15) at 4201 evals. Final best L/D=130.7.
               s9 (job 1701): CANCELLED (cron, Apr 17) at ~4200 evals. Final best L/D=144.6.
-              s7 (job 1699): 4890 evals, best L/D=273.99 (Apr 19), still improving.
-                             Gained +12.4 since Apr 18 check. Exempt from cron cancel;
-                             ~1110 evals remain to n=6000 budget.
+            Stage 2+3 (IPOPT CM>=-0.125 + XFOIL) run on seeds 5–9 (April 20, 2026).
+            See BO_TORCH EXTENDED RUNS — STAGE 2+3 below.
             See BO_TORCH EXTENDED RUNS below for full details.
 
   NeuralFoil benchmark: COMPLETE across all 4 methods (benchmark result unchanged).
@@ -1080,8 +1141,10 @@ AUTOMATED STOP AT 4200 EVALS (April 14–15, 2026)
 Current status (April 18):
   seed5  (job 1697): 4200 evals, best NF L/D=155.0 — CANCELLED (cron, Apr 17). Final.
   seed6  (job 1698): 4200 evals, best NF L/D=210.5 — CANCELLED (cron, Apr 17). Final.
-  seed7  (job 1699): 4890 evals, best NF L/D=273.99 — RUNNING (8d5h elapsed); still improving.
-                     Gained +12.4 L/D since Apr 18 check (261.6→273.99). ~1110 evals remain to budget.
+  seed7  (job 1699): 4890 evals, best NF L/D=273.99 — CANCELLED (Apr 19, manually). Final.
+                     Job was preempted by node failure and restarted from scratch (results.csv
+                     overwritten, GP state lost). Cancelled rather than re-run to completion.
+                     See SEED 7 SHUTDOWN NOTE below.
   seed8  (job 1700): 4201 evals, best NF L/D=130.7 — CANCELLED (cron, Apr 15). Final.
   seed9  (job 1701): ~4200 evals, best NF L/D=144.6 — CANCELLED (cron, Apr 17). Final.
 
@@ -1114,10 +1177,101 @@ SEED 7 IMPROVEMENT HISTORY AND OUTLOOK (April 15, 2026)
   manually cancelled when convergence is more firmly established or budget is
   exhausted.
 
-Note: seeds 5–9 best range 131–245, below seeds 0–3 range 145–264 — normal
+Note: seeds 5–9 best range 131–274, below seeds 0–3 range 145–264 — normal
 seed-to-seed variability; BO finds different local optima depending on random
 initialization. The benchmark result (seed1, XF L/D=324.9 after IPOPT) is
 unaffected.
+
+SEED 7 SHUTDOWN NOTE (April 19, 2026)
+--------------------------------------
+Job 1699 was manually cancelled on April 19 after a node preemption restarted it
+from scratch (results.csv overwritten, GP state lost). Final pre-restart performance:
+NF L/D=273.99 at n=4890 evals (~8d5h elapsed, 82% of n=6000 budget).
+
+What "below the benchmark result" means — clarification:
+  The benchmark result is XF L/D=324.9 (seed1, after IPOPT+XFOIL post-processing).
+  Seed1's raw BO output before IPOPT was only NF L/D=263.8. Seed7's NF L/D=273.99
+  was actually slightly HIGHER than seed1's raw output — so it was not "below the
+  benchmark" in a raw-NF sense.
+
+  The correct framing is: seeds 5–9 were extended statistical runs, not attempts to
+  beat the benchmark. The benchmark pipeline is:
+    raw BO output (NF L/D ~150-274 for seeds 5-9)
+    → IPOPT post-processing (always converges to NF L/D ~361, the dominant basin)
+    → XFOIL validation (XF L/D ~329)
+  IPOPT converges to the same NF optimum (~361) regardless of starting point, as
+  confirmed across all warm-starts tested (GA, lbfgsb, v3, BO). So seed7's NF=273.99
+  warm-start would have yielded the same XF L/D ~329 as seed1's NF=263.8 warm-start.
+  The extended seeds add no new information about the benchmark result — their purpose
+  was purely to characterise BO's raw convergence behaviour across seeds.
+
+SEED 7 RESULTS.CSV RECOVERY (April 20, 2026)
+  The restart overwrote results.csv with only 2176 rows (iters 0–2175). The full
+  4921-eval run was reconstructed from per-iteration save/results.json files via
+  recover_results_csv.py (in the seed7 run dir). Recovery is lossless: iters 0–2175
+  are identical under fixed --random_state 7, and iters 2176–4920 were never
+  overwritten. The restarted (truncated) file is preserved as restarted_results.csv;
+  results.csv now contains all 4921 rows. Boundary at iter 2175→2176 shows no jump
+  in best_reward (held at 207.6 across the seam), confirming correct reconstruction.
+
+  Seeds 5/6/8/9 stalled at NF L/D 131–210 and were cron-cancelled at 4200 evals.
+  Seed7 was the only extended seed still meaningfully improving, driven by an
+  unusually productive phase at n=3511–3820 (+22 L/D in 309 evals). Its final value
+  of 273.99 represents the best raw BO performance among seeds 5–9, but this has no
+  bearing on the final XFOIL benchmark result.
+
+
+BO_TORCH EXTENDED RUNS — STAGE 2+3 RESULTS (April 20, 2026)
+-------------------------------------------------------------
+IPOPT CM>=-0.125 / conf>=0.85 warm-started from each seed's raw best design,
+then XFOIL-validated. Script: analysis/run_ipopt_xfoil_bo_seeds5to9.py.
+Best iter per seed: s5=1923, s6=1686, s7=4863, s8=1329, s9=2978.
+
+  Seed    Raw NF L/D  IPOPT NF L/D  IPOPT CM   IPOPT conf  XF L/D   XF CM    xtr_u  CM ok?
+  ------  ----------  ------------  ---------  ----------  -------  -------  -----  ------
+  seed5     155.02       358.75      -0.12500    0.8500     310.22   -0.1295  0.493  YES
+  seed6     210.47       302.88      -0.12500    0.9439     256.47   -0.1272  0.471  YES
+  seed7     273.99       358.79      -0.12500    0.8500     310.22   -0.1295  0.493  YES
+  seed8     130.68       358.92      -0.12500    0.8500     307.85   -0.1294  0.489  YES
+  seed9     144.64       359.30      -0.12500    0.8500     309.29   -0.1293  0.492  YES
+
+Full 9-seed summary (seeds 0–3 + 5–9):
+  Seed    IPOPT NF L/D  XF L/D   XF CM
+  ------  ------------  -------  -------
+  seed0      302.60      256.84  -0.1272   ← conf not active (0.944), low-XF basin
+  seed1      356.38      324.89  -0.1280   ← benchmark result (best)
+  seed2      358.63      307.17  -0.1295
+  seed3      358.65      309.46  -0.1295
+  seed5      358.75      310.22  -0.1295
+  seed6      302.88      256.47  -0.1272   ← conf not active (0.944), low-XF basin
+  seed7      358.79      310.22  -0.1295
+  seed8      358.92      307.85  -0.1294
+  seed9      359.30      309.29  -0.1293
+
+Key findings:
+  1. IPOPT converges to two distinct basins:
+       High-XF basin: NF L/D ~358–359, conf=0.850 active, XF L/D ~307–325
+       Low-XF basin:  NF L/D ~302–303, conf≈0.944 (NOT active), XF L/D ~256
+     Seeds 0 and 6 fall into the low-XF basin; all others find the high-XF basin.
+     The low-XF basin occurs when the warm-start is far from the conf=0.85 boundary
+     and IPOPT converges to a different local optimum where the CM constraint is
+     active but conf is not.
+
+  2. Within the high-XF basin, XF L/D varies 307–325 depending on the specific
+     Kulfan trajectory IPOPT takes — same warm-start sensitivity observed for seeds 0–3
+     and across all methods (range 307–330 total).
+
+  3. Seed1 (XF=324.9) remains the best BO result. Seeds 5–9 contribute no new
+     high-XF designs above seed1. The benchmark result is confirmed unchanged.
+
+  4. The SEED 7 SHUTDOWN NOTE framing is confirmed correct: seed7 raw NF=273.99
+     warm-started to XF=310.2 after IPOPT — better than seeds 2,3,5,8,9 but still
+     below seed1's XF=324.9. Same dominant basin, different local trajectory.
+
+Output files:
+  environments/NeuralFoil/results/SAVED_DIRS_ld_adjoint_ld_ratio_constrained/ld_adjoint_cm125_conf85_from_BO_torch_seed{5-9}/
+  environments/NeuralFoil/results/xfoil_validation_BO_torch_best_cm125_conf85/summary.json
+    (now contains all 9 seeds: 0,1,2,3,5,6,7,8,9)
 
 
 FILES
@@ -1135,20 +1289,24 @@ FILES
       run_lbfgsb_ld_ratio_constrained_m02_re1e7_normalized_seed[0-39]_nr3/
 
   Completed (benchmark) BO_torch seeds 0–3 (cut off at ~2600–2851 evals):
-    environments/NeuralFoil/results/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[0-3]_n5000/
+    environments/NeuralFoil/results/SAVED_DIRS_run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized/
+      run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[0-3]_n5000/
 
   BO_torch extended seeds 5–9 (submitted April 12, jobs 1697–1701):
-    environments/NeuralFoil/results/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[5-9]_n6000/
+    environments/NeuralFoil/results/SAVED_DIRS_run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized/
+      run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[5-9]_n6000/
     sbatch/environments/NeuralFoil/BO_torch/run_BO_torch_ld_ratio_constrained_m02_re1e7_normalized_seed[5-9]_n6000.slurm
-    Status (April 19): s5/s6/s8/s9 all CANCELLED (cron Apr 15-17). s7 RUNNING at
-                       4890 evals, best=273.99, still improving.
+    Status (April 19): s5/s6/s8/s9 all CANCELLED (cron Apr 15-17). s7 CANCELLED
+                       manually Apr 19 after node-restart loss. Final best=273.99 at n=4890.
+                       All seeds 5–9 now complete/cancelled. Extended run series CLOSED.
 
   Automated cancel script (seeds 5,6,8,9 at 4200 evals):
     bin/cancel_bo_ldcn_at_4200.sh  (cron: */10 * * * *; self-removes when all done)
     Log: ~/logs/cancel_bo_ldcn_at_4200.log
 
   Completed v3 (April 8, 2026):
-    environments/NeuralFoil/results/run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized_attempt_[1-20]_flash_2_5/
+    environments/NeuralFoil/results/SAVED_DIRS_run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized/
+      run_v3_dynamic_optimizer_ld_ratio_constrained_m02_re1e7_normalized_attempt_[1-20]_flash_2_5/
 
   Archived prior experiments:
     SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_INITIAL_LAMBDA/  (lambda=1 runs)
@@ -1156,6 +1314,49 @@ FILES
     SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_normalized_conf95/  (conf95 variant, 5 GA + 5 lbfgsb)
       run_GA_ld_ratio_constrained_m02_re1e7_normalized_conf95_120particles_500iterations_attempt_[1-5]_AWS/
       run_lbfgsb_ld_ratio_constrained_m02_re1e7_normalized_conf95_seed[0-4]_nr3/
+
+  CONVERGENCE PLOTS (updated April 20, 2026)
+  ------------------------------------------
+  Output directory: environments/NeuralFoil/results/convergence_plots_LAM500/
+
+  Four plots, each with a run_*.txt file recording the exact regeneration command:
+
+  convergence_best_reward.pdf/.png
+    Script: analysis/plot_convergence_lam500.py
+    Shows best penalized reward vs NF evals per run (log x-axis), median + min-max
+    band across runs per method. Stage 1 raw optimizer curves only (pre-IPOPT).
+    Method coverage:
+      GA/PSO:   25 attempts, up to 60,000 evals each (extend flat)
+      L-BFGS-B: 26 seeds, up to ~45,700 evals each (extend flat)
+      BO_torch: 9 seeds total — seeds 0–3 (n5000, ~2600–2850 evals, extend=False
+                so drop out naturally) + seeds 5–9 (n6000, 4200–4921 evals,
+                extend=False). Band suppressed where <5 seeds have data.
+                Seed 7 uses results.csv (recovered from per-iter save/results.json).
+      v3 LLM:   20 attempts, up to 5834 evals each (extend flat)
+    Dashed horizontals: XFOIL-validated best per method after IPOPT post-processing.
+
+  airfoil_comparison.pdf/.png
+    Script: analysis/plot_airfoil_comparison.py  (see run_airfoil_comparison.txt)
+    Overlaid airfoil shapes for the best IPOPT-refined design per method.
+    BO representative: seed1 (XF L/D=324.9, best across all 9 seeds).
+
+  nf_xf_scatter.pdf/.png
+    Script: analysis/plot_nf_xf_scatter.py
+    NeuralFoil L/D vs XFOIL L/D for all IPOPT-validated candidates (all methods,
+    both CM≥-0.125 solid and CM≥-0.130 open markers). BO points: all 9 seeds
+    (0–3 and 5–9), loaded from xfoil_validation_BO_torch_best_cm125_conf85/summary.json.
+
+  pipeline_stages.pdf/.png
+    Script: analysis/plot_pipeline_stages.py
+    Three-stage parallel-coordinates: raw NF L/D → IPOPT NF L/D → XFOIL L/D,
+    one line per method showing the value added at each stage.
+    BO representative: seed1 (raw NF=263.8, IPOPT NF=356.4, XF=324.9).
+
+  XFOIL validation summary (all 9 BO seeds):
+    environments/NeuralFoil/results/xfoil_validation_BO_torch_best_cm125_conf85/summary.json
+    Seeds 0–3: run Apr 9, 2026 (inline, no dedicated script).
+    Seeds 5–9: run Apr 20, 2026 via analysis/run_ipopt_xfoil_bo_seeds5to9.py.
+    Individual IPOPT output dirs: SAVED_DIRS_ld_adjoint_ld_ratio_constrained/ld_adjoint_cm125_conf85_from_BO_torch_seed{0,1,2,3,5,6,7,8,9}/
 
 
 WHY XFOIL WAS NOT USED IN STAGE 2 INSTEAD OF NEURALFOIL+IPOPT

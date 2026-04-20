@@ -6,7 +6,7 @@ Purpose: compensate for the ~0.003 NeuralFoil→XFOIL CM bias so the result
 satisfies CM≥−0.133 when validated with XFOIL.
 
 Results saved to:
-  environments/NeuralFoil/results/ld_adjoint_cm130_from_GA_att5/
+  environments/NeuralFoil/results/SAVED_DIRS_ld_adjoint_ld_ratio_constrained/ld_adjoint_cm130_from_GA_att5/
 """
 
 import json
@@ -27,6 +27,7 @@ ADJOINT_DIR = os.path.dirname(os.path.abspath(__file__))
 INITIAL_DESIGN = os.path.join(ADJOINT_DIR, "best_GA_att5.json")
 
 OUTPUT_DIR = os.path.join(REPO_DIR, "environments", "NeuralFoil", "results",
+                           "SAVED_DIRS_ld_adjoint_ld_ratio_constrained",
                            "ld_adjoint_cm130_from_GA_att5")
 
 
