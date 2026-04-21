@@ -92,10 +92,10 @@ BENCHMARK COVERAGE (updated April 16, 2026)
                                                                  att16 anomaly: CD=0.17952 (near-baseline).
                                                                  att4: only 1315 evals (LLM batch fallback).
   --- Notchback (vtk_N) body ---
-  BO_torch n=2000       2525-2529      2000 calls × 5            RUNNING (Apr 20 04:32 UTC; seeds s7,s8,s11,s15,s16
-  (extended, s7/8/11/15/16)                                      ~45-48% done; s7=n906/CD=0.05049,
-                                                                 s8=n967/CD=0.04956, s11=n891/CD=0.05001,
-                                                                 s15=n955/CD=0.04968, s16=n892/CD=0.05026)
+  BO_torch n=2000       2525-2529      2000 calls × 5            RUNNING (Apr 20 15:42 UTC; seeds s7,s8,s11,s15,s16
+  (extended, s7/8/11/15/16)                                      ~50-54% done; s7=n1033/Cd=0.05032,
+                                                                 s8=n1133/Cd=0.04960, s11=n1045/Cd=0.04990,
+                                                                 s15=n1099/Cd=0.04970, s16=n1028/Cd=0.04970)
   BO_torch (s0-19)      2259-2278      1000 calls × 20           COMPLETE (Apr 18; all 20 seeds at n=999).
                                                                  best=s8=0.04956, median=0.05166,
                                                                  range 0.04956–0.05623 (~13% spread).
@@ -109,12 +109,11 @@ BENCHMARK COVERAGE (updated April 16, 2026)
                                                                  compute-dy-hpc-128vcpu-2. Failed result
                                                                  dirs renamed _FAILED. Resubmitted as jobs
                                                                  2712-2720 (Apr 19).
-                                                                 12/20 complete (att1,2,3,7,9-14,16,20):
-                                                                 att2 job 2712 done Apr 20 03:50 UTC.
-                                                                 8 reruns RUNNING (Apr 20 04:32 UTC) at
-                                                                 72-99%: att5/Cd=0.07115 best of in-progress.
-                                                                 11 completed: best=att11=att14=0.06808,
-                                                                 median=0.07145, range 0.06808-0.07506.
+                                                                 COMPLETE — all 20 done Apr 20 (last reruns
+                                                                 finished ~11:04 UTC). Final results:
+                                                                 best=att11=att14=0.06808, median=0.07156,
+                                                                 range 0.06808-0.07921 (att19 worst).
+                                                                 See v3 vtk_N results table below.
 
 Note on GA/PSO and L-BFGS-B job history: both methods were submitted in multiple
 batches due to disk-space failures and re-runs. A batch of L-BFGS-B jobs
@@ -528,12 +527,13 @@ FINAL BENCHMARK TABLE (updated April 16, 2026)
   BO still improving at end of budget for top seeds — the n=2000 extended runs
   (jobs 2525-2529) are probing the ceiling for the 5 best seeds.
 
-  v3 vtk_N results (all 20 attempts, sorted by best Cd):
-    att8=0.06800  att11=0.06808  att14=0.06808  att19=0.06841  att7=0.07128
-    att10=0.07146 att18=0.07157  att4=0.07150   att13=0.07138  att1=0.07189
-    att5=0.07261  att9=0.07290   att16=0.07282  att17=0.07329  att12=0.07337
-    att2=0.07412  att15=0.07516  att3=0.07506   att20=0.07148  att6=0.08010
-    best=0.06800 (att8), median=0.07173, mean=0.07213.
+  v3 vtk_N results (all 20 attempts COMPLETE Apr 20, sorted by best Cd):
+    att11=0.06808 att14=0.06808  att7=0.07127   att5=0.07113   att18=0.07113
+    att8=0.07130  att2=0.07138   att13=0.07138  att10=0.07145  att20=0.07145
+    att15=0.07156 att17=0.07156  att16=0.07195  att1=0.07189   att4=0.07204
+    att6=0.07264  att9=0.07286   att12=0.07336  att3=0.07506   att19=0.07921
+    best=0.06808 (att11=att14), median=0.07156, mean=0.07213.
+    Note: att19 is the outlier at 0.07921 (worst); att5/att18 tied best of reruns at 0.07113.
     ~62% drag reduction from baseline Cd=0.181. Much worse than BO_torch on N
     (0.068 vs 0.050). Decelerating but not fully flat: 0.00044 improvement in
     evals 3000–6000 vs 0.00147 in 0–3000.
@@ -592,8 +592,8 @@ Table 1 — Evaluations per case (design-space: 20 FFD parameters):
   BO_torch n=1000     vtk_F   1,000                  1,000                           20      20,000
   v3 LLM n=6000       vtk_F   ~6,000                 5,720 mean                      20    ~114,000
   BO_torch n=1000     vtk_N   1,000                  1,000                           20      20,000
-  BO_torch n=2000     vtk_N   2,000                  ~2,000 (est., RUNNING)           5     ~10,000
-  v3 LLM n=6000       vtk_N   ~6,000                 5,970 mean (12/20 done)         20    ~119,000
+  BO_torch n=2000     vtk_N   2,000                  ~1,060 mean (RUNNING ~52%)       5     ~10,000
+  v3 LLM n=6000       vtk_N   ~6,000                 5,981 mean (20/20 COMPLETE)     20    ~119,620
   -------             -----   ------------------    ---------------------------    -----  -----------
   All methods combined (estate complete + vtk_F complete + vtk_N partial)               ~1,462,000
 
@@ -609,7 +609,7 @@ Table 2 — Wall-clock and CPU-hour cost per case (1 core each):
   v3 LLM n=6000       vtk_F   ~21h                            ~21        20      ~420
   BO_torch n=1000     vtk_N   ~21h                            ~21        20      ~420
   BO_torch n=2000     vtk_N   ~42h est. (~76 s/eval × 2000)  ~42         5      ~210
-  v3 LLM n=6000       vtk_N   ~20h (12/20 done)              ~20        20      ~400
+  v3 LLM n=6000       vtk_N   ~20h (20/20 COMPLETE)           ~20        20      ~400
   -------             -----   --------------------------  ----------  -----  -----------
   Total (all bodies, 1 core jobs)                                       ≥126   ~5,174
 
@@ -633,7 +633,7 @@ Notes:
     In the NeuralFoil benchmark (eval <1 ms), GP fitting dominated and 128-core
     exclusive allocation was required to keep runs feasible; that situation does not
     apply here. See ld_ratio_constrained doc for full BO scaling discussion.
-  - vtk_N BO n=2000 (RUNNING Apr 20): current rate ~76 s/eval (n≈950 after 19.7h),
+  - vtk_N BO n=2000 (RUNNING Apr 20): current rate ~76 s/eval (n≈1060 after ~30h),
     consistent with n=1000 rate. Extrapolates to ~42h for full 2000-eval budget.
   - v3 LLM: bottleneck is serial LLM API calls (Gemini 2.5 Flash), not surrogate eval.
     Adding CPU cores does not reduce wall time (sequential LLM→eval→LLM loop).
@@ -1000,13 +1000,9 @@ FILES
     environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_[1-21]_flash_2_5_n10000/ (19/20 complete + att21 RUNNING ~57%, Apr 16)
     environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_F_seed[0-19]_n1000/  (COMPLETE, Apr 16)
     environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_N_seed[0-19]_n1000/  (IN PROGRESS Apr 17; 8/20 done)
-    environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_N_seed{7,8,11,15,16}_n2000/  (RUNNING Apr 20 04:32 UTC; jobs 2525-2529; ~45-48%: s7=906, s8=967, s11=891, s15=955, s16=892 evals)
+    environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_N_seed{7,8,11,15,16}_n2000/  (PREEMPTED + RECOVERED Apr 21; see status update below)
     environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_F_attempt_[1-20]_flash_2_5_n6000/  (COMPLETE — all 20 done Apr 20)
-    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_N_attempt_[1-20]_flash_2_5_n6000/  (12/20 COMPLETE; att2 job 2712 completed Apr 20 03:50 UTC ~19.2h;
-                                                                                                                              8 fresh reruns (jobs 2713-2720) at 72-99% of 600 iters as of
-                                                                                                                              Apr 20 04:32 UTC: att4=92%/Cd=0.07213, att5=91%/Cd=0.07115,
-                                                                                                                              att6=86%/Cd=0.07264, att8=96%/Cd=0.07130, att15=93%/Cd=0.07156,
-                                                                                                                              att17=96%/Cd=0.07156, att18=73%/Cd=0.07176, att19=99%/Cd=0.07921)
+    environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_N_attempt_[1-20]_flash_2_5_n6000/  (COMPLETE — all 20 done Apr 20 ~11:04 UTC; best=att11=att14=0.06808, median=0.07156)
 
   Slurm scripts (vtk_F and vtk_N):
     sbatch/environments/DrivAer_Star/BO_torch/vtk_F/run_BO_torch_cd_only_vtk_F_seed[0-19]_n1000.slurm
@@ -1190,3 +1186,69 @@ DrivAerNet++ is primarily a dataset and surrogate benchmarking resource; it does
 not include an optimization loop. DrivAerStar provides the full pipeline from
 parametrized geometry to surrogate inference to reward, making it directly usable
 as an optimization environment.
+
+
+================================================================================
+STATUS UPDATE (April 21, 2026)
+================================================================================
+
+BO vtk_N n2000 — PREEMPTION AND RECOVERY
+-----------------------------------------
+Jobs 2525–2529 (BO_torch vtk_N seeds 7/8/11/15/16, n=2000) were preempted by
+the cluster scheduler and restarted from scratch, overwriting results.csv.
+Detected by comparing iter_* directory count (~1295–1402) against CSV row count
+(112–126 rows from the restarted job).
+
+Action taken:
+  - Cancelled jobs 2525–2529.
+  - Ran analysis/reconstruct_results_csv.py, which reads each iter_XXXX/save/
+    results.json and reconstructs results.csv with correct reward, best_reward,
+    drag, Cd, and lift columns.  Backs up corrupt CSV to results.csv.bak.
+
+Recovery completeness: 1294–1401 rows recovered per seed, 0 missing.  Every
+iter_XXXX had a save/results.json — the BO framework saves results for every
+evaluation, so recovery was complete.
+
+Recovered final results (vtk_N, n≈1300–1400 evals at preemption):
+  seed7:  1328 evals  best Cd = 0.05029
+  seed8:  1401 evals  best Cd = 0.04956
+  seed11: 1294 evals  best Cd = 0.04985
+  seed15: 1336 evals  best Cd = 0.04968
+  seed16: 1316 evals  best Cd = 0.04964
+  Median best Cd across 5 seeds: ~0.04968
+
+Note: these runs were preempted at ~65–70% of the n=2000 budget.  The jobs
+have not been re-submitted; the recovered data represents the partial n≈1300
+runs.  For a full n=2000 comparison, re-submission would be needed.
+
+BO vtk_N n2000 — CONVERGENCE ASSESSMENT (April 21, 2026)
+----------------------------------------------------------
+Analysis of the recovered results.csv files (quartile Cd values, running best)
+shows that all 5 seeds were essentially converged by the time of preemption.
+
+  Cd at quartiles of actual run (25% ≈ 325 evals, 50% ≈ 650, 75% ≈ 975, end ≈ 1300):
+    seed7:   0.05644 → 0.05326 → 0.05034 → 0.05029
+    seed8:   0.04956 → 0.04956 → 0.04956 → 0.04956  (flat throughout)
+    seed11:  (flat from 75% onward)   → 0.04985 → 0.04985
+    seed15:  (flat from 50% onward)   → 0.04968 → 0.04968
+    seed16:  0.05777 → 0.05653 → 0.04971 → 0.04964
+
+  Summary:
+    - Seeds 8, 11, 15: completely flat in the final quartile (evals 975–1300).
+    - Seeds 7 and 16: last meaningful improvement in the 650–975 eval window;
+      improvement in the 975–1300 window was <0.0001 Cd for both.
+    - All 5 seeds were effectively stagnant for the final ~325 evals of the run.
+
+  Conclusion: the remaining ~700 evals of the n=2000 budget would very likely
+  yield no meaningful improvement.  Re-submission is not warranted; the recovered
+  n≈1300 data is sufficient for benchmarking purposes.
+
+PLOTS REGENERATED (April 21, 2026)
+------------------------------------
+  environments/DrivAer_Star/results/analysis_plots_cd_only/
+    convergence_cd_vs_evals_vtk_E.{png,pdf}  — regenerated
+    3d_panel_best_designs_vtk_E.{png,pdf}     — regenerated
+
+FILES ADDED
+  analysis/reconstruct_results_csv.py  (new — reconstructs results.csv from
+    per-evaluation save/results.json; supports both lbfgsb and BO/PSO layouts)

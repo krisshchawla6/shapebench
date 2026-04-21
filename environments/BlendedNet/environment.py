@@ -274,6 +274,12 @@ class BlendedNetEnvironment(BaseEnvironment):
         path = os.path.join(output_dir, f'{name}.json')
         return save_design_json(path, params)
 
+    def read_design(self, design_path: str):
+        from .design_actions import CONTINUOUS_KEYS
+        with open(design_path) as f:
+            params = json.load(f)
+        return np.array([float(params[k]) for k in CONTINUOUS_KEYS])
+
     def set_llm_backend(self, backend, image_analyzer=None):
         from . import agent
         agent.set_llm_backend(backend, image_analyzer)

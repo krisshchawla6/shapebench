@@ -159,6 +159,23 @@ class BaseEnvironment(ABC):
             f"{self.__class__.__name__} does not implement write_design(). "
             "Override to enable gradient-free optimizers such as PSO.")
 
+    def read_design(self, design_path: str):
+        """Read a design file and return the parameter vector x as a numpy array.
+
+        The returned vector must match the order of get_param_bounds() exactly,
+        so that (x - lb) / (ub - lb) recovers the normalised representation used
+        during optimisation.  Required for --resume-from in CMA-ES.
+
+        Args:
+            design_path: Path to the design file written by write_design().
+
+        Returns:
+            x: 1-D np.ndarray of raw (un-normalised) parameter values.
+        """
+        raise NotImplementedError(
+            f"{self.__class__.__name__} does not implement read_design(). "
+            "Override to enable --resume-from in CMA-ES.")
+
     @staticmethod
     def add_args(parser):
         """Add environment-specific CLI arguments (optional override)."""

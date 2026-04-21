@@ -828,3 +828,105 @@ practice in constrained BO. It does not change the BO algorithm itself.
 In a paper, one sentence should clarify this: L-BFGS-B uses the uncapped
 penalized objective directly, while BO_torch uses the uncapped value for GP
 training but the capped reward for reporting and comparison purposes.
+
+
+WHY BO IS FAR MORE EXPENSIVE (COMPUTE TIME) ON NEURALFOIL THAN DRIVAER/BLENDEDNET
+==================================================================================
+(April 20, 2026)
+
+CONVERGENCE ITERATION COUNT — VERIFIED TRAJECTORIES
+----------------------------------------------------
+Checking best_reward at key milestones across all three environments:
+
+  NeuralFoil seed0 (n=5000):
+    iter 30 (init): -12.53  iter 100: -0.139  iter 500: -0.137
+    iter 1500: -0.137       iter 2500: -0.113  iter 3000: -0.096
+    iter 4000: -0.094       (still slowly improving throughout)
+
+  NeuralFoil seed2 cap2k (n=5000):
+    iter 30: -9.69  iter 100: -0.127  iter 1000-2500: -0.121 (plateau)
+    iter 3000: -0.108  iter 4000: -0.103  (resumes after plateau)
+
+  DrivAer vtk_N seed8 (n=1000):
+    iter 50: -0.090  iter 100: -0.069  iter 200: -0.050
+    iter 300: -0.050  iter 999: -0.050  (flat from iter ~200)
+
+  DrivAer vtk_N seed1 / best (n=1000):
+    iter 50: -0.083  iter 200: -0.057  iter 500: -0.053
+    iter 999: -0.050  (still slowly improving at budget end)
+
+  BlendedNet seed0 (n=500):
+    iter 30: -0.005474  iter 50: -0.004748  iter 100: -0.004482
+    iter 100-499: flat  (converged by iter ~100)
+
+Summary of convergence iteration counts:
+  BlendedNet:  ~100 / 500  (20% of budget)
+  DrivAer:     ~200-300 / 1000 for most seeds; seed1 improving throughout
+  NeuralFoil:  early fake plateau ~100-1500, then slow improvement to ~3000-4000
+
+The iteration counts until apparent convergence are broadly in the same order
+of magnitude (hundreds to low thousands), though BlendedNet and many DrivAer
+seeds converge somewhat faster as a fraction of their respective budgets.
+The NeuralFoil two-phase pattern (early feasibility-finding plateau, then
+resumed improvement) makes its "convergence" harder to define cleanly.
+
+WHY BO IS SO MUCH MORE EXPENSIVE ON NEURALFOIL — THREE REASONS
+---------------------------------------------------------------
+
+1. EVAL TIME IS NEAR ZERO → GP FITTING DOMINATES
+   NeuralFoil evals a neural network surrogate: each call takes <1 ms.
+   With 5000 iterations, the GP is refit from scratch on a growing dataset
+   at every iteration. Each refit is an O(n³) Cholesky solve. By n=3000–4000
+   the refit cost completely dominates the per-iteration wall time.
+
+   DrivAer: each eval takes ~76 s (VTK mesh deformation + surrogate call).
+   GP fitting at n≤1000 costs ~1.5 s and is negligible (<2%) relative to
+   the simulation. BlendedNet: OpenVSP mesh generation similarly dominates.
+
+   The practical inversion: for NeuralFoil, 5000 cheap evals × expensive
+   GP refits = slow. For DrivAer/BlendedNet, expensive evals × cheap GP
+   refits = the simulation is the bottleneck, not the surrogate.
+
+2. O(n³) SCALING WITH LARGE BUDGET
+   NeuralFoil ran 5000 evals vs 500 (BlendedNet) and 1000–2000 (DrivAer).
+   GP Cholesky scales as O(n³): relative cost at n=5000 vs n=500 is
+   (5000/500)³ = 1000× per refit. Combined with 10× more iterations,
+   the total GP work is ~10,000× greater than BlendedNet BO.
+   This is why seed0 took up to 135h wall time on an exclusive 128-core node.
+
+3. EXCLUSIVE 128-CORE NODE REQUIRED
+   Because the eval is ~free, the only way to make NeuralFoil BO feasible
+   was to allocate an entire 128-core node exclusively and let PyTorch/
+   gpytorch use all cores for the matrix algebra of each GP refit.
+   DrivAer and BlendedNet BO jobs run on shared 1-core allocations because
+   the bottleneck is the sequential simulation call, not matrix ops.
+   This means every NeuralFoil BO seed occupied 128 CPU-hours per wall-hour
+   vs 1 CPU-hour per wall-hour for the others — a 128× multiplier on
+   CPU-hour cost before even accounting for the longer wall time.
+
+COMBINED EFFECT
+---------------
+  NeuralFoil BO:   4 seeds × ~50-135h × 128 cores ≈ 44,800 CPU-h
+  DrivAer BO n=1k: 20 seeds × ~21h × 1 core        ≈    420 CPU-h
+  BlendedNet BO:   10 seeds × ~5.5h × 1 core        ≈     55 CPU-h
+
+BO accounts for ~99% of the entire NeuralFoil benchmark compute budget.
+The pathology is structural: using BO on a near-zero-cost evaluator with
+a large iteration budget is the worst possible use case for GP-based BO.
+The GP surrogate overhead makes no sense when the underlying evaluator is
+already cheaper than the surrogate refit. BO makes most sense when evals
+are expensive (DrivAer-like) and the surrogate overhead is amortised.
+
+ADDITIONALLY: TWO-PHASE FEASIBILITY DYNAMIC IN NEURALFOIL
+----------------------------------------------------------
+A secondary effect (not a cost driver but relevant to BO behaviour):
+NeuralFoil has a sharp feasibility cliff — random init produces rewards
+of -10 to -100 (deeply infeasible). The first ~100-1500 evals are spent
+learning the feasibility boundary. Once located, the GP exploits the
+narrow feasible band but can get trapped (as with seeds 2 and 3, which
+plateaued at -0.121 for ~1500 iters before the cap2k fix allowed escape).
+DrivAer and BlendedNet lack this cliff, so their BO trajectories show
+cleaner, steadier improvement from the start.
+This two-phase pattern also causes GP conditioning issues at large n:
+deeply infeasible early samples remain in the training set and distort
+the surrogate in the feasible region — the second motivation for cap2k.
