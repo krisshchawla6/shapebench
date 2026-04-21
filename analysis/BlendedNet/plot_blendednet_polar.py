@@ -124,7 +124,7 @@ def load_median(name):
         dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_v3_flash2_5_shapebench_5_attempt_*_n2000")))
         return _load_median_results_json(dirs, "reward", "v3")
     elif name == "CMA-ES":
-        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_seed*_n500")))
+        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_seed*_n500to1000")))
         return _load_median_results_json(dirs, "reward", "bo")
     return None, None
 

@@ -771,10 +771,30 @@ LBFGS-B NR10 — COMPLETE (all 10 seeds, data fully recovered)
   nr10 gives only marginal improvement over nr3 (nr3 best 0.005230 vs nr10 best
   0.005184): extra restarts did not escape the dominant local optima.
 
-CMA-ES N500→N1000 — RUNNING (jobs 2728-2737)
-  Progress as of Apr 21 ~03:30 UTC: evals 620–700 / 1000 (62–70% complete).
-  Best rewards so far: -0.004423 to -0.004597.  Consistent with n500 results;
-  no significant improvement beyond the n500 best (-0.004441) yet observed.
+CMA-ES N500→N1000 — COMPLETE (all 10 seeds, jobs 2728-2737)
+  Final best_reward per seed (CD = -reward):
+    seed0: 0.004516   seed1: 0.004467   seed2: 0.004512   seed3: 0.004511
+    seed4: 0.004512   seed5: 0.004263   seed6: 0.004549   seed7: 0.004464
+    seed8: 0.004271   seed9: 0.004471
+  Median best CD: ~0.004492.  Best across all seeds: 0.004263 (seed5).
+
+  Convergence assessment (CD at 25/50/75/100% of 1000 evals):
+    seed0: 0.004865 → 0.004603 → 0.004534 → 0.004516   (flat from 75%)
+    seed1: 0.004929 → 0.004626 → 0.004523 → 0.004467   (flat from 75%)
+    seed2: 0.004836 → 0.004523 → 0.004515 → 0.004512   (flat from 75%)
+    seed3: 0.004922 → 0.004561 → 0.004513 → 0.004511   (flat from 75%)
+    seed4: 0.004963 → 0.004561 → 0.004516 → 0.004512   (flat from 75%)
+    seed5: 0.005056 → 0.004907 → 0.004425 → 0.004263   (still improving: −0.000162, 3.7%)
+    seed6: 0.004820 → 0.004575 → 0.004552 → 0.004549   (flat from 50%)
+    seed7: 0.004892 → 0.004561 → 0.004472 → 0.004464   (flat from 75%)
+    seed8: 0.004984 → 0.004583 → 0.004312 → 0.004271   (still improving: −0.000041, 0.95%)
+    seed9: 0.005112 → 0.004764 → 0.004569 → 0.004471   (still improving: −0.000098, 2.1%)
+
+  8 of 10 seeds changed <0.01% in the final 250 evals — clearly converged.
+  Seeds 5, 8, 9 were still improving in the last quartile; seed5 notably so.
+  These are the seeds that found the best regions (exploring later, not stalling).
+  Extending to n=2000 is not warranted: improvement rate is diminishing and
+  would not move the median.  n=1000 is a sufficient budget for this problem.
 
 ANALYSIS PLOTS
   analysis/BlendedNet/plot_blendednet_planform.py updated:
@@ -835,19 +855,36 @@ FORMULATION
   (identical cost to shapebench_5).
 
 RELATIONSHIP TO SHAPEBENCH_5
-  shapebench_5:      reward = -mean( CD_i )            weights all CL points equally
-  shapebench_5_max_LD: reward =  mean( CL_i / CD_i )   weights higher-CL points more
+  shapebench_5:        reward = -mean( CD_i )          — equal weight per operating point
+  shapebench_5_max_LD: reward =  mean( CL_i / CD_i )  — each point scaled by its CL target
 
-  The two objectives are not equivalent when CL varies across operating points.
-  With CL_i in {0.185, 0.206, 0.227}, the highest-CL point (0.227) is weighted
-  ~23% more than the lowest (0.185) under L/D aggregation.  The practical
-  difference is modest given the narrow CL range, but L/D is the more physically
-  defensible objective for a range-optimised transport.
+  These two objectives are NOT equivalent, even though they share identical
+  bisection and CL targets.  The distinction is the aggregation:
 
-  Single-point L/D at fixed CL would be equivalent to single-point CD
-  minimisation (since CL is held constant by bisection), offering no new
-  information.  Multi-point is used for the same off-design robustness reasons
-  as shapebench_5.
+  shapebench_5 minimises an unweighted mean of CD values.  shapebench_5_max_LD
+  maximises a CL-weighted mean of 1/CD values, where the weight for each
+  operating point is proportional to its CL target.
+
+  Effective weights from CL_TARGETS = [0.206, 0.206, 0.206, 0.185, 0.227]:
+    CL=0.206 → 60%  (appears 3× in the list)
+    CL=0.185 → 20%
+    CL=0.227 → 20%
+  Both rewards share this frequency-based weighting, but shapebench_5_max_LD
+  additionally scales each point by its CL value.
+
+  Consequence: a design that trades worse CD at CL=0.185 for better CD at
+  CL=0.227 is penalised equally by shapebench_5 (net mean CD unchanged) but
+  rewarded by shapebench_5_max_LD (the CL=0.227 point gains more L/D than the
+  CL=0.185 point loses).  The two rewards can therefore prefer different
+  designs and should not be compared directly.
+
+  Note: a single-point version of each reward (at the same fixed CL) WOULD be
+  equivalent, since CL is held constant by bisection and L/D = CL/CD is then a
+  monotone function of CD.  The non-equivalence is a multi-point effect arising
+  from unequal CL targets.
+
+  Multi-point evaluation is used for the same off-design robustness reasons as
+  shapebench_5.
 
 THEORETICAL BASIS AND REFERENCES
   The L/D ratio is the central figure of merit for aircraft aerodynamic
@@ -900,10 +937,172 @@ Config:
 Node assignments (one method per node):
   GA/PSO    → compute-dy-hpc-128vcpu-4   (jobs 3029–3038)
   BO_torch  → compute-dy-hpc-128vcpu-5   (jobs 3039–3048)
-  CMA-ES    → exclude compute-dy-hpc-128vcpu-6, auto-allocated  (jobs 3075–3084)
+  CMA-ES    → compute-dy-hpc-128vcpu-6  (jobs 3166–3175, resubmitted without node exclusion)
   v3        → exclude compute-dy-hpc-128vcpu-6, auto-allocated  (jobs 3085–3094)
 
 All 40 jobs submitted, status: PENDING (Priority) at time of submission.
+
+--- April 21 2026: job failures and resubmissions ---
+
+CMA-ES (3166–3175) FAILED: torchvision circular import bug on node-6 poisoned the
+model cache within the process — all 10 evals in the first CMA-ES population returned
+reward=-5.0 (FAIL_REWARD), triggering the tolfun stop condition after just 1 population.
+Root cause: once the first import fails mid-way, Python caches the partial module and
+every subsequent import in the same long-running process also fails. Unlike GA/BO/v3
+which spawn fresh processes per run, CMA-ES runs 1000 evals in a single Python process,
+so a single bad import silently wastes the entire run.
+Fix: cleaned contaminated output dirs (iter_00000–iter_00009 + results.csv for each
+seed), added --exclude=compute-dy-hpc-128vcpu-6 to all 10 CMA-ES slurm scripts,
+resubmitted → jobs 3179–3188.
+
+GA (3029–3038) and BO (3039–3048) STUCK: nodes 4 and 5 flipped back to idle% (cannot
+spin up — cluster at max node count). Jobs were permanently queued with no path forward.
+v3 (3085–3094) and CMA-ES (3179–3188) also stuck: all other nodes occupied by large
+SuperWing job arrays (2746–2750) with hundreds of pending tasks that replenish nodes
+immediately — lower-priority BlendedNet jobs could not compete.
+Node-6 (mixed, ~121 CPUs free) is the only node with available capacity.
+Fix for GA/BO: removed --nodelist constraints from all 20 scripts, cancelled 3029–3048,
+resubmitted → GA jobs 3189–3198, BO jobs 3199–3208 (no node pin, will land on node-6).
+v3 and CMA-ES left as-is with --exclude=node-6; will start when SuperWing arrays drain.
+
+GA (3189–3198) FAILED immediately: run_benchmark.py rejected --random_state 0 as an
+unrecognized argument. Root cause: the max_LD GA slurm scripts were created by copying
+from CMA-ES scripts, which do accept --random_state; the GA framework does not. The
+working shapebench_5 GA scripts (attempt1–10) never passed --random_state — they use
+only --config and --output-dir. Fix: removed --random_state line from all 10 GA slurm
+scripts; cancelled 3189–3198, resubmitted → jobs 3209–3218.
+
+CMA-ES (3179–3188) FAILED again: same torchvision circular import / poisoned-cache
+failure, but this time on node-8. Root cause: with only --exclude=node-6, all 10 jobs
+landed on node-8 simultaneously when a SuperWing job freed it — recreating the exact
+race condition. The fix (--exclude=node-6) was necessary but not sufficient; excluding
+one node doesn't prevent all 10 jobs from piling onto the next available node together.
+Fix: added a startup sleep stagger to each CMA-ES slurm script (seed N sleeps N×90s
+before activating the venv), so each job's initial torchvision import completes before
+the next job starts. This only needs to work once at startup — torchvision is then
+cached in sys.modules for the entire 1000-eval process lifetime, so subsequent evals
+are unaffected. Also: nodes 4 and 5 were stuck in down# state for hours due to a stale
+health-check-failed flag from a mid-shutdown SLURM check; cleared manually with
+`sudo scontrol update NodeName=... State=idle`, both returned to idle~ immediately.
+Cleaned contaminated CMA-ES output dirs, resubmitted → jobs 3229–3238 (all running on
+node-8, staggered).
+
+--- April 21 2026: stagger fix also failed; root fix via fcntl file lock ---
+
+CMA-ES stagger (3229–3238) also FAILED: seeds 0–3 completed immediately with
+Best reward: -5.0 (same torchvision race, stagger insufficient). Seeds 4–9 were
+stuck in the retry loop (also not working — clearing sys.modules cannot un-poison
+a partially-loaded C extension already held by dlopen). Root cause analysis:
+- The retry + sys.modules-clearing approach fails because the torchvision C
+  extension (.so) state is held at the C/dlopen level, not in Python's sys.modules.
+  Clearing sys.modules removes the Python module object but the .so's internal state
+  (partially registered custom ops like torchvision::nms) remains corrupt.
+- The stagger also fails because v3 jobs continuously spawn evaluations throughout
+  their lifetime, keeping a constant stream of torchvision imports happening on
+  node-8. There is no safe "quiet window" to import into.
+
+Root fix applied: replaced the retry loop in environments/BlendedNet/environment.py
+with a fcntl.flock() exclusive file lock around the `from Transolver import Model`
+import. This serialises ALL torchvision imports across every process on the same
+node (or filesystem) — no race is possible. Lock file: model/.torchvision_lock.
+Once a process acquires the lock, it imports torchvision cleanly (regardless of
+how many other processes are waiting), releases the lock, and proceeds. Subsequent
+calls hit `if _model is not None: return` immediately. Zero effect on model
+mathematics or per-process inference.
+
+Also cancelled 3229–3238 (stuck retry loops), cancelled GA (3209–3218) and BO
+(3199–3208) which were also failing (same torchvision race on shared nodes).
+Removed stagger sleep lines from CMA-ES slurm scripts (no longer needed).
+Cleaned all output dirs. Resubmitted all three methods.
+
+Current job IDs (April 21 2026 — third resubmission):
+  GA/PSO    → jobs 3249–3258  (node-6)
+  BO_torch  → jobs 3259–3268  (node-6)
+  CMA-ES    → jobs 3239–3248  (node-8)
+  v3        → jobs 3085–3094  (node-8, still running from original submission)
+
+--- April 21 2026: flock also failed (Lustre); switched to fcntl.lockf ---
+
+Jobs 3239–3268 (CMA-ES/GA/BO third resubmission) also failed immediately:
+torchvision race still happening. Root cause: /scratch is a Lustre filesystem.
+BSD advisory flock() is NOT implemented on Lustre — calls succeed silently but
+provide no actual mutual exclusion. Multiple processes all "acquired" the lock
+simultaneously and raced as before.
+
+Fix: replaced fcntl.flock() with fcntl.lockf() in environments/BlendedNet/
+environment.py. lockf() uses POSIX record locks (fcntl F_SETLKW), which Lustre
+routes through its Distributed Lock Manager (DLM) and supports correctly across
+both same-node and cross-node processes. Cancelled 3239–3268, cleaned output
+dirs, resubmitted.
+
+Current job IDs (April 21 2026 — fourth resubmission, lockf fix):
+  CMA-ES    → jobs 3269–3278  (node-8)
+  GA/PSO    → jobs 3279–3288  (node-6)
+  BO_torch  → jobs 3289–3298  (node-6)
+  v3        → jobs 3085–3094  (node-8, still running)
+
+--- April 21 2026: TRUE root cause found — broken torch installation ---
+
+All lockf-fixed jobs (3269–3298) also failed immediately. This ruled out any
+import race as the cause. Testing torchvision in a single isolated process
+reproduced the error deterministically:
+  $ venv/bin/python -c "import torchvision"
+  RuntimeError: operator torchvision::nms does not exist
+
+Root cause: at 01:57 UTC April 21, torch 2.11.0+cpu was installed into the
+shared venv (by root). torchvision 0.25.0 requires torch 2.10.x — the version
+mismatch caused torchvision._C to fail to register its custom ops, making every
+single surrogate evaluation fail with FAIL_REWARD = -5.0 regardless of design.
+The error message is identical to the concurrent-import race, which is why all
+earlier fixes chased the wrong root cause.
+
+The shared venv was left untouched (others may depend on torch 2.11.0+cpu).
+Fix: created a personal overlay venv at /home/jack/venv_torch210:
+  - Base: /scratch/ShapeEvolve/venv/bin/python -m venv --system-site-packages
+  - Added shared_venv.pth to include /scratch/ShapeEvolve/venv/lib/python3.10/
+    site-packages (inherits torchvision, timm, pyvista, etc.)
+  - Installed torch==2.10.0+cu128 on top (overrides broken 2.11.0+cpu)
+  - Verified: torch 2.10.0+cu128, torchvision 0.25.0+cu128, Transolver all OK
+Updated all CMA-ES, GA, BO slurm scripts to source venv_torch210 instead of
+the shared venv. fcntl.lockf fix retained in environment.py (genuine protection
+against import races; harmless overhead).
+
+Current job IDs (April 21 2026 — fifth resubmission, correct torch fix):
+  CMA-ES    → jobs 3299–3308  (node-8)
+  GA/PSO    → jobs 3300,3303,3306,3309,3312,3315,3318,3321,3324,3327  (node-6)
+  BO_torch  → jobs 3301,3304,3307,3310,3313,3316,3319,3322,3325,3328  (node-6)
+  v3        → jobs 3085–3094  (node-8, still running — v3 uses same broken venv
+              but handles FAIL_REWARD gracefully and keeps retrying)
+
+--- April 21 2026: breadth-of-impact check; v3 resubmitted ---
+
+Checked all environments for runs completed after 01:57 UTC (when torch was
+broken). Only BlendedNet was affected:
+
+  BlendedNet v3 (3085–3094): ran for ~2 hours entirely on the broken venv.
+    All evaluations returned FAIL_REWARD = -5.0. v3 continued running (it
+    retries on failure) but produced zero useful results. Cancelled, dirs
+    cleaned, v3 slurm scripts updated to use venv_torch210, resubmitted.
+
+  DrivAer_Star BO (seeds 7,8,11,15,16): last results written at 01:51–01:52
+    UTC, 5 minutes BEFORE the torch breakage. Results contain real non-trivial
+    rewards (e.g. -0.20, -0.06). Confirmed clean.
+
+  SuperWing: currently running under the ubuntu user with their own separate
+    environment. Not affected.
+
+  NeuralFoil: last results Apr 20. No runs after 01:57. Not affected.
+
+  CERAS: last results Apr 20 or earlier. No runs after 01:57. Not affected.
+
+Summary: only BlendedNet runs (v3 + CMA-ES + GA + BO, all now resubmitted
+with venv_torch210) were affected. All other environment results are clean.
+
+Current job IDs (April 21 2026 — all methods resubmitted with venv_torch210):
+  CMA-ES    → jobs 3299–3308  (node-8)
+  GA/PSO    → jobs 3300,3303,3306,3309,3312,3315,3318,3321,3324,3327  (node-6)
+  BO_torch  → jobs 3301,3304,3307,3310,3313,3316,3319,3322,3325,3328  (node-6)
+  v3        → jobs 3329–3338  (pending/spinning up)
 
 Output directories:
   environments/BlendedNet/results/run_GA_shapebench_5_max_LD_seed{N}_20p_200i/

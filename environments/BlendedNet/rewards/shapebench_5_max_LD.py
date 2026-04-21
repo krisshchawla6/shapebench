@@ -14,6 +14,27 @@ alpha (unlike ld_ratio.py which used a free alpha).
 
 Reward (maximised by framework):
     R = mean_LD  (dimensionless, typically ~20-60 for a BWB)
+
+NON-EQUIVALENCE WITH shapebench_5
+----------------------------------
+Despite sharing the same bisection procedure and CL targets, this reward is
+NOT equivalent to shapebench_5 (which maximises -mean_CD).
+
+shapebench_5   : reward = -(1/5) * sum_i  CD_i          — equal weight per point
+shapebench_5_max_LD: reward =  (1/5) * sum_i  CL_i/CD_i — CL-weighted per point
+
+Because CL targets are not all equal, the L/D aggregation implicitly
+up-weights operating points with higher CL.  Concretely, the 5-entry list
+
+    CL_TARGETS = [0.206, 0.206, 0.206, 0.185, 0.227]
+
+gives effective weights:  CL=0.206 → 60%,  CL=0.185 → 20%,  CL=0.227 → 20%.
+Both rewards share this weighting structure, but max_LD additionally scales
+each point's contribution by its CL value.  A design that trades higher CD at
+CL=0.185 for lower CD at CL=0.227 is penalised equally by shapebench_5 (same
+mean CD) but rewarded by shapebench_5_max_LD (higher CL/CD at the high-CL
+point outweighs the loss at the low-CL point).  The two rewards therefore
+define different Pareto-optimal solutions and should not be compared directly.
 """
 
 import json

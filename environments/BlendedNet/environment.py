@@ -1,5 +1,6 @@
 import os
 import sys
+import fcntl
 import json
 import math
 import numpy as np
@@ -12,6 +13,9 @@ from .mesh_generator import generate_mesh
 
 ENV_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(ENV_DIR, "model")
+# Serialises the torchvision import across all processes on the same node,
+# preventing the circular-import race that occurs under concurrent loads.
+_LOCK_FILE = os.path.join(MODEL_DIR, ".torchvision_lock")
 
 sys.path.insert(0, MODEL_DIR)
 
@@ -45,7 +49,13 @@ def _load_model():
         "unified_pos": False, "time_input": False, "shapelist": None,
     })()
 
-    from Transolver import Model
+    with open(_LOCK_FILE, "a") as _lf:
+        fcntl.lockf(_lf, fcntl.LOCK_EX)
+        try:
+            from Transolver import Model
+        finally:
+            fcntl.lockf(_lf, fcntl.LOCK_UN)
+
     _model = Model(args)
     ckpt = torch.load(os.path.join(MODEL_DIR, "transolver_best.pt"),
                       map_location=_device, weights_only=True)

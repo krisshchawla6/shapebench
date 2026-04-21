@@ -41,3 +41,9 @@ SAVED_DIRS_reward_ld_ratio_constrained_m02_re1e7_LAM50/
 archive/
 logs/
 environments/solver_configs/
+
+# Runtime lockfile auto-created by fcntl.lockf in environment.py (no need to commit)
+environments/BlendedNet/model/.torchvision_lock
+
+# Mesh cache: generated .stl files keyed by design params, recreatable via generate_mesh()
+environments/BlendedNet/mesh_cache/

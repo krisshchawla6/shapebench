@@ -1,33 +1,15 @@
 """2D top-view planform overlay + 3 vertically-stacked isometric 3D renders.
 
-Panel layout (left column: 2D planform; right column: 3 rows of 3D renders):
-  Left  — 2D top-view planform of median-best design per method (all overlaid).
-  Right — Three isometric 3D renders stacked vertically (top to bottom):
-    1. BO median-best — representative of the BO/PSO/CMA-ES converged cluster
-       (pairwise normalised distance PSO↔CMA-ES=0.10, BO↔PSO=0.46).
-    2. ShapeEvolve median-best — distinct geometry (wider fuselage, shallower
-       inner sweep S1=45° vs 60°; distance ~0.86–1.02 from cluster).
-    3. L-BFGS-B median-best — local-optimum trap (B3=477 vs 700 at bounds;
-       clearly different shape, far from cluster).
-
-  Each 3D render includes a scale bar (500 mm) computed from mesh normalized
-  coordinates: bar_len_norm = 500 / half_span_mm * half_y_extent_norm.
-
-Geometry construction (all dims in mm):
-  - Root (y=0): chord C1=1000, LE at x=0
-  - Station 1 (y=B1): chord C2, LE at x = B1·tan(S1)
-  - Station 2 (y=B1+B2): chord C3, LE at x = B1·tan(S1) + B2·tan(S2)
-  - Tip (y=B1+B2+B3): chord C4, LE at x = B1·tan(S1) + B2·tan(S2) + B3·tan(S3)
-
-Full span shown (symmetric). x = chordwise (LE left), y = spanwise.
+Same layout as plot_blendednet_planform.py but selects the single BEST design
+per method (lowest CD across all runs/seeds) rather than the median-best.
 
 Usage:
     cd /scratch/ShapeEvolve
     source venv/bin/activate
-    python analysis/BlendedNet/plot_blendednet_planform.py
+    python analysis/BlendedNet/plot_blendednet_planform_best_cd.py
 
 Outputs:
-    environments/BlendedNet/results/analysis_plots_shapebench_mean_cd/planform_best_designs.png/.pdf
+    environments/BlendedNet/results/analysis_plots_shapebench_mean_cd/planform_best_designs_best_cd.png/.pdf
 """
 
 import os
@@ -218,8 +200,9 @@ def _design_dir(run_dir, row, method_key):
         return os.path.join(run_dir, str(row["design"]))
 
 
-def _load_median_params(run_dirs, reward_col, method_key):
-    run_data = []
+def _load_best_params(run_dirs, reward_col, method_key):
+    """Return params and best CD for the single best design across all runs."""
+    best_reward, best_run_dir, best_row = -np.inf, None, None
     for run_dir in run_dirs:
         csv = os.path.join(run_dir, "results.csv")
         if not os.path.exists(csv):
@@ -232,31 +215,29 @@ def _load_median_params(run_dirs, reward_col, method_key):
             continue
         idx = int(df[reward_col].idxmax())
         row = df.iloc[idx]
-        run_data.append((float(row[reward_col]), run_dir, row))
+        r = float(row[reward_col])
+        if r > best_reward:
+            best_reward, best_run_dir, best_row = r, run_dir, row
 
-    if not run_data:
+    if best_run_dir is None:
         return None, None
 
-    finals = np.array([x[0] for x in run_data])
-    median_val = float(np.median(finals))
-    _, run_dir, row = min(run_data, key=lambda x: abs(x[0] - median_val))
-
-    ddir = _design_dir(run_dir, row, method_key)
+    ddir = _design_dir(best_run_dir, best_row, method_key)
     rj = os.path.join(ddir, "save", "results.json")
     if not os.path.exists(rj):
         return None, None
     with open(rj) as f:
         d = json.load(f)
-    return d["design"], -median_val
+    return d["design"], -best_reward
 
 
-def load_median(name):
+def load_best(name):
     if name == "L-BFGS-B":
         dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_lbfgsb_shapebench_5_seed*_nr3_normfix")))
-        return _load_median_params(dirs, "reward", "lbfgsb")
+        return _load_best_params(dirs, "reward", "lbfgsb")
     elif name == "Bayesian Opt. (exact GP)":
         dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500")))
-        return _load_median_params(dirs, "reward", "bo")
+        return _load_best_params(dirs, "reward", "bo")
     elif name == "PSO (20p × 200i)":
         dirs = []
         for pat in [
@@ -264,13 +245,13 @@ def load_median(name):
             os.path.join(RESULTS_DIR, "run_GA_shapebench_5_attempt*_20p_200i"),
         ]:
             dirs.extend(sorted(glob.glob(pat)))
-        return _load_median_params(dirs, "reward", "ga")
+        return _load_best_params(dirs, "reward", "ga")
     elif name == "ShapeEvolve":
         dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_v3_flash2_5_shapebench_5_attempt_*_n2000")))
-        return _load_median_params(dirs, "reward", "v3")
+        return _load_best_params(dirs, "reward", "v3")
     elif name == "CMA-ES":
         dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_seed*_n500to1000")))
-        return _load_median_params(dirs, "reward", "bo")
+        return _load_best_params(dirs, "reward", "bo")
     return None, None
 
 
@@ -294,11 +275,11 @@ def main():
     axes_3d   = [fig.add_subplot(right_gs[i]) for i in range(3)]  # 3D render panels
 
     # ── Left: 2D planform overlay ──────────────────────────────────────────────
-    print(f"{'Method':<28}  {'median_CD':>10}  {'half_span':>10}  {'root_chord':>10}")
+    print(f"{'Method':<28}  {'best_CD':>10}  {'half_span':>10}  {'root_chord':>10}")
     print("-" * 65)
 
     for name in METHOD_ORDER:
-        params, median_cd = load_median(name)
+        params, best_cd = load_best(name)
         if params is None:
             print(f"{name:<28}  no data")
             continue
@@ -308,9 +289,9 @@ def main():
 
         ax.fill(x, y, color=COLORS[name], alpha=0.18)
         ax.plot(x, y, color=COLORS[name], lw=1.6,
-                label=f"{name}  (median CD={median_cd:.5f})")
+                label=f"{name}  (best CD={best_cd:.5f})")
 
-        print(f"{name:<28}  {median_cd:>10.6f}  {half_span:>10.1f}  {C1:>10.1f}")
+        print(f"{name:<28}  {best_cd:>10.6f}  {half_span:>10.1f}  {C1:>10.1f}")
 
     ax.set_xlabel("Span (mm)")
     ax.set_ylabel("Chord (mm, LE → TE)")
@@ -324,17 +305,17 @@ def main():
     legend_ax.legend(handles, labels, fontsize=21, loc="center",
                      framealpha=0.95, title="Method", borderaxespad=0, ncol=1)
     ax.set_title(
-        "Top-view planform — median-best design per method\n"
+        "Top-view planform — best design per method\n"
         "Full span shown (symmetric).  LE at top, TE at bottom.",
         fontweight="medium", pad=8,
     )
 
     # ── Right: 3 isometric 3D renders (one per distinct design cluster) ────────
     for ax_3d, (method, panel_label) in zip(axes_3d, RENDER_PANELS):
-        params, cd = load_median(method)
+        params, cd = load_best(method)
         ax_3d.axis("off")
         if params is not None:
-            print(f"Rendering 3D: {method}  (median CD={cd:.5f})...")
+            print(f"Rendering 3D: {method}  (best CD={cd:.5f})...")
             try:
                 img = _render(params)
                 ax_3d.imshow(img)
@@ -345,7 +326,7 @@ def main():
             ax_3d.text(0.5, 0.5, "no data", ha="center", va="center",
                        transform=ax_3d.transAxes, fontsize=9)
 
-        cd_str = f"median CD = {cd:.5f}" if cd is not None else ""
+        cd_str = f"best CD = {cd:.5f}" if cd is not None else ""
         ax_3d.text(0.5, 0.97, f"{panel_label}\n{cd_str}",
                    transform=ax_3d.transAxes, fontsize=22, fontweight="medium",
                    ha="center", va="top",
@@ -353,12 +334,12 @@ def main():
                              alpha=0.75, edgecolor="none"))
 
     fig.suptitle(
-        "BlendedNet (BWB) — Planform comparison and representative geometries",
+        "BlendedNet (BWB) — Planform comparison: best design per method",
         fontsize=26, fontweight="medium", y=1.005,
     )
 
-    out_png = os.path.join(OUT_DIR, "planform_best_designs.png")
-    out_pdf = os.path.join(OUT_DIR, "planform_best_designs.pdf")
+    out_png = os.path.join(OUT_DIR, "planform_best_designs_best_cd.png")
+    out_pdf = os.path.join(OUT_DIR, "planform_best_designs_best_cd.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

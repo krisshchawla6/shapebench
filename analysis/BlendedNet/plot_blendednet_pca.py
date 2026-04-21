@@ -142,7 +142,7 @@ def load_all_designs():
          sorted(glob.glob(os.path.join(RESULTS_DIR, "run_v3_flash2_5_shapebench_5_attempt_*_n2000"))),
          "reward", "v3"),
         ("CMA-ES",
-         sorted(glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_seed*_n500"))),
+         sorted(glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_seed*_n500to1000"))),
          "reward", "bo"),
     ]
     dataset = {}

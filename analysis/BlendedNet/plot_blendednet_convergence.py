@@ -108,7 +108,7 @@ def load_v3():
 
 def load_cmaes():
     return _load_curves(
-        glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_seed*_n500", "results.csv")),
+        glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_seed*_n500to1000", "results.csv")),
         "best_reward",
     )
 
