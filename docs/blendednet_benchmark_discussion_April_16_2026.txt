@@ -792,6 +792,135 @@ PLOTS REGENERATED (April 21, 2026)
     planform_best_designs.{png,pdf}   — regenerated (vertical layout + scale bar)
     convergence_cd_vs_evals.{png,pdf} — regenerated with full lbfgsb + CMA-ES data
 
+
+================================================================================
+STATUS UPDATE (April 21, 2026 — third update)
+================================================================================
+
+NEW REWARD: shapebench_5_max_LD
+--------------------------------
+
+MOTIVATION
+The shapebench_5 reward minimises mean drag coefficient (CD) across 3 CL
+operating points.  This is a valid aerodynamic objective but it ignores the
+lift-to-drag ratio (L/D), which is the fundamental figure of merit for aircraft
+range and endurance.  Two designs with identical mean CD but different CL
+distributions will score equally under shapebench_5, yet have different real-
+world range performance.
+
+The earlier ld_ratio.py reward attempted L/D maximisation but was gameable:
+alpha was a free design variable (10-D parameter space includes alpha), so the
+optimizer could maximise L/D simply by tuning alpha to the polar peak rather
+than improving wing geometry.  The bisection infrastructure introduced in
+shapebench_5 eliminates this exploit.
+
+FORMULATION
+  max_x  mean_LD(x)
+
+  mean_LD = (1/N) * sum_i  [ CL^(i) / CD(x; CL^(i)) ]
+  CL^(i) in {0.206, 0.206, 0.206, 0.185, 0.227}   (same 5-point set as shapebench_5)
+
+  For each unique CL target (0.185, 0.206, 0.227), bisection (8 iterations,
+  alpha in [-5°, 12°]) finds the angle of attack that achieves CL^(i) exactly
+  (using CL_approx = -Cp_mean from Transolver).  L/D at that trimmed condition
+  is then CL^(i) / CD_trimmed.  Mean is taken over the 5 operating points
+  (which duplicate CL=0.206 three times, consistent with shapebench_5).
+
+  Reward (maximised by framework):
+    R = mean_LD   (dimensionless, expected range ~20–60 for a BWB)
+
+  Fail reward: -5.0 (same as shapebench_5)
+
+  Surrogate calls per design evaluation: 3 unique CL × 8 bisect iterations = 24
+  (identical cost to shapebench_5).
+
+RELATIONSHIP TO SHAPEBENCH_5
+  shapebench_5:      reward = -mean( CD_i )            weights all CL points equally
+  shapebench_5_max_LD: reward =  mean( CL_i / CD_i )   weights higher-CL points more
+
+  The two objectives are not equivalent when CL varies across operating points.
+  With CL_i in {0.185, 0.206, 0.227}, the highest-CL point (0.227) is weighted
+  ~23% more than the lowest (0.185) under L/D aggregation.  The practical
+  difference is modest given the narrow CL range, but L/D is the more physically
+  defensible objective for a range-optimised transport.
+
+  Single-point L/D at fixed CL would be equivalent to single-point CD
+  minimisation (since CL is held constant by bisection), offering no new
+  information.  Multi-point is used for the same off-design robustness reasons
+  as shapebench_5.
+
+THEORETICAL BASIS AND REFERENCES
+  The L/D ratio is the central figure of merit for aircraft aerodynamic
+  efficiency, entering directly into the Breguet range equation:
+
+      R = (V/g) × (1/TSFC) × (L/D) × ln(W_init / W_final)
+
+  where V = cruise speed, g = gravitational acceleration, TSFC = thrust-specific
+  fuel consumption (weight-based, units 1/s), W_init/W_final = takeoff-to-
+  landing weight ratio.  With TSFC, V, and weight fractions fixed as mission
+  constants, maximising range reduces exactly to maximising L/D.  For a
+  medium-to-long range BWB transport (fuel fraction ~0.35, Liebeck BWB-450
+  mission), ln(W_init/W_final) ≈ 0.43.
+
+  Key references:
+    Raymer, D.P. — Aircraft Design: A Conceptual Approach, AIAA Education
+      Series (multiple editions).  Ch. 3 derives the Breguet equation and uses
+      L/D as the primary aerodynamic sizing parameter throughout.
+    Anderson, J.D. — Introduction to Flight, McGraw-Hill.  First-principles
+      derivation of the Breguet range and endurance equations.
+    Torenbeek, E. — Synthesis of Subsonic Airplane Design, Springer (1982).
+      Detailed treatment with fuel fraction methods; widely used for transport
+      aircraft conceptual design.
+    Liebeck, R.H. — "Design of the Blended Wing Body Subsonic Transport",
+      Journal of Aircraft, Vol. 41, No. 1, 2004.  Canonical BWB paper; uses
+      range and L/D as primary design metrics.  Fuel fraction ~0.35 for the
+      BWB-450 long-range mission.
+    Qin, N. et al. — "Aerodynamic considerations of blended wing body aircraft",
+      Progress in Aerospace Sciences, Vol. 40, 2004.  Surveys BWB aerodynamic
+      objectives; L/D and Breguet range are the stated figures of merit.
+
+FILE ADDED
+  environments/BlendedNet/rewards/shapebench_5_max_LD.py
+    Multi-point L/D maximisation reward.  Identical bisection infrastructure to
+    shapebench_5; only the aggregation changes (mean L/D instead of -mean CD).
+    Diff from shapebench_5: 4 lines changed — aggregation loop, reward sign,
+    results_dict key (mean_LD vs mean_CD), print statement.
+
+BENCHMARK RUNS SUBMITTED (April 21, 2026)
+------------------------------------------
+Goal: replicate the shapebench_5 benchmark setup with the new reward to enable
+direct comparison of method rankings and absolute L/D values.
+
+Config:
+  GA/PSO:   20 particles × 200 iterations = 4000 evals, 10 seeds (0–9)
+  BO_torch: n_calls=500, n_initial=30, 10 seeds (0–9)
+  CMA-ES:   n_calls=1000, sigma0=0.3, 10 seeds (0–9)  [single stage, no resume]
+  v3:       gemini-2.5-flash, 200 iterations × 10 batch = 2000 evals, 10 attempts
+
+Node assignments (one method per node):
+  GA/PSO    → compute-dy-hpc-128vcpu-4   (jobs 3029–3038)
+  BO_torch  → compute-dy-hpc-128vcpu-5   (jobs 3039–3048)
+  CMA-ES    → exclude compute-dy-hpc-128vcpu-6, auto-allocated  (jobs 3075–3084)
+  v3        → exclude compute-dy-hpc-128vcpu-6, auto-allocated  (jobs 3085–3094)
+
+All 40 jobs submitted, status: PENDING (Priority) at time of submission.
+
+Output directories:
+  environments/BlendedNet/results/run_GA_shapebench_5_max_LD_seed{N}_20p_200i/
+  environments/BlendedNet/results/run_BO_torch_shapebench_5_max_LD_seed{N}_n500/
+  environments/BlendedNet/results/run_cmaes_shapebench_5_max_LD_seed{N}_n1000/
+  environments/BlendedNet/results/run_v3_flash2_5_shapebench_5_max_LD_attempt_{N}_n2000/
+
+Sbatch scripts:
+  sbatch/environments/BlendedNet/GA/ga_20p_200i_shapebench_5_max_LD.config.json
+  sbatch/environments/BlendedNet/GA/run_GA_shapebench_5_max_LD_seed{N}_20p_200i.slurm
+  sbatch/environments/BlendedNet/BO_torch/run_BO_torch_shapebench_5_max_LD_seed{N}_n500.slurm
+  sbatch/environments/BlendedNet/cmaes/run_cmaes_shapebench_5_max_LD_seed{N}_n1000.slurm
+  sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_max_LD_n2000.config.json
+  sbatch/environments/BlendedNet/v3/run_v3_flash2_5_shapebench_5_max_LD_attempt{N}.slurm
+
+Results to be added once runs complete.
+
 FILES ADDED / UPDATED
   analysis/reconstruct_results_csv.py  (new — CSV reconstruction from save dirs)
   analysis/BlendedNet/plot_blendednet_planform.py  (vertical 3D layout, scale bar)

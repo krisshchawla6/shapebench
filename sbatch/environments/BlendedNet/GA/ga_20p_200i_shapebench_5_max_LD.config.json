@@ -1,0 +1,9 @@
+{
+  "framework": "GA",
+  "environment": "BlendedNet",
+  "reward": "shapebench_5_max_LD",
+  "n_particles": 20,
+  "n_iterations": 200,
+  "mach": 0.3,
+  "re": 10000000.0
+}
