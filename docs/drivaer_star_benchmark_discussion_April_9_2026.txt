@@ -1249,6 +1249,56 @@ PLOTS REGENERATED (April 21, 2026)
     convergence_cd_vs_evals_vtk_E.{png,pdf}  — regenerated
     3d_panel_best_designs_vtk_E.{png,pdf}     — regenerated
 
+PLOT UPDATES (April 21, 2026)
+------------------------------
+All DrivAer analysis plots updated to use consistent method colors and labels
+matching the BlendedNet and NeuralFoil benchmarks:
+
+  Old → New colors:
+    GA/PSO       #e07b39 → PSO (120p × 500i)        #1f77b4  (blue)
+    L-BFGS-B     #7b9e87 → L-BFGS-B                 #e377c2  (pink)
+    BO_torch     #4a90d9 → Bayesian Opt. (exact GP)  #ff7f0e  (orange)
+    v3 flash-2.5 #9b59b6 → ShapeEvolve               #2ca02c  (green)
+
+  Method order in all plots: L-BFGS-B → Bayesian Opt. → PSO → ShapeEvolve
+
+  Label style: plain method names only (no run counts, no "in progress" suffix),
+  matching NeuralFoil LAM500 convergence plot convention.
+
+ShapeEvolve vtk_E run filtering:
+  21 runs existed but 2 terminated early (att5: 3,010 evals, att19: 3,180 evals
+  out of ~10,000 planned — both <50% of max run length). These are excluded via
+  a 50%-of-max-length filter added to load_v3() in plot_drivaer_convergence.py.
+  vtk_E now uses 19 runs. vtk_F: 19 runs (1 filtered). vtk_N: 20 runs (none filtered).
+
+All plots regenerated:
+  convergence_cd_vs_evals_vtk_{E,F,N}.{png,pdf}
+  param_evolution_best_run.{png,pdf}
+  pca_scatter_{cd,method}.{png,pdf}
+  radar_best_designs.{png,pdf}
+  3d_panel_best_designs_vtk_{E,F,N}.{png,pdf}
+
+Run scripts added (per plot script):
+  environments/DrivAer_Star/results/analysis_plots_cd_only/run_convergence.txt
+  environments/DrivAer_Star/results/analysis_plots_cd_only/run_param_evolution.txt
+  environments/DrivAer_Star/results/analysis_plots_cd_only/run_pca_scatter.txt
+  environments/DrivAer_Star/results/analysis_plots_cd_only/run_radar.txt
+  environments/DrivAer_Star/results/analysis_plots_cd_only/run_3d_panel.txt
+
+vtk_N convergence — BO extended runs (April 21, 2026)
+------------------------------------------------------
+load_bo() updated so that for vtk_F/N, seeds with n2000 (recovered) runs are
+preferred over their n1000 counterparts; seeds without n2000 use n1000 as before.
+
+For vtk_N this means seeds 7/8/11/15/16 contribute ~1300–1401 evals instead of
+1000, while the other 15 seeds remain at 1000 evals. The plot uses extend=True
+clipped to x_max_bo=1401. The 15 shorter runs extend flat from eval 1000 to 1401;
+this is valid because the convergence assessment (see above) confirmed all seeds
+were fully stagnant well before eval 1000. No selection bias concern.
+
+convergence_cd_vs_evals_vtk_N.{png,pdf} regenerated: BO now shows 20 runs,
+max evals=1401, best Cd=0.04956, median final Cd=0.05166.
+
 FILES ADDED
   analysis/reconstruct_results_csv.py  (new — reconstructs results.csv from
     per-evaluation save/results.json; supports both lbfgsb and BO/PSO layouts)

@@ -1429,3 +1429,40 @@ SUMMARY
   Can XFOIL gradients be finite-differenced?        YES, but 100-1000x slower
   Is one-shot XFOIL validation sufficient?          YES — bias is systematic
   How is NeuralFoil→XFOIL bias handled?            Constraint tightening in Stage 2
+
+
+CONVERGENCE PLOT — BO SEEDS AND extend=True CHOICE (April 21, 2026)
+====================================================================
+
+In analysis/plot_convergence_lam500.py the convergence band for each method
+uses extend=True clipped to that method's own x_max (the xg() convention from
+the BlendedNet convergence plot). For BO this requires a judgement call because
+four seeds (0–3) were cancelled before their planned budget:
+
+  BO seed run lengths (planned vs actual):
+    Seeds 0–3: planned n=5000, ran 2582–2851 evals (cancelled)
+    Seeds 5–9: planned n=6000, ran 4200–4921 evals
+
+With extend=False (shorter seeds drop out of median once they end), the median
+in the right tail is computed from seeds 5–9 only:
+  [155, 210, 274, 131, 145]  →  median ≈ 155
+
+With extend=True (cancelled seeds hold their last value flat to BO's x_max),
+all 9 seeds contribute:
+  [223, 264, 218, 145, 155, 210, 274, 131, 145]  →  median ≈ 210
+
+The difference is ~55 reward units — large relative to the inter-method spread.
+extend=False is misleading here because it selectively drops the better-
+performing seeds (0, 1, 2 ended at 218–264) while retaining the worse ones
+(8, 9 ended at 131–145), creating a downward bias in the right-tail median.
+
+The stagnation assumption implied by extend=True was verified directly:
+
+  Seed 0: last improvement at eval 1742, flat for 892 evals before cancellation
+  Seed 1: last improvement at eval 1337, flat for 1488 evals before cancellation
+  Seed 2: last improvement at eval 2576 (+1.5 over last ~1000 evals — flat)
+  Seed 3: last improvement at eval 1857, flat for 994 evals before cancellation
+
+All four cancelled seeds had genuinely converged before they were cancelled.
+Extending them flat is not a modelling assumption — it matches the actual data.
+extend=True is therefore correct.

@@ -37,11 +37,10 @@ BASELINE_CD_BY_BODY = {
 }
 
 COLORS = {
-    "GA/PSO":       "#e07b39",
-    "L-BFGS-B":     "#7b9e87",
-    "BO_torch":     "#4a90d9",
-    "v3 n10000":    "#9b59b6",
-    "v3 n6000":     "#9b59b6",
+    "L-BFGS-B":                 "#e377c2",
+    "Bayesian Opt. (exact GP)": "#ff7f0e",
+    "PSO (120p × 500i)":        "#1f77b4",
+    "ShapeEvolve":              "#2ca02c",
 }
 
 
@@ -85,13 +84,27 @@ def load_lbfgsb():
 def load_bo(body="E"):
     if body == "E":
         pattern = os.path.join(RESULTS_DIR, "run_BO_torch_cd_only_seed*_n1000", "results.csv")
+        return _load_curves(glob.glob(pattern), "best_reward")
     else:
-        pattern = os.path.join(RESULTS_DIR, f"run_BO_torch_cd_only_vtk_{body}_seed*_n1000", "results.csv")
-    return _load_curves(glob.glob(pattern), "best_reward")
+        # Prefer n2000 (recovered) runs where available; fall back to n1000.
+        csvs = []
+        extended_seeds = set()
+        for p in sorted(glob.glob(os.path.join(
+                RESULTS_DIR, f"run_BO_torch_cd_only_vtk_{body}_seed*_n2000", "results.csv"))):
+            seed = p.split("_seed")[1].split("_")[0]
+            extended_seeds.add(seed)
+            csvs.append(p)
+        for p in sorted(glob.glob(os.path.join(
+                RESULTS_DIR, f"run_BO_torch_cd_only_vtk_{body}_seed*_n1000", "results.csv"))):
+            seed = p.split("_seed")[1].split("_")[0]
+            if seed not in extended_seeds:
+                csvs.append(p)
+        return _load_curves(csvs, "best_reward")
 
 
 def load_v3(body="E"):
-    """May be in-progress (do NOT extend past actual length)."""
+    """May be in-progress (do NOT extend past actual length).
+    Runs shorter than 50% of the longest run are excluded (cancelled/failed)."""
     if body == "E":
         pattern = os.path.join(RESULTS_DIR, "run_v3_*_n10000", "results.csv")
     else:
@@ -100,7 +113,11 @@ def load_v3(body="E"):
             f"run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_{body}_attempt_*_flash_2_5_n6000",
             "results.csv",
         )
-    return _load_curves(glob.glob(pattern), "best_reward")
+    curves = _load_curves(glob.glob(pattern), "best_reward")
+    if curves:
+        max_len = max(len(c) for c in curves)
+        curves = [c for c in curves if len(c) >= max_len * 0.5]
+    return curves
 
 
 # ── Interpolation onto common log-spaced grid ─────────────────────────────────
@@ -159,14 +176,14 @@ def main():
     lb_curves  = load_lbfgsb()   if body == "E" else []
     bo_curves  = load_bo(body)
     v3_curves  = load_v3(body)
-    v3_label   = "v3 n10000" if body == "E" else "v3 n6000"
+    v3_label   = "ShapeEvolve"
 
-    if ga_curves:
-        print(f"GA/PSO:    {len(ga_curves)} runs,  max evals = {max(len(c) for c in ga_curves)}")
     if lb_curves:
-        print(f"L-BFGS-B:  {len(lb_curves)} runs,  max evals = {max(len(c) for c in lb_curves)}")
+        print(f"L-BFGS-B:              {len(lb_curves)} runs,  max evals = {max(len(c) for c in lb_curves)}")
     if bo_curves:
-        print(f"BO_torch:  {len(bo_curves)} runs,  max evals = {max(len(c) for c in bo_curves)}")
+        print(f"Bayesian Opt.:         {len(bo_curves)} runs,  max evals = {max(len(c) for c in bo_curves)}")
+    if ga_curves:
+        print(f"PSO (120p × 500i):     {len(ga_curves)} runs,  max evals = {max(len(c) for c in ga_curves)}")
     if v3_curves:
         print(f"{v3_label}: {len(v3_curves)} runs,  max evals = {max(len(c) for c in v3_curves)}")
 
@@ -186,30 +203,27 @@ def main():
     ax.text(1.3, BASELINE_CD + 0.004, f"Baseline  Cd = {BASELINE_CD:.5f}",
             color="#666666", fontsize=8.5, va="bottom")
 
-    # v3 — in-progress, do NOT extend past actual run length
-    if v3_curves:
-        x_max_v3 = max(len(c) for c in v3_curves)
-        x_grid_v3 = x_grid[x_grid <= x_max_v3 + 1]
-        n_label = "10000" if body == "E" else "6000"
-        plot_band(ax, v3_curves, x_grid_v3, COLORS[v3_label],
-                  f"v3 flash-2.5 n{n_label}  (n={len(v3_curves)}, in progress)", extend=False)
+    # L-BFGS-B — complete, extend flat (Estate only)
+    if lb_curves:
+        plot_band(ax, lb_curves, x_grid, COLORS["L-BFGS-B"], "L-BFGS-B", extend=True)
 
-    # BO_torch — complete at n=1000; clip grid to avoid flat extrapolation clutter
+    # Bayesian Opt. — complete at n=1000; clip grid to avoid flat extrapolation clutter
     if bo_curves:
         x_max_bo = max(len(c) for c in bo_curves)
         x_grid_bo = x_grid[x_grid <= x_max_bo + 1]
-        plot_band(ax, bo_curves, x_grid_bo, COLORS["BO_torch"],
-                  f"BO_torch  (n={len(bo_curves)} seeds)", extend=True)
+        plot_band(ax, bo_curves, x_grid_bo, COLORS["Bayesian Opt. (exact GP)"],
+                  "Bayesian Opt. (exact GP)", extend=True)
 
-    # L-BFGS-B — complete, extend flat (Estate only)
-    if lb_curves:
-        plot_band(ax, lb_curves, x_grid, COLORS["L-BFGS-B"],
-                  f"L-BFGS-B  (n={len(lb_curves)} seeds)", extend=True)
-
-    # GA/PSO — complete, extend flat (Estate only)
+    # PSO — complete, extend flat (Estate only)
     if ga_curves:
-        plot_band(ax, ga_curves, x_grid, COLORS["GA/PSO"],
-                  f"GA/PSO  (n={len(ga_curves)} runs)", extend=True)
+        plot_band(ax, ga_curves, x_grid, COLORS["PSO (120p × 500i)"],
+                  r"PSO (120p $\times$ 500i)", extend=True)
+
+    # ShapeEvolve — in-progress, do NOT extend past actual run length
+    if v3_curves:
+        x_max_v3 = max(len(c) for c in v3_curves)
+        x_grid_v3 = x_grid[x_grid <= x_max_v3 + 1]
+        plot_band(ax, v3_curves, x_grid_v3, COLORS[v3_label], "ShapeEvolve", extend=False)
 
     # Axes
     ax.set_xscale("log")
@@ -247,10 +261,10 @@ def main():
     print("\nMethod            n_runs  best_Cd   median_final  mean_final")
     print("-" * 62)
     for name, curves in [
-        ("GA/PSO",      ga_curves),
-        ("L-BFGS-B",   lb_curves),
-        ("BO_torch",   bo_curves),
-        (v3_label,     v3_curves),
+        ("L-BFGS-B",                 lb_curves),
+        ("Bayesian Opt. (exact GP)", bo_curves),
+        ("PSO (120p × 500i)",        ga_curves),
+        (v3_label,                   v3_curves),
     ]:
         if not curves:
             continue

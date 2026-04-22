@@ -57,8 +57,8 @@ STYLE = {
 DEFAULT_COLORS = {
     "v3":      "#2ca02c",
     "adjoint": "#333333",
-    "pso":     "#ff7f0e",
-    "bo":      "#9467bd",
+    "pso":     "#1f77b4",
+    "bo":      "#ff7f0e",
     "lbfgsb":  "#e377c2",
 }
 

@@ -26,7 +26,7 @@ OUT_DIR = f"{BASE}/convergence_plots_LAM500"
 os.makedirs(OUT_DIR, exist_ok=True)
 
 # ── Style (matches other LAM500 plots) ───────────────────────────────────────
-C = {"GA": "#e07b39", "LBFGSB": "#2176ae", "v3": "#57a773", "BO": "#8e4ec6"}
+C = {"GA": "#1f77b4", "LBFGSB": "#e377c2", "v3": "#2ca02c", "BO": "#ff7f0e"}
 STYLE = {
     "font.family": "serif",
     "font.serif": ["Times New Roman", "DejaVu Serif", "serif"],
@@ -81,10 +81,10 @@ LABELS   = ["Stage 1\n(Raw optimizer\nbest NF L/D)",
             "Stage 2\n(IPOPT-refined\nNF L/D)",
             "Stage 3\n(XFOIL-validated\nL/D)"]
 METHODS  = [
-    ("LBFGSB", "L-BFGS-B s25"),
-    ("BO",     "Bayesian Opt. (exact GP) s1"),
-    ("GA",     r"PSO (120p$\times$500i) att13"),
-    ("v3",     "ShapeEvolve att15"),
+    ("LBFGSB", "L-BFGS-B"),
+    ("BO",     "Bayesian Opt. (exact GP)"),
+    ("GA",     r"PSO (120p$\times$500i)"),
+    ("v3",     "ShapeEvolve"),
 ]
 
 for key, label in METHODS:

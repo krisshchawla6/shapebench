@@ -23,7 +23,7 @@ OUT_DIR = f"{BASE}/convergence_plots_LAM500"
 os.makedirs(OUT_DIR, exist_ok=True)
 
 # ── Style ─────────────────────────────────────────────────────────────────────
-C = {"GA": "#e07b39", "LBFGSB": "#2176ae", "v3": "#57a773", "BO": "#8e4ec6"}
+C = {"GA": "#1f77b4", "LBFGSB": "#e377c2", "v3": "#2ca02c", "BO": "#ff7f0e"}
 STYLE = {
     "font.family": "serif",
     "font.serif": ["Times New Roman", "DejaVu Serif", "serif"],

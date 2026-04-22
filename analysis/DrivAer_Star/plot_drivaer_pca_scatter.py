@@ -42,10 +42,10 @@ from mesh_generator import PARAM_KEYS, BOUNDS
 MAX_PER_RUN = 300
 
 COLORS = {
-    "GA/PSO":         "#e07b39",
-    "L-BFGS-B":       "#7b9e87",
-    "BO_torch":       "#4a90d9",
-    "v3 flash-2.5":   "#9b59b6",
+    "L-BFGS-B":                 "#e377c2",
+    "Bayesian Opt. (exact GP)": "#ff7f0e",
+    "PSO (120p × 500i)":        "#1f77b4",
+    "ShapeEvolve":              "#2ca02c",
 }
 
 
@@ -203,10 +203,10 @@ def main():
     v3_X,   v3_cd   = load_v3_designs()
 
     datasets = [
-        ("GA/PSO",       ga_X,  ga_cd),
-        ("L-BFGS-B",     lb_X,  lb_cd),
-        ("BO_torch",     bo_X,  bo_cd),
-        ("v3 flash-2.5", v3_X,  v3_cd),
+        ("L-BFGS-B",                 lb_X,  lb_cd),
+        ("Bayesian Opt. (exact GP)", bo_X,  bo_cd),
+        ("PSO (120p × 500i)",        ga_X,  ga_cd),
+        ("ShapeEvolve",              v3_X,  v3_cd),
     ]
     datasets = [(n, X, cd) for n, X, cd in datasets if len(X) > 0]
 

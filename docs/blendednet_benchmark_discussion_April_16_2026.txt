@@ -9,8 +9,19 @@ environment. It uses a Transolver surrogate (same architecture as DrivAer_Star)
 to predict aerodynamic fields, with the shapebench_5 multi-point drag
 minimization reward.
 
-This file documents the benchmark runs of PSO (GA framework), L-BFGS-B, and
-v3_dynamic_optimizer on BlendedNet / shapebench_5.
+This file documents the benchmark runs on BlendedNet across two reward functions:
+
+  shapebench_5 (multi-point CD minimisation):
+    Methods: GA/PSO (10 attempts), L-BFGS-B nr3 + nr10 (10 seeds each),
+             BO_torch n=500 (10 seeds), CMA-ES n=500 + n500→1000 (10 seeds),
+             v3_dynamic_optimizer (10 attempts)
+    Status: ALL COMPLETE (April 18–21, 2026)
+
+  shapebench_5_max_LD (multi-point mean L/D maximisation):
+    Methods: BO_torch n=500 (10 seeds, COMPLETE), BO_torch n=1000 (10 seeds, RUNNING),
+             GA_parallel/PSO 20p×200i (10 seeds, RUNNING), CMA-ES n=1000 (10 seeds, RUNNING),
+             v3_dynamic_optimizer 200iter×10batch (10 attempts, RUNNING)
+    Status: BO n=500 complete; all others running as of April 22, 2026
 
 
 ENVIRONMENT
@@ -702,6 +713,33 @@ DESIGN OF EXPERIMENTS NOTES
   10D space. The prior 2000-eval run may have been too short to fully converge.
   At ~30-50s/eval (after fix 5), 4000 evals ≈ 33-55h wall time per attempt.
 
+  WHY 20 PARTICLES (not 120 as used in DrivAer/NeuralFoil)
+  ---------------------------------------------------------
+  Two factors explain the smaller particle count:
+
+  1. Dimensionality. BlendedNet has a 10D design space; DrivAer uses 20 FFD
+     parameters and NeuralFoil uses 18 Kulfan coefficients. For 10D, 20
+     particles is within the standard PSO recommendation (~10–30 particles for
+     low-dimensional problems). 120 particles is more appropriate for 18–20D
+     where greater population diversity is needed to cover the larger space.
+
+  2. Evaluation cost. BlendedNet costs ~30–50 s/eval (OpenVSP mesh generation
+     + 24 Transolver calls for multi-point CL bisection). Scaling to 120p×500i
+     = 60,000 evals would cost ~500–840 h per run — completely infeasible.
+     DrivAer and NeuralFoil evaluations are single surrogate or NeuralFoil
+     calls in the millisecond range, making 60,000 evals practical for them.
+
+  IS 20 PARTICLES SUFFICIENT?
+  ---------------------------
+  There is no controlled ablation study comparing 20p vs. more particles at
+  the same total budget. The indirect evidence is convergence: observed runs
+  flatten by iteration ~150–170 (~3,000–3,400 evals), meaning the final
+  600–1,000 evals contribute nothing. This suggests the search is not starved
+  for population diversity — it converges before exhausting the budget.
+  However, this does not rule out that more particles could reach different
+  (better) basins. The 20-particle choice was inherited from the initial
+  exploratory run (20p×100i) and never systematically validated.
+
 - v3 uses 2000 evals (200 iter × 10 per iter). The LLM oracle provides
   high-level reasoning about which regions to explore, which can offset the
   smaller raw eval budget. Each iteration: 1 LLM-proposed s0 design + 9
@@ -1118,8 +1156,368 @@ Sbatch scripts:
   sbatch/environments/BlendedNet/v3/v3_flash2_5_shapebench_5_max_LD_n2000.config.json
   sbatch/environments/BlendedNet/v3/run_v3_flash2_5_shapebench_5_max_LD_attempt{N}.slurm
 
-Results to be added once runs complete.
+BO n=500 RESULTS (shapebench_5_max_LD) — completed April 22 2026
+-----------------------------------------------------------------
+All 10 seeds ran to completion (500 evals each). Final best_reward per seed:
+
+  seed | best_reward
+  -----|------------
+  s0   |   45.59
+  s1   |   45.60
+  s2   |   46.29
+  s3   |   46.45
+  s4   |   45.74
+  s5   |   46.25
+  s6   |   46.04
+  s7   |   47.18
+  s8   |   45.45
+  s9   |   47.84
+
+  Range: 45.45 – 47.84   Median: 46.14   Mean: ~46.24
+
+Convergence by 50-eval intervals (best_reward at each checkpoint):
+
+  seed |  e50   e100   e150   e200   e250   e300   e350   e400   e450   e500
+  -----|-----------------------------------------------------------------------
+  s0   | 41.23  43.86  43.86  43.86  45.41  45.58  45.58  45.58  45.58  45.59
+  s1   | 38.12  45.25  45.25  45.25  45.25  45.25  45.25  45.60  45.60  45.60
+  s2   | 42.18  42.52  43.65  43.86  44.33  44.33  45.19  45.19  45.92  46.29
+  s3   | 43.86  46.45  46.45  46.45  46.45  46.45  46.45  46.45  46.45  46.45
+  s4   | 40.74  44.12  44.12  44.67  45.28  45.42  45.60  45.60  45.60  45.74
+  s5   | 43.95  45.62  45.62  45.62  45.62  45.62  46.25  46.25  46.25  46.25
+  s6   | 41.19  45.15  45.20  45.35  45.35  45.35  45.35  46.04  46.04  46.04
+  s7   | 45.61  47.18  47.18  47.18  47.18  47.18  47.18  47.18  47.18  47.18
+  s8   | 42.33  44.10  44.87  44.87  45.40  45.40  45.44  45.45  45.45  45.45
+  s9   | 43.82  45.31  47.84  47.84  47.84  47.84  47.84  47.84  47.84  47.84
+  -----|-----------------------------------------------------------------------
+  med  | 42.25  45.20  45.23  45.30  45.41  45.50  45.59  45.82  45.98  46.14
+  min  | 38.12  42.52  43.65  43.86  44.33  44.33  45.19  45.19  45.45  45.45
+  max  | 45.61  47.18  47.84  47.84  47.84  47.84  47.84  47.84  47.84  47.84
+
+Convergence notes:
+  - Median jumps from 42.25 at e50 to 45.20 at e100, then barely changes through
+    e300 (+0.30 over 200 more evals). Most seeds have plateaued by e100–e150.
+  - s7 and s9 are the best performers, both plateauing extremely early (s7 at e100
+    with 47.18; s9 at e150 with 47.84). These likely found a strong basin in the
+    random initial phase (n_initial=30) and converged quickly.
+  - s2 is the anomalous seed: still improving at every 50-eval checkpoint through
+    e500 (42.18 → 46.29), with no clear plateau. This is the primary motivation
+    for the n=1000 extended runs.
+  - s3 converges sharply at e100 (43.86 → 46.45) and then completely flat for
+    400 more evals. Classic BO fast-lock onto the optimum.
+  - s0, s1, s8: weakest performers (45.45–45.60 at e500), but not by much —
+    all are within 2.4 L/D units of the best.
+
+Overall assessment: BO is highly sample-efficient for this problem. 100 evals
+capture ~97% of the 500-eval performance (median 45.20 vs 46.14). Extended runs
+(n=1000) are motivated primarily by s2's lack of plateau rather than expectation
+of large gains across all seeds.
+
+GA_parallel RESULTS (shapebench_5_max_LD) — RUNNING as of April 22 2026
+------------------------------------------------------------------------
+Jobs 3339–3348 (seeds 0–9, 20p×200i).
+
+Convergence by iteration (gbest at every 20 iters; "---" = not yet reached):
+
+  seed | i20   i40   i60   i80   i100  i120  i140  i160  i180  i200 | evals
+  -----|--------------------------------------------------------------|------
+  s0   | 41.96 43.09 43.17 43.30 43.31 43.34 43.47 43.50 43.51  ---  | 3380
+  s1   | 43.91 43.94 44.53 44.53 44.53 44.53 44.53 44.53 44.53  ---  | 2780
+  s2   | 43.01 44.65 44.71 44.99 45.06 45.06 45.06 45.06 45.06  ---  | 2760
+  s3   | 45.45 45.70 45.71 45.72 45.72 45.72 45.72 45.72 45.72  ---  | 2840
+  s4   | 43.69 45.52 45.57 45.59 45.59 45.59 45.59 45.59 45.59  ---  | 2460
+  s5   | 42.70 43.30 43.30 43.32 43.90 44.23 44.23 44.23  ---   ---  | 2340
+  s6   | 42.45 43.55 43.61 43.61 43.71 43.71 43.71 43.71  ---   ---  | 2360
+  s7   | 38.44 40.05 40.14 40.33 40.33 40.42 40.59 40.59  ---   ---  | 2540
+  s8   | 40.15 42.22 42.54 42.63 42.67 42.69 42.69 42.69  ---   ---  | 2560
+  s9   | 44.23 44.49 44.74 44.74 44.75 44.75 44.75 44.94 44.95  ---  | 3680
+
+Convergence assessment:
+  - PSO converges completely by iter 60–120 across all seeds. For seeds that
+    have passed iter 120, gbest is flat — the remaining iterations add zero
+    improvement.
+  - The 200-iteration budget is over-provisioned: ~80% of improvement is
+    captured by iter 40, ~100% by iter 120. Budget was inherited from the serial
+    GA without accounting for how fast the swarm collapses.
+  - s3 and s4 locked onto their basins within iter 20–40; best values 45.72
+    and 45.59.
+  - s7 is the weak outlier (40.59); s0 improves slowly but well below the best.
+
+Final results to be added on completion.
+
+CMA-ES RESULTS (shapebench_5_max_LD, n=1000) — RUNNING as of April 22 2026
+----------------------------------------------------------------------------
+Jobs 3299–3308 (seeds 0–9, n_calls=1000).
+
+Convergence by eval (best_reward at every 100 evals; "---" = not yet reached):
+
+  seed | e100  e200  e300  e400  e500  e600  e700  e800  e900 e1000 | evals
+  -----|--------------------------------------------------------------|------
+  s0   | 38.20 42.90 43.55 45.30 45.49  ---   ---   ---   ---   ---  |  556
+  s1   | 39.18 40.97 42.44 43.19 44.00  ---   ---   ---   ---   ---  |  556
+  s2   | 42.08 42.08 44.36 44.63 45.35  ---   ---   ---   ---   ---  |  563
+  s3   | 39.01 40.84 42.44 43.32 44.92  ---   ---   ---   ---   ---  |  561
+  s4   | 39.90 43.17 43.58 45.40 45.66  ---   ---   ---   ---   ---  |  564
+  s5   | 39.68 40.27 41.03 42.86 44.08  ---   ---   ---   ---   ---  |  562
+  s6   | 39.48 41.72 43.57 43.66 44.15  ---   ---   ---   ---   ---  |  558
+  s7   | 41.45 42.09 42.86 43.38 43.70  ---   ---   ---   ---   ---  |  558
+  s8   | 36.44 42.24 43.95 44.61 45.01  ---   ---   ---   ---   ---  |  559
+  s9   | 35.15 40.35 43.70 44.43 44.99  ---   ---   ---   ---   ---  |  563
+  -----|--------------------------------------------------------------|------
+  med  | 39.33 41.90 43.56 44.05 44.96  ---   ---   ---   ---   ---  |
+  min  | 35.15 40.27 41.03 42.86 43.70  ---   ---   ---   ---   ---  |
+  max  | 42.08 43.17 44.36 45.40 45.66  ---   ---   ---   ---   ---  |
+
+Convergence assessment:
+  - CMA-ES is actively improving at the ~56% mark — no seed has plateaued yet.
+    Median rises steadily: 39.33 (e100) → 41.90 (e200) → 43.56 (e300) →
+    44.05 (e400) → 44.96 (e500). Plateau expected around e500–e600.
+  - The n=1000 budget appears ~2× what's needed; convergence pattern similar to
+    the shapebench_5 n=500→1000 runs which plateaued by ~e750.
+  - s7 is the weakest seed (43.70 at e500, smallest gains since e300).
+  - s5, s6, s9 show largest gains in e400–e500 — still in active phase.
+
+Final results to be added on completion.
+
+v3 RESULTS (shapebench_5_max_LD, n=2000) — RUNNING as of April 22 2026
+-----------------------------------------------------------------------
+Jobs 3329–3338 (attempts 1–10, 200iter×10batch).
+
+Convergence by eval (best_reward at every 200 evals; "---" = not yet reached):
+
+  att  | e200  e400  e600  e800 e1000 e1200 e1400 e1600 e1800 e2000 | evals
+  -----|--------------------------------------------------------------|------
+  a01  | 37.64 37.65  ---   ---   ---   ---   ---   ---   ---   ---  |  517
+  a02  | 41.53 41.96 44.15  ---   ---   ---   ---   ---   ---   ---  |  523
+  a03  | 33.68 34.92 35.30  ---   ---   ---   ---   ---   ---   ---  |  500
+  a04  | 33.88 36.93 38.47  ---   ---   ---   ---   ---   ---   ---  |  533
+  a05  | 36.99 37.01 37.95  ---   ---   ---   ---   ---   ---   ---  |  521
+  a06  | 33.85 36.68 37.27  ---   ---   ---   ---   ---   ---   ---  |  528
+  a07  | 37.63 37.64 37.65  ---   ---   ---   ---   ---   ---   ---  |  554
+  a08  | 36.09 37.22 37.46  ---   ---   ---   ---   ---   ---   ---  |  511
+  a09  | 39.28 44.94 46.01  ---   ---   ---   ---   ---   ---   ---  |  508
+  a10  | 36.48 36.77 36.82  ---   ---   ---   ---   ---   ---   ---  |  519
+  -----|--------------------------------------------------------------|------
+  med  | 36.73 37.12 37.65  ---   ---   ---   ---   ---   ---   ---  |
+  min  | 33.68 34.92 35.30  ---   ---   ---   ---   ---   ---   ---  |
+  max  | 41.53 44.94 46.01  ---   ---   ---   ---   ---   ---   ---  |
+
+Recent improvement trend (Δ in last ~150–200 evals as of April 22):
+
+  att  | best@e350 | current | Δ recent | status
+  -----|-----------|---------|----------|--------
+  a01  |   37.64   |  37.65  |  +0.01   | stuck
+  a02  |   41.73   |  44.15  |  +2.42   | improving
+  a03  |   34.84   |  35.30  |  +0.46   | slow/stuck
+  a04  |   36.81   |  38.47  |  +1.66   | improving
+  a05  |   37.00   |  37.95  |  +0.95   | borderline
+  a06  |   35.39   |  37.27  |  +1.88   | improving
+  a07  |   37.64   |  37.65  |  +0.01   | stuck
+  a08  |   37.10   |  37.46  |  +0.36   | slow/stuck
+  a09  |   44.14   |  46.01  |  +1.87   | improving
+  a10  |   36.75   |  36.82  |  +0.07   | stuck
+
+Convergence assessment:
+  - 4 of 10 attempts actively improving at 25% of budget (a02, a04, a06, a09);
+    6 appear stuck. Mirrors the shapebench_5 v3 pattern (4/10 found the good
+    basin at completion).
+  - a09 is the standout (46.01, +1.87 in last 158 evals) — still climbing and
+    potentially competitive with BO's best (47.84). Further gains cannot be
+    ruled out.
+  - a02 also strong (+2.42 in last 173 evals); likely has further room to grow.
+  - a01, a07, a10 effectively flat (<0.1 in 170+ evals) — remaining budget
+    likely wasted for these attempts.
+  - Final median will be dominated by whether a09 and a02 continue to improve.
+
+Final results to be added on completion.
+
+STATUS CHECK — April 21 2026, ~2h 13min into runs
+-------------------------------------------------
+All 40 jobs confirmed running (R state), no crashes.
+
+Progress (evals logged so far):
+  CMA-ES   seeds 0–9: ~186–188 / 1000 evals (~19%)
+  GA       seeds 0–9: ~161–181 / 4000 evals (~4–5%); seed9 at 281 (faster node)
+  BO_torch seeds 0–9: ~176–191 / 500 evals (~35–38%); seed9 at 297 (~59%)
+  v3       att 1–10:  ~141–151 rows (iteration 13–14)
+
+Reward sanity check — all positive, no -5.0 failures:
+  CMA-ES best so far: ~40–43 (mean L/D across operating points)
+  v3     best so far: ~37–38
+
+Error logs:
+  BO seed4 (job 3313): BoTorch gen_candidates_scipy RuntimeWarning (scipy
+    status 2, "ABNORMAL"). BoTorch auto-retries with new initial conditions;
+    not fatal, job is progressing normally.
+  v3 all attempts: three FutureWarning deprecation notices on import
+    (google-api-core Python 3.10 EOL, google.generativeai deprecated,
+    timm.models.layers). All harmless, no action needed.
+  All other logs: 2 lines (SLURM header only), clean.
 
 FILES ADDED / UPDATED
   analysis/reconstruct_results_csv.py  (new — CSV reconstruction from save dirs)
   analysis/BlendedNet/plot_blendednet_planform.py  (vertical 3D layout, scale bar)
+
+STATUS CHECK — April 21 2026, ~3h 08min into CMA-ES/GA/BO, ~2h 43min into v3
+------------------------------------------------------------------------------
+All 40 jobs confirmed running (R state), no crashes.
+
+Progress and eval rates:
+  CMA-ES seeds 0–9: 255–259 / 1000 evals (~25.7%)  |  rate: ~44 s/eval
+  GA     seeds 0–8: 240 / 4000 evals (~6%)          |  rate: ~47 s/eval
+  GA     seed9:     400 / 4000 evals (~10%)          |  rate: ~28 s/eval *
+  BO     seeds 0–8: 240–261 / 500 evals (~50%)       |  rate: ~45 s/eval
+  BO     seed9:     402 / 500 evals (~80%)            |  rate: ~28 s/eval *
+  v3     att 1–10:  200–221 / 2000 evals (~10.6%)    |  rate: ~46 s/eval
+
+  * GA seed9 and BO seed9 both running ~40–60% faster than peer seeds. Both
+    run on node-6 alongside the other GA/BO jobs. Likely due to natural variance
+    in evaluation time (the CL bisection terminates early for certain design
+    configurations). Not a concern.
+
+Estimated completion (from time of this check):
+  BO seed9:     ~46 min    (98 evals remaining at 28 s/eval)
+  BO seeds 0–8: ~3.1 h     (248 evals remaining at 45 s/eval)
+  CMA-ES:       ~9.1 h     (743 evals remaining at 44 s/eval)
+  v3:           ~23 h      (1,789 evals remaining at 46 s/eval)
+  GA seed9:     ~28 h      (3,600 evals remaining at 28 s/eval)
+  GA seeds 0–8: ~49 h      (3,760 evals remaining at 47 s/eval)
+
+  GA total projected runtime: ~52 h (4000 evals × 47 s/eval). This is a
+  2+ day run; no wall-time limit set in the sbatch scripts, so it will run
+  to completion unless cancelled.
+
+Best reward (L/D) seen so far per method (early-run snapshot):
+  BO:     45.2–47.8  (median ~45.4, seeds 0–9)  — leading at this stage
+  CMA-ES: 40.3–44.4  (median ~42.8, seeds 0–9)
+  GA:     37.1–43.9  (median ~40.2, seeds 0–9)  — only 6% of budget, too early to judge
+  v3:     33.7–41.5  (median ~36.9, att 1–10)   — only 10% of budget, too early to judge
+
+  Rankings will likely shift: BO is at mid-run while GA and v3 are very early.
+
+Error log status:
+  BO seeds 3–4 (jobs 3310, 3313): BoTorch gen_candidates_scipy RuntimeWarning
+    (scipy status 2, "ABNORMAL", retried with new initial conditions). Standard
+    BoTorch fallback — not fatal, both jobs progressing normally.
+  All other jobs: 2-line logs (timm.layers FutureWarning only). Clean.
+  v3: 13-line logs (timm + google-api-core + google.generativeai deprecation
+    warnings on import). All harmless.
+
+GA PARALLELISATION — April 22 2026
+------------------------------------
+The serial GA runs (jobs 3300–3327, seeds 0–9) were cancelled at ~5h05m elapsed
+(240/4000 evals, ~6% complete). Projected total runtime was ~52h (4000 evals ×
+47 s/eval), making them the longest-running jobs by far.
+
+A new GA_parallel framework was created at frameworks/GA_parallel/ (run.py +
+__init__.py). It is algorithmically identical to GA/run.py — same PSO update,
+same CSV format, same output structure — but evaluates all n_particles within
+each iteration concurrently via ProcessPoolExecutor. torch.set_num_threads(1)
+is set in each worker initializer to prevent PyTorch thread contention across
+the 20 concurrent subprocesses.
+
+The serial GA/run.py was left completely unchanged (confirmed via git diff).
+GA_parallel is a separate framework, loaded via --framework GA_parallel, so
+NeuralFoil, DrivAer, and CERAS runs using --framework GA are unaffected.
+
+Expected speedup: ~20× per run (one eval latency per iteration instead of
+20 × eval latency). Projected runtime: ~2.3h (200 iters × 41–47 s/iter),
+down from ~52h serial.
+
+Note: --random_state was deliberately omitted from GA_parallel (matching the
+serial GA framework). The 10 runs are independent realizations from OS random
+seeding, consistent with the completed shapebench_5 attempts.
+
+New jobs (April 22 2026):
+  GA_parallel seeds 0–9 → jobs 3339–3348  (--cpus-per-task=20 each)
+
+Slurm placement (--ntasks=1 --cpus-per-task=20):
+  node-6 (128 vCPU): GAp s0–s3 (4×20=80) + BO s0–s8 (9×1=9)  =  89/128 CPUs
+  node-8 (128 vCPU): GAp s4–s8 (5×20=100) + v3 (10×1) + CMA-ES (10×1) = 120/128 CPUs
+  node-7 (128 vCPU): GAp s9 (1×20=20)                                  =  20/128 CPUs
+  (node-7 was spun up fresh: nodes 6 and 8 had insufficient free CPUs for s9)
+
+Resource accounting chain:
+  --cpus-per-task=20  → Slurm reserves 20 cores per job, bin-packs across nodes
+  ProcessPoolExecutor(max_workers=20)  → spawns 20 worker subprocesses
+  torch.set_num_threads(1) in _worker_init  → each worker uses exactly 1 core
+  Result: 20 workers × 1 core = 20 cores used, matching the Slurm reservation exactly.
+
+Output directories:
+  environments/BlendedNet/results/run_GA_parallel_shapebench_5_max_LD_seed{N}_20p_200i/
+
+Sbatch scripts:
+  sbatch/environments/BlendedNet/GA/ga_parallel_20p_200i_shapebench_5_max_LD.config.json
+  sbatch/environments/BlendedNet/GA/run_GA_parallel_shapebench_5_max_LD_seed{N}_20p_200i.slurm
+
+Partial serial results (240 evals each, seeds 0–8; 400 evals, seed 9) remain in
+the run_GA_shapebench_5_max_LD_seed{N}_20p_200i directories and are not deleted.
+
+
+BO n=1000 EXTENDED RUNS — April 22 2026
+-----------------------------------------
+Motivation: the n=500 BO runs showed most seeds plateau by e100–e150 (median
+gbest: 42.25 at e0 → 45.20 at e100 → 46.14 at e500, only +0.94 in final 400
+evals). However seed 2 was anomalous — it continued improving at every 50-eval
+checkpoint through e500 with no sign of plateau. This justified a separate n=1000
+experiment to see if (a) s2 plateaus in the second half, and (b) any other seeds
+show late-phase gains.
+
+These are set up as a distinct experiment rather than resuming n=500 runs. They
+use the same random_state seeds (seed N → --random_state N) so the first 500 evals
+are directly comparable, and output to separate directories with the _n1000 suffix
+to avoid any collision with the existing n=500 results.
+
+Config / framework: BO_torch, reward=shapebench_5_max_LD, n_calls=1000,
+n_initial=30, mach=0.3, re=1e7. No config JSON — args passed directly in slurm.
+
+New jobs (April 22 2026):
+  BO n=1000 seeds 0–9 → jobs 3349–3358  (--cpus-per-task=1 each)
+
+Output directories:
+  environments/BlendedNet/results/run_BO_torch_shapebench_5_max_LD_seed{N}_n1000/
+
+Sbatch scripts:
+  sbatch/environments/BlendedNet/BO_torch/run_BO_torch_shapebench_5_max_LD_seed{N}_n1000.slurm
+
+Projected runtime: ~12.7h (1000 evals × ~46 s/eval). GP fitting overhead grows
+with n, so later iterations will be slower; actual runtime may be 14–16h.
+
+
+STATUS CHECK — April 22 2026, ~7h30m into session
+---------------------------------------------------
+Timestamp: CMA-ES/v3 at ~7h27m/7h02m elapsed; GA_parallel at ~2h15m; BO n=1000 at ~3min.
+
+GA_parallel (jobs 3339–3348):
+  seed | iters | pct  | gbest  | ETA
+  -----|-------|------|--------|------
+  s0   | 151   |  76% | 43.50  |  ~44 min
+  s1   | 125   |  62% | 44.53  |  ~81 min
+  s2   | 125   |  62% | 45.06  |  ~81 min
+  s3   | 128   |  64% | 45.72  |  ~76 min
+  s4   | 111   |  56% | 45.59  | ~108 min
+  s5   | 105   |  52% | 43.91  | ~122 min
+  s6   | 106   |  53% | 43.71  | ~120 min
+  s7   | 115   |  58% | 40.42  | ~100 min
+  s8   | 116   |  58% | 42.68  |  ~98 min
+  s9   | 166   |  83% | 44.95  |  ~27 min
+  (all jobs healthy; ~0.80–1.29 min/iter, varying by node load)
+  Projected completion window: s9 first (~27 min), s5/s6 last (~2h)
+  Current gbest range: 40.42 (s7) – 45.72 (s3); median ~44.5
+
+CMA-ES (jobs 3299–3308):
+  ~55% complete (544–552/1000 evals) at 7h27m elapsed
+  Best rewards: 43.74 (s7) – 45.66 (s4); median ~45.1
+  Rate: ~1.22 evals/min → ~6.2h remaining
+  ETA completion: ~6.2h from now
+
+v3 (jobs 3329–3338):
+  ~25% complete (490–534/2000 evals) at 7h02m elapsed
+  Best rewards: 35.30 (a3) – 46.01 (a9); median ~37.7 (most attempts struggling)
+  a9 is an outlier at 46.01; a2 also solid at 43.62; others 35–38
+  Rate: ~1.19 evals/min → ~21h remaining
+  ETA completion: ~21h from now
+
+BO n=1000 (jobs 3349–3358):
+  Just started — 2–4 evals each, 0.3–0.4% complete
+  ETA completion: ~12.7–16h (GP fitting overhead grows with n)

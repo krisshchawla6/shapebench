@@ -34,10 +34,10 @@ sys.path.insert(0, os.path.join(REPO_DIR, "environments", "DrivAer_Star"))
 from mesh_generator import PARAM_KEYS, BOUNDS
 
 COLORS = {
-    "GA/PSO":         "#e07b39",
-    "L-BFGS-B":       "#7b9e87",
-    "BO_torch":       "#4a90d9",
-    "v3 flash-2.5":   "#9b59b6",
+    "L-BFGS-B":                 "#e377c2",
+    "Bayesian Opt. (exact GP)": "#ff7f0e",
+    "PSO (120p × 500i)":        "#1f77b4",
+    "ShapeEvolve":              "#2ca02c",
 }
 
 
@@ -224,10 +224,10 @@ def main():
 
     datasets = []
     loaders = [
-        ("GA/PSO",       COLORS["GA/PSO"],       load_ga_best_run),
-        ("L-BFGS-B",     COLORS["L-BFGS-B"],     load_lbfgsb_best_run),
-        ("BO_torch",     COLORS["BO_torch"],      load_bo_best_run),
-        ("v3 flash-2.5", COLORS["v3 flash-2.5"], load_v3_best_run),
+        ("L-BFGS-B",                 COLORS["L-BFGS-B"],                 load_lbfgsb_best_run),
+        ("Bayesian Opt. (exact GP)", COLORS["Bayesian Opt. (exact GP)"], load_bo_best_run),
+        ("PSO (120p × 500i)",        COLORS["PSO (120p × 500i)"],        load_ga_best_run),
+        ("ShapeEvolve",              COLORS["ShapeEvolve"],               load_v3_best_run),
     ]
     for name, color, loader in loaders:
         print(f"Loading {name}...")

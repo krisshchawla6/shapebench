@@ -32,10 +32,10 @@ sys.path.insert(0, os.path.join(REPO_DIR, "environments", "DrivAer_Star"))
 from mesh_generator import PARAM_KEYS, BOUNDS
 
 COLORS = {
-    "GA/PSO":         "#e07b39",
-    "L-BFGS-B":       "#7b9e87",
-    "BO_torch":       "#4a90d9",
-    "v3 flash-2.5":   "#9b59b6",
+    "L-BFGS-B":                 "#e377c2",
+    "Bayesian Opt. (exact GP)": "#ff7f0e",
+    "PSO (120p × 500i)":        "#1f77b4",
+    "ShapeEvolve":              "#2ca02c",
 }
 
 
@@ -83,7 +83,7 @@ def load_best_ga():
                 with open(design_path) as f:
                     best_params = json.load(f)
                 best_cd = cd
-    print(f"GA/PSO best Cd: {best_cd:.5f}")
+    print(f"PSO best Cd: {best_cd:.5f}")
     return best_params, best_cd
 
 
@@ -133,7 +133,7 @@ def load_best_bo():
                 with open(design_path) as f:
                     best_params = json.load(f)
                 best_cd = cd
-    print(f"BO_torch best Cd: {best_cd:.5f}")
+    print(f"Bayesian Opt. best Cd: {best_cd:.5f}")
     return best_params, best_cd
 
 
@@ -161,7 +161,7 @@ def load_best_v3():
                     with open(design_path) as f:
                         best_params = json.load(f)
                     best_cd = cd
-    print(f"v3 flash-2.5 best Cd: {best_cd:.5f}")
+    print(f"ShapeEvolve best Cd: {best_cd:.5f}")
     return best_params, best_cd
 
 
@@ -197,10 +197,10 @@ def main():
 
     entries = []
     for params, cd, name, color in [
-        (ga_params, ga_cd,   "GA/PSO",       COLORS["GA/PSO"]),
-        (lb_params, lb_cd,   "L-BFGS-B",     COLORS["L-BFGS-B"]),
-        (bo_params, bo_cd,   "BO_torch",      COLORS["BO_torch"]),
-        (v3_params, v3_cd,   "v3 flash-2.5", COLORS["v3 flash-2.5"]),
+        (lb_params, lb_cd,   "L-BFGS-B",                 COLORS["L-BFGS-B"]),
+        (bo_params, bo_cd,   "Bayesian Opt. (exact GP)", COLORS["Bayesian Opt. (exact GP)"]),
+        (ga_params, ga_cd,   "PSO (120p × 500i)",        COLORS["PSO (120p × 500i)"]),
+        (v3_params, v3_cd,   "ShapeEvolve",              COLORS["ShapeEvolve"]),
     ]:
         if params is not None:
             entries.append((normalize_params(params), cd, name, color))

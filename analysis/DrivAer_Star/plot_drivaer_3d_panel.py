@@ -50,11 +50,11 @@ CELL_W, CELL_H = 700, 350
 
 # Method colours for title bars
 METHOD_COLORS = {
-    "Baseline":     "#888888",
-    "GA/PSO":       "#e07b39",
-    "L-BFGS-B":     "#7b9e87",
-    "BO_torch":     "#4a90d9",
-    "v3 flash-2.5": "#9b59b6",
+    "Baseline":                  "#888888",
+    "L-BFGS-B":                  "#e377c2",
+    "Bayesian Opt. (exact GP)":  "#ff7f0e",
+    "PSO (120p × 500i)":         "#1f77b4",
+    "ShapeEvolve":               "#2ca02c",
 }
 
 # Set by main() before _render() is called
@@ -251,7 +251,7 @@ def main():
     # GA/PSO and L-BFGS-B only available for Estate (E)
     if body == "E":
         for name, loader in [
-            ("GA/PSO",   load_best_ga),
+            ("PSO (120p × 500i)", load_best_ga),
             ("L-BFGS-B", load_best_lbfgsb),
         ]:
             params, cd = loader()
@@ -259,8 +259,8 @@ def main():
                 entries.append((name, params, cd))
 
     for name, loader, kwargs in [
-        ("BO_torch",     load_best_bo,  {"body": body}),
-        ("v3 flash-2.5", load_best_v3,  {"body": body}),
+        ("Bayesian Opt. (exact GP)", load_best_bo, {"body": body}),
+        ("ShapeEvolve",             load_best_v3, {"body": body}),
     ]:
         params, cd = loader(**kwargs)
         if params is not None:
