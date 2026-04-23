@@ -110,18 +110,12 @@ def full_span_polygon(params):
 
 # ── 3D render ─────────────────────────────────────────────────────────────────
 
-def _render(params):
+def _render(params, ref_span=None):
     """Shallow isometric BWB render (elev≈20°, az≈45°) with 500 mm scale bar.
 
-    Camera is tighter than the original (dist=span*1.0, zoom=1.1 vs 1.6/0.85)
-    so the aircraft fills the frame when used in compact vertical panels.
-
-    Scale bar: drawn in normalized mesh coordinates.  The mesh is generated with
-    root chord C1 = 1 normalized unit = 1000 mm.  The half-span in normalized
-    units is bounds[3] (= half_span_mm / 1000).  A 500 mm bar therefore spans
-    500 / half_span_mm * bounds[3] normalized units, independent of design.
-    Bar is placed just in front of the LE (x < bounds[0]) at mid-span, at the
-    mesh's bottom z-plane, so it sits clearly below the fuselage in the render.
+    ref_span: full-span in normalized units (mm/1000 * 2) shared across all
+    panels in a plot so every panel uses the same camera distance → consistent
+    zoom level.  Falls back to this design's own span if None.
     """
     half_span_mm = params["B1"] + params["B2"] + params["B3"]
     bar_mm = 500.0
@@ -147,8 +141,8 @@ def _render(params):
     cx = (bounds[0] + bounds[1]) / 2
     cy = (bounds[2] + bounds[3]) / 2
     cz = (bounds[4] + bounds[5]) / 2
-    span = max(bounds[3] - bounds[2], bounds[1] - bounds[0])
-    dist = span * 1.0  # tighter than original (was 1.6)
+    mesh_span = max(bounds[3] - bounds[2], bounds[1] - bounds[0])
+    dist = (ref_span if ref_span is not None else mesh_span) * 1.0
 
     el = np.radians(20)
     az = np.radians(45)
@@ -171,19 +165,20 @@ def _render(params):
     bar = pv.Line((bx, by0, bz), (bx, by1, bz))
     plotter.add_mesh(bar, color="black", line_width=3)
 
-    cap_r = 0.018
+    cap_r = 0.05
     for y_cap in [by0, by1]:
         cap = pv.Line((bx - cap_r, y_cap, bz), (bx + cap_r, y_cap, bz))
-        plotter.add_mesh(cap, color="black", line_width=3)
+        plotter.add_mesh(cap, color="black", line_width=4)
 
     plotter.add_point_labels(
-        [np.array([bx - 0.09, (by0 + by1) / 2, bz])],
+        [np.array([bx - 0.12, (by0 + by1) / 2, bz])],
         [f"{bar_mm:.0f} mm"],
-        font_size=14, text_color="black",
+        font_size=22, text_color="black",
         point_color="black", point_size=0,
         always_visible=True, shape=None,
     )
 
+    plotter.reset_camera_clipping_range()
     img = plotter.screenshot(return_img=True)
     plotter.close()
     return img
@@ -311,13 +306,19 @@ def main():
     )
 
     # ── Right: 3 isometric 3D renders (one per distinct design cluster) ────────
-    for ax_3d, (method, panel_label) in zip(axes_3d, RENDER_PANELS):
-        params, cd = load_best(method)
+    # Pre-collect to compute consistent ref_span (same camera distance for all panels)
+    _render_data = [(m, lbl, *load_best(m)) for m, lbl in RENDER_PANELS]
+    ref_span = max(
+        (2 * (p["B1"] + p["B2"] + p["B3"]) / 1000.0)
+        for _, _, p, _ in _render_data if p is not None
+    ) if any(p is not None for _, _, p, _ in _render_data) else None
+
+    for ax_3d, (method, panel_label, params, cd) in zip(axes_3d, _render_data):
         ax_3d.axis("off")
         if params is not None:
             print(f"Rendering 3D: {method}  (best CD={cd:.5f})...")
             try:
-                img = _render(params)
+                img = _render(params, ref_span=ref_span)
                 ax_3d.imshow(img)
             except Exception as e:
                 ax_3d.text(0.5, 0.5, f"render failed\n{e}", ha="center", va="center",
@@ -326,7 +327,7 @@ def main():
             ax_3d.text(0.5, 0.5, "no data", ha="center", va="center",
                        transform=ax_3d.transAxes, fontsize=9)
 
-        cd_str = f"best CD = {cd:.5f}" if cd is not None else ""
+        cd_str = f"best CD = {cd:.5f}" if params is not None else ""
         ax_3d.text(0.5, 0.97, f"{panel_label}\n{cd_str}",
                    transform=ax_3d.transAxes, fontsize=22, fontweight="medium",
                    ha="center", va="top",

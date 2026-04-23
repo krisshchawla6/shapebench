@@ -63,6 +63,11 @@ def add_args(parser):
                              'original design vectors from stored JSON files to '
                              'reconstruct CMA-ES state, then continues with real '
                              'simulations up to --n_calls total.')
+    parser.add_argument('--x0-design', default=None, metavar='JSON',
+                        help='Path to a design JSON file (save/results.json or '
+                             'iter_XXXXX.json) to use as the initial mean x0 '
+                             'instead of a random point.  Useful for warm-starting '
+                             'at a known good design.')
 
 
 def _load_resume_rewards(src_dir):
@@ -154,7 +159,14 @@ def run(environment, args, output_dir):
     if args.popsize > 0:
         cma_options['popsize'] = args.popsize
 
-    x0_norm = np.random.default_rng(args.random_state).uniform(0, 1, dim)
+    x0_design = getattr(args, 'x0_design', None)
+    if x0_design:
+        x_raw = environment.read_design(x0_design)
+        x0_norm = np.clip((np.asarray(x_raw, dtype=float) - lb) / scale, 0.0, 1.0)
+        print(f'[CMA-ES] Warm-start x0 loaded from {x0_design}')
+        print(f'[CMA-ES] x0_norm = {np.round(x0_norm, 4).tolist()}')
+    else:
+        x0_norm = np.random.default_rng(args.random_state).uniform(0, 1, dim)
     es = cma.CMAEvolutionStrategy(x0_norm, args.sigma0, cma_options)
 
     # Load design vectors for replay after es is initialised (need es.popsize)

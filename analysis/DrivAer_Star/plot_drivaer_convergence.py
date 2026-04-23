@@ -228,7 +228,7 @@ def main():
     # Axes
     ax.set_xscale("log")
     ax.set_xlabel("Function evaluations (per run)", fontsize=11)
-    ax.set_ylabel("Best Cd (drag coefficient)", fontsize=11)
+    ax.set_ylabel(r"$C_d$", fontsize=11)
     ax.set_title(
         f"DrivAer Star ({body_label}, vtk_{body}) — Convergence: best Cd vs function evaluations\n"
         "(solid = median across runs,  band = min–max range)",

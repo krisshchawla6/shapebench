@@ -206,7 +206,7 @@ for key, xf in XFOIL_BEST.items():
 # ── Axes ──────────────────────────────────────────────────────────────────────
 ax.set_xscale("log")
 ax.set_xlabel("NeuralFoil evaluations (per run)")
-ax.set_ylabel(r"Best reward so far  ($\approx$ NF L/D at near-feasible convergence)")
+ax.set_ylabel(r"$L/D$")
 ax.set_title(
     "ShapeEvolve — NeuralFoil LAM500 benchmark\n"
     "Stage 1 convergence: best penalized reward per run   "

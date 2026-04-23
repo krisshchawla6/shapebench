@@ -209,7 +209,7 @@ def main():
 
     ax.set_xscale("log")
     ax.set_xlabel("Function evaluations (per run)")
-    ax.set_ylabel("Best mean CD (drag coefficient)")
+    ax.set_ylabel(r"Mean $C_D$")
     ax.set_title(
         "BlendedNet (BWB) — Convergence: best mean-CD vs function evaluations\n"
         "Reward = −mean_CD at CL ∈ {0.185, 0.206, 0.227}",

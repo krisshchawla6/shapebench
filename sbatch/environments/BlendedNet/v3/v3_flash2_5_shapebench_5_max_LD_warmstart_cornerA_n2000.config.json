@@ -1,0 +1,23 @@
+{
+  "framework": "v3_dynamic_optimizer",
+  "environment": "BlendedNet",
+  "reward": "shapebench_5_max_LD",
+  "action": "gaussain",
+  "iterations": 200,
+  "batch_size": 10,
+  "gaussian_decay": false,
+  "gaussian_final_scale": 0.1,
+  "sampler_model": "gemini-2.5-flash",
+  "sampler_max_retries": 3,
+  "hybrid": false,
+  "inspirations": 10,
+  "initialize_n_sample": 0,
+  "pw_alpha": 3.0,
+  "num_islands": 1,
+  "migration_interval": 10,
+  "migration_rate": 0.1,
+  "baseline": "/scratch/ShapeEvolve/environments/BlendedNet/results/run_GA_shapebench_5_attempt4_20p_200i/iter_0189_p015/design.json",
+  "debug": false,
+  "mach": 0.3,
+  "re": 10000000.0
+}

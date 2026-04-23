@@ -52,15 +52,35 @@ def add_args(parser):
     parser.add_argument('--n_workers', type=int, default=0,
                         help='Worker processes for parallel evaluation; '
                              '0 = n_particles (default)')
+    parser.add_argument('--random-state', type=int, default=None,
+                        help='NumPy random seed for reproducibility (default: None)')
+    parser.add_argument('--x0-design', default=None, metavar='JSON',
+                        help='Path to a design JSON file to use as the warm-start '
+                             'centre.  All particles are initialised with Gaussian '
+                             'noise (sigma=0.1*span per dim) around this point.')
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def run(environment, args, output_dir):
+    if getattr(args, 'random_state', None) is not None:
+        np.random.seed(args.random_state)
+
     lb, ub = environment.get_param_bounds()
     swarm  = Swarm(n_particles=args.n_particles, lb=lb, ub=ub)
     T      = args.n_iterations
     n_workers = swarm.n if args.n_workers == 0 else args.n_workers
+
+    x0_design = getattr(args, 'x0_design', None)
+    if x0_design:
+        x0 = np.asarray(environment.read_design(x0_design), dtype=float)
+        span = ub - lb
+        noise = np.random.randn(swarm.n, swarm.dim) * 0.1 * span
+        swarm.x = np.clip(x0 + noise, lb, ub)
+        swarm.p = swarm.x.copy()
+        swarm.g = swarm.x[0].copy()
+        print(f'[PSO] Warm-start: all particles initialised near {x0_design}')
+        print(f'[PSO] x0 = {np.round(x0, 2).tolist()}')
 
     database = empty_database()
 

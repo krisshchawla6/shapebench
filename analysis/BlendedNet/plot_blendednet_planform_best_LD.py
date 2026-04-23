@@ -1,33 +1,14 @@
 """2D top-view planform overlay + 3 vertically-stacked isometric 3D renders.
 
-Panel layout (left column: 2D planform; right column: 3 rows of 3D renders):
-  Left  — 2D top-view planform of median-best design per method (all overlaid).
-  Right — Three isometric 3D renders stacked vertically (top to bottom):
-    1. BO median-best — representative of the BO/PSO/CMA-ES converged cluster
-       (pairwise normalised distance PSO↔CMA-ES=0.10, BO↔PSO=0.46).
-    2. ShapeEvolve median-best — distinct geometry (wider fuselage, shallower
-       inner sweep S1=45° vs 60°; distance ~0.86–1.02 from cluster).
-    3. L-BFGS-B median-best — local-optimum trap (B3=477 vs 700 at bounds;
-       clearly different shape, far from cluster).
-
-  Each 3D render includes a scale bar (500 mm) computed from mesh normalized
-  coordinates: bar_len_norm = 500 / half_span_mm * half_y_extent_norm.
-
-Geometry construction (all dims in mm):
-  - Root (y=0): chord C1=1000, LE at x=0
-  - Station 1 (y=B1): chord C2, LE at x = B1·tan(S1)
-  - Station 2 (y=B1+B2): chord C3, LE at x = B1·tan(S1) + B2·tan(S2)
-  - Tip (y=B1+B2+B3): chord C4, LE at x = B1·tan(S1) + B2·tan(S2) + B3·tan(S3)
-
-Full span shown (symmetric). x = chordwise (LE left), y = spanwise.
+Best overall design per method for shapebench_5_max_LD (mean L/D reward).
 
 Usage:
     cd /scratch/ShapeEvolve
-    source venv/bin/activate
-    python analysis/BlendedNet/plot_blendednet_planform.py
+    source /home/jack/venv_torch210/bin/activate
+    python analysis/BlendedNet/plot_blendednet_planform_best_LD.py
 
 Outputs:
-    environments/BlendedNet/results/analysis_plots_shapebench_mean_cd/planform_best_designs.png/.pdf
+    environments/BlendedNet/results/analysis_plots_shapebench_5_max_LD/planform_best_designs_max_LD.png/.pdf
 """
 
 import os
@@ -42,7 +23,7 @@ import matplotlib.pyplot as plt
 
 REPO_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RESULTS_DIR = os.path.join(REPO_DIR, "environments", "BlendedNet", "results")
-OUT_DIR = os.path.join(RESULTS_DIR, "analysis_plots_shapebench_mean_cd")
+OUT_DIR = os.path.join(RESULTS_DIR, "analysis_plots_shapebench_5_max_LD")
 CACHE_DIR = os.path.join(REPO_DIR, "environments", "BlendedNet", "mesh_cache")
 
 sys.path.insert(0, os.path.join(REPO_DIR, "environments", "BlendedNet"))
@@ -70,26 +51,22 @@ STYLE = {
 }
 
 COLORS = {
-    "L-BFGS-B":                "#e377c2",
     "Bayesian Opt. (exact GP)": "#ff7f0e",
     "PSO (20p × 200i)":        "#1f77b4",
-    "ShapeEvolve":             "#2ca02c",
     "CMA-ES":                  "#d62728",
+    "ShapeEvolve":             "#2ca02c",
 }
 
-METHOD_ORDER = ["L-BFGS-B", "Bayesian Opt. (exact GP)", "PSO (20p × 200i)", "ShapeEvolve", "CMA-ES"]
+METHOD_ORDER = ["Bayesian Opt. (exact GP)", "PSO (20p × 200i)", "CMA-ES", "ShapeEvolve"]
 
-# Three representative designs for the 3D panels:
-#   cluster  — BO median-best, representative of BO/PSO/CMA-ES (all converged to same corner)
-#   distinct — ShapeEvolve median-best (different sweep/fuselage geometry)
-#   outlier  — L-BFGS-B median-best (trapped local optimum, clearly different shape)
 RENDER_PANELS = [
-    ("Bayesian Opt. (exact GP)", "BO / PSO / CMA-ES\n(converged cluster)"),
+    ("Bayesian Opt. (exact GP)", "Bayesian Opt."),
+    ("PSO (20p × 200i)",        "PSO (20p × 200i)"),
+    ("CMA-ES",                   "CMA-ES"),
     ("ShapeEvolve",              "ShapeEvolve"),
-    ("L-BFGS-B",                 "L-BFGS-B"),
 ]
 
-C1 = 1000.0  # fixed root chord (mm)
+C1 = 1000.0
 
 
 # ── Geometry ──────────────────────────────────────────────────────────────────
@@ -100,7 +77,6 @@ def planform_polygon(params):
     S1 = np.radians(params["S1"])
     S2 = np.radians(params["S2"])
     S3 = np.radians(params["S3"])
-
     y = np.array([0.0, B1, B1 + B2, B1 + B2 + B3])
     le = np.array([
         0.0,
@@ -115,12 +91,10 @@ def planform_polygon(params):
 
 def full_span_polygon(params):
     y_half, le, te = planform_polygon(params)
-
-    xs_le = y_half;       xs_te = y_half[::-1]
-    ys_le = le;           ys_te = te[::-1]
+    xs_le = y_half;         xs_te = y_half[::-1]
+    ys_le = le;             ys_te = te[::-1]
     xp_le = -y_half[::-1]; xp_te = -y_half
-    yp_le = le[::-1];     yp_te = te
-
+    yp_le = le[::-1];      yp_te = te
     x = np.concatenate([xp_te, xp_le, xs_le, xs_te, [xp_te[0]]])
     y = np.concatenate([yp_te, yp_le, ys_le, ys_te, [yp_te[0]]])
     return x, y
@@ -129,73 +103,43 @@ def full_span_polygon(params):
 # ── 3D render ─────────────────────────────────────────────────────────────────
 
 def _render(params, ref_span=None):
-    """Shallow isometric BWB render (elev≈20°, az≈45°) with 500 mm scale bar.
-
-    ref_span: full-span in normalized units (mm/1000 * 2) shared across all
-    panels in a plot so every panel uses the same camera distance → consistent
-    zoom level.  Falls back to this design's own span if None.
-    """
     half_span_mm = params["B1"] + params["B2"] + params["B3"]
     bar_mm = 500.0
-
     mesh = generate_mesh(params, cache_dir=CACHE_DIR)
-
     plotter = pv.Plotter(off_screen=True, window_size=(700, 500))
-    plotter.add_mesh(
-        mesh,
-        color="#5a7fa0",
-        show_edges=False,
-        smooth_shading=True,
-        specular=0.15,
-        specular_power=8,
-        ambient=0.08,
-        diffuse=0.9,
-    )
+    plotter.add_mesh(mesh, color="#5a7fa0", show_edges=False, smooth_shading=True,
+                     specular=0.15, specular_power=8, ambient=0.08, diffuse=0.9)
     plotter.add_light(pv.Light(position=(-3, -3, 6), intensity=0.85, light_type="scene light"))
     plotter.add_light(pv.Light(position=(3,   3, 1), intensity=0.35, light_type="scene light"))
     plotter.enable_ssao(radius=0.05, bias=0.005, kernel_size=32)
-
     bounds = mesh.bounds
     cx = (bounds[0] + bounds[1]) / 2
     cy = (bounds[2] + bounds[3]) / 2
     cz = (bounds[4] + bounds[5]) / 2
     mesh_span = max(bounds[3] - bounds[2], bounds[1] - bounds[0])
     dist = (ref_span if ref_span is not None else mesh_span) * 1.0
-
-    el = np.radians(20)
-    az = np.radians(45)
+    el = np.radians(20); az = np.radians(45)
     plotter.camera.position    = (cx + dist * np.cos(el) * np.cos(az),
                                    cy + dist * np.cos(el) * np.sin(az),
                                    cz + dist * np.sin(el))
     plotter.camera.focal_point = (cx, cy, cz)
     plotter.camera.up          = (0, 0, 1)
     plotter.camera.zoom(1.1)
-
-    # Scale bar — normalized mesh units; bar placed just below (z) and in front
-    # of LE (x < 0) so it is unobstructed in the isometric view.
-    half_y_norm  = bounds[3]                              # = half_span_mm / 1000
+    half_y_norm  = bounds[3]
     bar_len_norm = bar_mm / half_span_mm * half_y_norm
-    bx  = bounds[0] - 0.12
-    bz  = bounds[4] - 0.03
-    by0 = cy - bar_len_norm / 2
-    by1 = cy + bar_len_norm / 2
-
+    bx  = bounds[0] - 0.12; bz = bounds[4] - 0.03
+    by0 = cy - bar_len_norm / 2; by1 = cy + bar_len_norm / 2
     bar = pv.Line((bx, by0, bz), (bx, by1, bz))
     plotter.add_mesh(bar, color="black", line_width=3)
-
     cap_r = 0.05
     for y_cap in [by0, by1]:
         cap = pv.Line((bx - cap_r, y_cap, bz), (bx + cap_r, y_cap, bz))
         plotter.add_mesh(cap, color="black", line_width=4)
-
     plotter.add_point_labels(
         [np.array([bx - 0.12, (by0 + by1) / 2, bz])],
-        [f"{bar_mm:.0f} mm"],
-        font_size=22, text_color="black",
-        point_color="black", point_size=0,
-        always_visible=True, shape=None,
+        [f"{bar_mm:.0f} mm"], font_size=22, text_color="black",
+        point_color="black", point_size=0, always_visible=True, shape=None,
     )
-
     plotter.reset_camera_clipping_range()
     img = plotter.screenshot(return_img=True)
     plotter.close()
@@ -205,16 +149,14 @@ def _render(params, ref_span=None):
 # ── Data loading ──────────────────────────────────────────────────────────────
 
 def _design_dir(run_dir, row, method_key):
-    if method_key == "lbfgsb":
-        return os.path.join(run_dir, f"call_{int(row['call']):05d}_r{int(row['restart'])}")
-    elif method_key == "ga":
+    if method_key == "ga":
         return os.path.join(run_dir, f"iter_{int(row['iteration']):04d}_p{int(row['particle']):03d}")
     else:
         return os.path.join(run_dir, str(row["design"]))
 
 
-def _load_median_params(run_dirs, reward_col, method_key):
-    run_data = []
+def _load_best_params(run_dirs, reward_col, method_key):
+    best_reward, best_run_dir, best_row = -np.inf, None, None
     for run_dir in run_dirs:
         csv = os.path.join(run_dir, "results.csv")
         if not os.path.exists(csv):
@@ -227,45 +169,33 @@ def _load_median_params(run_dirs, reward_col, method_key):
             continue
         idx = int(df[reward_col].idxmax())
         row = df.iloc[idx]
-        run_data.append((float(row[reward_col]), run_dir, row))
-
-    if not run_data:
+        r = float(row[reward_col])
+        if r > best_reward:
+            best_reward, best_run_dir, best_row = r, run_dir, row
+    if best_run_dir is None:
         return None, None
-
-    finals = np.array([x[0] for x in run_data])
-    median_val = float(np.median(finals))
-    _, run_dir, row = min(run_data, key=lambda x: abs(x[0] - median_val))
-
-    ddir = _design_dir(run_dir, row, method_key)
+    ddir = _design_dir(best_run_dir, best_row, method_key)
     rj = os.path.join(ddir, "save", "results.json")
     if not os.path.exists(rj):
         return None, None
     with open(rj) as f:
         d = json.load(f)
-    return d["design"], -median_val
+    return d["design"], best_reward
 
 
-def load_median(name):
-    if name == "L-BFGS-B":
-        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_lbfgsb_shapebench_5_seed*_nr3_normfix")))
-        return _load_median_params(dirs, "reward", "lbfgsb")
-    elif name == "Bayesian Opt. (exact GP)":
-        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500")))
-        return _load_median_params(dirs, "reward", "bo")
+def load_best(name):
+    if name == "Bayesian Opt. (exact GP)":
+        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_max_LD_seed*_n1000")))
+        return _load_best_params(dirs, "reward", "bo")
     elif name == "PSO (20p × 200i)":
-        dirs = []
-        for pat in [
-            os.path.join(RESULTS_DIR, "run_GA_shapebench_5_seed*_20p_200i"),
-            os.path.join(RESULTS_DIR, "run_GA_shapebench_5_attempt*_20p_200i"),
-        ]:
-            dirs.extend(sorted(glob.glob(pat)))
-        return _load_median_params(dirs, "reward", "ga")
-    elif name == "ShapeEvolve":
-        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_v3_flash2_5_shapebench_5_attempt_*_n2000")))
-        return _load_median_params(dirs, "reward", "v3")
+        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_GA_parallel_shapebench_5_max_LD_seed*_20p_200i")))
+        return _load_best_params(dirs, "reward", "ga")
     elif name == "CMA-ES":
-        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_seed*_n500to1000")))
-        return _load_median_params(dirs, "reward", "bo")
+        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_max_LD_seed*_n1000")))
+        return _load_best_params(dirs, "reward", "bo")
+    elif name == "ShapeEvolve":
+        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_v3_flash2_5_shapebench_5_max_LD_attempt_*_n2000")))
+        return _load_best_params(dirs, "reward", "v3")
     return None, None
 
 
@@ -275,37 +205,30 @@ def main():
     plt.rcParams.update(STYLE)
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    # ── Layout: 2D planform (left column, full height) + 3 × 3D renders (right
-    #    column, stacked vertically).  width_ratios give the 2D panel ~47% of
-    #    the total width; each 3D render is compact and square-ish.
     fig = plt.figure(figsize=(20, 18), facecolor="white")
     outer_gs = fig.add_gridspec(1, 2, width_ratios=[1.8, 2], wspace=0.1,
                                 left=0.07, right=0.97, top=0.93, bottom=0.05)
     left_gs  = outer_gs[0, 0].subgridspec(2, 1, height_ratios=[8, 2], hspace=0.05)
-    right_gs = outer_gs[0, 1].subgridspec(3, 1, hspace=0.02)
-    ax        = fig.add_subplot(left_gs[0])   # 2D planform overlay
-    legend_ax = fig.add_subplot(left_gs[1])   # dedicated legend panel (left col only)
+    right_gs = outer_gs[0, 1].subgridspec(4, 1, hspace=0.02)
+    ax        = fig.add_subplot(left_gs[0])
+    legend_ax = fig.add_subplot(left_gs[1])
     legend_ax.axis("off")
-    axes_3d   = [fig.add_subplot(right_gs[i]) for i in range(3)]  # 3D render panels
+    axes_3d   = [fig.add_subplot(right_gs[i]) for i in range(4)]
 
-    # ── Left: 2D planform overlay ──────────────────────────────────────────────
-    print(f"{'Method':<28}  {'median_CD':>10}  {'half_span':>10}  {'root_chord':>10}")
+    print(f"{'Method':<28}  {'best_LD':>10}  {'half_span':>10}  {'root_chord':>10}")
     print("-" * 65)
 
     for name in METHOD_ORDER:
-        params, median_cd = load_median(name)
+        params, best_ld = load_best(name)
         if params is None:
             print(f"{name:<28}  no data")
             continue
-
         x, y = full_span_polygon(params)
         half_span = params["B1"] + params["B2"] + params["B3"]
-
         ax.fill(x, y, color=COLORS[name], alpha=0.18)
         ax.plot(x, y, color=COLORS[name], lw=1.6,
-                label=f"{name}  (median CD={median_cd:.5f})")
-
-        print(f"{name:<28}  {median_cd:>10.6f}  {half_span:>10.1f}  {C1:>10.1f}")
+                label=f"{name}  (best L/D={best_ld:.3f})")
+        print(f"{name:<28}  {best_ld:>10.4f}  {half_span:>10.1f}  {C1:>10.1f}")
 
     ax.set_xlabel("Span (mm)")
     ax.set_ylabel("Chord (mm, LE → TE)")
@@ -319,23 +242,22 @@ def main():
     legend_ax.legend(handles, labels, fontsize=21, loc="center",
                      framealpha=0.95, title="Method", borderaxespad=0, ncol=1)
     ax.set_title(
-        "Top-view planform — median-best design per method\n"
+        "Top-view planform — best design per method\n"
         "Full span shown (symmetric).  LE at top, TE at bottom.",
         fontweight="medium", pad=8,
     )
 
-    # ── Right: 3 isometric 3D renders (one per distinct design cluster) ────────
-    # Pre-collect to compute consistent ref_span (same camera distance for all panels)
-    _render_data = [(m, lbl, *load_median(m)) for m, lbl in RENDER_PANELS]
+    # Pre-collect render params and compute consistent ref_span across all panels
+    _render_data = [(m, lbl, *load_best(m)) for m, lbl in RENDER_PANELS]
     ref_span = max(
         (2 * (p["B1"] + p["B2"] + p["B3"]) / 1000.0)
         for _, _, p, _ in _render_data if p is not None
     ) if any(p is not None for _, _, p, _ in _render_data) else None
 
-    for ax_3d, (method, panel_label, params, cd) in zip(axes_3d, _render_data):
+    for ax_3d, (method, panel_label, params, ld) in zip(axes_3d, _render_data):
         ax_3d.axis("off")
         if params is not None:
-            print(f"Rendering 3D: {method}  (median CD={cd:.5f})...")
+            print(f"Rendering 3D: {method}  (best L/D={ld:.4f})...")
             try:
                 img = _render(params, ref_span=ref_span)
                 ax_3d.imshow(img)
@@ -345,21 +267,21 @@ def main():
         else:
             ax_3d.text(0.5, 0.5, "no data", ha="center", va="center",
                        transform=ax_3d.transAxes, fontsize=9)
-
-        cd_str = f"median CD = {cd:.5f}" if params is not None else ""
-        ax_3d.text(0.5, 0.97, f"{panel_label}\n{cd_str}",
+        ld_str = f"best L/D = {ld:.3f}" if params is not None else ""
+        ax_3d.text(0.5, 0.97, f"{panel_label}\n{ld_str}",
                    transform=ax_3d.transAxes, fontsize=22, fontweight="medium",
                    ha="center", va="top",
                    bbox=dict(boxstyle="round,pad=0.25", facecolor="white",
                              alpha=0.75, edgecolor="none"))
 
     fig.suptitle(
-        "BlendedNet (BWB) — Planform comparison and representative geometries",
+        "BlendedNet (BWB) — Planform comparison: best design per method\n"
+        r"Reward = mean(CL/CD) at $\alpha \in \{3°, 4°, 5°, 6°, 7°\}$",
         fontsize=26, fontweight="medium", y=1.005,
     )
 
-    out_png = os.path.join(OUT_DIR, "planform_best_designs.png")
-    out_pdf = os.path.join(OUT_DIR, "planform_best_designs.pdf")
+    out_png = os.path.join(OUT_DIR, "planform_best_designs_max_LD.png")
+    out_pdf = os.path.join(OUT_DIR, "planform_best_designs_max_LD.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)
