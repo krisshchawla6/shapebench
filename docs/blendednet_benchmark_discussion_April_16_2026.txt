@@ -2130,3 +2130,81 @@ BENCHMARK INTERPRETATION
   • The gap between warm-started and random-start performance (~2.5 L/D units,
     ~5%) quantifies the cost of the landscape trap — i.e., the value of
     exploration in this problem.
+
+
+WARM-START INVESTIGATION — UPDATE April 23 2026
+-------------------------------------------------
+
+CMA-ES warm-start FINAL RESULTS (all 3 seeds complete, 500/500 evals each):
+
+  seed 0:  500/500 evals,  best L/D = 48.50
+  seed 1:  500/500 evals,  best L/D = 48.50
+  seed 2:  500/500 evals,  best L/D = 48.50
+
+  All three converged tightly to Corner A. Compare to CMA-ES random-start (10
+  seeds): all stuck at Corner B, best 45.3–46.2. The warm-start provides a
+  clean +2.3–2.4 L/D improvement over random initialization.
+
+  Scenario 1 confirmed for CMA-ES (same outcome as PSO warm-start). Corner A
+  is a stable attractor under the max-L/D landscape for both local search
+  methods.
+
+v3 (ShapeEvolve) warm-start IN PROGRESS (~400–460/2000 evals each):
+
+  attempt 1:  460 evals,  best L/D = 48.75  (so far)
+  attempt 2:  404 evals,  best L/D = 48.75  (so far)
+  attempt 3:  410 evals,  best L/D = 48.75  (so far)
+
+  All three are already above the CMA-ES and PSO warm-start plateau (~48.50,
+  ~48.53–48.74), suggesting the LLM is actively refining upward from Corner A
+  rather than just holding steady. The LLM has ~1550 evals remaining per run
+  and may improve further. Compare to v3 random-start: median 37.8, best 46.1.
+
+  ETA for completion: ~April 25 2026.
+
+NEXT STEPS
+
+  1. Wait for v3 warm-start completion (~April 25).
+  2. Once complete:
+       - Update convergence plots (plot_blendednet_convergence_max_LD.py) to
+         add warm-start curves for PSO, CMA-ES, and v3 as reference bands.
+       - Update planform plots to show Corner A designs from warm-start runs.
+  3. Paper writing:
+       - Incorporate the landscape trap section (bullet points above) into
+         the shapebench_5_max_LD results discussion.
+       - Quantify the final warm-start vs. random-start gap once v3 is done.
+       - Consider whether to propose Corner A as a "ground truth" benchmark
+         answer for shapebench_5_max_LD.
+
+
+DOES shapebench_5 (min-CD) HAVE THE SAME LANDSCAPE TRAP?
+----------------------------------------------------------
+Short answer: no. The existing data is clear — all random-start methods (PSO,
+CMA-ES, ShapeEvolve) already converge to Corner A geometry for min-CD. The
+planform plots show essentially the same design found by all methods. There is
+no sign of a Corner B trap in the CD landscape, and warm-starting shapebench_5
+would provide no benefit.
+
+Physical explanation:
+
+  • min-CD has a cleaner landscape. The dominant drag term at these operating
+    points is induced drag, which scales as C_L²/(π e AR). Maximizing span and
+    sweep angle (Corner A geometry) reduces this monotonically. There is no
+    competing local minimum that trades off span efficiency in a way that
+    creates a second basin — the gradient throughout most of the parameter
+    space points toward Corner A.
+
+  • max-L/D has a more complex landscape. L/D couples lift and drag
+    simultaneously. Corner B (lower sweep, wider inner chord) is a genuine
+    local optimum: it generates adequate lift at the prescribed CL* targets
+    with moderate drag, forming a real hill in the L/D surface. Optimizers
+    get self-reinforced into it — not because it is wrong, but because it is
+    locally self-consistent.
+
+  • The two objectives share the same global optimum (Corner A) but not the
+    same basins of attraction. The CD landscape is effectively unimodal with a
+    dominant Corner A basin. The L/D landscape adds a lift coupling that creates
+    Corner B as a distinct, large-basin attractor.
+
+  Conclusion: the landscape trap is specific to the L/D formulation. Warm-start
+  investigations are only warranted for shapebench_5_max_LD.
