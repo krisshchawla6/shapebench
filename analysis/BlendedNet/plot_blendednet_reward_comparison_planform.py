@@ -47,8 +47,13 @@ STYLE = {
     "figure.dpi": 150,
 }
 
-COLOR_CD = "#1f77b4"   # blue  — min-CD reward
-COLOR_LD = "#d62728"   # red   — max-L/D reward
+# Consistent method colors (match planform_max_LD plots)
+COLORS = {
+    "Bayesian Opt.":    "#ff7f0e",
+    "PSO (20p × 200i)": "#1f77b4",
+    "CMA-ES":           "#d62728",
+    "ShapeEvolve":      "#2ca02c",
+}
 
 
 # ── Geometry ──────────────────────────────────────────────────────────────────
@@ -140,6 +145,93 @@ def _cross_metrics(res):
     return mean_cd, mean_ld
 
 
+# ── Warm-start loaders ────────────────────────────────────────────────────────
+
+def _load_ws_best_cmaes():
+    dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_max_LD_warmstart_cornerA_seed*_n500")))
+    best_r, best_p = -np.inf, None
+    for d in dirs:
+        csv = os.path.join(d, "results.csv")
+        if not os.path.exists(csv):
+            continue
+        df = pd.read_csv(csv)
+        if "reward" not in df.columns:
+            continue
+        run_best = df["reward"].max()
+        if run_best > best_r:
+            row = df.loc[df["reward"].idxmax()]
+            rj = os.path.join(d, str(row["design"]), "save", "results.json")
+            if os.path.exists(rj):
+                with open(rj) as f:
+                    res = json.load(f)
+                best_r, best_p = run_best, res
+    return best_p["design"] if best_p else None, best_r, best_p
+
+
+def _load_ws_best_ga():
+    dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_GA_parallel_shapebench_5_max_LD_warmstart_cornerA_seed*_20p_100i")))
+    best_r, best_p = -np.inf, None
+    for d in dirs:
+        csv = os.path.join(d, "results.csv")
+        if not os.path.exists(csv):
+            continue
+        df = pd.read_csv(csv)
+        if "gbest_reward" not in df.columns:
+            continue
+        run_best = df["gbest_reward"].max()
+        if run_best > best_r:
+            matches = df[df["reward"] >= run_best - 1e-4]
+            if matches.empty:
+                continue
+            row = matches.iloc[0]
+            it, pt = int(row["iteration"]), int(row["particle"])
+            rj = os.path.join(d, f"iter_{it:04d}_p{pt:03d}", "save", "results.json")
+            if os.path.exists(rj):
+                with open(rj) as f:
+                    res = json.load(f)
+                best_r, best_p = run_best, res
+    return best_p["design"] if best_p else None, best_r, best_p
+
+
+def _load_ws_best_v3():
+    dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_v3_flash2_5_shapebench_5_max_LD_warmstart_cornerA_attempt_*_n2000")))
+    best_r, best_p_params = -np.inf, None
+    for d in dirs:
+        db_path = os.path.join(d, "database.json")
+        if not os.path.exists(db_path):
+            continue
+        with open(db_path) as f:
+            db = json.load(f)
+        entries = db if isinstance(db, list) else list(db.values())
+        for e in entries:
+            r = e.get("reward", -np.inf)
+            if r > best_r:
+                path = e.get("path", "")
+                if os.path.exists(path):
+                    with open(path) as f2:
+                        params = json.load(f2)
+                    if "B1" in params:
+                        best_r, best_p_params = r, params
+    if best_p_params is None:
+        return None, best_r, None
+    # wrap in same results dict shape as other methods
+    fake_res = {"design": best_p_params, "mean_LD": best_r, "reward": best_r, "operating_points": []}
+    return best_p_params, best_r, fake_res
+
+
+def load_warmstart_best_ld(name):
+    """Returns (params, reward, results_dict) for warm-start max-LD; None for BO."""
+    if name == "Bayesian Opt.":
+        return None, None, None
+    elif name == "PSO (20p × 200i)":
+        return _load_ws_best_ga()
+    elif name == "CMA-ES":
+        return _load_ws_best_cmaes()
+    elif name == "ShapeEvolve":
+        return _load_ws_best_v3()
+    return None, None, None
+
+
 METHODS = {
     "Bayesian Opt.": {
         "cd_dirs": lambda: sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500"))),
@@ -171,12 +263,14 @@ METHOD_ORDER = ["Bayesian Opt.", "PSO (20p × 200i)", "CMA-ES", "ShapeEvolve"]
 
 # ── Annotation helper ─────────────────────────────────────────────────────────
 
-def _ann(params, res):
+def _ann(params, res, header=""):
     hs = params["B1"] + params["B2"] + params["B3"]
     mean_cd, mean_ld = _cross_metrics(res)
     cd_str = f"CD  = {mean_cd:.5f}" if mean_cd is not None else "CD  = n/a"
     ld_str = f"L/D = {mean_ld:.2f}"  if mean_ld is not None else "L/D = n/a"
+    prefix = f"{header}\n" if header else ""
     return (
+        f"{prefix}"
         f"half-span={hs:.0f} mm\n"
         f"S1={params['S1']:.0f}°  C2={params['C2']:.0f}  C4={params['C4']:.0f}\n"
         f"B2={params['B2']:.0f}\n"
@@ -219,62 +313,98 @@ def main():
     xlim = (min(all_x) - pad_x, max(all_x) + pad_x)
     ylim = (max(all_y) + pad_y, min(all_y) - pad_y)  # inverted (LE at top)
 
-    fig, axes = plt.subplots(2, 2, figsize=(14, 16), facecolor="white")
-    axes = axes.flatten()
+    # Load warm-start max-LD designs
+    ws_designs = {}
+    for name in METHOD_ORDER:
+        p_ws, r_ws, res_ws = load_warmstart_best_ld(name)
+        ws_designs[name] = (p_ws, r_ws, res_ws)
 
-    for ax, name in zip(axes, METHOD_ORDER):
-        p_cd, r_cd, res_cd, p_ld, r_ld, res_ld = designs[name]
+    # 2 rows × 4 cols
+    # Row 0: min-CD (blue solid) + max-LD random-start (red dashed) — no warm-start
+    # Row 1: min-CD (blue solid) + max-LD warm-start (green dashed)
+    fig, axes = plt.subplots(2, 4, figsize=(22, 12), facecolor="white",
+                             sharex=True, sharey=True)
 
-        if p_cd is not None:
-            x, y = full_span_polygon(p_cd)
-            ax.fill(x, y, color=COLOR_CD, alpha=0.15)
-            ax.plot(x, y, color=COLOR_CD, lw=2.0, label="min-CD  (shapebench_5)")
-
-        if p_ld is not None:
-            x, y = full_span_polygon(p_ld)
-            ax.fill(x, y, color=COLOR_LD, alpha=0.15)
-            ax.plot(x, y, color=COLOR_LD, lw=2.0, ls="--", label="max-L/D (shapebench_5_max_LD)")
-
-        ax.set_xlim(xlim)
-        ax.set_ylim(ylim)
-        ax.set_aspect("equal")
-        ax.axvline(0, color="grey", lw=0.5, ls="--", alpha=0.4)
-        ax.grid(True, alpha=0.18)
-        for sp in ["top", "right"]:
-            ax.spines[sp].set_visible(False)
-        ax.set_xlabel("Span (mm)")
-        ax.set_ylabel("Chord (mm)")
-        ax.set_title(name, fontweight="medium", pad=6)
-        ax.legend(loc="lower right", fontsize=8, framealpha=0.9)
-
-        # Annotation blocks — place CD text on left side, LD on right
-        if p_cd is not None:
-            ax.text(0.02, 0.97, _ann(p_cd, res_cd), transform=ax.transAxes,
-                    fontsize=7.5, va="top", ha="left", color=COLOR_CD,
-                    bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
-                              edgecolor=COLOR_CD, alpha=0.85, linewidth=0.8))
-        if p_ld is not None:
-            ax.text(0.98, 0.97, _ann(p_ld, res_ld), transform=ax.transAxes,
-                    fontsize=7.5, va="top", ha="right", color=COLOR_LD,
-                    bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
-                              edgecolor=COLOR_LD, alpha=0.85, linewidth=0.8))
-
-    # Shared legend in figure
-    legend_handles = [
-        Line2D([0], [0], color=COLOR_CD, lw=2.0,      label="min-CD  (shapebench_5)"),
-        Patch(facecolor=COLOR_CD, alpha=0.25,           label="min-CD fill"),
-        Line2D([0], [0], color=COLOR_LD, lw=2.0, ls="--", label="max-L/D (shapebench_5_max_LD)"),
-        Patch(facecolor=COLOR_LD, alpha=0.25,           label="max-L/D fill"),
+    ROW_LABELS = [
+        "min-CD + max-L/D\n(no warm-start)",
+        "min-CD + max-L/D\n(with warm-start, Corner A)",
     ]
-    fig.legend(handles=legend_handles, loc="lower center", ncol=4,
-               fontsize=9, framealpha=0.95, bbox_to_anchor=(0.5, 0.01))
+
+    for col, name in enumerate(METHOD_ORDER):
+        p_cd, r_cd, res_cd, p_ld, r_ld, res_ld = designs[name]
+        p_ws, r_ws, res_ws = ws_designs[name]
+        c = COLORS[name]
+
+        for row in range(2):
+            ax = axes[row, col]
+
+            # min-CD: solid filled outline in method color
+            if p_cd is not None:
+                x, y = full_span_polygon(p_cd)
+                ax.fill(x, y, color=c, alpha=0.20)
+                ax.plot(x, y, color=c, lw=2.0,
+                        label="min-CD" if col == 0 else "_")
+
+            # max-LD: dashed outline only (no fill) in same method color
+            if row == 0:
+                p_ld_show, res_ld_show = p_ld, res_ld
+                ld_label = "max-L/D (random-start)" if col == 0 else "_"
+            else:
+                # fall back to random-start for BO (no warm-start run)
+                p_ld_show  = p_ws  if p_ws  is not None else p_ld
+                res_ld_show = res_ws if res_ws is not None else res_ld
+                ld_label = ("max-L/D (warm-start)" if (p_ws is not None and col == 0)
+                            else ("max-L/D (random, BO)" if (p_ws is None and col == 0)
+                            else "_"))
+
+            if p_ld_show is not None:
+                x, y = full_span_polygon(p_ld_show)
+                ax.plot(x, y, color=c, lw=2.0, ls="--", label=ld_label)
+
+            ax.set_xlim(xlim)
+            ax.set_ylim(ylim)
+            ax.set_aspect("equal")
+            ax.axvline(0, color="grey", lw=0.5, ls="--", alpha=0.4)
+            ax.grid(True, alpha=0.18)
+            for sp in ["top", "right"]:
+                ax.spines[sp].set_visible(False)
+            if row == 1:
+                ax.set_xlabel("Span (mm)")
+            if col == 0:
+                ax.set_ylabel("Chord (mm, LE → TE)")
+            if row == 0:
+                ax.set_title(name, fontweight="medium", pad=6)
+
+            # annotation box — max-LD design (dashed outline)
+            ann_header = ("max-L/D  [warm-start]" if (row == 1 and p_ws is not None)
+                          else "max-L/D  [random-start]")
+            if p_ld_show is not None and res_ld_show is not None:
+                ax.text(0.97, 0.97, _ann(p_ld_show, res_ld_show, header=ann_header),
+                        transform=ax.transAxes,
+                        fontsize=7, va="top", ha="right", color=c,
+                        bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
+                                  edgecolor=c, alpha=0.85, linewidth=0.8))
+
+            if col == 0:
+                ax.legend(fontsize=8, loc="lower left", framealpha=0.9,
+                          handlelength=1.5, borderpad=0.5)
+
+    # Row descriptor text
+    for row, label in enumerate(ROW_LABELS):
+        axes[row, 0].text(-0.22, 0.5, label,
+                          transform=axes[row, 0].transAxes,
+                          fontsize=9, fontweight="bold", va="center", ha="right",
+                          rotation=90,
+                          bbox=dict(boxstyle="round,pad=0.3", facecolor="lightyellow",
+                                    edgecolor="grey", alpha=0.85, linewidth=0.8))
 
     fig.suptitle(
-        "BlendedNet (BWB) — Best design planform: min-CD vs max-L/D per method\n"
-        "Full span shown (symmetric).  LE at top, TE at bottom.  Same scale across all panels.",
-        fontsize=12, fontweight="medium", y=0.995,
+        "BlendedNet (BWB) — Best design planform: min-CD vs. max-L/D per method\n"
+        "Top: overlaid without warm-start.  Bottom: max-L/D replaced by warm-start (Corner A).  "
+        "Same scale across all panels.",
+        fontsize=11, fontweight="medium",
     )
-    fig.tight_layout(rect=[0, 0.05, 1, 0.97])
+    fig.tight_layout(rect=[0.05, 0, 1, 0.96])
 
     out_png = os.path.join(OUT_DIR, "planform_reward_comparison.png")
     out_pdf = os.path.join(OUT_DIR, "planform_reward_comparison.pdf")

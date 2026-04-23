@@ -1,21 +1,20 @@
-"""Convergence curves (best mean-L/D vs function evaluations) for shapebench_5_max_LD.
+"""Two-panel convergence comparison for shapebench_5_max_LD.
 
-For each method: median best-L/D across runs (solid line) with min/max envelope
-(shaded band).
+Left panel : random-start convergence — median best-L/D ± min/max band for
+             each method (BO n=1000, PSO, CMA-ES, ShapeEvolve).
+Right panel: warm-start convergence — same methods from Corner A warm-start
+             (PSO, CMA-ES, ShapeEvolve; BO has no warm-start run).
 
-Warm-start reference lines (dotted, same method color): median final value
-achieved by each method when warm-started from Corner A, with min–max band.
-These show the "ceiling" unlocked by warm-starting.
-
-X-axis: log scale.
+X-axis: log scale, shared between panels.
+Y-axis: shared range across both panels.
 
 Usage:
     cd /scratch/ShapeEvolve
     source /home/jack/venv_torch210/bin/activate
-    python analysis/BlendedNet/plot_blendednet_convergence_max_LD.py
+    python analysis/BlendedNet/plot_blendednet_convergence_max_LD_warmstart_comparison.py
 
 Outputs:
-    environments/BlendedNet/results/analysis_plots_shapebench_5_max_LD/convergence_LD_vs_evals.png/.pdf
+    environments/BlendedNet/results/analysis_plots_shapebench_5_max_LD/convergence_LD_vs_evals_warmstart_comparison.png/.pdf
 """
 
 import os
@@ -53,8 +52,7 @@ STYLE = {
 }
 
 COLORS = {
-    "Bayesian Opt. n=500":  "#ff7f0e",
-    "Bayesian Opt. n=1000": "#ffb366",
+    "Bayesian Opt. n=1000": "#ff7f0e",
     "PSO (20p × 200i)":     "#1f77b4",
     "CMA-ES":               "#d62728",
     "ShapeEvolve":          "#2ca02c",
@@ -64,7 +62,6 @@ COLORS = {
 # ── Data loading ──────────────────────────────────────────────────────────────
 
 def _load_curves(csv_paths, best_reward_col):
-    """Return list of 1-D best-L/D arrays (one per run), running max."""
     curves = []
     for csv in sorted(csv_paths):
         if not os.path.exists(csv):
@@ -79,13 +76,6 @@ def _load_curves(csv_paths, best_reward_col):
         arr = np.maximum.accumulate(arr)
         curves.append(arr)
     return curves
-
-
-def load_bo_n500():
-    return _load_curves(
-        glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_max_LD_seed*_n500", "results.csv")),
-        "best_reward",
-    )
 
 
 def load_bo_n1000():
@@ -180,10 +170,10 @@ def compute_band(curves, x_grid, extend=False):
     return med, lo, hi
 
 
-def plot_band(ax, curves, x_grid, color, label, ls="-"):
+def plot_band(ax, curves, x_grid, color, label, ls="-", extend=True):
     if not curves:
         return
-    med, lo, hi = compute_band(curves, x_grid, extend=True)
+    med, lo, hi = compute_band(curves, x_grid, extend=extend)
     ax.fill_between(x_grid, lo, hi, color=color, alpha=0.18)
     ax.plot(x_grid, med, color=color, lw=1.8, label=label, ls=ls)
 
@@ -194,100 +184,109 @@ def main():
     plt.rcParams.update(STYLE)
     os.makedirs(OUT_DIR, exist_ok=True)
 
+    # Random-start
     bo1000_curves = load_bo_n1000()
     ga_curves     = load_ga_parallel()
     cmaes_curves  = load_cmaes()
     v3_curves     = load_v3()
 
+    # Warm-start
     ga_ws_curves    = load_ga_warmstart_curves()
     cmaes_ws_curves = load_cmaes_warmstart_curves()
     v3_ws_curves    = load_v3_warmstart_curves()
 
-    for name, curves in [
-        ("Bayesian Opt. n=1000", bo1000_curves),
-        ("PSO (20p × 200i)",     ga_curves),
-        ("CMA-ES",               cmaes_curves),
-        ("ShapeEvolve",          v3_curves),
-        ("PSO warm-start",       ga_ws_curves),
-        ("CMA-ES warm-start",    cmaes_ws_curves),
-        ("ShapeEvolve warm-start", v3_ws_curves),
+    for label, curves in [
+        ("BO n=1000",           bo1000_curves),
+        ("PSO random",          ga_curves),
+        ("CMA-ES random",       cmaes_curves),
+        ("ShapeEvolve random",  v3_curves),
+        ("PSO warm-start",      ga_ws_curves),
+        ("CMA-ES warm-start",   cmaes_ws_curves),
+        ("SE warm-start",       v3_ws_curves),
     ]:
         if curves:
-            print(f"{name:<28} {len(curves):>3} runs  max_evals={max(len(c) for c in curves)}")
+            print(f"{label:<24} {len(curves):>3} runs  max_evals={max(len(c) for c in curves)}")
 
-    all_curves = [c for g in [bo1000_curves, ga_curves, cmaes_curves, v3_curves] for c in g]
-    if not all_curves:
-        print("No data found.")
+    rand_curves = [c for g in [bo1000_curves, ga_curves, cmaes_curves, v3_curves] for c in g]
+    ws_curves_all = [c for g in [ga_ws_curves, cmaes_ws_curves, v3_ws_curves] for c in g]
+    if not rand_curves:
+        print("No random-start data found.")
         return
 
-    x_max = max(len(c) for c in all_curves)
-    x_grid = np.unique(
-        np.concatenate([np.geomspace(1, x_max, 3000).astype(int), [x_max]])
-    )
+    x_max_rand = max(len(c) for c in rand_curves)
+    x_max_ws   = max(len(c) for c in ws_curves_all) if ws_curves_all else x_max_rand
 
-    fig, ax = plt.subplots(figsize=(10, 6), facecolor="white")
+    x_grid_rand = np.unique(np.concatenate([np.geomspace(1, x_max_rand, 3000).astype(int), [x_max_rand]]))
+    x_grid_ws   = np.unique(np.concatenate([np.geomspace(1, x_max_ws,   3000).astype(int), [x_max_ws]]))
 
-    def xg(curves):
+    def xg(curves, x_grid):
         return x_grid[x_grid <= max(len(c) for c in curves)]
 
+    fig, (ax_l, ax_r) = plt.subplots(1, 2, figsize=(14, 6), facecolor="white", sharey=True)
+    fig.subplots_adjust(wspace=0.08)
+
+    # ── Left panel: random-start ──────────────────────────────────────────────
     if bo1000_curves:
-        plot_band(ax, bo1000_curves, xg(bo1000_curves),
+        plot_band(ax_l, bo1000_curves, xg(bo1000_curves, x_grid_rand),
                   COLORS["Bayesian Opt. n=1000"], "Bayesian Opt.")
-
     if ga_curves:
-        plot_band(ax, ga_curves, xg(ga_curves),
+        plot_band(ax_l, ga_curves, xg(ga_curves, x_grid_rand),
                   COLORS["PSO (20p × 200i)"], "PSO (20p × 200i)")
-
     if cmaes_curves:
-        plot_band(ax, cmaes_curves, xg(cmaes_curves),
+        plot_band(ax_l, cmaes_curves, xg(cmaes_curves, x_grid_rand),
                   COLORS["CMA-ES"], "CMA-ES")
-
     if v3_curves:
-        plot_band(ax, v3_curves, xg(v3_curves),
+        plot_band(ax_l, v3_curves, xg(v3_curves, x_grid_rand),
                   COLORS["ShapeEvolve"], "ShapeEvolve")
 
-    # Warm-start reference lines: dotted horizontal at median final value, light band for range
-    for ws_name, ws_curves, color_key in [
-        ("PSO (20p × 200i)",  ga_ws_curves,    "PSO (20p × 200i)"),
-        ("CMA-ES",            cmaes_ws_curves, "CMA-ES"),
-        ("ShapeEvolve",       v3_ws_curves,    "ShapeEvolve"),
-    ]:
-        if not ws_curves:
-            continue
-        color = COLORS[color_key]
-        finals = [c[-1] for c in ws_curves]
-        med_f = float(np.median(finals))
-        lo_f  = float(np.min(finals))
-        hi_f  = float(np.max(finals))
-        ax.axhspan(lo_f, hi_f, color=color, alpha=0.10, zorder=3)
-        ax.axhline(med_f, color=color, lw=1.5, ls=":", zorder=5)
-
-    ax.set_xscale("log")
-    ax.set_xlabel("Function evaluations (per run)")
-    ax.set_ylabel("Mean L/D")
-    ax.set_title(
-        "BlendedNet (BWB) — Convergence: best mean-L/D vs function evaluations\n"
-        r"Reward = mean($C_L/C_D$) at $C_L^\star \in \{0.185, 0.206, 0.227\}$, "
-        r"$M_\infty=0.3$, $\mathrm{Re}=10^7$",
-        fontweight="medium", pad=8,
-    )
-    ax.set_xlim(1, x_max)
-    ax.grid(True, which="both", alpha=0.25)
+    ax_l.set_xscale("log")
+    ax_l.set_xlim(1, x_max_rand)
+    ax_l.set_xlabel("Function evaluations (per run)")
+    ax_l.set_ylabel("Mean L/D")
+    ax_l.set_title("Random start", fontweight="medium")
+    ax_l.grid(True, which="both", alpha=0.25)
     for sp in ["top", "right"]:
-        ax.spines[sp].set_visible(False)
+        ax_l.spines[sp].set_visible(False)
+    ax_l.legend(fontsize=8.5, loc="lower right", framealpha=0.95, title="Method")
 
-    method_leg = ax.legend(fontsize=8.5, loc="lower right", framealpha=0.95, title="Method")
-    ax.add_artist(method_leg)
+    # ── Right panel: warm-start ───────────────────────────────────────────────
+    if ga_ws_curves:
+        plot_band(ax_r, ga_ws_curves, xg(ga_ws_curves, x_grid_ws),
+                  COLORS["PSO (20p × 200i)"], "PSO (20p × 200i)")
+    if cmaes_ws_curves:
+        plot_band(ax_r, cmaes_ws_curves, xg(cmaes_ws_curves, x_grid_ws),
+                  COLORS["CMA-ES"], "CMA-ES")
+    if v3_ws_curves:
+        plot_band(ax_r, v3_ws_curves, xg(v3_ws_curves, x_grid_ws),
+                  COLORS["ShapeEvolve"], "ShapeEvolve")
+
+    ax_r.set_xscale("log")
+    ax_r.set_xlim(1, x_max_ws)
+    ax_r.set_xlabel("Function evaluations (per run)")
+    ax_r.set_title("Warm-start from Corner A", fontweight="medium")
+    ax_r.grid(True, which="both", alpha=0.25)
+    for sp in ["top", "right"]:
+        ax_r.spines[sp].set_visible(False)
+    ax_r.legend(fontsize=8.5, loc="lower right", framealpha=0.95, title="Method")
+
+    # Shared style key
     style_handles = [
         Patch(facecolor="grey", alpha=0.25, label="Min–max range"),
         Line2D([0], [0], color="grey", lw=1.8, label="Median best"),
-        Line2D([0], [0], color="grey", lw=1.5, ls=":", label="Warm-start asymptote (median ± range)"),
     ]
-    ax.legend(handles=style_handles, loc="upper left", fontsize=8.5,
-              framealpha=0.95, title="Style key")
+    fig.legend(handles=style_handles, fontsize=8.5, loc="upper center",
+               ncol=2, framealpha=0.95, title="Style key",
+               bbox_to_anchor=(0.5, 0.98))
 
-    out_png = os.path.join(OUT_DIR, "convergence_LD_vs_evals.png")
-    out_pdf = os.path.join(OUT_DIR, "convergence_LD_vs_evals.pdf")
+    fig.suptitle(
+        "BlendedNet (BWB) — Convergence: best mean-L/D vs function evaluations\n"
+        r"Reward = mean($C_L/C_D$) at $C_L^\star \in \{0.185, 0.206, 0.227\}$, "
+        r"$M_\infty=0.3$, $\mathrm{Re}=10^7$",
+        fontsize=10, fontweight="medium", y=1.04,
+    )
+
+    out_png = os.path.join(OUT_DIR, "convergence_LD_vs_evals_warmstart_comparison.png")
+    out_pdf = os.path.join(OUT_DIR, "convergence_LD_vs_evals_warmstart_comparison.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)
@@ -297,10 +296,13 @@ def main():
     print("\nMethod                      n_runs  best_LD   median_final")
     print("-" * 60)
     for name, curves in [
-        ("Bayesian Opt. n=1000", bo1000_curves),
-        ("PSO (20p × 200i)",     ga_curves),
-        ("CMA-ES",               cmaes_curves),
-        ("ShapeEvolve",          v3_curves),
+        ("BO random",               bo1000_curves),
+        ("PSO random",              ga_curves),
+        ("CMA-ES random",           cmaes_curves),
+        ("ShapeEvolve random",      v3_curves),
+        ("PSO warm-start",          ga_ws_curves),
+        ("CMA-ES warm-start",       cmaes_ws_curves),
+        ("ShapeEvolve warm-start",  v3_ws_curves),
     ]:
         if not curves:
             continue

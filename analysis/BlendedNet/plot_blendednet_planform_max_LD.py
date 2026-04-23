@@ -1,6 +1,13 @@
-"""2D top-view planform overlay + 3 vertically-stacked isometric 3D renders.
+"""2D top-view planform overlay + isometric 3D renders for shapebench_5_max_LD.
 
-Median-best design per method for shapebench_5_max_LD (mean L/D reward).
+Left column: 2D full-span planform overlay.
+  - Solid lines: median-best design per method (random initialisation → Corner B).
+  - Dashed lines: best warm-start design per method (Corner A warm-start → Corner A).
+  - Annotated Corner A / Corner B basins of attraction.
+
+Right column: isometric 3D renders.
+  - Rows 1–4: median random-start design per method (Corner B).
+  - Row 5:    best warm-start design (Corner A, ShapeEvolve v3), green-labelled.
 
 Usage:
     cd /scratch/ShapeEvolve
@@ -200,62 +207,203 @@ def load_median(name):
     return None, None
 
 
+# ── Warm-start loaders ────────────────────────────────────────────────────────
+
+def _load_best_params_cmaes_warmstart():
+    """Best design across all CMA-ES warm-start seeds."""
+    dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_cmaes_shapebench_5_max_LD_warmstart_cornerA_seed*_n500")))
+    best_r, best_p = -np.inf, None
+    for run_dir in dirs:
+        csv = os.path.join(run_dir, "results.csv")
+        if not os.path.exists(csv):
+            continue
+        df = pd.read_csv(csv)
+        if "reward" not in df.columns:
+            continue
+        run_best = df["reward"].max()
+        if run_best > best_r:
+            row = df.loc[df["reward"].idxmax()]
+            rj = os.path.join(run_dir, str(row["design"]), "save", "results.json")
+            if os.path.exists(rj):
+                with open(rj) as f:
+                    d = json.load(f)
+                best_r, best_p = run_best, d["design"]
+    return best_p, best_r
+
+
+def _load_best_params_ga_warmstart():
+    """Best design across all GA/PSO warm-start seeds."""
+    dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_GA_parallel_shapebench_5_max_LD_warmstart_cornerA_seed*_20p_100i")))
+    best_r, best_p = -np.inf, None
+    for run_dir in dirs:
+        csv = os.path.join(run_dir, "results.csv")
+        if not os.path.exists(csv):
+            continue
+        df = pd.read_csv(csv)
+        if "gbest_reward" not in df.columns:
+            continue
+        run_best = df["gbest_reward"].max()
+        if run_best > best_r:
+            # find the particle whose individual evaluation achieved the global best
+            matches = df[df["reward"] >= run_best - 1e-4]
+            if matches.empty:
+                continue
+            row = matches.iloc[0]
+            it, pt = int(row["iteration"]), int(row["particle"])
+            rj = os.path.join(run_dir, f"iter_{it:04d}_p{pt:03d}", "save", "results.json")
+            if os.path.exists(rj):
+                with open(rj) as f:
+                    d = json.load(f)
+                best_r, best_p = run_best, d["design"]
+    return best_p, best_r
+
+
+def _load_best_params_v3_warmstart():
+    """Best design across all v3 warm-start attempts (reads database.json)."""
+    dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_v3_flash2_5_shapebench_5_max_LD_warmstart_cornerA_attempt_*_n2000")))
+    best_r, best_p = -np.inf, None
+    for run_dir in dirs:
+        db_path = os.path.join(run_dir, "database.json")
+        if not os.path.exists(db_path):
+            continue
+        with open(db_path) as f:
+            db = json.load(f)
+        entries = db if isinstance(db, list) else list(db.values())
+        for e in entries:
+            r = e.get("reward", -np.inf)
+            if r > best_r:
+                path = e.get("path", "")
+                if os.path.exists(path):
+                    with open(path) as f2:
+                        params = json.load(f2)
+                    if "B1" in params:
+                        best_r, best_p = r, params
+    return best_p, best_r
+
+
+# warm-start methods that have runs (BO has no warm-start)
+WARMSTART_METHODS = ["PSO (20p × 200i)", "CMA-ES", "ShapeEvolve"]
+
+
+def load_warmstart_best(name):
+    if name == "PSO (20p × 200i)":
+        return _load_best_params_ga_warmstart()
+    elif name == "CMA-ES":
+        return _load_best_params_cmaes_warmstart()
+    elif name == "ShapeEvolve":
+        return _load_best_params_v3_warmstart()
+    return None, None
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
     plt.rcParams.update(STYLE)
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    fig = plt.figure(figsize=(20, 18), facecolor="white")
+    # 5 render panels: 4 random-start (Corner B) + 1 Corner A warm-start
+    fig = plt.figure(figsize=(20, 22), facecolor="white")
     outer_gs = fig.add_gridspec(1, 2, width_ratios=[1.8, 2], wspace=0.1,
-                                left=0.07, right=0.97, top=0.93, bottom=0.05)
-    left_gs  = outer_gs[0, 0].subgridspec(2, 1, height_ratios=[8, 2], hspace=0.05)
-    right_gs = outer_gs[0, 1].subgridspec(4, 1, hspace=0.02)
-    ax        = fig.add_subplot(left_gs[0])
-    legend_ax = fig.add_subplot(left_gs[1])
-    legend_ax.axis("off")
-    axes_3d   = [fig.add_subplot(right_gs[i]) for i in range(4)]
+                                left=0.07, right=0.97, top=0.93, bottom=0.04)
+    left_gs  = outer_gs[0, 0].subgridspec(2, 1, height_ratios=[1, 1], hspace=0.18)
+    right_gs = outer_gs[0, 1].subgridspec(5, 1, hspace=0.02)
+    ax_b      = fig.add_subplot(left_gs[0])   # Corner B — random-start
+    ax_a      = fig.add_subplot(left_gs[1])   # Corner A — warm-start
+    axes_3d   = [fig.add_subplot(right_gs[i]) for i in range(5)]
 
-    print(f"{'Method':<28}  {'median_LD':>10}  {'half_span':>10}  {'root_chord':>10}")
-    print("-" * 65)
+    # ── Random-start (Corner B) planform ──────────────────────────────────────
+    print(f"{'Method':<28}  {'median_LD':>10}  {'half_span':>10}")
+    print("-" * 55)
 
+    rand_params = {}
     for name in METHOD_ORDER:
         params, median_ld = load_median(name)
         if params is None:
             print(f"{name:<28}  no data")
             continue
         x, y = full_span_polygon(params)
-        half_span = params["B1"] + params["B2"] + params["B3"]
-        ax.fill(x, y, color=COLORS[name], alpha=0.18)
-        ax.plot(x, y, color=COLORS[name], lw=1.6,
-                label=f"{name}  (median L/D={median_ld:.3f})")
-        print(f"{name:<28}  {median_ld:>10.4f}  {half_span:>10.1f}  {C1:>10.1f}")
+        ax_b.fill(x, y, color=COLORS[name], alpha=0.18)
+        ax_b.plot(x, y, color=COLORS[name], lw=1.8, label=f"{name}  (median L/D={median_ld:.3f})")
+        rand_params[name] = (params, median_ld)
+        print(f"{name:<28}  {median_ld:>10.4f}  {params['B1']+params['B2']+params['B3']:>10.1f}")
 
-    ax.set_xlabel("Span (mm)")
-    ax.set_ylabel("Chord (mm, LE → TE)")
-    ax.set_aspect("equal")
-    ax.invert_yaxis()
-    ax.axvline(0, color="grey", lw=0.6, ls="--", alpha=0.5)
-    ax.grid(True, alpha=0.2)
-    for sp in ["top", "right"]:
-        ax.spines[sp].set_visible(False)
-    handles, labels = ax.get_legend_handles_labels()
-    legend_ax.legend(handles, labels, fontsize=21, loc="center",
-                     framealpha=0.95, title="Method", borderaxespad=0, ncol=1)
-    ax.set_title(
-        "Top-view planform — median-best design per method\n"
-        "Full span shown (symmetric).  LE at top, TE at bottom.",
-        fontweight="medium", pad=8,
-    )
+    # ── Warm-start (Corner A) planform ────────────────────────────────────────
+    print()
+    print(f"{'Warm-start method':<28}  {'best_LD':>10}  {'S1':>6}  {'C2':>7}  {'C4':>7}")
+    print("-" * 65)
 
-    # Pre-collect render params and compute consistent ref_span across all panels
+    ws_params = {}
+    for name in WARMSTART_METHODS:
+        params, best_ld = load_warmstart_best(name)
+        if params is None:
+            print(f"{name:<28}  no data")
+            continue
+        x, y = full_span_polygon(params)
+        ax_a.fill(x, y, color=COLORS[name], alpha=0.18)
+        ax_a.plot(x, y, color=COLORS[name], lw=1.8, label=f"{name}  (best L/D={best_ld:.3f})")
+        ws_params[name] = (params, best_ld)
+        print(f"{name:<28}  {best_ld:>10.4f}  {params['S1']:>5.1f}°  {params['C2']:>6.0f}  {params['C4']:>6.1f}")
+
+    # ── Shared axis limits across both planform subplots ──────────────────────
+    all_x, all_y = [], []
+    for params, _ in list(rand_params.values()) + list(ws_params.values()):
+        x, y = full_span_polygon(params)
+        all_x.extend(x); all_y.extend(y)
+    xlim     = (min(all_x) - 60, max(all_x) + 60)
+    ylim_inv = (max(all_y) + 50, min(all_y) - 50)
+
+    # Corner B trapped methods (median: all 4 land in Corner B territory)
+    trapped_str = "Trapped: BO, PSO, CMA-ES, ShapeEvolve"
+
+    for ax, badge_text, badge_color, subtitle, add_legend in [
+        (ax_b,
+         f"Corner B  (local trap)\nL/D ≈ 45.7–46.2\n{trapped_str}",
+         "#d62728",
+         "Random init. — median-best per method  (→ Corner B)",
+         True),
+        (ax_a,
+         "Corner A  (global opt.)\nL/D ≈ 48.5–48.8\nPSO, CMA-ES, ShapeEvolve",
+         "#2ca02c",
+         "Warm-start (Corner A) — best per method  (→ Corner A)",
+         True),
+    ]:
+        ax.set_xlabel("Span (mm)")
+        ax.set_ylabel("Chord (mm, LE → TE)")
+        ax.set_aspect("equal")
+        ax.set_xlim(xlim)
+        ax.set_ylim(ylim_inv)
+        ax.axvline(0, color="grey", lw=0.6, ls="--", alpha=0.5)
+        ax.grid(True, alpha=0.2)
+        for sp in ["top", "right"]:
+            ax.spines[sp].set_visible(False)
+        ax.set_title(subtitle, fontweight="medium", pad=6)
+        ax.text(0.04, 0.97, badge_text,
+                transform=ax.transAxes, fontsize=14, fontweight="bold",
+                va="top", ha="left",
+                bbox=dict(boxstyle="round,pad=0.4", facecolor=badge_color,
+                          alpha=0.15, edgecolor=badge_color, linewidth=1.5))
+        if add_legend:
+            ax.legend(fontsize=13, loc="upper center",
+                      bbox_to_anchor=(0.5, -0.22),
+                      framealpha=0.95, handlelength=1.5,
+                      borderpad=0.6, ncol=2)
+
+    # ── 3D renders: rows 0–3 = random-start, row 4 = Corner A warm-start ──────
     _render_data = [(m, lbl, *load_median(m)) for m, lbl in RENDER_PANELS]
-    ref_span = max(
-        (2 * (p["B1"] + p["B2"] + p["B3"]) / 1000.0)
-        for _, _, p, _ in _render_data if p is not None
-    ) if any(p is not None for _, _, p, _ in _render_data) else None
 
-    for ax_3d, (method, panel_label, params, ld) in zip(axes_3d, _render_data):
+
+    # Corner A warm-start design for 5th panel
+    cornerA_params, cornerA_ld = _load_best_params_v3_warmstart()
+
+    all_params_for_span = [p for _, _, p, _ in _render_data if p is not None]
+    if cornerA_params is not None:
+        all_params_for_span.append(cornerA_params)
+    ref_span = max(
+        2 * (p["B1"] + p["B2"] + p["B3"]) / 1000.0 for p in all_params_for_span
+    ) if all_params_for_span else None
+
+    # Random-start panels (rows 0–3)
+    for ax_3d, (method, panel_label, params, ld) in zip(axes_3d[:4], _render_data):
         ax_3d.axis("off")
         if params is not None:
             print(f"Rendering 3D: {method}  (median L/D={ld:.4f})...")
@@ -275,9 +423,34 @@ def main():
                    bbox=dict(boxstyle="round,pad=0.25", facecolor="white",
                              alpha=0.75, edgecolor="none"))
 
+    # Corner A warm-start panel (row 4) — green label
+    ax_cA = axes_3d[4]
+    ax_cA.axis("off")
+    # green top border to visually separate from Corner B panels
+    ax_cA.plot([0, 1], [1.012, 1.012], color="#2ca02c", lw=2.5,
+               transform=ax_cA.transAxes, clip_on=False)
+    if cornerA_params is not None:
+        print(f"Rendering 3D: Corner A warm-start  (best L/D={cornerA_ld:.4f})...")
+        try:
+            img = _render(cornerA_params, ref_span=ref_span)
+            ax_cA.imshow(img)
+        except Exception as e:
+            ax_cA.text(0.5, 0.5, f"render failed\n{e}", ha="center", va="center",
+                       transform=ax_cA.transAxes, fontsize=7, wrap=True)
+    else:
+        ax_cA.text(0.5, 0.5, "no data", ha="center", va="center",
+                   transform=ax_cA.transAxes, fontsize=9)
+    ld_str = f"best L/D = {cornerA_ld:.3f}" if cornerA_params is not None else ""
+    ax_cA.text(0.5, 0.97, f"Corner A  (warm-start, ShapeEvolve)\n{ld_str}",
+               transform=ax_cA.transAxes, fontsize=22, fontweight="bold",
+               ha="center", va="top",
+               bbox=dict(boxstyle="round,pad=0.25", facecolor="#c8e6c9",
+                         alpha=0.90, edgecolor="#2ca02c", linewidth=1.5))
+
     fig.suptitle(
-        "BlendedNet (BWB) — Planform comparison: median-best design per method\n"
-        r"Reward = mean(CL/CD) at $\alpha \in \{3°, 4°, 5°, 6°, 7°\}$",
+        "BlendedNet (BWB) — Planform: random-start (Corner B) vs. warm-start (Corner A)\n"
+        r"Reward = mean($C_L/C_D$) at $C_L^\star \in \{0.185,\,0.206,\,0.227\}$, "
+        r"$M_\infty=0.3$, $\mathrm{Re}=10^7$",
         fontsize=26, fontweight="medium", y=1.005,
     )
 
