@@ -45,11 +45,12 @@ def run(environment, args, output_dir):
         opt = LBFGSOptimizer(x0, lb, ub, maxiter=args.maxiter, eps=args.eps)
 
         def reward_fn(x, _restart=restart):
+            nonlocal database
             t = call_counter[0]
             case_dir = os.path.join(output_dir, f'call_{t:05d}_r{_restart}')
             design_path = environment.write_design(x, case_dir, 'design')
             reward, results = environment.simulate(design_path, case_dir)
-            database_ref = update_database(database, design_path, reward, results)
+            database = update_database(database, design_path, reward, results)
 
             nonlocal global_best
             if reward > global_best:

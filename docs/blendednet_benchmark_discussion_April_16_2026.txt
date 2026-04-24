@@ -2351,3 +2351,367 @@ NEXT STEPS
          for shapebench_5_max_LD.
   2. Consider whether to run additional warm-start seeds (currently n=3 per
      method) for tighter confidence intervals in the paper.
+
+================================================================================
+SESSION UPDATE — April 23 2026 (evening)
+================================================================================
+
+CROSS-METRIC ANALYSIS AND NEW PLOTS
+------------------------------------
+
+Two new analysis scripts were created:
+
+  analysis/BlendedNet/plot_blendednet_cd_ld_scatter.py
+    Scatter plot of best CD vs best L/D for each method × reward type.
+    Filled circle = best design from min-CD runs.
+    Open circle   = best design from max-L/D runs.
+    Both evaluated on both metrics via operating_points in results.json.
+    Output: analysis_plots_reward_comparison/cd_ld_scatter.png/.pdf
+
+  analysis/BlendedNet/plot_blendednet_convergence_combined.py
+    Two-panel convergence: left = min-CD, right = max-L/D with warm-start lines.
+    Consistent method colors across both panels (#ff7f0e BO, #1f77b4 PSO,
+    #d62728 CMA-ES, #2ca02c ShapeEvolve, #e377c2 L-BFGS-B left panel only).
+    Output: analysis_plots_reward_comparison/convergence_combined.png/.pdf
+
+CROSS-METRIC SCATTER RESULTS (as of April 23):
+
+  Method               CD(minCD)  LD(minCD)    CD(maxLD)  LD(maxLD)
+  -------              ---------  ---------    ---------  ---------
+  Bayesian Opt.          0.00441    46.87        0.00433    47.84
+  PSO (20p × 200i)       0.00425    48.87        0.00451    45.73
+  CMA-ES                 0.00426    48.66        0.00447    46.19
+  ShapeEvolve            0.00428    48.54        0.00449    46.05
+
+KEY FINDING — CROSS-METRIC ANOMALY:
+  For PSO, CMA-ES, and ShapeEvolve, the best design found by the min-CD reward
+  achieves HIGHER L/D than the best design found directly by the max-L/D reward.
+  This is the landscape trap in action: the max-L/D reward guides methods to
+  Corner B (~45–46 L/D) while the min-CD reward happens to guide methods to
+  Corner A (~48.5–48.9 L/D), which is simultaneously min-CD and max-L/D optimal.
+
+ANOMALY IN BO DATA — BUDGET MISMATCH:
+  Bayesian Opt. is the exception: its max-L/D best design (CD=0.00433, L/D=47.84)
+  is better than its min-CD best design (CD=0.00441, L/D=46.87) on BOTH metrics.
+  Root cause: the min-CD BO runs used n=500 evaluations while the max-L/D BO runs
+  used n=1000 evaluations. The n=1000 BO run at n=1000 happens to approach Corner A
+  (2/10 seeds), yielding lower CD and higher L/D simultaneously, because Corner A is
+  the optimum for both rewards.
+  The cross-metric anomaly claim is CLEAN for PSO, CMA-ES, ShapeEvolve (matched
+  budgets: PSO 4000 evals, CMA-ES 1000 evals, ShapeEvolve 2000 evals for both
+  rewards). BO requires the budget correction described below.
+
+BO MIN-CD EXTENSION RUNS (n=500 → n=1000)
+-------------------------------------------
+
+To correct the budget mismatch and enable a fair cross-metric comparison,
+10 new BO runs were submitted to extend each seed from n=500 to n=1000.
+
+Method: use the existing --warmstart_csv mechanism in BO_torch/run.py.
+  1. build_bo_bnet_warmstart_csvs.py converts each seed's 500 existing design
+     JSONs + rewards into a CSV with columns x_0,...,x_9,reward.
+  2. New runs load these 500 observations into the GP at startup, then run 500
+     additional GP-guided evaluations (n_calls=500), producing total n=1000.
+  3. Output dirs: run_BO_torch_shapebench_5_seed{N}_n1000/ (N=0..9)
+
+Submitted as jobs 3441–3450 (April 23 2026, ~23:00 UTC).
+All 10 running on compute-dy-hpc-128vcpu-6.
+
+Expected wall time: 15–20 hours (original n=500 ran ~7.6h; extension GP fits
+on 500–999 observations rather than 0–499, so each fit is larger).
+
+For the convergence plot after completion: the n=1000 trajectory per seed is
+constructed by concatenating the raw reward columns from the n=500 and n=1000
+directories, then applying running min on -reward. The n=1000 run's best_reward
+column is initialized from the n=500 warmstart best, so no discontinuity at
+the join point.
+
+sbatch files: sbatch/environments/BlendedNet/BO_torch/run_BO_torch_shapebench_5_seed{N}_n1000.slurm
+helper script: scripts/build_bo_bnet_warmstart_csvs.py
+
+V3 MIN-CD EXTENSION RUNS (att_2 and att_5)
+--------------------------------------------
+
+Jobs 3439 (att_2, 300 iters) and 3440 (att_5, 250 iters) are running and have
+been running for ~1 hour as of submission of the BO jobs.
+
+  att_2: active basin transition (Δ0.000568 in last 200 evals) — the critical one
+  att_5: nearly converged in good basin, small continued improvement expected
+  att_3: skipped (firmly converged to bad basin, ~1e-8 improvement/eval)
+
+PAPER WRITING PLAN (BOTH REWARDS)
+-----------------------------------
+
+See detailed breakdown discussed in session. Short summary:
+
+Narrative arc:
+  Part 1 (min-CD): all methods find Corner A; straightforward ranking.
+  Part 2 (max-L/D): same env, harder; cross-metric anomaly is the hook.
+
+Recommended figure order:
+  1. convergence_combined.png        — both rewards side-by-side (contrast)
+  2. planform_reward_comparison.png  — cross-metric anomaly + Corner A/B geometry
+  3. cd_ld_scatter.png               — trade-off space; replaces cross-metric table
+  4. 3D renders of Corner A vs B     — physical intuition
+  5. convergence_LD_vs_evals_warmstart_comparison.png  — landscape trap confirmation
+
+Key numbers to report:
+  min-CD: PSO 0.00425, CMA-ES 0.00426, ShapeEvolve 0.00428, BO(n500) 0.00441
+  max-L/D random best: BO 47.84, CMA-ES 46.19, SE 46.05, PSO 45.73
+  max-L/D warm-start:  SE 48.75, PSO 48.74, CMA-ES 48.50
+  Landscape trap gap:  ~2.4 L/D units (~5%) between warm-start ceiling and
+                       best random-start result.
+
+NEXT STEPS
+
+  1. Wait for BO n=1000 extension jobs (3441–3450) to complete (~15–20h).
+  2. Re-run cross-metric scatter and convergence plots with BO n=1000 results.
+  3. Wait for v3 att_2 / att_5 extension jobs (3439–3440) to complete.
+  4. Update all convergence plots once both extension sets are done.
+  5. Begin paper writing using the detailed section breakdown from this session.
+  6. Consider extending att_2 further if still actively converging at iter 300.
+
+BO N=1000 JOBS — FAILURE AND FIX (April 23 2026, late evening)
+---------------------------------------------------------------
+
+Jobs 3441–3450 failed immediately after submission. Root cause: missing shared
+library libscipy_openblas-68440149.so on the compute node.
+
+Diagnosis:
+  - scipy 1.15.3 is installed in ShapeEvolve/venv but owned by root (installed
+    with sudo at some point). The rest of the venv is jack-owned.
+  - When scipy was installed, it used a system openblas on the original node
+    rather than bundling its own scipy.libs/ directory. The current node
+    (compute-dy-hpc-128vcpu-6) has no system openblas, so the library is missing.
+  - The original n=500 BO runs succeeded on node compute-dy-hpc-128vcpu-8, which
+    presumably had the system openblas available.
+  - pip install --force-reinstall failed with permission denied on scipy/version.py
+    (root-owned).
+
+Fix (non-destructive, no root required):
+  - Downloaded the matching scipy wheel:
+      scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+  - Extracted only the scipy.libs/ directory into site-packages/:
+      unzip scipy-*.whl 'scipy.libs/*' -d venv/lib/python3.10/site-packages/
+  - This added libscipy_openblas-68440149.so (and companion gfortran/quadmath
+    libs) without touching the root-owned scipy package files.
+  - Verified: botorch imports cleanly after fix.
+
+Safety: the v3 extension jobs (3439, 3440) were running throughout and were
+unaffected — they do not import scipy or botorch.
+
+Jobs 3451–3460 resubmitted and confirmed running (all on compute-dy-hpc-128vcpu-6).
+
+SESSION UPDATE — April 24 2026
+================================
+
+V3 MIN-CD EXTENSION — FAILED ITERATION CLEANUP AND RESUBMISSION
+-----------------------------------------------------------------
+
+Background:
+  Jobs 3464/3465 (att_2 and att_5 v3 extensions, ext2) were running on
+  compute-dy-hpc-128vcpu-1 but continued to produce 100% penalty evaluations
+  (reward = -5.0) despite the torchvision /tmp lock fix already being in place.
+  Checkpoints had advanced to att_2=239, att_5=255 with zero good evaluations
+  in the extension range.
+
+Cleanup procedure:
+  All database.json entries with iter >= 200 were stripped from both runs, the
+  corresponding design files and case directories on disk were deleted, and
+  checkpoint.json was reset to {"last_completed_iter": 199} for both.
+
+    att_2: dropped 400 db entries, deleted 242 files + 248 case dirs
+    att_5: dropped 570 db entries, deleted 570 files + 570 case dirs
+
+  New slurm files created with --exclude=compute-dy-hpc-128vcpu-3,
+  compute-dy-hpc-128vcpu-6 to keep v3 jobs away from the BO node:
+    run_v3_flash2_5_shapebench_5_attempt2_resume300_clean.slurm  → job 3468
+    run_v3_flash2_5_shapebench_5_attempt5_resume250_clean.slurm  → job 3467
+
+  Both submitted April 24 2026. att_5 (job 3467) started immediately and ran
+  successfully — all evaluations producing valid rewards. att_2 (job 3466)
+  crashed on its first iteration.
+
+ATT_2 PARTIAL RMTREE INCIDENT
+-------------------------------
+
+Root cause of att_2 crash (job 3466):
+  An earlier failed background cleanup script used os.path.dirname() on a path
+  of the form .../run_dir/iter_N_oX.json, which returns run_dir itself — not a
+  subdirectory. The script then called shutil.rmtree(run_dir), which began
+  deleting everything inside att_2's run directory before crashing mid-way due
+  to a race condition (FileNotFoundError on iter_215_o4).
+
+  This silently deleted ~808 design JSON files and case directories spread
+  across iter 0–199. The database.json still contained entries pointing to
+  those missing paths, but iter_197_o8.json (the idxmax best design, first in
+  CSV at reward -0.004952) had its case directory deleted. When job 3466 tried
+  to build context from this parent, it crashed with FileNotFoundError.
+
+Fix:
+  808 database entries with missing file paths were stripped from att_2's
+  database.json (keeping 1201 valid entries). The best surviving reward is
+  still -0.004952 (iter_197_o8.json design file is intact; only its case dir
+  was deleted). Job 3468 submitted as the clean att_2 extension.
+
+Impact on results:
+  - results.csv fully intact: all 2009 rows for iter 0–199 preserved, best
+    reward -0.004952 correctly recorded. Convergence plots unaffected.
+  - 808 mid-run design parameter JSON files unrecoverable (case dirs also
+    deleted; data not backed up in git or snapshots).
+  - Globally best v3 run for min-CD is att_1 (-0.004276); its data is fully
+    intact. Best-design planform plots unaffected.
+  - Median-based design plots (radar, polar, 3d_panel) for v3/SE in
+    analysis_plots_shapebench_mean_cd/ are temporarily broken: att_2 is the
+    closest run to the median (-0.005215) but iter_197_o8's case dir is
+    missing, so _load_median_params returns None and the v3 panel is silently
+    dropped. This self-corrects once job 3468 runs a few iterations and
+    establishes a new case directory at the same or better reward.
+
+CURRENT JOB STATE (April 24 2026)
+-----------------------------------
+
+  BO n=1000 extensions:  jobs 3451–3460, running on compute-dy-hpc-128vcpu-3
+  v3 att_5 extension:    job 3467, running on compute-dy-hpc-128vcpu-1
+  v3 att_2 extension:    job 3468, running on compute-dy-hpc-128vcpu-1
+
+  att_5 targets: iter 200–249 (+50 good iters, --iterations 250)
+  att_2 targets: iter 200–299 (+100 good iters, --iterations 300)
+
+NEXT STEPS
+
+  1. Wait for BO n=1000 jobs (3451–3460) to complete (~15–20h from restart).
+     Re-run cross-metric scatter and convergence plots once done.
+  2. Wait for v3 att_2 (3469) and att_5 (3467) to complete.
+     Median-based design plots become valid again once att_2 beats its current
+     personal best (−0.004952), which shifts idxmax to a fresh case dir.
+  3. Update all convergence plots once both extension sets are done.
+  4. Begin paper writing using the section breakdown from April 23 session.
+
+PLANNED WRITE-UP FIGURES — ATT_2 IMPACT ASSESSMENT
+----------------------------------------------------
+
+The five planned paper figures are unaffected by the att_2 data loss:
+
+  1. convergence_combined.png          — results.csv only. Safe.
+  2. planform_reward_comparison.png    — load_best picks globally best v3 min-CD
+                                         run = att_1 (iter_149_o2, intact). Safe.
+  3. cd_ld_scatter.png                 — same load_best pattern, same att_1. Safe.
+  4. 3D renders of Corner A vs B       — not planned; was floated in discussion
+                                         but not confirmed for the write-up.
+  5. convergence_LD_vs_evals_          — max-LD run directories only. Safe.
+     warmstart_comparison.png
+
+The only currently broken outputs are three secondary diagnostic plots in
+analysis_plots_shapebench_mean_cd/ (radar, polar, 3d_panel_best_designs) where
+the ShapeEvolve panel is silently dropped. These fix automatically once job 3469
+produces a design that beats att_2's current best (−0.004952).
+
+Note: plot_blendednet_3d_panel.py produces 3d_panel_best_designs.png (one 3D
+mesh render per method, median-best design) — this is distinct from the planned
+"Corner A vs B" figure which does not yet have a script.
+
+ATT_2 DATA RECOVERY — FINAL STATUS (April 24 2026)
+----------------------------------------------------
+
+After the partial rmtree incident, recovery proceeded in several stages:
+
+Stage 1 — Strip bad database entries:
+  808 database entries with missing .json paths stripped, leaving 1201 valid
+  entries. Checkpoint held at 199.
+
+Stage 2 — Reconstruct from case directories:
+  478 of the 808 missing design JSON files were reconstructed by reading the
+  "design" field from their surviving case_dir/save/results.json files and
+  writing the parameters back to the corresponding .json files. These 478
+  entries were re-added to database.json, bringing the total to 1679.
+
+Stage 3 — Recreate key plot file:
+  iter_197_o8/save/results.json was recreated by re-running the surrogate on
+  iter_197_o8.json (design file intact) using the overlay venv
+  (venv_torch210). Confirmed: reward=-0.004952, mean_CD=0.004952,
+  cruise_alpha=7.252°. This restores the v3/SE panel in all three median-based
+  design plots (radar, polar, 3d_panel).
+
+Permanently unrecoverable: 330 entries
+  All 330 were genuine good evaluations (reward range -0.0094 to -0.0050),
+  including 11 near-optimal (reward > -0.005) and 250 in the -0.006 to -0.005
+  range. Both their design JSON files and case directories were deleted by the
+  rmtree with nothing remaining on disk. No Lustre snapshots are configured on
+  this cluster (confirmed via lfs snap, .snapshot directories, and df).
+
+Final database state:
+  Entries:      1679  (out of original 2009; 83.5% recovered)
+  Best reward:  -0.004952  (unchanged, preserved throughout)
+  results.csv:  fully intact, all 2009 rows
+  Plot impact:  none — all five planned paper figures safe; median diagnostic
+                plots restored via Stage 3 surrogate re-run
+
+TORCHVISION LOCK FIX — MODULE-LEVEL (April 24 2026)
+-----------------------------------------------------
+
+Jobs 3468/3467 (att_2/att_5, the "ext3" resubmission) both failed with the
+same torchvision circular import error despite the /tmp lock being in place.
+
+Root cause: the lock was inside _load_model(), which is called lazily on the
+first evaluation. But environment.py had already been changed to import
+torchvision.extension and Transolver at MODULE LEVEL (lines 24-25). With two
+jobs starting simultaneously, both processes hit the module-level import at
+the same time, racing on the __pycache__ .pyc write on Lustre before the lock
+was ever reached.
+
+Fix: the fcntl.lockf block was moved to wrap the module-level imports:
+
+  with open("/tmp/blendednet_torchvision_import.lock", "a") as _lf:
+      fcntl.lockf(_lf, fcntl.LOCK_EX)
+      try:
+          import torchvision.extension
+          from Transolver import Model as _TransolverModel
+      finally:
+          fcntl.lockf(_lf, fcntl.LOCK_UN)
+
+This serialises the torchvision import at the point where the race actually
+occurs. Jobs 4356 (att_2, node 9) and 4357 (att_5, node 8) submitted with
+this fix. SLURM also assigned them to separate nodes, providing additional
+isolation.
+
+SESSION UPDATE — April 24 2026 (v3 scale-out)
+----------------------------------------------
+
+Jobs 4356/4357 (att_2/att_5, node 9/8) failed immediately on startup with:
+  RuntimeError: operator torchvision::nms does not exist
+
+Root cause: the shared venv ($REPO_DIR/venv) has torch 2.11.0+cpu, but
+torchvision 0.25.0 was built against torch 2.10.x.  The module-level import
+lock fix was correct, but the wrong venv was being activated.
+
+Fix applied: all v3 slurm scripts changed from
+  source "$REPO_DIR/venv/bin/activate"
+to
+  source "/home/jack/venv_torch210/bin/activate"
+(overlay venv with torch 2.10.0+cu128, compatible with torchvision 0.25.0)
+
+Jobs 4368 (att_2 resume→300) and 4369 (att_5 resume→250) resubmitted with
+this fix.  Both landed on compute-dy-hpc-128vcpu-8 and confirmed working:
+checkpoint advanced 199 → 200 within ~21 minutes of start.
+
+NEW RUNS — att_11 through att_20 (fresh from iter 0)
+  All 10 scripts (run_v3_flash2_5_shapebench_5_attempt{11..20}.slurm) updated
+  with the venv_torch210 fix before submission.
+  Jobs 4370–4379, all running on compute-dy-hpc-128vcpu-3.
+  Fresh starts — no --resume flag, no pre-existing checkpoint.
+  Config: v3_flash2_5_shapebench_5_n2000.config.json (200 iters, n_evals=2000)
+
+Active v3 jobs as of submission:
+  4368  v3_bnet_a2_ext  (att_2, resume 200→300)
+  4369  v3_bnet_a5_ext  (att_5, resume 200→250)
+  4370  v3_bnet_a11     (att_11, iter 0→199)
+  4371  v3_bnet_a12     (att_12, iter 0→199)
+  4372  v3_bnet_a13     (att_13, iter 0→199)
+  4373  v3_bnet_a14     (att_14, iter 0→199)
+  4374  v3_bnet_a15     (att_15, iter 0→199)
+  4375  v3_bnet_a16     (att_16, iter 0→199)
+  4376  v3_bnet_a17     (att_17, iter 0→199)
+  4377  v3_bnet_a18     (att_18, iter 0→199)
+  4378  v3_bnet_a19     (att_19, iter 0→199)
+  4379  v3_bnet_a20     (att_20, iter 0→199)

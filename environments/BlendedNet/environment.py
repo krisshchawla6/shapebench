@@ -13,11 +13,20 @@ from .mesh_generator import generate_mesh
 
 ENV_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(ENV_DIR, "model")
-# Serialises the torchvision import across all processes on the same node,
-# preventing the circular-import race that occurs under concurrent loads.
-_LOCK_FILE = os.path.join(MODEL_DIR, ".torchvision_lock")
+# /tmp is always local to the compute node — fcntl.lockf is reliable there.
+# Serialises the torchvision + Transolver import across all processes on the
+# same node so that concurrent jobs don't race on the __pycache__ write.
+_LOCK_FILE = "/tmp/blendednet_torchvision_import.lock"
 
 sys.path.insert(0, MODEL_DIR)
+
+with open(_LOCK_FILE, "a") as _lf:
+    fcntl.lockf(_lf, fcntl.LOCK_EX)
+    try:
+        import torchvision.extension  # loads _C before _meta_registrations runs
+        from Transolver import Model as _TransolverModel
+    finally:
+        fcntl.lockf(_lf, fcntl.LOCK_UN)
 
 GEOM_KEYS = ["B1", "B2", "B3", "C2", "C3", "C4", "S1", "S2", "S3"]
 N_POINTS = 8192
@@ -49,14 +58,7 @@ def _load_model():
         "unified_pos": False, "time_input": False, "shapelist": None,
     })()
 
-    with open(_LOCK_FILE, "a") as _lf:
-        fcntl.lockf(_lf, fcntl.LOCK_EX)
-        try:
-            from Transolver import Model
-        finally:
-            fcntl.lockf(_lf, fcntl.LOCK_UN)
-
-    _model = Model(args)
+    _model = _TransolverModel(args)
     ckpt = torch.load(os.path.join(MODEL_DIR, "transolver_best.pt"),
                       map_location=_device, weights_only=True)
     _model.load_state_dict(ckpt)
