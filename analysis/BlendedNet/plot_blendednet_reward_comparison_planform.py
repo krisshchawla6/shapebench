@@ -234,7 +234,8 @@ def load_warmstart_best_ld(name):
 
 METHODS = {
     "Bayesian Opt.": {
-        "cd_dirs": lambda: sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500"))),
+        "cd_dirs": lambda: (sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500"))) +
+                            sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n1000")))),
         "ld_dirs": lambda: sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_max_LD_seed*_n1000"))),
         "mkey": "bo",
     },

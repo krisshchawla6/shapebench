@@ -15,6 +15,7 @@ Outputs:
 """
 
 import os
+import re
 import glob
 import numpy as np
 import pandas as pd
@@ -83,10 +84,31 @@ def load_lbfgsb():
 
 
 def load_bo():
-    return _load_curves(
-        glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500", "results.csv")),
-        "best_reward",
-    )
+    """Concatenate n500 + n1000 extension per seed for full 1000-eval BO min-CD curve."""
+    curves = []
+    for csv500 in sorted(glob.glob(os.path.join(
+            RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500", "results.csv"))):
+        m = re.search(r"_seed(\d+)_n500", os.path.basename(os.path.dirname(csv500)))
+        if m is None:
+            continue
+        try:
+            df500 = pd.read_csv(csv500)
+        except Exception:
+            continue
+        if "best_reward" not in df500.columns:
+            continue
+        arr = -df500["best_reward"].values.astype(float)
+        csv1000 = os.path.join(
+            RESULTS_DIR, f"run_BO_torch_shapebench_5_seed{m.group(1)}_n1000", "results.csv")
+        if os.path.exists(csv1000):
+            try:
+                df1000 = pd.read_csv(csv1000)
+                if "best_reward" in df1000.columns:
+                    arr = np.concatenate([arr, -df1000["best_reward"].values.astype(float)])
+            except Exception:
+                pass
+        curves.append(np.minimum.accumulate(arr))
+    return curves
 
 
 def load_ga():
