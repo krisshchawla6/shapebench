@@ -132,7 +132,8 @@ def load_all_designs():
          sorted(glob.glob(os.path.join(RESULTS_DIR, "run_lbfgsb_shapebench_5_seed*_nr3_normfix"))),
          "reward", "lbfgsb"),
         ("Bayesian Opt. (exact GP)",
-         sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500"))),
+         sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500"))) +
+         sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n1000"))),
          "reward", "bo"),
         ("PSO (20p × 200i)", [
             *sorted(glob.glob(os.path.join(RESULTS_DIR, "run_GA_shapebench_5_seed*_20p_200i"))),

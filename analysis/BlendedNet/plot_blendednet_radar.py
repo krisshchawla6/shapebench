@@ -127,7 +127,8 @@ def load_median(name):
         dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_lbfgsb_shapebench_5_seed*_nr3_normfix")))
         return _load_median_params(dirs, "reward", "lbfgsb")
     elif name == "Bayesian Opt. (exact GP)":
-        dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500")))
+        dirs = (sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500"))) +
+                sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n1000"))))
         return _load_median_params(dirs, "reward", "bo")
     elif name == "PSO (20p × 200i)":
         dirs = []
