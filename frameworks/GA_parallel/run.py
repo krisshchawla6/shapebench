@@ -28,8 +28,18 @@ _worker_env = None
 
 def _worker_init(env):
     """Called once per worker process on startup."""
-    import torch
-    torch.set_num_threads(1)
+    import os, sys
+    # Set up sys.path and chdir so imports resolve correctly in forked workers
+    repo = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    if repo not in sys.path:
+        sys.path.insert(0, repo)
+    sys_pkgs = '/home/ubuntu/.local/lib/python3.10/site-packages'
+    if sys_pkgs not in sys.path:
+        sys.path.insert(1, sys_pkgs)
+    os.environ.setdefault('PYTHONPATH', sys_pkgs)
+    os.chdir(repo)
+    # Do NOT import torch here — it conflicts with forked FAST-OAD/OpenMDAO state.
+    # CPU thread limits are handled via OMP_NUM_THREADS/OPENBLAS_NUM_THREADS env vars.
     global _worker_env
     _worker_env = env
 

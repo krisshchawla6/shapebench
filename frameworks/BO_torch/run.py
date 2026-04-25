@@ -41,6 +41,32 @@ def add_args(parser):
     parser.add_argument('--gradient_infeasible', action='store_true', default=True,
                         help='Return actual penalty value for infeasible samples so the GP '
                              'surrogate has gradient signal toward the feasible region (default: True)')
+    parser.add_argument('--warmstart_csv', type=str, default=None,
+                        help='Path to CSV with pre-existing observations (columns: x_0,...,x_{d-1},reward). '
+                             'Loaded into the GP before the run starts, skipping n_initial random phase '
+                             'if enough warmstart points are provided. (default: None)')
+
+
+def _load_warmstart(csv_path, dim, lb_t, ub_t):
+    """Load warmstart observations from CSV. Returns (obs_X, obs_Y, best_reward)."""
+    obs_X, obs_Y = [], []
+    with open(csv_path, newline='') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            try:
+                x_raw = np.array([float(row[f'x_{i}']) for i in range(dim)])
+                reward = float(row['reward'])
+            except (KeyError, ValueError):
+                continue
+            lb = lb_t.numpy(); ub = ub_t.numpy()
+            x_norm = torch.tensor((x_raw - lb) / (ub - lb + 1e-12), dtype=torch.float64)
+            x_norm = x_norm.clamp(0.0, 1.0)
+            obs_X.append(x_norm)
+            obs_Y.append(reward)
+    best_reward = max(obs_Y) if obs_Y else -np.inf
+    print(f'[BO_torch] Warmstart: loaded {len(obs_X)} observations, '
+          f'best reward = {best_reward:.4f}')
+    return obs_X, obs_Y, best_reward
 
 
 def run(environment, args, output_dir):
@@ -76,8 +102,13 @@ def run(environment, args, output_dir):
     obs_X = []   # normalised, shape (n, dim)
     obs_Y = []   # raw reward, shape (n,)
 
+    # Pre-populate from warmstart CSV — bypasses random phase if sufficient data
+    if getattr(args, 'warmstart_csv', None):
+        obs_X, obs_Y, best_reward = _load_warmstart(
+            args.warmstart_csv, dim, lb_t, ub_t)
+
     for i in range(args.n_calls):
-        if i < args.n_initial:
+        if len(obs_X) < args.n_initial:
             # Random phase: uniform sample in [0,1]^dim, then denormalise
             x_norm = torch.rand(dim, dtype=torch.float64)
         else:
@@ -133,7 +164,7 @@ def run(environment, args, output_dir):
                 + extra_values
             )
 
-        phase = 'random' if i < args.n_initial else 'BO'
+        phase = 'random' if len(obs_X) - 1 < args.n_initial else 'BO'
         print(f'[BO_torch] iter {i + 1}/{args.n_calls}  reward={reward:.4f}'
               f'  best={best_reward:.4f}  phase={phase}')
 

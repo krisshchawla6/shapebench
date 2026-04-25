@@ -11,6 +11,7 @@ The resolved configuration is always saved to <output_dir>/run_config.json.
 import os
 import sys
 import json
+import inspect
 import argparse
 import importlib
 
@@ -134,6 +135,8 @@ def main():
                             help='Reward evaluator to use (discovered from environments/<env>/rewards/)')
     pre_parser.add_argument('--output-dir', type=str, default=None,
                             help='Output directory (default: environments/<env>/results/run_<framework>_<reward>)')
+    pre_parser.add_argument('--resume', action='store_true', default=False,
+                            help='Resume from checkpoint.json in the output directory')
     pre_args, remaining = pre_parser.parse_known_args(effective_argv)
 
     available_rewards = _discover_rewards(pre_args.environment)
@@ -177,6 +180,21 @@ def main():
     reward = reward_class(**shared_kwargs)
     environment = env_class(reward=reward, **shared_kwargs)
 
+    # Resume support: read checkpoint and database if --resume is set
+    from frameworks.core.database import load_database
+    start_iter = 0
+    initial_db = None
+    if args.resume:
+        ckpt_path = os.path.join(output_dir, 'checkpoint.json')
+        db_path   = os.path.join(output_dir, 'database.json')
+        if os.path.exists(ckpt_path) and os.path.exists(db_path):
+            start_iter = json.load(open(ckpt_path))['last_completed_iter'] + 1
+            initial_db = load_database(db_path)
+            print(f"  Resuming from iteration {start_iter} "
+                  f"({len(initial_db)} designs in database)")
+        else:
+            print("  --resume set but no checkpoint found; starting fresh")
+
     print("=" * 60)
     print(f"  Framework:   {args.framework}")
     print(f"  Environment: {args.environment}")
@@ -185,7 +203,15 @@ def main():
     print(f"  Config:      {config_path}")
     print("=" * 60)
 
-    fw_module.run(environment, args, output_dir)
+    run_sig = inspect.signature(fw_module.run)
+    if '_start_iter' in run_sig.parameters:
+        fw_module.run(environment, args, output_dir,
+                      _start_iter=start_iter, _initial_database=initial_db)
+    else:
+        if args.resume:
+            print(f"  Warning: --resume has no effect for framework '{args.framework}' "
+                  f"(run() does not accept _start_iter)")
+        fw_module.run(environment, args, output_dir)
 
 
 if __name__ == '__main__':

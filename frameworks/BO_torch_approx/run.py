@@ -44,8 +44,33 @@ def add_args(parser):
                              'Start at 300; increase toward 500 if reward quality suffers.')
     parser.add_argument('--n_epochs', type=int, default=100,
                         help='Adam training epochs per BO iteration (default: 100)')
+    parser.add_argument('--warmstart_csv', type=str, default=None,
+                        help='Path to CSV with pre-existing observations (columns: x_0,...,x_{d-1},reward). '
+                             'Loaded into the GP before the run starts. (default: None)')
     parser.add_argument('--lr', type=float, default=0.01,
                         help='Adam learning rate (default: 0.01)')
+
+
+def _load_warmstart(csv_path, dim, lb_t, ub_t):
+    import csv as _csv
+    obs_X, obs_Y = [], []
+    with open(csv_path, newline='') as f:
+        for row in _csv.DictReader(f):
+            try:
+                x_raw = [float(row[f'x_{i}']) for i in range(dim)]
+                reward = float(row['reward'])
+            except (KeyError, ValueError):
+                continue
+            lb = lb_t.numpy(); ub = ub_t.numpy()
+            x_norm = torch.tensor(
+                [(v - lo) / (hi - lo + 1e-12) for v, lo, hi in zip(x_raw, lb, ub)],
+                dtype=torch.float64
+            ).clamp(0.0, 1.0)
+            obs_X.append(x_norm)
+            obs_Y.append(reward)
+    best = max(obs_Y) if obs_Y else float('-inf')
+    print(f'[BO_torch_approx] Warmstart: loaded {len(obs_X)} obs, best={best:.4f}')
+    return obs_X, obs_Y, best
 
 
 def run(environment, args, output_dir):
@@ -80,9 +105,13 @@ def run(environment, args, output_dir):
     obs_X = []   # normalised, shape (n, dim)
     obs_Y = []   # raw reward, shape (n,)
     prev_state = None   # warm-start: carry model state across iterations
+    # Pre-populate from warmstart CSV
+    if getattr(args, 'warmstart_csv', None):
+        obs_X, obs_Y, best_reward = _load_warmstart(
+            args.warmstart_csv, dim, lb_t, ub_t)
 
     for i in range(args.n_calls):
-        if i < args.n_initial:
+        if len(obs_X) < args.n_initial:
             # Random phase: uniform sample in [0,1]^dim, then denormalise
             x_norm = torch.rand(dim, dtype=torch.float64)
         else:

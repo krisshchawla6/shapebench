@@ -2715,3 +2715,196 @@ Active v3 jobs as of submission:
   4377  v3_bnet_a18     (att_18, iter 0→199)
   4378  v3_bnet_a19     (att_19, iter 0→199)
   4379  v3_bnet_a20     (att_20, iter 0→199)
+
+SESSION UPDATE — April 24 2026 (BO n=1000 shapebench_5 failure and resubmit)
+------------------------------------------------------------------------------
+
+DISCOVERY: BO shapebench_5 n=1000 jobs (3451–3460) completely failed.
+  All 10 seeds, all 500 new evaluations returned reward=-5.0 (penalty).
+  Root cause: same torchvision/venv incompatibility as att_2/att_5.
+  Scripts used source "$REPO_DIR/venv/bin/activate" (torch 2.11+cpu,
+  incompatible with torchvision 0.25.0). The multiprocessing fork in
+  BO_torch triggers the same circular import race that the fcntl lock
+  was meant to fix, but the wrong venv meant the ABI was also broken.
+
+  Earlier attempt (jobs 3441–3449) also failed silently — crashed at
+  startup before entering the evaluation loop, wrote no results.
+
+  These are warmstart extensions: each seed loads
+    run_BO_torch_shapebench_5_seed{N}_n500/warmstart.csv
+  as prior observations, then runs 500 additional BO calls.  The n=500
+  output directories are read-only inputs — they are not modified.
+
+CONFIRMED GOOD: BO max_LD n=1000 (jobs 3349–3358) — all 10 seeds ran
+  1000 valid evaluations each, completed Apr 23.  Those scripts used a
+  different submission path and were unaffected.
+
+FIX APPLIED: venv_torch210 fix applied to all 10 slurm scripts:
+  sbatch/environments/BlendedNet/BO_torch/run_BO_torch_shapebench_5_seed{0..9}_n1000.slurm
+  Changed: source "$REPO_DIR/venv/bin/activate"
+      → source "/home/jack/venv_torch210/bin/activate"
+
+RESUBMITTED: jobs 5498–5507 (seeds 0–9 respectively).
+  Expected runtime: ~12–15 hours per seed.
+  Basis: n=500 runs took ~7.5h; max_LD n=1000 took ~20h total.
+  Extension starts with 500 warmstart points already in GP, so each
+  new iteration is slower than in the original n=500 run.
+
+V3 PERFORMANCE STATUS (April 24, ~9.5h elapsed for att_11–20):
+  Completed runs ranked by best CD (min-CD reward = shapebench_5):
+    att_1   iter 199  best CD = 0.004276  (overall best)
+    att_5   iter 249  best CD = 0.004476  (extended)
+    att_8   iter 199  best CD = 0.004533
+    att_10  iter 199  best CD = 0.004574
+    att_2   iter 299  best CD = 0.004938  (extended)
+    att_3   iter 199  best CD = 0.005479
+    att_4   iter 199  best CD = 0.005481
+    att_6   iter 199  best CD = 0.005500
+    att_9   iter 199  best CD = 0.005521
+    att_7   iter 199  best CD = 0.005795
+
+  Still running (att_11–20, ~40–57% done at time of check):
+    att_11  iter 112  best CD so far = 0.005466
+    att_12  iter 112  best CD so far = 0.005506
+    att_13  iter  87  best CD so far = 0.004790
+    att_14  iter  83  best CD so far = 0.005610
+    att_15  iter  82  best CD so far = 0.004957
+    att_16  iter  82  best CD so far = 0.004636  (promising)
+    att_17  iter  80  best CD so far = 0.004736  (promising)
+    att_18  iter  81  best CD so far = 0.005478
+    att_19  iter  83  best CD so far = 0.005555
+    att_20  iter  84  best CD so far = 0.004738  (promising)
+
+  Clear bimodal distribution: ~half converge to 0.0044–0.0050,
+  ~half stall at 0.0054–0.0058, suggesting two distinct basins.
+
+
+================================================================================
+SESSION UPDATE — April 25 2026
+================================================================================
+
+V3 MIN-CD EXTENSIONS (att_2, att_5) — COMPLETE
+------------------------------------------------
+Jobs 4368 (att_2, resume iter 200→300) and 4369 (att_5, resume iter 200→250)
+both completed.
+
+  att_2: iter=299, n=3599 evals, best_CD=0.004938
+         (vs 0.004952 at iter 199 — Δ0.000014, marginal)
+  att_5: iter=249, n=3449 evals, best_CD=0.004476
+         (vs 0.004483 at iter 199 — Δ0.000007, marginal)
+
+Both extensions confirm the convergence plateau observed at iter 199.
+Additional iterations yield negligible improvement; the runs are done.
+
+
+V3 MIN-CD ATT_11–20 — ALL COMPLETE
+-------------------------------------
+All 10 fresh-start attempts (jobs 4370–4379) completed overnight April 24–25.
+
+  att | iter | n evals | best CD  | basin
+  ----|------|---------|----------|------
+  11  |  199 |   2001  | 0.005466 | bad
+  12  |  199 |   2018  | 0.005504 | bad
+  13  |  199 |   1992  | 0.004790 | good
+  14  |  199 |   1821  | 0.005560 | bad   (fewest evals — API failures)
+  15  |  199 |   1974  | 0.004747 | good
+  16  |  199 |   2004  | 0.004636 | good
+  17  |  199 |   2001  | 0.004729 | good
+  18  |  199 |   1999  | 0.004677 | good
+  19  |  199 |   1988  | 0.005499 | bad
+  20  |  199 |   1978  | 0.004734 | good
+
+  Good basin rate for att_11–20: 6/10 (60%).  Compare to att_1–10: 5/10 (50%).
+  Marginal improvement in discovery rate; variance is consistent with stochastic
+  LLM behaviour rather than a systematic trend.
+
+COMBINED v3 RESULTS (att_1 through att_20, all complete):
+
+  att | best CD  | basin
+  ----|----------|------
+  1   | 0.004276 | good  ← overall best
+  2   | 0.004938 | good  (extended to iter 299)
+  3   | 0.005479 | bad
+  4   | 0.005481 | bad
+  5   | 0.004476 | good  (extended to iter 249)
+  6   | 0.005500 | bad
+  7   | 0.005795 | bad
+  8   | 0.004533 | good
+  9   | 0.005521 | bad
+  10  | 0.004574 | good
+  11  | 0.005466 | bad
+  12  | 0.005504 | bad
+  13  | 0.004790 | good
+  14  | 0.005560 | bad
+  15  | 0.004747 | good
+  16  | 0.004636 | good
+  17  | 0.004729 | good
+  18  | 0.004677 | good
+  19  | 0.005499 | bad
+  20  | 0.004734 | good
+
+  All 20: best=0.004276 (att_1),  median≈0.004864 (between att_13 and att_2).
+  Good basin (CD ≤ 0.0050): 11/20 (55%).
+  Bad basin  (CD > 0.0050):  9/20 (45%).
+
+
+BO SHAPEBENCH_5 N=1000 EXTENSION — ALL COMPLETE
+------------------------------------------------
+Jobs 5498–5507 (seeds 0–9, resubmitted April 24 with venv_torch210 fix).
+Each run loads the 500 n=500 observations as GP warmstart, then runs 500
+additional GP-guided evaluations.
+
+Combined best across both phases (true n=1000 result):
+
+  seed | ext evals | ext best CD | combined best | status
+  -----|-----------|-------------|---------------|--------
+  s0   |    500    |  0.004426   |   0.004426    | complete (Apr 24)
+  s1   |    500    |  0.004541   |   0.004459    | complete (Apr 24)
+  s2   |    500    |  0.004544   |   0.004511    | complete (job 5500, Apr 25 05:58)
+  s3   |    500    |  0.004469   |   0.004461    | complete (Apr 24)
+  s4   |    500    |  0.004554   |   0.004410    | complete (Apr 24)  ← n500 best held
+  s5   |    500    |  0.004367   |   0.004367    | complete (Apr 24)  ← new overall best
+  s6   |    500    |  0.004464   |   0.004464    | complete (Apr 24)
+  s7   |    500    |  0.004483   |   0.004457    | complete (Apr 24)
+  s8   |    500    |  0.004533   |   0.004504    | complete (job 5506, Apr 25)
+  s9   |    500    |  0.004507   |   0.004507    | complete (job 5507, Apr 25 06:49)
+
+  n=1000 combined stats (all 10 seeds):
+    Best:   0.004367 (seed5)  — new best, improves on n=500 best of 0.004410
+    Median: ~0.004460         — improvement over n=500 median of ~0.004490
+
+  The extension yields modest but real gains:
+    best   0.004410 → 0.004367  (Δ0.000043, ~1.0%)
+    median 0.004490 → 0.004460  (Δ0.000030, ~0.7%)
+
+  Note: seeds where the extension did not improve (s1, s2, s4, s7) had the n=500
+  best retained as the combined best.  The GP with 500 warmstart points is better
+  informed but occasionally converges to the same neighbourhood.
+
+  Paper numbers update (replaces "BO(n500) 0.00441" from April 23 session):
+    BO n=500 best:   0.004410
+    BO n=1000 best:  0.004367  ← use for matched-budget comparison vs max-LD runs
+
+ACTIVE JOBS (April 25 2026)
+---------------------------
+  None. All BlendedNet jobs complete.
+
+PLOTS TO RERUN (April 25 2026)
+-------------------------------
+All plot scripts need to be rerun now that the following runs are newly complete:
+  - BO shapebench_5 n=1000 all 10 seeds (jobs 5498–5507)
+  - v3 shapebench_5 att_11–20 (jobs 4370–4379)
+  - v3 shapebench_5 att_2 extension (iter 299) and att_5 extension (iter 249)
+
+Scripts to rerun:
+  analysis/BlendedNet/plot_blendednet_convergence.py
+      (min-CD convergence — BO n=1000 curve now complete; v3 20-attempt median updated)
+  analysis/BlendedNet/plot_blendednet_convergence_combined.py
+      (combined min-CD + max-LD — same BO n=1000 update on left panel)
+  analysis/BlendedNet/plot_blendednet_cd_ld_scatter.py
+      (cross-metric scatter — BO min-CD best now 0.004367 from n=1000 seed5)
+  analysis/BlendedNet/plot_blendednet_planform.py
+      (min-CD planform — best design may now come from BO n=1000 seed5)
+  analysis/BlendedNet/plot_blendednet_reward_comparison_planform.py
+      (reward comparison planform — BO min-CD best updated)
+
