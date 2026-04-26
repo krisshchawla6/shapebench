@@ -3076,8 +3076,10 @@ Figure: BlendedNet_planform_reward_comparison.png
     share the same global optimum once the optimizer is in the right basin.
     This is the geometric confirmation that warm-starting resolves the anomaly.
 
-    For BO: the warm-start column falls back to the random-start max-L/D result
-    (no BO warm-start run was conducted), so both columns look similar for BO.
+    For BO: the warm-start column shows a grey N/A panel ("no warm-start run")
+    because no Corner A warm-start was conducted for BO. This makes the
+    experimental scope immediately legible — BO is excluded from the warm-start
+    comparison rather than silently re-using its random-start result.
 
   Key message: the Corner B shape looks physically plausible (lower-sweep,
   broader chord distribution, generous fuselage) — it is not obviously wrong.
