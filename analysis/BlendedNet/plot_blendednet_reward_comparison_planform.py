@@ -320,43 +320,38 @@ def main():
         p_ws, r_ws, res_ws = load_warmstart_best_ld(name)
         ws_designs[name] = (p_ws, r_ws, res_ws)
 
-    # 2 rows × 4 cols
-    # Row 0: min-CD (blue solid) + max-LD random-start (red dashed) — no warm-start
-    # Row 1: min-CD (blue solid) + max-LD warm-start (green dashed)
-    fig, axes = plt.subplots(2, 4, figsize=(22, 22), facecolor="white",
+    # 4 rows × 2 cols: row = method, col = condition (no warm-start / warm-start)
+    fig, axes = plt.subplots(4, 2, figsize=(18, 32), facecolor="white",
                              sharex=True, sharey=True)
 
-    ROW_LABELS = [
-        r"min-$\overline{C_D}$ + max-$\overline{L/D}$" + "\n(no warm-start)",
-        r"min-$\overline{C_D}$ + max-$\overline{L/D}$" + "\n(with warm-start, Corner A)",
+    COL_LABELS = [
+        r"No warm-start",
+        r"With warm-start (Corner A)",
     ]
 
-    for col, name in enumerate(METHOD_ORDER):
+    for mi, name in enumerate(METHOD_ORDER):
         p_cd, r_cd, res_cd, p_ld, r_ld, res_ld = designs[name]
         p_ws, r_ws, res_ws = ws_designs[name]
         c = COLORS[name]
 
-        for row in range(2):
-            ax = axes[row, col]
+        for ci in range(2):
+            ax = axes[mi, ci]
 
             # min-CD: solid filled outline in method color
             if p_cd is not None:
                 x, y = full_span_polygon(p_cd)
                 ax.fill(x, y, color=c, alpha=0.20)
                 ax.plot(x, y, color=c, lw=2.0,
-                        label=r"min-$\overline{C_D}$" if col == 0 else "_")
+                        label=r"min-$\overline{C_D}$" if ci == 0 else "_")
 
-            # max-LD: dashed outline only (no fill) in same method color
-            if row == 0:
+            # max-LD: dashed outline (ci=0 → random-start, ci=1 → warm-start or BO random)
+            if ci == 0:
                 p_ld_show, res_ld_show = p_ld, res_ld
-                ld_label = r"max-$\overline{L/D}$ (random-start)" if col == 0 else "_"
+                ld_label = r"max-$\overline{L/D}$ (random-start)"
             else:
-                # fall back to random-start for BO (no warm-start run)
                 p_ld_show  = p_ws  if p_ws  is not None else p_ld
                 res_ld_show = res_ws if res_ws is not None else res_ld
-                ld_label = (r"max-$\overline{L/D}$ (warm-start)" if (p_ws is not None and col == 0)
-                            else (r"max-$\overline{L/D}$ (random, BO)" if (p_ws is None and col == 0)
-                            else "_"))
+                ld_label = "_"
 
             if p_ld_show is not None:
                 x, y = full_span_polygon(p_ld_show)
@@ -369,44 +364,40 @@ def main():
             ax.grid(True, alpha=0.18)
             for sp in ["top", "right"]:
                 ax.spines[sp].set_visible(False)
-            if row == 1:
+            if mi == len(METHOD_ORDER) - 1:
                 ax.set_xlabel("Span (mm)")
-            if col == 0:
+            if ci == 0:
                 ax.set_ylabel("Chord (mm, LE → TE)")
-            if row == 0:
-                ax.set_title(name, fontweight="medium", pad=6)
+            if mi == 0:
+                ax.set_title(COL_LABELS[ci], fontweight="medium", pad=6)
 
-            # annotation box — max-LD design (dashed outline)
-            ann_header = (r"max-$\overline{L/D}$  [warm-start]" if (row == 1 and p_ws is not None)
+            # annotation box — max-LD design
+            ann_header = (r"max-$\overline{L/D}$  [warm-start]" if (ci == 1 and p_ws is not None)
                           else r"max-$\overline{L/D}$  [random-start]")
             if p_ld_show is not None and res_ld_show is not None:
                 ax.text(0.97, 0.97, _ann(p_ld_show, res_ld_show, header=ann_header),
                         transform=ax.transAxes,
-                        fontsize=18, va="top", ha="right", color=c,
+                        fontsize=14, va="top", ha="right", color=c,
                         bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
                                   edgecolor=c, alpha=0.85, linewidth=0.8))
 
-            if col == 0:
+            if ci == 0:
                 ax.legend(fontsize=20, loc="lower left", framealpha=0.9,
                           handlelength=1.5, borderpad=0.5)
-
-    # Row descriptor text
-    for row, label in enumerate(ROW_LABELS):
-        axes[row, 0].text(-0.22, 0.5, label,
-                          transform=axes[row, 0].transAxes,
-                          fontsize=22, fontweight="bold", va="center", ha="right",
-                          rotation=90,
-                          bbox=dict(boxstyle="round,pad=0.3", facecolor="lightyellow",
-                                    edgecolor="grey", alpha=0.85, linewidth=0.8))
+                # Method name inside top-left of left panel
+                ax.text(0.03, 0.97, name,
+                        transform=ax.transAxes,
+                        fontsize=20, fontweight="bold", va="top", ha="left",
+                        color=c,
+                        bbox=dict(boxstyle="round,pad=0.25", facecolor="white",
+                                  edgecolor="none", alpha=0.85))
 
     fig.suptitle(
-        r"BlendedNet (BWB) — Best design planform: min-$\overline{C_D}$ vs. max-$\overline{L/D}$ per method"
-        "\nTop: overlaid without warm-start.  "
-        r"Bottom: max-$\overline{L/D}$ replaced by warm-start (Corner A).  "
-        "Same scale across all panels.",
+        r"BlendedNet (BWB) — Best design planform: min-$\overline{C_D}$ vs. max-$\overline{L/D}$ per method",
         fontsize=24, fontweight="medium",
     )
-    fig.tight_layout(rect=[0.05, 0, 1, 0.96])
+    fig.tight_layout(rect=[0.02, 0.02, 0.99, 0.96])
+    fig.subplots_adjust(hspace=0.35, wspace=0.25)
 
     out_png = os.path.join(OUT_DIR, "BlendedNet_planform_reward_comparison.png")
     out_pdf = os.path.join(OUT_DIR, "BlendedNet_planform_reward_comparison.pdf")

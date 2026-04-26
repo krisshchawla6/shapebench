@@ -370,7 +370,7 @@ def main():
             ax.legend(fontsize=21, loc="upper center",
                       bbox_to_anchor=(0.5, -0.22),
                       framealpha=0.95, handlelength=1.5,
-                      borderpad=0.6, ncol=2)
+                      borderpad=0.6, ncol=1)
 
     # ── 3D renders: rows 0–3 = random-start, row 4 = Corner A warm-start ──────
     _render_data = [(m, lbl, *load_best(m)) for m, lbl in RENDER_PANELS]
