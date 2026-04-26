@@ -33,12 +33,12 @@ STYLE = {
     "font.family": "serif",
     "font.serif": ["Times New Roman", "DejaVu Serif", "serif"],
     "mathtext.fontset": "cm",
-    "font.size": 10,
-    "axes.labelsize": 11,
-    "axes.titlesize": 11,
-    "xtick.labelsize": 9,
-    "ytick.labelsize": 9,
-    "legend.fontsize": 9,
+    "font.size": 12,
+    "axes.labelsize": 13,
+    "axes.titlesize": 13,
+    "xtick.labelsize": 11,
+    "ytick.labelsize": 11,
+    "legend.fontsize": 11,
     "axes.linewidth": 0.6,
     "xtick.major.width": 0.5,
     "ytick.major.width": 0.5,
@@ -267,8 +267,8 @@ METHOD_ORDER = ["Bayesian Opt.", "PSO (20p × 200i)", "CMA-ES", "ShapeEvolve"]
 def _ann(params, res, header=""):
     hs = params["B1"] + params["B2"] + params["B3"]
     mean_cd, mean_ld = _cross_metrics(res)
-    cd_str = f"CD  = {mean_cd:.5f}" if mean_cd is not None else "CD  = n/a"
-    ld_str = f"L/D = {mean_ld:.2f}"  if mean_ld is not None else "L/D = n/a"
+    cd_str = rf"$\overline{{C_D}}$ = {mean_cd:.5f}" if mean_cd is not None else r"$\overline{C_D}$ = n/a"
+    ld_str = rf"$\overline{{L/D}}$ = {mean_ld:.2f}"  if mean_ld is not None else r"$\overline{L/D}$ = n/a"
     prefix = f"{header}\n" if header else ""
     return (
         f"{prefix}"
@@ -323,12 +323,12 @@ def main():
     # 2 rows × 4 cols
     # Row 0: min-CD (blue solid) + max-LD random-start (red dashed) — no warm-start
     # Row 1: min-CD (blue solid) + max-LD warm-start (green dashed)
-    fig, axes = plt.subplots(2, 4, figsize=(22, 12), facecolor="white",
+    fig, axes = plt.subplots(2, 4, figsize=(22, 16), facecolor="white",
                              sharex=True, sharey=True)
 
     ROW_LABELS = [
-        "min-CD + max-L/D\n(no warm-start)",
-        "min-CD + max-L/D\n(with warm-start, Corner A)",
+        r"min-$\overline{C_D}$ + max-$\overline{L/D}$" + "\n(no warm-start)",
+        r"min-$\overline{C_D}$ + max-$\overline{L/D}$" + "\n(with warm-start, Corner A)",
     ]
 
     for col, name in enumerate(METHOD_ORDER):
@@ -344,18 +344,18 @@ def main():
                 x, y = full_span_polygon(p_cd)
                 ax.fill(x, y, color=c, alpha=0.20)
                 ax.plot(x, y, color=c, lw=2.0,
-                        label="min-CD" if col == 0 else "_")
+                        label=r"min-$\overline{C_D}$" if col == 0 else "_")
 
             # max-LD: dashed outline only (no fill) in same method color
             if row == 0:
                 p_ld_show, res_ld_show = p_ld, res_ld
-                ld_label = "max-L/D (random-start)" if col == 0 else "_"
+                ld_label = r"max-$\overline{L/D}$ (random-start)" if col == 0 else "_"
             else:
                 # fall back to random-start for BO (no warm-start run)
                 p_ld_show  = p_ws  if p_ws  is not None else p_ld
                 res_ld_show = res_ws if res_ws is not None else res_ld
-                ld_label = ("max-L/D (warm-start)" if (p_ws is not None and col == 0)
-                            else ("max-L/D (random, BO)" if (p_ws is None and col == 0)
+                ld_label = (r"max-$\overline{L/D}$ (warm-start)" if (p_ws is not None and col == 0)
+                            else (r"max-$\overline{L/D}$ (random, BO)" if (p_ws is None and col == 0)
                             else "_"))
 
             if p_ld_show is not None:
@@ -377,33 +377,34 @@ def main():
                 ax.set_title(name, fontweight="medium", pad=6)
 
             # annotation box — max-LD design (dashed outline)
-            ann_header = ("max-L/D  [warm-start]" if (row == 1 and p_ws is not None)
-                          else "max-L/D  [random-start]")
+            ann_header = (r"max-$\overline{L/D}$  [warm-start]" if (row == 1 and p_ws is not None)
+                          else r"max-$\overline{L/D}$  [random-start]")
             if p_ld_show is not None and res_ld_show is not None:
                 ax.text(0.97, 0.97, _ann(p_ld_show, res_ld_show, header=ann_header),
                         transform=ax.transAxes,
-                        fontsize=7, va="top", ha="right", color=c,
+                        fontsize=9, va="top", ha="right", color=c,
                         bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
                                   edgecolor=c, alpha=0.85, linewidth=0.8))
 
             if col == 0:
-                ax.legend(fontsize=8, loc="lower left", framealpha=0.9,
+                ax.legend(fontsize=10, loc="lower left", framealpha=0.9,
                           handlelength=1.5, borderpad=0.5)
 
     # Row descriptor text
     for row, label in enumerate(ROW_LABELS):
         axes[row, 0].text(-0.22, 0.5, label,
                           transform=axes[row, 0].transAxes,
-                          fontsize=9, fontweight="bold", va="center", ha="right",
+                          fontsize=11, fontweight="bold", va="center", ha="right",
                           rotation=90,
                           bbox=dict(boxstyle="round,pad=0.3", facecolor="lightyellow",
                                     edgecolor="grey", alpha=0.85, linewidth=0.8))
 
     fig.suptitle(
-        "BlendedNet (BWB) — Best design planform: min-CD vs. max-L/D per method\n"
-        "Top: overlaid without warm-start.  Bottom: max-L/D replaced by warm-start (Corner A).  "
+        r"BlendedNet (BWB) — Best design planform: min-$\overline{C_D}$ vs. max-$\overline{L/D}$ per method"
+        "\nTop: overlaid without warm-start.  "
+        r"Bottom: max-$\overline{L/D}$ replaced by warm-start (Corner A).  "
         "Same scale across all panels.",
-        fontsize=11, fontweight="medium",
+        fontsize=13, fontweight="medium",
     )
     fig.tight_layout(rect=[0.05, 0, 1, 0.96])
 

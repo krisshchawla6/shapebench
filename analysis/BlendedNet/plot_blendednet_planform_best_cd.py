@@ -285,7 +285,7 @@ def main():
 
         ax.fill(x, y, color=COLORS[name], alpha=0.18)
         ax.plot(x, y, color=COLORS[name], lw=1.6,
-                label=f"{name}  (best CD={best_cd:.5f})")
+                label=rf"{name}  (best $\overline{{C_D}}$={best_cd:.5f})")
 
         print(f"{name:<28}  {best_cd:>10.6f}  {half_span:>10.1f}  {C1:>10.1f}")
 
@@ -328,7 +328,7 @@ def main():
             ax_3d.text(0.5, 0.5, "no data", ha="center", va="center",
                        transform=ax_3d.transAxes, fontsize=9)
 
-        cd_str = f"best CD = {cd:.5f}" if params is not None else ""
+        cd_str = rf"best $\overline{{C_D}}$ = {cd:.5f}" if params is not None else ""
         ax_3d.text(0.5, 0.97, f"{panel_label}\n{cd_str}",
                    transform=ax_3d.transAxes, fontsize=22, fontweight="medium",
                    ha="center", va="top",

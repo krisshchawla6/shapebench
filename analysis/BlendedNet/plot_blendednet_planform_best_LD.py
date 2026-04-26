@@ -425,9 +425,7 @@ def main():
                          alpha=0.90, edgecolor="#2ca02c", linewidth=1.5))
 
     fig.suptitle(
-        "BlendedNet (BWB) — Planform: random-start (Corner B) vs. warm-start (Corner A)\n"
-        r"Reward = mean($C_L/C_D$) at $C_L^\star \in \{0.185,\,0.206,\,0.227\}$, "
-        r"$M_\infty=0.3$, $\mathrm{Re}=10^7$",
+        r"BlendedNet (BWB) — Planform: random-start (Corner B) vs. warm-start (Corner A)",
         fontsize=26, fontweight="medium", y=1.005,
     )
 

@@ -265,8 +265,8 @@ def main():
     # ── Anomaly text annotation — upper left of centre, clear of Method legend ─
     ax.text(
         0.36, 0.97,
-        r"$\longrightarrow$ min-$C_D$ reward finds Corner A" + "\n"
-        r"(lower $C_D$ and higher $L/D$ than max-$L/D$ reward)",
+        r"$\longrightarrow$ min-$\overline{C_D}$ reward finds Corner A" + "\n"
+        r"(lower $\overline{C_D}$ and higher $\overline{L/D}$ than max-$\overline{L/D}$ reward)",
         transform=ax.transAxes,
         va="top", ha="center", fontsize=8.5,
         bbox=dict(boxstyle="round,pad=0.4", fc="#f0f4ff", ec="#7090c0", lw=0.8, alpha=0.92),
@@ -312,10 +312,10 @@ def main():
     style_handles = [
         Line2D([0], [0], marker="o", color="w",
                markerfacecolor="grey", markeredgecolor="grey",
-               markersize=9, label=r"min-$C_D$ reward (filled)"),
+               markersize=9, label=r"min-$\overline{C_D}$ reward (filled)"),
         Line2D([0], [0], marker="o", color="w",
                markerfacecolor="none", markeredgecolor="grey",
-               markersize=9, label=r"max-$L/D$ reward (open)"),
+               markersize=9, label=r"max-$\overline{L/D}$ reward (open)"),
         Line2D([0], [0], marker="D", color="w",
                markerfacecolor="grey", markeredgecolor="grey",
                markersize=9, label=r"Bayesian Opt. $\diamondsuit$"),
