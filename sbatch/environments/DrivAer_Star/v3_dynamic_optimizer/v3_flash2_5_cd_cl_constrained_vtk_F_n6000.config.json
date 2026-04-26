@@ -23,5 +23,6 @@
   "rho": 1.25,
   "u": 40.0,
   "area_ref": 2.37,
-  "lam": 1.0
+  "lam": 1.0,
+  "cl_threshold": -0.1
 }
