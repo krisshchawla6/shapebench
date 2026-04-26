@@ -337,6 +337,24 @@ def main():
         for ci in range(2):
             ax = axes[mi, ci]
 
+            # BO has no warm-start run — show blank N/A panel
+            if name == "Bayesian Opt." and ci == 1:
+                ax.set_facecolor("#f0f0f0")
+                ax.text(0.5, 0.5, "N/A\n(no warm-start run)",
+                        transform=ax.transAxes,
+                        fontsize=18, va="center", ha="center",
+                        color="grey", style="italic")
+                ax.set_xlim(xlim)
+                ax.set_ylim(ylim)
+                ax.set_aspect("equal")
+                for sp in ax.spines.values():
+                    sp.set_visible(False)
+                ax.tick_params(left=False, bottom=False,
+                               labelleft=False, labelbottom=False)
+                if mi == 0:
+                    ax.set_title(COL_LABELS[ci], fontweight="medium", pad=6)
+                continue
+
             # min-CD: solid filled outline in method color
             if p_cd is not None:
                 x, y = full_span_polygon(p_cd)
