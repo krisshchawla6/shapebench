@@ -1302,3 +1302,68 @@ max evals=1401, best Cd=0.04956, median final Cd=0.05166.
 FILES ADDED
   analysis/reconstruct_results_csv.py  (new — reconstructs results.csv from
     per-evaluation save/results.json; supports both lbfgsb and BO/PSO layouts)
+
+NEW REWARD: cd_cl_constrained — Cl <= -0.10 (April 26, 2026)
+-------------------------------------------------------------
+MOTIVATION
+  The cd_only benchmark minimizes drag with no aerodynamic constraint.
+  We explored adding a lift constraint to create a more physically realistic
+  and challenging benchmark. Two candidate formulations were considered:
+
+  (A) Multi-objective: reward = -Cd - β·Cl  (minimize drag + maximize downforce)
+      Rejected: requires the surrogate to accurately predict Cl across the full
+      design space, including the Cl < -0.10 region that cd_only BO never
+      explored. Transolver validation reports MAPE=2.64% for Cd only; Cl
+      accuracy outside the training distribution is unknown.
+
+  (B) Constrained drag minimization: reward = -Cd - λ·max(0, Cl - threshold)
+      Chosen: the optimizer is still guided by -Cd (the validated quantity).
+      Cl only appears in the penalty term, which merely filters out infeasible
+      designs. The feasible region (Cl <= -0.10) is well-covered by the 8000-
+      sample LHS training data (~13% of uniform random evaluations fall in
+      Cl ∈ (-0.20, -0.10) from the cd_only BO runs).
+
+CONSTRAINT BINDING ANALYSIS (from 20k cd_only Estate BO evals)
+  Cl <= 0.0  : non-binding — best Cd (0.0651) already has Cl ≈ -0.08. Any λ
+               works; constrained and unconstrained optima are identical.
+  Cl <= -0.10: binding — best Cd at Cl <= -0.10 is 0.0668 vs unconstrained
+               best 0.0651. Constraint forces a real trade-off (~0.002 Cd
+               penalty to achieve the downforce requirement).
+
+  λ = 1.0 is sufficient: even λ = 0.1 would enforce the constraint (a design
+  at the unconstrained optimum, Cl ≈ -0.08, has violation = 0.02, giving
+  penalty = 0.002 > Cd improvement from switching to infeasible region).
+
+REWARD IMPLEMENTATION
+  File:      environments/DrivAer_Star/rewards/cd_cl_constrained.py
+  Class:     CdClConstrainedReward
+  Formula:   reward = -Cd - 1.0 * max(0, Cl - (-0.10))
+  Params:    lam=1.0, cl_threshold=-0.10 (both configurable via CLI / config)
+  Feedback:  non-empty string with Cl value and penalty when infeasible,
+             so the v3 LLM optimizer sees constraint status at each iteration.
+
+RUNS SUBMITTED (April 26, 2026)
+  Bayesian Opt. (BO_torch): 10 seeds × 3 body styles = 30 jobs
+    n_calls=1000, n_initial=50, SLURM IDs 8312–8341
+    vtk_E: seeds 0–9  (jobs 8312–8321)
+    vtk_F: seeds 0–9  (jobs 8322–8331)
+    vtk_N: seeds 0–9  (jobs 8332–8341)
+
+  ShapeEvolve v3: 10 attempts × 3 body styles = 30 jobs
+    iterations=600, batch_size=10 (n_evals=6000), model=gemini-2.5-flash
+    SLURM IDs 8342–8371
+    vtk_E: attempts 1–10  (jobs 8342–8351)
+    vtk_F: attempts 1–10  (jobs 8352–8361)
+    vtk_N: attempts 1–10  (jobs 8362–8371)
+
+  Slurm scripts: sbatch/environments/DrivAer_Star/BO_torch/vtk_{E,F,N}/
+                 sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/vtk_{E,F,N}/
+  v3 configs:    sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/
+                   v3_flash2_5_cd_cl_constrained_vtk_{E,F,N}_n6000.config.json
+  Results dirs:  environments/DrivAer_Star/results/
+                   run_BO_torch_cd_cl_constrained_vtk_{E,F,N}_seed{0-9}_n1000/
+                   run_v3_dynamic_optimizer_cd_cl_constrained_drivaer_star_
+                     vtk_{E,F,N}_attempt_{1-10}_flash_2_5_n6000/
+
+STATUS
+  Runs in progress (submitted April 26 2026). Analysis pending.
