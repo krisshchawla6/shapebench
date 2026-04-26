@@ -397,7 +397,7 @@ def main():
         fontsize=24, fontweight="medium",
     )
     fig.tight_layout(rect=[0.02, 0.02, 0.99, 0.96])
-    fig.subplots_adjust(hspace=0.35, wspace=0.25)
+    fig.subplots_adjust(hspace=0.10, wspace=0.25)
 
     out_png = os.path.join(OUT_DIR, "BlendedNet_planform_reward_comparison.png")
     out_pdf = os.path.join(OUT_DIR, "BlendedNet_planform_reward_comparison.pdf")
