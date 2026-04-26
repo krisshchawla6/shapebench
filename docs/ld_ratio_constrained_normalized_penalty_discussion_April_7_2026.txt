@@ -20,7 +20,7 @@ shape smoothness (wiggliness).
 
 BENCHMARK: Four optimization methods are compared:
   GA/PSO       120 particles x 500 iterations, 20+ attempts
-  L-BFGS-B     gradient-based with finite-difference gradients, 26 seeds
+  L-BFGS-B     gradient-based with finite-difference gradients, 40 seeds
   BO_torch     Bayesian optimization with exact GP, 4 seeds (cancelled early)
   ShapeEvolve  LLM-guided optimizer (v3, Gemini 2.5 Flash), 20 attempts
 
@@ -97,7 +97,7 @@ FINAL RESULTS (April 9, 2026) --- all XFOIL-validated, benchmark COMPLETE:
 
   Method       Budget                  Best warm-start   NF L/D  XF L/D  XF CM    xtr_u
   -----------  ----------------------  ----------------  ------  ------  -------  -----
-  L-BFGS-B     26 seeds, 3 restarts    s25 (2-step)      361.2   329.5   -0.1290  0.488  <- best
+  L-BFGS-B     40 seeds, 3 restarts    s25 (2-step)      361.2   329.5   -0.1290  0.488  <- best
   ShapeEvolve  20 attempts             att15             362.2   329.0   -0.1291  0.487
   GA/PSO       20 att, 120p x 500i     att13_raw         357.0   325.6   -0.1282  0.484
   BO_torch     4 seeds, ~1600/5000     seed1             356.4   324.9   -0.1280  0.484
@@ -125,7 +125,7 @@ surrogate accuracy gap per method:
   Method     NF evals (Stage 1)      IPOPT runs     NF→XF gap   Cost bottleneck
   ---------  ----------------------  -------------  ----------  -----------------------------------------
   GA/PSO     ~1.50M (25×60k)         5 attempts     -8.8%       Eval volume: 120p×500i; NF <1 ms/call
-  L-BFGS-B   ~992k  (26×~38k)        4 seeds (×2)   -8.8%       3-pt FD in 18D: 36 extra evals/grad step
+  L-BFGS-B   ~1.55M (40×~38k)        4 seeds (×2)   -8.8%       3-pt FD in 18D: 36 extra evals/grad step
   v3 LLM     ~100k  (20×~5k)         20 attempts    -9.2%       LLM API latency: ~1600 calls at ~2-5 s each
   BO_torch   ~31k   (9 seeds total)   9 seeds        -8.8%       GP fitting: O(n³) refit, ~28 s/call at n=2700
 
@@ -136,7 +136,7 @@ Wall-clock and CPU-hour cost per case (all jobs ran on compute-dy-hpc-128vcpu no
   Method      Cores  Wall time/case    CPU-h/case   Cases  Total CPU-h
   ----------  -----  ----------------  -----------  -----  -----------
   GA/PSO        1    32–68 min (~1h)       ~1         25      ~25
-  L-BFGS-B      1    12–52 min (~35m)      ~0.6       26      ~15
+  L-BFGS-B      1    12–52 min (~35m)      ~0.6       40      ~24
   v3 LLM        1    3–9h (~5h avg)        ~5         20      ~100
   BO_torch     128*  27h–202h (~90h avg)   ~12k        9    ~105,000
 
@@ -163,7 +163,7 @@ Notes:
     budget, NeuralFoil's sub-millisecond throughput makes GA wall time a few
     minutes per attempt on a single core.
 
-  - L-BFGS-B also accumulates ~1M NF calls, spread over 26 seeds × 3 restarts.
+  - L-BFGS-B also accumulates ~1.55M NF calls, spread over 40 seeds × 3 restarts.
     The high count comes from 3-point finite differences: each gradient step
     requires 2×18=36 extra forward evals (18-parameter space). Despite this cost,
     L-BFGS-B achieves the best XF L/D, suggesting gradient information is useful
@@ -1327,7 +1327,7 @@ FILES
     band across runs per method. Stage 1 raw optimizer curves only (pre-IPOPT).
     Method coverage:
       GA/PSO:   25 attempts, up to 60,000 evals each (extend flat)
-      L-BFGS-B: 26 seeds, up to ~45,700 evals each (extend flat)
+      L-BFGS-B: 40 seeds, up to ~45,700 evals each (extend flat)
       BO_torch: 9 seeds total — seeds 0–3 (n5000, ~2600–2850 evals, extend=False
                 so drop out naturally) + seeds 5–9 (n6000, 4200–4921 evals,
                 extend=False). Band suppressed where <5 seeds have data.

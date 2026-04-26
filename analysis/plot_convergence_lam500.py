@@ -116,7 +116,7 @@ print(f"GA: {len(ga_curves)} attempts loaded, max evals = {max(len(c) for c in g
 
 # ── Load L-BFGS-B ─────────────────────────────────────────────────────────────
 lbfgsb_curves = []
-for s in range(26):
+for s in range(40):
     f = (f"{BASE_LAM}/run_lbfgsb_ld_ratio_constrained_m02_re1e7_normalized_"
          f"seed{s}_nr3/results.csv")
     if os.path.exists(f):

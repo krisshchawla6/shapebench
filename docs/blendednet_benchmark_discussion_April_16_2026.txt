@@ -3134,3 +3134,103 @@ STATUS SUMMARY
   Draft prose — Corner A GT:       NOT STARTED
   Draft prose — cross-reward anomaly: NOT STARTED
 
+
+================================================================================
+FINAL RESULTS AND COMPUTE COST — April 26 2026
+================================================================================
+
+FINAL RESULTS — shapebench_5 (min-CD)
+--------------------------------------
+All results are Transolver surrogate evaluations (the frozen surrogate defines
+the benchmark ground truth; no separate external validator equivalent to XFOIL).
+
+  Method           Seeds/Attempts  Budget/run   Best CD    Best L/D   Notes
+  ------           --------------  ----------   -------    --------   -----
+  PSO (20p×200i)       10          4000 evals   0.00425    48.87      Corner A
+  CMA-ES               10          1000 evals   0.00426    48.66      Corner A
+  ShapeEvolve          20          2000 evals   0.00428    48.54      Corner A; 55% good-basin rate
+  Bayesian Opt.        10          1000 evals   0.00437    47.56      Corner A (partial)
+  (BO n=500 only)      10           500 evals   0.00441    n/a        pre-extension baseline
+
+  Best design geometry (Corner A): S1=60°, C2=550mm, C4=90mm, B2≈54mm,
+    half-span≈851–863mm.
+  All four methods converge to Corner A. Spread in best CD: 0.00425–0.00437
+  (~2.8%), narrowing to 0.00425–0.00428 (~0.7%) for matched-surrogate methods.
+
+
+FINAL RESULTS — shapebench_5_max_LD (max L/D)
+-----------------------------------------------
+
+  Random-start results:
+
+  Method           Seeds/Attempts  Budget/run   Best L/D   Notes
+  ------           --------------  ----------   --------   -----
+  Bayesian Opt.        10          1000 evals   47.84      Partial Corner A escape (2/10 seeds)
+  CMA-ES               10          1000 evals   46.19      Corner B trap
+  ShapeEvolve          10          2000 evals   46.05      Corner B trap
+  PSO (20p×200i)       10          4000 evals   45.73      Corner B trap
+
+  Warm-start (Corner A seed) results:
+
+  Method           Seeds/Attempts  Budget/run   Best L/D   Median L/D   Notes
+  ------           --------------  ----------   --------   ----------   -----
+  ShapeEvolve           3          2000 evals   48.75      48.75        converges within ~400 evals
+  PSO (20p×100i)        3          2000 evals   48.74      48.53        converges within ~400 evals
+  CMA-ES                3           500 evals   48.50      48.50        converges within ~200 evals
+
+  Proposed ground truth (Corner A): L/D ≈ 48.75, confirmed by 3 methods × 3 runs.
+  Landscape trap cost: +2.3–3.0 L/D units (~5–7%) vs. random-start methods.
+
+
+COMPUTE COST
+------------
+Surrogate evaluation cost: ~30–50s per design (24 Transolver CPU forward passes:
+  3 CL targets × 8 bisection iterations). All jobs ran on single CPU cores unless
+  noted. Wall times are per job (per seed/attempt).
+
+  shapebench_5 (min-CD):
+
+  Method          Budget   Seeds  Wall/job   Total evals   Total CPU-h
+  ------          ------   -----  --------   -----------   -----------
+  PSO (20p×200i)  4000     10     ~35–55h    40,000        ~350–450
+  CMA-ES n500     500      10     ~5–6h       5,000         ~50–60
+  CMA-ES ext→1000 500      10     ~5–6h       5,000         ~50–60  (extension)
+  ShapeEvolve     2000     20     ~17–28h    40,000        ~340–560*
+  BO n500         500      10     ~5–6h       5,000         ~50–60
+  BO ext n500→1000 500     10     ~5–12h      5,000         ~50–120 (ext; GP larger)
+
+  * ShapeEvolve wall time dominated by LLM API latency (~2–5s/call ×
+    ~1600 calls/attempt), not Transolver throughput.
+
+  shapebench_5_max_LD (random-start):
+
+  Method          Budget   Seeds  Wall/job   Total evals   Total CPU-h
+  ------          ------   -----  --------   -----------   -----------
+  BO n1000        1000     10     ~10–12h    10,000        ~100–120
+  PSO (20p×200i)  4000     10     ~35–55h    40,000        ~350–450
+  CMA-ES n1000    1000     10     ~10–12h    10,000        ~100–120
+  ShapeEvolve     2000     10     ~17–28h    20,000        ~170–280*
+
+  shapebench_5_max_LD (warm-start from Corner A):
+
+  Method          Budget   Seeds  Wall/job   Total evals   Total CPU-h
+  ------          ------   -----  --------   -----------   -----------
+  PSO (20p×100i)  2000      3     ~17–28h     6,000         ~51–84
+  CMA-ES n500      500      3     ~5–6h       1,500         ~15–18
+  ShapeEvolve     2000      3     ~17–28h     6,000         ~51–84*
+
+  Grand total (all BlendedNet runs): ~150,000–200,000 Transolver evals,
+  ~1,400–2,300 CPU-hours.
+
+Notes:
+  - PSO and ShapeEvolve min-CD and max-LD random-start runs used the same
+    per-method budget (4000 and 2000 evals respectively) for both reward
+    functions — enabling a direct cross-reward comparison.
+  - CMA-ES and BO used matched budgets for the cross-reward comparison:
+    n=1000 for both min-CD (via extension) and max-LD.
+  - The warm-start CMA-ES budget (n=500) is smaller than the random-start
+    budget (n=1000) because CMA-ES converges quickly once seeded at Corner A
+    (~200 evals to plateau). The n=500 budget is sufficient.
+  - All surrogate evals are the primary cost; no external validator (XFOIL
+    equivalent) is used. The Transolver surrogate IS the benchmark oracle.
+
