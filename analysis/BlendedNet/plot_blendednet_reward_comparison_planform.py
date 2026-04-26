@@ -407,8 +407,8 @@ def main():
     )
     fig.tight_layout(rect=[0.05, 0, 1, 0.96])
 
-    out_png = os.path.join(OUT_DIR, "planform_reward_comparison.png")
-    out_pdf = os.path.join(OUT_DIR, "planform_reward_comparison.pdf")
+    out_png = os.path.join(OUT_DIR, "BlendedNet_planform_reward_comparison.png")
+    out_pdf = os.path.join(OUT_DIR, "BlendedNet_planform_reward_comparison.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

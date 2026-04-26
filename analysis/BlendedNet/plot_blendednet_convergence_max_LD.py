@@ -264,11 +264,9 @@ def main():
 
     ax.set_xscale("log")
     ax.set_xlabel("Function evaluations (per run)")
-    ax.set_ylabel("Mean L/D")
+    ax.set_ylabel(r"$\overline{L/D}$")
     ax.set_title(
-        "BlendedNet (BWB) — Convergence: best mean-L/D vs function evaluations\n"
-        r"Reward = mean($C_L/C_D$) at $C_L^\star \in \{0.185, 0.206, 0.227\}$, "
-        r"$M_\infty=0.3$, $\mathrm{Re}=10^7$",
+        r"BlendedNet (BWB) — Convergence: best $\overline{L/D}$ vs function evaluations",
         fontweight="medium", pad=8,
     )
     ax.set_xlim(1, x_max)
@@ -286,8 +284,8 @@ def main():
     ax.legend(handles=style_handles, loc="upper left", fontsize=8.5,
               framealpha=0.95, title="Style key")
 
-    out_png = os.path.join(OUT_DIR, "convergence_LD_vs_evals.png")
-    out_pdf = os.path.join(OUT_DIR, "convergence_LD_vs_evals.pdf")
+    out_png = os.path.join(OUT_DIR, "BlendedNet_convergence_LD_vs_evals.png")
+    out_pdf = os.path.join(OUT_DIR, "BlendedNet_convergence_LD_vs_evals.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

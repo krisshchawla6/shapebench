@@ -242,7 +242,7 @@ def main():
     ax_l.set_xscale("log")
     ax_l.set_xlim(1, x_max_rand)
     ax_l.set_xlabel("Function evaluations (per run)")
-    ax_l.set_ylabel("Mean L/D")
+    ax_l.set_ylabel(r"$\overline{L/D}$")
     ax_l.set_title("Random start", fontweight="medium")
     ax_l.grid(True, which="both", alpha=0.25)
     for sp in ["top", "right"]:
@@ -279,14 +279,12 @@ def main():
                bbox_to_anchor=(0.5, 0.98))
 
     fig.suptitle(
-        "BlendedNet (BWB) — Convergence: best mean-L/D vs function evaluations\n"
-        r"Reward = mean($C_L/C_D$) at $C_L^\star \in \{0.185, 0.206, 0.227\}$, "
-        r"$M_\infty=0.3$, $\mathrm{Re}=10^7$",
+        r"BlendedNet (BWB) — Convergence: best $\overline{L/D}$ vs function evaluations",
         fontsize=10, fontweight="medium", y=1.04,
     )
 
-    out_png = os.path.join(OUT_DIR, "convergence_LD_vs_evals_warmstart_comparison.png")
-    out_pdf = os.path.join(OUT_DIR, "convergence_LD_vs_evals_warmstart_comparison.pdf")
+    out_png = os.path.join(OUT_DIR, "BlendedNet_convergence_LD_vs_evals_warmstart_comparison.png")
+    out_pdf = os.path.join(OUT_DIR, "BlendedNet_convergence_LD_vs_evals_warmstart_comparison.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

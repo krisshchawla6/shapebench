@@ -230,8 +230,8 @@ def main():
         fontsize=10, y=1.02,
     )
 
-    out_png = os.path.join(OUT_DIR, "3d_panel_best_designs.png")
-    out_pdf = os.path.join(OUT_DIR, "3d_panel_best_designs.pdf")
+    out_png = os.path.join(OUT_DIR, "BlendedNet_3d_panel_best_designs.png")
+    out_pdf = os.path.join(OUT_DIR, "BlendedNet_3d_panel_best_designs.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

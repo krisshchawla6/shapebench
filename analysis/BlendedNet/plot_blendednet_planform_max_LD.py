@@ -454,8 +454,8 @@ def main():
         fontsize=26, fontweight="medium", y=1.005,
     )
 
-    out_png = os.path.join(OUT_DIR, "planform_median_designs_max_LD.png")
-    out_pdf = os.path.join(OUT_DIR, "planform_median_designs_max_LD.pdf")
+    out_png = os.path.join(OUT_DIR, "BlendedNet_planform_median_designs_max_LD.png")
+    out_pdf = os.path.join(OUT_DIR, "BlendedNet_planform_median_designs_max_LD.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

@@ -231,10 +231,9 @@ def main():
 
     ax.set_xscale("log")
     ax.set_xlabel("Function evaluations (per run)")
-    ax.set_ylabel(r"Mean $C_D$")
+    ax.set_ylabel(r"$\overline{C_D}$")
     ax.set_title(
-        "BlendedNet (BWB) — Convergence: best mean-CD vs function evaluations\n"
-        "Reward = −mean_CD at CL ∈ {0.185, 0.206, 0.227}",
+        r"BlendedNet (BWB) — Convergence: best $\overline{C_D}$ vs function evaluations",
         fontweight="medium", pad=8,
     )
     ax.set_xlim(1, x_max)
@@ -252,8 +251,8 @@ def main():
               framealpha=0.95, title="Style key",
               bbox_to_anchor=(0.0, 0.08))
 
-    out_png = os.path.join(OUT_DIR, "convergence_cd_vs_evals.png")
-    out_pdf = os.path.join(OUT_DIR, "convergence_cd_vs_evals.pdf")
+    out_png = os.path.join(OUT_DIR, "BlendedNet_convergence_cd_vs_evals.png")
+    out_pdf = os.path.join(OUT_DIR, "BlendedNet_convergence_cd_vs_evals.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

@@ -187,8 +187,8 @@ def main():
         ax.text(cl_t, y_top, f"CL={cl_t}", fontsize=7, ha="center", color="grey",
                 va="top", rotation=90)
 
-    out_png = os.path.join(OUT_DIR, "polar_best_designs.png")
-    out_pdf = os.path.join(OUT_DIR, "polar_best_designs.pdf")
+    out_png = os.path.join(OUT_DIR, "BlendedNet_polar_best_designs.png")
+    out_pdf = os.path.join(OUT_DIR, "BlendedNet_polar_best_designs.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

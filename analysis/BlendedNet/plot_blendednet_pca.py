@@ -261,8 +261,8 @@ def main():
         fontsize=11, fontweight="medium", y=1.01,
     )
 
-    out_png = os.path.join(OUT_DIR, "pca_designs.png")
-    out_pdf = os.path.join(OUT_DIR, "pca_designs.pdf")
+    out_png = os.path.join(OUT_DIR, "BlendedNet_pca_designs.png")
+    out_pdf = os.path.join(OUT_DIR, "BlendedNet_pca_designs.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

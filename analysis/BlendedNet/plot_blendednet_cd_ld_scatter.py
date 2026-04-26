@@ -288,10 +288,10 @@ def main():
         )
 
     # ── Axes and labels ───────────────────────────────────────────────────────
-    ax.set_xlabel(r"Mean $C_D$")
-    ax.set_ylabel(r"Mean $L/D$")
+    ax.set_xlabel(r"$\overline{C_D}$")
+    ax.set_ylabel(r"$\overline{L/D}$")
     ax.set_title(
-        r"BlendedNet (BWB) — Best design: mean $C_D$ vs mean $L/D$",
+        r"BlendedNet (BWB) — Best design: $\overline{C_D}$ vs $\overline{L/D}$",
         fontweight="medium", pad=8,
     )
     ax.grid(True, alpha=0.25)
@@ -327,8 +327,8 @@ def main():
               framealpha=0.95, title="Marker key")
 
     # ── Save ──────────────────────────────────────────────────────────────────
-    out_png = os.path.join(OUT_DIR, "cd_ld_scatter.png")
-    out_pdf = os.path.join(OUT_DIR, "cd_ld_scatter.pdf")
+    out_png = os.path.join(OUT_DIR, "BlendedNet_cd_ld_scatter.png")
+    out_pdf = os.path.join(OUT_DIR, "BlendedNet_cd_ld_scatter.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)
