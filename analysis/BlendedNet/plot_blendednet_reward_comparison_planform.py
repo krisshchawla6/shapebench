@@ -33,12 +33,12 @@ STYLE = {
     "font.family": "serif",
     "font.serif": ["Times New Roman", "DejaVu Serif", "serif"],
     "mathtext.fontset": "cm",
-    "font.size": 12,
-    "axes.labelsize": 13,
-    "axes.titlesize": 13,
-    "xtick.labelsize": 11,
-    "ytick.labelsize": 11,
-    "legend.fontsize": 11,
+    "font.size": 22,
+    "axes.labelsize": 24,
+    "axes.titlesize": 24,
+    "xtick.labelsize": 20,
+    "ytick.labelsize": 20,
+    "legend.fontsize": 20,
     "axes.linewidth": 0.6,
     "xtick.major.width": 0.5,
     "ytick.major.width": 0.5,
@@ -323,7 +323,7 @@ def main():
     # 2 rows × 4 cols
     # Row 0: min-CD (blue solid) + max-LD random-start (red dashed) — no warm-start
     # Row 1: min-CD (blue solid) + max-LD warm-start (green dashed)
-    fig, axes = plt.subplots(2, 4, figsize=(22, 16), facecolor="white",
+    fig, axes = plt.subplots(2, 4, figsize=(22, 22), facecolor="white",
                              sharex=True, sharey=True)
 
     ROW_LABELS = [
@@ -382,19 +382,19 @@ def main():
             if p_ld_show is not None and res_ld_show is not None:
                 ax.text(0.97, 0.97, _ann(p_ld_show, res_ld_show, header=ann_header),
                         transform=ax.transAxes,
-                        fontsize=9, va="top", ha="right", color=c,
+                        fontsize=18, va="top", ha="right", color=c,
                         bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
                                   edgecolor=c, alpha=0.85, linewidth=0.8))
 
             if col == 0:
-                ax.legend(fontsize=10, loc="lower left", framealpha=0.9,
+                ax.legend(fontsize=20, loc="lower left", framealpha=0.9,
                           handlelength=1.5, borderpad=0.5)
 
     # Row descriptor text
     for row, label in enumerate(ROW_LABELS):
         axes[row, 0].text(-0.22, 0.5, label,
                           transform=axes[row, 0].transAxes,
-                          fontsize=11, fontweight="bold", va="center", ha="right",
+                          fontsize=22, fontweight="bold", va="center", ha="right",
                           rotation=90,
                           bbox=dict(boxstyle="round,pad=0.3", facecolor="lightyellow",
                                     edgecolor="grey", alpha=0.85, linewidth=0.8))
@@ -404,7 +404,7 @@ def main():
         "\nTop: overlaid without warm-start.  "
         r"Bottom: max-$\overline{L/D}$ replaced by warm-start (Corner A).  "
         "Same scale across all panels.",
-        fontsize=13, fontweight="medium",
+        fontsize=24, fontweight="medium",
     )
     fig.tight_layout(rect=[0.05, 0, 1, 0.96])
 

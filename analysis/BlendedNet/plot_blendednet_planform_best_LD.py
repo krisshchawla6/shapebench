@@ -367,7 +367,7 @@ def main():
                 bbox=dict(boxstyle="round,pad=0.4", facecolor=badge_color,
                           alpha=0.15, edgecolor=badge_color, linewidth=1.5))
         if add_legend:
-            ax.legend(fontsize=13, loc="upper center",
+            ax.legend(fontsize=21, loc="upper center",
                       bbox_to_anchor=(0.5, -0.22),
                       framealpha=0.95, handlelength=1.5,
                       borderpad=0.6, ncol=2)
