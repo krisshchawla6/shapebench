@@ -2908,3 +2908,167 @@ Scripts to rerun:
   analysis/BlendedNet/plot_blendednet_reward_comparison_planform.py
       (reward comparison planform — BO min-CD best updated)
 
+
+================================================================================
+PAPER WRITING PLAN — April 26 2026
+================================================================================
+
+All runs and figures are complete as of April 25. No draft prose exists yet.
+This section records what each paper section needs to say and the key numbers
+to use. Figures are all committed with BlendedNet_ prefix.
+
+OVERALL NARRATIVE ARC
+---------------------
+Part 1 (min-CD): all methods converge to Corner A; story is comparative
+  efficiency across methods and budgets.
+Part 2 (max-L/D): same environment, harder; cross-reward anomaly is the hook.
+  Landscape trap → warm-start confirmation → Corner A as ground truth.
+
+
+PART 1 — MIN-CD RESULTS (shapebench_5)
+---------------------------------------
+Narrative: straightforward — all four methods converge to Corner A; main story
+is comparative efficiency.
+
+Key numbers (post BO n=1000 extension, matched budgets):
+
+  Method            Best CD    Budget
+  ------            -------    ------
+  PSO (20p×200i)    0.00425    4000 evals
+  CMA-ES            0.00426    1000 evals
+  ShapeEvolve       0.00428    2000 evals
+  BO                0.00437    1000 evals
+
+Corner A geometry: S1=60°, C2=550, C4=90, B2≈54 mm.
+
+What to write (1–2 paragraphs):
+  All methods locate the same Corner A design within their budget. PSO/CMA-ES
+  are cheapest (1000–4000 evals) and find the lowest drag. ShapeEvolve (55%
+  good-basin rate across 20 attempts) is comparable. BO improves monotonically
+  but needs the full n=1000 to approach the others. The unimodal character of
+  the CD landscape (single Corner A basin dominant) makes this a well-posed
+  benchmark — all methods succeed, differing only in efficiency.
+
+
+PART 2 — MAX-L/D RESULTS (shapebench_5_max_LD)
+------------------------------------------------
+
+LANDSCAPE TRAP SECTION
+  What to write:
+  The max-L/D reward introduces a second large-basin attractor (Corner B)
+  absent in the CD landscape. Corner B geometry: S1≈40°, C2≈675–689, C4=60,
+  B2≈117 mm → mean L/D ≈ 45.7–46.2. It exists because the L/D coupling
+  creates a locally self-consistent optimum: higher sweep increases L/D at
+  moderate CL but moves the design away from the global Corner A. All three
+  gradient-free methods (PSO, CMA-ES, ShapeEvolve) converge to Corner B under
+  random start — bests cluster at 45.7–46.2. BO (n=1000) partially escapes
+  in 2/10 seeds (best 47.84) because its global GP occasionally samples the
+  Corner A region.
+
+  Structural confirmation: Corner A (S1=60°, C2=550, C4=90, B2≈54 mm)
+  achieves mean L/D ≈ 48.75 and simultaneously the lowest drag (CD ≈ 0.00425).
+  The CD and L/D objectives share the same global optimum but have different
+  basins of attraction — the L/D formulation adds a lift coupling that inflates
+  the Corner B basin relative to Corner A.
+
+WARM-START GAP (~2.4 L/D units, ~5%)
+  All three gradient-free methods were restarted from Corner A to confirm the
+  global optimum and quantify the trap cost.
+
+  Method        Random-start best   Warm-start best   Gap
+  ------        -----------------   ---------------   ---
+  PSO           45.73               48.74             +3.01  (+6.6%)
+  CMA-ES        46.19               48.50             +2.31  (+5.0%)
+  ShapeEvolve   46.05               48.75             +2.70  (+5.9%)
+
+  All three exceed random-start by +2.3–3.0 L/D units (~5–7%) from Corner A.
+  Warm-start curves converge within ~200–400 evaluations. The landscape trap
+  is not a budget problem — even PSO with 4000 random-start evaluations cannot
+  reach what a Corner A warm-start delivers in 400.
+
+CORNER A AS BENCHMARK GROUND TRUTH (L/D ≈ 48.75)
+  Proposed as the shapebench_5_max_LD ground-truth answer. Points to make:
+
+  1. Independently confirmed by multiple methods. PSO, CMA-ES, ShapeEvolve all
+     converge to 48.5–48.75 from Corner A warm-start across 3 methods × 3
+     seeds/attempts = 9 independent runs. Tight clustering (range < 0.3 L/D)
+     indicates a genuine global optimum.
+
+  2. Dominates on both objectives. Corner A achieves lower CD (0.00425) AND
+     higher L/D (48.75) than Corner B — no trade-off exists. Rules out the
+     possibility that Corner A is merely good on one axis.
+
+  3. Physical interpretation. The planform_reward_comparison figure shows the
+     cross-reward anomaly: min-CD designs (PSO/CMA-ES/SE) are Corner A designs
+     that dominate their own max-L/D designs on both metrics simultaneously.
+     The max-L/D reward creates a richer landscape that traps gradient-free
+     optimizers in a physically plausible but suboptimal region.
+
+  4. Benchmark implication. Achieving mean L/D ≈ 48.7+ is the success criterion
+     for shapebench_5_max_LD. Methods landing at 45–46 have found Corner B and
+     are ~5% below optimal. The task tests global search capability, not just
+     convergence speed — a harder problem than min-CD.
+
+  Additional points to elaborate in the paper:
+  - Why BO partially escapes: GP samples globally rather than following gradient
+    descent, occasionally placing a candidate in the Corner A basin. BO reaches
+    47.84 in 2/10 seeds but fails to consistently locate Corner A (8/10 near
+    Corner B).
+  - The asymmetry: min-CD guides to Corner A "for free" because drag and L/D are
+    aligned there. This is non-obvious from the reward formulation and is the
+    key finding.
+  - Frame warm-start as a landscape analysis tool (diagnosis), not a prescription
+    for the optimization method. The point is to confirm the global optimum exists
+    and quantify the gap, not to recommend warm-starting as an approach.
+
+
+CROSS-REWARD ANOMALY SECTION
+------------------------------
+Anchor figure: BlendedNet_cd_ld_scatter.png
+
+Three-sentence core:
+  PSO, CMA-ES, and ShapeEvolve all find Corner A under the min-CD reward, which
+  turns out to also be the global L/D optimum. Their max-L/D reward runs land in
+  Corner B — lower L/D AND higher CD than their own min-CD results. Optimizing
+  for L/D directly yields a worse design on both metrics than optimizing for CD.
+
+Updated scatter numbers (BO now with n=1000 min-CD results):
+
+  Method            CD(min-CD)   LD(min-CD)   CD(max-LD)   LD(max-LD)
+  ------            ----------   ----------   ----------   ----------
+  Bayesian Opt.     0.00437      47.56        0.00433      47.84
+  PSO               0.00425      48.87        0.00451      45.73
+  CMA-ES            0.00426      48.66        0.00447      46.19
+  ShapeEvolve       0.00428      48.54        0.00449      46.05
+
+  Cross-reward anomaly is clean for PSO, CMA-ES, ShapeEvolve (matched budgets).
+  BO is the exception: its max-LD best (47.84) still beats its min-CD best (47.56)
+  on L/D, though both are near Corner A. Both BO results are already above Corner B,
+  so BO does not demonstrate the trap as clearly as the other three methods.
+
+
+PLANNED FIGURE ORDER IN PAPER
+-------------------------------
+  1. BlendedNet_convergence_combined.png       — both rewards side-by-side (contrast)
+  2. BlendedNet_planform_reward_comparison.png — cross-reward anomaly + Corner A/B geometry
+  3. BlendedNet_cd_ld_scatter.png              — trade-off space; cross-reward anomaly visual
+  4. BlendedNet_convergence_LD_vs_evals_       — landscape trap confirmation via warm-start
+     warmstart_comparison.png
+  5. BlendedNet_planform_best_designs_         — best designs per method (min-CD)
+     best_cd.png
+  6. BlendedNet_planform_best_designs_         — best designs per method (max-L/D)
+     max_LD.png
+
+  (Note: a Corner A vs. Corner B 3D render was floated but not confirmed for write-up.)
+
+
+STATUS SUMMARY
+--------------
+  Data / run records:              COMPLETE (this file)
+  All figures generated:           COMPLETE (committed April 25–26)
+  Draft prose — min-CD:            NOT STARTED
+  Draft prose — max-L/D trap:      NOT STARTED
+  Draft prose — warm-start gap:    NOT STARTED
+  Draft prose — Corner A GT:       NOT STARTED
+  Draft prose — cross-reward anomaly: NOT STARTED
+
