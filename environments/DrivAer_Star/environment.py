@@ -1,3 +1,4 @@
+import fcntl
 import os
 import sys
 import json
@@ -12,6 +13,18 @@ ENV_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(ENV_DIR, "model")
 
 sys.path.insert(0, MODEL_DIR)
+
+# Serialise the torchvision + Transolver import across all processes on the
+# same node so concurrent jobs don't race on the __pycache__ write.
+# /tmp is node-local, making fcntl.lockf reliable here.
+_LOCK_FILE = "/tmp/drivaerstar_torchvision_import.lock"
+with open(_LOCK_FILE, "a") as _lf:
+    fcntl.lockf(_lf, fcntl.LOCK_EX)
+    try:
+        import torchvision.extension  # loads _C before _meta_registrations runs
+        from Transolver import Model as _TransolverModel
+    finally:
+        fcntl.lockf(_lf, fcntl.LOCK_UN)
 
 _model = None
 _norm = None
@@ -36,8 +49,7 @@ def _load_model(norm_stats_path=None):
             f"python model/setup_model.py --vtk-dir <path> --norm-output {norm_stats_path}")
     _norm = torch.load(norm_stats_path, map_location=_device, weights_only=True)
 
-    from Transolver import Model
-    _model = Model(
+    _model = _TransolverModel(
         space_dim=7, n_layers=4, n_hidden=64, dropout=0.0,
         n_head=4, act='gelu', mlp_ratio=1, fun_dim=0, out_dim=4,
         slice_num=16, ref=8, unified_pos=0,
