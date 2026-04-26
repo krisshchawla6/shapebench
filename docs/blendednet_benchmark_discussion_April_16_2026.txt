@@ -3151,11 +3151,20 @@ the benchmark ground truth; no separate external validator equivalent to XFOIL).
   ShapeEvolve          20          2000 evals   0.00428    48.54      Corner A; 55% good-basin rate
   Bayesian Opt.        10          1000 evals   0.00437    47.56      Corner A (partial)
   (BO n=500 only)      10           500 evals   0.00441    n/a        pre-extension baseline
+  L-BFGS-B nr3         10          ~2011 evals  0.00523    n/a        stuck; local opt, NOT Corner A
+  L-BFGS-B nr10        10          ~3170 evals  0.00518    n/a        marginal nr3 improvement
+
+  L-BFGS-B is included in convergence_combined (left panel) and planform_best_cd
+  as a 5th method but is EXCLUDED from the 4-method comparison plots (scatter,
+  planform_reward_comparison, convergence_max_LD) because it does not reach Corner A.
+  Best CD 0.00518 is ~22% above the benchmark optimum (0.00425). Root cause:
+  finite-difference gradients in 10D are too noisy on the Transolver landscape;
+  extra restarts (nr10 vs nr3) provide only marginal benefit.
 
   Best design geometry (Corner A): S1=60°, C2=550mm, C4=90mm, B2≈54mm,
     half-span≈851–863mm.
-  All four methods converge to Corner A. Spread in best CD: 0.00425–0.00437
-  (~2.8%), narrowing to 0.00425–0.00428 (~0.7%) for matched-surrogate methods.
+  Main 4 methods all converge to Corner A. Spread in best CD: 0.00425–0.00437
+  (~2.8%), narrowing to 0.00425–0.00428 (~0.7%) for matched-budget methods.
 
 
 FINAL RESULTS — shapebench_5_max_LD (max L/D)
@@ -3198,6 +3207,8 @@ Surrogate evaluation cost: ~30–50s per design (24 Transolver CPU forward passe
   ShapeEvolve     2000     20     ~17–28h    40,000        ~340–560*
   BO n500         500      10     ~5–6h       5,000         ~50–60
   BO ext n500→1000 500     10     ~5–12h      5,000         ~50–120 (ext; GP larger)
+  L-BFGS-B nr3   ~2011     10     ~26h       20,110         ~260    (nr3, normfix)
+  L-BFGS-B nr10  ~3170     10     ~40–60h    31,700         ~400–600 (nr10, marginally better)
 
   * ShapeEvolve wall time dominated by LLM API latency (~2–5s/call ×
     ~1600 calls/attempt), not Transolver throughput.
@@ -3219,8 +3230,8 @@ Surrogate evaluation cost: ~30–50s per design (24 Transolver CPU forward passe
   CMA-ES n500      500      3     ~5–6h       1,500         ~15–18
   ShapeEvolve     2000      3     ~17–28h     6,000         ~51–84*
 
-  Grand total (all BlendedNet runs): ~150,000–200,000 Transolver evals,
-  ~1,400–2,300 CPU-hours.
+  Grand total (all BlendedNet runs): ~200,000–260,000 Transolver evals,
+  ~1,800–3,200 CPU-hours (L-BFGS-B nr3+nr10 add ~52k evals and ~660–860 CPU-h).
 
 Notes:
   - PSO and ShapeEvolve min-CD and max-LD random-start runs used the same
