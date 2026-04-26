@@ -3047,6 +3047,66 @@ Updated scatter numbers (BO now with n=1000 min-CD results):
   so BO does not demonstrate the trap as clearly as the other three methods.
 
 
+FIGURE-BY-FIGURE WRITING NOTES
+-------------------------------
+
+Figure: BlendedNet_planform_reward_comparison.png
+  Layout: 4 rows × 2 cols. Rows = methods (BO, PSO, CMA-ES, ShapeEvolve).
+  Cols = "No warm-start" (left) and "With warm-start (Corner A)" (right).
+  Each panel: solid filled = best min-CD design; dashed = best max-L/D design.
+  Annotation boxes give max-L/D design geometry (half-span, S1, C2, C4, B2)
+  and cross-evaluated metrics (mean CD, mean L/D) for the dashed design.
+
+  What the left column (no warm-start) shows:
+    For PSO, CMA-ES, and ShapeEvolve: the solid (min-CD) wing is slender and
+    high-swept (Corner A, S1=60°), while the dashed (max-L/D random-start) wing
+    is visibly wider and lower-swept (Corner B, S1≈40°, larger B2). The planform
+    difference is the geometric manifestation of the cross-reward anomaly — the
+    max-L/D reward guides methods to a different part of the design space than
+    the min-CD reward, and that region is suboptimal on both metrics.
+
+    For BO: both shapes are near Corner A already (BO's random-start max-L/D
+    best approaches Corner A in 2/10 seeds). The two outlines nearly overlap,
+    reflecting BO's partial escape from the trap.
+
+  What the right column (with warm-start) shows:
+    Once max-L/D is seeded from Corner A, the dashed shape converges to
+    approximately the same planform as the solid min-CD shape. For PSO/CMA-ES/SE
+    the two outlines become nearly coincident — confirming that both rewards
+    share the same global optimum once the optimizer is in the right basin.
+    This is the geometric confirmation that warm-starting resolves the anomaly.
+
+    For BO: the warm-start column falls back to the random-start max-L/D result
+    (no BO warm-start run was conducted), so both columns look similar for BO.
+
+  Key message: the Corner B shape looks physically plausible (lower-sweep,
+  broader chord distribution, generous fuselage) — it is not obviously wrong.
+  This is why optimizers converge to it: it is a genuine local optimum with a
+  large basin, not a degenerate or penalized design. The figure makes this
+  tangible in a way that numbers alone do not.
+
+  Text reference points:
+  - Introduce alongside the cross-reward anomaly scatter (cd_ld_scatter): the
+    scatter shows the numeric anomaly; this figure shows why geometrically.
+  - Reference again when discussing the warm-start experiment: the right column
+    is the planform evidence that warm-starting resolves the trap.
+  - Note that all four annotation boxes in the left column (one per method) show
+    the max-L/D random-start design trapped in Corner B (S1≈40°, B2≈117 mm,
+    L/D≈45.7–46.2) for PSO/CMA-ES/SE, confirming the trap is consistent across
+    methods, not a single-method artifact.
+
+  Caption suggestion (draft):
+    "Planform overlay of best min-$\overline{C_D}$ (solid, filled) and best
+    max-$\overline{L/D}$ (dashed) designs for each method. Left: random-start
+    max-$\overline{L/D}$ designs; right: warm-start (Corner A) max-$\overline{L/D}$
+    designs. For PSO, CMA-ES, and ShapeEvolve, the random-start max-$\overline{L/D}$
+    design converges to a distinct Corner B planform (lower sweep, broader fuselage)
+    that is dominated by the min-$\overline{C_D}$ Corner A design on both metrics.
+    Warm-starting from Corner A recovers designs geometrically consistent with the
+    min-$\overline{C_D}$ solution. BO (top row) approaches Corner A under both
+    conditions, reflecting its partial resistance to the landscape trap."
+
+
 PLANNED FIGURE ORDER IN PAPER
 -------------------------------
   1. BlendedNet_convergence_combined.png       — both rewards side-by-side (contrast)
