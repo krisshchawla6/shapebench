@@ -321,7 +321,7 @@ def main():
         ws_designs[name] = (p_ws, r_ws, res_ws)
 
     # 4 rows × 2 cols: row = method, col = condition (no warm-start / warm-start)
-    fig, axes = plt.subplots(4, 2, figsize=(18, 32), facecolor="white",
+    fig, axes = plt.subplots(4, 2, figsize=(18, 22), facecolor="white",
                              sharex=True, sharey=True)
 
     COL_LABELS = [
