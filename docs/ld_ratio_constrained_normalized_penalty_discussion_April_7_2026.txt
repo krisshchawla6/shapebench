@@ -1655,4 +1655,32 @@ STATUS
   All four figures generated and available in:
     environments/NeuralFoil/results/convergence_plots_LAM500/
   Draft prose: NOT STARTED
+
+CONVERGENCE CHECK (April 26 2026)
+----------------------------------
+Checked whether median convergence curves are flat at the end of each method's
+budget by computing improvement over the last 20% of the shortest run in each
+group (using the same aligned-matrix logic as the convergence plot).
+
+  GA/PSO      : aggregate median improvement = +0.10 over last 20%  ✅ flat
+  BO          : aggregate median improvement = 0.0                   ✅ flat
+  L-BFGS-B    : per-run median improvement = 0.0 (individual seeds
+                are flat at their own end), but aggregate median over
+                last 20% of min_len (22k evals) = +17.5 (261.9→279.4)
+                ⚠ NOT flat in the aggregate. Cause: heterogeneous run
+                lengths (22k–46k). Seeds with more restarts are still
+                improving at eval 22k, pulling the aggregate median up.
+                Individual runs do converge; the issue is structural
+                (fixed nr=3 restarts gives variable eval budgets).
+  v3 (SE)     : per-run median improvement = +1.7 over last 20%;
+                aggregate median improvement = +15.9 (297.5→313.5)
+                ⚠ NOT flat. The LLM optimizer was still finding
+                meaningful improvements when runs ended (~5k evals).
+
+  Implication: the convergence_best_reward plot will show upward-trending
+  tails for L-BFGS-B and v3 rather than flat plateaus. Options:
+    (a) Run v3 longer (e.g., ~8k–10k evals per attempt) to reach a plateau.
+    (b) Run all L-BFGS-B seeds to a fixed eval budget (e.g., 50k) instead
+        of a fixed number of restarts to equalize the x-axis.
+    (c) Accept the current budget and note the limitation in the paper.
 extend=True is therefore correct.
