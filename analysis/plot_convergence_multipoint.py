@@ -42,13 +42,12 @@ plot_combined(
     colors=["#e377c2", "#ff7f0e", "#1f77b4", "#2ca02c"],
     adjoint_dir=f"{BASE}/adjoint_run_fwbounds_naca0012",
     adjoint_label="Adjoint (IPOPT)",
-    x_max=25000,
+    x_max=60000,
     y_min=0.065,
     y_max=200,
     title=(
-        r"Multi-point HPA Drag Minimisation ($M_\infty$=0.03, Re=200–500k, 6 $C_L$ targets)"
-        "\nStage 1 convergence: best penalized objective per run"
-        "   (dashed = Adjoint/IPOPT reference)"
+        r"Multi-point HPA Drag Minimisation"
+        r" ($M_\infty$=0.03, Re=$4.42$–$6.25\times10^5$, 6 $C_L$ targets)"
     ),
     output_path=f"{OUT_DIR}/NeuralFoil_multipoint_objective_vs_iterations.png",
 )
