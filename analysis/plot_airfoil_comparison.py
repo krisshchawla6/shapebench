@@ -113,7 +113,10 @@ def plot_airfoils(entries, output_path, title=None):
     ax.set_aspect("equal")
     ax.set_xlabel("x/c")
     ax.set_ylabel("y/c")
-    ax.set_title(title or "Best Airfoil Design — Method Comparison", fontweight="medium", pad=8)
+    ax.set_title(
+        title or r"Best Airfoil — Constrained $C_L/C_D$ Maximisation (Ma=0.2, Re=10$^7$)",
+        fontweight="medium", pad=8,
+    )
     ax.legend(loc="upper right", framealpha=0.95)
     for sp in ["top", "right"]:
         ax.spines[sp].set_visible(False)
@@ -180,7 +183,7 @@ if __name__ == "__main__":
     parser.add_argument("--extra-designs", nargs="+", default=[], metavar="PATH")
     parser.add_argument("--extra-colors",  nargs="+", default=[], metavar="COLOR")
 
-    parser.add_argument("--output", default="airfoil_comparison.png",
+    parser.add_argument("--output", default="NeuralFoil_LD_airfoil_comparison.png",
                         help="Output PNG path")
     parser.add_argument("--title", default=None,
                         help="Plot title override")

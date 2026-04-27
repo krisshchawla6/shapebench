@@ -166,3 +166,186 @@ environments/NeuralFoil/analysis/make_comparison_graph.py
   Uses: ablations_reward_fixed/geo_b30_f0003, GA/particle_swarm_fixed_reward,
         adjoint/from_pso_best/, adjoint/from_geo_b30_best/
   Output: analysis/comparison_graph.png
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAPER WRITING PLAN — April 27 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problem: multi-point HPA drag minimisation. Minimize weighted mean CD over 6 CL
+targets {0.8, 1.0, 1.2, 1.4, 1.5, 1.6} at Ma=0.03, Re=200–500k. 18-parameter
+Kulfan CST. No CM or confidence constraints — lambda=1 penalty was sufficient
+because HPA conditions sit well within NeuralFoil's training distribution (conf
+stays 0.96–0.98). Adjoint reference: IPOPT with CasADi autodiff through
+NeuralFoil, warm-started from NACA 0012 (fwbounds variant), converged in ~47
+iterations (weighted_CD = 0.07851, ~31 seconds wall time).
+
+Recommended figure order:
+  1. NeuralFoil_multipoint_objective_vs_iterations
+  2. NeuralFoil_multipoint_yc_xc
+  3. NeuralFoil_multipoint_xfoil_vs_nf_fidelity
+
+Output dirs:
+  Figures 1–2: environments/NeuralFoil/results/combined_method_comparison_reward_exact_notebook/
+  Figure 3:    environments/NeuralFoil/results/xfoil_evaluation_reward_exact_notebook/
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FIGURE 1 — NeuralFoil_multipoint_objective_vs_iterations
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+What it shows:
+  Convergence bands (median + min/max shading) for all four methods vs. model
+  evaluations (log scale). Y-axis = penalized objective (-reward, lower is
+  better). Dashed horizontal = Adjoint (IPOPT) reference at -0.0785.
+
+Adjoint baseline:
+  IPOPT with CasADi autodiff through NeuralFoil, warm-started from NACA 0012.
+  It represents a gradient-based local optimum — the best achievable from a
+  single starting point using exact surrogate gradients. ~47 NeuralFoil
+  evaluations, ~31 seconds wall time. It is a local optimizer: if the landscape
+  has multiple basins, it only finds the one nearest NACA 0012. The dashed
+  reference line therefore represents the strongest possible single-start
+  gradient-informed baseline, not a global optimum.
+
+Key observations:
+  - ShapeEvolve (green): fastest convergence — reaches near-adjoint performance
+    within ~1,000 evaluations, tightest min-max band.
+  - PSO (blue): converges steadily, reaches competitive objective by ~10k evals.
+  - L-BFGS-B (pink): ultimately competitive but widest band and longest tail
+    (~35k evals); high run-to-run variance driven by the high nr3 failure rate
+    (55% of seeds required nr10 retries; 3 seeds permanently failed — see
+    FAILURE NOTE below).
+  - BO (orange): starts slow due to GP overhead; reaches its plateau at ~5k
+    evals but at a higher (worse) objective than the other methods.
+
+L-BFGS-B failure note:
+  "Failure" means zero feasible designs found across all restarts — not a
+  timeout. L-BFGS-B follows the gradient from a random start to a local
+  minimum. If that minimum is infeasible (one or more CL targets unreachable),
+  best_reward = -1.000/-2.000/-3.000 (pure penalty, round values, no gradient
+  signal pointing toward feasibility). Running longer does nothing — the outcome
+  is fixed by the starting point. The only remedy is a new restart.
+    nr3 (3 restarts): 22/40 seeds failed (55% failure rate)
+    nr10 (10 restarts): 3/40 seeds permanently failed (7.5%): seeds 8, 14, 31
+  The wide L-BFGS-B band and long tail in Figure 1 directly reflect this
+  initialisation sensitivity.
+
+Key message:
+  ShapeEvolve achieves near-adjoint objective earliest and with lowest variance.
+  Despite large differences in Stage 1 behavior, the dashed reference lines
+  confirm that methods converging to the dominant basin (Adjoint, ShapeEvolve,
+  PSO) all reach similar final objectives. L-BFGS-B is competitive when it
+  converges but requires many more evaluations and restarts. BO's plateau is
+  notably higher — it finds a different basin (see Figure 2).
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FIGURE 2 — NeuralFoil_multipoint_yc_xc
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+What it shows:
+  Best airfoil profiles (y/c vs x/c) for all five entries: L-BFGS-B, BO, PSO,
+  ShapeEvolve, Adjoint.
+
+Key observations:
+  - PSO, ShapeEvolve, L-BFGS-B, and Adjoint all converge to visually similar
+    thin, moderately cambered profiles (max camber ~y/c=0.12 near x/c=0.35–0.40)
+    — a common dominant basin.
+  - BO is a clear outlier: massively over-cambered (max y/c≈0.165 near
+    x/c=0.25), a qualitatively different shape. BO's exact GP exploration finds
+    a different local optimum basin that the other methods do not reach.
+  - This contrasts with the LAM500 benchmark where all methods converged to the
+    same geometry. Here the multi-point HPA problem has at least two distinct
+    basins; BO finds the suboptimal one.
+
+Key message:
+  The geometry comparison reveals that four of five entries converge to a common
+  optimum shape while BO finds a separate over-cambered design. Whether BO's
+  basin is better or worse is answered by Figure 3 (it is worse). The near-
+  identical profiles of ShapeEvolve and Adjoint foreshadow Figure 3's result.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FIGURE 3 — NeuralFoil_multipoint_xfoil_vs_nf_fidelity
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+What it shows:
+  For each method's best design: side-by-side bars of NeuralFoil weighted CD
+  (solid) vs XFOIL weighted CD (hatched), with red dashed line showing the
+  NF->XFOIL % error = (XFOIL - NF) / NF per method.
+
+Key numbers:
+  Method              NF wCD    XFOIL wCD   NF->XFOIL error
+  Adjoint (IPOPT)     0.07851   0.07891     +0.50%
+  ShapeEvolve         0.07909   0.07926     +0.21%
+  PSO (120p x 500i)   0.07973   0.08009     +0.45%
+  L-BFGS-B            0.08263   0.08264     +0.01%
+  Bayesian Opt.       0.09421   0.09672     +2.67%
+
+  XFOIL ranking: Adjoint (best) > ShapeEvolve > PSO > L-BFGS-B >> BO
+
+Key observations:
+  1. NF->XFOIL bias negligible for top 4 methods (0.01–0.50%) — orders of
+     magnitude smaller than the ~9% seen in LAM500. HPA conditions (Ma=0.03)
+     sit well within NeuralFoil's training distribution; no constraint back-off
+     was required. The surrogate is an essentially faithful proxy for XFOIL here.
+
+  2. XFOIL ranking exactly preserves the NeuralFoil ranking for all 5 methods —
+     the surrogate correctly identifies the best optimizer. Ordinal validity
+     is confirmed at ground-truth fidelity.
+
+  3. BO's outlier basin confirmed worse by XFOIL: XFOIL wCD = 0.09672, ~22%
+     worse than Adjoint (0.07891). Its larger NF->XFOIL error (+2.67%) is
+     consistent with the over-cambered design sitting further from NeuralFoil's
+     training distribution.
+
+  4. ShapeEvolve matches Adjoint to within 0.44% in XFOIL (0.07926 vs 0.07891).
+     ShapeEvolve's NF->XFOIL error (+0.21%) is actually smaller than the
+     Adjoint's (+0.50%), meaning its design is slightly more faithfully
+     represented by NeuralFoil.
+
+  5. L-BFGS-B achieves near-perfect NF->XFOIL fidelity (+0.01%) but its best
+     design (seed21, an nr10 recovery) did not reach the dominant optimum basin
+     — confirmed genuinely worse at ground truth.
+
+Key message:
+  XFOIL validation confirms NeuralFoil is a highly accurate proxy at HPA
+  conditions (0.01–0.50% error), in sharp contrast to LAM500 (~9% bias). The
+  surrogate ranking is preserved exactly. ShapeEvolve matches the gradient-based
+  adjoint to within 0.44% in XFOIL-validated drag. BO's alternative basin is
+  confirmed suboptimal (~22% worse), with a larger surrogate error consistent
+  with designs further from the training distribution. No constraint back-off
+  was needed for this benchmark.
+
+What to write:
+  "NeuralFoil predictions at HPA conditions are validated against XFOIL for
+  each method's best design. Surrogate errors of 0.01–0.50% confirm that no
+  constraint back-off was required for this benchmark, in sharp contrast to the
+  ~9% systematic overestimate in the single-point Ma=0.2 case. The XFOIL
+  ranking is identical to the NeuralFoil ranking: Adjoint > ShapeEvolve > PSO >
+  L-BFGS-B >> BO. ShapeEvolve matches the adjoint to within 0.44% at
+  ground-truth fidelity. BO's alternative basin, identified geometrically in
+  Fig. [yc_xc], is confirmed ~22% worse under XFOIL, with a larger surrogate
+  error (+2.67%) consistent with its over-cambered design lying further from
+  NeuralFoil's training distribution."
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NARRATIVE ARC
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Para 1 (convergence): introduce the multi-point benchmark. Reference Figure 1
+    to show ShapeEvolve's early convergence and BO's higher plateau. Note
+    L-BFGS-B's variance driven by initialisation sensitivity (7.5% permanent
+    failure rate at nr10). Adjoint baseline is a single-start gradient-based
+    local optimum at ~47 evaluations.
+
+  Para 2 (geometry): reference Figure 2. Four of five methods converge to a
+    common moderately cambered optimum shape; BO finds a distinct over-cambered
+    design. This raises the question of whether BO's basin is better or worse.
+
+  Para 3 (ground-truth validation): reference Figure 3. XFOIL confirms the NF
+    ranking, validates near-zero surrogate bias at HPA conditions, and confirms
+    BO's basin is ~22% worse. ShapeEvolve matches the adjoint to 0.44% — the
+    LLM optimizer finds the same optimum as exact-gradient IPOPT.

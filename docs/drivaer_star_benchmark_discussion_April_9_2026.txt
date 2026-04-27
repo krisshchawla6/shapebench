@@ -1342,19 +1342,32 @@ REWARD IMPLEMENTATION
   Feedback:  non-empty string with Cl value and penalty when infeasible,
              so the v3 LLM optimizer sees constraint status at each iteration.
 
-RUNS SUBMITTED (April 26, 2026)
+RUNS SUBMITTED (April 26, 2026) — FIRST BATCH (ALL FAILED)
   Bayesian Opt. (BO_torch): 10 seeds × 3 body styles = 30 jobs
     n_calls=1000, n_initial=50, SLURM IDs 8312–8341
-    vtk_E: seeds 0–9  (jobs 8312–8321)
-    vtk_F: seeds 0–9  (jobs 8322–8331)
-    vtk_N: seeds 0–9  (jobs 8332–8341)
-
   ShapeEvolve v3: 10 attempts × 3 body styles = 30 jobs
     iterations=600, batch_size=10 (n_evals=6000), model=gemini-2.5-flash
     SLURM IDs 8342–8371
-    vtk_E: attempts 1–10  (jobs 8342–8351)
-    vtk_F: attempts 1–10  (jobs 8352–8361)
-    vtk_N: attempts 1–10  (jobs 8362–8371)
+
+  FAILURE: torchvision circular import error on all 60 jobs.
+    Error: AttributeError: partially initialized module 'torchvision' has no
+           attribute 'extension' (most likely due to a circular import)
+    Cause: venv uses torch 2.11, incompatible with torchvision 0.25.0.
+           Chain: Transolver.py → timm → torchvision._meta_registrations → circular
+    Fix applied (same as BlendedNet fix, commit c83ee65):
+      1. environments/DrivAer_Star/environment.py: added fcntl module-level lock
+         to pre-load torchvision.extension before _meta_registrations runs.
+      2. All 60 slurm scripts updated to use venv_torch210 (torch 2.10.0+cu128)
+         instead of venv.
+
+RUNS RESUBMITTED (April 26, 2026) — WORKING BATCH
+  Same configuration as above. SLURM IDs 8372–8431.
+    BO vtk_E: seeds 0–9  (jobs 8372–8381)
+    BO vtk_F: seeds 0–9  (jobs 8392–8401)
+    BO vtk_N: seeds 0–9  (jobs 8412–8421)
+    v3 vtk_E: attempts 1–10  (jobs 8382–8391)
+    v3 vtk_F: attempts 1–10  (jobs 8402–8411)
+    v3 vtk_N: attempts 1–10  (jobs 8422–8431)
 
   Slurm scripts: sbatch/environments/DrivAer_Star/BO_torch/vtk_{E,F,N}/
                  sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/vtk_{E,F,N}/
@@ -1365,5 +1378,22 @@ RUNS SUBMITTED (April 26, 2026)
                    run_v3_dynamic_optimizer_cd_cl_constrained_drivaer_star_
                      vtk_{E,F,N}_attempt_{1-10}_flash_2_5_n6000/
 
-STATUS
-  Runs in progress (submitted April 26 2026). Analysis pending.
+NODE PREEMPTION (April 27, 2026)
+  All 60 jobs (8372–8431) were preempted once overnight (Restarts=1 confirmed
+  via scontrol on all jobs). Jobs requeued automatically at 2026-04-27T05:14
+  and restarted at 2026-04-27T05:18 on compute-dy-hpc-128vcpu-2.
+  Each restarted job began fresh: single CSV header confirmed, and iteration
+  counters are strictly monotonically increasing from 0 with no resets
+  (checked across all body styles and both methods). No appended data from
+  the pre-preemption run; pre-preemption progress was lost but data is clean.
+
+STATUS (April 27, 2026 ~16:30)
+  All 60 jobs running. ~11h elapsed since restart.
+  BO (target 1000 evals): 63–81% complete across all body styles.
+    Best rewards so far: vtk_E Cd≈0.0666–0.0685, vtk_F Cd≈0.0342–0.0372,
+                         vtk_N Cd≈0.0671–0.0685
+  v3 (target 6000 evals): 39–48% complete across all body styles.
+    Best rewards so far: vtk_E≈−0.070 to −0.088, vtk_F≈−0.035 to −0.074,
+                         vtk_N≈−0.069 to −0.088 (Cl violations still present
+                         in worst runs; expected to resolve with more iterations)
+  Analysis pending on completion.

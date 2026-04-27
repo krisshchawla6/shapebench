@@ -3,7 +3,7 @@
 NeuralFoil vs XFOIL L/D scatter plot for all IPOPT-validated candidates.
 
 Each point is an IPOPT-optimised design evaluated by both NeuralFoil and XFOIL.
-Colour = method; marker fill = CM threshold (solid = CM≥−0.125, open = CM≥−0.130).
+Colour = method; marker fill = CM threshold (solid = $C_M$≥−0.125, open = $C_M$≥−0.130).
 Reference lines: identity (y = x) and empirical ratio line (y ≈ 0.910 x).
 
 Output: environments/NeuralFoil/results/convergence_plots_LAM500/nf_xf_scatter.pdf/.png
@@ -73,22 +73,22 @@ def scatter(pts, color, marker, filled, label, zorder=3):
                s=55, lw=1.2, zorder=zorder, label=label)
 
 # cm125 (solid)
-scatter(lbfgsb_cm125, C["LBFGSB"], "o", True,  r"L-BFGS-B  CM≥$-$0.125")
-scatter(bo_cm125,     C["BO"],     "D", True,  r"Bayesian Opt. (exact GP)  CM≥$-$0.125")
-scatter(ga_cm125,     C["GA"],     "^", True,  r"PSO (120p$\times$500i)  CM≥$-$0.125")
-scatter(v3_cm125,     C["v3"],     "s", True,  r"ShapeEvolve  CM≥$-$0.125")
+scatter(lbfgsb_cm125, C["LBFGSB"], "o", True,  r"L-BFGS-B  $C_M$≥$-$0.125")
+scatter(bo_cm125,     C["BO"],     "D", True,  r"Bayesian Opt. (exact GP)  $C_M$≥$-$0.125")
+scatter(ga_cm125,     C["GA"],     "^", True,  r"PSO (120p$\times$500i)  $C_M$≥$-$0.125")
+scatter(v3_cm125,     C["v3"],     "s", True,  r"ShapeEvolve  $C_M$≥$-$0.125")
 
 # cm130 (open)
-scatter(lbfgsb_cm130, C["LBFGSB"], "o", False, r"L-BFGS-B  CM≥$-$0.130")
-scatter(v3_cm130,     C["v3"],     "s", False, r"ShapeEvolve  CM≥$-$0.130")
+scatter(lbfgsb_cm130, C["LBFGSB"], "o", False, r"L-BFGS-B  $C_M$≥$-$0.130")
+scatter(v3_cm130,     C["v3"],     "s", False, r"ShapeEvolve  $C_M$≥$-$0.130")
 
 # ── Axes ──────────────────────────────────────────────────────────────────────
 ax.set_xlabel("NeuralFoil L/D  (IPOPT-refined)", fontsize=11)
 ax.set_ylabel("XFOIL L/D  (validated)", fontsize=11)
 ax.set_title(
-    "ShapeEvolve — NeuralFoil LAM500\n"
-    "NF vs XFOIL L/D: all IPOPT candidates  "
-    "(solid = CM≥−0.125, open = CM≥−0.130)",
+    r"Constrained Laminar Airfoil $C_L/C_D$ Maximisation (Ma=0.2, Re=10$^7$)"
+    "\nNF vs XFOIL L/D: all IPOPT candidates  "
+    "(solid = $C_M$≥−0.125, open = $C_M$≥−0.130)",
     fontweight="medium", pad=8,
 )
 ax.set_xlim(240, 390)
@@ -100,7 +100,7 @@ ax.grid(alpha=0.2)
 
 plt.tight_layout()
 for ext in (".pdf", ".png"):
-    out = f"{OUT_DIR}/nf_xf_scatter{ext}"
+    out = f"{OUT_DIR}/NeuralFoil_LD_nf_xf_scatter{ext}"
     fig.savefig(out, dpi=200, bbox_inches="tight")
     print(f"Saved: {out}")
 plt.close(fig)

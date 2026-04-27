@@ -206,9 +206,9 @@ for key, xf in XFOIL_BEST.items():
 # ── Axes ──────────────────────────────────────────────────────────────────────
 ax.set_xscale("log")
 ax.set_xlabel("NeuralFoil evaluations (per run)")
-ax.set_ylabel(r"$L/D$")
+ax.set_ylabel(r"$C_L/C_D - 500\!\sum_k v_k$")
 ax.set_title(
-    "ShapeEvolve — NeuralFoil LAM500 benchmark\n"
+    r"Constrained Laminar Airfoil $C_L/C_D$ Maximisation (Ma=0.2, Re=10$^7$)" + "\n"
     "Stage 1 convergence: best penalized reward per run   "
     r"($\lambda=500$, dashed = XFOIL-validated best after IPOPT post-processing)",
 )
@@ -229,8 +229,8 @@ ax.legend(handles=style_legend, loc="lower left", fontsize=8.5,
 
 plt.tight_layout()
 
-out_pdf = f"{OUT_DIR}/convergence_best_reward.pdf"
-out_png = f"{OUT_DIR}/convergence_best_reward.png"
+out_pdf = f"{OUT_DIR}/NeuralFoil_LD_convergence_best_reward.pdf"
+out_png = f"{OUT_DIR}/NeuralFoil_LD_convergence_best_reward.png"
 plt.savefig(out_pdf, bbox_inches="tight")
 plt.savefig(out_png, dpi=150, bbox_inches="tight")
 print(f"Saved:\n  {out_pdf}\n  {out_png}")

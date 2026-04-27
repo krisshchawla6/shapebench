@@ -87,14 +87,27 @@ METHODS  = [
     ("v3",     "ShapeEvolve"),
 ]
 
+# Stage 3 x-jitter: LBFGSB/GA left, v3/BO right so close markers don't overlap.
+X3_JITTER = {"LBFGSB": -0.07, "v3": +0.07, "GA": -0.07, "BO": +0.07}
+# Annotation text positions: evenly spaced vertically so labels are clearly separated.
+ANNOT_TEXT = {
+    "LBFGSB": (2.30, 337.0),
+    "v3":     (2.30, 331.5),
+    "GA":     (2.30, 326.0),
+    "BO":     (2.30, 320.5),
+}
+
 for key, label in METHODS:
+    x3 = 2 + X3_JITTER[key]
+    xs = [0, 1, x3]
     ys = [RAW_NF[key], IPOPT_NF[key], XF_LD[key]]
-    ax.plot(STAGES, ys, "o-", color=C[key], lw=2.0, ms=7,
+    ax.plot(xs, ys, "o-", color=C[key], lw=2.0, ms=7,
             markerfacecolor=C[key], markeredgecolor="white",
             markeredgewidth=0.8, label=label, zorder=3)
-    # Annotate final XF value on the right
-    ax.text(2.06, XF_LD[key], f"{XF_LD[key]:.1f}",
-            color=C[key], fontsize=8, va="center")
+    tx, ty = ANNOT_TEXT[key]
+    ax.annotate(f"{XF_LD[key]:.1f}", xy=(x3, XF_LD[key]), xytext=(tx, ty),
+                color=C[key], fontsize=8, va="center",
+                arrowprops=dict(arrowstyle="->", color=C[key], lw=0.8))
 
 # Stage dividers
 for x in [0.5, 1.5]:
@@ -103,10 +116,11 @@ for x in [0.5, 1.5]:
 ax.set_xticks(STAGES)
 ax.set_xticklabels(LABELS, fontsize=9)
 ax.set_ylabel("L/D", fontsize=11)
-ax.set_xlim(-0.3, 2.5)
+ax.set_xlim(-0.3, 2.65)
 ax.set_ylim(220, 385)
 ax.set_title(
-    "ShapeEvolve — NeuralFoil LAM500\nTwo-stage pipeline: best design per method",
+    r"Constrained Laminar Airfoil $C_L/C_D$ Maximisation (Ma=0.2, Re=10$^7$)"
+    "\nThree-stage pipeline: best design per method",
     fontweight="medium", pad=8,
 )
 ax.legend(loc="lower right", fontsize=8.5, framealpha=0.95)
@@ -116,7 +130,7 @@ ax.grid(axis="y", alpha=0.25)
 
 plt.tight_layout()
 for ext in (".pdf", ".png"):
-    out = f"{OUT_DIR}/pipeline_stages{ext}"
+    out = f"{OUT_DIR}/NeuralFoil_LD_pipeline_stages{ext}"
     fig.savefig(out, dpi=200, bbox_inches="tight")
     print(f"Saved: {out}")
 plt.close(fig)
