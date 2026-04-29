@@ -1,0 +1,2 @@
+"""Deterministic diagnostic checks."""
+
