@@ -220,8 +220,8 @@ def main():
         [e[1] for e in entries],
     )
 
-    out_png = os.path.join(OUT_DIR, "radar_best_designs.png")
-    out_pdf = os.path.join(OUT_DIR, "radar_best_designs.pdf")
+    out_png = os.path.join(OUT_DIR, "DrivAer_Star_radar_best_designs.png")
+    out_pdf = os.path.join(OUT_DIR, "DrivAer_Star_radar_best_designs.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

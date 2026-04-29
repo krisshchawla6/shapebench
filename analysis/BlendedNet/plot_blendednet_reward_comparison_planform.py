@@ -195,7 +195,7 @@ def _load_ws_best_ga():
 
 def _load_ws_best_v3():
     dirs = sorted(glob.glob(os.path.join(RESULTS_DIR, "run_v3_flash2_5_shapebench_5_max_LD_warmstart_cornerA_attempt_*_n2000")))
-    best_r, best_p_params = -np.inf, None
+    best_r, best_res = -np.inf, None
     for d in dirs:
         db_path = os.path.join(d, "database.json")
         if not os.path.exists(db_path):
@@ -207,16 +207,16 @@ def _load_ws_best_v3():
             r = e.get("reward", -np.inf)
             if r > best_r:
                 path = e.get("path", "")
-                if os.path.exists(path):
-                    with open(path) as f2:
-                        params = json.load(f2)
-                    if "B1" in params:
-                        best_r, best_p_params = r, params
-    if best_p_params is None:
+                stem = os.path.splitext(os.path.basename(path))[0]
+                rj = os.path.join(d, stem, "save", "results.json")
+                if os.path.exists(rj):
+                    with open(rj) as f2:
+                        res = json.load(f2)
+                    if "B1" in res.get("design", {}):
+                        best_r, best_res = r, res
+    if best_res is None:
         return None, best_r, None
-    # wrap in same results dict shape as other methods
-    fake_res = {"design": best_p_params, "mean_LD": best_r, "reward": best_r, "operating_points": []}
-    return best_p_params, best_r, fake_res
+    return best_res["design"], best_r, best_res
 
 
 def load_warmstart_best_ld(name):
@@ -273,7 +273,7 @@ def _ann(params, res, header=""):
     return (
         f"{prefix}"
         f"half-span={hs:.0f} mm\n"
-        f"S1={params['S1']:.0f}°  C2={params['C2']:.0f}  C4={params['C4']:.0f}\n"
+        f"S1={params['S1']:.0f}$^\\circ$  C2={params['C2']:.0f}  C4={params['C4']:.0f}\n"
         f"B2={params['B2']:.0f}\n"
         f"{cd_str}\n"
         f"{ld_str}"
@@ -390,11 +390,13 @@ def main():
                 ax.set_title(COL_LABELS[ci], fontweight="medium", pad=6)
 
             # annotation box — max-LD design
-            ann_header = (r"max-$\overline{L/D}$  [warm-start]" if (ci == 1 and p_ws is not None)
-                          else r"max-$\overline{L/D}$  [random-start]")
+            ann_header = (r"$\underline{\mbox{max-}\overline{L/D}\mbox{  [warm-start]:}}$"
+                          if (ci == 1 and p_ws is not None)
+                          else r"$\underline{\mbox{max-}\overline{L/D}\mbox{  [random-start]:}}$")
             if p_ld_show is not None and res_ld_show is not None:
                 ax.text(0.97, 0.97, _ann(p_ld_show, res_ld_show, header=ann_header),
                         transform=ax.transAxes,
+                        usetex=True,
                         fontsize=14, va="top", ha="right", color=c,
                         bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
                                   edgecolor=c, alpha=0.85, linewidth=0.8))
@@ -403,7 +405,8 @@ def main():
                 ax.legend(fontsize=20, loc="lower left", framealpha=0.9,
                           handlelength=1.5, borderpad=0.5)
                 # Method name inside top-left of left panel
-                ax.text(0.03, 0.97, name,
+                display_name = "Bayesian Opt. (exact GP)" if name == "Bayesian Opt." else name
+                ax.text(0.03, 0.97, display_name,
                         transform=ax.transAxes,
                         fontsize=20, fontweight="bold", va="top", ha="left",
                         color=c,

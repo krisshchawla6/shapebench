@@ -51,7 +51,7 @@ STYLE = {
 
 COLORS = {
     "L-BFGS-B":         "#e377c2",
-    "Bayesian Opt.":    "#ff7f0e",
+    "Bayesian Opt. (exact GP)": "#ff7f0e",
     "PSO (20p × 200i)": "#1f77b4",
     "CMA-ES":           "#d62728",
     "ShapeEvolve":      "#2ca02c",
@@ -311,7 +311,7 @@ def main():
     if lbfgsb:
         plot_band(ax_cd, lbfgsb,   xg_cd(lbfgsb),   COLORS["L-BFGS-B"],         "L-BFGS-B")
     if cd_bo:
-        plot_band(ax_cd, cd_bo,    xg_cd(cd_bo),    COLORS["Bayesian Opt."],     "Bayesian Opt.")
+        plot_band(ax_cd, cd_bo,    xg_cd(cd_bo),    COLORS["Bayesian Opt. (exact GP)"],     "Bayesian Opt. (exact GP)")
     if cd_ga:
         plot_band(ax_cd, cd_ga,    xg_cd(cd_ga),    COLORS["PSO (20p × 200i)"],  "PSO (20p × 200i)")
     if cd_cmaes:
@@ -332,7 +332,7 @@ def main():
     # ── Right panel: max-L/D ─────────────────────────────────────────────────
 
     if ld_bo:
-        plot_band(ax_ld, ld_bo,    xg_ld(ld_bo),    COLORS["Bayesian Opt."],     "Bayesian Opt.")
+        plot_band(ax_ld, ld_bo,    xg_ld(ld_bo),    COLORS["Bayesian Opt. (exact GP)"],     "Bayesian Opt. (exact GP)")
     if ld_ga:
         plot_band(ax_ld, ld_ga,    xg_ld(ld_ga),    COLORS["PSO (20p × 200i)"],  "PSO (20p × 200i)")
     if ld_cmaes:
@@ -366,7 +366,7 @@ def main():
     # Right panel: method legend (lower right) + style key (upper left)
     method_handles = [
         Line2D([0], [0], color=COLORS[n], lw=2, label=n)
-        for n in ["Bayesian Opt.", "PSO (20p × 200i)", "CMA-ES", "ShapeEvolve"]
+        for n in ["Bayesian Opt. (exact GP)", "PSO (20p × 200i)", "CMA-ES", "ShapeEvolve"]
     ]
     style_handles = [
         Patch(facecolor="grey", alpha=0.25, label="Min–max range"),

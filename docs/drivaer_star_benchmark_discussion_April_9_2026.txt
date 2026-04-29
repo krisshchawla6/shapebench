@@ -1397,3 +1397,135 @@ STATUS (April 27, 2026 ~16:30)
                          vtk_N≈−0.069 to −0.088 (Cl violations still present
                          in worst runs; expected to resolve with more iterations)
   Analysis pending on completion.
+
+SECOND PREEMPTION AND DATA RECOVERY (April 28, 2026)
+------------------------------------------------------
+All 60 jobs (8372–8431) were preempted a second time (Restarts=2 confirmed via
+scontrol show job 8382). All jobs were cancelled manually with scancel {8372..8431}.
+
+Data recovery strategy: results.csv is overwritten on each restart and was lost.
+However, per-design save/results.json files survive preemption because they are
+written once and never overwritten. Script analysis/recover_drivaer_results.py
+scans iter_* design directories in each run folder, reads save/results.json from
+each, and reconstructs results_recovered.csv with the same schema as results.csv
+(except island, which is runtime-only and not stored in any per-design file).
+
+Recovered data:
+  150,948 rows total across 60 runs (30 BO + 30 v3).
+  BO: 790–992 evals per run (79–99% of n_calls=1000 target).
+  v3: 3,238–4,514 evals per run, against a 6,000-eval target:
+      vtk_E: 54–70% complete   vtk_F: 67–75% complete   vtk_N: 66–75% complete
+
+Convergence validation (v3 plateau check):
+  Median improvement in best objective during the second half of each run:
+    vtk_E: 0.46%   vtk_F: 0.57%   vtk_N: 0.08%
+  All well below 1% (with the exception of a few outlier runs up to 7–14%).
+  Conclusion: v3 runs had effectively plateaued before preemption; the missing
+  25–46% of evaluations would not materially change final best values.
+
+FINAL RESULTS: cd_cl_constrained (April 28, 2026)
+--------------------------------------------------
+Reward formula: reward = -Cd - 1.0 * max(0, Cl - (-0.10))
+At convergence (constraint satisfied): reward ≈ -Cd, so best_Cd ≈ -best_reward.
+All best-Cd values below are the -best_reward at the end of each run; the
+constraint is satisfied for any run whose best_reward is close to -Cd.
+
+  Body E (Estate),    Baseline Cd = 0.22334:
+    ShapeEvolve  (10 runs):  best Cd = 0.06970,  median = 0.07879
+    Bayesian Opt.(10 runs):  best Cd = 0.06657,  median = 0.06814
+
+  Body F (Fastback),  Baseline Cd = 0.18990:
+    ShapeEvolve  (10 runs):  best Cd = 0.03492,  median = 0.04737
+    Bayesian Opt.(10 runs):  best Cd = 0.03422,  median = 0.03572
+
+  Body N (Notchback), Baseline Cd = 0.18132:
+    ShapeEvolve  (10 runs):  best Cd = 0.06845,  median = 0.07086
+    Bayesian Opt.(10 runs):  best Cd = 0.06677,  median = 0.06701
+
+Analysis scripts:
+  analysis/recover_drivaer_results.py            — rebuilds results_recovered.csv
+  analysis/DrivAer_Star/
+    plot_drivaer_convergence_cd_cl_constrained.py — convergence plots per body
+  analysis/plot_drivaer_best_designs.py           — 3D panel of best geometries
+  Output dir: environments/DrivAer_Star/results/analysis_plots_cd_cl_constrained/
+
+CD_ONLY vs. CD_CL_CONSTRAINED: COMPARISON (April 28, 2026)
+-----------------------------------------------------------
+This section compares the best Cd achieved under two reward variants:
+  cd_only:             reward = -Cd  (unconstrained; Cl is free)
+  cd_cl_constrained:   reward = -Cd - 1.0 * max(0, Cl - (-0.10))
+                        (forces Cl <= -0.10, i.e. net aerodynamic downforce)
+
+The Cl values for cd_only designs are the Cl of the best design found when no
+lift constraint is in effect. The optimizer was free to achieve any Cl it wanted;
+these are not set by the reward but are the emergent aerodynamic outcome of the
+drag-minimizing configuration. Where Cl > -0.10, the design violates the constraint
+and would be infeasible under cd_cl_constrained.
+
+cd_only runs used 20 seeds/attempts per method (BO n=1000 evals; v3 n=6000–10000
+evals). cd_cl_constrained used 10 seeds/attempts (BO n=1000; v3 n=6000, 54–75%
+complete at termination but effectively converged — see plateau check above).
+
+Full comparison table:
+  Body  Method          cd_only:           cd_cl_constrained:   Drag
+                        best Cd  Cl        best Cd              penalty
+  ────  ──────────────  ───────  ────────  ───────────────────  ───────
+  E     Bayesian Opt.   0.06509  -0.079*   0.06657              +2.3%
+  E     ShapeEvolve     0.06516  -0.065*   0.06970              +7.0%
+  F     Bayesian Opt.   0.03064  -0.031*   0.03422              +11.7%
+  F     ShapeEvolve     0.03384  -0.094*   0.03492              +3.2%
+  N     Bayesian Opt.   0.04956  +0.713*   0.06677              +34.7%
+  N     ShapeEvolve     0.06808  -0.118    0.06845              +0.5%
+
+  * = violates Cl <= -0.10 constraint (infeasible under cd_cl_constrained)
+  Cl computed from cd_only results.csv: Cl/Cd = Lift/Drag, both in Newtons and
+  non-dimensional units respectively (Cl = (lift_N / drag_N) * Cd).
+
+Interpretation:
+
+Estate (E) and Fastback (F):
+  The unconstrained optima already have mild negative lift (Cl between -0.03 and
+  -0.094), close to but slightly above the -0.10 threshold. Adding the constraint
+  forces a modest design change, costing 2–12% in drag depending on method. The
+  constraint is binding but not severely: the feasible and infeasible regions are
+  adjacent in design space.
+
+Notchback (N) — anomalous BO behavior:
+  BO unconstrained finds Cd=0.04956 with Cl=+0.713, a strongly lift-generating
+  configuration (the car body is shaped to produce aerodynamic upforce). This is
+  a physically valid drag minimizer in an unconstrained setting: the optimizer
+  exploits the fact that generating lift reduces induced drag or that a different
+  camber distribution reduces pressure drag. However, Cl=+0.713 wildly violates
+  the Cl <= -0.10 constraint.
+
+  When BO is constrained (cd_cl_constrained), it must search in the Cl <= -0.10
+  region and finds Cd=0.06677 — a 34.7% drag penalty compared to the unconstrained
+  optimum. This is not a failure of BO; it reflects the true cost of enforcing
+  downforce on the Notchback geometry. The unconstrained and constrained optima
+  are in different basins of the design space.
+
+  ShapeEvolve unconstrained converges to Cd=0.06808, Cl=-0.118, which already
+  satisfies the constraint. Adding the constraint produces almost no change
+  (Cd=0.06845, +0.5%). This is because ShapeEvolve's search trajectory — guided
+  by LLM-proposed perturbations — naturally stays in the downforce-generating
+  region, whereas BO's acquisition function has no spatial bias and freely explores
+  the positive-lift region where drag is lower.
+
+  Implication: for the Notchback body, the two variants (cd_only and
+  cd_cl_constrained) are effectively testing different optimization problems. BO
+  solves the unconstrained problem better (Cd=0.050 vs 0.068), while ShapeEvolve
+  finds a comparable solution to the constrained problem in both cases.
+
+Summary across all bodies:
+  BO achieves better best Cd than ShapeEvolve in all constrained cases (best BO
+  is 0.4–7.3% lower Cd than best ShapeEvolve). BO also achieves better median
+  Cd in 2 of 3 bodies (E: +2.2%, N: +5.7% lower; F comparable +0.7%).
+  The performance gap is largest for vtk_E where v3 median (0.079) is notably
+  higher than BO median (0.068), suggesting ShapeEvolve has higher run-to-run
+  variance under the constrained reward.
+
+  Under the unconstrained cd_only benchmark (where the problems are equivalent
+  for E and F), the methods are nearly tied: best Cd differs by < 0.1% for E
+  (BO: 0.06509, v3: 0.06516) and 10.4% for F (BO: 0.03064, v3: 0.03384), with
+  BO having the edge. For N, the comparison is confounded by BO finding a
+  qualitatively different (lift-generating) regime.

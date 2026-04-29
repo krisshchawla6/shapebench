@@ -251,8 +251,8 @@ def main():
     ax.legend(fontsize=8, loc="upper right")
     ax.grid(True, alpha=0.2)
 
-    out1_png = os.path.join(OUT_DIR, "pca_scatter_cd.png")
-    out1_pdf = os.path.join(OUT_DIR, "pca_scatter_cd.pdf")
+    out1_png = os.path.join(OUT_DIR, "DrivAer_Star_pca_scatter_cd.png")
+    out1_pdf = os.path.join(OUT_DIR, "DrivAer_Star_pca_scatter_cd.pdf")
     fig.savefig(out1_png, dpi=150, bbox_inches="tight")
     fig.savefig(out1_pdf, bbox_inches="tight")
     plt.close(fig)
@@ -276,8 +276,8 @@ def main():
     ax.legend(fontsize=9, markerscale=2)
     ax.grid(True, alpha=0.2)
 
-    out2_png = os.path.join(OUT_DIR, "pca_scatter_method.png")
-    out2_pdf = os.path.join(OUT_DIR, "pca_scatter_method.pdf")
+    out2_png = os.path.join(OUT_DIR, "DrivAer_Star_pca_scatter_method.png")
+    out2_pdf = os.path.join(OUT_DIR, "DrivAer_Star_pca_scatter_method.pdf")
     fig.savefig(out2_png, dpi=150, bbox_inches="tight")
     fig.savefig(out2_pdf, bbox_inches="tight")
     plt.close(fig)

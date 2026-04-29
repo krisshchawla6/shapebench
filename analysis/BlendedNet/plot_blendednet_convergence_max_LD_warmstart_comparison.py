@@ -228,7 +228,7 @@ def main():
     # ── Left panel: random-start ──────────────────────────────────────────────
     if bo1000_curves:
         plot_band(ax_l, bo1000_curves, xg(bo1000_curves, x_grid_rand),
-                  COLORS["Bayesian Opt. n=1000"], "Bayesian Opt.")
+                  COLORS["Bayesian Opt. n=1000"], "Bayesian Opt. (exact GP)")
     if ga_curves:
         plot_band(ax_l, ga_curves, xg(ga_curves, x_grid_rand),
                   COLORS["PSO (20p × 200i)"], "PSO (20p × 200i)")

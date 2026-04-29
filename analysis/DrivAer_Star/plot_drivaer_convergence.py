@@ -249,8 +249,8 @@ def main():
               framealpha=0.95, title="Style")
 
     suffix = f"_vtk_{body}"
-    out_png = os.path.join(OUT_DIR, f"convergence_cd_vs_evals{suffix}.png")
-    out_pdf = os.path.join(OUT_DIR, f"convergence_cd_vs_evals{suffix}.pdf")
+    out_png = os.path.join(OUT_DIR, f"DrivAer_Star_convergence_cd_vs_evals{suffix}.png")
+    out_pdf = os.path.join(OUT_DIR, f"DrivAer_Star_convergence_cd_vs_evals{suffix}.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

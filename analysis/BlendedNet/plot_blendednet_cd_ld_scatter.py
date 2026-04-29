@@ -52,7 +52,7 @@ STYLE = {
 }
 
 COLORS = {
-    "Bayesian Opt.":    "#ff7f0e",
+    "Bayesian Opt. (exact GP)": "#ff7f0e",
     "PSO (20p × 200i)": "#1f77b4",
     "CMA-ES":           "#d62728",
     "ShapeEvolve":      "#2ca02c",
@@ -61,7 +61,7 @@ COLORS = {
 # Methods that cleanly show the cross-metric anomaly (Corner A via min-CD,
 # Corner B via max-L/D, matched budgets)
 ANOMALY_METHODS = ["PSO (20p × 200i)", "CMA-ES", "ShapeEvolve"]
-BO_METHOD       = "Bayesian Opt."
+BO_METHOD       = "Bayesian Opt. (exact GP)"
 METHOD_ORDER    = ANOMALY_METHODS + [BO_METHOD]
 
 MARKER_SIZE = 130
@@ -126,7 +126,7 @@ def _cross_metrics(res):
 
 
 METHODS = {
-    "Bayesian Opt.": {
+    "Bayesian Opt. (exact GP)": {
         # Include both n=500 and n=1000 dirs so the best across all seeds is used
         "cd_dirs": lambda: (
             sorted(glob.glob(os.path.join(RESULTS_DIR, "run_BO_torch_shapebench_5_seed*_n500"))) +

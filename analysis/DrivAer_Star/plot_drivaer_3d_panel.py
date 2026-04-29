@@ -12,10 +12,12 @@ all rendered at comparable apparent scale.
 Usage:
     cd /scratch/ShapeEvolve
     source venv/bin/activate
-    python analysis/DrivAer_Star/plot_drivaer_3d_panel.py [--body {E,F,N}]
+    python analysis/DrivAer_Star/plot_drivaer_3d_panel.py [--body {E,F,N}] [--variant {cd_only,cd_cl_constrained}]
 
-Outputs:
-    environments/DrivAer_Star/results/analysis_plots_cd_only/3d_panel_best_designs[_vtk_F|_vtk_N].png
+Outputs (cd_only):
+    environments/DrivAer_Star/results/analysis_plots_cd_only/DrivAer_Star_3d_panel_best_designs_vtk_{body}.png
+Outputs (cd_cl_constrained):
+    environments/DrivAer_Star/results/analysis_plots_cd_cl_constrained/DrivAer_Star_3d_panel_best_designs_vtk_{body}_cd_cl_constrained.png
 """
 
 import argparse
@@ -220,16 +222,66 @@ def load_best_v3(body="E"):
     return best_params, best_cd
 
 
+def _load_best_recovered(run_dirs):
+    """Load best design from results_recovered.csv (preempted runs).
+
+    Params are stored in {design}/save/results.json under the 'design' key.
+    """
+    best_cd, best_params = np.inf, None
+    for run_dir in run_dirs:
+        csv = os.path.join(run_dir, "results_recovered.csv")
+        if not os.path.exists(csv):
+            continue
+        df = pd.read_csv(csv)
+        if df.empty:
+            continue
+        idx = int(df["reward"].idxmax())
+        row = df.iloc[idx]
+        cd = float(row["Cd"])
+        if cd < best_cd:
+            design_name = str(row["design"])
+            p = os.path.join(run_dir, design_name, "save", "results.json")
+            if os.path.exists(p):
+                with open(p) as f:
+                    best_params = json.load(f)["design"]
+                best_cd = cd
+    return best_params, best_cd
+
+
+def load_best_bo_constrained(body):
+    run_dirs = [
+        os.path.join(RESULTS_DIR, f"run_BO_torch_cd_cl_constrained_vtk_{body}_seed{s}_n1000")
+        for s in range(10)
+    ]
+    return _load_best_recovered(run_dirs)
+
+
+def load_best_v3_constrained(body):
+    run_dirs = [
+        os.path.join(
+            RESULTS_DIR,
+            f"run_v3_dynamic_optimizer_cd_cl_constrained_"
+            f"drivaer_star_vtk_{body}_attempt_{a}_flash_2_5_n6000",
+        )
+        for a in range(1, 11)
+    ]
+    return _load_best_recovered(run_dirs)
+
+
 def main():
     global _BASE_VTK
 
     parser = argparse.ArgumentParser(description="DrivAer 3D panel plot")
     parser.add_argument("--body", choices=["E", "F", "N"], default="E",
                         help="Body style: E=Estate, F=Fastback, N=Notchback (default: E)")
+    parser.add_argument("--variant", choices=["cd_only", "cd_cl_constrained"], default="cd_only",
+                        help="Reward variant (default: cd_only)")
     args = parser.parse_args()
-    body = args.body
+    body    = args.body
+    variant = args.variant
 
-    os.makedirs(OUT_DIR, exist_ok=True)
+    out_dir = os.path.join(RESULTS_DIR, f"analysis_plots_{variant}")
+    os.makedirs(out_dir, exist_ok=True)
 
     body_names = {"E": "Estate", "F": "Fastback", "N": "Notchback"}
     body_label = body_names[body]
@@ -248,23 +300,33 @@ def main():
 
     entries = [("Baseline", baseline_params, BASELINE_CD)]
 
-    # GA/PSO and L-BFGS-B only available for Estate (E)
-    if body == "E":
-        for name, loader in [
-            ("PSO (120p × 500i)", load_best_ga),
-            ("L-BFGS-B", load_best_lbfgsb),
+    if variant == "cd_only":
+        # GA/PSO and L-BFGS-B only available for Estate (E)
+        if body == "E":
+            for name, loader in [
+                ("PSO (120p × 500i)", load_best_ga),
+                ("L-BFGS-B", load_best_lbfgsb),
+            ]:
+                params, cd = loader()
+                if params is not None:
+                    entries.append((name, params, cd))
+
+        for name, loader, kwargs in [
+            ("Bayesian Opt. (exact GP)", load_best_bo, {"body": body}),
+            ("ShapeEvolve",             load_best_v3, {"body": body}),
         ]:
-            params, cd = loader()
+            params, cd = loader(**kwargs)
             if params is not None:
                 entries.append((name, params, cd))
 
-    for name, loader, kwargs in [
-        ("Bayesian Opt. (exact GP)", load_best_bo, {"body": body}),
-        ("ShapeEvolve",             load_best_v3, {"body": body}),
-    ]:
-        params, cd = loader(**kwargs)
-        if params is not None:
-            entries.append((name, params, cd))
+    else:  # cd_cl_constrained
+        for name, loader in [
+            ("Bayesian Opt. (exact GP)", load_best_bo_constrained),
+            ("ShapeEvolve",             load_best_v3_constrained),
+        ]:
+            params, cd = loader(body)
+            if params is not None:
+                entries.append((name, params, cd))
 
     views = [("side", "Side profile"), ("rear_quarter", "Rear quarter")]
     ncols = len(entries)
@@ -305,16 +367,17 @@ def main():
         axes[row_idx][0].set_ylabel(view_label, fontsize=9, rotation=90,
                                      labelpad=4, va="center")
 
+    variant_label = "" if variant == "cd_only" else " ($C_d$-constrained)"
     fig.suptitle(
-        f"DrivAer Star ({body_label}, vtk_{body}) — Best Design Shapes\n"
+        f"DrivAer Star ({body_label}, vtk_{body}){variant_label} — Best Design Shapes\n"
         "(side profile shows ramp/hood/trunklid/diffusor angles; "
         "rear quarter shows trunklid, diffusor, greenhouse)",
         fontsize=10, y=1.01,
     )
 
-    suffix = f"_vtk_{body}"
-    out_png = os.path.join(OUT_DIR, f"3d_panel_best_designs{suffix}.png")
-    out_pdf = os.path.join(OUT_DIR, f"3d_panel_best_designs{suffix}.pdf")
+    suffix = f"_vtk_{body}" + ("_cd_cl_constrained" if variant == "cd_cl_constrained" else "")
+    out_png = os.path.join(out_dir, f"DrivAer_Star_3d_panel_best_designs{suffix}.png")
+    out_pdf = os.path.join(out_dir, f"DrivAer_Star_3d_panel_best_designs{suffix}.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)

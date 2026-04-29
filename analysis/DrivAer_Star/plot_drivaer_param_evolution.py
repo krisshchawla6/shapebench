@@ -271,8 +271,8 @@ def main():
     )
     fig.tight_layout()
 
-    out_png = os.path.join(OUT_DIR, "param_evolution_best_run.png")
-    out_pdf = os.path.join(OUT_DIR, "param_evolution_best_run.pdf")
+    out_png = os.path.join(OUT_DIR, "DrivAer_Star_param_evolution_best_run.png")
+    out_pdf = os.path.join(OUT_DIR, "DrivAer_Star_param_evolution_best_run.pdf")
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     fig.savefig(out_pdf, bbox_inches="tight")
     plt.close(fig)
