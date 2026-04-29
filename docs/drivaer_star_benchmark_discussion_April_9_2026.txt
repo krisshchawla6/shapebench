@@ -1529,3 +1529,61 @@ Summary across all bodies:
   (BO: 0.06509, v3: 0.06516) and 10.4% for F (BO: 0.03064, v3: 0.03384), with
   BO having the edge. For N, the comparison is confounded by BO finding a
   qualitatively different (lift-generating) regime.
+
+================================================================================
+DOWNFORCE EFFICIENCY — IMPLEMENTATION AND RUN STATUS (April 29, 2026)
+================================================================================
+
+Reward variant: downforce efficiency.
+
+  reward = -Cl / Cd   (i.e. |Cl|/Cd, since Cl < 0 for downforce)
+
+Rationale:
+  cd_only and cd_cl_constrained produce nearly identical convergence curves
+  because the Cl ≤ -0.10 constraint is weak and rarely active for most designs.
+  Downforce efficiency is a fundamentally different landscape: the optimizer must
+  simultaneously generate downforce (push Cl negative) and keep drag low — a
+  genuine trade-off that should produce visually distinct best designs and
+  different convergence behaviour across methods.
+
+  This objective is physically meaningful for performance/GT road cars and avoids
+  the degenerate solution of pure downforce maximization (reward = -Cl), which
+  can find high-downforce, high-drag shapes that are impractical.
+
+Implementation (April 29, 2026):
+  - New reward: environments/DrivAer_Star/rewards/downforce_efficiency.py
+      class DownforceEfficiencyReward: reward = -Cl / max(Cd, 1e-4)
+      rho=1.25, u=40.0, area_ref=2.37 (same as other DrivAer_Star rewards)
+  - SLURM scripts (in /home/jack/):
+      run_drivaer_bo_downforce_efficiency_{E,F,N}.slurm   — BO, array 0-9
+      run_drivaer_v3_downforce_efficiency_{E,F,N}.slurm   — v3, array 1-10
+  - Results written to:
+      environments/DrivAer_Star/results/run_BO_torch_downforce_efficiency_vtk_{E,F,N}_seed{0-9}_n1000
+      environments/DrivAer_Star/results/run_v3_dynamic_optimizer_downforce_efficiency_drivaer_star_vtk_{E,F,N}_attempt_{1-10}_flash_2_5_n6000
+
+Torchvision fix (April 29, 2026):
+  First submission (jobs 8499–8504, April 29) failed immediately with:
+    RuntimeError: operator torchvision::nms does not exist
+  Root cause: torchvision 0.25.0 in the venv is a CUDA build; its _C.so fails
+  to load on CPU-only compute nodes. timm (used by Transolver) imports
+  torchvision, which triggers _meta_registrations.py. In torch 2.11.0 the
+  @register_fake decorator validates the op exists before registering — but
+  with _C unloaded the op is absent, so it raises.
+  Fix applied to environments/DrivAer_Star/environment.py: monkey-patch
+  torch._library.fake_impl.FakeImplHolder.register to catch "does not exist"
+  RuntimeErrors and return a no-op handle, allowing the import to proceed.
+  The model (Transolver) does not use any torchvision ops at inference time.
+
+Run status:
+  Resubmitted April 29, 2026: SLURM jobs 8619 (BO vtk_E), 8620 (BO vtk_F),
+  8621 (BO vtk_N), 8622 (v3 vtk_E), 8623 (v3 vtk_F), 8624 (v3 vtk_N).
+  Total: 60 tasks (30 BO + 30 v3). Running as of submission.
+
+Log naming convention:
+  SLURM array jobs use %j in the output filename, which gives each task a
+  unique dynamically-assigned per-task job ID (not the master array ID returned
+  by sbatch). All 60 per-task log files are created separately. To find logs
+  for a given body/method, grep by the descriptive prefix, e.g.:
+    ls logs/jack/ | grep "BO_drivaer_downforce_efficiency_vtkE"
+  The number at the end of each filename is the per-task job ID.
+  This matches the convention used by the cd_cl_constrained scripts.

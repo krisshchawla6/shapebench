@@ -1656,6 +1656,45 @@ STATUS
     environments/NeuralFoil/results/convergence_plots_LAM500/
   Draft prose: NOT STARTED
 
+SUGGESTED FIGURE CAPTIONS (April 29, 2026)
+-------------------------------------------
+
+pipeline_stages.pdf/.png:
+  Three-stage optimization pipeline applied to the constrained airfoil L/D
+  benchmark. Each line traces a method's best design from Stage 1 raw surrogate
+  output (NeuralFoil L/D) through Stage 2 IPOPT local refinement (NeuralFoil
+  L/D) to Stage 3 ground-truth validation (XFOIL L/D). Stage 1 outputs span
+  ~90 L/D units across methods (BO: 264, L-BFGS-B: 325, PSO: 355,
+  ShapeEvolve: 344); IPOPT refinement collapses all four to 357–363 NF L/D;
+  XFOIL validation reduces each uniformly by ~9% to 325–330, yielding a final
+  spread of only 4.6 L/D units (1.4%) across methods.
+
+convergence_best_reward.pdf/.png:
+  Stage 1 convergence of four optimization methods on the NeuralFoil LAM500
+  benchmark (maximize L/D subject to CM ≥ −0.133, σ_conf > 0.90, Ma = 0.2,
+  Re = 10⁷). Solid lines show the median best penalized reward across runs;
+  shaded bands show min–max range. X-axis is NeuralFoil evaluations (log
+  scale). Dashed horizontal lines indicate each method's XFOIL-validated L/D
+  after Stage 2 IPOPT post-processing. ShapeEvolve finds non-trivial solutions
+  earliest (~eval 5–10) but has the widest band; PSO rises rapidly after
+  population initialization; L-BFGS-B converges steadily with the highest raw
+  Stage 1 median; BO plateaus lowest in Stage 1 due to GP overhead at small
+  budgets. Despite large Stage 1 differences, the dashed reference lines are
+  nearly coincident, showing that IPOPT post-processing closes the inter-method
+  gap entirely.
+
+airfoil_comparison.pdf/.png:
+  Overlay of best IPOPT-refined airfoil profiles (CM ≥ −0.125) for all four
+  methods, with XFOIL-validated L/D in the legend. All four profiles are
+  visually indistinguishable, converging to the same highly cambered shape:
+  upper surface peaking near y/c = 0.165 at x/c = 0.40, near-flat lower
+  surface aft of x/c = 0.1, thin trailing edge. XFOIL L/D values: L-BFGS-B =
+  329.5, ShapeEvolve = 329.0, PSO = 325.6, BO = 324.9. The geometric
+  convergence confirms that all methods locate the same global optimum within
+  the 8-parameter Kulfan design space; the 1.4% spread in final L/D is
+  attributable to differences in IPOPT starting point rather than distinct
+  solution basins.
+
 CONVERGENCE CHECK (April 26 2026)
 ----------------------------------
 Checked whether median convergence curves are flat at the end of each method's

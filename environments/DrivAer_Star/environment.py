@@ -14,6 +14,28 @@ MODEL_DIR = os.path.join(ENV_DIR, "model")
 
 sys.path.insert(0, MODEL_DIR)
 
+# torchvision._meta_registrations (imported transitively via timm) uses
+# @torch.library.register_fake which checks that the operator already exists.
+# On CPU-only nodes the torchvision C extension (_C.so, a CUDA build) fails
+# to load silently, so the operators are never registered and the check raises.
+# Patch FakeImplHolder.register to skip gracefully when the op is absent.
+import torch._library.fake_impl as _tv_fake_impl
+_orig_fake_register = _tv_fake_impl.FakeImplHolder.register
+
+class _NullHandle:
+    def destroy(self):
+        pass
+
+def _patched_fake_register(self, *args, **kwargs):
+    try:
+        return _orig_fake_register(self, *args, **kwargs)
+    except RuntimeError as _e:
+        if "does not exist" in str(_e):
+            return _NullHandle()  # fake impl won't be registered; no-op on cleanup
+        raise
+
+_tv_fake_impl.FakeImplHolder.register = _patched_fake_register
+
 # Serialise the torchvision + Transolver import across all processes on the
 # same node so concurrent jobs don't race on the __pycache__ write.
 # /tmp is node-local, making fcntl.lockf reliable here.
@@ -21,7 +43,6 @@ _LOCK_FILE = "/tmp/drivaerstar_torchvision_import.lock"
 with open(_LOCK_FILE, "a") as _lf:
     fcntl.lockf(_lf, fcntl.LOCK_EX)
     try:
-        import torchvision.extension  # loads _C before _meta_registrations runs
         from Transolver import Model as _TransolverModel
     finally:
         fcntl.lockf(_lf, fcntl.LOCK_UN)

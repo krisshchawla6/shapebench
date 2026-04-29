@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Reconstruct results_recovered.csv for DrivAer_Star cd_cl_constrained runs.
+Reconstruct results_recovered.csv for DrivAer_Star runs (all reward variants).
 
 Per-design results.json files survive SLURM preemption restarts; only
 results.csv is overwritten.  This script rebuilds a trajectory CSV from
@@ -16,7 +16,8 @@ Columns reconstructed:
   drag         — from save/results.json
   Cd           — from save/results.json
   lift         — from save/results.json
-  violation    — from save/results.json
+  Cl           — from save/results.json (downforce_efficiency runs)
+  violation    — from save/results.json (cd_cl_constrained runs)
   particle     — BO only: always 0 (single-seed BO runs)
 
 NOT recoverable:
@@ -140,24 +141,25 @@ def main():
 
     total = 0
 
-    print("=== v3 runs ===")
-    for body in ["E", "F", "N"]:
-        for att in range(1, 11):
-            run_dir = base / (
-                f"run_v3_dynamic_optimizer_cd_cl_constrained_drivaer_star_vtk_"
-                f"{body}_attempt_{att}_flash_2_5_n6000"
-            )
-            if run_dir.exists():
-                total += recover_run(run_dir, mode="v3")
+    for reward_variant in ["cd_cl_constrained", "downforce_efficiency"]:
+        print(f"\n=== {reward_variant} — v3 runs ===")
+        for body in ["E", "F", "N"]:
+            for att in range(1, 11):
+                run_dir = base / (
+                    f"run_v3_dynamic_optimizer_{reward_variant}_drivaer_star_vtk_"
+                    f"{body}_attempt_{att}_flash_2_5_n6000"
+                )
+                if run_dir.exists():
+                    total += recover_run(run_dir, mode="v3")
 
-    print("\n=== BO runs ===")
-    for body in ["E", "F", "N"]:
-        for seed in range(10):
-            run_dir = base / (
-                f"run_BO_torch_cd_cl_constrained_vtk_{body}_seed{seed}_n1000"
-            )
-            if run_dir.exists():
-                total += recover_run(run_dir, mode="bo")
+        print(f"\n=== {reward_variant} — BO runs ===")
+        for body in ["E", "F", "N"]:
+            for seed in range(10):
+                run_dir = base / (
+                    f"run_BO_torch_{reward_variant}_vtk_{body}_seed{seed}_n1000"
+                )
+                if run_dir.exists():
+                    total += recover_run(run_dir, mode="bo")
 
     print(f"\nTotal rows recovered: {total}")
 
