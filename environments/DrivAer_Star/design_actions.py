@@ -51,10 +51,23 @@ STD_FRACTIONS = {
 }
 
 
-def gaussian_sampling_drivaer(mean_params: dict, std_scale: float = 1.0) -> dict:
+def _merged_bounds(bounds_override: dict | None) -> dict:
+    """Return BOUNDS with any entries in bounds_override applied."""
+    if not bounds_override:
+        return BOUNDS
+    merged = dict(BOUNDS)
+    for k, v in bounds_override.items():
+        if k in merged:
+            merged[k] = (float(v[0]), float(v[1]))
+    return merged
+
+
+def gaussian_sampling_drivaer(mean_params: dict, std_scale: float = 1.0,
+                               bounds_override: dict | None = None) -> dict:
+    bounds = _merged_bounds(bounds_override)
     sampled = {}
     for key in CONTINUOUS_KEYS:
-        lo, hi = BOUNDS[key]
+        lo, hi = bounds[key]
         mean = float(mean_params.get(key, (lo + hi) / 2))
         std = (hi - lo) * STD_FRACTIONS.get(key, 0.1) * std_scale
         sampled[key] = float(np.clip(np.random.normal(mean, std), lo, hi))
@@ -70,15 +83,17 @@ def save_design_json(path: str, params: dict) -> str:
 
 
 def gaussian_drivaer(params: dict, out_dir: str = './output', name: str = 'design',
-                     std_scale: float = 1.0) -> str:
+                     std_scale: float = 1.0,
+                     bounds_override: dict | None = None) -> str:
     os.makedirs(out_dir, exist_ok=True)
-    sampled = gaussian_sampling_drivaer(params, std_scale=std_scale)
+    sampled = gaussian_sampling_drivaer(params, std_scale=std_scale,
+                                        bounds_override=bounds_override)
     sampled['name'] = params.get('name', name)
     path = os.path.join(out_dir, f'{name}.json')
     return save_design_json(path, sampled)
 
 
-def run_action_drivaer(action: str, **kwargs) -> str:
+def run_action_drivaer(action: str, bounds_override=None, **kwargs) -> str:
     if action in ('gaussain', 'gaussian'):
-        return gaussian_drivaer(**kwargs)
+        return gaussian_drivaer(bounds_override=bounds_override, **kwargs)
     raise ValueError(f"Unknown DrivAerStar action: {action}")

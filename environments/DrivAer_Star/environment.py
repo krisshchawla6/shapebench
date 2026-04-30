@@ -185,12 +185,23 @@ class DrivAerStarEnvironment(BaseEnvironment):
     """Transolver surrogate for DrivAerStar vehicle aerodynamics."""
 
     def __init__(self, reward: BaseReward, base_vtk=None, render_images=False,
-                 save_fields=False, norm_stats_path=None, **kwargs):
+                 save_fields=False, norm_stats_path=None, bounds_override=None,
+                 **kwargs):
         self.reward = reward
         self.base_vtk = base_vtk
         self.render_images = render_images
         self.save_fields = save_fields
         self.norm_stats_path = norm_stats_path  # None → default model/norm_stats.pt
+
+        # Parse bounds_override: accepts a dict or a JSON string.
+        # None / empty → no override, original BOUNDS used unchanged.
+        if isinstance(bounds_override, str) and bounds_override.strip():
+            import json as _json
+            self.bounds_override = _json.loads(bounds_override)
+        elif isinstance(bounds_override, dict):
+            self.bounds_override = bounds_override
+        else:
+            self.bounds_override = {}
 
     @staticmethod
     def add_args(parser):
@@ -205,6 +216,9 @@ class DrivAerStarEnvironment(BaseEnvironment):
                             help='Render solution images per evaluation (slow; off by default)')
         parser.add_argument('--save_fields', action='store_true', default=False,
                             help='Save fields.npz per evaluation (large; off by default)')
+        parser.add_argument('--bounds_override', type=str, default=None,
+                            help='JSON dict overriding specific parameter bounds, e.g. '
+                                 '\'{"car_size": [0.9, 1.1], "diffusor_angle": [-4.0, 4.0]}\'')
 
     def _run_sim(self, design_path: str, case_dir: str) -> dict:
         """Run surrogate on design; return raw forces and field outputs."""
@@ -284,24 +298,29 @@ class DrivAerStarEnvironment(BaseEnvironment):
         pb = self.get_prompt_blocks()
         agent.set_env_format_context(pb['format_context'])
         return agent.run_llm_action_drivaer(
-            action, context_entries, output_dir, name=name, debug_dir=debug_dir)
+            action, context_entries, output_dir, name=name, debug_dir=debug_dir,
+            bounds_override=self.bounds_override or None)
 
     def sample_gaussian(self, mean_params: dict, output_dir: str, name: str,
                         std_scale: float = 1.0) -> str:
         from .design_actions import gaussian_drivaer
         return gaussian_drivaer(
-            params=mean_params, out_dir=output_dir, name=name, std_scale=std_scale)
+            params=mean_params, out_dir=output_dir, name=name, std_scale=std_scale,
+            bounds_override=self.bounds_override or None)
 
     def get_param_bounds(self):
-        from .design_actions import CONTINUOUS_KEYS, BOUNDS
-        lb = np.array([BOUNDS[k][0] for k in CONTINUOUS_KEYS])
-        ub = np.array([BOUNDS[k][1] for k in CONTINUOUS_KEYS])
+        from .design_actions import CONTINUOUS_KEYS, _merged_bounds
+        bounds = _merged_bounds(self.bounds_override or None)
+        lb = np.array([bounds[k][0] for k in CONTINUOUS_KEYS])
+        ub = np.array([bounds[k][1] for k in CONTINUOUS_KEYS])
         return lb, ub
 
     def write_design(self, x, output_dir: str, name: str) -> str:
-        from .design_actions import CONTINUOUS_KEYS, save_design_json
+        from .design_actions import CONTINUOUS_KEYS, _merged_bounds, save_design_json
         os.makedirs(output_dir, exist_ok=True)
-        params = {k: float(x[i]) for i, k in enumerate(CONTINUOUS_KEYS)}
+        bounds = _merged_bounds(self.bounds_override or None)
+        params = {k: float(np.clip(x[i], bounds[k][0], bounds[k][1]))
+                  for i, k in enumerate(CONTINUOUS_KEYS)}
         params['name'] = name
         path = os.path.join(output_dir, f'{name}.json')
         return save_design_json(path, params)

@@ -114,6 +114,7 @@ REQUIRED_KEYS = [
 def run_llm_action_drivaer(
     action, context, output_dir, name="design",
     temperature=1.0, debug_dir=None, strategy_idx=None, random_strategy=True,
+    bounds_override=None,
 ) -> Optional[str]:
     os.makedirs(output_dir, exist_ok=True)
     ctx_text = _env_format_context(context)
@@ -193,4 +194,5 @@ def run_llm_action_drivaer(
             return None
 
     params.setdefault('name', name)
-    return run_action_drivaer(action, params=params, out_dir=output_dir, name=name)
+    return run_action_drivaer(action, params=params, out_dir=output_dir, name=name,
+                              bounds_override=bounds_override)

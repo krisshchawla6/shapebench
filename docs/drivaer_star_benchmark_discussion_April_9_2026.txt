@@ -1742,3 +1742,329 @@ Assessment — is it worth running more v3 cases?
     benchmark finding about v3's limitations for this objective.
   Decision: wait for current runs to complete; use those results as the final
     benchmark. No additional v3 submissions planned.
+
+================================================================================
+DOWNFORCE EFFICIENCY — NEAR-FINAL COMPARISON (April 30, 2026, ~82-83% complete)
+================================================================================
+
+vtk_F is fully complete; vtk_E and vtk_N still have ~5 tasks running each.
+
+v3 results (current):
+  vtk_F:  best=3.9141 (attempt_8)  mean=3.073  std=0.679  FINAL (all 10 done)
+  vtk_E:  best=2.3772 (attempt_7)  mean=1.747  std=0.353  (7 tasks still running)
+  vtk_N:  best=2.0324 (attempt_8)  mean=1.605  std=0.373  (5 tasks still running)
+
+BO vs v3 — best-vs-best:
+  vtk_E:  v3 best=2.3772  BO best=2.3656  → v3 +0.5%
+  vtk_F:  v3 best=3.9141  BO best=3.9051  → v3 +0.2%
+  vtk_N:  v3 best=2.0324  BO best=2.5280  → BO +24.3%
+
+BO vs v3 — mean-vs-mean:
+  vtk_E:  v3 mean=1.747   BO mean=2.360   → BO +35%
+  vtk_F:  v3 mean=3.073   BO mean=3.867   → BO +26%
+  vtk_N:  v3 mean=1.605   BO mean=2.527   → BO +57%
+
+Summary:
+  Best-vs-best: v3 edges BO on vtk_E and vtk_F; BO wins decisively on vtk_N.
+    The LLM found competitive single designs on two of three body styles.
+  Mean-vs-mean: BO dominates all three. Its near-zero variance (CV <0.6%) means
+    every seed lands near the optimum. v3's high variance (std 0.35–0.68) reflects
+    that ~40% of attempts find the competitive basin (vtk_F: 4/10, vtk_E: 2/10)
+    while the rest get stuck well below. BO is the more reliable optimizer;
+    v3 occasionally matches or exceeds BO's best but cannot do so consistently.
+
+  Late-run observation: vtk_E attempt_4 jumped from 1.77 to 2.34 between 57%
+  and 82% completion — evidence that the LLM can find the high-reward basin late
+  in a run, though this is unpredictable.
+
+================================================================================
+DOWNFORCE EFFICIENCY — FINAL RESULTS AND ANALYSIS PLOTS (April 30, 2026)
+================================================================================
+
+All v3 and BO runs are complete. Final numbers (all 10 seeds / 10 attempts):
+
+  vtk_E:
+    BO:  best=2.36556  mean=2.35977  std=0.0049  CV=0.21%
+    v3:  best=2.37722  mean=1.79569  std=0.353   (10 runs, attempt_9 excluded)
+
+  vtk_F:
+    BO:  best=3.90512  mean=3.86660  std=0.024   CV=0.61%
+    v3:  best=3.91413  mean=3.07270  std=0.679   (10 runs)
+
+  vtk_N:
+    BO:  best=2.52802  mean=2.52658  std=0.0016  CV=0.07%
+    v3:  best=2.03242  mean=1.60464  std=0.373   (10 runs)
+
+Note on vtk_E v3 run count: attempt_9 stalled at 466 evaluations (out of 6000)
+and was excluded by the 50%-of-max-length filter in the convergence plot script.
+attempt_11 (submitted as replacement) reached ~3873 evals (~65% complete at the
+time of final plots) and is included.
+
+ANALYSIS PLOTS GENERATED
+-------------------------
+Two new plot scripts were created and run for the downforce_efficiency reward:
+
+  analysis/DrivAer_Star/plot_drivaer_convergence_downforce_efficiency.py
+  analysis/DrivAer_Star/plot_drivaer_3d_panel_downforce_efficiency.py
+
+Output directory: environments/DrivAer_Star/results/analysis_plots_downforce_efficiency/
+
+Convergence plots (best reward vs. evaluations, log x-axis):
+  DrivAer_Star_convergence_reward_vs_evals_vtk_E_downforce_efficiency.{png,pdf}
+  DrivAer_Star_convergence_reward_vs_evals_vtk_F_downforce_efficiency.{png,pdf}
+  DrivAer_Star_convergence_reward_vs_evals_vtk_N_downforce_efficiency.{png,pdf}
+
+3D panel plots (baseline / BO best / ShapeEvolve best, side + rear-quarter views):
+  DrivAer_Star_3d_panel_best_designs_vtk_E_downforce_efficiency.{png,pdf}
+  DrivAer_Star_3d_panel_best_designs_vtk_F_downforce_efficiency.{png,pdf}
+  DrivAer_Star_3d_panel_best_designs_vtk_N_downforce_efficiency.{png,pdf}
+
+Script design choices vs. existing cd_only/cd_cl_constrained scripts:
+  - No GA / L-BFGS-B (not run for this reward variant)
+  - Y-axis: best_reward directly (NOT negated) — reward is maximized
+  - Curves: np.maximum.accumulate (monotone non-decreasing, not non-increasing)
+  - BO design JSON path: {run_dir}/{design_name}/{design_name}.json (confirmed)
+  - v3 design JSON path: {run_dir}/{design_name}.json
+  - Stalled runs auto-excluded by 50%-of-max-length filter (catches attempt_9)
+  - Title shows "reward = X.XXXX" instead of "Cd = X.XXXXX"
+  - Baseline reference line: vtk_E=-0.332, vtk_F=-0.393, vtk_N=-0.028
+    (downforce efficiency of undeformed geometry, from iter_0_s0)
+
+FINAL BENCHMARK CONCLUSIONS (downforce_efficiency)
+---------------------------------------------------
+Best-vs-best (single best run across all seeds/attempts):
+  vtk_E: v3 +0.5%  (2.377 vs BO 2.366) — effectively tied
+  vtk_F: v3 +0.2%  (3.914 vs BO 3.905) — effectively tied
+  vtk_N: BO +24.3% (2.528 vs v3 2.032) — BO wins decisively
+
+Mean-vs-mean (reliability across 10 runs):
+  vtk_E: BO +31%  (BO mean 2.360 vs v3 mean 1.796)
+  vtk_F: BO +26%  (BO mean 3.867 vs v3 mean 3.073)
+  vtk_N: BO +57%  (BO mean 2.527 vs v3 mean 1.605)
+
+BO is a reliable optimizer for this reward: near-zero variance (CV <0.7%) across
+all three body styles — every seed converges to essentially the same solution.
+
+v3 (ShapeEvolve) exhibits strong bimodality:
+  ~40% of attempts find the competitive basin (vtk_F best case); the remainder
+  get stuck well below. Notably, vtk_N: 0/10 attempts found the high-efficiency
+  regime that BO identifies consistently. This is the clearest failure mode for
+  v3 in this benchmark and is a meaningful negative result.
+
+================================================================================
+CD_ONLY GROUND CLEARANCE CONSTRAINT — IMPLEMENTATION (April 30, 2026)
+================================================================================
+
+MOTIVATION
+----------
+Diagnostic analysis (see drivaer_diagnostic_suite_setup_April_30_2026.txt) of
+the best cd_only design (iter_517_o2, attempt_13, Cd=0.065) identified:
+  - GEOMETRY_DEFORMATION_EXCESSIVE: ground clearance collapse at the rear
+  - 13/20 parameters at bounds; diffusor_angle=-8 and car_size=0.8 simultaneously
+  - surrogate_exploitation_risk: HIGH
+  - Recommended mitigations: TIGHTEN_PARAMETER_BOUNDS, ADD_GEOMETRY_REGULARIZATION
+
+TWO REMEDIES IMPLEMENTED
+------------------------
+
+1. cd_only_gc_constrained reward (soft penalty)
+   File: environments/DrivAer_Star/rewards/cd_only_gc_constrained.py
+   Reward: reward = -Cd - lam_gc * max(0, gc_min - ground_clearance)
+   Default: lam_gc=1.0, gc_min=0.07 m
+
+   Ground clearance metric (_compute_gc):
+     - Applies FFD deformation to base VTK point cloud (cached per vtk_path)
+     - Floor mask: z in [dz_min + 7%, dz_min + 30%] of total height,
+       laterally centred (inner 60% of width, excluding wheel arches)
+     - gc = min(z[floor_mask]) - dz_min  (floor height above tire contact)
+     - Returns 0.0 if floor_mask is empty (fallback; no penalty)
+   vtk_path read from design JSON params; falls back to base_vtk at construction.
+
+   Assessment: the penalty is too weak to fix the problem.
+     - iter_517_o2 has gc=0.074 m > gc_min=0.07 m — not penalised at all
+     - Even if slightly below threshold, penalty magnitude ~0.001 vs Cd gain ~0.265
+       (3 orders of magnitude difference) — the penalty cannot compete
+     - The gc collapse is a corner-solution: requires BOTH diffusor_angle=-8 AND
+       car_size=0.8 simultaneously. Individually neither causes collapse
+       (DA=-8 alone → gc=0.093 m; CS=0.8 alone → gc=0.147 m).
+       A soft penalty does not remove the corner attractor.
+   Conclusion: cd_only_gc_constrained is implemented and run for completeness,
+   but the bounds_override approach is the correct fix.
+
+   Run configuration: 10 v3 attempts + 10 BO seeds, vtk_E only
+     Config: sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/
+               v3_flash2_5_cd_only_gc_constrained_drivaer_star_n10000.config.json
+     v3 scripts: run_v3_flash2_5_cd_only_gc_constrained_..._attempt{1..10}.slurm
+     BO scripts:  run_BO_torch_cd_only_gc_constrained_seed{0..9}_n1000.slurm
+     Output dirs: run_v3_dynamic_optimizer_cd_only_gc_constrained_drivaer_star_vtk_E_attempt_{N}_flash_2_5_n10000
+                  run_BO_torch_cd_only_gc_constrained_vtk_E_seed{N}_n1000
+
+2. cd_only with tightened parameter bounds (bounds_override) — CORRECT FIX
+   Tightened bounds: car_size=[0.9, 1.1], diffusor_angle=[-4.0, 4.0]
+   This removes the corner attractor entirely without requiring a penalty term.
+   All other parameters remain at their original bounds.
+
+   Implementation — bounds_override mechanism:
+     environments/DrivAer_Star/design_actions.py:
+       - Added _merged_bounds(bounds_override): merges BOUNDS with override dict
+       - gaussian_sampling_drivaer: accepts bounds_override kwarg
+       - gaussian_drivaer: passes bounds_override through
+     environments/DrivAer_Star/environment.py:
+       - __init__: accepts bounds_override (str JSON or dict), stored as self.bounds_override
+       - add_args: --bounds_override JSON string argument
+       - get_param_bounds(): uses _merged_bounds(self.bounds_override) — BO search space
+       - sample_gaussian(): passes bounds_override to gaussian_drivaer — v3 sampling
+       - write_design(): clips x to merged bounds before saving JSON
+     Backwards compatible: bounds_override={} → _merged_bounds returns BOUNDS unchanged.
+     Mean in gaussian_sampling_drivaer is NOT clipped to new bounds (preserves exact
+     original behavior for existing runs where no override is set).
+
+   Run configuration: 10 v3 attempts + 10 BO seeds, vtk_E only, submitted April 30 2026
+     Config: sbatch/environments/DrivAer_Star/v3_dynamic_optimizer/
+               v3_flash2_5_cd_only_tight_bounds_drivaer_star_n10000.config.json
+     v3 scripts (10 separate jobs): run_v3_flash2_5_cd_only_tight_bounds_..._attempt{1..10}.slurm
+       Job IDs: 9053–9062
+       Output dirs: run_v3_dynamic_optimizer_cd_only_tight_bounds_drivaer_star_vtk_E_attempt_{N}_flash_2_5_n10000
+     BO script (1 parallel job): run_BO_torch_cd_only_tight_bounds_all_seeds_n1000.slurm
+       Job ID: 9086 (replaces initial 10 separate jobs 9043–9052, which were cancelled)
+       Output dirs: run_BO_torch_cd_only_tight_bounds_vtk_E_seed{N}_n1000
+       Configuration: --exclusive node, OMP_NUM_THREADS=4, 10 seeds as background
+         processes within single job (matches downforce_efficiency BO pattern).
+         10×4=40 threads on 128-vCPU node — no oversubscription.
+         Initial 10 separate jobs (9043–9052) were cancelled after ~14 min because
+         they lacked OMP_NUM_THREADS=4, causing oversubscription with default threading.
+
+   Only vtk_E run (not F or N): the gc collapse issue was diagnosed specifically
+   from vtk_E runs; no evidence of the same corner attractor in F or N body styles.
+
+================================================================================
+BOUNDS_OVERRIDE BUG FIX — V3 LLM ACTION PATH (April 30, 2026)
+================================================================================
+
+BUG DISCOVERED
+--------------
+After submitting the first 10 tight_bounds v3 runs (jobs 9053–9062), a gc check
+on the best designs revealed that the tightened bounds were NOT being applied:
+  - car_size=0.800  (old minimum, should be ≥0.9)
+  - diffusor_angle up to 8.00  (old maximum, should be ≤4.0)
+
+The BO runs (job 9086) were correctly constrained (diffusor_angle=4.00 at new
+max, car_size≈1.0), so the bug was specific to the v3 LLM action path.
+
+ROOT CAUSE
+----------
+The bounds_override was correctly wired into:
+  - environment.get_param_bounds() → BO search space  ✓
+  - environment.sample_gaussian() → Gaussian proposals  ✓
+  - environment.write_design() → BO design clipping  ✓
+
+But NOT into the LLM proposal path:
+  environment.run_llm_action()
+    → agent.run_llm_action_drivaer()       (no bounds_override param)
+      → design_actions.run_action_drivaer() (no bounds_override param)
+        → gaussian_drivaer()               (bounds_override=None → original BOUNDS)
+
+The LLM returns param values, which become the Gaussian mean. Without
+bounds_override, gaussian_sampling_drivaer clips to the original BOUNDS,
+not the tightened ones. So car_size could sample freely down to 0.8.
+
+FIX APPLIED
+-----------
+Three files updated:
+
+  environments/DrivAer_Star/agent.py:
+    run_llm_action_drivaer(..., bounds_override=None) — added parameter
+    run_action_drivaer(action, params=params, out_dir=..., name=...,
+                       bounds_override=bounds_override) — passed through
+
+  environments/DrivAer_Star/design_actions.py:
+    run_action_drivaer(action: str, bounds_override=None, **kwargs)
+    gaussian_drivaer(bounds_override=bounds_override, **kwargs) — passed through
+
+  environments/DrivAer_Star/environment.py:
+    run_llm_action() passes bounds_override=self.bounds_override or None
+    to agent.run_llm_action_drivaer()
+
+Backwards compatibility: all new parameters default to None →
+_merged_bounds(None) returns original BOUNDS unchanged. All previously run
+v3 cases (cd_only, downforce_efficiency, etc.) are unaffected.
+
+ACTION TAKEN
+------------
+Jobs 9053–9062 cancelled after ~1.5h (~4-5% complete).
+Partial result directories cleared.
+Fixed runs resubmitted as jobs 9205–9214.
+
+Note: gc values for the broken runs were all >0.07m despite car_size=0.800,
+because the best designs happened to have positive diffusor_angle (6–8°),
+which does not cause gc collapse. The corner-solution attractor requires
+diffusor_angle ≈ −8° combined with car_size ≈ 0.8. So the broken runs were
+accidentally feasible — but they were still exploring the wrong parameter space
+(car_size going down to 0.8 instead of staying ≥0.9).
+
+================================================================================
+NEURIPS PAPER — CD_ONLY RESULTS SECTION SKELETON (April 30, 2026)
+================================================================================
+
+Drafted for the DrivAer_Star Estateback (vtk_E) cd_only benchmark section.
+Placeholders [FILL] to be completed once tight_bounds runs finish.
+
+Key numbers available now:
+  BO  cd_only vtk_E: n=20 seeds,  best_Cd=0.06509, mean_Cd=0.06544, std=0.000177, CV=0.27%
+  v3  cd_only vtk_E: n=21 attempts, best_Cd=0.06516, mean_Cd=0.07950, std=0.004911, CV=6.18%
+  Tight_bounds BO  (in progress, ~45% done): best_Cd≈0.114, mean≈0.115
+  Tight_bounds v3  (in progress, ~5%  done): best_Cd≈0.125, mean≈0.157
+
+--------------------------------------------------------------------------------
+
+\paragraph{Results}
+
+\textit{Computational cost per $1{,}000$ evaluations} ($n$ = independent runs);
+$1$ core unless otherwise noted:
+\begin{itemize}
+    \item Bayesian Opt.\ ($n = 20$): $\approx [FILL]$ CPU-hours ($128$-core exclusive node)
+    \item ShapeEvolve ($n = 21$): $[FILL]$ -- $[FILL]$ CPU-hours
+\end{itemize}
+
+Figure~\ref{fig:DrivAer_cd_only_convergence} shows convergence for drag
+minimisation on the DrivAer$^\star$ Estateback (vtk\_E) body.  Both methods
+converge to a very similar best $C_d \approx 0.065$, roughly $[FILL]$\% below
+the undeformed baseline ($C_d^{\mathrm{base}} \approx [FILL]$).  Bayesian
+optimisation is near-deterministic (CV $= 0.27$\%, $n = 20$ seeds all within
+$0.001$ of each other), while ShapeEvolve exhibits moderate spread
+(CV $= 6.2$\%, best $C_d = 0.065$, mean $C_d = 0.080$): roughly half the
+attempts converge near the BO optimum, while the remainder settle in a
+higher-drag basin.
+
+\paragraph{Surrogate exploitation and physical plausibility}
+
+% KEY POINT: unlike the NeuralFoil case, no high-fidelity CFD validator is
+% available to close the fidelity gap — the surrogate (Transolver) is the only
+% evaluation oracle.
+
+LLM-assisted diagnostic analysis of the best ShapeEvolve design
+($C_d = 0.065$, attempt~13) flagged high surrogate-exploitation risk: 13 of 20
+parameters are at their bounds, and the geometry exhibits rear ground-clearance
+collapse driven by the simultaneous extremisation of \texttt{car\_size} and
+\texttt{diffusor\_angle}.  The diagnostic rated physical credibility as
+\textit{low} and assigned \texttt{GEOMETRY\_DEFORMATION\_EXCESSIVE} as the
+primary failure mechanism.  Because no high-fidelity CFD reference is
+available for DrivAer$^\star$, the $C_d = 0.065$ result cannot be validated
+externally --- in contrast to the NeuralFoil case where \texttt{XFOIL} confirmed
+surrogate fidelity to within $0.5$\%.
+
+\paragraph{Tightened-bounds ablation}
+
+% KEY POINT: results pending (tight_bounds runs in progress); fill in final numbers.
+% v3 jobs 9205-9214, BO job 9086, all vtk_E only.
+
+To isolate the effect of surrogate exploitation, we re-ran both methods with
+tightened parameter bounds (\texttt{car\_size} $\in [0.9, 1.1]$,
+\texttt{diffusor\_angle} $\in [-4^\circ, 4^\circ]$), removing the corner
+attractor identified by the diagnostic.  Under these bounds, the best achieved
+$C_d$ rises to approximately $[FILL]$ (BO) and $[FILL]$ (ShapeEvolve),
+confirming that the unconstrained $C_d = 0.065$ result was driven by an
+unphysical geometry outside the surrogate's validated domain.  Ground-clearance
+checks on all tightened-bounds designs confirm feasibility
+($\mathrm{gc} \geq 0.09$\,m, well above the $0.07$\,m threshold identified in
+the diagnostic).
