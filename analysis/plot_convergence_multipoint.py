@@ -46,7 +46,7 @@ plot_combined(
     y_min=0.065,
     y_max=200,
     title=(
-        r"Multi-point HPA Drag Minimisation"
+        r"Multi-point Drag Minimization"
         r" ($M_\infty$=0.03, Re=$4.42$–$6.25\times10^5$, 6 $C_L$ targets)"
     ),
     output_path=f"{OUT_DIR}/NeuralFoil_multipoint_objective_vs_iterations.png",

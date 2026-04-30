@@ -218,8 +218,7 @@ def plot_combined(labels, csv_paths, colors, adjoint_dir=None,
     ax.set_ylim(y_lo, y_hi)
     ax.set_xlabel("Model (Airfoil Design) Evaluations")
     ax.set_ylabel(
-        "Penalized objective\n"
-        r"$\overline{C}_D + \lambda\!\sum_k v_k$",
+        r"Penalized objective $\overline{C_D} + \lambda\!\sum_k v_k$",
         fontsize=11,
     )
     ax.set_title(title or "NeuralFoil Optimisation — Method Comparison",
