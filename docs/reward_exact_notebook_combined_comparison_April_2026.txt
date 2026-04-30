@@ -349,3 +349,26 @@ NARRATIVE ARC
     ranking, validates near-zero surrogate bias at HPA conditions, and confirms
     BO's basin is ~22% worse. ShapeEvolve matches the adjoint to 0.44% — the
     LLM optimizer finds the same optimum as exact-gradient IPOPT.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NOTE: ShapeEvolve NeuralFoil calls per iteration — April 30 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Each v3 (ShapeEvolve) iteration makes batch_size NeuralFoil calls in total,
+not just one. Per iteration the evaluations are:
+
+  s0          (1 call):              LLM-proposed design, evaluated via
+                                     environment.simulate()
+  oracle (n_llm calls):              sampler agent mini-optimizer steps around
+                                     the LLM-proposed mean; each step calls
+                                     environment.simulate()
+  Gaussian (n_gauss calls):          Gaussian perturbations around the LLM mean
+                                     (hybrid mode only); each also evaluated
+
+  n_llm + n_gauss = batch_size - 1  →  total per iteration = batch_size calls
+
+The x-axis of the convergence plot (NeuralFoil_multipoint_objective_vs_iterations)
+counts each individual NeuralFoil call as one evaluation. There are no hidden
+re-evaluations: designs already in the database are never re-called through
+NeuralFoil; their rewards are read from stored results only.
