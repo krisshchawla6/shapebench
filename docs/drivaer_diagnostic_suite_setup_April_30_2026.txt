@@ -185,3 +185,101 @@ OPEN QUESTIONS / MOTIVATION FOR DIAGNOSTIC
 4. The diagnostic is expected to suggest constraint additions (e.g. Cl ≥ -0.2
    or |Cl| ≤ some threshold, minimum car_size, plausibility checks on geometry
    angles) that should be added to the cd_only reward for future runs.
+
+
+================================================================================
+FIRST RUN — FIXES APPLIED (April 30, 2026)
+================================================================================
+
+Three issues were found and resolved before a clean diagnostic run was obtained.
+
+1. frameworks/.env not present in extracted directory
+   The script loads GOOGLE_API_KEY via dotenv from repo_root/frameworks/.env
+   (repo_root = /scratch/ShapeEvolve_diagnostic_suite). Since only diagnostic_suite/
+   was extracted via git archive, the frameworks/ directory did not exist.
+   Fix: symlinked the main repo .env into place:
+     mkdir -p /scratch/ShapeEvolve_diagnostic_suite/frameworks
+     ln -s /scratch/ShapeEvolve/frameworks/.env \
+           /scratch/ShapeEvolve_diagnostic_suite/frameworks/.env
+   Note: the .env uses the key name GEMINI_KEY (not GOOGLE_API_KEY); judge.py
+   checks all three variants so this works without further changes.
+
+2. LLM response truncated at ~290 chars (finish_reason: MAX_TOKENS)
+   diagnostic_suite/config.py had llm_max_output_tokens = 2000. Despite
+   the limit, the deprecated google.generativeai SDK with Gemini 2.5 Flash
+   was hitting MAX_TOKENS at ~200 tokens of output. Increased to 8192:
+     File: /scratch/ShapeEvolve_diagnostic_suite/diagnostic_suite/config.py
+     llm_max_output_tokens: int = 8192
+   After this fix the LLM returned a complete JSON response (~1800 tokens).
+
+3. base_vtk_path was null — F003/F006 feasibility checks missing evidence
+   Neither the design JSON (iter_517_o2.json) nor results.json carries a
+   vtk_path field, so model_artifacts["base_vtk_path"] stayed None.
+   Fix: added BASE_VTK_PATH to the USER CONFIG block and a fallback override
+   after the auto-detection logic in run_drivaer_diagnostics.py:
+     BASE_VTK_PATH = "/scratch/ShapeEvolve/environments/DrivAer_Star/data/vtk_E/00000.vtk"
+     # after auto-detection block:
+     if model_artifacts["base_vtk_path"] is None and BASE_VTK_PATH \
+             and os.path.exists(BASE_VTK_PATH):
+         model_artifacts["base_vtk_path"] = BASE_VTK_PATH
+   With this fix F003 (base VTK exists) and F006 (norm stats compatible with
+   body style E) both return status=ok.
+
+Output file structure note:
+   The top-level key "feasibility_checks" is not part of the real output schema.
+   Feasibility results live at evidence_bundle.feasibility (a list of 6 CheckResult
+   objects). A stale empty "feasibility_checks: {}" key appeared in an earlier
+   truncated run; it is absent in a complete run. The correct path to inspect:
+     diagnostics.json → evidence_bundle → feasibility[0..5]
+
+
+================================================================================
+DIAGNOSTIC RESULTS — CLEAN RUN (April 30, 2026)
+================================================================================
+
+Output:
+  /scratch/ShapeEvolve/environments/DrivAer_Star/results/
+    run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/
+      iter_517_o2/save/diagnostics.json
+
+Feasibility checks (evidence_bundle.feasibility) — all 6 passed:
+  F001 required_params_present   ok  — all 20 parameters present
+  F002 param_bounds_respected    ok  — all values within bounds
+  F003 base_vtk_exists           ok  — base VTK found (vtk_E/00000.vtk)
+  F004 norm_stats_exists         ok  — norm_stats.pt found
+  F005 metrics_finite            ok  — drag/lift/Cd all finite
+  F006 body_style_norm_compat    ok  — norm stats compatible with style E
+
+LLM diagnostic summary (llm_report):
+  diagnostic_status:         complete
+  physical_credibility:      low
+  surrogate_exploitation_risk: high
+  confidence:                0.9
+
+  primary_failure_mechanisms:
+    - GEOMETRY_DEFORMATION_EXCESSIVE
+
+  secondary_risks:
+    - PARAM_BOUNDARY_COLLAPSE
+    - AERO_PLAUSIBILITY_WEAK
+    - SURROGATE_DOMAIN_RISK
+
+  overall_assessment:
+    The candidate exhibits significant geometric deformation, primarily ground
+    clearance collapse at the rear, driven by multiple parameters at their
+    bounds. While Cd=0.065 passes all feasibility checks numerically, it is
+    physically implausible for a DrivAer vehicle and indicates the surrogate
+    is exploiting unrealistic geometries outside its validated domain. Visual
+    pressure and WSS fields corroborate the deformation diagnosis.
+
+  recommended_mitigations:
+    - TIGHTEN_PARAMETER_BOUNDS
+    - ADD_GEOMETRY_REGULARIZATION
+    - ENFORCE_REQUIRED_ARTIFACTS
+    - ADD_PHYSICS_CONSISTENCY_PENALTY
+    - REJECT_OOD_CANDIDATES
+
+  recommended_next_tests:
+    - Full CFD simulation to validate Cd and flow field for this extreme geometry
+    - Implement ground clearance measurement and constraint in the optimisation loop
+    - Inspect generated mesh for quality issues, especially at rear diffuser

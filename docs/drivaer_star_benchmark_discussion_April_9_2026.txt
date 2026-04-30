@@ -1699,3 +1699,46 @@ Key observations (updated):
     A replacement attempt_11 was submitted as job 8686 (array task 11, Apr 30) to
     bring the vtk_E pool back to 10 clean attempts (1-8, 10-11). attempt_11 starts
     fresh and is expected to finish ~22h from submission (~Apr 30 22:00 UTC).
+
+================================================================================
+DOWNFORCE EFFICIENCY — PROGRESS UPDATE (April 30, 2026, ~57% complete)
+================================================================================
+
+Checked at ~57% completion (~3300-3600/6000 evals per attempt, except vtk_E
+attempt_11 at ~15% and vtk_E attempt_9 stalled at 466).
+
+v3 results at ~57% (10 attempts per body, excluding stalled vtk_E attempt_9):
+  vtk_E:  best=2.3764 (attempt_7)   mean=1.6381  std=0.3912
+  vtk_F:  best=3.9086 (attempt_8)   mean=2.8496  std=0.8876
+  vtk_N:  best=2.0324 (attempt_8)   mean=1.5783  std=0.3507
+
+BO vs v3 comparison (best-vs-best):
+  vtk_E:  v3 AHEAD  +0.5%   (2.3764 vs BO 2.3656)
+  vtk_F:  v3 AHEAD  +0.1%   (3.9086 vs BO 3.9051) — effectively tied
+  vtk_N:  BO AHEAD  +24.3%  (2.5280 vs v3 2.0324) — v3 has not found the regime
+
+Strong bimodality observed in v3 attempt outcomes:
+  vtk_E: 1/10 attempts found high-reward basin (attempt_7 at 2.38); rest stuck ≤1.77
+  vtk_F: 4/10 attempts competitive (attempts 7,8,9,10 in range 3.78-3.91); 6 stuck
+         in two lower clusters (~1.52 and ~2.52)
+  vtk_N: 0/10 attempts found the high-efficiency regime; all below 2.04
+
+BO spread for comparison (10 seeds, all complete):
+  vtk_E:  best=2.3656  mean=2.3598  std=0.0049  CV=0.21%
+  vtk_F:  best=3.9051  mean=3.8666  std=0.0236  CV=0.61%
+  vtk_N:  best=2.5280  mean=2.5266  std=0.0016  CV=0.07%
+  BO is essentially deterministic; all seeds converge to the same solution.
+  The GP model has resolved the landscape and additional BO seeds are not warranted.
+
+Assessment — is it worth running more v3 cases?
+  vtk_E / vtk_F: NO. The best designs already match or exceed BO. More attempts
+    would raise the mean (useful for aggregate statistics) but would not improve
+    the benchmark conclusion. Current runs finishing at 6000 evals are sufficient.
+  vtk_N: NO, with the same strategy. v3 has failed to find the efficient-downforce
+    basin across all 10 attempts — this is not a sample-size problem. The pattern
+    would not change with more identical runs. A different approach would be needed:
+    e.g. seeding from a BO solution, tighter parameter guidance in the LLM prompt,
+    or a modified reward formulation. The vtk_N gap is itself an informative
+    benchmark finding about v3's limitations for this objective.
+  Decision: wait for current runs to complete; use those results as the final
+    benchmark. No additional v3 submissions planned.
