@@ -1587,3 +1587,115 @@ Log naming convention:
     ls logs/jack/ | grep "BO_drivaer_downforce_efficiency_vtkE"
   The number at the end of each filename is the per-task job ID.
   This matches the convention used by the cd_cl_constrained scripts.
+
+BO job reconfiguration (April 29, 2026):
+  Initial BO submissions (8619–8621) were array jobs with --cpus-per-task=1.
+  PyTorch defaults to 8 threads; with only 1 CPU allocated, threads competed on
+  one core, degrading GP fitting and acqf optimisation. Jobs were cancelled and
+  rewritten as single-node parallel jobs:
+    --nodes=1 --cpus-per-task=40 --exclusive
+    10 seeds launched as background processes with OMP_NUM_THREADS=4 each
+    (10 × 4 = 40 CPUs, one dedicated node per body style)
+  Resubmitted as jobs 8683 (vtk_E), 8684 (vtk_F), 8685 (vtk_N), each on its
+  own node separate from the v3 array jobs (which remained on node 1).
+  Per-seed logs: logs/jack/BO_drivaer_downforce_efficiency_vtk{E,F,N}_seed{0-9}_n1000_{jobid}.{out,err}
+  New run continues into the same output dirs as the cancelled run, overwriting
+  from iter_0000.
+
+================================================================================
+DOWNFORCE EFFICIENCY — INTERIM PERFORMANCE RESULTS (April 29, 2026)
+================================================================================
+
+Checked at ~3h22m elapsed for BO (895/999 iters, nearly complete) and ~5h10m
+elapsed for v3 (~20-23% through 6000 designs per attempt).
+
+BO results (10 seeds, reported as best reward across seeds):
+  vtk_E:  best=2.3654  mean=2.3593  std=0.0053   (seeds converged tightly)
+  vtk_F:  best=3.9051  mean=3.8621  std=0.0254
+  vtk_N:  best=2.5280  mean=2.5265  std=0.0017   (extremely tight convergence)
+
+v3 results (10 attempts, interim — runs still ongoing):
+  vtk_E:  best=2.3330  mean=1.5770  std=0.3576   (9/10 attempts below 1.75; outlier attempt_7=2.33)
+  vtk_F:  best=3.7438  mean=2.5691  std=0.8094   (attempts 7,9,10 competitive; others stuck <2.5)
+  vtk_N:  best=1.9418  mean=1.5221  std=0.3164   (all attempts well below BO)
+
+BO vs v3 comparison (best-vs-best, BO advantage):
+  vtk_E:  BO +1.4%   (2.365 vs 2.333 — close, v3 may close gap with remaining budget)
+  vtk_F:  BO +4.3%   (3.905 vs 3.744 — v3 top attempts competitive, gap may narrow)
+  vtk_N:  BO +30.2%  (2.528 vs 1.942 — v3 has not found the efficient-downforce regime)
+
+Key observations:
+  - vtk_F (notchback) is the best body style for downforce efficiency across both methods.
+    Likely benefits from a natural rear-diffuser effect that the surrogate captures.
+  - BO is extremely consistent (low std across seeds), particularly for vtk_N.
+  - v3 is highly variable: some attempts get close to BO quality, others are stuck.
+    This suggests the LLM optimizer is sensitive to the random initialisation / parent
+    selection for this objective.
+  - vtk_N is the hardest case for v3: the downforce-efficient regime may require a
+    specific parameter combination that the LLM has not yet discovered.
+  - Full v3 runs expected to complete ~tomorrow morning; BO within ~1.5h of this note.
+
+================================================================================
+DOWNFORCE EFFICIENCY — PROGRESS UPDATE (April 30, 2026, ~9.75h elapsed)
+================================================================================
+
+BO FINAL RESULTS (all 30 seeds complete, 1000/1000 iters):
+  vtk_E:  best=2.3656  mean=2.3598  std=0.0053
+  vtk_F:  best=3.9051  mean=3.8666  std=0.0254
+  vtk_N:  best=2.5280  mean=2.5266  std=0.0017
+
+  Final BO values are nearly unchanged from the April 29 checkpoint (+0.1% or less),
+  consistent with the runs being >88% complete at that check.
+
+v3 INTERIM RESULTS at ~43% complete (~2500-2800/6000 evals per attempt):
+  vtk_E:  best=2.3764 (attempt_7)  mean=1.6781  std=0.3193
+  vtk_F:  best=3.7981 (attempt_8)  mean=2.8080  std=0.8441
+  vtk_N:  best=2.0304 (attempt_8)  mean=1.5683  std=0.3457
+
+BO vs v3 comparison at current checkpoint:
+  vtk_E:  v3 AHEAD by +0.5%  (2.3764 vs BO 2.3656) — first case where v3 leads BO
+  vtk_F:  BO ahead by  +2.8%  (3.9051 vs v3 3.7981) — gap narrowing from April 29 +4.3%
+  vtk_N:  BO ahead by +24.5%  (2.5280 vs v3 2.0304) — v3 still has not found the
+          efficient-downforce regime for notchback
+
+vtk_E attempt_9 stall — root cause investigation:
+  attempt_9 has only 466/6000 evals (stopped at iter_46). Multiple jobs ran this slot:
+
+  Jobs 8540 and 8600 (Apr 29 05:10 and 05:50): both failed at import with
+    "run_benchmark.py: error: unrecognized arguments: --output_dir ..."
+    The SLURM script used --output_dir (underscore) before the flag was corrected
+    to --output-dir (hyphen). No data written.
+
+  Job 8660 (Apr 29 16:02): script fixed; Python imported successfully and ran
+    for ~2h, writing 466 rows to results.csv (through iter_46, last modified 17:51).
+    Started iter_47 evals (dirs iter_47_o0..o8 written at 17:53). Process was then
+    killed — likely SLURM preemption or a hung Gemini API call with no timeout guard.
+    Python stdout was buffered and never flushed to log (log file = 559 bytes, just
+    the SLURM banner), which is normal behavior when a process is hard-killed.
+
+  Job 8622_9 (current, started ~Apr 30 00:00): shows RUNNING in squeue (9.5h+) but
+    no new results.csv rows, no new iter directories, and no log file. The process
+    is almost certainly hung on a Gemini API call — a known issue in the v3 framework
+    where a dropped connection produces an indefinitely blocked socket read. This is
+    a zombie SLURM task that will not make further progress.
+
+  Impact: attempt_9 contributes best=1.2824 to the vtk_E pool — the lowest of all
+  attempts and a clear outlier. Excluding it, vtk_E mean rises from 1.678 to ~1.752.
+  The hung 8622_9 task occupies one array slot but does not affect other attempts.
+
+Key observations (updated):
+  - vtk_E v3 (attempt_7) has already surpassed BO at 43% of its budget. This is
+    the strongest early signal yet that v3 can match or beat BO on DrivAer_Star.
+  - vtk_F v3 is narrowing the gap steadily (attempts 7-10 all competitive with BO).
+    Strong performance is concentrated in the last 4 attempts — may reflect a "warm
+    start" benefit from the LLM accumulating design intuition across earlier attempts.
+  - vtk_N remains the hardest case: the downforce-efficient regime (low Cd AND high
+    -Cl/Cd ratio) requires a specific parameter combination that the LLM has not found.
+    BO's global GP model is better suited to sparse landscapes.
+  - v3 variance remains high (std 0.32–0.84 vs BO std 0.002–0.025), confirming that
+    LLM optimizer performance is sensitive to initialisation and search trajectory.
+  - v3 runs expected to complete in ~10-12 more hours (total ~20-22h wall time).
+  - attempt_9 is treated as failed/partial (466 evals, hung job 8622_9 left running).
+    A replacement attempt_11 was submitted as job 8686 (array task 11, Apr 30) to
+    bring the vtk_E pool back to 10 clean attempts (1-8, 10-11). attempt_11 starts
+    fresh and is expected to finish ~22h from submission (~Apr 30 22:00 UTC).
