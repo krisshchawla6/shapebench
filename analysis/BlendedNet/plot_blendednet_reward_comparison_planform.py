@@ -267,8 +267,8 @@ METHOD_ORDER = ["Bayesian Opt.", "PSO (20p × 200i)", "CMA-ES", "ShapeEvolve"]
 def _ann(params, res, header=""):
     hs = params["B1"] + params["B2"] + params["B3"]
     mean_cd, mean_ld = _cross_metrics(res)
-    cd_str = rf"$\overline{{C_D}}$ = {mean_cd:.5f}" if mean_cd is not None else r"$\overline{C_D}$ = n/a"
-    ld_str = rf"$\overline{{L/D}}$ = {mean_ld:.2f}"  if mean_ld is not None else r"$\overline{L/D}$ = n/a"
+    cd_str = rf"$\overline{{C}}_{{fx}}$ = {mean_cd:.5f}" if mean_cd is not None else r"$\overline{C}_{fx}$ = n/a"
+    ld_str = rf"$\overline{{L/D}}_{{\mathrm{{proxy}}}}$ = {mean_ld:.2f}"  if mean_ld is not None else r"$\overline{L/D}_{\mathrm{proxy}}$ = n/a"
     prefix = f"{header}\n" if header else ""
     return (
         f"{prefix}"
@@ -360,12 +360,12 @@ def main():
                 x, y = full_span_polygon(p_cd)
                 ax.fill(x, y, color=c, alpha=0.20)
                 ax.plot(x, y, color=c, lw=2.0,
-                        label=r"min-$\overline{C_D}$" if ci == 0 else "_")
+                        label=r"min-$\overline{C}_{fx}$" if ci == 0 else "_")
 
             # max-LD: dashed outline (ci=0 → random-start, ci=1 → warm-start or BO random)
             if ci == 0:
                 p_ld_show, res_ld_show = p_ld, res_ld
-                ld_label = r"max-$\overline{L/D}$ (random-start)"
+                ld_label = r"max-$\overline{L/D}_{\mathrm{proxy}}$ (random-start)"
             else:
                 p_ld_show  = p_ws  if p_ws  is not None else p_ld
                 res_ld_show = res_ws if res_ws is not None else res_ld
@@ -390,9 +390,9 @@ def main():
                 ax.set_title(COL_LABELS[ci], fontweight="medium", pad=6)
 
             # annotation box — max-LD design
-            ann_header = (r"$\underline{\mbox{max-}\overline{L/D}\mbox{  [warm-start]:}}$"
+            ann_header = (r"$\underline{\mbox{max-}\overline{L/D}_{\mathrm{proxy}}\mbox{  [warm-start]:}}$"
                           if (ci == 1 and p_ws is not None)
-                          else r"$\underline{\mbox{max-}\overline{L/D}\mbox{  [random-start]:}}$")
+                          else r"$\underline{\mbox{max-}\overline{L/D}_{\mathrm{proxy}}\mbox{  [random-start]:}}$")
             if p_ld_show is not None and res_ld_show is not None:
                 ax.text(0.97, 0.97, _ann(p_ld_show, res_ld_show, header=ann_header),
                         transform=ax.transAxes,
@@ -414,7 +414,7 @@ def main():
                                   edgecolor="none", alpha=0.85))
 
     fig.suptitle(
-        r"BlendedNet (BWB) — Best design planform: min-$\overline{C_D}$ vs. max-$\overline{L/D}$ per method",
+        r"BlendedNet (BWB) — Best design planform: min-$\overline{C}_{fx}$ vs. max-$\overline{L/D}_{\mathrm{proxy}}$ per method",
         fontsize=24, fontweight="medium",
     )
     fig.tight_layout(rect=[0.02, 0.02, 0.99, 0.96])

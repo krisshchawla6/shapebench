@@ -321,8 +321,8 @@ def main():
 
     ax_cd.set_xscale("log")
     ax_cd.set_xlabel("Function evaluations (per run)")
-    ax_cd.set_ylabel(r"$\overline{C_D}$")
-    ax_cd.set_title(r"(a)  min-$\overline{C_D}$ reward", fontweight="medium", pad=6)
+    ax_cd.set_ylabel(r"$\overline{C}_{fx}$ (friction proxy)")
+    ax_cd.set_title(r"(a)  min-$\overline{C}_{fx}$ reward", fontweight="medium", pad=6)
     ax_cd.set_xlim(1, cd_xmax)
     ax_cd.grid(True, which="both", alpha=0.25)
     for sp in ["top", "right"]:
@@ -356,8 +356,8 @@ def main():
 
     ax_ld.set_xscale("log")
     ax_ld.set_xlabel("Function evaluations (per run)")
-    ax_ld.set_ylabel(r"$\overline{L/D}$")
-    ax_ld.set_title(r"(b)  max-$\overline{L/D}$ reward", fontweight="medium", pad=6)
+    ax_ld.set_ylabel(r"$\overline{L/D}_{\mathrm{proxy}}$")
+    ax_ld.set_title(r"(b)  max-$\overline{L/D}_{\mathrm{proxy}}$ reward", fontweight="medium", pad=6)
     ax_ld.set_xlim(1, ld_xmax)
     ax_ld.grid(True, which="both", alpha=0.25)
     for sp in ["top", "right"]:

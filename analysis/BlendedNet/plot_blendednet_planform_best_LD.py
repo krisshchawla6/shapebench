@@ -309,7 +309,7 @@ def main():
             continue
         x, y = full_span_polygon(params)
         ax_b.fill(x, y, color=COLORS[name], alpha=0.18)
-        ax_b.plot(x, y, color=COLORS[name], lw=1.8, label=f"{name}  (best L/D={best_ld:.3f})")
+        ax_b.plot(x, y, color=COLORS[name], lw=1.8, label=f"{name}  (best $\\overline{{L/D}}_{{\\mathrm{{proxy}}}}$={best_ld:.3f})")
         rand_params[name] = (params, best_ld)
         print(f"{name:<28}  {best_ld:>10.4f}  {params['B1']+params['B2']+params['B3']:>10.1f}")
 
@@ -326,7 +326,7 @@ def main():
             continue
         x, y = full_span_polygon(params)
         ax_a.fill(x, y, color=COLORS[name], alpha=0.18)
-        ax_a.plot(x, y, color=COLORS[name], lw=1.8, label=f"{name}  (best L/D={best_ld:.3f})")
+        ax_a.plot(x, y, color=COLORS[name], lw=1.8, label=f"{name}  (best $\\overline{{L/D}}_{{\\mathrm{{proxy}}}}$={best_ld:.3f})")
         ws_params[name] = (params, best_ld)
         print(f"{name:<28}  {best_ld:>10.4f}  {params['S1']:>5.1f}°  {params['C2']:>6.0f}  {params['C4']:>6.1f}")
 
@@ -341,12 +341,12 @@ def main():
     # Corner B trapped methods (best: PSO/CMA-ES/ShapeEvolve trapped; BO partially escapes)
     for ax, badge_text, badge_color, subtitle, add_legend in [
         (ax_b,
-         "Corner B  (local trap)\nL/D ≈ 45.7–46.2\nTrapped: PSO, CMA-ES, ShapeEvolve\n(BO partially escapes)",
+         "Corner B  (local trap)\n$\\overline{L/D}_{\\mathrm{proxy}}$ ≈ 45.7–46.2\nTrapped: PSO, CMA-ES, ShapeEvolve\n(BO partially escapes)",
          "#d62728",
          "Random init. — best per method  (→ Corner B)",
          True),
         (ax_a,
-         "Corner A  (global opt.)\nL/D ≈ 48.5–48.8\nPSO, CMA-ES, ShapeEvolve",
+         "Corner A  (global opt.)\n$\\overline{L/D}_{\\mathrm{proxy}}$ ≈ 48.5–48.8\nPSO, CMA-ES, ShapeEvolve",
          "#2ca02c",
          "Warm-start (Corner A) — best per method  (→ Corner A)",
          True),
@@ -395,7 +395,7 @@ def main():
         else:
             ax_3d.text(0.5, 0.5, "no data", ha="center", va="center",
                        transform=ax_3d.transAxes, fontsize=9)
-        ld_str = f"best L/D = {ld:.3f}" if params is not None else ""
+        ld_str = f"best $\\overline{{L/D}}_{{\\mathrm{{proxy}}}}$ = {ld:.3f}" if params is not None else ""
         ax_3d.text(0.5, 0.97, f"{panel_label}\n{ld_str}",
                    transform=ax_3d.transAxes, fontsize=22, fontweight="medium",
                    ha="center", va="top",
@@ -417,7 +417,7 @@ def main():
     else:
         ax_cA.text(0.5, 0.5, "no data", ha="center", va="center",
                    transform=ax_cA.transAxes, fontsize=9)
-    ld_str = f"best L/D = {cornerA_ld:.3f}" if cornerA_params is not None else ""
+    ld_str = f"best $\\overline{{L/D}}_{{\\mathrm{{proxy}}}}$ = {cornerA_ld:.3f}" if cornerA_params is not None else ""
     ax_cA.text(0.5, 0.97, f"Corner A  (warm-start, ShapeEvolve)\n{ld_str}",
                transform=ax_cA.transAxes, fontsize=22, fontweight="bold",
                ha="center", va="top",

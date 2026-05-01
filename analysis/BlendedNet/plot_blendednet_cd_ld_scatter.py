@@ -265,8 +265,9 @@ def main():
     # ── Anomaly text annotation — upper left of centre, clear of Method legend ─
     ax.text(
         0.36, 0.97,
-        r"$\longrightarrow$ min-$\overline{C_D}$ reward finds Corner A" + "\n"
-        r"(lower $\overline{C_D}$ and higher $\overline{L/D}$ than max-$\overline{L/D}$ reward)",
+        r"$\longrightarrow$ min-$\overline{C}_{fx}$ reward finds Corner A" + "\n"
+        r"(lower $\overline{C}_{fx}$ and higher $\overline{L/D}_{\mathrm{proxy}}$" + "\n"
+        r"than max-$\overline{L/D}_{\mathrm{proxy}}$ reward)",
         transform=ax.transAxes,
         va="top", ha="center", fontsize=8.5,
         bbox=dict(boxstyle="round,pad=0.4", fc="#f0f4ff", ec="#7090c0", lw=0.8, alpha=0.92),
@@ -288,10 +289,10 @@ def main():
         )
 
     # ── Axes and labels ───────────────────────────────────────────────────────
-    ax.set_xlabel(r"$\overline{C_D}$")
-    ax.set_ylabel(r"$\overline{L/D}$")
+    ax.set_xlabel(r"$\overline{C}_{fx}$ (friction proxy)")
+    ax.set_ylabel(r"$\overline{L/D}_{\mathrm{proxy}}$")
     ax.set_title(
-        r"BlendedNet (BWB) — Best design: $\overline{C_D}$ vs $\overline{L/D}$",
+        r"BlendedNet (BWB) — Best design: $\overline{C}_{fx}$ vs $\overline{L/D}_{\mathrm{proxy}}$",
         fontweight="medium", pad=8,
     )
     ax.grid(True, alpha=0.25)
@@ -312,10 +313,10 @@ def main():
     style_handles = [
         Line2D([0], [0], marker="o", color="w",
                markerfacecolor="grey", markeredgecolor="grey",
-               markersize=9, label=r"min-$\overline{C_D}$ reward (filled)"),
+               markersize=9, label=r"min-$\overline{C}_{fx}$ reward (filled)"),
         Line2D([0], [0], marker="o", color="w",
                markerfacecolor="none", markeredgecolor="grey",
-               markersize=9, label=r"max-$\overline{L/D}$ reward (open)"),
+               markersize=9, label=r"max-$\overline{L/D}_{\mathrm{proxy}}$ reward (open)"),
         Line2D([0], [0], marker="D", color="w",
                markerfacecolor="grey", markeredgecolor="grey",
                markersize=9, label=r"Bayesian Opt. $\diamondsuit$"),

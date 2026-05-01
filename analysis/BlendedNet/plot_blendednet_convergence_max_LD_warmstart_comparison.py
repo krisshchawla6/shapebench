@@ -242,7 +242,7 @@ def main():
     ax_l.set_xscale("log")
     ax_l.set_xlim(1, x_max_rand)
     ax_l.set_xlabel("Function evaluations (per run)")
-    ax_l.set_ylabel(r"$\overline{L/D}$")
+    ax_l.set_ylabel(r"$\overline{L/D}_{\mathrm{proxy}}$")
     ax_l.set_title("Random start", fontweight="medium")
     ax_l.grid(True, which="both", alpha=0.25)
     for sp in ["top", "right"]:
@@ -279,7 +279,7 @@ def main():
                bbox_to_anchor=(0.5, 0.98))
 
     fig.suptitle(
-        r"BlendedNet (BWB) — Convergence: best $\overline{L/D}$ vs function evaluations",
+        r"BlendedNet (BWB) — Convergence: best $\overline{L/D}_{\mathrm{proxy}}$ vs function evaluations",
         fontsize=10, fontweight="medium", y=1.04,
     )
 

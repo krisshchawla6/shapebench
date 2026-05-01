@@ -2009,11 +2009,14 @@ NEURIPS PAPER — CD_ONLY RESULTS SECTION SKELETON (April 30, 2026)
 Drafted for the DrivAer_Star Estateback (vtk_E) cd_only benchmark section.
 Placeholders [FILL] to be completed once tight_bounds runs finish.
 
-Key numbers available now:
-  BO  cd_only vtk_E: n=20 seeds,  best_Cd=0.06509, mean_Cd=0.06544, std=0.000177, CV=0.27%
-  v3  cd_only vtk_E: n=21 attempts, best_Cd=0.06516, mean_Cd=0.07950, std=0.004911, CV=6.18%
-  Tight_bounds BO  (in progress, ~45% done): best_Cd≈0.114, mean≈0.115
-  Tight_bounds v3  (in progress, ~5%  done): best_Cd≈0.125, mean≈0.157
+Key numbers available now (updated May 1, 2026 — all 4 methods):
+  BO  cd_only vtk_E:       n=20,  best_Cd=0.06509, mean_Cd=0.06544, std=0.000177, CV=0.27%,  max_evals/run=1000
+  ShapeEvolve cd_only vtk_E: n=19, best_Cd=0.06516, mean_Cd=0.07907, std=0.004911, CV=6.2%,  max_evals/run=10172
+  L-BFGS-B cd_only vtk_E:  n=20,  best_Cd=0.06618, mean_Cd=0.08031, std=0.008467, CV=10.5%, max_evals/run=28044 (3 restarts)
+  PSO cd_only vtk_E:        n=20,  best_Cd=0.06526, mean_Cd=0.07240, std=0.005459, CV=7.5%,  max_evals/run=36960 (120p×250i)
+  Tight_bounds BO  (COMPLETE, n=10): best_Cd=0.1140, mean_Cd=0.1151
+  Tight_bounds v3  (COMPLETE, n=10): best_Cd=0.1205, mean_Cd=0.1322
+  Source: plot_drivaer_convergence.py printout (n per run from results.csv curves)
 
 --------------------------------------------------------------------------------
 
@@ -2022,18 +2025,25 @@ Key numbers available now:
 \textit{Computational cost per $1{,}000$ evaluations} ($n$ = independent runs);
 $1$ core unless otherwise noted:
 \begin{itemize}
-    \item Bayesian Opt.\ ($n = 20$): $\approx [FILL]$ CPU-hours ($128$-core exclusive node)
-    \item ShapeEvolve ($n = 21$): $[FILL]$ -- $[FILL]$ CPU-hours
+    \item Bayesian Opt.\ ($n = 20$): $\approx 7$--$21$ CPU-hours per run ($1{,}000$ evals/run, single core; range due to node speed variation across seeds)
+    \item ShapeEvolve ($n = 19$): $43$--$50$ CPU-hours per run ($\sim 10{,}000$ evals/run, single core)
+    \item L-BFGS-B ($n = 20$, 3 restarts): $12$--$38$ CPU-hours per run (mean $\sim 24$\,h, $\sim 28{,}000$ evals/run, single core)
+    \item PSO $120p \times 250i$ ($n = 20$): $\approx 78$ CPU-hours per run ($\sim 37{,}000$ evals/run, single core)
 \end{itemize}
 
 Figure~\ref{fig:DrivAer_cd_only_convergence} shows convergence for drag
-minimisation on the DrivAer$^\star$ Estateback (vtk\_E) body.  Both methods
-converge to a very similar best $C_d \approx 0.065$, roughly $[FILL]$\% below
-the undeformed baseline ($C_d^{\mathrm{base}} \approx [FILL]$).  Bayesian
-optimisation is near-deterministic (CV $= 0.27$\%, $n = 20$ seeds all within
-$0.001$ of each other), while ShapeEvolve exhibits moderate spread
-(CV $= 6.2$\%, best $C_d = 0.065$, mean $C_d = 0.080$): roughly half the
-attempts converge near the BO optimum, while the remainder settle in a
+minimisation on the DrivAer$^\star$ Estateback (vtk\_E) body.  All four methods
+converge to a very similar best $C_d \approx 0.065$, roughly $71$\% below
+the undeformed baseline ($C_d^{\mathrm{base}} \approx 0.223$).
+Bayesian optimisation is near-deterministic (CV $= 0.27$\%, $n = 20$ seeds,
+all within $0.001$ of each other) and reaches its best at only $1{,}000$
+evaluations per run.  PSO converges reliably to a competitive mean
+($\bar{C}_d = 0.072$, best $C_d = 0.065$) but requires $\sim 37\times$ more
+evaluations.  L-BFGS-B (3 random restarts) matches PSO's best ($C_d = 0.066$)
+at comparable total cost but with a higher mean ($\bar{C}_d = 0.080$), reflecting
+sensitivity to initialisation.  ShapeEvolve exhibits the widest spread
+(CV $= 6.2$\%, best $C_d = 0.065$, mean $C_d = 0.079$): roughly half the
+attempts converge near the BO/PSO optimum, while the remainder settle in a
 higher-drag basin.
 
 \paragraph{Surrogate exploitation and physical plausibility}
@@ -2055,14 +2065,14 @@ surrogate fidelity to within $0.5$\%.
 
 \paragraph{Tightened-bounds ablation}
 
-% KEY POINT: results pending (tight_bounds runs in progress); fill in final numbers.
-% v3 jobs 9205-9214, BO job 9086, all vtk_E only.
+% Tight_bounds runs complete: BO n=10 seeds, v3 n=10 attempts (vtk_E only).
 
-To isolate the effect of surrogate exploitation, we re-ran both methods with
-tightened parameter bounds (\texttt{car\_size} $\in [0.9, 1.1]$,
+To isolate the effect of surrogate exploitation, we re-ran BO and ShapeEvolve
+(the two primary methods) with tightened parameter bounds
+(\texttt{car\_size} $\in [0.9, 1.1]$,
 \texttt{diffusor\_angle} $\in [-4^\circ, 4^\circ]$), removing the corner
 attractor identified by the diagnostic.  Under these bounds, the best achieved
-$C_d$ rises to approximately $[FILL]$ (BO) and $[FILL]$ (ShapeEvolve),
+$C_d$ rises to approximately $0.114$ (BO, $n=10$) and $0.120$ (ShapeEvolve, $n=10$),
 confirming that the unconstrained $C_d = 0.065$ result was driven by an
 unphysical geometry outside the surrogate's validated domain.  Ground-clearance
 checks on all tightened-bounds designs confirm feasibility
