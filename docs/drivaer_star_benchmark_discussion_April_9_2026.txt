@@ -2065,16 +2065,307 @@ surrogate fidelity to within $0.5$\%.
 
 \paragraph{Tightened-bounds ablation}
 
-% Tight_bounds runs complete: BO n=10 seeds, v3 n=10 attempts (vtk_E only).
+% Tight_bounds BO: COMPLETE (n=10).
+% Tight_bounds v3: IN PROGRESS — resumed May 1, 2026 (see progress note below).
+% Numbers below will be updated once v3 runs finish (~23–26 h from resume).
 
 To isolate the effect of surrogate exploitation, we re-ran BO and ShapeEvolve
 (the two primary methods) with tightened parameter bounds
 (\texttt{car\_size} $\in [0.9, 1.1]$,
 \texttt{diffusor\_angle} $\in [-4^\circ, 4^\circ]$), removing the corner
 attractor identified by the diagnostic.  Under these bounds, the best achieved
-$C_d$ rises to approximately $0.114$ (BO, $n=10$) and $0.120$ (ShapeEvolve, $n=10$),
+$C_d$ rises to approximately $0.114$ (BO, $n=10$, \textbf{final}) and
+$[0.114\text{--}0.115]$ (ShapeEvolve, $n=10$, \textbf{in progress} --- current
+best $0.115$ at $25\%$ budget; [FILL] once runs complete),
 confirming that the unconstrained $C_d = 0.065$ result was driven by an
 unphysical geometry outside the surrogate's validated domain.  Ground-clearance
 checks on all tightened-bounds designs confirm feasibility
 ($\mathrm{gc} \geq 0.09$\,m, well above the $0.07$\,m threshold identified in
 the diagnostic).
+
+================================================================================
+TIGHT_BOUNDS RUN PROGRESS UPDATE (May 1, 2026)
+================================================================================
+
+Status at time of last update
+------------------------------
+BO tight_bounds (vtk_E, n=10):  COMPLETE
+  best_Cd=0.1140  mean_Cd=0.1151  std=0.0013  CV=1.1%
+  Seeds 0-9, all 1000 evals/run.
+
+v3 tight_bounds (vtk_E, n=10):  IN PROGRESS (~25% complete at update)
+  Jobs 9205–9214 were cancelled after 8h 44min (all on compute-dy-hpc-128vcpu-1,
+  sharing 128 CPUs with no OMP_NUM_THREADS set — severe thread contention).
+  Results at cancellation:
+    attempt  1: 273 iters / 1000  best_Cd=0.1190
+    attempt  2: 272 iters / 1000  best_Cd=0.1463
+    attempt  3: 264 iters / 1000  best_Cd=0.1462
+    attempt  4: 262 iters / 1000  best_Cd=0.1296
+    attempt  5: 243 iters / 1000  best_Cd=0.1192
+    attempt  6: 256 iters / 1000  best_Cd=0.1146  ← current best
+    attempt  7: 262 iters / 1000  best_Cd=0.1293
+    attempt  8: 249 iters / 1000  best_Cd=0.1473
+    attempt  9: 264 iters / 1000  best_Cd=0.1172
+    attempt 10: 264 iters / 1000  best_Cd=0.1304
+  Intermediate stats: best=0.1146  median=0.1294  mean=0.1299
+
+  NOTE: a previous set of tight_bounds v3 runs (jobs 9053–9062) had a
+  bounds_override bug (car_size still reaching 0.800, diffusor_angle reaching
+  8.0) and reported best_Cd=0.1205.  Those results are superseded by the
+  current bug-fixed runs.  The current best of 0.1146 at 25% budget already
+  improves on the buggy 0.1205.
+
+Resume action
+-------------
+  Cancelled 9205–9214; resubmitted as SLURM array job 9450 (array tasks 1–10).
+  Script: slurm_jobs/drivaer_tight_bounds_resume/resume_array.sh
+  Each attempt on a dedicated node (128 vCPUs, OMP_NUM_THREADS=128).
+  Excluded nodes 3–7 (occupied by BlendedNet total_drag jobs 9445–9449).
+  Node assignments: attempt 1 → node-1, attempts 2–10 → nodes 8–16.
+  --resume flag used: each run picks up from checkpoint.json (last_completed_iter).
+  Estimated remaining: ~23–26 h.
+
+Bounds-override bug verification
+---------------------------------
+  Post-cancellation spot check on attempt 1, recent designs (iter_272_s0.json etc.):
+    car_size=0.900  (new lower bound ✓, old lower bound was 0.800)
+    diffusor_angle=4.000  (new upper bound ✓, old upper bound was ~8.0)
+  Fix confirmed working. Optimizer still gravitates toward the lower corner of
+  the tightened bounds (car_size=0.9, diffusor_angle=4.0) but these are valid
+  geometries — this is the attractor within the constrained space, not a gc collapse.
+
+================================================================================
+PAPER WRITING PLAN — UPDATED WITH TIGHT_BOUNDS RESULTS (May 1, 2026)
+================================================================================
+
+What is confirmed / final
+--------------------------
+1. Unconstrained cd_only (all 4 methods, vtk_E):
+   All four methods converge to Cd ≈ 0.065, ~71% below baseline (0.223).
+   These numbers are final and in the NeurIPS skeleton above.
+
+2. Tight_bounds BO (n=10, COMPLETE):
+   best_Cd=0.1140  mean=0.1151  std=0.0013  CV=1.1%
+   Very low variance — BO is near-deterministic under tight bounds too.
+
+3. Bounds-override bug in first v3 tight_bounds set:
+   The old v3 tight_bounds result (0.1205) came from runs where the LLM
+   proposal path did NOT respect bounds_override → designs still went to
+   car_size=0.800.  Those numbers should not appear in the paper.
+
+What is pending (fill once v3 runs complete, ~May 2–3, 2026)
+-------------------------------------------------------------
+4. Tight_bounds v3 (n=10, ~25% done):
+   Current best: 0.1146 at 25% budget.
+   Expected range at completion: 0.110–0.115 (3 of 10 runs already ≤0.120
+   and trending down; the 3 high-drag runs at 0.146–0.147 may be stuck in
+   local minima and may not improve much).
+   [FILL] final best_Cd, mean_Cd once job 9450 completes.
+
+What changes in the paper once v3 tight_bounds finishes
+--------------------------------------------------------
+\paragraph{Tightened-bounds ablation} will update:
+  - "0.120 (ShapeEvolve, n=10)" → final number from job 9450
+  - If final v3 best ≤ 0.115: the gap between BO and SE essentially closes
+    under tight bounds, strengthening the argument that the Cd=0.065 gap was
+    purely surrogate exploitation.
+  - If final v3 best ≈ 0.114–0.115: narrative becomes
+      "both methods converge to Cd ≈ 0.114–0.115 under tight bounds,
+       confirming that the unconstrained gap (BO 0.065 vs SE 0.065) was
+       coincidental surrogate agreement rather than a method advantage."
+  - If final v3 best > 0.120: SE still lags BO under tight bounds, meaning
+      SE has a genuine search-quality disadvantage at low budgets — a more
+      nuanced finding worth noting.
+
+Narrative arc for the DrivAer section (current best understanding)
+-------------------------------------------------------------------
+1. Setup: DrivAer* vtk_E Estateback, Transolver surrogate, cd_only reward.
+   No high-fidelity CFD validator available (key caveat vs NeuralFoil).
+
+2. Unconstrained results: all methods reach Cd ≈ 0.065, ~71% below baseline.
+   BO most efficient (1000 evals, CV=0.27%). SE widest spread (CV=6.2%).
+   PSO and L-BFGS-B competitive but ~37× more evaluations.
+
+3. Diagnostic: best SE design flagged as low physical credibility.
+   13/20 params at bounds. gc collapse at car_size=0.8 + diffusor_angle=8.
+   No external CFD to validate → must rely on bounds tightening.
+
+4. Tight-bounds ablation: removes corner attractor.
+   BO: Cd=0.1140 (final). SE: [FILL] (expected ~0.114–0.115).
+   ~48% below baseline vs ~71% unconstrained — confirms 23% was surrogate
+   exploitation, not genuine aerodynamic improvement.
+
+5. Physical discussion: the constrained optimum (Cd≈0.114) likely represents
+   a physically plausible drag reduction via shape optimisation within the
+   surrogate's validated envelope. The 48% below baseline is still a strong
+   result for a surrogate-only study.
+
+Key [FILL] remaining in paper skeleton
+---------------------------------------
+  - v3 tight_bounds final best_Cd and mean_Cd
+  - Confirmation of whether BO-SE gap closes under tight bounds
+  - Any gc check results on the final tight_bounds v3 designs
+
+================================================================================
+TIGHT_BOUNDS DIAGNOSTIC RESULTS — EXPLOITATION PERSISTS (May 1, 2026)
+================================================================================
+
+Motivation
+----------
+The tight_bounds ablation (car_size→[0.9,1.1], diffusor_angle→[-4,4]) blocked
+the specific gc-collapse corner from the unconstrained best design.  However,
+after running both BO (complete, best Cd=0.1140) and v3 (in-progress, best
+Cd=0.1139), the LLM diagnostic was run on the best design from each method to
+assess whether the Cd≈0.114 result is physically credible.
+
+Design parameter inspection (before running diagnostic)
+--------------------------------------------------------
+Best BO tight_bounds design (seed1, iter_0656, Cd=0.11399):
+  car_size=1.003 (interior), car_width=-0.027 (interior),
+  car_green_house_angle=0.500 (interior)
+  ALL OTHER 17 PARAMETERS AT THEIR BOUNDS.
+  lift = +688 N (strong upward lift — opposite sign to unconstrained att13 -237 N)
+
+Best SE tight_bounds design (att6, iter_811_o1, Cd=0.11390):
+  car_size=1.001 (interior), car_width=-0.027 (interior),
+  wind_screen_z=-0.039 (near but not at bound),
+  car_green_house_angle=-0.790 (interior), tires_width=0.002 (interior)
+  ALL OTHER 15 PARAMETERS AT THEIR BOUNDS.
+  lift = +648 N (same positive-lift pattern as BO)
+
+Note: unconstrained att13 had 13/20 at bounds; BO tight_bounds has 17/20; SE
+tight_bounds has 15/20.  Tightening bounds did not reduce boundary saturation —
+it shifted the optimizer to a different boundary corner.
+
+Diagnostic results
+------------------
+Script copies:
+  diagnostic_suite/run/run_drivaer_diagnostics_bo_tight_bounds.py  (BO seed1)
+  diagnostic_suite/run/run_drivaer_diagnostics_se_tight_bounds.py  (SE att6)
+Output:
+  run_BO_torch_cd_only_tight_bounds_vtk_E_seed1_n1000/iter_0656/save/diagnostics.json
+  run_v3_dynamic_optimizer_cd_only_tight_bounds_drivaer_star_vtk_E_attempt_6_.../
+    iter_811_o1/save/diagnostics.json
+
+Three-way comparison:
+  ┌────────────────────────────┬──────────────────┬──────────────────┬──────────────────┐
+  │                            │ Unconstrained SE │ BO tight_bounds  │ SE tight_bounds  │
+  │                            │ att13            │ seed1            │ att6             │
+  ├────────────────────────────┼──────────────────┼──────────────────┼──────────────────┤
+  │ Cd                         │ 0.06516          │ 0.11399          │ 0.11390          │
+  │ params at bounds           │ 13/20            │ 17/20            │ 15/20            │
+  │ physical_credibility       │ low              │ low              │ medium           │
+  │ surrogate_exploitation_risk│ high             │ high             │ high             │
+  │ confidence                 │ 0.9              │ 0.8              │ 0.9              │
+  │ primary_failure_mechanisms │ GEOM_DEFORM_EXCESS│ PARAM_BOUNDARY_  │ PARAM_BOUNDARY_  │
+  │                            │                  │ COLLAPSE +       │ COLLAPSE         │
+  │                            │                  │ GEOM_DEFORM_EXCESS│                 │
+  └────────────────────────────┴──────────────────┴──────────────────┴──────────────────┘
+
+Key observations:
+  1. surrogate_exploitation_risk = HIGH in all three cases.
+  2. SE tight_bounds upgraded to physical_credibility=medium (vs low for the
+     others), with the LLM noting "flow fields appear plausible" — a marginal
+     improvement but exploitation risk still flagged as high.
+  3. Tightening car_size and diffusor_angle shifted the primary failure from
+     GEOMETRY_DEFORMATION_EXCESSIVE to PARAM_BOUNDARY_COLLAPSE, but did not
+     resolve the underlying issue.
+  4. Both tight_bounds optima have strong positive lift (~+650-688 N) — the
+     optimizer found an aerodynamically extreme configuration that maximises
+     downforce removal to reduce induced drag, rather than a conventionally
+     streamlined shape.
+
+Conclusion: tight_bounds (2-param) ablation was insufficient
+-------------------------------------------------------------
+The exploitation is not specific to one corner — it is a property of the
+Transolver surrogate landscape across the full parameter space.  Optimizers
+systematically find boundary-saturated solutions regardless of which specific
+boundaries are tightened, because the surrogate rewards extreme parameter
+combinations that push designs outside its training distribution.
+
+================================================================================
+SUPER-TIGHT BOUNDS ABLATION — SETUP AND SUBMISSION (May 1, 2026)
+================================================================================
+
+Rationale
+---------
+Tighten ALL 17 high-saturation parameters (those at-bound in either tight_bounds
+best design) by 50% of their current tight_bounds range.  Three parameters left
+at their current bounds because they were interior in both designs:
+  - car_width: [-0.1, 0.1] (both designs: ~-0.027)
+  - car_green_house_angle: [-8, 8] (BO: 0.50, SE: -0.79)
+  - car_size: [0.9, 1.1] unchanged (already tightened; both designs: ~1.001)
+
+New super-tight bounds (vs original bounds):
+  car_size:              [0.9, 1.1]     (unchanged from tight_bounds)
+  car_len:               [-0.05, 0.05]  (was [-0.1, 0.1],   50% reduction)
+  ramp_angle:            [-4.0, 4.0]    (was [-8.0, 8.0],   50% reduction)
+  front_bumper_length:   [-0.05, 0.05]  (was [-0.1, 0.1],   50% reduction)
+  wind_screen_x:         [-0.025,0.025] (was [-0.05,0.05],  50% reduction)
+  wind_screen_z:         [-0.025,0.025] (was [-0.05,0.05],  50% reduction)
+  side_mirrors_x:        [-0.025,0.025] (was [-0.05,0.05],  50% reduction)
+  side_mirrors_z:        [-0.025,0.025] (was [-0.05,0.05],  50% reduction)
+  rear_window_x:         [-0.025,0.025] (was [-0.05,0.05],  50% reduction)
+  rear_window_z:         [-0.025,0.025] (was [-0.05,0.05],  50% reduction)
+  trunklid_angle:        [-4.0, 4.0]    (was [-8.0, 8.0],   50% reduction)
+  trunklid_x:            [-0.025,0.025] (was [-0.05,0.05],  50% reduction)
+  trunklid_z:            [-0.025,0.025] (was [-0.05,0.05],  50% reduction)
+  diffusor_angle:        [-2.0, 2.0]    (was [-4.0,4.0],    75% vs original)
+  car_front_hood_angle:  [-4.0, 4.0]    (was [-8.0, 8.0],   50% reduction)
+  car_air_intake_angle:  [-4.0, 4.0]    (was [-8.0, 8.0],   50% reduction)
+  tires_diameter:        [-0.0065,0.0065](was [-0.013,0.013],50% reduction)
+  tires_width:           [-0.0075,0.0075](was [-0.015,0.015],50% reduction)
+
+SLURM scripts
+-------------
+  slurm_jobs/drivaer_super_tight_bounds/_common.sh  — shared helpers + BOUNDS_OVERRIDE
+  slurm_jobs/drivaer_super_tight_bounds/bo.sh       — BO, 10 seeds, n=1000
+  slurm_jobs/drivaer_super_tight_bounds/v3.sh       — v3 array, 10 attempts, n=1000 iters
+
+Jobs submitted May 1, 2026:
+  10442  drvr_stb_bo  — BO 10 seeds, compute-dy-hpc-128vcpu-6
+                        MAX_JOBS=16, OMP=8, n_calls=1000, n_initial=30
+                        Expected completion: ~4–5h
+  10443  drvr_stb_v3  — v3 array 1-10, one attempt per dedicated 128-vCPU node
+                        OMP=128, iterations=1000, batch_size=10, gemini-2.5-flash
+                        Expected completion: ~22–26h
+
+Output directories:
+  run_BO_torch_cd_only_super_tight_bounds_vtk_E_seed{0-9}_n1000
+  run_v3_dynamic_optimizer_cd_only_super_tight_bounds_drivaer_star_vtk_E_attempt_{1-10}_flash_2_5_n10000
+
+What to do when results arrive
+-------------------------------
+1. Check best designs for boundary saturation (count params at bounds).
+2. Run LLM diagnostic on best BO and best SE designs.
+3. Decision gate:
+   - If diagnostic still flags high exploitation → surrogate exploitation is
+     structural; document as paper finding; do not run further tightening.
+   - If diagnostic flags medium/low exploitation → compute Cd reduction vs
+     baseline, compare BO vs SE, update paper skeleton.
+4. Run convergence and 3D panel plots:
+     python analysis/DrivAer_Star/plot_drivaer_convergence_super_tight_bounds.py
+     python analysis/DrivAer_Star/plot_drivaer_3d_panel_super_tight_bounds.py
+   (scripts to be created once results are available)
+
+Updated narrative arc (reflecting tight_bounds diagnostic findings)
+-------------------------------------------------------------------
+1. Setup: DrivAer* vtk_E, Transolver surrogate, cd_only.  No CFD validator.
+
+2. Unconstrained: all 4 methods → Cd≈0.065, 71% below baseline.  Diagnostic
+   flags low credibility, high exploitation risk, 13/20 params at bounds.
+
+3. Tight-bounds ablation (car_size, diffusor_angle): Cd rises to ≈0.114.
+   But diagnostic still flags high exploitation risk on both best designs
+   (17/20 and 15/20 params at bounds respectively).  Exploitation is not
+   corner-specific — it persists under 2-param tightening.
+
+4. Super-tight-bounds ablation (all 17 high-saturation params, 50% tighter):
+   [FILL] Cd values, boundary saturation counts, diagnostic results.
+
+5. Paper conclusion (tentative): if exploitation persists after super-tight
+   tightening, the DrivAer section becomes a case study in structural surrogate
+   exploitation — the Transolver landscape rewards boundary-saturated designs
+   regardless of bound width.  The LLM diagnostic tool correctly identified this
+   at every level of tightening, which is itself a positive finding for the
+   diagnostic methodology.

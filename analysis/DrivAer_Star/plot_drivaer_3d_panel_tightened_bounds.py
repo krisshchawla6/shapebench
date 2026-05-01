@@ -1,46 +1,39 @@
-"""3D surface rendering panel: baseline vs best design per method (downforce_efficiency).
+"""3D surface rendering panel — tightened-bounds ablation best designs.
 
-Reward: reward = -Cl / max(Cd, 1e-4)   (maximized)
+Renders Baseline, BO best, and ShapeEvolve best under tightened parameter bounds
+(car_size in [0.9,1.1], diffusor_angle in [-4,4]).  vtk_E (Estateback) only.
 
-Produces two rows of renders for each design (baseline + BO + ShapeEvolve):
-  Row 1 — side profile view (x-z plane)
-  Row 2 — rear three-quarter view
+Two rows per design: side profile and rear quarter view.
 
 Usage:
     cd /scratch/ShapeEvolve
     source venv/bin/activate
-    python analysis/DrivAer_Star/plot_drivaer_3d_panel_downforce_efficiency.py [--body {E,F,N}]
+    python analysis/DrivAer_Star/plot_drivaer_3d_panel_tightened_bounds.py
 
 Outputs:
-    environments/DrivAer_Star/results/analysis_plots_downforce_efficiency/
-        DrivAer_Star_3d_panel_best_designs_vtk_{body}_downforce_efficiency.png/.pdf
+    environments/DrivAer_Star/results/analysis_plots_cd_only_tightened_bounds/
+        DrivAer_Star_3d_panel_best_designs_tightened_bounds_vtk_E.png
+        DrivAer_Star_3d_panel_best_designs_tightened_bounds_vtk_E.pdf
 """
 
-import argparse
+import os
 import glob
 import json
-import os
 import sys
-
+import numpy as np
+import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
 
-REPO_DIR    = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+REPO_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RESULTS_DIR = os.path.join(REPO_DIR, "environments", "DrivAer_Star", "results")
-OUT_DIR     = os.path.join(RESULTS_DIR, "analysis_plots_downforce_efficiency")
+OUT_DIR = os.path.join(RESULTS_DIR, "analysis_plots_cd_only_tightened_bounds")
 
-# Baseline downforce efficiency for undeformed geometry (iter_0_s0)
-BASELINE_REWARD_BY_BODY = {
-    "E": -0.332,
-    "F": -0.393,
-    "N": -0.028,
-}
+BASELINE_CD = 0.22334
 
 sys.path.insert(0, os.path.join(REPO_DIR, "environments", "DrivAer_Star"))
-from mesh_generator import PARAM_KEYS, BOUNDS, apply_ffd
+from mesh_generator import PARAM_KEYS, apply_ffd
 
 import pyvista as pv
 pv.global_theme.background = "#e8e8e8"
@@ -58,7 +51,7 @@ _BASE_VTK = None
 
 def _render(params, view):
     mesh = pv.read(_BASE_VTK)
-    pts  = np.array(mesh.points, dtype=np.float64)
+    pts = np.array(mesh.points, dtype=np.float64)
     mesh.points = apply_ffd(pts, params)
 
     plotter = pv.Plotter(off_screen=True, window_size=(CELL_W, CELL_H))
@@ -103,97 +96,81 @@ def _render(params, view):
     return img
 
 
-def load_best_bo(body):
-    pattern = os.path.join(
-        RESULTS_DIR,
-        f"run_BO_torch_downforce_efficiency_vtk_{body}_seed*_n1000",
-    )
-    best_reward, best_params = -np.inf, None
+def load_best_bo_tight():
+    """Best BO design across all 10 tight_bounds seeds.
+    CSV columns: iteration,particle,sample,design,reward,best_reward,drag,Cd,lift
+    Design JSON: {run_dir}/{design_name}/{design_name}.json
+    """
+    best_cd, best_params = np.inf, None
+    pattern = os.path.join(RESULTS_DIR, "run_BO_torch_cd_only_tight_bounds_vtk_E_seed*_n1000")
     for run_dir in sorted(glob.glob(pattern)):
         csv = os.path.join(run_dir, "results.csv")
         if not os.path.exists(csv):
             continue
-        try:
-            df = pd.read_csv(csv)
-        except Exception:
-            continue
-        if "reward" not in df.columns:
-            continue
+        df = pd.read_csv(csv)
         idx = int(df["reward"].idxmax())
         row = df.iloc[idx]
-        r   = float(row["reward"])
-        if r > best_reward:
+        cd = float(row["Cd"])
+        if cd < best_cd:
             design_name = str(row["design"])
             p = os.path.join(run_dir, design_name, f"{design_name}.json")
             if os.path.exists(p):
                 with open(p) as f:
                     best_params = json.load(f)
-                best_reward = r
-    return best_params, best_reward
+                best_cd = cd
+    return best_params, best_cd
 
 
-def load_best_v3(body):
+def load_best_v3_tight():
+    """Best ShapeEvolve design across all 10 tight_bounds attempts.
+    CSV columns: iteration,sample,design,reward,best_reward,sample_type,drag,Cd,lift,island
+    Design JSON: {run_dir}/{design_name}.json  (flat, no subdir)
+    """
+    best_cd, best_params = np.inf, None
     pattern = os.path.join(
         RESULTS_DIR,
-        f"run_v3_dynamic_optimizer_downforce_efficiency_drivaer_star_vtk_{body}"
-        f"_attempt_*_flash_2_5_n6000",
+        "run_v3_dynamic_optimizer_cd_only_tight_bounds_drivaer_star_vtk_E_attempt_*_flash_2_5_n10000",
     )
-    best_reward, best_params = -np.inf, None
     for run_dir in sorted(glob.glob(pattern)):
         csv = os.path.join(run_dir, "results.csv")
         if not os.path.exists(csv):
             continue
-        try:
-            df = pd.read_csv(csv)
-        except Exception:
-            continue
-        if "reward" not in df.columns:
-            continue
+        df = pd.read_csv(csv)
         idx = int(df["reward"].idxmax())
         row = df.iloc[idx]
-        r   = float(row["reward"])
-        if r > best_reward:
+        cd = float(row["Cd"])
+        if cd < best_cd:
             design_name = str(row["design"])
             p = os.path.join(run_dir, f"{design_name}.json")
             if os.path.exists(p):
                 with open(p) as f:
                     best_params = json.load(f)
-                best_reward = r
-    return best_params, best_reward
+                best_cd = cd
+    return best_params, best_cd
 
 
 def main():
     global _BASE_VTK
 
-    parser = argparse.ArgumentParser(description="DrivAer 3D panel — downforce efficiency")
-    parser.add_argument("--body", choices=["E", "F", "N"], default="E",
-                        help="Body style: E=Estate, F=Fastback, N=Notchback (default: E)")
-    args = parser.parse_args()
-    body = args.body
-
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    body_names   = {"E": "Estate", "F": "Fastback", "N": "Notchback"}
-    body_label   = body_names[body]
-    BASELINE_REW = BASELINE_REWARD_BY_BODY[body]
-
-    base_vtk_file = "00001.vtk" if body == "N" else "00000.vtk"
-    _BASE_VTK = os.path.join(
-        REPO_DIR, "environments", "DrivAer_Star", "data", f"vtk_{body}", base_vtk_file
-    )
+    _BASE_VTK = os.path.join(REPO_DIR, "environments", "DrivAer_Star", "data", "vtk_E", "00000.vtk")
 
     baseline_params = {k: 0.0 for k in PARAM_KEYS}
     baseline_params["car_size"] = 1.0
 
-    entries = [("Baseline", baseline_params, BASELINE_REW)]
+    entries = [("Baseline", baseline_params, BASELINE_CD)]
 
     for name, loader in [
-        ("Bayesian Opt. (exact GP)", load_best_bo),
-        ("ShapeEvolve",             load_best_v3),
+        ("Bayesian Opt. (exact GP)", load_best_bo_tight),
+        ("ShapeEvolve",             load_best_v3_tight),
     ]:
-        params, reward = loader(body)
+        params, cd = loader()
         if params is not None:
-            entries.append((name, params, reward))
+            print(f"{name}: best Cd = {cd:.5f}")
+            entries.append((name, params, cd))
+        else:
+            print(f"{name}: no data found")
 
     views = [("side", "Side profile"), ("rear_quarter", "Rear quarter")]
     ncols = len(entries)
@@ -210,7 +187,7 @@ def main():
         axes = [[ax] for ax in axes]
 
     for row_idx, (view_key, view_label) in enumerate(views):
-        for col_idx, (name, params, reward) in enumerate(entries):
+        for col_idx, (name, params, cd) in enumerate(entries):
             ax = axes[row_idx][col_idx]
             print(f"Rendering {name} / {view_key}...")
             img = _render(params, view_key)
@@ -218,10 +195,10 @@ def main():
             ax.axis("off")
 
             if row_idx == 0:
-                rew_str = f"reward = {reward:.4f}"
-                color   = METHOD_COLORS.get(name, "#333333")
+                cd_str = f"$C_D$ = {cd:.5f}"
+                color = METHOD_COLORS.get(name, "#333333")
                 ax.set_title(
-                    f"{name}\n{rew_str}",
+                    f"{name}\n{cd_str}",
                     fontsize=9,
                     fontweight="bold",
                     color="white",
@@ -232,20 +209,19 @@ def main():
                                      labelpad=4, va="center")
 
     fig.suptitle(
-        f"DrivAer$^\\star$ ({body_label}, vtk_{body}) — Downforce Efficiency ($-C_l/C_D$) — Best Design Shapes\n"
-        "(side profile shows ramp/hood/trunklid/diffusor angles; "
-        "rear quarter shows trunklid, diffusor, greenhouse)",
+        r"DrivAer Star (Estate, vtk\_E) — Tightened-Bounds Ablation: Best Design Shapes"
+        "\n"
+        r"car\_size $\in [0.9, 1.1]$,  diffusor\_angle $\in [-4^\circ, 4^\circ]$"
+        "  |  side profile and rear quarter views",
         fontsize=10, y=1.01,
     )
 
-    out_base = os.path.join(
-        OUT_DIR, f"DrivAer_Star_3d_panel_best_designs_vtk_{body}_downforce_efficiency"
-    )
-    fig.savefig(out_base + ".png", dpi=150, bbox_inches="tight")
-    fig.savefig(out_base + ".pdf", bbox_inches="tight")
+    stem = "DrivAer_Star_3d_panel_best_designs_tightened_bounds_vtk_E"
+    fig.savefig(os.path.join(OUT_DIR, f"{stem}.png"), dpi=150, bbox_inches="tight")
+    fig.savefig(os.path.join(OUT_DIR, f"{stem}.pdf"), bbox_inches="tight")
     plt.close(fig)
-    print(f"Saved: {out_base}.png")
-    print(f"Saved: {out_base}.pdf")
+    print(f"Saved: {OUT_DIR}/{stem}.png")
+    print(f"Saved: {OUT_DIR}/{stem}.pdf")
 
 
 if __name__ == "__main__":

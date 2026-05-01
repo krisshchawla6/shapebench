@@ -200,7 +200,7 @@ def main():
 
     # Baseline reference
     ax.axhline(BASELINE_CD, color="#999999", lw=1.2, ls="--", zorder=1)
-    ax.text(1.3, BASELINE_CD + 0.004, f"Baseline  Cd = {BASELINE_CD:.5f}",
+    ax.text(1.3, BASELINE_CD + 0.004, f"Baseline  $C_D$ = {BASELINE_CD:.5f}",
             color="#666666", fontsize=8.5, va="bottom")
 
     # L-BFGS-B — complete, extend flat (Estate only)
@@ -228,9 +228,9 @@ def main():
     # Axes
     ax.set_xscale("log")
     ax.set_xlabel("Function evaluations (per run)", fontsize=11)
-    ax.set_ylabel(r"$C_d$", fontsize=11)
+    ax.set_ylabel(r"$C_D$", fontsize=11)
     ax.set_title(
-        f"DrivAer Star ({body_label}, vtk_{body}) — Convergence: best Cd vs function evaluations\n"
+        f"DrivAer Star ({body_label}, vtk_{body}) — Convergence: best $C_D$ vs function evaluations\n"
         "(solid = median across runs,  band = min–max range)",
         fontsize=11,
     )
@@ -242,7 +242,7 @@ def main():
     method_leg = ax.legend(fontsize=9, loc="upper right", framealpha=0.95, title="Method")
     ax.add_artist(method_leg)
     style_handles = [
-        Line2D([0], [0], color="grey", lw=2.0, label="Median best Cd"),
+        Line2D([0], [0], color="grey", lw=2.0, label="Median best $C_D$"),
         Patch(facecolor="grey", alpha=0.25, label="Min–max range"),
     ]
     ax.legend(handles=style_handles, loc="lower left", fontsize=9,

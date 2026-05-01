@@ -40,6 +40,11 @@ _device = None
 # (only alpha changes within a design evaluation, not the geometry).
 _mesh_cache: dict = {}
 
+# Integration-weight cache: geometry key → (areas, nx, s_ref, cell_to_sample_idx)
+# Cell areas, cell-face x-normals, planform S_ref, and nearest-sample mapping are
+# all geometry-only quantities — reused across all bisection calls for a design.
+_geom_integ_cache: dict = {}
+
 
 def _load_model():
     global _model, _norm, _device
@@ -100,6 +105,43 @@ def _run_surrogate(mesh, geom_params, flight_params):
         "pos": pos, "idx": idx,
         "Cp": out[:, 0], "Cfx": out[:, 1], "Cfz": out[:, 2],
     }
+
+
+def _get_integ_weights(mesh, result, geom_key):
+    """Return (areas, nx, s_ref, cell_to_sample_idx) for CD_integrated, cached by geometry.
+
+    areas            — triangle areas (n_cells,)
+    nx               — outward cell-face normal x-component (n_cells,)
+    s_ref            — planform XY-projected reference area (scalar)
+    cell_to_sample   — nearest sampled-point index for each cell centre (n_cells,)
+
+    Formula (matches compute_drag_decomposition.py):
+        CD_pressure  = sum(Cp[cell_to_sample]  * areas * nx) / s_ref
+        CD_friction  = sum(Cfx[cell_to_sample] * areas)      / s_ref
+        CD_integrated = CD_pressure + CD_friction
+    """
+    if geom_key not in _geom_integ_cache:
+        from scipy.spatial import cKDTree
+
+        sized  = mesh.compute_cell_sizes(length=False, area=True, volume=False)
+        areas  = np.array(sized.cell_data["Area"], dtype=np.float64)
+
+        normed = mesh.compute_normals(point_normals=False, cell_normals=True,
+                                      auto_orient_normals=True)
+        nx = np.array(normed.cell_data["Normals"], dtype=np.float64)[:, 0]
+
+        pts  = np.array(mesh.points)
+        tris = mesh.faces.reshape(-1, 4)[:, 1:]
+        v0, v1, v2 = pts[tris[:, 0], :2], pts[tris[:, 1], :2], pts[tris[:, 2], :2]
+        cross = (v1 - v0)[:, 0] * (v2 - v0)[:, 1] - (v1 - v0)[:, 1] * (v2 - v0)[:, 0]
+        s_ref = float(0.5 * np.abs(cross).sum())
+
+        centres = np.array(mesh.cell_centers().points, dtype=np.float32)
+        _, cell_to_sample = cKDTree(result["pos"]).query(centres, k=1)
+
+        _geom_integ_cache[geom_key] = (areas, nx, s_ref, cell_to_sample)
+
+    return _geom_integ_cache[geom_key]
 
 
 def _render_field(mesh, scalar, out_path, title, cmap, clim, view, fmt="%.3f"):
@@ -205,12 +247,20 @@ class BlendedNetEnvironment(BaseEnvironment):
 
         images = _save_sol_images(mesh, result, sol_dir) if self.render_images else []
 
+        areas, nx, s_ref, c2s = _get_integ_weights(mesh, result, geom_key)
+        cp_c  = result["Cp"][c2s]
+        cfx_c = result["Cfx"][c2s]
+        cd_pressure   = float(np.sum(cp_c  * areas * nx) / s_ref)
+        cd_friction   = float(np.sum(cfx_c * areas)      / s_ref)
+        cd_integrated = cd_pressure + cd_friction
+
         return {
             "params": params,
             "Re": re_val, "Mach": mach_val, "alpha": alpha_val,
-            "Cp_mean": float(result["Cp"].mean()),
-            "Cfx_mean": float(result["Cfx"].mean()),
-            "Cfz_mean": float(result["Cfz"].mean()),
+            "Cp_mean":       float(result["Cp"].mean()),
+            "Cfx_mean":      float(result["Cfx"].mean()),
+            "Cfz_mean":      float(result["Cfz"].mean()),
+            "CD_integrated": cd_integrated,
             "save_dir": save_dir,
             "images": images,
         }

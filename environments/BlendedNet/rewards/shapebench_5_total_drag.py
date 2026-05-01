@@ -1,0 +1,160 @@
+"""
+Multi-point total-drag minimisation for BWB.
+
+    min_x  mean_CD(x)
+
+    mean_CD = (1/N) * sum_i  CD_integrated(x; CL^(i))
+    CL^(i) in {0.206, 0.206, 0.206, 0.185, 0.227}
+
+CD_integrated is the area-weighted surface integral of pressure + friction drag:
+
+    CD_pressure  = (1/S_ref) * sum_cells  Cp_cell  * A_cell * nx_cell
+    CD_friction  = (1/S_ref) * sum_cells  Cfx_cell * A_cell
+    CD_integrated = CD_pressure + CD_friction
+
+where S_ref is the planform XY-projected area and nx is the outward cell-face
+normal x-component.  This captures both pressure (form) drag and skin-friction
+drag, unlike shapebench_5 which minimises only Cfx_mean (friction proxy).
+
+Alpha for each CL operating point is found by bisection over the Transolver
+surrogate (CL_approx = -Cp_mean), identical to shapebench_5.
+
+Reward (maximised by framework):
+    R = -mean_CD_integrated
+"""
+
+import json
+import os
+
+import numpy as np
+
+from environments.base_reward import BaseReward
+
+FAIL_REWARD = -5.0
+
+CL_TARGETS = [0.206, 0.206, 0.206, 0.185, 0.227]
+
+BISECT_ITERS = 8
+ALPHA_LO = -5.0
+ALPHA_HI = 12.0
+
+
+class ShapeBench5TotalDragReward(BaseReward):
+    """Multi-point total-drag minimisation for BWB."""
+
+    def __init__(self, mach=0.3, re=1.0e7, **kwargs):
+        self.mach = float(mach)
+        self.re = float(re)
+
+    @staticmethod
+    def add_args(parser):
+        parser.add_argument('--mach', type=float, default=0.3,
+                            help='Freestream Mach number')
+        parser.add_argument('--re', type=float, default=1.0e7,
+                            help='Reynolds number')
+
+    # ── helpers ───────────────────────────────────────────────────────
+
+    def _run_at_alpha(self, run_sim, design_path, case_dir, alpha):
+        os.makedirs(case_dir, exist_ok=True)
+        with open(design_path) as f:
+            params = json.load(f)
+        params['alpha'] = alpha
+        temp_path = os.path.join(case_dir, 'design.json')
+        with open(temp_path, 'w') as f:
+            json.dump(params, f, indent=2)
+        return run_sim(temp_path, case_dir,
+                       mach=self.mach, re=self.re, alpha=alpha)
+
+    def _bisect_cl(self, run_sim, design_path, work_dir, target_cl, tag):
+        """Find alpha that yields target_cl via bisection on CL = -Cp_mean."""
+        lo, hi = ALPHA_LO, ALPHA_HI
+        r_last = None
+        for i in range(BISECT_ITERS):
+            mid = 0.5 * (lo + hi)
+            r = self._run_at_alpha(
+                run_sim, design_path,
+                os.path.join(work_dir, f'{tag}_{i}'), mid)
+            cl = -r["Cp_mean"]
+            r_last = r
+            if cl < target_cl:
+                lo = mid
+            else:
+                hi = mid
+        return 0.5 * (lo + hi), r_last
+
+    # ── main evaluation ──────────────────────────────────────────────
+
+    def evaluate(self, run_sim, design_path: str, case_dir: str) -> tuple:
+        try:
+            return self._evaluate(run_sim, design_path, case_dir)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            print(f"[shapebench_5_total_drag] FAILED: {e}")
+            return float(FAIL_REWARD), {
+                "metrics": {"reward": FAIL_REWARD},
+                "images": [],
+                "feedback": "Simulation failed.",
+            }
+
+    def _evaluate(self, run_sim, design_path: str, case_dir: str) -> tuple:
+        os.makedirs(case_dir, exist_ok=True)
+        work = os.path.join(case_dir, "_mp")
+
+        unique_cls = sorted(set(CL_TARGETS))
+        solved = {}
+        for cl_t in unique_cls:
+            alpha_sol, r = self._bisect_cl(
+                run_sim, design_path, work, cl_t,
+                tag=f'cl{cl_t:.3f}')
+            solved[cl_t] = (alpha_sol, r)
+
+        cds = [solved[cl_t][1]["CD_integrated"] for cl_t in CL_TARGETS]
+        mean_cd = float(np.mean(cds))
+
+        reward = -mean_cd
+
+        cruise_cl = CL_TARGETS[0]
+        cruise_alpha = solved[cruise_cl][0]
+        cruise_r = solved[cruise_cl][1]
+        images = cruise_r.get("images", [])
+
+        with open(design_path) as f:
+            orig_params = json.load(f)
+
+        op_points = []
+        for cl_t in CL_TARGETS:
+            a_i, r_i = solved[cl_t]
+            op_points.append({
+                "cl_target":      cl_t,
+                "alpha_solved":   a_i,
+                "CL_approx":      -r_i["Cp_mean"],
+                "CD_integrated":  r_i["CD_integrated"],
+                "Cfx_mean":       r_i["Cfx_mean"],
+            })
+
+        results_dict = {
+            "design":        orig_params,
+            "operating_points": op_points,
+            "mean_CD":       mean_cd,
+            "cruise_alpha":  cruise_alpha,
+            "reward":        reward,
+        }
+
+        save_dir = os.path.join(case_dir, "save")
+        os.makedirs(save_dir, exist_ok=True)
+        with open(os.path.join(save_dir, "results.json"), "w") as f:
+            json.dump(results_dict, f, indent=2)
+
+        print(f"[shapebench_5_total_drag] mean_CD_integrated={mean_cd:.6f}  reward={reward:.6f}")
+
+        return float(reward), {
+            "metrics": {
+                "mean_CD":      mean_cd,
+                "cruise_alpha": cruise_alpha,
+                "reward":       reward,
+            },
+            "images": images,
+            "feedback": "",
+        }

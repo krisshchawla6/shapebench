@@ -185,7 +185,7 @@ def main():
 
     # Baseline reference
     ax.axhline(BASELINE_CD, color="#999999", lw=1.2, ls="--", zorder=1)
-    ax.text(1.3, BASELINE_CD + 0.003, f"Baseline  $C_d$ = {BASELINE_CD:.5f}",
+    ax.text(1.3, BASELINE_CD + 0.003, f"Baseline  $C_D$ = {BASELINE_CD:.5f}",
             color="#666666", fontsize=8.5, va="bottom")
 
     # BO — near-complete (79–99%), extend flat to x_max_bo
@@ -205,10 +205,10 @@ def main():
 
     ax.set_xscale("log")
     ax.set_xlabel("Function evaluations (per run)", fontsize=11)
-    ax.set_ylabel(r"$-\mathrm{reward} \approx C_d$  (penalised objective)", fontsize=11)
+    ax.set_ylabel(r"$-\mathrm{reward} \approx C_D$  (penalised objective)", fontsize=11)
     ax.set_title(
         f"DrivAer$^\\star$ ({body_label}, vtk_{body}) — "
-        r"$C_d$-constrained ($C_l \leq -0.10$) optimisation" + "\n"
+        r"$C_D$-constrained ($C_l \leq -0.10$) optimisation" + "\n"
         "Convergence: best penalised objective per run  "
         "(solid = median,  band = min–max)",
         fontsize=11,

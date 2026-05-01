@@ -353,7 +353,7 @@ def main():
 
             # Column title on top row only
             if row_idx == 0:
-                cd_str = f"Cd = {cd:.5f}"
+                cd_str = f"$C_D$ = {cd:.5f}"
                 color = METHOD_COLORS.get(name, "#333333")
                 ax.set_title(
                     f"{name}\n{cd_str}",
@@ -367,7 +367,7 @@ def main():
         axes[row_idx][0].set_ylabel(view_label, fontsize=9, rotation=90,
                                      labelpad=4, va="center")
 
-    variant_label = "" if variant == "cd_only" else " ($C_d$-constrained)"
+    variant_label = "" if variant == "cd_only" else " ($C_D$-constrained)"
     fig.suptitle(
         f"DrivAer Star ({body_label}, vtk_{body}){variant_label} — Best Design Shapes\n"
         "(side profile shows ramp/hood/trunklid/diffusor angles; "

@@ -204,10 +204,10 @@ def main():
 
     ax.set_xscale("log")
     ax.set_xlabel("Function evaluations (per run)", fontsize=11)
-    ax.set_ylabel(r"Best reward  ($-C_l\,/\,C_d$, downforce efficiency)", fontsize=11)
+    ax.set_ylabel(r"Best reward  ($-C_l\,/\,C_D$, downforce efficiency)", fontsize=11)
     ax.set_title(
         f"DrivAer$^\\star$ ({body_label}, vtk_{body}) — "
-        r"Downforce efficiency ($-C_l\,/\,C_d$) optimisation" + "\n"
+        r"Downforce efficiency ($-C_l\,/\,C_D$) optimisation" + "\n"
         "Convergence: best reward per run  "
         "(solid = median,  band = min–max)",
         fontsize=11,
