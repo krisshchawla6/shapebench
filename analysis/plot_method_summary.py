@@ -308,6 +308,8 @@ def make_summary(dirs, method_label="method", output_dir=None,
     n_points    = len(eval_grid)
     mean_best   = np.full(n_points, np.nan)
     median_best = np.full(n_points, np.nan)
+    p25_best    = np.full(n_points, np.nan)
+    p75_best    = np.full(n_points, np.nan)
     min_best    = np.full(n_points, np.nan)
     max_best    = np.full(n_points, np.nan)
     n_active    = np.zeros(n_points, dtype=int)
@@ -317,6 +319,8 @@ def make_summary(dirs, method_label="method", output_dir=None,
         if len(active) > 0:
             mean_best[i]   = np.mean(active)
             median_best[i] = np.median(active)
+            p25_best[i]    = np.percentile(active, 25)
+            p75_best[i]    = np.percentile(active, 75)
             min_best[i]    = np.min(active)
             max_best[i]    = np.max(active)
             n_active[i]    = len(active)
@@ -353,13 +357,14 @@ def make_summary(dirs, method_label="method", output_dir=None,
     csv_out = os.path.join(output_dir, f"{output_name}_trajectory.csv")
     with open(csv_out, "w", newline="") as f:
         writer = csv_mod.writer(f)
-        writer.writerow(["eval", "n_active", "mean_best", "median_best", "min_best", "max_best"])
+        writer.writerow(["eval", "n_active", "mean_best", "median_best", "p25_best", "p75_best", "min_best", "max_best"])
         for i, ev in enumerate(eval_grid):
             def fmt(v):
                 return f"{v:.8f}" if not np.isnan(v) else ""
             writer.writerow([
                 f"{ev:.1f}", n_active[i],
                 fmt(mean_best[i]), fmt(median_best[i]),
+                fmt(p25_best[i]),  fmt(p75_best[i]),
                 fmt(min_best[i]),  fmt(max_best[i]),
             ])
     print(f"[summary] Trajectory CSV -> {csv_out}")
@@ -379,6 +384,8 @@ def make_summary(dirs, method_label="method", output_dir=None,
         ft_arr      = np.array(ft_trajs)   # (n_runs, n_points)
         ft_mean     = np.full(n_points, np.nan)
         ft_median   = np.full(n_points, np.nan)
+        ft_p25      = np.full(n_points, np.nan)
+        ft_p75      = np.full(n_points, np.nan)
         ft_min      = np.full(n_points, np.nan)
         ft_max      = np.full(n_points, np.nan)
         ft_n_active = np.zeros(n_points, dtype=int)
@@ -387,6 +394,8 @@ def make_summary(dirs, method_label="method", output_dir=None,
             if len(active) > 0:
                 ft_mean[i]     = np.mean(active)
                 ft_median[i]   = np.median(active)
+                ft_p25[i]      = np.percentile(active, 25)
+                ft_p75[i]      = np.percentile(active, 75)
                 ft_min[i]      = np.min(active)
                 ft_max[i]      = np.max(active)
                 ft_n_active[i] = len(active)
@@ -394,13 +403,14 @@ def make_summary(dirs, method_label="method", output_dir=None,
         ft_csv_out = os.path.join(output_dir, f"{output_name}_trajectory_fitness_total.csv")
         with open(ft_csv_out, "w", newline="") as f:
             writer = csv_mod.writer(f)
-            writer.writerow(["eval", "n_active", "mean_best", "median_best", "min_best", "max_best"])
+            writer.writerow(["eval", "n_active", "mean_best", "median_best", "p25_best", "p75_best", "min_best", "max_best"])
             for i, ev in enumerate(eval_grid):
                 def fmt(v):
                     return f"{v:.8f}" if not np.isnan(v) else ""
                 writer.writerow([
                     f"{ev:.1f}", ft_n_active[i],
                     fmt(ft_mean[i]), fmt(ft_median[i]),
+                    fmt(ft_p25[i]),  fmt(ft_p75[i]),
                     fmt(ft_min[i]),  fmt(ft_max[i]),
                 ])
         print(f"[summary] Fitness-total CSV -> {ft_csv_out}")

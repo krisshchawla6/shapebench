@@ -62,11 +62,12 @@ def load_trajectory(csv_path, max_evals=None):
     """Load a trajectory CSV produced by plot_method_summary.py.
 
     Returns a dict of arrays:
-        eval, median_best, min_best, max_best
-    and optionally n_active (None if column absent).
+        eval, median_best, p25_best, p75_best, min_best, max_best
+    p25/p75 are None if the columns are absent (older CSV format).
     """
-    evals, median, min_b, max_b, n_active = [], [], [], [], []
+    evals, median, p25, p75, min_b, max_b, n_active = [], [], [], [], [], [], []
     has_n_active = False
+    has_iqr = False
 
     with open(csv_path) as f:
         reader = csv_mod.DictReader(f)
@@ -83,6 +84,12 @@ def load_trajectory(csv_path, max_evals=None):
             median.append(float(med))
             min_b.append(float(mn))
             max_b.append(float(mx))
+            q25 = row.get("p25_best", "")
+            q75 = row.get("p75_best", "")
+            if q25 != "" and q75 != "":
+                has_iqr = True
+                p25.append(float(q25))
+                p75.append(float(q75))
             na = row.get("n_active")
             if na is not None:
                 has_n_active = True
@@ -91,6 +98,8 @@ def load_trajectory(csv_path, max_evals=None):
     result = dict(
         eval=np.array(evals),
         median=np.maximum(np.array(median), 1e-9),
+        p25=np.maximum(np.array(p25), 1e-9) if has_iqr else None,
+        p75=np.maximum(np.array(p75), 1e-9) if has_iqr else None,
         min_b=np.maximum(np.array(min_b),  1e-9),
         max_b=np.maximum(np.array(max_b),  1e-9),
         n_active=np.array(n_active) if has_n_active else None,
@@ -123,13 +132,21 @@ def load_adjoint_reference(adjoint_dir):
 
 def _draw_methods(ax, trajs, adjoint_ref=None, lw=1.8):
     """Draw all method trajectories (and optional adjoint line) onto ax."""
-    for color, ev, med, mn, mx, solid_mask, dash_mask in trajs:
+    for color, ev, med, p25, p75, mn, mx, solid_mask, dash_mask in trajs:
+        # Outer band: min–max (light)
         ax.fill_between(ev[solid_mask], mn[solid_mask], mx[solid_mask],
-                        color=color, alpha=0.18)
+                        color=color, alpha=0.12)
+        # Inner band: 25th–75th percentile (darker); falls back to min–max if absent
+        q_lo = p25[solid_mask] if p25 is not None else mn[solid_mask]
+        q_hi = p75[solid_mask] if p75 is not None else mx[solid_mask]
+        ax.fill_between(ev[solid_mask], q_lo, q_hi, color=color, alpha=0.28)
         ax.plot(ev[solid_mask], med[solid_mask], color=color, lw=lw)
         if dash_mask.any():
             ax.fill_between(ev[dash_mask], mn[dash_mask], mx[dash_mask],
                             color=color, alpha=0.07)
+            if p25 is not None:
+                ax.fill_between(ev[dash_mask], p25[dash_mask], p75[dash_mask],
+                                color=color, alpha=0.15)
             ax.plot(ev[dash_mask], med[dash_mask],
                     color=color, lw=lw, linestyle="--")
     if adjoint_ref is not None:
@@ -152,6 +169,8 @@ def plot_combined(labels, csv_paths, colors, adjoint_dir=None,
         traj = load_trajectory(csv_path, max_evals)
         ev   = traj["eval"]
         med  = traj["median"]
+        p25  = traj["p25"]
+        p75  = traj["p75"]
         mn   = traj["min_b"]
         mx   = traj["max_b"]
         na   = traj["n_active"]
@@ -179,7 +198,7 @@ def plot_combined(labels, csv_paths, colors, adjoint_dir=None,
         solid_mask = ev <= split_ev if split_ev is not None else np.ones(len(ev), dtype=bool)
         dash_mask  = ev >= split_ev if split_ev is not None else np.zeros(len(ev), dtype=bool)
 
-        trajs.append((color, ev, med, mn, mx, solid_mask, dash_mask))
+        trajs.append((color, ev, med, p25, p75, mn, mx, solid_mask, dash_mask))
         method_legend.append(Line2D([0], [0], color=color, lw=2.0, label=label))
 
     # Adjoint reference
@@ -227,8 +246,13 @@ def plot_combined(labels, csv_paths, colors, adjoint_dir=None,
         ax.spines[sp].set_visible(False)
 
     # Legends
+    any_iqr = any(t[3] is not None for t in trajs)  # p25 is index 3
     style_legend = [
-        Patch(facecolor="grey", alpha=0.25, label="Min–max range"),
+        Patch(facecolor="grey", alpha=0.18, label="Min–max range"),
+    ]
+    if any_iqr:
+        style_legend.append(Patch(facecolor="grey", alpha=0.40, label="25th–75th percentile"))
+    style_legend += [
         Line2D([0], [0], color="grey", lw=1.8, label="Median best"),
         Line2D([0], [0], color="grey", lw=1.8, linestyle="--",
                label="Failed/partial runs begin"),
