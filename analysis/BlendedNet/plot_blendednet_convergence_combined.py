@@ -240,16 +240,19 @@ def compute_band(curves, x_grid, extend=True):
     n_valid = np.sum(~np.isnan(mat), axis=0)
     mask = n_valid >= max(1, len(curves) // 2)
     med = np.where(mask, np.nanpercentile(mat, 50, axis=0), np.nan)
+    p25 = np.where(mask, np.nanpercentile(mat, 25, axis=0), np.nan)
+    p75 = np.where(mask, np.nanpercentile(mat, 75, axis=0), np.nan)
     lo  = np.where(mask, np.nanmin(mat, axis=0), np.nan)
     hi  = np.where(mask, np.nanmax(mat, axis=0), np.nan)
-    return med, lo, hi
+    return med, p25, p75, lo, hi
 
 
 def plot_band(ax, curves, x_grid, color, label, ls="-"):
     if not curves:
         return
-    med, lo, hi = compute_band(curves, x_grid)
-    ax.fill_between(x_grid, lo, hi, color=color, alpha=0.18)
+    med, p25, p75, lo, hi = compute_band(curves, x_grid)
+    ax.fill_between(x_grid, lo, hi, color=color, alpha=0.12)
+    ax.fill_between(x_grid, p25, p75, color=color, alpha=0.28)
     ax.plot(x_grid, med, color=color, lw=1.8, label=label, ls=ls)
 
 
@@ -369,7 +372,8 @@ def main():
         for n in ["Bayesian Opt. (exact GP)", "PSO (20p × 200i)", "CMA-ES", "ShapeEvolve"]
     ]
     style_handles = [
-        Patch(facecolor="grey", alpha=0.25, label="Min–max range"),
+        Patch(facecolor="grey", alpha=0.18, label="Min–max range"),
+        Patch(facecolor="grey", alpha=0.40, label="25th–75th percentile"),
         Line2D([0], [0], color="grey", lw=1.8,  label="Median best"),
         Line2D([0], [0], color="grey", lw=1.5, ls=":", label="Warm-start ceiling"),
     ]
