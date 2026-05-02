@@ -2369,3 +2369,122 @@ Updated narrative arc (reflecting tight_bounds diagnostic findings)
    regardless of bound width.  The LLM diagnostic tool correctly identified this
    at every level of tightening, which is itself a positive finding for the
    diagnostic methodology.
+
+
+STATUS UPDATE (May 1, 2026, ~19:00 UTC)
+================================================================================
+
+v3 tight_bounds (job 9450) — RUNNING, att 1–10
+-----------------------------------------------
+Multiple attempts near or at completion.  Best Cd per attempt (best_reward col):
+
+  att1:  8,678 evals   Cd = 0.1189
+  att2:  9,363 evals   Cd = 0.1228
+  att3:  9,404 evals   Cd = 0.1150
+  att4:  8,658 evals   Cd = 0.1294
+  att5:  8,168 evals   Cd = 0.1139  ← ties best
+  att6: 10,040 evals   Cd = 0.1139  ← ties best (matches prior diagnostic: 0.11389540)
+  att7:  6,935 evals   Cd = 0.1293
+  att8:  9,364 evals   Cd = 0.1462
+  att9:  6,913 evals   Cd = 0.1139  ← ties best
+  att10: 6,269 evals   Cd = 0.1276
+
+Best overall: Cd = 0.1139 (att5, att6, att9).  Consistent with prior diagnostic.
+Att7–10 still running; completion expected ~1–2 AM May 2.
+
+BO super-tight_bounds (job 10442) — RUNNING, ~80% done
+-------------------------------------------------------
+All 10 seeds running concurrently on one node (MAX_JOBS=16, OMP=8).
+Evals: 804–857 / 1000.  Best Cd per seed:
+
+  seed0: 804 evals   Cd = 0.1568
+  seed1: 838 evals   Cd = 0.1568
+  seed2: 826 evals   Cd = 0.1568
+  seed3: 839 evals   Cd = 0.1597
+  seed4: 857 evals   Cd = 0.1568
+  seed5: 811 evals   Cd = 0.1568
+  seed6: 848 evals   Cd = 0.1597
+  seed7: 854 evals   Cd = 0.1568
+  seed8: 851 evals   Cd = 0.1569
+  seed9: 834 evals   Cd = 0.1568
+
+Best overall so far: Cd ≈ 0.1568 (seeds 0,1,2,4,5,7,9).
+Higher than tight_bounds best (0.1139) as expected — bounds squeezed further.
+Estimated completion: ~30–60 min from time of check.
+
+v3 super-tight_bounds (job 10443) — RUNNING, very early
+---------------------------------------------------------
+Att 1–8 started; att 9–10 pending (waiting for node resources).
+Evals so far: 225–1,673 of ~10,000 target per attempt.  Early best Cd per attempt:
+
+  att1:  1,573 evals   Cd = 0.1709
+  att2:  1,671 evals   Cd = 0.1709
+  att3:  1,657 evals   Cd = 0.1582  ← best so far
+  att4:  1,428 evals   Cd = 0.1711
+  att5:  1,272 evals   Cd = 0.1689
+  att6:  1,063 evals   Cd = 0.1707
+  att7:    425 evals   Cd = 0.1712
+  att8:    225 evals   Cd = 0.1738
+
+Best so far: Cd ≈ 0.158 (att3, ~1,600 evals) — very early, likely to improve.
+Estimated completion: ~20h from time of check.
+[FILL narrative arc step 4 once both jobs complete and diagnostics are run]
+
+
+STATUS UPDATE (May 2, 2026, ~00:30 UTC)
+================================================================================
+
+BO super-tight_bounds (job 10442) — COMPLETE
+---------------------------------------------
+All 10 seeds finished at exactly 1,000 evals.  Final best Cd per seed:
+
+  seed0: 0.15683   seed5: 0.15683
+  seed1: 0.15682   seed6: 0.15967
+  seed2: 0.15682   seed7: 0.15682  ← ties best
+  seed3: 0.15967   seed8: 0.15683
+  seed4: 0.15682   seed9: 0.15683
+
+Best overall: Cd = 0.15682 (seeds 1,2,4,7 — all converge to same value,
+indicating a single boundary corner).
+Progression across ablation levels:
+  Unconstrained:   Cd ≈ 0.0651  (71% below baseline)
+  Tight-bounds:    Cd ≈ 0.1139  (49% below baseline)
+  Super-tight:     Cd ≈ 0.1568  (30% below baseline)
+  Baseline:        Cd = 0.2233
+
+v3 tight_bounds (job 9450) — RUNNING, att 1,4,5,7,9,10 still active
+---------------------------------------------------------------------
+Completed since last check: att2 (10,053 evals), att3 (9,997 evals), att8 (9,787 evals).
+Still running: att1 (9,419), att4 (9,391), att5 (8,794), att7 (7,879), att9 (7,713), att10 (7,140).
+
+Updated best Cd per attempt:
+  att1:  9,419 evals   Cd = 0.1189
+  att2: 10,053 evals   Cd = 0.1205  DONE
+  att3:  9,997 evals   Cd = 0.1145  DONE
+  att4:  9,391 evals   Cd = 0.1294
+  att5:  8,794 evals   Cd = 0.1139  ← ties best
+  att6: 10,040 evals   Cd = 0.1139  ← ties best  DONE
+  att7:  7,879 evals   Cd = 0.1293
+  att8:  9,787 evals   Cd = 0.1462  DONE
+  att9:  7,713 evals   Cd = 0.1139  ← ties best
+  att10: 7,140 evals   Cd = 0.1276
+
+Best overall: Cd = 0.1139 (att5, att6, att9).
+
+v3 super-tight_bounds (job 10443) — RUNNING, all 10 attempts now active
+------------------------------------------------------------------------
+Att 9–10 started since last check.  Progress and best Cd per attempt:
+
+  att1:  2,623 evals   Cd = 0.1652
+  att2:  2,825 evals   Cd = 0.1709
+  att3:  2,703 evals   Cd = 0.1578  ← best so far
+  att4:  2,372 evals   Cd = 0.1710
+  att5:  2,346 evals   Cd = 0.1590
+  att6:  2,135 evals   Cd = 0.1657
+  att7:  1,320 evals   Cd = 0.1707
+  att8:  1,337 evals   Cd = 0.1709
+  att9:    372 evals   Cd = 0.2024  (very early)
+  att10:   231 evals   Cd = 0.1713  (very early)
+
+Best so far: Cd = 0.1578 (att3).  ~17h remaining for full convergence.
+[FILL narrative arc step 4 once both jobs complete and diagnostics are run]

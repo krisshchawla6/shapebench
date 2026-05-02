@@ -398,3 +398,152 @@ STATUS SUMMARY (May 1, 2026, ~12h elapsed)
   PSO (9446):          total_drag COMPLETE; max_LD seeds 6-9 running (~4h remaining)
   v3 (9449):           total_drag attempts 5-10 running (~10h remaining);
                        max_LD_total_drag CANCELLED (stub files, will skip)
+
+
+STATUS UPDATE (May 1, 2026, ~19:00 UTC)
+================================================================================
+
+BO total_drag_constrained (job 10358 node) — COMPLETE
+------------------------------------------------------
+All 10 seeds finished (completed ~20:32–20:53 UTC).  n=1000 each.
+Best reward (= -CD_integrated) per seed:
+
+  seed0: -0.006976   seed5: -0.006739
+  seed1: -0.006926   seed6: -0.007243
+  seed2: -0.007045   seed7: -0.007346  ← best overall
+  seed3: -0.007082   seed8: -0.007020
+  seed4: -0.007088   seed9: -0.007074
+
+Best overall: seed7, CD_integrated = 0.007346.
+Compare to unconstrained BO best: 0.003416 — constrained is ~2.1× higher,
+reflecting the AR≥2.5 constraint pushing the optimizer away from the low-AR
+boundary-collapse corner.
+
+v3 total_drag unconstrained (job 9449) — RUNNING, ~16h elapsed
+---------------------------------------------------------------
+Att1–7 effectively complete (~2,003–2,019 evals).  Att8 at 1,024; att9 at 280;
+att10 at 233.  Still running; att8–10 expected within ~6h.
+
+v3 total_drag constrained (job 10359) — RUNNING, ~4h elapsed
+-------------------------------------------------------------
+Att1–4 at 1,067–1,216 evals; att5–10 not yet started (single-node serial job).
+~18h remaining.
+
+L-BFGS-B max_LD_total_drag (job 9448) — RUNNING, ~8h53m elapsed
+-----------------------------------------------------------------
+Seeds 6–9: 3,746–4,150 evals (~55–62% of nr10 budget of ~6,700).
+Seeds 0–5: 1,552–1,888 evals (~23–28%).
+~15–20h remaining.
+
+[FILL] All four jobs above: update with final best-reward numbers once complete.
+
+
+STATUS UPDATE (May 2, 2026, ~00:30 UTC)
+================================================================================
+
+PSO total_drag_constrained (job 10358) — COMPLETE
+--------------------------------------------------
+All 10 seeds at 4,000 evals.  Final best CD_integrated per seed:
+
+  seed0: 0.00676   seed5: 0.00798
+  seed1: 0.00604   seed6: 0.00793
+  seed2: 0.00803   seed7: 0.00608
+  seed3: 0.00671   seed8: 0.00709
+  seed4: 0.00645   seed9: 0.00702
+
+Best overall: seed1, CD = 0.00604.
+Comparison (total_drag_constrained, best CD across methods so far):
+  PSO:  0.00604  ← best
+  BO:   0.00735
+  v3:   0.00692  (att3, partial — att1–4 only)
+  CMA-ES: [FILL when run]
+
+v3 total_drag unconstrained (job 9449) — RUNNING, att 8–10 active
+------------------------------------------------------------------
+Att1–7 complete.  Att8 at 1,785 evals; att9 at 992; att10 at 964.
+
+Current best CD_integrated per attempt:
+  att1: 0.00530 (outlier — likely bad run)   att6: 0.00375
+  att2: 0.00374                               att7: 0.00469
+  att3: 0.00342  ← best complete              att8: 0.00353 (running)
+  att4: 0.00386                               att9: 0.00374 (running)
+  att5: 0.00331  ← best overall so far        att10: 0.00357 (running)
+
+Best so far: att5, CD = 0.00331.
+
+v3 total_drag constrained (job 10359) — RUNNING, att 1–4 near complete, att 5–10 not started
+---------------------------------------------------------------------------------------------
+  att1: 1,837 evals   CD = 0.00705
+  att2: 1,837 evals   CD = 0.00723
+  att3: 1,938 evals   CD = 0.00692  ← best so far
+  att4: 1,915 evals   CD = 0.00907  (outlier)
+  att5–10: not yet started
+
+L-BFGS-B max_LD_total_drag (job 9448) — RUNNING, ~11h42m elapsed
+-----------------------------------------------------------------
+Seeds 6–9: 4,600–4,928 evals (~69–74% of ~6,700 nr10 budget).
+Seeds 0–5: 1,552–1,888 evals (~23–28% — appear stagnated at nr3 boundary).
+
+Best L/D per seed so far:
+  seed0: 26.0   seed5: 23.1  ← worst
+  seed1: 48.8   seed6: 45.3
+  seed2: 32.7   seed7: 25.9
+  seed3: 66.9   ← best overall   seed8: 41.4
+  seed4: 41.5   seed9: 32.0
+
+High variance (23–67 range).  Seeds 0–5 appear to have stagnated early (all
+at ~1,500–1,900 evals with no further improvement logged).
+
+
+CONSTRAINED RESULTS — PHYSICAL PLAUSIBILITY CHECK (May 2, 2026)
+================================================================================
+
+Manual inspection of the best BO (seed5, CD=0.006739) and PSO (seed1, CD=0.00604)
+constrained designs reveals residual surrogate exploitation even with AR≥2.5 enforced.
+
+Boundary saturation (params at bounds out of 10 total):
+-------------------------------------------------------
+BO best (iter_0657):
+  AT BOUND: B1=200 (upper), B2=50 (lower), C3=180 (lower), S1=60 (upper), S2=40 (lower)
+  Interior: B3=356, C2=559, C4=69, S3=29, alpha=-0.22
+  Count: 5/10 parameters at bounds
+
+PSO best (iter_0199_p000, CD=0.006524 — not confirmed as seed1 overall best):
+  AT BOUND: B1=200 (upper), B2=50 (lower), C3=180 (lower), S2=40 (lower)
+  Interior: B3=421, C2=664, C4=73, S1=60 (near-bound), S3=33, alpha=-0.68
+  Count: 4/10 parameters at bounds
+
+Both designs saturate the same corner: B1→upper, B2→lower, C3→lower, S2→lower.
+This is a different corner from the unconstrained exploitation (which drove AR→0
+via B3→lower, C2→upper), confirming that the AR constraint blocked one corner
+but the surrogate has a second exploitable region.
+
+CD physical plausibility check:
+--------------------------------
+BO best: CD_integrated = 0.006739 at CL≈0.206, AR=2.547
+  Cfx_mean ≈ 0.0083 → estimated area-weighted CD_friction ≈ 0.002 (Cfx_mean/~4×,
+  per the Cfx_mean vs Cfx_area_avg ratio documented for the GA reference design)
+  → implied CD_pressure ≈ 0.0047
+
+  Theoretical induced drag floor at CL=0.206, AR=2.5, e≈0.8:
+    CD_i = CL² / (π × AR × e) ≈ 0.04 / 6.28 ≈ 0.0064
+
+  CD_integrated (0.0067) is at or below the induced drag floor alone, leaving
+  essentially zero budget for profile drag. This is physically implausible —
+  a well-designed BWB at these conditions should have CD ≈ 0.011–0.015.
+
+Conclusion:
+-----------
+The AR≥2.5 constraint successfully blocked the flat-wing degenerate corner
+(unconstrained best CD ≈ 0.003 → constrained best CD ≈ 0.006), confirming that
+the unconstrained exploitation was real. However, the constrained designs still
+show 4–5/10 parameters at bounds and CD values at or below the theoretical
+induced drag floor. The surrogate exploitation is not fully resolved by the AR
+constraint alone — it has migrated to a new boundary corner.
+
+This is consistent with the DrivAer structural exploitation finding: the Transolver
+and BlendedNet surrogates both have landscapes that reward boundary-saturated
+designs across multiple distinct corners of the parameter space.
+
+Note: no formal LLM diagnostic suite exists for BlendedNet (unlike DrivAer_Star);
+this assessment is based on manual parameter inspection and physical drag estimates.

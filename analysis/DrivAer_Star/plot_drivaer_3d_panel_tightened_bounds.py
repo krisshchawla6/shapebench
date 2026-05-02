@@ -199,13 +199,14 @@ def main():
                 color = METHOD_COLORS.get(name, "#333333")
                 ax.set_title(
                     f"{name}\n{cd_str}",
-                    fontsize=9,
+                    fontsize=14,
                     fontweight="bold",
                     color="white",
+                    pad=2,
                     bbox=dict(boxstyle="round,pad=0.3", facecolor=color, alpha=0.85),
                 )
 
-        axes[row_idx][0].set_ylabel(view_label, fontsize=9, rotation=90,
+        axes[row_idx][0].set_ylabel(view_label, fontsize=14, rotation=90,
                                      labelpad=4, va="center")
 
     fig.suptitle(
@@ -213,7 +214,7 @@ def main():
         "\n"
         r"car\_size $\in [0.9, 1.1]$,  diffusor\_angle $\in [-4^\circ, 4^\circ]$"
         "  |  side profile and rear quarter views",
-        fontsize=10, y=1.01,
+        fontsize=15, y=1.01,
     )
 
     stem = "DrivAer_Star_3d_panel_best_designs_tightened_bounds_vtk_E"

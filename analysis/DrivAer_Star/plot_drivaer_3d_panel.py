@@ -357,14 +357,15 @@ def main():
                 color = METHOD_COLORS.get(name, "#333333")
                 ax.set_title(
                     f"{name}\n{cd_str}",
-                    fontsize=9,
+                    fontsize=14,
                     fontweight="bold",
                     color="white",
+                    pad=2,
                     bbox=dict(boxstyle="round,pad=0.3", facecolor=color, alpha=0.85),
                 )
 
         # Row label on left
-        axes[row_idx][0].set_ylabel(view_label, fontsize=9, rotation=90,
+        axes[row_idx][0].set_ylabel(view_label, fontsize=14, rotation=90,
                                      labelpad=4, va="center")
 
     variant_label = "" if variant == "cd_only" else " ($C_D$-constrained)"
@@ -372,7 +373,7 @@ def main():
         f"DrivAer Star ({body_label}, vtk_{body}){variant_label} — Best Design Shapes\n"
         "(side profile shows ramp/hood/trunklid/diffusor angles; "
         "rear quarter shows trunklid, diffusor, greenhouse)",
-        fontsize=10, y=1.01,
+        fontsize=15, y=1.01,
     )
 
     suffix = f"_vtk_{body}" + ("_cd_cl_constrained" if variant == "cd_cl_constrained" else "")
