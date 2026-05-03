@@ -106,7 +106,11 @@ def load_v3(body="E"):
     """May be in-progress (do NOT extend past actual length).
     Runs shorter than 50% of the longest run are excluded (cancelled/failed)."""
     if body == "E":
-        pattern = os.path.join(RESULTS_DIR, "run_v3_*_n10000", "results.csv")
+        pattern = os.path.join(
+            RESULTS_DIR,
+            "run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_*_flash_2_5_n10000",
+            "results.csv",
+        )
     else:
         pattern = os.path.join(
             RESULTS_DIR,
@@ -116,6 +120,9 @@ def load_v3(body="E"):
     curves = _load_curves(glob.glob(pattern), "best_reward")
     if curves:
         max_len = max(len(c) for c in curves)
+        # att19 (Estate) was stalled at ~3,180/10,000 evals and cancelled; att5 ran
+        # all 1,000 iters but only accumulated ~3,010 evals due to an rng.randint bug.
+        # Both fall below the 50% threshold and are excluded here.
         curves = [c for c in curves if len(c) >= max_len * 0.5]
     return curves
 

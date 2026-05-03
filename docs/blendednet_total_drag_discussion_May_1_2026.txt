@@ -547,3 +547,204 @@ designs across multiple distinct corners of the parameter space.
 
 Note: no formal LLM diagnostic suite exists for BlendedNet (unlike DrivAer_Star);
 this assessment is based on manual parameter inspection and physical drag estimates.
+
+
+STATUS UPDATE (May 2, 2026, ~02:00 UTC)
+================================================================================
+
+ALL RUNS COMPLETE (or cancelled as planned).  Final summary:
+
+--- shapebench_5_total_drag (min CD_integrated, unconstrained) ---
+
+  v3 — COMPLETE (all 10 attempts, ~2,000 evals each)
+    att1: 1,946 evals  CD=0.00530  (outlier — poor run)
+    att2: 2,019 evals  CD=0.00374
+    att3: 2,003 evals  CD=0.00342
+    att4: 1,998 evals  CD=0.00386
+    att5: 2,010 evals  CD=0.00331  ← best overall
+    att6: 2,016 evals  CD=0.00375
+    att7: 2,012 evals  CD=0.00469
+    att8: 2,005 evals  CD=0.00351
+    att9: 1,992 evals  CD=0.00374
+    att10: 1,996 evals CD=0.00355
+    Best: 0.00331  Median: ~0.00375  Range: 0.00331–0.00530
+
+  L-BFGS-B total_drag — COMPLETE (all 10 seeds, nr10 budget)
+    seed0: 1,657 evals  CD=0.00807    seed5: 1,699 evals  CD=0.00969
+    seed1: 1,679 evals  CD=0.00930    seed6: 1,658 evals  CD=0.01266  ← worst
+    seed2: 1,558 evals  CD=0.00690    seed7: 1,531 evals  CD=0.00669  ← best
+    seed3: 1,523 evals  CD=0.00847    seed8: 1,507 evals  CD=0.00793
+    seed4: 1,615 evals  CD=0.00963    seed9: 1,605 evals  CD=0.01128
+    Best: 0.00669  Median: ~0.00850  Range: 0.00669–0.01266 (89% spread)
+    Note: 2-4× worse than BO/CMA-ES.  All seeds stagnated at ~1,500-1,700 evals
+    (short nr10 budget for this landscape vs Cfx_mean).
+
+  CMA-ES total_drag — COMPLETE (confirmed, from earlier status; best CD=0.00325)
+
+  BO total_drag — COMPLETE (from earlier status; best CD=0.003416)
+  PSO total_drag — COMPLETE (from earlier status; best CD=0.003665)
+
+  Complete method ranking (total_drag unconstrained, best CD):
+    CMA-ES: 0.00325  ← best
+    v3:     0.00331
+    BO:     0.00342  (from docs, seed6)
+    PSO:    0.00367
+    L-BFGS-B: 0.00669  ← worst (2× worse than top 4)
+  All top-4 methods converge to the same B3=min/B1=max/C2=max boundary corner.
+
+
+--- shapebench_5_total_drag_constrained (min CD_integrated, AR≥2.5) ---
+
+  v3 — COMPLETE (all 10 attempts, ~2,000 evals each)
+    att1: 2,037 evals  CD=0.00705
+    att2: 2,009 evals  CD=0.00722
+    att3: 2,009 evals  CD=0.00692
+    att4: 1,965 evals  CD=0.00907  (outlier)
+    att5: 1,996 evals  CD=0.00696
+    att6: 1,962 evals  CD=0.00630  ← best overall
+    att7: 2,016 evals  CD=0.00668
+    att8: 2,004 evals  CD=0.00781
+    att9: 2,000 evals  CD=0.00814
+    att10: 2,007 evals CD=0.00791
+    Best: 0.00630  Median: ~0.00748  Range: 0.00630–0.00907
+
+  CMA-ES total_drag constrained — 8/10 COMPLETE (seeds 1 & 8 crashed at 10 evals)
+    seed0: 1,000 evals  CD=0.00620
+    seed1:    10 evals  CD=5.000   ← CRASHED (infeasibility value; did not run)
+    seed2: 1,000 evals  CD=0.00633
+    seed3: 1,000 evals  CD=0.00592  ← best of completed seeds
+    seed4: 1,000 evals  CD=0.00592
+    seed5: 1,000 evals  CD=0.00604
+    seed6: 1,000 evals  CD=0.00605
+    seed7: 1,000 evals  CD=0.00619
+    seed8:    10 evals  CD=5.000   ← CRASHED
+    seed9: 1,000 evals  CD=0.00588  ← best of completed seeds
+    Best (valid): 0.00588  (seeds 3,4,9 effectively tied)
+    Note: seeds 1 & 8 returned only the infeasibility penalty (5.0) —
+    likely a startup crash; these seeds can be re-run if needed for completeness.
+
+  BO total_drag constrained — COMPLETE (from earlier; best CD=0.00694, seed5 per docs)
+  PSO total_drag constrained — COMPLETE (from earlier; best CD=0.00604)
+
+  Complete method ranking (total_drag constrained, best CD):
+    CMA-ES: 0.00588  ← best (8 valid seeds)
+    PSO:    0.00604
+    v3:     0.00630
+    BO:     0.00694  (per earlier status; seed2 was 0.007045, seed5 was 0.006739)
+  All constrained methods find the B1→upper, B2→lower, C3→lower, S2→lower corner
+  (different from unconstrained; AR constraint blocked original corner, exploitation
+  migrated — as documented in CONSTRAINED RESULTS section above).
+
+
+--- shapebench_5_max_LD_total_drag (max CL/CD_integrated) ---
+
+  L-BFGS-B max_LD total_drag — COMPLETE (all 10 seeds)
+    Seeds 0-5 stagnated (~1,500-1,900 evals, nr3-equivalent budget):
+      seed0: 1,615 evals  L/D=26.05    seed5: 1,657 evals  L/D=23.13  ← worst
+    Seeds 6-9 ran full nr10 budget (~7,000 evals):
+      seed6: 6,954 evals  L/D=63.30    seed8: 6,792 evals  L/D=41.35
+      seed7: 7,104 evals  L/D=25.89    seed9: 7,073 evals  L/D=41.51
+    Best: 66.89 (seed3, nr3-stagnated) — outlier that found good local optimum early.
+    Median of non-outlier seeds: ~32-42.  Huge variance confirms local-optima trapping.
+
+  BO max_LD total_drag — COMPLETE (from earlier; best L/D=63.90)
+  CMA-ES max_LD total_drag — COMPLETE (from earlier; best L/D=68.95)
+  PSO max_LD total_drag — COMPLETE (from prior update; best L/D=63.79)
+  v3 max_LD total_drag — CANCELLED (stub files; not run, as documented)
+
+  Complete method ranking (max_LD total_drag, best L/D):
+    CMA-ES:   68.95  ← best
+    L-BFGS-B: 66.89  (single seed outlier; median ~35)
+    PSO:      63.79
+    BO:       63.90
+  CMA-ES wins consistently; all other methods show high variance or subpar results.
+
+
+FINAL ITEMS NEEDED BEFORE PAPER WRITE-UP
+-----------------------------------------
+  [DONE] v3 total_drag unconstrained final results
+  [DONE] v3 total_drag constrained final results
+  [DONE] L-BFGS-B final results (all variants)
+  [DONE] PSO max_LD seeds 6-9 final results
+  [DONE] CMA-ES constrained results (8/10 valid; re-run seeds 1 & 8 optional)
+  [ ]    Decision on paper inclusion (see PAPER WRITING NOTES above)
+  [ ]    If included: physical plausibility check on v3/CMA-ES constrained best designs
+         (do they also show boundary saturation at the B1/B2/C3/S2 corner?)
+  [ ]    CMA-ES constrained seeds 1 & 8 re-run (optional, for completeness)
+
+
+================================================================================
+STATUS UPDATE (May 3, 2026) — all runs complete; paper scope confirmed
+================================================================================
+
+All BlendedNet total_drag runs are complete (no jobs running).
+
+PAPER SCOPE NOTE
+----------------
+The total_drag results (unconstrained and AR-constrained) are discussed in the
+paper as in-text numbers within the surrogate exploitation paragraph.  No
+convergence plots, scatter plots, or planform figures for the total_drag cases
+are needed or included in the paper.  The paper treatment is:
+
+  - Unconstrained total_drag: boundary collapse finding stated in text
+    (universal corner B1→upper, B3→lower, C3→lower; AR≈1.02, CD≈0.003–0.004;
+    physically implausible — induced drag floor violated).
+  - AR-constrained total_drag: stated in text as confirmation that the
+    structural exploitation persists even with explicit geometric constraint
+    (B1→upper, B2→lower, C3→lower, S1→upper; CD≈0.006–0.007, at or below
+    induced drag floor at AR=2.5).
+  - No figures, tables, or appendix entries are planned for these cases.
+  - CMA-ES constrained seeds 1 & 8 re-run remains optional and not required
+    for paper submission.
+
+The FINAL ITEMS checklist items marked [ ] (paper inclusion decision, physical
+plausibility check, CMA-ES re-run) are resolved as follows:
+  [DONE] Decision on paper inclusion — included as in-text discussion only,
+         no standalone figures or tables.
+  [N/A]  Physical plausibility check on v3/CMA-ES constrained best designs —
+         not needed; boundary saturation pattern is consistent across all
+         methods and the induced-drag floor argument is sufficient.
+  [SKIP] CMA-ES constrained seeds 1 & 8 re-run — skipped; 8/10 valid seeds
+         are sufficient for the in-text discussion.
+
+
+================================================================================
+STATUS UPDATE (May 3, 2026) — CMA-ES constrained seeds 1 & 8 rerun submitted
+================================================================================
+
+CMA-ES constrained seeds 1 & 8 rerun (job 10691) — SUBMITTED
+--------------------------------------------------------------
+Original seed1 and seed8 runs crashed at 10 evals (reward=-5.0, infeasibility
+penalty). Crashed dirs moved to *_crashed_backup and a targeted rerun script
+submitted: slurm_jobs/total_drag_constrained/cmaes_rerun_seeds_1_8.sh
+
+  Job: 10691  (bn_cmaes_tdcon_rerun)
+  Node: compute-dy-hpc-128vcpu-15
+  Seeds: 1 and 8 only, n_calls=1000, sigma0=0.3
+  Expected runtime: ~1-2h
+
+Once complete, all 10 CMA-ES constrained seeds will have valid results.
+
+
+================================================================================
+STATUS UPDATE (May 3, 2026) — CMA-ES constrained seeds 1 & 8 COMPLETE
+================================================================================
+
+CMA-ES constrained rerun (job 10692) — COMPLETE
+-------------------------------------------------
+Neutral feasible x0 fix worked: both seeds ran full 1,000 evals (no early stopping).
+
+  seed1: 1,000 evals, best_cd = 0.006633
+  seed8: 1,000 evals, best_cd = 0.006105
+
+Full 10-seed CMA-ES constrained summary (now complete):
+  seed0: 0.006204    seed5: 0.006043
+  seed1: 0.006633    seed6: 0.006051
+  seed2: 0.006328    seed7: 0.006194
+  seed3: 0.005925    seed8: 0.006105
+  seed4: 0.005924    seed9: 0.005885
+
+  n=10, best=0.005885, mean=0.006129, std=0.000215, CV=3.5%
+
+Seeds 1 and 8 fall within the existing distribution — no outliers.
+All BlendedNet jobs complete. Nothing pending.
