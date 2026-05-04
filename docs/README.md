@@ -64,6 +64,15 @@ pip install google-generativeai aerosandbox neuralfoil numpy pandas matplotlib n
 
 Additional per-environment dependencies are listed in each environment's folder.
 
+**SuperWing** requires `cfdpost` (from GitHub for the `wing` submodule) and `flowvae` (the `floGen` library):
+
+```bash
+pip install --no-deps git+https://github.com/YangYunjia/cfdpost.git
+pip install git+https://github.com/YangYunjia/floGen.git
+```
+
+`cfdpost` also has a one-line bug in `multi_section_wing.py` that must be patched after install: in `_reconstruct_surface_grids`, change `yus[:-1]` → `yus` on the line that builds `zzs` in the `rtcs` branch (line ~212). The ATsurf_M model weights are downloaded automatically from `yunplus/AeroTransformer` on first run.
+
 ### 3. Run a benchmark
 
 ```bash

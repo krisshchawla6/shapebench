@@ -47,3 +47,7 @@ environments/BlendedNet/model/.torchvision_lock
 
 # Mesh cache: generated .stl files keyed by design params, recreatable via generate_mesh()
 environments/BlendedNet/mesh_cache/
+
+# Personal docs logs — tracked in private repo (jguo96/ShapeEvolve_docs)
+docs/
+!docs/README.md
