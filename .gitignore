@@ -51,3 +51,4 @@ environments/BlendedNet/mesh_cache/
 # Personal docs logs — tracked in private repo (jguo96/ShapeEvolve_docs)
 docs/
 !docs/README.md
+docs_backup*/
