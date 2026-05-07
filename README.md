@@ -12,7 +12,7 @@
 | Environments | 8 |
 | Geometry types | 2D airfoil · 3D wing · BWB aircraft · automotive · supersonic transport · drone |
 | Surrogate types | Neural network · VLM · FAST-OAD |
-| High-fidelity solvers | OpenFOAM · FEniCS · VortexNet CFD |
+| High-fidelity solvers | Flow360 · FEniCS · VortexNet CFD |
 | Optimization methods | 7 |
 
 ---
