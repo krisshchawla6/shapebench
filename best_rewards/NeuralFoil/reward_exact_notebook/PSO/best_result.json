@@ -1,0 +1,15 @@
+{
+  "method": "PSO",
+  "description": "Particle Swarm Optimisation (25 seeds / runs, 120 particles, up to 500 iters / ~60k evals)",
+  "best_reward": -0.07933935,
+  "median_reward": -0.080998,
+  "n_seeds": 25,
+  "max_eval_budget": 59999.0,
+  "median_eval_budget": 59999.0,
+  "best_fitness": 0.07933935,
+  "median_fitness": 0.080998,
+  "final_min_best": 0.07933935,
+  "final_median_best": 0.080998,
+  "final_n_active": 25,
+  "trajectory_csv": "trajectory_fitness_total.csv"
+}

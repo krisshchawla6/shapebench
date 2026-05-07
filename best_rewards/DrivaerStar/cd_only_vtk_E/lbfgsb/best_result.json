@@ -1,0 +1,10 @@
+{
+  "reward": -0.066184,
+  "Cd": 0.06618359,
+  "drag": 156.8551,
+  "lift": -221.0906,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/SAVED_DIRS_run_lbfgsb_cd_only_drivaer_star_nr3/run_lbfgsb_cd_only_seed5_nr3",
+    "design_file": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/SAVED_DIRS_run_lbfgsb_cd_only_drivaer_star_nr3/run_lbfgsb_cd_only_seed5_nr3/call_14473_r1/design.json"
+  }
+}

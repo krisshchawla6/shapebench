@@ -1,0 +1,19 @@
+{
+  "reward": -10.0,
+  "method": "openevolve_adapter",
+  "seed": 2,
+  "CL": null,
+  "CD": null,
+  "L_D": null,
+  "CM": null,
+  "total_violation": null,
+  "feasible": null,
+  "n_solved": null,
+  "fitness_objective": null,
+  "fitness_penalty": null,
+  "fitness_total": null,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/openevolve_adapter/multipoint_cl_avg_cd/seed2",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/openevolve_adapter/multipoint_cl_avg_cd/seed2/best_design.json"
+  }
+}

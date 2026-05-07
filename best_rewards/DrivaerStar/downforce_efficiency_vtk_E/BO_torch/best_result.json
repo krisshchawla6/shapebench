@@ -1,0 +1,10 @@
+{
+  "reward": 2.365559,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_BO_torch_downforce_efficiency_vtk_E_seed5_n1000",
+    "design_file": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_BO_torch_downforce_efficiency_vtk_E_seed5_n1000/iter_0826/iter_0826.json"
+  },
+  "Cd": 0.08415788,
+  "drag": 199.4542,
+  "lift": -471.8205
+}

@@ -1,0 +1,23 @@
+{
+  "Dihedral angle": 9.8,
+  "Max Wing Blend": 115.0,
+  "Inlet Angle 1": 7.0,
+  "Inlet Angle 2": 1.0,
+  "Wing Position": 0.316,
+  "Rear Point": [
+    7300.0,
+    0.0,
+    0.0
+  ],
+  "Inlet Location": 0.5,
+  "NACA 4-digit code": "4412",
+  "Fore Top Angle": 10.0,
+  "Aft Top Angle": 27.3,
+  "Top Height Aft": 220.0,
+  "Bottom Height Aft": 146.0,
+  "Wing span": 16000.0,
+  "Rear tail offset": 1195.0,
+  "Root Chord": 1550.0,
+  "Tail Root chord": 1125.0,
+  "File Path_0": "/scratch/ShapeEvolve/results/CCA_drone/v3/cca_ld_ratio_single/seed6/iter_21_s0/mesh/design_dihe9.8_max_115.0_inle7.0_inle1.0_wing0.3_rear7300.0_inle0.5_naca2.9_fore10.0_aft_27.3_top_220.0_bot/design.stl"
+}

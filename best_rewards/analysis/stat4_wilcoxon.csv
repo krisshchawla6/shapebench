@@ -1,0 +1,20 @@
+Method A,Method B,W-stat,p-value,Significant (p<0.05),Better method
+BO,OpenEvolve,149.0,0.0,True,BO
+BO,L-BFGS-B,579.0,0.0002,True,BO
+CMA-ES,L-BFGS-B,0.0,0.0005,True,CMA-ES
+GA,OpenEvolve,429.0,0.0069,True,GA
+GA,L-BFGS-B,774.0,0.0095,True,GA
+L-BFGS-B,OpenEvolve,481.0,0.0243,True,L-BFGS-B
+BO,CMA-ES,28.0,0.0691,False,CMA-ES
+BO,LLM (v3),1284.0,0.1064,False,BO
+GA,LLM (v3),927.0,0.1328,False,GA
+OpenEvolve,Shinka,301.0,0.1461,False,Shinka
+GA,Shinka,304.0,0.1578,False,GA
+L-BFGS-B,LLM (v3),908.5,0.2081,False,LLM (v3)
+BO,Shinka,321.0,0.2315,False,BO
+CMA-ES,GA,30.0,0.2787,False,CMA-ES
+CMA-ES,LLM (v3),39.0,0.3967,False,LLM (v3)
+LLM (v3),OpenEvolve,683.0,0.6084,False,LLM (v3)
+BO,GA,1065.0,0.6437,False,BO
+L-BFGS-B,Shinka,376.5,0.6525,False,L-BFGS-B
+LLM (v3),Shinka,407.0,0.9735,False,LLM (v3)

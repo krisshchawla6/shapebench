@@ -1,0 +1,19 @@
+{
+  "reward": -0.016417,
+  "method": "lbfgsb",
+  "seed": 2,
+  "CL": 0.0,
+  "CD": 0.0,
+  "L_D": 0.0,
+  "CM": 0.0,
+  "total_violation": 0.0,
+  "feasible": 1.0,
+  "n_solved": 6.0,
+  "fitness_objective": -0.01641741,
+  "fitness_penalty": -0.0,
+  "fitness_total": -0.01641741,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/multipoint_hpa/seed2",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/multipoint_hpa/seed2/call_02960_r0/design.json"
+  }
+}

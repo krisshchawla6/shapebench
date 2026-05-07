@@ -1,0 +1,6 @@
+{
+  "method": "openevolve",
+  "task": "cca_ld_ratio_single",
+  "sample_dir": "/scratch/ShapeEvolve/results/CCA_drone/openevolve/cca_ld_ratio_single/seed1/oe_cases/eval_bbc49a9b/sample_0",
+  "param_file": "/scratch/ShapeEvolve/results/CCA_drone/openevolve/cca_ld_ratio_single/seed1/oe_cases/eval_bbc49a9b/sample_0/design_0.json"
+}

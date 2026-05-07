@@ -1,0 +1,9 @@
+{
+  "reward": 400.0,
+  "median_reward": 0.789751,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/multipoint_avg_drag_reduction/run_shinka_adapter_multipoint_avg_drag_reduction_attempt_3"
+  }
+}

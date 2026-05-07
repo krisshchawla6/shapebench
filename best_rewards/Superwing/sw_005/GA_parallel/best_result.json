@@ -1,0 +1,11 @@
+{
+  "reward": -0.022072,
+  "CL": 0.548733,
+  "CD": 0.02205607,
+  "L_D": 24.879,
+  "CM": 0.725348,
+  "source": {
+    "sample_dir": "/scratch/ShapeEvolve/environments/SuperWing/results/GA_parallel/sw_005_s4",
+    "design_file": "/scratch/ShapeEvolve/environments/SuperWing/results/GA_parallel/sw_005_s4/iter_0071_p019/design.json"
+  }
+}

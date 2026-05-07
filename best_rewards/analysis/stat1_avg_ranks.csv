@@ -1,0 +1,9 @@
+method,avg_rank
+CMA-ES,1.632
+BO,2.602
+GA,2.736
+LLM (v3),2.964
+Shinka,3.475
+L-BFGS-B,3.7
+OpenEvolve,4.093
+Islands (GA),5.0

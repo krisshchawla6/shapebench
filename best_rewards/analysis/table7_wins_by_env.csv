@@ -1,0 +1,10 @@
+env,BO,CMA-ES,GA,L-BFGS-B,LLM (v3),Shinka
+BlendedNet,5.0,4.0,1.0,1.0,1.0,0.0
+CCA,0.0,0.0,0.0,0.0,1.0,0.0
+Ceras,0.0,0.0,0.0,0.0,0.0,1.0
+DrivaerStar,8.0,0.0,0.0,0.0,5.0,0.0
+NeuralFoil,0.0,0.0,0.0,0.0,2.0,0.0
+SuperSonic_Transport_aircraft,1.0,0.0,11.0,0.0,6.0,4.0
+Superwing,16.0,0.0,4.0,10.0,0.0,0.0
+VortexNet,2.0,7.0,0.0,0.0,1.0,0.0
+Total problems,,,,,,

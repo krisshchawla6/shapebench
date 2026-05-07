@@ -1,0 +1,13 @@
+{
+  "wing_mac_x": 17.50613566981573,
+  "wing_ar": 9.87824698792442,
+  "vt_ar": 3.54887401945096,
+  "ht_ar": 3.4298094651580913,
+  "wing_taper": 0.41964465125837624,
+  "wing_sweep": 27.05659379047638,
+  "cruise_altitude_ft": 32000,
+  "engine_count": 2,
+  "tail_type": 1,
+  "engine_position": 1,
+  "name": "iter_18_s0"
+}

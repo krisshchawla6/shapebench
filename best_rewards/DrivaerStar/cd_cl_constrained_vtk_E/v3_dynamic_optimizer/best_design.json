@@ -1,0 +1,23 @@
+{
+  "car_size": 0.8,
+  "car_width": -0.039620511455835554,
+  "car_len": 0.1,
+  "ramp_angle": 6.988294571375039,
+  "front_bumper_length": -0.1,
+  "wind_screen_x": -4.9928029644417665e-05,
+  "wind_screen_z": -0.006026501054908491,
+  "side_mirrors_x": 0.05,
+  "side_mirrors_z": 0.05,
+  "rear_window_x": -0.05,
+  "rear_window_z": 0.05,
+  "trunklid_angle": 4.772915706780945,
+  "trunklid_x": -0.05,
+  "trunklid_z": 0.05,
+  "diffusor_angle": 1.5347895959814746,
+  "car_green_house_angle": -8.0,
+  "car_front_hood_angle": -8.0,
+  "car_air_intake_angle": -6.769248031861759,
+  "tires_diameter": -0.013,
+  "tires_width": -0.015,
+  "name": "hybrid_taper_optimizer_v1"
+}

@@ -1,0 +1,19 @@
+{
+  "reward": 141.216265,
+  "method": "GA",
+  "seed": 2,
+  "CL": 0.773786,
+  "CD": 0.00547944,
+  "L_D": 141.2163,
+  "CM": 0.007401,
+  "total_violation": 0.0,
+  "feasible": 0.0,
+  "n_solved": 0.0,
+  "fitness_objective": 141.21626517,
+  "fitness_penalty": -0.0,
+  "fitness_total": 141.21626517,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/GA/ld_ratio_constrained_m02_re1e7_normalized_conf95/seed2",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/GA/ld_ratio_constrained_m02_re1e7_normalized_conf95/seed2/iter_0019_p001/design.json"
+  }
+}

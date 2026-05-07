@@ -1,0 +1,9 @@
+,BlendedNet,CCA,Ceras,DrivaerStar,NeuralFoil,SuperSonic_Transport_aircraft,Superwing,VortexNet
+BlendedNet,1.0,0.6,0.2,-0.6,-0.2,0.2,0.2,0.3
+CCA,0.6,1.0,-0.25,-1.0,0.2,-0.143,-0.086,0.5
+Ceras,0.2,-0.25,1.0,0.8,-0.4,0.429,0.143,-0.3
+DrivaerStar,-0.6,-1.0,0.8,1.0,-0.2,0.2,0.2,-0.4
+NeuralFoil,-0.2,0.2,-0.4,-0.2,1.0,0.6,-1.0,0.8
+SuperSonic_Transport_aircraft,0.2,-0.143,0.429,0.2,0.6,1.0,-0.429,0.8
+Superwing,0.2,-0.086,0.143,0.2,-1.0,-0.429,1.0,-0.8
+VortexNet,0.3,0.5,-0.3,-0.4,0.8,0.8,-0.8,1.0

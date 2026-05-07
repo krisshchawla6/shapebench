@@ -1,0 +1,21 @@
+{
+  "dihedral_angle": 13.008562576033373,
+  "max_wing_blend": 437.95525643611865,
+  "inlet_angle_1": 37.62959559112622,
+  "inlet_angle_2": 6.383040838281629,
+  "wing_position": 0.3588155598144449,
+  "rear_point_x": 6301.309349168787,
+  "inlet_location": 0.5706139462380709,
+  "naca_code": 2.722264777051591,
+  "fore_top_angle": 3.0088046654547385,
+  "aft_top_angle": 27.356427424192347,
+  "top_height_aft": 78.69610263303494,
+  "bottom_height_aft": 205.19753519729073,
+  "wing_span": 11224.209201630416,
+  "rear_tail_offset": 1453.2969274996021,
+  "root_chord": 1530.4237192124647,
+  "tail_root_chord": 1190.310166838036,
+  "velocity_magnitude": 50.0,
+  "alpha": 4.0,
+  "altitude_m": 500.0
+}

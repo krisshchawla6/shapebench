@@ -1,0 +1,19 @@
+{
+  "reward": -161.650365,
+  "method": "v3_dynamic_optimizer",
+  "seed": 0,
+  "CL": 0.549263,
+  "CD": 0.0037827,
+  "L_D": 145.2041,
+  "CM": 0.078754,
+  "total_violation": 0.6137089,
+  "feasible": 0.0,
+  "n_solved": 0.0,
+  "fitness_objective": 145.20408497,
+  "fitness_penalty": -306.85444955,
+  "fitness_total": -161.65036458,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/v3_dynamic_optimizer/ld_ratio_alpha7_normalized/seed0",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/v3_dynamic_optimizer/ld_ratio_alpha7_normalized/seed0/iter_69_o3.json"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "method": "BO_torch",
+  "task": "cca_ld_ratio_single",
+  "seed": 0,
+  "design_dir": "/scratch/ShapeEvolve/results/CCA_drone/BO_torch/cca_ld_ratio_single/seed0/iter_0249",
+  "results_csv": "/scratch/ShapeEvolve/results/CCA_drone/BO_torch/cca_ld_ratio_single/seed0/results.csv",
+  "param_file": "/scratch/ShapeEvolve/results/CCA_drone/BO_torch/cca_ld_ratio_single/seed0/iter_0249/iter_0249.json"
+}

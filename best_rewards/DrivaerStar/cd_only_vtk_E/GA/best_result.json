@@ -1,0 +1,10 @@
+{
+  "reward": -0.065264,
+  "Cd": 0.06526449,
+  "drag": 154.6768,
+  "lift": -220.4965,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/SAVED_DIRS_run_GA_cd_only_drivaer_star_120p_250i/run_GA_cd_only_120particles_500iterations_attempt_20",
+    "design_file": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/SAVED_DIRS_run_GA_cd_only_drivaer_star_120p_250i/run_GA_cd_only_120particles_500iterations_attempt_20/iter_0143_p009/design.json"
+  }
+}

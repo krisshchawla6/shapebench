@@ -1,0 +1,42 @@
+{
+  "best_reward": 2.106071,
+  "best_seed": 4,
+  "mean_reward": 2.0428597999999996,
+  "n_seeds": 5,
+  "seeds": [
+    {
+      "seed": 0,
+      "reward": 2.104897
+    },
+    {
+      "seed": 1,
+      "reward": 2.061956
+    },
+    {
+      "seed": 2,
+      "reward": 1.880182
+    },
+    {
+      "seed": 3,
+      "reward": 2.061193
+    },
+    {
+      "seed": 4,
+      "reward": 2.106071
+    }
+  ],
+  "CL": null,
+  "CD": null,
+  "L_D": null,
+  "CM": null,
+  "total_violation": null,
+  "feasible": null,
+  "n_solved": null,
+  "fitness_objective": null,
+  "fitness_penalty": null,
+  "fitness_total": null,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/shinka_adapter/max_cl/seed4",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/shinka_adapter/max_cl/seed4/best_design.json"
+  }
+}

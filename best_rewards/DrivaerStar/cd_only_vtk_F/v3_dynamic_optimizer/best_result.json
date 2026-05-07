@@ -1,0 +1,10 @@
+{
+  "reward": -0.033841,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_F_attempt_3_flash_2_5_n6000",
+    "design_file": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_vtk_F_attempt_3_flash_2_5_n6000/iter_544_o6.json"
+  },
+  "Cd": 0.03384081,
+  "drag": 80.2027,
+  "lift": -221.9941
+}

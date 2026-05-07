@@ -1,0 +1,8 @@
+{
+  "method": "cmaes",
+  "task": "cca_ld_ratio_single",
+  "seed": 2,
+  "design_dir": "/scratch/ShapeEvolve/results/CCA_drone/cmaes/cca_ld_ratio_single/seed2/iter_00210",
+  "results_csv": "/scratch/ShapeEvolve/results/CCA_drone/cmaes/cca_ld_ratio_single/seed2/results.csv",
+  "param_file": "/scratch/ShapeEvolve/results/CCA_drone/cmaes/cca_ld_ratio_single/seed2/iter_00210/iter_00210.json"
+}

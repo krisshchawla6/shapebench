@@ -1,0 +1,1 @@
+from .benchmark_cases.sw_020 import Sw020MultipointAvgCdReward

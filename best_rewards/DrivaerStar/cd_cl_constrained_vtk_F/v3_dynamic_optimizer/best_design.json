@@ -1,0 +1,23 @@
+{
+  "car_size": 0.8,
+  "car_width": -0.09961927208248417,
+  "car_len": 0.09346492573526749,
+  "ramp_angle": -6.940070693161822,
+  "front_bumper_length": 0.08988859389134615,
+  "wind_screen_x": 0.01837711992171308,
+  "wind_screen_z": 0.03601239215248572,
+  "side_mirrors_x": 0.04411420655457659,
+  "side_mirrors_z": -0.05,
+  "rear_window_x": -0.04259681421530258,
+  "rear_window_z": -0.04152356730645931,
+  "trunklid_angle": 4.396738495356857,
+  "trunklid_x": 0.05,
+  "trunklid_z": 0.05,
+  "diffusor_angle": 7.377890013735159,
+  "car_green_house_angle": -1.3675520276128776,
+  "car_front_hood_angle": -8.0,
+  "car_air_intake_angle": -4.792460044980082,
+  "tires_diameter": -0.009591937393398234,
+  "tires_width": -0.015,
+  "name": "streamlined_longtail_v1"
+}

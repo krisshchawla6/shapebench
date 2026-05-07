@@ -1,0 +1,5250 @@
+[
+  {
+    "env": "BlendedNet",
+    "task": "multipoint_mach_cd",
+    "task_reward_py": true,
+    "num_method_dirs": 1,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 1,
+    "missing_design_stl_count": 1,
+    "missing_best_reward_folders": [
+      "BO_torch"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "multipoint_mach_range",
+    "task_reward_py": true,
+    "num_method_dirs": 1,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 1,
+    "missing_design_stl_count": 1,
+    "missing_best_reward_folders": [
+      "BO_torch"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "range_optimization",
+    "task_reward_py": true,
+    "num_method_dirs": 1,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 1,
+    "missing_design_stl_count": 1,
+    "missing_best_reward_folders": [
+      "BO_torch"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_flash2_5"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_flash2_5",
+        "method_key": "v3_flash2_5",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_max_LD",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "GA_parallel",
+      "cmaes",
+      "v3_flash2_5"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_flash2_5",
+        "method_key": "v3_flash2_5",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_max_LD_total_drag",
+    "task_reward_py": true,
+    "num_method_dirs": 4,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 4,
+    "missing_design_stl_count": 4,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "cmaes",
+      "lbfgsb"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_max_LD_warmstart_cornerA",
+    "task_reward_py": true,
+    "num_method_dirs": 3,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 3,
+    "missing_design_stl_count": 3,
+    "missing_best_reward_folders": [
+      "GA_parallel",
+      "cmaes",
+      "v3_flash2_5"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_flash2_5",
+        "method_key": "v3_flash2_5",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_total_drag",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "cmaes",
+      "lbfgsb",
+      "v3_flash2_5"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_flash2_5",
+        "method_key": "v3_flash2_5",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_total_drag_constrained",
+    "task_reward_py": true,
+    "num_method_dirs": 4,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 4,
+    "missing_design_stl_count": 4,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "cmaes",
+      "v3_flash2_5"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_flash2_5",
+        "method_key": "v3_flash2_5",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_case5",
+    "task_reward_py": true,
+    "num_method_dirs": 1,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 1,
+    "missing_design_stl_count": 1,
+    "missing_best_reward_folders": [
+      "cmaes"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_case6",
+    "task_reward_py": true,
+    "num_method_dirs": 1,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 1,
+    "missing_design_stl_count": 1,
+    "missing_best_reward_folders": [
+      "lbfgsb"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "static_margin_constrained",
+    "task_reward_py": true,
+    "num_method_dirs": 1,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 1,
+    "missing_design_stl_count": 1,
+    "missing_best_reward_folders": [
+      "BO_torch"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "CCA",
+    "task": "task1_l_d",
+    "task_reward_py": true,
+    "num_method_dirs": 7,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 0,
+    "missing_design_stl_count": 0,
+    "missing_best_reward_folders": [],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": true,
+        "design_params": true,
+        "source_info": true,
+        "design_stl": true
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": true,
+        "design_params": true,
+        "source_info": true,
+        "design_stl": true
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": true,
+        "design_params": true,
+        "source_info": true,
+        "design_stl": true
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": true,
+        "design_params": true,
+        "source_info": true,
+        "design_stl": true
+      },
+      {
+        "folder": "openevolve",
+        "method_key": "openevolve",
+        "best_reward": true,
+        "design_params": true,
+        "source_info": true,
+        "design_stl": true
+      },
+      {
+        "folder": "shinka",
+        "method_key": "shinka",
+        "best_reward": true,
+        "design_params": true,
+        "source_info": true,
+        "design_stl": true
+      },
+      {
+        "folder": "v3",
+        "method_key": "v3",
+        "best_reward": true,
+        "design_params": true,
+        "source_info": true,
+        "design_stl": true
+      }
+    ]
+  },
+  {
+    "env": "Ceras",
+    "task": "fuel_mass",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 1,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "GAp",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3"
+    ],
+    "non_method_folders": [
+      "BO"
+    ],
+    "methods": [
+      {
+        "folder": "GAp",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3",
+        "method_key": "v3",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_cl_constrained_vtk_E",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_cl_constrained_vtk_F",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_cl_constrained_vtk_N",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_super_tight_bounds_vtk_E",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_tight_bounds_vtk_E",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_tightened_bounds_vtk_E",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_vtk_E",
+    "task_reward_py": true,
+    "num_method_dirs": 4,
+    "num_non_method_dirs": 1,
+    "missing_best_reward_count": 4,
+    "missing_design_stl_count": 4,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [
+      "drivaer_star_3d_islands"
+    ],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_vtk_F",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_vtk_N",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "downforce_efficiency_vtk_E",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "downforce_efficiency_vtk_F",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "downforce_efficiency_vtk_N",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "NeuralFoil",
+    "task": "ld_ratio_constrained_m02_re1e7_normalized",
+    "task_reward_py": true,
+    "num_method_dirs": 2,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 2,
+    "missing_design_stl_count": 2,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "NeuralFoil",
+    "task": "reward_exact_notebook",
+    "task_reward_py": true,
+    "num_method_dirs": 4,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 4,
+    "missing_design_stl_count": 4,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio",
+    "task_reward_py": true,
+    "num_method_dirs": 8,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 8,
+    "missing_design_stl_count": 8,
+    "missing_best_reward_folders": [
+      "BO_torch_approx_ld_ratio_500calls",
+      "GA_ld_ratio_20p_20i",
+      "GA_ld_ratio_30p_100i",
+      "lbfgsb_ld_ratio_2r40i",
+      "lbfgsb_ld_ratio_nr3_maxiter200",
+      "openevolve_adapter_ld_ratio_flash25",
+      "shinka_adapter_ld_ratio_flash25",
+      "v3_dynamic_optimizer_ld_ratio_flash25"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx_ld_ratio_500calls",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_ld_ratio_20p_20i",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_ld_ratio_30p_100i",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb_ld_ratio_2r40i",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb_ld_ratio_nr3_maxiter200",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter_ld_ratio_flash25",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter_ld_ratio_flash25",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer_ld_ratio_flash25",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_basic",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_m12_a20",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_m15_a35",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_m18_a15",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "multipoint_avg_drag_reduction",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld_m12_a20",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld_m15_a30",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld_m18_a15",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl_m12_a20",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl_m15_a25",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl_m15_a35",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl_m12_a20",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl_m15_a25",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl_m15_a35",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl_balanced_m12_a20",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl_clheavy_m15_a35",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl_ldheavy_m15_a25",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch_approx",
+      "GA",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch_approx",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_001",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_002",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_003",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_004",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_005",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_006",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_007",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_008",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_009",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_010",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_011",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_012",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_013",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_014",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_015",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_016",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_017",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_018",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_019",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_020",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_021",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_022",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_023",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_024",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_025",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_026",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_027",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_028",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_029",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_030",
+    "task_reward_py": true,
+    "num_method_dirs": 6,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 6,
+    "missing_design_stl_count": 6,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA_parallel",
+      "lbfgsb",
+      "openevolve_adapter",
+      "shinka_adapter",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA_parallel",
+        "method_key": "ga_parallel",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "openevolve_adapter",
+        "method_key": "openevolve",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "shinka_adapter",
+        "method_key": "shinka",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "ld_ratio",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "max_kn",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "multi_cl_min_cd_sub",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "single_pt_ld",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_max_ld_cl",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_max_ld_cm",
+    "task_reward_py": true,
+    "num_method_dirs": 4,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 4,
+    "missing_design_stl_count": 4,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_min_cd_cl",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_min_cd_cl_cm",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_min_cd_kn",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "two_pt_multi",
+    "task_reward_py": true,
+    "num_method_dirs": 5,
+    "num_non_method_dirs": 0,
+    "missing_best_reward_count": 5,
+    "missing_design_stl_count": 5,
+    "missing_best_reward_folders": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "non_method_folders": [],
+    "methods": [
+      {
+        "folder": "BO_torch",
+        "method_key": "bo_torch",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "GA",
+        "method_key": "ga",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "cmaes",
+        "method_key": "cmaes",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "lbfgsb",
+        "method_key": "lbfgsb",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      },
+      {
+        "folder": "v3_dynamic_optimizer",
+        "method_key": "v3_dynamic_optimizer",
+        "best_reward": false,
+        "design_params": false,
+        "source_info": false,
+        "design_stl": false
+      }
+    ]
+  }
+]

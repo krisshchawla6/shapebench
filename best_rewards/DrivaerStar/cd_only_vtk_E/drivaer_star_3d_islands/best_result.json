@@ -1,0 +1,10 @@
+{
+  "reward": -0.085157,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_drivaer_star_3d_islands",
+    "design_file": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_drivaer_star_3d_islands/design_650.json"
+  },
+  "Cd": 0.08515733,
+  "drag": 201.8229,
+  "lift": -157.3984
+}

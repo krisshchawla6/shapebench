@@ -1,0 +1,19 @@
+{
+  "reward": -2282.529857,
+  "method": "cmaes",
+  "seed": 2,
+  "CL": 0.0,
+  "CD": 0.0,
+  "L_D": 0.0,
+  "CM": 0.0,
+  "total_violation": 0.0,
+  "feasible": 0.0,
+  "n_solved": 0.0,
+  "fitness_objective": 0.0,
+  "fitness_penalty": 0.0,
+  "fitness_total": -2282.52985746,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/cmaes/multipoint_re_robustness/seed2",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/cmaes/multipoint_re_robustness/seed2/iter_00607/iter_00607.json"
+  }
+}

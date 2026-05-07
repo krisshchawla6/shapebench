@@ -1,0 +1,13 @@
+{
+  "wing_mac_x": 16.0,
+  "wing_ar": 11.0,
+  "vt_ar": 6.0,
+  "ht_ar": 6.0,
+  "wing_taper": 0.6221897205475778,
+  "wing_sweep": 30.0,
+  "cruise_altitude_ft": 30000,
+  "engine_count": 2,
+  "tail_type": 0,
+  "engine_position": 1,
+  "name": "design"
+}

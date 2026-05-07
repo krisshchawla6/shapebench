@@ -1,0 +1,8 @@
+{
+  "method": "GA",
+  "task": "cca_ld_ratio_single",
+  "seed": 2,
+  "design_dir": "/scratch/ShapeEvolve/results/CCA_drone/GA/cca_ld_ratio_single/seed2/iter_0012_p001",
+  "results_csv": "/scratch/ShapeEvolve/results/CCA_drone/GA/cca_ld_ratio_single/seed2/results.csv",
+  "param_file": "/scratch/ShapeEvolve/results/CCA_drone/GA/cca_ld_ratio_single/seed2/iter_0012_p001/design.json"
+}

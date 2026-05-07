@@ -1,0 +1,11 @@
+{
+  "reward": 17.195866440644615,
+  "CL": null,
+  "CD": null,
+  "L_D": null,
+  "CM": null,
+  "source": {
+    "sample_dir": "/scratch/ShapeEvolve/environments/SuperWing/results/openevolve_adapter/sw_021_s4",
+    "design_file": "/scratch/ShapeEvolve/environments/SuperWing/results/openevolve_adapter/sw_021_s4/best_design.json"
+  }
+}

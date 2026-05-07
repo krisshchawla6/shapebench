@@ -1,0 +1,9 @@
+{
+  "reward": -0.002554,
+  "median_reward": -0.002654,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/sub_min_cd_cl/run_openevolve_adapter_sub_min_cd_cl_attempt_2"
+  }
+}

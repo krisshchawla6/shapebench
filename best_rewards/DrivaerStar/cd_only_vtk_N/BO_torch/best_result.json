@@ -1,0 +1,10 @@
+{
+  "reward": -0.049557,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_N_seed8_n1000",
+    "design_file": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_BO_torch_cd_only_vtk_N_seed8_n1000/iter_0202/iter_0202.json"
+  },
+  "Cd": 0.04955702,
+  "drag": 117.4501,
+  "lift": 1690.7962
+}

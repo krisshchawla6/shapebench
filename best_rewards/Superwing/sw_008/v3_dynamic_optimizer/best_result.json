@@ -1,0 +1,11 @@
+{
+  "reward": -0.026929,
+  "CL": 0.549406,
+  "CD": 0.02692534,
+  "L_D": 20.4048,
+  "CM": 0.560308,
+  "source": {
+    "sample_dir": "/scratch/ShapeEvolve/environments/SuperWing/results/v3_dynamic_optimizer/sw_008_s2",
+    "design_file": "/scratch/ShapeEvolve/environments/SuperWing/results/v3_dynamic_optimizer/sw_008_s2/iter_45_s0.json"
+  }
+}

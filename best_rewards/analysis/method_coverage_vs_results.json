@@ -1,0 +1,1883 @@
+[
+  {
+    "env": "BlendedNet",
+    "task": "multipoint_mach_cd",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "multipoint_mach_range",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "range_optimization",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_flash2_5"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_flash2_5"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_max_LD",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "ga_parallel",
+      "v3_flash2_5"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "ga_parallel",
+      "v3_flash2_5"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_max_LD_total_drag",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga_parallel",
+      "lbfgsb"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga_parallel",
+      "lbfgsb"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_max_LD_warmstart_cornerA",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "cmaes",
+      "ga_parallel",
+      "v3_flash2_5"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "cmaes",
+      "ga_parallel",
+      "v3_flash2_5"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_total_drag",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga_parallel",
+      "lbfgsb",
+      "v3_flash2_5"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga_parallel",
+      "lbfgsb",
+      "v3_flash2_5"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_total_drag_constrained",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga_parallel",
+      "v3_flash2_5"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga_parallel",
+      "v3_flash2_5"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_case5",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "cmaes"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "cmaes"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_case6",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "lbfgsb"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "lbfgsb"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "static_margin_constrained",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch"
+    ]
+  },
+  {
+    "env": "CCA",
+    "task": "task1_l_d",
+    "results_task_found": true,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3"
+    ]
+  },
+  {
+    "env": "Ceras",
+    "task": "fuel_mass",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_cl_constrained_vtk_E",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_cl_constrained_vtk_F",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_cl_constrained_vtk_N",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_super_tight_bounds_vtk_E",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_tight_bounds_vtk_E",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_tightened_bounds_vtk_E",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_vtk_E",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_vtk_F",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_vtk_N",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "downforce_efficiency_vtk_E",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "downforce_efficiency_vtk_F",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "downforce_efficiency_vtk_N",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "NeuralFoil",
+    "task": "ld_ratio_constrained_m02_re1e7_normalized",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "NeuralFoil",
+    "task": "reward_exact_notebook",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_basic",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_m12_a20",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_m15_a35",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_m18_a15",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "multipoint_avg_drag_reduction",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld_m12_a20",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld_m15_a30",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld_m18_a15",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl_m12_a20",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl_m15_a25",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl_m15_a35",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl_m12_a20",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl_m15_a25",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl_m15_a35",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl_balanced_m12_a20",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl_clheavy_m15_a35",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl_ldheavy_m15_a25",
+    "results_task_found": true,
+    "expected_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_methods": [
+      "bo_torch",
+      "ga",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_001",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_002",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_003",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_004",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_005",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_006",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_007",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_008",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_009",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_010",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_011",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_012",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_013",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_014",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_015",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_016",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_017",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_018",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_019",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_020",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_021",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_022",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_023",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_024",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_025",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_026",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_027",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_028",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_029",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_030",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "ga_parallel",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "ld_ratio",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "max_kn",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "multi_cl_min_cd_sub",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "single_pt_ld",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_max_ld_cl",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_max_ld_cm",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_min_cd_cl",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_min_cd_cl_cm",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_min_cd_kn",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "two_pt_multi",
+    "results_task_found": false,
+    "expected_methods": [],
+    "present_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_methods": [],
+    "extra_methods": [
+      "bo_torch",
+      "cmaes",
+      "ga",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ]
+  }
+]

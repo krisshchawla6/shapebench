@@ -1,0 +1,11 @@
+{
+  "reward": 23.76292172184211,
+  "CL": null,
+  "CD": null,
+  "L_D": null,
+  "CM": null,
+  "source": {
+    "sample_dir": "/scratch/ShapeEvolve/environments/SuperWing/results/shinka_adapter/sw_011_s4",
+    "design_file": "/scratch/ShapeEvolve/environments/SuperWing/results/shinka_adapter/sw_011_s4/best_design.json"
+  }
+}

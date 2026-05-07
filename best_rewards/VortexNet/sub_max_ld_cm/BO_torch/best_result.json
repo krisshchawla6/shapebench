@@ -1,0 +1,11 @@
+{
+  "reward": -45.657546,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/vortexnet/results/run_BO_torch_vortexnet_sub_max_ld_cm_seed2_n2000",
+    "design_file": "/scratch/ShapeEvolve/environments/vortexnet/results/run_BO_torch_vortexnet_sub_max_ld_cm_seed2_n2000/iter_0751/iter_0751.json"
+  },
+  "CL": 0.743674,
+  "CDi": 0.13113,
+  "CM": -0.716441,
+  "L_D": 5.6713
+}

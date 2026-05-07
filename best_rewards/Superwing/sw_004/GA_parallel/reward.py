@@ -1,0 +1,1 @@
+from .benchmark_cases.sw_004 import Sw004MinCdAlternativeVariationReward

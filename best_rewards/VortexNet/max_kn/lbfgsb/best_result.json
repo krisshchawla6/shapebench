@@ -1,0 +1,11 @@
+{
+  "reward": 0.421711,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/vortexnet/results/run_lbfgsb_vortexnet_max_kn_seed1_nr5mi2000",
+    "design_file": "/scratch/ShapeEvolve/environments/vortexnet/results/run_lbfgsb_vortexnet_max_kn_seed1_nr5mi2000/call_00144_r1/design.json"
+  },
+  "CL": 0.80673,
+  "CDi": 0.142248,
+  "CM": -0.760757,
+  "L_D": 0.0
+}

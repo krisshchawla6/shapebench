@@ -1,0 +1,9 @@
+{
+  "reward": 108.795112,
+  "median_reward": 46.827303,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/single_pt_ld_m12_a20/run_shinka_adapter_single_pt_ld_m12_a20_attempt_5"
+  }
+}

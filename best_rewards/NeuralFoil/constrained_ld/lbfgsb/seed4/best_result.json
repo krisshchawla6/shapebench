@@ -1,0 +1,19 @@
+{
+  "reward": 299.225358,
+  "method": "lbfgsb",
+  "seed": 4,
+  "CL": 1.424378,
+  "CD": 0.00475864,
+  "L_D": 299.3246,
+  "CM": -0.099618,
+  "total_violation": 0.0,
+  "feasible": 0.0,
+  "n_solved": 0.0,
+  "fitness_objective": 0.0,
+  "fitness_penalty": 0.0,
+  "fitness_total": 299.22535756,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/constrained_ld/seed4",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/constrained_ld/seed4/call_09807_r1/design.json"
+  }
+}

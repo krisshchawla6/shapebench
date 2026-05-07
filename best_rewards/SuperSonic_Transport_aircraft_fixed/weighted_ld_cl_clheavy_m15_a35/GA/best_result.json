@@ -1,0 +1,15 @@
+{
+  "reward": 45.124449,
+  "median_reward": 28.866667,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/weighted_ld_cl_clheavy_m15_a35/run_GA_weighted_ld_cl_clheavy_m15_a35_attempt_6"
+  },
+  "LtoD": -13.5433,
+  "CL": 0.329918,
+  "CDi": -0.02436,
+  "if_cranked": 0.0,
+  "if_Ttail": 0.0,
+  "if_canard": 0.0
+}

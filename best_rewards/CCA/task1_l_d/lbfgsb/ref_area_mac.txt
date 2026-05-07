@@ -1,0 +1,2 @@
+Reference Area (S_real_m2): 21.467632 m^2
+Mean Aerodynamic Chord (MAC_m): 1.400344 m

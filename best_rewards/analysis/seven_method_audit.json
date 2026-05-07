@@ -1,0 +1,2294 @@
+[
+  {
+    "env": "BlendedNet",
+    "task": "multipoint_mach_cd",
+    "fully_populated": false,
+    "present": [
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch"
+    ],
+    "has_results_but_not_collected": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "multipoint_mach_range",
+    "fully_populated": false,
+    "present": [
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch"
+    ],
+    "has_results_but_not_collected": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "range_optimization",
+    "fully_populated": false,
+    "present": [
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch"
+    ],
+    "has_results_but_not_collected": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "lbfgsb",
+      "cmaes",
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_max_LD",
+    "fully_populated": false,
+    "present": [
+      "cmaes",
+      "GA",
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_max_LD_total_drag",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "cmaes"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_max_LD_warmstart_cornerA",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "v3_dynamic_optimizer",
+      "cmaes"
+    ],
+    "missing_folders_of_7": [
+      "BO_torch",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "GA",
+      "cmaes",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_total_drag",
+    "fully_populated": false,
+    "present": [
+      "cmaes",
+      "BO_torch",
+      "GA",
+      "v3_dynamic_optimizer",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_5_total_drag_constrained",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "GA",
+      "cmaes",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_case5",
+    "fully_populated": false,
+    "present": [
+      "cmaes"
+    ],
+    "missing_folders_of_7": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_but_no_best_reward": [
+      "cmaes"
+    ],
+    "has_results_but_not_collected": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "shapebench_case6",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_but_no_best_reward": [
+      "lbfgsb"
+    ],
+    "has_results_but_not_collected": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "BlendedNet",
+    "task": "static_margin_constrained",
+    "fully_populated": false,
+    "present": [
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch"
+    ],
+    "has_results_but_not_collected": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "CCA",
+    "task": "task1_l_d",
+    "fully_populated": true,
+    "present": [
+      "shinka",
+      "BO_torch",
+      "cmaes",
+      "openevolve",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [],
+    "present_but_no_best_reward": [],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Ceras",
+    "task": "fuel_mass",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "openevolve",
+      "cmaes",
+      "v3_dynamic_optimizer",
+      "GA",
+      "shinka"
+    ],
+    "missing_folders_of_7": [
+      "BO_torch"
+    ],
+    "present_but_no_best_reward": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "BO_torch"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_cl_constrained_vtk_E",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_cl_constrained_vtk_F",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_cl_constrained_vtk_N",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_super_tight_bounds_vtk_E",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_tight_bounds_vtk_E",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_tightened_bounds_vtk_E",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_vtk_E",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "BO_torch",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_vtk_F",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "cd_only_vtk_N",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "downforce_efficiency_vtk_E",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "downforce_efficiency_vtk_F",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "DrivaerStar",
+    "task": "downforce_efficiency_vtk_N",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "NeuralFoil",
+    "task": "ld_ratio_constrained_m02_re1e7_normalized",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "NeuralFoil",
+    "task": "reward_exact_notebook",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "GA",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "cmaes",
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio",
+    "fully_populated": false,
+    "present": [
+      "openevolve",
+      "BO_torch",
+      "lbfgsb",
+      "GA",
+      "v3_dynamic_optimizer",
+      "shinka"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_basic",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "shinka",
+      "openevolve",
+      "BO_torch",
+      "GA",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_m12_a20",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "BO_torch",
+      "shinka"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_m15_a35",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "openevolve",
+      "GA",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "shinka"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "ld_ratio_m18_a15",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "shinka",
+      "lbfgsb",
+      "BO_torch",
+      "openevolve",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "multipoint_avg_drag_reduction",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "BO_torch",
+      "openevolve",
+      "lbfgsb",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "BO_torch",
+      "v3_dynamic_optimizer",
+      "openevolve",
+      "shinka",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld_m12_a20",
+    "fully_populated": false,
+    "present": [
+      "shinka",
+      "lbfgsb",
+      "GA",
+      "v3_dynamic_optimizer",
+      "openevolve",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld_m15_a30",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "GA",
+      "v3_dynamic_optimizer",
+      "BO_torch",
+      "shinka",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "single_pt_ld_m18_a15",
+    "fully_populated": false,
+    "present": [
+      "openevolve",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "shinka",
+      "GA",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "openevolve",
+      "shinka",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl_m12_a20",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "openevolve",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "shinka",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl_m15_a25",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "GA",
+      "openevolve",
+      "BO_torch",
+      "v3_dynamic_optimizer",
+      "shinka"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_max_ld_cl_m15_a35",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "GA",
+      "shinka",
+      "lbfgsb",
+      "BO_torch",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "BO_torch",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl_m12_a20",
+    "fully_populated": false,
+    "present": [
+      "openevolve",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "BO_torch",
+      "shinka"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl_m15_a25",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "BO_torch",
+      "openevolve",
+      "shinka",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "sub_min_cd_cl_m15_a35",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "shinka",
+      "v3_dynamic_optimizer",
+      "BO_torch",
+      "openevolve",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl",
+    "fully_populated": false,
+    "present": [
+      "openevolve",
+      "BO_torch",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "GA",
+      "shinka"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl_balanced_m12_a20",
+    "fully_populated": false,
+    "present": [
+      "shinka",
+      "v3_dynamic_optimizer",
+      "GA",
+      "openevolve",
+      "BO_torch",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl_clheavy_m15_a35",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "GA",
+      "shinka",
+      "openevolve",
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "SuperSonic_Transport_aircraft",
+    "task": "weighted_ld_cl_ldheavy_m15_a25",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "GA",
+      "shinka",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_001",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "shinka",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_002",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "lbfgsb",
+      "shinka",
+      "openevolve",
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_003",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "BO_torch",
+      "shinka",
+      "lbfgsb",
+      "openevolve",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_004",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "GA",
+      "v3_dynamic_optimizer",
+      "shinka",
+      "BO_torch",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_005",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer",
+      "openevolve",
+      "shinka",
+      "lbfgsb",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_006",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "v3_dynamic_optimizer",
+      "shinka",
+      "lbfgsb",
+      "openevolve",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_007",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "BO_torch",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_008",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer",
+      "shinka",
+      "openevolve",
+      "GA",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_009",
+    "fully_populated": false,
+    "present": [
+      "shinka",
+      "GA",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "openevolve",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_010",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "shinka",
+      "GA",
+      "BO_torch",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_011",
+    "fully_populated": false,
+    "present": [
+      "openevolve",
+      "BO_torch",
+      "GA",
+      "v3_dynamic_optimizer",
+      "shinka",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_012",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "openevolve",
+      "BO_torch",
+      "GA",
+      "shinka"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_013",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "GA",
+      "v3_dynamic_optimizer",
+      "shinka",
+      "BO_torch",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_014",
+    "fully_populated": false,
+    "present": [
+      "shinka",
+      "GA",
+      "v3_dynamic_optimizer",
+      "BO_torch",
+      "lbfgsb",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_015",
+    "fully_populated": false,
+    "present": [
+      "shinka",
+      "openevolve",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_016",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "shinka",
+      "openevolve",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_017",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "shinka",
+      "v3_dynamic_optimizer",
+      "GA",
+      "BO_torch",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_018",
+    "fully_populated": false,
+    "present": [
+      "openevolve",
+      "v3_dynamic_optimizer",
+      "shinka",
+      "BO_torch",
+      "GA",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_019",
+    "fully_populated": false,
+    "present": [
+      "shinka",
+      "openevolve",
+      "BO_torch",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_020",
+    "fully_populated": false,
+    "present": [
+      "openevolve",
+      "GA",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "shinka",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_021",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "GA",
+      "v3_dynamic_optimizer",
+      "shinka",
+      "BO_torch",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_022",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "shinka",
+      "openevolve",
+      "lbfgsb",
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_023",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "BO_torch",
+      "shinka",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_024",
+    "fully_populated": false,
+    "present": [
+      "openevolve",
+      "GA",
+      "BO_torch",
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "shinka"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_025",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_026",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "openevolve",
+      "BO_torch",
+      "shinka",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_027",
+    "fully_populated": false,
+    "present": [
+      "shinka",
+      "lbfgsb",
+      "openevolve",
+      "BO_torch",
+      "GA",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_028",
+    "fully_populated": false,
+    "present": [
+      "openevolve",
+      "lbfgsb",
+      "BO_torch",
+      "v3_dynamic_optimizer",
+      "shinka",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_029",
+    "fully_populated": false,
+    "present": [
+      "shinka",
+      "openevolve",
+      "v3_dynamic_optimizer",
+      "BO_torch",
+      "GA",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "Superwing",
+    "task": "sw_030",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "BO_torch",
+      "shinka",
+      "GA",
+      "openevolve"
+    ],
+    "missing_folders_of_7": [
+      "cmaes"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": []
+  },
+  {
+    "env": "VortexNet",
+    "task": "ld_ratio",
+    "fully_populated": false,
+    "present": [
+      "v3_dynamic_optimizer",
+      "GA",
+      "BO_torch",
+      "lbfgsb",
+      "cmaes"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "max_kn",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "lbfgsb",
+      "cmaes",
+      "v3_dynamic_optimizer",
+      "BO_torch"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "multi_cl_min_cd_sub",
+    "fully_populated": false,
+    "present": [
+      "lbfgsb",
+      "GA",
+      "cmaes",
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "single_pt_ld",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_max_ld_cl",
+    "fully_populated": false,
+    "present": [
+      "cmaes",
+      "v3_dynamic_optimizer",
+      "lbfgsb",
+      "BO_torch",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_max_ld_cm",
+    "fully_populated": false,
+    "present": [
+      "cmaes",
+      "BO_torch",
+      "lbfgsb",
+      "GA"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka",
+      "v3_dynamic_optimizer"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_min_cd_cl",
+    "fully_populated": false,
+    "present": [
+      "GA",
+      "v3_dynamic_optimizer",
+      "cmaes",
+      "BO_torch",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_min_cd_cl_cm",
+    "fully_populated": false,
+    "present": [
+      "cmaes",
+      "lbfgsb",
+      "GA",
+      "BO_torch",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "sub_min_cd_kn",
+    "fully_populated": false,
+    "present": [
+      "BO_torch",
+      "v3_dynamic_optimizer",
+      "GA",
+      "cmaes",
+      "lbfgsb"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  },
+  {
+    "env": "VortexNet",
+    "task": "two_pt_multi",
+    "fully_populated": false,
+    "present": [
+      "cmaes",
+      "BO_torch",
+      "GA",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "missing_folders_of_7": [
+      "openevolve",
+      "shinka"
+    ],
+    "present_but_no_best_reward": [
+      "BO_torch",
+      "GA",
+      "cmaes",
+      "lbfgsb",
+      "v3_dynamic_optimizer"
+    ],
+    "has_results_but_not_collected": [
+      "openevolve",
+      "shinka"
+    ]
+  }
+]

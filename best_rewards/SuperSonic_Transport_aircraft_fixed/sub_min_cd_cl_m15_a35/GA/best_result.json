@@ -1,0 +1,15 @@
+{
+  "reward": 0.003558,
+  "median_reward": -0.005705,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/sub_min_cd_cl_m15_a35/run_GA_sub_min_cd_cl_m15_a35_attempt_1"
+  },
+  "LtoD": 19.4213,
+  "CL": 0.04144,
+  "CDi": 0.002134,
+  "if_cranked": 0.0,
+  "if_Ttail": 0.0,
+  "if_canard": 0.0
+}

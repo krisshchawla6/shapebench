@@ -1,0 +1,42 @@
+{
+  "best_reward": 6.553683,
+  "best_seed": 0,
+  "mean_reward": -3.4936895999999997,
+  "n_seeds": 5,
+  "seeds": [
+    {
+      "seed": 0,
+      "reward": 6.553683
+    },
+    {
+      "seed": 1,
+      "reward": -10.0
+    },
+    {
+      "seed": 2,
+      "reward": 5.977869
+    },
+    {
+      "seed": 3,
+      "reward": -10.0
+    },
+    {
+      "seed": 4,
+      "reward": -10.0
+    }
+  ],
+  "CL": 0.0,
+  "CD": 0.0,
+  "L_D": 0.0,
+  "CM": 0.0,
+  "total_violation": 0.0,
+  "feasible": 0.0,
+  "n_solved": 0.0,
+  "fitness_objective": 0.0,
+  "fitness_penalty": 0.0,
+  "fitness_total": 6.55368311,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/glider_endurance/seed0",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/glider_endurance/seed0/call_07369_r0/design.json"
+  }
+}

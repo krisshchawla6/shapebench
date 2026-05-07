@@ -1,0 +1,23 @@
+{
+  "car_size": 0.8,
+  "car_width": 0.03659254621383159,
+  "car_len": -0.1,
+  "ramp_angle": 8.0,
+  "front_bumper_length": 0.1,
+  "wind_screen_x": -0.05,
+  "wind_screen_z": 0.05,
+  "side_mirrors_x": -0.011844722503566182,
+  "side_mirrors_z": -0.05,
+  "rear_window_x": -0.05,
+  "rear_window_z": -0.04628281615386027,
+  "trunklid_angle": 8.0,
+  "trunklid_x": 0.04998752799326999,
+  "trunklid_z": -0.05,
+  "diffusor_angle": -8.0,
+  "car_green_house_angle": 7.994838466110935,
+  "car_front_hood_angle": 3.6747791145888344,
+  "car_air_intake_angle": 8.0,
+  "tires_diameter": 0.006406800780073611,
+  "tires_width": 0.007763435433999034,
+  "name": "design"
+}

@@ -1,0 +1,19 @@
+{
+  "reward": -7.950401,
+  "method": "GA",
+  "seed": 3,
+  "CL": 0.0,
+  "CD": 0.0,
+  "L_D": 0.0,
+  "CM": 0.0,
+  "total_violation": 7.82473149,
+  "feasible": 0.0,
+  "n_solved": 6.0,
+  "fitness_objective": -0.12566938,
+  "fitness_penalty": -7.82473149,
+  "fitness_total": -7.95040087,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/GA/reward_exact_notebook/seed3",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/GA/reward_exact_notebook/seed3/iter_0008_p013/design.json"
+  }
+}

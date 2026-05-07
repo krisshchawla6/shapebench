@@ -1,0 +1,17 @@
+{
+  "reward": 27.021272,
+  "median_reward": -9.972454,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/single_pt_ld_m15_a30/run_v3_dynamic_optimizer_single_pt_ld_m15_a30_attempt_5"
+  },
+  "sample": 0.0,
+  "LtoD": 40.9591,
+  "CL": 0.065265,
+  "CDi": 0.001593,
+  "if_cranked": 0.0,
+  "if_Ttail": 0.0,
+  "if_canard": 0.0,
+  "island": 1.0
+}

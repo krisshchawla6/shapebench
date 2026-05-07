@@ -1,0 +1,19 @@
+{
+  "reward": -7.440957,
+  "method": "BO_torch",
+  "seed": 3,
+  "CL": 0.414602,
+  "CD": 0.01437543,
+  "L_D": 28.841,
+  "CM": 0.0,
+  "total_violation": 0.0,
+  "feasible": 0.0,
+  "n_solved": 0.0,
+  "fitness_objective": 0.0,
+  "fitness_penalty": 0.0,
+  "fitness_total": -7.44095742,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/BO_torch/min_cd_cl_floor/seed3",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/BO_torch/min_cd_cl_floor/seed3/iter_0350/iter_0350.json"
+  }
+}

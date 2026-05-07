@@ -1,0 +1,8 @@
+{
+  "method": "lbfgsb",
+  "task": "cca_ld_ratio_single",
+  "seed": 4,
+  "design_dir": "/scratch/ShapeEvolve/results/CCA_drone/lbfgsb/cca_ld_ratio_single/seed4/call_00018_r0",
+  "results_csv": "/scratch/ShapeEvolve/results/CCA_drone/lbfgsb/cca_ld_ratio_single/seed4/results.csv",
+  "param_file": "/scratch/ShapeEvolve/results/CCA_drone/lbfgsb/cca_ld_ratio_single/seed4/call_00018_r0/design.json"
+}

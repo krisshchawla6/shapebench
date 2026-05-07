@@ -1,0 +1,25 @@
+{
+  "upper_weights": [
+    0.555,
+    0.55,
+    0.6,
+    0.3,
+    0.1,
+    0.55,
+    0.58,
+    0.095
+  ],
+  "lower_weights": [
+    -0.225,
+    0.05,
+    -0.005,
+    0.295,
+    0.26,
+    0.3,
+    0.3,
+    0.3
+  ],
+  "leading_edge_weight": 0.25,
+  "TE_thickness": 0.01,
+  "name": "HighLift_BluntScoopWaist"
+}

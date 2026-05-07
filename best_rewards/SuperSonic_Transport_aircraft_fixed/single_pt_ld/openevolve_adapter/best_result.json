@@ -1,0 +1,9 @@
+{
+  "reward": 47.062765,
+  "median_reward": 2.667775,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/single_pt_ld/run_openevolve_adapter_single_pt_ld_attempt_1"
+  }
+}

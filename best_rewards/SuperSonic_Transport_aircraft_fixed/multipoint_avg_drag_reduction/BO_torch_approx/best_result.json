@@ -1,0 +1,15 @@
+{
+  "reward": 0.833622,
+  "median_reward": 0.833622,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/multipoint_avg_drag_reduction/run_BO_torch_approx_multipoint_avg_drag_reduction_attempt_1"
+  },
+  "LtoD": 0.0,
+  "CL": 0.0,
+  "CDi": 0.0,
+  "if_cranked": 0.0,
+  "if_Ttail": 0.0,
+  "if_canard": 0.0
+}

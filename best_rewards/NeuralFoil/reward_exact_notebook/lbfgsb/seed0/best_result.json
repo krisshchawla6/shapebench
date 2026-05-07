@@ -1,0 +1,19 @@
+{
+  "reward": -4.0,
+  "method": "lbfgsb",
+  "seed": 0,
+  "CL": 0.0,
+  "CD": 0.0,
+  "L_D": 0.0,
+  "CM": 0.0,
+  "total_violation": 4.0,
+  "feasible": 0.0,
+  "n_solved": 2.0,
+  "fitness_objective": 0.0,
+  "fitness_penalty": -4.0,
+  "fitness_total": -4.0,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/reward_exact_notebook/seed0",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/reward_exact_notebook/seed0/call_07659_r1/design.json"
+  }
+}

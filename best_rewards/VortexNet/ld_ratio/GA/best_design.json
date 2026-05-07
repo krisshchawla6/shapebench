@@ -1,0 +1,14 @@
+{
+  "design_name": "design",
+  "le_sweep": 59.29157080444683,
+  "root_chord_in": 25.734,
+  "twist_root": 0.0,
+  "twist_tip": 0.0,
+  "dihedral": 0.0,
+  "naca": {
+    "m": 2,
+    "p": 4,
+    "t": 10,
+    "chord_length": 1.0
+  }
+}

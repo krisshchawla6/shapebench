@@ -1,0 +1,25 @@
+{
+  "upper_weights": [
+    0.6,
+    0.6,
+    0.6,
+    -0.3,
+    -0.3,
+    -0.3,
+    0.6,
+    -0.3
+  ],
+  "lower_weights": [
+    -0.3,
+    -0.3,
+    -0.3,
+    -0.3,
+    0.3,
+    0.3,
+    -0.3,
+    -0.3
+  ],
+  "leading_edge_weight": -0.5,
+  "TE_thickness": 0.0,
+  "name": "Exploration_Reflex_V1"
+}

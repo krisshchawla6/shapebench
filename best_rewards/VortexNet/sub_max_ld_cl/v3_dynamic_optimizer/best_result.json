@@ -1,0 +1,11 @@
+{
+  "reward": 26.827853,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/vortexnet/results/run_v3_dynamic_optimizer_vortexnet_sub_max_ld_cl_seed1_n2000",
+    "design_file": "/scratch/ShapeEvolve/environments/vortexnet/results/run_v3_dynamic_optimizer_vortexnet_sub_max_ld_cl_seed1_n2000/iter_90_o1.json"
+  },
+  "CL": 0.69374,
+  "CDi": 0.025859,
+  "CM": -0.71411,
+  "L_D": 26.8279
+}

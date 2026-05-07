@@ -1,0 +1,19 @@
+{
+  "reward": -6.235278,
+  "method": "lbfgsb",
+  "seed": 2,
+  "CL": 0.447188,
+  "CD": 0.01147984,
+  "L_D": 38.9542,
+  "CM": 0.0,
+  "total_violation": 0.0,
+  "feasible": 0.0,
+  "n_solved": 0.0,
+  "fitness_objective": 0.0,
+  "fitness_penalty": 0.0,
+  "fitness_total": -6.23527767,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/min_cd_cl_floor/seed2",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/lbfgsb/min_cd_cl_floor/seed2/call_05148_r0/design.json"
+  }
+}

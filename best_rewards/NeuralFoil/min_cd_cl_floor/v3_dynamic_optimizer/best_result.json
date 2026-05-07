@@ -1,0 +1,42 @@
+{
+  "best_reward": -4.082508,
+  "best_seed": 4,
+  "mean_reward": -249.3312254,
+  "n_seeds": 5,
+  "seeds": [
+    {
+      "seed": 0,
+      "reward": -95.625074
+    },
+    {
+      "seed": 1,
+      "reward": -1033.450585
+    },
+    {
+      "seed": 2,
+      "reward": -109.348135
+    },
+    {
+      "seed": 3,
+      "reward": -4.149825
+    },
+    {
+      "seed": 4,
+      "reward": -4.082508
+    }
+  ],
+  "CL": 0.514653,
+  "CD": 0.01135375,
+  "L_D": 45.3289,
+  "CM": 0.0,
+  "total_violation": 0.0,
+  "feasible": 0.0,
+  "n_solved": 0.0,
+  "fitness_objective": 0.0,
+  "fitness_penalty": 0.0,
+  "fitness_total": -4.08250753,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/v3_dynamic_optimizer/min_cd_cl_floor/seed4",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/v3_dynamic_optimizer/min_cd_cl_floor/seed4/iter_65_o1.json"
+  }
+}

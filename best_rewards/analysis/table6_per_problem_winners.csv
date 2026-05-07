@@ -1,0 +1,92 @@
+Problem,Env,#Methods,Best Family,Worst Family,Best Value,Worst Value
+CCA/task1_l_d,CCA,7,LLM (v3),GA,84.7483,26.8524
+Ceras/fuel_mass,Ceras,7,Shinka,OpenEvolve,-2673.679,-18399.6156
+Superwing/sw_024,Superwing,6,BO,GA,20.4753,10.9284
+SuperSonic_Transport_aircraft/weighted_ld_cl_ldheavy_m15_a25,SuperSonic_Transport_aircraft,6,Shinka,L-BFGS-B,208243234.4314,38.0559
+SuperSonic_Transport_aircraft/weighted_ld_cl_clheavy_m15_a35,SuperSonic_Transport_aircraft,6,Shinka,BO,80236.907,18.3556
+SuperSonic_Transport_aircraft/weighted_ld_cl_balanced_m12_a20,SuperSonic_Transport_aircraft,6,BO,L-BFGS-B,123936280212.8793,43.3253
+SuperSonic_Transport_aircraft/weighted_ld_cl,SuperSonic_Transport_aircraft,6,GA,L-BFGS-B,151089692.1508,35.502
+SuperSonic_Transport_aircraft/sub_min_cd_cl_m15_a35,SuperSonic_Transport_aircraft,6,GA,L-BFGS-B,78.2114,-0.0059
+SuperSonic_Transport_aircraft/sub_min_cd_cl_m15_a25,SuperSonic_Transport_aircraft,6,Shinka,L-BFGS-B,117.4111,-0.0038
+Superwing/sw_002,Superwing,6,BO,Shinka,290.3583,6.7122
+Superwing/sw_001,Superwing,6,BO,Shinka,290.3583,8.4716
+SuperSonic_Transport_aircraft/sub_min_cd_cl,SuperSonic_Transport_aircraft,6,LLM (v3),BO,5.4166,-0.0035
+SuperSonic_Transport_aircraft/sub_min_cd_cl_m12_a20,SuperSonic_Transport_aircraft,6,Shinka,L-BFGS-B,41121.7549,-0.0015
+SuperSonic_Transport_aircraft/sub_max_ld_cl_m15_a35,SuperSonic_Transport_aircraft,6,LLM (v3),L-BFGS-B,540699.3614,43.2677
+SuperSonic_Transport_aircraft/sub_max_ld_cl_m15_a25,SuperSonic_Transport_aircraft,6,GA,L-BFGS-B,55315.0245,74.9409
+SuperSonic_Transport_aircraft/single_pt_ld_m18_a15,SuperSonic_Transport_aircraft,6,GA,BO,43597.0125,9.7783
+SuperSonic_Transport_aircraft/single_pt_ld_m15_a30,SuperSonic_Transport_aircraft,6,GA,OpenEvolve,382443.1463,1.4362
+SuperSonic_Transport_aircraft/sub_max_ld_cl_m12_a20,SuperSonic_Transport_aircraft,6,GA,L-BFGS-B,13354998.6852,72.9191
+SuperSonic_Transport_aircraft/sub_max_ld_cl,SuperSonic_Transport_aircraft,6,GA,BO,178597511.0275,146.4908
+SuperSonic_Transport_aircraft/single_pt_ld,SuperSonic_Transport_aircraft,6,LLM (v3),BO,15551960.792,6.9153
+SuperSonic_Transport_aircraft/single_pt_ld_m12_a20,SuperSonic_Transport_aircraft,6,LLM (v3),BO,1318425.8251,38.5031
+SuperSonic_Transport_aircraft/multipoint_avg_drag_reduction,SuperSonic_Transport_aircraft,6,GA,OpenEvolve,338312794771.6172,5.2319
+SuperSonic_Transport_aircraft/ld_ratio_m18_a15,SuperSonic_Transport_aircraft,6,LLM (v3),L-BFGS-B,52603.4365,45.189
+SuperSonic_Transport_aircraft/ld_ratio_m12_a20,SuperSonic_Transport_aircraft,6,GA,BO,374173.9126,60.9956
+SuperSonic_Transport_aircraft/ld_ratio_m15_a35,SuperSonic_Transport_aircraft,6,GA,OpenEvolve,1731301.9634,79.586
+SuperSonic_Transport_aircraft/ld_ratio,SuperSonic_Transport_aircraft,6,LLM (v3),OpenEvolve,21471224.6652,58.1261
+SuperSonic_Transport_aircraft/ld_ratio_basic,SuperSonic_Transport_aircraft,6,GA,BO,84218632.8884,140.2085
+Superwing/sw_028,Superwing,6,L-BFGS-B,GA,22.2469,9.6774
+Superwing/sw_027,Superwing,6,L-BFGS-B,GA,23.3669,9.9219
+Superwing/sw_030,Superwing,6,L-BFGS-B,GA,25.9727,13.4653
+Superwing/sw_029,Superwing,6,L-BFGS-B,Shinka,22.3127,8.9623
+Superwing/sw_026,Superwing,6,L-BFGS-B,GA,26.8244,9.4083
+Superwing/sw_025,Superwing,6,BO,GA,21.5858,10.1259
+Superwing/sw_011,Superwing,6,BO,Shinka,87.7756,23.7629
+Superwing/sw_012,Superwing,6,BO,L-BFGS-B,15.4214,-5.0
+Superwing/sw_013,Superwing,6,L-BFGS-B,OpenEvolve,36.3289,9.4309
+Superwing/sw_023,Superwing,6,BO,LLM (v3),15.2385,9.5425
+Superwing/sw_022,Superwing,6,L-BFGS-B,LLM (v3),19.011,10.9117
+Superwing/sw_021,Superwing,6,L-BFGS-B,GA,24.4637,12.4603
+Superwing/sw_014,Superwing,6,BO,Shinka,11.4093,6.1319
+Superwing/sw_017,Superwing,5,BO,GA,-0.025,-0.039
+Superwing/sw_006,Superwing,5,BO,OpenEvolve,-0.0587,-0.7062
+Superwing/sw_005,Superwing,5,L-BFGS-B,LLM (v3),-0.0094,-0.6742
+VortexNet/multi_cl_min_cd_sub,VortexNet,5,CMA-ES,L-BFGS-B,-0.0587,-0.0635
+VortexNet/single_pt_ld,VortexNet,5,CMA-ES,L-BFGS-B,0.5218,0.4971
+Superwing/sw_019,Superwing,5,BO,GA,-0.0315,-0.0432
+Superwing/sw_020,Superwing,5,BO,GA,-0.0412,-0.0593
+Superwing/sw_009,Superwing,5,BO,L-BFGS-B,-0.0376,-0.0741
+Superwing/sw_010,Superwing,5,GA,LLM (v3),-0.0344,-0.0575
+DrivaerStar/cd_only_vtk_E,DrivaerStar,5,BO,Islands (GA),-0.0651,-0.0852
+BlendedNet/shapebench_5_total_drag,BlendedNet,5,CMA-ES,L-BFGS-B,-0.0033,-0.0067
+BlendedNet/shapebench_5,BlendedNet,5,GA,L-BFGS-B,-0.0042,-0.0052
+Superwing/sw_018,Superwing,5,BO,GA,-0.0338,-0.048
+Superwing/sw_008,Superwing,5,GA,OpenEvolve,-0.0195,-0.0276
+Superwing/sw_007,Superwing,5,GA,LLM (v3),-0.0114,-0.0152
+Superwing/sw_004,Superwing,5,L-BFGS-B,LLM (v3),-0.0074,-0.1651
+Superwing/sw_003,Superwing,5,GA,OpenEvolve,-0.0049,-0.0514
+Superwing/sw_016,Superwing,5,BO,GA,-0.0177,-0.0368
+Superwing/sw_015,Superwing,5,BO,GA,-0.0275,-0.0452
+VortexNet/sub_min_cd_kn,VortexNet,5,BO,L-BFGS-B,-0.0259,-0.0307
+VortexNet/sub_min_cd_cl_cm,VortexNet,5,LLM (v3),L-BFGS-B,-5.0,-44.9746
+VortexNet/sub_max_ld_cl,VortexNet,5,CMA-ES,L-BFGS-B,26.8279,24.4548
+VortexNet/sub_min_cd_cl,VortexNet,5,BO,L-BFGS-B,-0.0259,-0.0307
+VortexNet/two_pt_multi,VortexNet,5,CMA-ES,L-BFGS-B,7.272,7.2283
+VortexNet/max_kn,VortexNet,5,CMA-ES,L-BFGS-B,0.727,0.4217
+VortexNet/ld_ratio,VortexNet,5,CMA-ES,L-BFGS-B,5.9718,5.9471
+BlendedNet/shapebench_5_total_drag_constrained,BlendedNet,4,CMA-ES,BO,-0.0059,-0.0067
+BlendedNet/shapebench_5_max_LD_total_drag,BlendedNet,4,CMA-ES,GA,68.9496,63.7866
+NeuralFoil/reward_exact_notebook,NeuralFoil,4,LLM (v3),BO,-0.079,-0.0944
+VortexNet/sub_max_ld_cm,VortexNet,4,CMA-ES,BO,-45.5898,-45.6575
+BlendedNet/shapebench_5_max_LD,BlendedNet,4,BO,LLM (v3),47.8399,46.053
+BlendedNet/shapebench_5_max_LD_warmstart_cornerA,BlendedNet,3,LLM (v3),CMA-ES,48.7479,48.5046
+DrivaerStar/cd_cl_constrained_vtk_E,DrivaerStar,2,BO,LLM (v3),-0.0705,-0.1004
+DrivaerStar/cd_only,DrivaerStar,2,BO,LLM (v3),-0.0651,-0.0652
+DrivaerStar/cd_only_vtk_N,DrivaerStar,2,BO,LLM (v3),-0.0496,-0.0681
+DrivaerStar/cd_cl_constrained_vtk_F,DrivaerStar,2,BO,LLM (v3),-0.036,-0.0767
+DrivaerStar/cd_only_super_tight_bounds_vtk_E,DrivaerStar,2,LLM (v3),BO,-0.1568,-0.1568
+DrivaerStar/cd_cl_constrained_vtk_N,DrivaerStar,2,BO,LLM (v3),-0.0694,-0.0788
+DrivaerStar/downforce_efficiency_vtk_F,DrivaerStar,2,LLM (v3),BO,3.9141,3.9051
+DrivaerStar/cd_only_vtk_F,DrivaerStar,2,BO,LLM (v3),-0.0306,-0.0338
+DrivaerStar/cd_only_tightened_bounds_vtk_E,DrivaerStar,2,LLM (v3),BO,-0.1139,-0.114
+DrivaerStar/downforce_efficiency_vtk_E,DrivaerStar,2,LLM (v3),BO,2.3772,2.3656
+DrivaerStar/downforce_efficiency_vtk_N,DrivaerStar,2,BO,LLM (v3),2.528,2.0324
+DrivaerStar/cd_only_tight_bounds_vtk_E,DrivaerStar,2,LLM (v3),BO,-0.1139,-0.114
+NeuralFoil/ld_ratio_constrained_m02_re1e7_normalized,NeuralFoil,2,LLM (v3),BO,352.7796,273.9952
+BlendedNet/static_margin_constrained,BlendedNet,1,BO,BO,-5.0,-5.0
+BlendedNet/multipoint_mach_range,BlendedNet,1,BO,BO,-5.0,-5.0
+BlendedNet/range_optimization,BlendedNet,1,BO,BO,-5.0,-5.0
+BlendedNet/shapebench_case6,BlendedNet,1,L-BFGS-B,L-BFGS-B,-5.0,-5.0
+BlendedNet/shapebench_case5,BlendedNet,1,CMA-ES,CMA-ES,-5.0,-5.0
+BlendedNet/multipoint_mach_cd,BlendedNet,1,BO,BO,-5.0,-5.0

@@ -1,0 +1,15 @@
+{
+  "reward": 188.499425,
+  "median_reward": 6.524133,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/single_pt_ld_m12_a20/run_lbfgsb_single_pt_ld_m12_a20_attempt_1"
+  },
+  "LtoD": 223.4994,
+  "CL": 0.680676,
+  "CDi": 0.003046,
+  "if_cranked": 0.0,
+  "if_Ttail": 0.0,
+  "if_canard": 0.0
+}

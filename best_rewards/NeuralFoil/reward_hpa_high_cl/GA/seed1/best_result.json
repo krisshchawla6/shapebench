@@ -1,0 +1,19 @@
+{
+  "reward": -10.0,
+  "method": "GA",
+  "seed": 1,
+  "CL": 0.0,
+  "CD": 0.0,
+  "L_D": 0.0,
+  "CM": 0.0,
+  "total_violation": 54.56559596,
+  "feasible": 0.0,
+  "n_solved": 2.0,
+  "fitness_objective": 0.0,
+  "fitness_penalty": -54.56559596,
+  "fitness_total": -54.56559596,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/GA/reward_hpa_high_cl/seed1",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/GA/reward_hpa_high_cl/seed1/iter_0000_p000/design.json"
+  }
+}

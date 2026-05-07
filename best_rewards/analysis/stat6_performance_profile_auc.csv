@@ -1,0 +1,9 @@
+,AUC
+CMA-ES,0.7563
+BO,0.6012
+GA,0.528
+LLM (v3),0.4096
+L-BFGS-B,0.3054
+Shinka,0.2336
+OpenEvolve,0.1812
+Islands (GA),0.005

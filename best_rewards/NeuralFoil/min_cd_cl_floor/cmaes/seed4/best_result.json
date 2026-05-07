@@ -1,0 +1,19 @@
+{
+  "reward": -1769.084739,
+  "method": "cmaes",
+  "seed": 4,
+  "CL": 1.207226,
+  "CD": 0.01518389,
+  "L_D": 79.507,
+  "CM": 0.0,
+  "total_violation": 0.0,
+  "feasible": 0.0,
+  "n_solved": 0.0,
+  "fitness_objective": 0.0,
+  "fitness_penalty": 0.0,
+  "fitness_total": -1769.08473879,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/cmaes/min_cd_cl_floor/seed4",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/cmaes/min_cd_cl_floor/seed4/iter_00563/iter_00563.json"
+  }
+}

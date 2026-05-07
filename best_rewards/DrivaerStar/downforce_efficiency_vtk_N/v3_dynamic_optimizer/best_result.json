@@ -1,0 +1,10 @@
+{
+  "reward": 2.032423,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_downforce_efficiency_drivaer_star_vtk_N_attempt_8_flash_2_5_n6000",
+    "design_file": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_downforce_efficiency_drivaer_star_vtk_N_attempt_8_flash_2_5_n6000/iter_345_o8.json"
+  },
+  "Cd": 0.0775494,
+  "drag": 183.7921,
+  "lift": -373.5432
+}

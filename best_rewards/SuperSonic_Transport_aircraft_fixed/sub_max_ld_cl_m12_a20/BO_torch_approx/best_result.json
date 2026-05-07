@@ -1,0 +1,15 @@
+{
+  "reward": 53.057067,
+  "median_reward": 53.057067,
+  "n_attempts": 6,
+  "x_max_evals": 80,
+  "source": {
+    "run_dir": "/scratch/ShapeEvolve/environments/Mixed_integer_yiren/results/sub_max_ld_cl_m12_a20/run_BO_torch_approx_sub_max_ld_cl_m12_a20_attempt_1"
+  },
+  "LtoD": 53.066,
+  "CL": 0.050136,
+  "CDi": 0.000945,
+  "if_cranked": 0.0,
+  "if_Ttail": 0.0,
+  "if_canard": 0.0
+}

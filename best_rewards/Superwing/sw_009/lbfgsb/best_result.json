@@ -1,0 +1,11 @@
+{
+  "reward": -0.074086,
+  "CL": 0.649,
+  "CD": 0.07407648,
+  "L_D": 8.7612,
+  "CM": 0.531765,
+  "source": {
+    "sample_dir": "/scratch/ShapeEvolve/environments/SuperWing/results/lbfgsb/sw_009_s7",
+    "design_file": "/scratch/ShapeEvolve/environments/SuperWing/results/lbfgsb/sw_009_s7/call_05651_r0/design.json"
+  }
+}

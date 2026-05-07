@@ -1,0 +1,19 @@
+{
+  "reward": -10.0,
+  "method": "shinka_adapter",
+  "seed": 0,
+  "CL": null,
+  "CD": null,
+  "L_D": null,
+  "CM": null,
+  "total_violation": null,
+  "feasible": null,
+  "n_solved": null,
+  "fitness_objective": null,
+  "fitness_penalty": null,
+  "fitness_total": null,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/shinka_adapter/ld_ratio_alpha7_normalized/seed0",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/shinka_adapter/ld_ratio_alpha7_normalized/seed0/best_design.json"
+  }
+}

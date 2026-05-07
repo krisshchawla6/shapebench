@@ -1,0 +1,19 @@
+{
+  "reward": 91.190175,
+  "method": "shinka_adapter",
+  "seed": 3,
+  "CL": null,
+  "CD": null,
+  "L_D": null,
+  "CM": null,
+  "total_violation": null,
+  "feasible": null,
+  "n_solved": null,
+  "fitness_objective": null,
+  "fitness_penalty": null,
+  "fitness_total": null,
+  "source": {
+    "seed_dir": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/shinka_adapter/ld_ratio_constrained_m02_re1e7_normalized_conf95/seed3",
+    "design_file": "/scratch/ShapeEvolve/environments/NeuralFoil/results/benchmark_700/shinka_adapter/ld_ratio_constrained_m02_re1e7_normalized_conf95/seed3/best_design.json"
+  }
+}

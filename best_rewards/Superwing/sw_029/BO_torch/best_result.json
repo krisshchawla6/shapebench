@@ -1,0 +1,11 @@
+{
+  "reward": 20.086802,
+  "CL": 0.0,
+  "CD": 0.0,
+  "L_D": 0.0,
+  "CM": 0.0,
+  "source": {
+    "sample_dir": "/scratch/ShapeEvolve/environments/SuperWing/results/BO_torch/sw_029_s2",
+    "design_file": "/scratch/ShapeEvolve/environments/SuperWing/results/BO_torch/sw_029_s2/iter_0089/iter_0089.json"
+  }
+}
