@@ -74,9 +74,9 @@
 
 #### DrivAer Star — Automotive Exterior
 - **Geometry:** DrivAer reference vehicle in three body variants — Notchback (vtk_N), Fastback (vtk_F), Estate (vtk_E) — parameterized surface morphing on VTK meshes
-- **Solver:** ML surrogate trained on OpenFOAM RANS simulations; returns CD, CL
+- **Solver:** ML surrogate trained on Flow360 RANS simulations; returns CD, CL
 - **Tasks (~13):** CD minimization (standard, tight bounds, GC-constrained), CD+CL constrained, downforce efficiency — across all three body variants
-- **High fidelity:** OpenFOAM RANS (`environments/High_Fidelity`)
+- **High fidelity:** Flow360 RANS (`environments/High_Fidelity`)
 
 ---
 
