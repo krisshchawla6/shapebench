@@ -1,0 +1,489 @@
+{
+  "version": "0.1.0",
+  "environment": "DrivAer_Star",
+  "design_id": "iter_517_o2",
+  "timestamp_utc": "2026-04-30T04:31:27Z",
+  "input_snapshot": {
+    "environment": "DrivAer_Star",
+    "design_id": "iter_517_o2",
+    "design_path": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+    "case_dir": "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2",
+    "design_params": {
+      "car_size": 0.8,
+      "car_width": 0.040242888869530376,
+      "car_len": -0.1,
+      "ramp_angle": 7.121438172129935,
+      "front_bumper_length": 0.1,
+      "wind_screen_x": -0.05,
+      "wind_screen_z": 0.05,
+      "side_mirrors_x": -0.009025765712378033,
+      "side_mirrors_z": 0.05,
+      "rear_window_x": -0.05,
+      "rear_window_z": -0.046316046991307466,
+      "trunklid_angle": 8.0,
+      "trunklid_x": 0.05,
+      "trunklid_z": -0.05,
+      "diffusor_angle": -8.0,
+      "car_green_house_angle": 8.0,
+      "car_front_hood_angle": 8.0,
+      "car_air_intake_angle": 8.0,
+      "tires_diameter": 0.013,
+      "tires_width": -0.00781327375478008,
+      "name": "refined_kammback_optimizer"
+    },
+    "metrics": {
+      "drag": 154.4256248474121,
+      "Cd": 0.06515849149679837,
+      "lift": -153.39218473434448,
+      "drag_pressure": 120.70740509033203,
+      "drag_shear": 33.71821975708008
+    },
+    "images": [
+      "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/Pressure_iso.png",
+      "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/Pressure_top.png",
+      "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/Pressure_side.png",
+      "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/WSSx_iso.png",
+      "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/WSSx_top.png",
+      "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/WSSx_side.png"
+    ],
+    "field_stats": {},
+    "model_artifacts": {
+      "base_vtk_path": "/scratch/ShapeEvolve/environments/DrivAer_Star/data/vtk_E/00000.vtk",
+      "norm_stats_path": "/scratch/ShapeEvolve_diagnostic_suite/environments/DrivAer_Star/model/norm_stats.pt"
+    },
+    "problem_setup": {
+      "objective": {
+        "name": "minimize Cd",
+        "reward": "-Cd"
+      },
+      "method": "ShapeEvolve (v3_dynamic_optimizer, Gemini Flash 2.5, n=10000)",
+      "best_Cd": 0.06515849,
+      "constraints": {
+        "hard": [
+          "all 20 parameters within bounds"
+        ]
+      },
+      "param_bounds": {
+        "car_size": [
+          0.8,
+          1.2
+        ],
+        "car_width": [
+          -0.1,
+          0.1
+        ],
+        "car_len": [
+          -0.1,
+          0.1
+        ],
+        "ramp_angle": [
+          -8.0,
+          8.0
+        ],
+        "front_bumper_length": [
+          -0.1,
+          0.1
+        ],
+        "wind_screen_x": [
+          -0.05,
+          0.05
+        ],
+        "wind_screen_z": [
+          -0.05,
+          0.05
+        ],
+        "side_mirrors_x": [
+          -0.05,
+          0.05
+        ],
+        "side_mirrors_z": [
+          -0.05,
+          0.05
+        ],
+        "rear_window_x": [
+          -0.05,
+          0.05
+        ],
+        "rear_window_z": [
+          -0.05,
+          0.05
+        ],
+        "trunklid_angle": [
+          -8.0,
+          8.0
+        ],
+        "trunklid_x": [
+          -0.05,
+          0.05
+        ],
+        "trunklid_z": [
+          -0.05,
+          0.05
+        ],
+        "diffusor_angle": [
+          -8.0,
+          8.0
+        ],
+        "car_green_house_angle": [
+          -8.0,
+          8.0
+        ],
+        "car_front_hood_angle": [
+          -8.0,
+          8.0
+        ],
+        "car_air_intake_angle": [
+          -8.0,
+          8.0
+        ],
+        "tires_diameter": [
+          -0.013,
+          0.013
+        ],
+        "tires_width": [
+          -0.015,
+          0.015
+        ]
+      },
+      "operating_conditions": {
+        "body_style": "vtk_E (Estateback)",
+        "rho": 1.25,
+        "u": 40.0,
+        "area_ref": 2.37
+      }
+    },
+    "run_context": {},
+    "raw_feedback": "",
+    "timestamp_utc": null
+  },
+  "evidence_bundle": {
+    "environment": "DrivAer_Star",
+    "design_id": "iter_517_o2",
+    "feasibility": [
+      {
+        "check_id": "F001_required_params_present",
+        "tier": "feasibility",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "All required parameters present.",
+        "value": {
+          "missing": []
+        },
+        "threshold": null,
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "F002_param_bounds_respected",
+        "tier": "feasibility",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "All parameter values within bounds.",
+        "value": {
+          "violations": []
+        },
+        "threshold": "within configured bounds",
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "F003_base_vtk_exists",
+        "tier": "feasibility",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "Base VTK exists.",
+        "value": "/scratch/ShapeEvolve/environments/DrivAer_Star/data/vtk_E/00000.vtk",
+        "threshold": null,
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/data/vtk_E/00000.vtk"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "F004_norm_stats_exists",
+        "tier": "feasibility",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "Norm stats file exists.",
+        "value": "/scratch/ShapeEvolve_diagnostic_suite/environments/DrivAer_Star/model/norm_stats.pt",
+        "threshold": null,
+        "evidence_refs": [
+          "/scratch/ShapeEvolve_diagnostic_suite/environments/DrivAer_Star/model/norm_stats.pt"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "F005_metrics_finite",
+        "tier": "feasibility",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "All required metrics are finite.",
+        "value": {
+          "missing": [],
+          "non_finite": []
+        },
+        "threshold": null,
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "F006_body_style_norm_compatibility",
+        "tier": "feasibility",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "Norm stats compatible with inferred body style 'E'.",
+        "value": {
+          "style": "E",
+          "norm_stats_path": "/scratch/ShapeEvolve_diagnostic_suite/environments/DrivAer_Star/model/norm_stats.pt"
+        },
+        "threshold": null,
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2"
+        ],
+        "metadata": {}
+      }
+    ],
+    "geometry": [
+      {
+        "check_id": "G001_param_extremeness_ratio",
+        "tier": "geometry",
+        "status": "warning",
+        "severity": 0.9,
+        "message": "High fraction of parameters near bounds (0.80).",
+        "value": {
+          "near_bound_fraction": 0.8,
+          "near_bound_keys": [
+            "car_size",
+            "car_len",
+            "front_bumper_length",
+            "wind_screen_x",
+            "wind_screen_z",
+            "side_mirrors_z",
+            "rear_window_x",
+            "rear_window_z",
+            "trunklid_angle",
+            "trunklid_x",
+            "trunklid_z",
+            "diffusor_angle",
+            "car_green_house_angle",
+            "car_front_hood_angle",
+            "car_air_intake_angle",
+            "tires_diameter"
+          ]
+        },
+        "threshold": {
+          "warn_fraction": 0.6,
+          "margin_ratio": 0.05
+        },
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "G002_combined_angle_stress",
+        "tier": "geometry",
+        "status": "warning",
+        "severity": 0.9061815033101911,
+        "message": "Combined angle stress is high (47.12 deg abs-sum).",
+        "value": {
+          "combined_abs_angle_sum": 47.121438172129935
+        },
+        "threshold": {
+          "warn_sum": 26.0
+        },
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "G003_size_width_length_coupling",
+        "tier": "geometry",
+        "status": "warning",
+        "severity": 0.8008096295651012,
+        "message": "Global scale + width/length coupling is aggressive; geometry realism risk increased.",
+        "value": {
+          "car_size": 0.8,
+          "abs_car_width": 0.040242888869530376,
+          "abs_car_len": 0.1,
+          "coupling_score": 2.4024288886953036
+        },
+        "threshold": {
+          "warn_score": 2.4
+        },
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2"
+        ],
+        "metadata": {}
+      }
+    ],
+    "aero": [
+      {
+        "check_id": "A001_drag_decomposition_consistency",
+        "tier": "aero",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "Drag decomposition consistent (rel_err=0.00000).",
+        "value": {
+          "drag": 154.4256248474121,
+          "drag_pressure_plus_shear": 154.4256248474121,
+          "rel_err": 0.0
+        },
+        "threshold": {
+          "warn_rel_err": 0.02
+        },
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "A002_cd_plausible_range",
+        "tier": "aero",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "Cd within plausible warning band.",
+        "value": 0.06515849149679837,
+        "threshold": {
+          "min": 0.0,
+          "max": 1.5
+        },
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "A003_lift_plausible_range",
+        "tier": "aero",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "Lift magnitude within plausible warning range.",
+        "value": -153.39218473434448,
+        "threshold": {
+          "warn_abs": 200000.0
+        },
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2.json",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2"
+        ],
+        "metadata": {}
+      },
+      {
+        "check_id": "A004_image_availability_signal",
+        "tier": "aero",
+        "status": "ok",
+        "severity": 0.0,
+        "message": "All expected flow images are available.",
+        "value": {
+          "present": 6,
+          "total": 6,
+          "coverage": 1.0,
+          "suffix_map": {
+            "Pressure_iso.png": true,
+            "Pressure_top.png": true,
+            "Pressure_side.png": true,
+            "WSSx_iso.png": true,
+            "WSSx_top.png": true,
+            "WSSx_side.png": true
+          }
+        },
+        "threshold": {
+          "expected_total": 6
+        },
+        "evidence_refs": [
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/Pressure_iso.png",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/Pressure_top.png",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/Pressure_side.png",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/WSSx_iso.png",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/WSSx_top.png",
+          "/scratch/ShapeEvolve/environments/DrivAer_Star/results/run_v3_dynamic_optimizer_cd_only_drivaer_star_attempt_13_flash_2_5_n10000/iter_517_o2/save/sol/WSSx_side.png"
+        ],
+        "metadata": {}
+      }
+    ],
+    "summary": {
+      "feasibility": {
+        "ok": 6,
+        "warning": 0,
+        "issue": 0,
+        "error": 0,
+        "missing": 0
+      },
+      "geometry": {
+        "ok": 0,
+        "warning": 3,
+        "issue": 0,
+        "error": 0,
+        "missing": 0
+      },
+      "aero": {
+        "ok": 4,
+        "warning": 0,
+        "issue": 0,
+        "error": 0,
+        "missing": 0
+      }
+    },
+    "data_quality_notes": []
+  },
+  "llm_report": {
+    "diagnostic_status": "complete",
+    "overall_assessment": "The candidate design 'iter_517_o2' exhibits significant geometric deformation issues, primarily characterized by ground clearance collapse at the rear, driven by multiple parameters pushed to their bounds. While all feasibility and aerodynamic consistency checks pass, the resulting drag coefficient (Cd=0.065) is extremely low and highly suspicious for a DrivAer vehicle, suggesting the surrogate model may be exploiting unrealistic geometries. The visual evidence strongly supports the diagnosis of excessive deformation.",
+    "primary_failure_mechanisms": [
+      "GEOMETRY_DEFORMATION_EXCESSIVE"
+    ],
+    "secondary_risks": [
+      "PARAM_BOUNDARY_COLLAPSE",
+      "AERO_PLAUSIBILITY_WEAK",
+      "SURROGATE_DOMAIN_RISK"
+    ],
+    "surrogate_exploitation_risk": "high",
+    "physical_credibility": "low",
+    "confidence": 0.9,
+    "evidence_weighting_rationale": "Hard data from geometry checks (G001, G002, G003) clearly indicates extreme parameter values and aggressive deformations. This deterministic evidence is strongly corroborated by visual inspection of the pressure and WSSx images, which show a car with severely reduced ground clearance at the rear. The extremely low Cd, while passing a broad plausibility check, further reinforces the suspicion of an unphysical design resulting from surrogate exploitation.",
+    "recommended_mitigations": [
+      "TIGHTEN_PARAMETER_BOUNDS",
+      "ADD_GEOMETRY_REGULARIZATION",
+      "ADD_PHYSICS_CONSISTENCY_PENALTY"
+    ],
+    "recommended_next_tests": [
+      "Perform a high-fidelity CFD validation for this design to confirm the Cd value and flow field realism.",
+      "Implement a ground clearance constraint in the optimization objective or as a hard constraint.",
+      "Visualize the mesh quality of the deformed geometry to check for local collapses or inversions, especially at the rear underbody."
+    ],
+    "notes_on_missing_evidence": [],
+    "citations_to_evidence": [
+      "G001_param_extremeness_ratio",
+      "G002_combined_angle_stress",
+      "G003_size_width_length_coupling",
+      "A002_cd_plausible_range",
+      "Pressure_side.png",
+      "WSSx_side.png"
+    ],
+    "model_name": "gemini-2.5-flash",
+    "prompt_version": "drivaer_mvp_v1",
+    "raw_response": "{\n  \"diagnostic_status\": \"complete\",\n  \"overall_assessment\": \"The candidate design 'iter_517_o2' exhibits significant geometric deformation issues, primarily characterized by ground clearance collapse at the rear, driven by multiple parameters pushed to their bounds. While all feasibility and aerodynamic consistency checks pass, the resulting drag coefficient (Cd=0.065) is extremely low and highly suspicious for a DrivAer vehicle, suggesting the surrogate model may be exploiting unrealistic geometries. The visual evidence strongly supports the diagnosis of excessive deformation.\",\n  \"primary_failure_mechanisms\": [\n    \"GEOMETRY_DEFORMATION_EXCESSIVE\"\n  ],\n  \"secondary_risks\": [\n    \"PARAM_BOUNDARY_COLLAPSE\",\n    \"AERO_PLAUSIBILITY_WEAK\",\n    \"SURROGATE_DOMAIN_RISK\"\n  ],\n  \"surrogate_exploitation_risk\": \"high\",\n  \"physical_credibility\": \"low\",\n  \"confidence\": 0.9,\n  \"evidence_weighting_rationale\": \"Hard data from geometry checks (G001, G002, G003) clearly indicates extreme parameter values and aggressive deformations. This deterministic evidence is strongly corroborated by visual inspection of the pressure and WSSx images, which show a car with severely reduced ground clearance at the rear. The extremely low Cd, while passing a broad plausibility check, further reinforces the suspicion of an unphysical design resulting from surrogate exploitation.\",\n  \"recommended_mitigations\": [\n    \"TIGHTEN_PARAMETER_BOUNDS\",\n    \"ADD_GEOMETRY_REGULARIZATION\",\n    \"ADD_PHYSICS_CONSISTENCY_PENALTY\"\n  ],\n  \"recommended_next_tests\": [\n    \"Perform a high-fidelity CFD validation for this design to confirm the Cd value and flow field realism.\",\n    \"Implement a ground clearance constraint in the optimization objective or as a hard constraint.\",\n    \"Visualize the mesh quality of the deformed geometry to check for local collapses or inversions, especially at the rear underbody.\"\n  ],\n  \"notes_on_missing_evidence\": [],\n  \"citations_to_evidence\": [\n    \"G001_param_extremeness_ratio\",\n    \"G002_combined_angle_stress\",\n    \"G003_size_width_length_coupling\",\n    \"A002_cd_plausible_range\",\n    \"Pressure_side.png\",\n    \"WSSx_side.png\"\n  ],\n  \"model_name\": \"refined_kammback_optimizer\",\n  \"prompt_version\": null,\n  \"raw_response\": null,\n  \"parser_warnings\": []\n}",
+    "parser_warnings": []
+  },
+  "trace": {
+    "pipeline_version": "phase4_mvp_v1",
+    "llm_diagnostic_status": "complete"
+  },
+  "provenance": {}
+}
