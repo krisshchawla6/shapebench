@@ -1,5 +1,7 @@
 # ShapeBench
 
+![Median rank trajectory of each optimizer over relative evaluation budget across ShapeBench environments](best_rewards/plots/ranks_geometry/ALL__median_raw_rank_all7.png)
+
 **ShapeBench** is an open benchmark for aerodynamic shape optimization (ASO), comprising **103 tasks** across 8 environments, 3 geometry classes, and 7 optimization methods.
 
 ---
